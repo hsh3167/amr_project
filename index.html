@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a111d">
+  <meta name="description" content="University AMR Project: interactive 3D CAD concept, 2WD + 4 casters, 24V 169mm hub motors.">
+  <title>AMR PROJECT · Layout Lab</title>
+  <style>
+    :root{font-family:Inter,"Pretendard","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;color:#eaf2ff;background:#080e19;--bg:#080e19;--panel:#0f1929;--line:#22324a;--muted:#91a1b9;--blue:#4b93ff;--teal:#48d9c9;--warn:#ffcc73}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}.app{display:flex;flex-direction:column;height:100vh;min-height:620px;overflow:hidden}
+    header{height:64px;flex:none;background:#0d1524;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 25px;z-index:3}
+    .brand{display:flex;align-items:center;gap:12px}.mark{width:37px;height:37px;display:grid;place-items:center;color:#78aaff;border:1px solid #4b6a93;border-radius:10px;background:#172a48;font-weight:900;font-size:19px}
+    .brand strong{font-size:16px;letter-spacing:.11em}.brand small{display:block;font-size:10px;color:var(--muted);letter-spacing:.18em;margin-top:3px}
+    .header-right{display:flex;align-items:center;gap:14px}.chip{border:1px solid #2f4761;border-radius:50px;padding:7px 11px;font-size:11px;color:#b8c8df;white-space:nowrap}.chip b{color:#7cf0db}.header-link{color:#c3d8ff;text-decoration:none;font-size:12px}
+    .workspace{flex:1;min-height:0;display:grid;grid-template-columns:278px minmax(0,1fr) 286px}
+    aside{background:#0c1523;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#37445a transparent;padding:23px 19px}
+    .left{border-right:1px solid var(--line)}.right{border-left:1px solid var(--line)}.eyebrow{color:#6e92c4;font-weight:700;letter-spacing:.17em;font-size:10px;text-transform:uppercase;margin:0 0 9px}
+    h1{font-size:22px;margin:0 0 10px;letter-spacing:-.035em;line-height:1.35}h2{font-size:14px;margin:0 0 13px;color:#d8e7ff}p{margin:0}.intro{font-size:12px;line-height:1.75;color:var(--muted);margin-bottom:24px}
+    .section{padding:19px 0;border-top:1px solid var(--line)}.section:first-of-type{border-top:0}.mini-label{font-size:11px;color:#94a9c5;display:block;margin-bottom:9px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+    button.control{border:1px solid #2e405b;background:#132137;border-radius:8px;color:#b8cce9;font-size:12px;padding:10px 7px;transition:background .15s,border .15s}
+    button.control:hover,button.control:focus-visible{border-color:#6d96c6;outline:none}button.control.active{color:#fff;border-color:#4e8ceb;background:#18395f}
+    .toggle{display:flex;align-items:center;gap:9px;justify-content:space-between;font-size:12px;color:#c6d5eb;padding:7px 0}.toggle span:first-child{display:flex;align-items:center;gap:8px}
+    .swatch{width:8px;height:8px;flex:none;border-radius:50%}.toggle input{appearance:none;width:32px;height:18px;border-radius:22px;border:1px solid #394a61;background:#202d41;position:relative;cursor:pointer}
+    .toggle input:after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#7f8fa5;transition:transform .16s}.toggle input:checked{background:#255999;border-color:#3b7fe2}.toggle input:checked:after{background:#e4f2ff;transform:translateX(14px)}
+    select,input[type=number]{width:100%;background:#121e30;border:1px solid #2c415a;color:#e1edff;border-radius:8px;padding:9px;outline:none;font-size:12px}
+    .range-row{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#c9ddf4;margin-bottom:7px}.range-row strong{color:#7fc2ff}
+    input[type=range]{width:100%;accent-color:#5da6ff;margin:5px 0 2px}.hint{color:#8093ad;font-size:11px;line-height:1.65}.micro{font-size:10px;color:#7d91aa}
+    .scene-wrap{min-width:0;min-height:0;position:relative;background:radial-gradient(circle at 52% 38%,#18304b 0,#101b2b 45%,#09121f 78%);overflow:hidden}
+    #viewport{display:block;width:100%;height:100%;touch-action:none;outline:none}
+    .scene-top{position:absolute;left:21px;top:22px;pointer-events:none;z-index:2}.scene-top h2{font-size:16px;font-weight:650;margin:0 0 5px}.scene-top p{color:#8dabc9;font-size:11px}
+    .top-actions{position:absolute;right:20px;top:18px;display:flex;gap:8px;z-index:2}.icon-btn{background:rgba(12,26,44,.89);border:1px solid #38506c;border-radius:9px;color:#dcecff;padding:9px 11px;font-size:11px}
+    .status{position:absolute;left:20px;bottom:21px;right:20px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;pointer-events:none;z-index:2}.status>*{pointer-events:auto}
+    .stats{display:flex;gap:15px;background:rgba(10,21,36,.79);border:1px solid #304258;border-radius:11px;padding:12px 14px;backdrop-filter:blur(10px)}
+    .stat b{display:block;font-size:15px;color:#e1efff;font-weight:650}.stat span{font-size:10px;color:#899cb6}
+    .motion{display:flex;align-items:center;gap:6px;background:rgba(10,21,36,.81);border:1px solid #304258;border-radius:11px;padding:7px;backdrop-filter:blur(10px)}
+    .motion button{border:none;background:transparent;border-radius:7px;color:#a9c3e4;font-size:11px;padding:9px;white-space:nowrap}.motion button.active{background:#2165a4;color:#fff}
+    #loading{position:absolute;inset:0;display:grid;place-items:center;color:#bdcde3;font-size:13px;pointer-events:none}
+    .annotation{position:absolute;z-index:1;transform:translate(-50%,-50%);border:1px solid #466785;background:rgba(13,27,46,.9);color:#e7f3ff;border-radius:6px;padding:4px 7px;font-size:10px;white-space:nowrap;pointer-events:none;box-shadow:0 4px 16px #0004}
+    .annotation:before{content:"";width:5px;height:5px;position:absolute;left:50%;bottom:-3px;transform:translateX(-50%);background:#70bdff;rotate:45deg}
+    .detail-title{font-size:15px;letter-spacing:-.02em;margin:0 0 8px}.detail-text{font-size:12px;line-height:1.8;color:#a7b8cc}.legend{display:inline-block;padding:5px 8px;background:#18304b;color:#77beff;border:1px solid #395980;border-radius:5px;font-size:10px;margin-bottom:12px}
+    .spec{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #1e2d41;font-size:12px}.spec span{color:#91a3bc}.spec b{font-weight:550;text-align:right;color:#deebff;font-variant-numeric:tabular-nums}
+    .note{border:1px solid #584d36;background:#272317;border-radius:9px;color:#e9d2a5;padding:12px;font-size:11px;line-height:1.7;margin-top:12px}.note strong{color:#ffd58a}
+    .callout{background:#13243b;border:1px solid #2a4967;border-radius:9px;padding:12px;font-size:11px;color:#b5d0ec;line-height:1.7}
+    .list{margin:0;padding:0 0 0 16px;color:#a8bad0;font-size:11px;line-height:1.9}.list strong{color:#d7e7fc}
+    .footer{position:absolute;top:75px;right:20px;color:#6e84a5;font-size:10px;pointer-events:none}.small-btn{border:1px solid #334b66;background:#17283d;color:#c6d8ef;padding:8px 10px;border-radius:7px;font-size:11px}
+    #partName{min-height:20px}a{color:#8dc2ff}
+    @media(max-width:1190px){.workspace{grid-template-columns:244px minmax(0,1fr) 255px}aside{padding:19px 15px}.stats{gap:9px}.stat b{font-size:13px}}
+    @media(max-width:930px){.workspace{grid-template-columns:228px minmax(0,1fr)}.right{display:none}.status{flex-direction:column;align-items:flex-start}.motion{align-self:flex-end}}
+    @media(max-width:650px){.app{height:auto;min-height:100vh;overflow:visible}.workspace{display:flex;flex-direction:column}.left{order:2;border-right:none;border-top:1px solid var(--line)}.scene-wrap{order:1;height:62vh;min-height:440px}.right{display:block;order:3;border-left:0;border-top:1px solid var(--line)}.brand strong{font-size:12px}.header-right .chip{display:none}.header-link{font-size:11px}.scene-top{top:12px;left:13px}.scene-top h2{font-size:13px}.top-actions{right:10px;top:10px}.status{left:10px;right:10px;bottom:10px;gap:6px}.stats{padding:9px;gap:8px}.stat b{font-size:12px}.motion button{padding:7px;font-size:10px}}
+  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"}}</script>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><div class="mark">A</div><div><strong>AMR PROJECT</strong><small>UNIVERSITY ROBOTICS · LAYOUT LAB</small></div></div>
+    <div class="header-right"><span class="chip"><b>●</b> REV 0.1 · CONCEPT ONLY</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+  </header>
+  <main class="workspace">
+    <aside class="left">
+      <div class="eyebrow">MECHANICAL CONCEPT</div>
+      <h1>6-Wheel Differential AMR</h1>
+      <p class="intro">회사 보유품을 재사용하는 저비용 교육용 AMR. 판재 + 알루미늄 프로파일 프레임, 중앙 허브모터 2개, 캐스터 4개, 상부 확장 플랫폼.</p>
+      <div class="section">
+        <h2>카메라 시점</h2>
+        <div class="tabs"><button class="control active" data-view="iso">3D</button><button class="control" data-view="top">TOP</button><button class="control" data-view="front">FRONT</button></div>
+        <p class="hint" style="margin-top:10px">마우스 드래그: 회전 · 휠: 확대 · 우클릭: 이동</p>
+      </div>
+      <div class="section">
+        <h2>구성품 표시</h2>
+        <label class="toggle"><span><i class="swatch" style="background:#adbdcc"></i>상부 판재</span><input type="checkbox" id="showDeck" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#5687ef"></i>휠모터 2개</span><input type="checkbox" id="showMotors" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#96acbe"></i>캐스터 4개</span><input type="checkbox" id="showCasters" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#e5ab62"></i>배터리(가설계)</span><input type="checkbox" id="showBattery" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#77d0a5"></i>전장부</span><input type="checkbox" id="showElectronics" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#46d6d6"></i>LiDAR</span><input type="checkbox" id="showLidar" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#d3a5fa"></i>카메라</span><input type="checkbox" id="showCameras" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#ffcc73"></i>로봇암 장착 영역</span><input type="checkbox" id="showArm"></label>
+        <label class="toggle"><span><i class="swatch" style="background:#8ebcff"></i>부품 라벨</span><input type="checkbox" id="showLabels" checked></label>
+      </div>
+      <div class="section">
+        <h2>카메라 구성</h2>
+        <select id="cameraMode" aria-label="카메라 구성"><option value="single">전방 카메라 1개 (기본)</option><option value="dual">전방 대각선 카메라 2개</option></select>
+      </div>
+      <div class="section">
+        <div class="range-row"><span>분해 뷰 (Explode)</span><strong id="explodeVal">0%</strong></div>
+        <input id="explode" type="range" min="0" max="100" step="1" value="0" aria-label="분해 뷰">
+        <div class="hint">간섭과 조립 구조 설명용 시각화입니다.</div>
+      </div>
+      <div class="section">
+        <h2>설계 근거</h2><p class="hint">확정: 2WD, Ø169, 24V, 브레이크 없음, 전후 캐스터 각 2개, LiDAR, 카메라, 상판.</p><p class="hint" style="margin-top:8px">미확정: 부품 장착 홀, 캐스터 규격, 판두께, 배터리 치수, 로봇암 하중, 전체 치수.</p>
+      </div>
+    </aside>
+    <section class="scene-wrap" aria-label="Interactive AMR 3D model">
+      <canvas id="viewport"></canvas>
+      <div id="loading">3D 모델 불러오는 중…<br>인터넷 연결이 필요합니다 (Three.js CDN).</div>
+      <div id="labels"></div>
+      <div class="scene-top"><h2>LOW-COST AMR / GENERAL ARRANGEMENT</h2><p>선행 레이아웃 · 검증 전 가설계 치수 [mm]</p></div>
+      <div class="top-actions"><button class="icon-btn" id="resetCamera">⟳ 시점 초기화</button><button class="icon-btn" id="saveImage">↓ PNG</button></div>
+      <div class="footer">NOT FOR MANUFACTURING · NO FEA / COLLISION / SLAM VALIDATION</div>
+      <div class="status">
+        <div class="stats">
+          <div class="stat"><b>≈470 mm</b><span>전체 폭*</span></div>
+          <div class="stat"><b>≈590 mm</b><span>전체 길이*</span></div>
+          <div class="stat"><b>Ø169 mm</b><span>구동륜</span></div>
+          <div class="stat"><b>24 V</b><span>휠모터 정격</span></div>
+        </div>
+        <div class="motion"><button class="active" data-motion="stop">■ 정지</button><button data-motion="forward">↑ 직진</button><button data-motion="turn">↻ 제자리 회전</button></div>
+      </div>
+    </section>
+    <aside class="right">
+      <div class="eyebrow">COMPONENT INSPECTOR</div>
+      <div class="legend">부품을 클릭하면 설명 표시</div>
+      <h2 id="partName" class="detail-title">개념 배치 v0.1</h2>
+      <p id="partDescription" class="detail-text">상판을 숨기거나 분해 뷰를 조정하면 구동부, 전장품, 배터리 위치를 확인할 수 있습니다. 파란 구동륜은 고정축 차동구동, 회색 캐스터는 자유 회전 구조입니다.</p>
+      <div class="section" style="margin-top:18px">
+        <h2>기본 배치값 (초안)</h2>
+        <div class="spec"><span>전체 엔벨로프</span><b>W470 × L590 × H≈360*</b></div>
+        <div class="spec"><span>상판 / 하판</span><b>420×550 / 390×530</b></div>
+        <div class="spec"><span>드라이브 축 간격</span><b>422 (가설계)</b></div>
+        <div class="spec"><span>캐스터</span><b>Ø70 × 4 (가정)</b></div>
+        <div class="spec"><span>프레임</span><b>20×20 프로파일 (가정)</b></div>
+        <div class="spec"><span>상판 높이</span><b>≈305 (가설계)</b></div>
+        <div class="spec"><span>배터리 공간</span><b>235×155×95 (가정)</b></div>
+      </div>
+      <div class="section">
+        <h2>배터리 선정 · 7S9P 우선 검토</h2>
+        <p class="detail-text">7S9P는 직렬 7개, 병렬 9개라는 의미입니다. <strong>셀 화학종·셀용량·BMS·실측 크기를 아직 모릅니다.</strong></p>
+        <div class="spec"><span>Li-ion 가정 전압</span><b>25.2/25.9V급 · 최대 29.4V</b></div>
+        <label class="mini-label" style="margin-top:13px" for="cellCapacity">셀 정격 용량 가정 (Ah)</label>
+        <input type="number" id="cellCapacity" min="1" max="6" step="0.1" value="3.0">
+        <div class="spec"><span>추정 팩 용량</span><b id="estimatedAh">27.0 Ah</b></div>
+        <div class="spec"><span>추정 에너지</span><b id="estimatedWh">680 Wh</b></div>
+        <p class="hint" style="margin-top:8px">계산: 9 × 셀 Ah, 7 × 3.6V × 팩 Ah. 셀 정격 3.6V 리튬이온이라는 가정이며, 실제 사용 가능 용량을 보장하지 않습니다.</p>
+        <div class="note"><strong>실물 투입 전 필수:</strong> 회사 반출 승인, 셀 타입, 수명/상태, BMS 연속·최대 전류, 29.4V 호환 드라이버, 퓨즈·차단·충전기, 실제 크기 확인. 브레이크가 없으므로 경사면 운용 금지.</div>
+      </div>
+      <div class="section">
+        <h2>1차 설계 검증 항목</h2>
+        <ul class="list"><li>모터 구동축 및 <strong>장착 홀 CAD</strong> 확보</li><li>구동륜·캐스터 <strong>접지하중 / 높이</strong> 확인</li><li>배터리·드라이버 간 <strong>케이블/방열 공간</strong></li><li>급정지 시 <strong>전도 / 제동 / 전원 차단</strong></li><li>차후 로봇암의 <strong>하중 및 작동반력</strong></li></ul>
+        <div class="callout" style="margin-top:13px">이 화면의 주행 애니메이션은 <b>개념적 운동 표현</b>입니다. 실제 동역학/전도/마찰/주행제어/SLAM 시뮬레이션은 아닙니다.</div>
+      </div>
+      <div class="section"><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
+    </aside>
+  </main>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+const DIM={baseW:390,baseL:530,deckW:420,deckL:550,baseY:118,deckY:305,driveDia:169,track:422,driveWidth:40,casterDia:70,casterX:138,casterZ:215};
+const $=id=>document.getElementById(id);
+const canvas=$('viewport'), wrap=document.querySelector('.scene-wrap');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene();scene.fog=new THREE.FogExp2('#0b1726',.00055);
+const camera=new THREE.PerspectiveCamera(40,1,1,6000);
+camera.position.set(860,740,980);
+const orbit=new OrbitControls(camera,canvas);orbit.target.set(0,150,0);orbit.enableDamping=true;orbit.dampingFactor=.07;orbit.minDistance=300;orbit.maxDistance=2300;orbit.maxPolarAngle=Math.PI/2-.015;orbit.update();
+scene.add(new THREE.HemisphereLight(0xb9d8ff,0x31435d,2.0));
+const key=new THREE.DirectionalLight(0xf3f9ff,3);key.position.set(-430,820,390);key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.camera.left=-700;key.shadow.camera.right=700;key.shadow.camera.top=700;key.shadow.camera.bottom=-700;key.shadow.bias=-.00025;scene.add(key);
+const fill=new THREE.DirectionalLight(0x549ce8,1.2);fill.position.set(470,300,-600);scene.add(fill);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(6000,6000),new THREE.MeshStandardMaterial({color:0x0d1a29,roughness:1,transparent:true,opacity:.5}));floor.rotation.x=-Math.PI/2;floor.position.y=-3;floor.receiveShadow=true;scene.add(floor);
+const grid=new THREE.GridHelper(2600,52,0x3f6486,0x22364e);grid.position.y=-1;grid.material.transparent=true;grid.material.opacity=.34;scene.add(grid);
+const robot=new THREE.Group();scene.add(robot);
+const mat=(color,metalness=.25,roughness=.55,more={})=>new THREE.MeshStandardMaterial({color,metalness,roughness,...more});
+const M={plate:mat(0xa8b8c8,.75,.32),edge:mat(0x3c5b7e,.55,.45),profile:mat(0x98adbf,.82,.3),black:mat(0x172437,.15,.82),tire:mat(0x171f2c,.06,.94),hub:mat(0x4775dc,.65,.3),caster:mat(0x7c93a8,.2,.74),fork:mat(0xb2c0ca,.75,.31),battery:mat(0xdba462,.22,.48),pcb:mat(0x237966,.4,.45),lidar:mat(0x43e1d3,.2,.3),camera:mat(0xae87e3,.25,.47),ghost:mat(0xffd276,.2,.45,{transparent:true,opacity:.19,depthWrite:false}),bolt:mat(0x23354d,.45,.5)};
+const groups={},parts={},wheels=[],casters=[];
+function part(id,name,description,explode=[0,0,0]){const obj=new THREE.Group();obj.userData.id=id;obj.userData.explode=new THREE.Vector3(...explode);groups[id]=obj;parts[id]={name,description};robot.add(obj);return obj;}
+function tag(obj,id){obj.traverse(o=>{if(o.isMesh)o.userData.partId=id});}
+function box(g,w,h,d,x,y,z,material,edges=false){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);if(edges){const lines=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry),new THREE.LineBasicMaterial({color:0x314b6b,transparent:true,opacity:.66}));mesh.add(lines)}return mesh}
+function cyl(g,r,h,x,y,z,material,rad=64){const o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,rad),material);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;g.add(o);return o}
+function rod(g,a,b,r,material){const dir=new THREE.Vector3().subVectors(b,a);const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,dir.length(),10),material);m.position.copy(a).add(b).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir.normalize());g.add(m);return m}
+function plate(g,points,y,thickness,material,holes=[]){const sh=new THREE.Shape();points.forEach((p,i)=>i?sh.lineTo(p[0],p[1]):sh.moveTo(p[0],p[1]));sh.closePath();holes.forEach(([x,z,r])=>{const h=new THREE.Path();h.absarc(x,z,r,0,Math.PI*2,false);sh.holes.push(h)});const geo=new THREE.ExtrudeGeometry(sh,{depth:thickness,bevelEnabled:false,curveSegments:28});geo.rotateX(Math.PI/2);const o=new THREE.Mesh(geo,material);o.position.y=y+thickness/2;o.castShadow=true;o.receiveShadow=true;g.add(o);return o}
+const base=part('base','하부 알루미늄 판재','390×530mm 가설계. 중앙 휠모터와 간섭하지 않도록 양 측면에 휠 웰을 만들었으며, 판두께/볼트 패턴은 미확정입니다.');
+plate(base,[[-195,-265],[195,-265],[195,-99],[145,-99],[145,99],[195,99],[195,265],[-195,265],[-195,99],[-145,99],[-145,-99],[-195,-99]],DIM.baseY,4,M.plate,[[0,-155,5],[0,155,5]]);
+for(const s of [-1,1]){box(base,70,5,27,s*164,119,0,M.edge,true);box(base,8,46,90,s*143,94,0,M.edge,true)}
+for(const z of [-215,215]){box(base,320,12,18,0,111,z,M.profile,true)}
+tag(base,'base');
+const profiles=part('profiles','알루미늄 프로파일','20×20mm 압출 프로파일 4개를 기본으로 가정했습니다. 상·하판 간격, 연결 브라켓, 체결 강도는 추후 계산해야 합니다.',[0,70,0]);
+for(const x of [-146,146])for(const z of [-208,208]){box(profiles,20,183,20,x,211.5,z,M.profile,true);box(profiles,32,4,32,x,121,z,M.edge);box(profiles,32,4,32,x,301,z,M.edge)}
+tag(profiles,'profiles');
+const deck=part('deck','탈착식 상부 판재','420×550mm 가설계. LiDAR/카메라 설치 및 향후 로봇암 체결용. 장착 예상 영역은 중앙 150×150mm이며 실제 암 정격하중/볼트 패턴은 미정입니다.',[0,170,0]);
+const dholes=[];for(const x of [-146,146])for(const z of [-208,208])dholes.push([x,z,4.2]);for(const x of [-62,62])for(const z of [-62,62])dholes.push([x,z,4.2]);
+plate(deck,[[-210,-275],[210,-275],[210,275],[-210,275]],DIM.deckY,4,mat(0x93abc0,.6,.37,{transparent:true,opacity:.85}),dholes);
+box(deck,155,5,155,0,299,0,M.edge,true);
+for(const x of [-62,62])for(const z of [-62,62]){const b=cyl(deck,6,3,x,310,z,M.bolt);b.material=M.bolt}
+tag(deck,'deck');
+for(const sign of [-1,1]){
+  const id=sign<0?'motorL':'motorR';const g=part(id,sign<0?'좌측 24V 휠인모터':'우측 24V 휠인모터','Ø169mm, 브레이크 없음. 실제 휠 폭·엔코더·축 체결부·기구 고정홀·허용 하중·드라이버 사양 확인 후 교체해야 하는 단순 대체 형상입니다.',[sign*145,0,0]);
+  const wg=new THREE.Group();wg.position.set(sign*211,84.5,0);g.add(wg);wheels.push({group:wg,sign});
+  const tire=cyl(wg,84.5,40,0,0,0,M.tire);tire.rotation.z=Math.PI/2;wheels[wheels.length-1].tire=tire;
+  const hub=cyl(wg,42,42,0,0,0,M.hub);hub.rotation.z=Math.PI/2;wheels[wheels.length-1].hub=hub;
+  const cap=cyl(wg,21,45,0,0,0,M.profile);cap.rotation.z=Math.PI/2;wheels[wheels.length-1].cap=cap;
+  for(let i=0;i<8;i++){const a=i*Math.PI/4;const dot=cyl(wg,4.5,44,Math.cos(a)*30,Math.sin(a)*30,0,M.bolt);dot.rotation.z=Math.PI/2}
+  const motor=cyl(g,50,31,sign*174,84.5,0,M.edge);motor.rotation.z=Math.PI/2;
+  const axle=cyl(g,15,16,sign*155,84.5,0,M.bolt);axle.rotation.z=Math.PI/2;
+  tag(g,id);
+}
+for(const x of [-138,138])for(const z of [-215,215]){
+  const id='caster'+(x<0?'L':'R')+(z>0?'F':'B');
+  const g=part(id,'자유회전 캐스터','4개 배치. Ø70mm / 스위블 오프셋 14mm는 임시값이며 실물 캐스터의 전체 높이와 회전 간섭범위를 반드시 측정해야 합니다.',[Math.sign(x)*100,0,Math.sign(z)*90]);
+  const sw=new THREE.Group();sw.position.set(x,0,z);g.add(sw);casters.push(sw);
+  box(sw,76,5,75,0,113,0,M.fork,true);
+  cyl(sw,12,24,0,95,0,M.edge);
+  for(const sx of [-17,17])box(sw,5,45,23,sx,68,-14,M.fork);
+  const casterWheel=cyl(sw,35,26,0,35,-14,M.caster);casterWheel.rotation.z=Math.PI/2;
+  cyl(sw,13,29,0,35,-14,M.bolt).rotation.z=Math.PI/2;
+  tag(g,id);
+}
+const battery=part('battery','7S9P 배터리 가설계','회사에서 확보 가능한 7S9P 팩을 우선 검토합니다. 화면상 235×155×95mm는 공간예약용 임시 크기입니다. 실제 팩 치수, 셀 타입, 전류, BMS, 충전기 확인 전 장착 확정 금지.',[0,45,-170]);
+box(battery,235,95,155,0,173.5,-52,M.battery,true);
+for(let z=-110;z<=0;z+=32)box(battery,217,2,3,0,222,z,M.edge);
+box(battery,65,4,34,-55,224,-51,M.black);
+tag(battery,'battery');
+const electronics=part('electronics','전장부 / 제어기 / 드라이버','Raspberry Pi 5 또는 미니 PC, MCU, 모터 드라이버 2개를 가정한 배치입니다. 실제 모델·소비전력·방열 요구사항은 전장 담당과 협의가 필요합니다.',[160,75,40]);
+box(electronics,165,7,104,0,146,122,M.pcb,true);box(electronics,146,23,82,0,161,122,M.black,true);
+for(const x of [-124,124]){box(electronics,70,44,98,x,156,65,M.edge,true);for(let i=0;i<5;i++)box(electronics,50,3,3,x,181,27+i*18,M.profile)}
+box(electronics,45,22,35,0,140,232,M.edge);
+tag(electronics,'electronics');
+const sensor=part('lidar','전방 LiDAR 1개','전방 상판에 1개 배치. 실제 시야각 및 주행 방향의 가림, 센서 설치높이, 장착 홀과 케이블 방향은 모델 확정 후 검토합니다.',[0,110,115]);
+box(sensor,94,6,68,0,313,223,M.edge,true);
+cyl(sensor,30,17,0,327,223,M.black);cyl(sensor,32,8,0,339,223,M.lidar);
+tag(sensor,'lidar');
+function makeCamera(id,x,z,yaw,description,explosion){
+ const g=part(id,'전방 비전 카메라',description,explosion);
+ box(g,22,21,38,x,331,z,M.camera,true);
+ const lens=cyl(g,9,8,x,331,z+21,M.black);lens.rotation.x=Math.PI/2;
+ const iris=cyl(g,5,9,x,331,z+24,M.lidar);iris.rotation.x=Math.PI/2;
+ const mount=box(g,11,21,11,x,313,z-3,M.fork);
+ g.rotation.y=yaw;
+ tag(g,id);return g;
+}
+makeCamera('cameraSingle',100,278,0,'카메라 1개 기본안. 실물 렌즈 화각과 주행 방향 시야를 확인해야 합니다.',[85,90,140]);
+makeCamera('cameraLeft',-158,225,-.47,'대각선 2개 옵션. 좌우 시야 확보용이며 실제 FOV에 따라 설치각 조정.',[-80,90,130]);
+makeCamera('cameraRight',158,225,.47,'대각선 2개 옵션. 좌우 시야 확보용이며 실제 FOV에 따라 설치각 조정.',[80,90,130]);
+const arm=part('arm','향후 로봇암 설치 영역','로봇암은 현재 포함하지 않습니다. 상판 중앙 약 Ø150mm 가상 영역을 표시하며, 미래 암 하중·작업반경·무게중심·전도 검토가 선행되어야 합니다.',[0,150,0]);
+cyl(arm,75,6,0,312,0,M.ghost);const volume=cyl(arm,75,120,0,375,0,M.ghost);volume.material.side=THREE.DoubleSide;
+tag(arm,'arm');
+const dimensions=new THREE.Group();robot.add(dimensions);
+function line(a,b){const pts=[new THREE.Vector3(...a),new THREE.Vector3(...b)];const o=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x5f8ab3,transparent:true,opacity:.7}));dimensions.add(o)}
+line([-235,7,-322],[235,7,-322]);for(const x of [-235,235])line([x,5,-332],[x,9,-312]);
+line([-283,7,-295],[-283,7,295]);for(const z of [-295,295])line([-293,5,z],[-273,9,z]);
+const annotations=[
+ {id:'motorL',text:'Ø169 · WHEEL',pos:[-230,155,0]},
+ {id:'casterLF',text:'CASTER ×4',pos:[-138,140,215]},
+ {id:'lidar',text:'LiDAR',pos:[0,375,223]},
+ {id:'battery',text:'7S9P BATTERY',pos:[0,238,-52]},
+ {id:'deck',text:'TOP PLATE',pos:[-30,320,-192]},
+ {id:'electronics',text:'CONTROLLERS',pos:[0,204,120]}
+].map(a=>{const node=document.createElement('div');node.className='annotation';node.textContent=a.text;$('labels').append(node);return {...a,node}});
+let cameraMode='single',explode=0,motion='stop',selected=null,autoTurning=0;
+const optionMap={showDeck:['deck'],showMotors:['motorL','motorR'],showCasters:Object.keys(groups).filter(x=>x.startsWith('caster')),showBattery:['battery'],showElectronics:['electronics'],showLidar:['lidar'],showCameras:['cameraSingle','cameraLeft','cameraRight'],showArm:['arm']};
+function applyVisibility(){
+ Object.entries(optionMap).forEach(([control,ids])=>ids.forEach(id=>{groups[id].visible=$(control).checked}));
+ groups.cameraSingle.visible=$('showCameras').checked&&cameraMode==='single';
+ groups.cameraLeft.visible=$('showCameras').checked&&cameraMode==='dual';
+ groups.cameraRight.visible=$('showCameras').checked&&cameraMode==='dual';
+ if(selected&&!groups[selected]?.visible)selected=null;
+}
+Object.keys(optionMap).forEach(k=>$(k).addEventListener('change',applyVisibility));
+$('cameraMode').addEventListener('change',e=>{cameraMode=e.target.value;applyVisibility()});
+$('explode').addEventListener('input',e=>{explode=Number(e.target.value)/100;$('explodeVal').textContent=e.target.value+'%';Object.values(groups).forEach(g=>g.position.copy(g.userData.explode).multiplyScalar(explode))});
+function updateBattery(){const ah=Number($('cellCapacity').value);$('estimatedAh').textContent=Number.isFinite(ah)&&ah>=1&&ah<=6?(9*ah).toFixed(1)+' Ah':'입력 확인';$('estimatedWh').textContent=Number.isFinite(ah)&&ah>=1&&ah<=6?Math.round(7*3.6*9*ah)+' Wh':'—'}
+$('cellCapacity').addEventListener('input',updateBattery);
+function setView(view){const d={iso:[860,740,980],top:[0,1250,1],front:[0,260,1250]};camera.position.set(...d[view]);orbit.target.set(0,155,0);orbit.update();document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view))}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+$('resetCamera').addEventListener('click',()=>{motion='stop';robot.rotation.y=0;robot.position.set(0,0,0);setView('iso');document.querySelectorAll('[data-motion]').forEach(b=>b.classList.toggle('active',b.dataset.motion==='stop'))});
+document.querySelectorAll('[data-motion]').forEach(b=>b.addEventListener('click',()=>{motion=b.dataset.motion;document.querySelectorAll('[data-motion]').forEach(el=>el.classList.toggle('active',el===b))}));
+$('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-layout-rev01.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
+const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
+canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width*2-1;pointer.y=-(e.clientY-r.top)/r.height*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(robot.children,true).filter(h=>h.object.userData.partId);if(hits.length){const id=hits[0].object.userData.partId;selected=id;$('partName').textContent=parts[id].name;$('partDescription').textContent=parts[id].description}});
+function resize(){const w=wrap.clientWidth,h=wrap.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+new ResizeObserver(resize).observe(wrap);resize();
+function updateLabels(){const visible=$('showLabels').checked;for(const p of annotations){const g=groups[p.id];p.node.style.display=visible&&g.visible?'block':'none';if(!visible||!g.visible)continue;const v=new THREE.Vector3(...p.pos).add(g.position).applyMatrix4(robot.matrixWorld).project(camera);const screenX=(v.x*.5+.5)*wrap.clientWidth,screenY=(-v.y*.5+.5)*wrap.clientHeight;const inview=v.z<1&&v.z>-1&&screenX>5&&screenX<wrap.clientWidth-5&&screenY>5&&screenY<wrap.clientHeight-5;p.node.style.display=inview?'block':'none';p.node.style.left=screenX+'px';p.node.style.top=screenY+'px'}}
+const clock=new THREE.Clock();let distance=0;
+function animate(){requestAnimationFrame(animate);const dt=Math.min(.05,clock.getDelta());orbit.update();
+ if(motion!=='stop'&&explode===0){
+  const wSpeed=motion==='forward'?1.9:1.5;
+  wheels.forEach(w=>{const dir=motion==='forward'?1:w.sign;w.tire.rotation.x+=dt*wSpeed*dir;w.hub.rotation.x+=dt*wSpeed*dir;w.cap.rotation.x+=dt*wSpeed*dir});
+  const steer=motion==='forward'?0:Math.PI/2;
+  casters.forEach(c=>{const diff=Math.atan2(Math.sin(steer-c.rotation.y),Math.cos(steer-c.rotation.y));c.rotation.y+=diff*Math.min(1,dt*3)});
+  if(motion==='turn')robot.rotation.y+=dt*.27;
+  else {distance+=dt*13;robot.position.x=Math.sin(robot.rotation.y)*distance*.15;robot.position.z=Math.cos(robot.rotation.y)*distance*.15;if(distance>90){distance=0;robot.position.set(0,0,0)}}
+ }else if(motion==='stop'){casters.forEach(c=>{c.rotation.y*=1-Math.min(1,dt*2)})}
+ robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera)}
+applyVisibility();updateBattery();$('loading').remove();animate();
+</script>
+</body>
+</html>
