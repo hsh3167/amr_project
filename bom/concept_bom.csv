@@ -1,0 +1,23 @@
+Category,Item,Qty,Unit,Supply,Specification,Status,Cost_KRW,Notes
+Mechanical,In-wheel motor,2,ea,Company reuse,24V / 169mm dia / no brake,Given,0,Mounting/encoder/driver need verification
+Mechanical,Swivel caster,4,ea,Company reuse,2 front + 2 rear,Given,0,Diameter/height/offset unspecified
+Mechanical,Lower aluminum plate,1,ea,Buy or scrap,390x530x4 assumed,Concept,TBD,Wheel wells / machining and safety margins pending
+Mechanical,Upper aluminum plate,1,ea,Buy or scrap,420x550x4 assumed,Concept,TBD,Reserved for optional robot arm
+Mechanical,2020 aluminum extrusion,4,ea,Buy or scrap,20x20x183 assumed,Concept,TBD,Use offcuts and standard joins
+Mechanical,Motor mount brackets,2,set,Machine or 3D print test,Actual wheel motor mount not known,Concept,TBD,Structural production brackets should be metal
+Mechanical,Caster mounts or shims,4,set,Make,Height adjustment and spacing,Concept,TBD,Contact loading control
+Mechanical,Fasteners/corner brackets,1,set,Buy or reuse,Standard M4/M5/M6 as required,Concept,TBD,Final thread sizes not confirmed
+Electrical,LiDAR,1,ea,Company reuse,Forward/front mount,Given,0,Confirm model and voltage/interface
+Electrical,Camera,1,ea,Company reuse,Front; optional dual cameras,Given,0,Confirm FoV
+Electrical,Optional second camera,1,ea,Company reuse if needed,Diagonal front pair option,Optional,0,Start with one
+Electrical,Battery pack,1,ea,Company reuse if approved,7S9P pack chemistry and BMS unknown,Pending,0,Replace placeholder model with actual pack
+Electrical,Motor driver,2,ea,Check existing stock,Compatible with specific wheel motor,Pending,TBD,Check hall/encoder and regen
+Electrical,Computer/SBC,1,ea,Check existing stock,ROS2 capable,Pending,TBD,Raspberry Pi 5 or used mini PC
+Electrical,Microcontroller,1,ea,Check existing stock,Wheel motor low-level bridge,Pending,TBD,Depends on driver interface
+Electrical,DC-DC converter,1,set,Reuse or buy,24V battery to SBC and sensors rails,Pending,TBD,Size by actual load
+Electrical,Fuse DC power disconnect and E-stop,1,set,Buy rated parts,Properly rated DC circuit protection,Required,TBD,No battery connection before protections installed
+Electrical,Wiring connectors and harness,1,set,Buy or reuse,Current-rated battery and motor wiring,Required,TBD,Strain relief/cable routing
+Electrical,Compatible battery charger,1,ea,Company reuse if approved,Match exact cell chemistry and BMS,Required,TBD,Never use chemistry-mismatched charger
+Software,ROS2/Linux,1,set,Open source,Nav2 SLAM Toolbox and teleop,Proposed,0,Depends on compute and drivers
+Software,Interactive 3D viewer,1,set,Open source,Three.js GitHub Pages,Done,0,Illustrative not dynamic simulation
+CAD,Parametric STEP generator,1,set,Open source,CadQuery Python source,Done,0,All parts are conceptual dummy solids
