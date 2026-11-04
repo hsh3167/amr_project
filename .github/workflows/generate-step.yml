@@ -1,0 +1,45 @@
+name: Generate AMR STEP CAD
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'cad/amr_layout.py'
+      - '.github/workflows/generate-step.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate-step:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install CadQuery
+        run: |
+          python -m pip install --upgrade pip
+          pip install cadquery==2.5.2
+
+      - name: Generate STEP assembly
+        run: python cad/amr_layout.py
+
+      - name: Commit generated STEP
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cad-output/amr_6w_layout_rev01.step
+          if ! git diff --cached --quiet; then
+            git commit -m "build(cad): update parametric AMR STEP assembly"
+            git push
+          else
+            echo "STEP assembly unchanged"
+          fi
