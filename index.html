@@ -224,11 +224,11 @@ cyl(sensor,30,17,0,327,223,M.black);cyl(sensor,32,8,0,339,223,M.lidar);
 tag(sensor,'lidar');
 function makeCamera(id,x,z,yaw,description,explosion){
  const g=part(id,'전방 비전 카메라',description,explosion);
- box(g,22,21,38,x,331,z,M.camera,true);
- const lens=cyl(g,9,8,x,331,z+21,M.black);lens.rotation.x=Math.PI/2;
- const iris=cyl(g,5,9,x,331,z+24,M.lidar);iris.rotation.x=Math.PI/2;
- const mount=box(g,11,21,11,x,313,z-3,M.fork);
- g.rotation.y=yaw;
+ const pivot=new THREE.Group();pivot.position.set(x,0,z);pivot.rotation.y=yaw;g.add(pivot);
+ box(pivot,22,21,38,0,331,0,M.camera,true);
+ const lens=cyl(pivot,9,8,0,331,21,M.black);lens.rotation.x=Math.PI/2;
+ const iris=cyl(pivot,5,9,0,331,24,M.lidar);iris.rotation.x=Math.PI/2;
+ box(pivot,11,21,11,0,313,-3,M.fork);
  tag(g,id);return g;
 }
 makeCamera('cameraSingle',100,278,0,'카메라 1개 기본안. 실물 렌즈 화각과 주행 방향 시야를 확인해야 합니다.',[85,90,140]);
