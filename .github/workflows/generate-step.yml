@@ -5,10 +5,15 @@ on:
     branches: [main]
     paths:
       - 'cad/amr_layout.py'
+      - 'cad/parts.json'
       - '.github/workflows/generate-step.yml'
 
 permissions:
   contents: write
+
+concurrency:
+  group: generate-amr-step
+  cancel-in-progress: false
 
 jobs:
   generate-step:
@@ -36,7 +41,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cad-output/amr_6w_layout_rev03.step
+          git add cad-output/amr_6w_layout_rev04.step cad-output/validation_rev04.json
           if ! git diff --cached --quiet; then
             git commit -m "build(cad): update parametric AMR STEP assembly"
             git push

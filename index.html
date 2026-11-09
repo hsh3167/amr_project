@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0a111d">
-  <meta name="description" content="University AMR Project: interactive 3D CAD concept, 2WD + 4 casters, 24V Ø180mm ZLLG65ASM250-N V2 rubber hub motors, four GL-65-ASF casters, dual SICK TiM571 and dual Orbbec Astra Mini Pro.">
+  <meta name="description" content="University AMR Project: interactive 3D CAD concept, 2WD + 4 casters, 24V Ø180mm ZLLG65ASM250-N V2.02 rubber hub motors, four GL-65-ASF casters, dual SICK TiM571 and dual Orbbec Astra Mini Pro.">
   <title>AMR PROJECT · Layout Lab</title>
   <style>
     :root{font-family:Inter,"Pretendard","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;color:#eaf2ff;background:#080e19;--bg:#080e19;--panel:#0f1929;--line:#22324a;--muted:#91a1b9;--blue:#4b93ff;--teal:#48d9c9;--warn:#ffcc73}
@@ -49,19 +49,20 @@
     @media(max-width:930px){.workspace{grid-template-columns:228px minmax(0,1fr)}.right{display:none}.status{flex-direction:column;align-items:flex-start}.motion{align-self:flex-end}}
     @media(max-width:650px){.app{height:auto;min-height:100vh;overflow:visible}.workspace{display:flex;flex-direction:column}.left{order:2;border-right:none;border-top:1px solid var(--line)}.scene-wrap{order:1;height:62vh;min-height:440px}.right{display:block;order:3;border-left:0;border-top:1px solid var(--line)}.brand strong{font-size:12px}.header-right .chip{display:none}.header-link{font-size:11px}.scene-top{top:12px;left:13px}.scene-top h2{font-size:13px}.top-actions{right:10px;top:10px}.status{left:10px;right:10px;bottom:10px;gap:6px}.stats{padding:9px;gap:8px}.stat b{font-size:12px}.motion button{padding:7px;font-size:10px}}
   </style>
+  <script>addEventListener("error",e=>{const el=document.getElementById("loading");if(el)el.textContent="3D 로딩 실패: 새로고침하거나 네트워크 연결을 확인하세요.";});addEventListener("unhandledrejection",()=>{const el=document.getElementById("loading");if(el)el.textContent="3D 부품 데이터 로딩 실패: 새로고침해 주세요.";});</script>
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"}}</script>
 </head>
 <body>
 <div class="app">
   <header>
     <div class="brand"><div class="mark">A</div><div><strong>AMR PROJECT</strong><small>UNIVERSITY ROBOTICS · LAYOUT LAB</small></div></div>
-    <div class="header-right"><span class="chip"><b>●</b> REV 0.3 · CONCEPT ONLY</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    <div class="header-right"><span class="chip"><b>●</b> REV 0.4 · CONCEPT ONLY</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </header>
   <main class="workspace">
     <aside class="left">
       <div class="eyebrow">MECHANICAL CONCEPT</div>
       <h1>6-Wheel Differential AMR</h1>
-      <p class="intro">선정 부품 기반 6륜 AMR. ZLLG65ASM250-N V2 Ø180 고무타이어 2개, GL-65-ASF 캐스터 4개, SICK TiM571 2개, Orbbec Astra Mini Pro 2개, 판재+프로파일 구조.</p>
+      <p class="intro">선정 부품 기반 6륜 AMR. ZLLG65ASM250-N V2.02 Ø180 고무타이어 2개, GL-65-ASF 캐스터 4개, SICK TiM571 2개, Orbbec Astra Mini Pro 2개, 판재+프로파일 구조.</p>
       <div class="section">
         <h2>카메라 시점</h2>
         <div class="tabs"><button class="control active" data-view="iso">3D</button><button class="control" data-view="top">TOP</button><button class="control" data-view="front">FRONT</button></div>
@@ -80,7 +81,7 @@
         <label class="toggle"><span><i class="swatch" style="background:#8ebcff"></i>부품 라벨</span><input type="checkbox" id="showLabels" checked></label>
       </div>
       <div class="section">
-        <h2>센서 배치 · Rev 0.3</h2>
+        <h2>센서 배치 · Rev 0.4</h2>
         <p class="hint">LiDAR: 전·후방 각 1개 (수평 270°). 카메라: 전방 좌·우 각 1개 (가설계 ±23°).</p>
         <label class="toggle"><span><i class="swatch" style="background:#43e1d3"></i>LiDAR 스캔 각도 개념선</span><input type="checkbox" id="showFov"></label>
       </div>
@@ -90,7 +91,7 @@
         <div class="hint">간섭과 조립 구조 설명용 시각화입니다.</div>
       </div>
       <div class="section">
-        <h2>설계 근거</h2><p class="hint">확정: ZLLG65ASM250-N V2 ×2 (사용자 지정 Ø180·24V·고무타이어·브레이크 없음), GL-65-ASF ×4, SICK TiM571-2050101 ×2, Astra Mini Pro MX6000 A V1.2 ×2.</p><p class="hint" style="margin-top:8px">미확정: N V2의 정확한 외형·축·체결부·타이어 폭, 판두께, 배터리 치수, 센서 장착부, 로봇암 하중.</p>
+        <h2>설계 근거</h2><p class="hint">확정: ZLLG65ASM250-N V2.02 ×2 (PDF p.7: Ø180±2·폭42.5±1·단축 M14×1.5·NBR·브레이크 없음), GL-65-ASF ×4, SICK TiM571-2050101 ×2, Astra Mini Pro MX6000 A V1.2 ×2.</p><p class="hint" style="margin-top:8px">가정: 케이스 Ø140, 타이어 내경, 브라켓·판두께·배터리·센서 장착부. 본문 사양과 도면 표의 충돌은 검토 문서에 기록했습니다.</p>
       </div>
     </aside>
     <section class="scene-wrap" aria-label="Interactive AMR 3D model">
@@ -102,8 +103,8 @@
       <div class="footer">NOT FOR MANUFACTURING · NO FEA / COLLISION / SLAM VALIDATION</div>
       <div class="status">
         <div class="stats">
-          <div class="stat"><b>≈470 mm</b><span>전체 폭*</span></div>
-          <div class="stat"><b>≈610 mm</b><span>전체 길이*</span></div>
+          <div class="stat"><b>484.2 mm</b><span>현재 모델 폭*</span></div>
+          <div class="stat"><b>566.8 mm</b><span>현재 모델 길이*</span></div>
           <div class="stat"><b>Ø180 mm</b><span>구동륜</span></div>
           <div class="stat"><b>24 V</b><span>휠모터 정격</span></div>
         </div>
@@ -113,11 +114,11 @@
     <aside class="right">
       <div class="eyebrow">COMPONENT INSPECTOR</div>
       <div class="legend">부품을 클릭하면 설명 표시</div>
-      <h2 id="partName" class="detail-title">개념 배치 v0.1</h2>
+      <h2 id="partName" class="detail-title">도면 반영 배치 Rev 0.4</h2>
       <p id="partDescription" class="detail-text">상판을 숨기거나 분해 뷰를 조정하면 구동부·배터리·전장품을 확인할 수 있습니다. 전후 LiDAR 2개와 전방 대각 카메라 2개를 적용했습니다. 세부 브라켓은 미확정입니다.</p>
       <div class="section" style="margin-top:18px">
         <h2>기본 배치값 (초안)</h2>
-        <div class="spec"><span>전체 엔벨로프</span><b>W≈470 × L≈610 × H≈420*</b></div>
+        <div class="spec"><span>전체 엔벨로프</span><b>W484.2 × L566.8 × H413.12*</b></div>
         <div class="spec"><span>상판 / 하판</span><b>420×550 / 390×530</b></div>
         <div class="spec"><span>드라이브 축 간격</span><b>422 (가설계)</b></div>
         <div class="spec"><span>캐스터</span><b>GL-65-ASF · Ø64 ×4</b></div>
@@ -137,14 +138,14 @@
         <div class="spec"><span>추정 팩 용량</span><b id="estimatedAh">27.0 Ah</b></div>
         <div class="spec"><span>추정 에너지</span><b id="estimatedWh">680 Wh</b></div>
         <p class="hint" style="margin-top:8px">계산: 9 × 셀 Ah, 7 × 3.6V × 팩 Ah. 셀 정격 3.6V 리튬이온이라는 가정이며, 실제 사용 가능 용량을 보장하지 않습니다.</p>
-        <div class="note"><strong>실물 투입 전 필수:</strong> 회사 반출 승인, 셀 타입, 수명/상태, BMS 연속·최대 전류, 29.4V 호환 드라이버, 퓨즈·차단·충전기, 실제 크기 확인. 브레이크가 없으므로 경사면 운용 금지.</div>
+        <div class="note"><strong>전원 검토:</strong> 회사 반출 승인, 셀 타입, 수명/상태, BMS 연속·최대 전류, 모터 18–30V와 드라이버 정격은 별개입니다. 완충 29.4V는 30V까지 여유 0.6V뿐입니다. 회생전압 제한과 BMS 충전 수용성을 확인하세요. TiM571(최대28V)은 안정화 24V 전원을 사용합니다. 브레이크가 없으므로 경사면 운용 금지.</div>
       </div>
       <div class="section">
         <h2>1차 설계 검증 항목</h2>
-        <ul class="list"><li>모터 구동축 및 <strong>장착 홀 CAD</strong> 확보</li><li>구동륜·캐스터 <strong>접지하중 / 높이</strong> 확인</li><li>배터리·드라이버 간 <strong>케이블/방열 공간</strong></li><li>급정지 시 <strong>전도 / 제동 / 전원 차단</strong></li><li>차후 로봇암의 <strong>하중 및 작동반력</strong></li></ul>
+        <ul class="list"><li>Ø14 / AF10 / M14×1.5 <strong>축 고정 및 토크반력 브라켓</strong></li><li>구동륜·캐스터 <strong>접지하중 / 높이</strong> 확인</li><li>배터리·드라이버 간 <strong>케이블/방열 공간</strong></li><li>급정지 시 <strong>전도 / 제동 / 전원 차단</strong></li><li>차후 로봇암의 <strong>하중 및 작동반력</strong></li></ul>
         <div class="callout" style="margin-top:13px">이 화면의 주행 애니메이션은 <b>개념적 운동 표현</b>입니다. 실제 동역학/전도/마찰/주행제어/SLAM 시뮬레이션은 아닙니다.</div>
       </div>
-      <div class="section"><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
+      <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_6w_layout_rev04.step">STEP 다운로드 ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
     </aside>
   </main>
 </div>
@@ -152,7 +153,9 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
-const DIM={baseW:390,baseL:530,deckW:420,deckL:550,baseY:118,deckY:305,driveDia:180,track:422,driveWidth:44,casterDia:64,casterOffset:22,casterHeight:82,casterX:138,casterZ:215};
+const SPEC=await fetch('./cad/parts.json').then(r=>{if(!r.ok)throw Error('Part data unavailable');return r.json()});
+const MOTOR=SPEC.drive_motor;
+const DIM={baseW:390,baseL:530,deckW:420,deckL:550,baseY:118,deckY:305,driveDia:MOTOR.tire_dia,track:422,driveWidth:MOTOR.tread_width,casterDia:64,casterOffset:22,casterHeight:82,casterX:138,casterZ:215};
 const $=id=>document.getElementById(id);
 const canvas=$('viewport'), wrap=document.querySelector('.scene-wrap');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,preserveDrawingBuffer:true});
@@ -178,7 +181,18 @@ function rod(g,a,b,r,material){const dir=new THREE.Vector3().subVectors(b,a);con
 function plate(g,points,y,thickness,material,holes=[]){const sh=new THREE.Shape();points.forEach((p,i)=>i?sh.lineTo(p[0],p[1]):sh.moveTo(p[0],p[1]));sh.closePath();holes.forEach(([x,z,r])=>{const h=new THREE.Path();h.absarc(x,z,r,0,Math.PI*2,false);sh.holes.push(h)});const geo=new THREE.ExtrudeGeometry(sh,{depth:thickness,bevelEnabled:false,curveSegments:28});geo.rotateX(Math.PI/2);const o=new THREE.Mesh(geo,material);o.position.y=y+thickness/2;o.castShadow=true;o.receiveShadow=true;g.add(o);return o}
 const base=part('base','하부 알루미늄 판재','390×530mm 가설계. 중앙 휠모터와 간섭하지 않도록 양 측면에 휠 웰을 만들었으며, 판두께/볼트 패턴은 미확정입니다.');
 plate(base,[[-195,-265],[195,-265],[195,-99],[145,-99],[145,99],[195,99],[195,265],[-195,265],[-195,99],[-145,99],[-145,-99],[-195,-99]],DIM.baseY,4,M.plate,[[0,-155,5],[0,155,5]]);
-for(const s of [-1,1]){box(base,70,5,27,s*164,119,0,M.edge,true);box(base,8,46,90,s*143,94,0,M.edge,true)}
+for(const sign of [-1,1]){
+ const bx=sign*(DIM.track/2-41);
+ // Drawing-derived axle seat with 0.2mm conceptual clearance; bracket remains unqualified.
+ const outline=[[-45,-35],[45,-35],[45,35],[-45,35]];
+ const sh=new THREE.Shape();outline.forEach(([y,z],i)=>i?sh.lineTo(y,z):sh.moveTo(y,z));sh.closePath();
+ const hole=new THREE.Path(),r=7.15,flat=5.1,a=Math.acos(flat/r);
+ hole.absarc(0,0,r,a,Math.PI-a,false);hole.lineTo(-flat,-Math.sqrt(r*r-flat*flat));
+ hole.absarc(0,0,r,Math.PI+a,2*Math.PI-a,false);hole.closePath();sh.holes.push(hole);
+ const geo=new THREE.ExtrudeGeometry(sh,{depth:6,bevelEnabled:false,curveSegments:48});
+ const mesh=new THREE.Mesh(geo,M.edge);mesh.rotation.y=Math.PI/2;mesh.position.set(bx-3,90,0);base.add(mesh);
+ box(base,43,6,90,sign*151.5,123,0,M.edge,true);
+}
 for(const z of [-215,215]){box(base,320,12,18,0,111,z,M.profile,true)}
 tag(base,'base');
 const profiles=part('profiles','알루미늄 프로파일','20×20mm 압출 프로파일 4개를 기본으로 가정했습니다. 상·하판 간격, 연결 브라켓, 체결 강도는 추후 계산해야 합니다.',[0,70,0]);
@@ -191,18 +205,26 @@ box(deck,155,5,155,0,299,0,M.edge,true);
 for(const x of [-62,62])for(const z of [-62,62]){const b=cyl(deck,6,3,x,310,z,M.bolt);b.material=M.bolt}
 tag(deck,'deck');
 for(const sign of [-1,1]){
-  const id=sign<0?'motorL':'motorR';
-  const g=part(id,sign<0?'좌측 ZLLG65ASM250-N V2':'우측 ZLLG65ASM250-N V2',
-    'Ø180mm 고무타이어 / 24V / 브레이크 없음. N V2의 실제 축·외형·장착 홀은 아직 미확보. 타이어 폭 44mm와 허브·모터 외형은 가설계이며 이전 -4096 V2 규격을 가져온 것이 아닙니다.',
-    [sign*145,0,0]);
-  const wg=new THREE.Group();wg.position.set(sign*211,90,0);g.add(wg);wheels.push({group:wg,sign});
-  const tire=cyl(wg,90,44,0,0,0,M.tire);tire.rotation.z=Math.PI/2;wheels[wheels.length-1].tire=tire;
-  const hub=cyl(wg,46,44,0,0,0,M.hub);hub.rotation.z=Math.PI/2;wheels[wheels.length-1].hub=hub;
-  const cap=cyl(wg,20,48,0,0,0,M.profile);cap.rotation.z=Math.PI/2;wheels[wheels.length-1].cap=cap;
-  for(let i=0;i<8;i++){const a=i*Math.PI/4;const dot=cyl(wg,4,46,Math.cos(a)*29,Math.sin(a)*29,0,M.bolt);dot.rotation.z=Math.PI/2}
-  const motor=cyl(g,51,28,sign*173,90,0,M.edge);motor.rotation.z=Math.PI/2;
-  const axle=cyl(g,8,45,sign*150,90,0,M.bolt);axle.rotation.z=Math.PI/2;
-  tag(g,id);
+ const id=sign<0?'motorL':'motorR';
+ const g=part(id,(sign<0?'좌측 ':'우측 ')+MOTOR.model,
+  'PDF p.7: Ø180±2 × 폭42.5±1, 전체89.8±1, 단축 Ø14(-0.1/-0.4), AF10±0.1, M14×1.5 / 나사23.5±0.3. 케이스 Ø140와 타이어 내경은 가정; 나사산은 생략. 본문 p.4: 24V,18–30V,4Nm,500rpm,10A; 스톨11.7Nm/30A; 1024라인.',[sign*145,0,0]);
+ const xc=sign*DIM.track/2,z=DIM.driveDia/2;
+ const outer=-MOTOR.tread_width/2-MOTOR.outer_face_to_tire;
+ const end=outer+MOTOR.overall_axial,bodyEnd=end-MOTOR.body_face_to_shaft_end;
+ const rolling=new THREE.Group();rolling.position.set(xc,z,0);g.add(rolling);wheels.push({group:rolling,sign});
+ const ring=new THREE.Shape();ring.absarc(0,0,MOTOR.tire_dia/2,0,2*Math.PI,false);
+ const inside=new THREE.Path();inside.absarc(0,0,MOTOR.assumed_body_dia/2,0,2*Math.PI,true);ring.holes.push(inside);
+ const tireGeo=new THREE.ExtrudeGeometry(ring,{depth:MOTOR.tread_width,bevelEnabled:false,curveSegments:64});
+ tireGeo.rotateY(Math.PI/2);tireGeo.translate(-MOTOR.tread_width/2,0,0);
+ rolling.add(new THREE.Mesh(tireGeo,M.tire));
+ const casing=cyl(rolling,MOTOR.assumed_body_dia/2,bodyEnd-outer,-sign*(outer+bodyEnd)/2,0,0,M.hub);casing.rotation.z=Math.PI/2;
+ // Double-flat shaft blank; thread helix and hollow cable bore not dimensioned/modelled.
+ const r=MOTOR.shaft_dia/2,flat=MOTOR.shaft_flat/2,a=Math.acos(flat/r),sh=new THREE.Shape();
+ sh.absarc(0,0,r,a,Math.PI-a,false);sh.lineTo(-flat,-Math.sqrt(r*r-flat*flat));
+ sh.absarc(0,0,r,Math.PI+a,2*Math.PI-a,false);sh.closePath();
+ const geo=new THREE.ExtrudeGeometry(sh,{depth:end-bodyEnd,bevelEnabled:false,curveSegments:48});geo.rotateY(Math.PI/2);
+ const shaft=new THREE.Mesh(geo,M.bolt);shaft.position.set(xc-sign*(bodyEnd+end)/2-(end-bodyEnd)/2,z,0);g.add(shaft);
+ tag(g,id);
 }
 for(const x of [-138,138])for(const z of [-215,215]){
   const id='caster'+(x<0?'L':'R')+(z>0?'F':'B');
@@ -210,10 +232,10 @@ for(const x of [-138,138])for(const z of [-215,215]){
     'Ø64mm 휠, 전체 높이 82mm, 오프셋 22mm, 상부판 65×48mm. 하부판과 캐스터 높이차를 맞추는 드롭 브라켓은 가설계. 실제 접지하중·장착부 확인 필요.',
     [Math.sign(x)*100,0,Math.sign(z)*90]);
   const sw=new THREE.Group();sw.position.set(x,0,z);g.add(sw);casters.push(sw);
-  box(sw,38,34,40,0,99,0,M.edge,true);
-  box(sw,65,5,48,0,79.5,0,M.fork,true);
+  for(const sx of [-27,27])for(const sz of [-12,12])cyl(sw,5.5,34,sx,99,sz,M.edge);
+  plate(sw,[[-32.5,-24],[32.5,-24],[32.5,24],[-32.5,24]],79.5,5,M.fork,[-27,27].flatMap(x=>[-12,12].map(z=>[x,z,3.5])));
   for(const sx of [-17,17])box(sw,4.5,38,32,sx,51,-12,M.fork);
-  cyl(sw,12,15,0,68,0,M.edge);
+  cyl(sw,12,15,0,67.5,0,M.edge);
   const cw=cyl(sw,32,23,0,32,-22,M.caster);cw.rotation.z=Math.PI/2;
   cyl(sw,12,26,0,32,-22,M.bolt).rotation.z=Math.PI/2;
   tag(g,id);
@@ -225,7 +247,7 @@ box(battery,65,4,34,-55,224,-51,M.black);
 tag(battery,'battery');
 const electronics=part('electronics','전장부 / 제어기 / 드라이버','Raspberry Pi 5 또는 미니 PC, MCU, 모터 드라이버 2개를 가정한 배치입니다. 실제 모델·소비전력·방열 요구사항은 전장 담당과 협의가 필요합니다.',[160,75,40]);
 box(electronics,165,7,104,0,146,122,M.pcb,true);box(electronics,146,23,82,0,161,122,M.black,true);
-for(const x of [-124,124]){box(electronics,70,44,98,x,156,65,M.edge,true);for(let i=0;i<5;i++)box(electronics,50,3,3,x,181,27+i*18,M.profile)}
+for(const x of [-124,124]){box(electronics,70,44,98,x,156,85,M.edge,true);for(let i=0;i<5;i++)box(electronics,50,3,3,x,181,47+i*18,M.profile)}
 box(electronics,45,22,35,0,140,232,M.edge);
 tag(electronics,'electronics');
 const lidarFov=new THREE.Group();robot.add(lidarFov);
@@ -234,12 +256,12 @@ for(const sign of [1,-1]){
   const g=part(id,front?'전방 SICK TiM571-2050101':'후방 SICK TiM571-2050101',
     'SICK TiM571-2050101, 수평 270° 스캔. 76.25×74.39×101.12mm 외형 기반 단순화 모델입니다. 광학 스캔면 위치·M12 커넥터·브라켓 고정홀은 추가 검토 필요.',
     [0,120,sign*140]);
-  box(g,94,5,85,0,310.5,zz,M.edge,true);
-  box(g,76.25,36,74.39,0,334,zz,M.fork,true);
-  box(g,61,65.12,60,0,384.56,zz,M.black,true);
+  box(g,94,5,85,0,310,zz,M.edge,true);
+  box(g,76.25,36,74.39,0,330,zz,M.fork,true);
+  box(g,61,65.12,60,0,380.56,zz,M.black,true);
   box(g,42,4,8,0,389,zz+sign*31,M.lidar);
-  cyl(g,22,4,0,416,zz,M.lidar);tag(g,id);
-  const a0=(front?-45:135)*Math.PI/180, a1=a0+Math.PI*1.5, pts=[];
+  cyl(g,22,3,0,411.62,zz,M.lidar);tag(g,id);
+  const a0=(front?-135:45)*Math.PI/180, a1=a0+Math.PI*1.5, pts=[];
   for(let i=0;i<=54;i++){const a=a0+(a1-a0)*i/54;pts.push(new THREE.Vector3(Math.sin(a)*165,421,zz+Math.cos(a)*165))}
   lidarFov.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x42dbcb,transparent:true,opacity:.5})));
 }
@@ -249,8 +271,8 @@ function makeCamera(id,sign){
   [sign*90,100,140]);
  const pivot=new THREE.Group();pivot.position.set(sign*120,0,266);pivot.rotation.y=sign*(23*Math.PI/180);g.add(pivot);
  box(pivot,84.9,20,19.92,0,335,0,M.camera,true);
- for(const cx of [-26,26]){const lens=cyl(pivot,7.8,4,cx,335,11,M.black);lens.rotation.x=Math.PI/2;const inner=cyl(pivot,4.5,5,cx,335,13,M.lidar);inner.rotation.x=Math.PI/2}
- box(pivot,28,18,26,0,317,-6,M.fork,true);
+ for(const cx of [-26,26]){const lens=cyl(pivot,7.8,1,cx,335,9,M.black);lens.rotation.x=Math.PI/2;const inner=cyl(pivot,4.5,.5,cx,335,9.5,M.lidar);inner.rotation.x=Math.PI/2}
+ box(g,28,18,26,sign*120,318,260,M.fork,true);
  tag(g,id);return g;
 }
 makeCamera('cameraLeft',-1);
@@ -260,10 +282,10 @@ cyl(arm,75,6,0,312,0,M.ghost);const volume=cyl(arm,75,120,0,375,0,M.ghost);volum
 tag(arm,'arm');
 const dimensions=new THREE.Group();robot.add(dimensions);
 function line(a,b){const pts=[new THREE.Vector3(...a),new THREE.Vector3(...b)];const o=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x5f8ab3,transparent:true,opacity:.7}));dimensions.add(o)}
-line([-235,7,-322],[235,7,-322]);for(const x of [-235,235])line([x,5,-332],[x,9,-312]);
-line([-283,7,-295],[-283,7,295]);for(const z of [-295,295])line([-293,5,z],[-273,9,z]);
+line([-242.1,7,-322],[242.1,7,-322]);for(const x of [-242.1,242.1])line([x,5,-332],[x,9,-312]);
+line([-283,7,-275],[-283,7,291.75]);for(const z of [-275,291.75])line([-293,5,z],[-273,9,z]);
 const annotations=[
- {id:'motorL',text:'ZLLG65ASM250-N V2 · Ø180',pos:[-230,160,0]},
+ {id:'motorL',text:'ZLLG65ASM250-N V2.02 · Ø180',pos:[-230,160,0]},
  {id:'casterLF',text:'GL-65-ASF ×4',pos:[-138,133,215]},
  {id:'lidarFront',text:'TiM571 FRONT',pos:[0,440,230]},
  {id:'lidarRear',text:'TiM571 REAR',pos:[0,440,-230]},
@@ -288,7 +310,7 @@ function setView(view){const d={iso:[860,740,980],top:[0,1250,1],front:[0,260,12
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 $('resetCamera').addEventListener('click',()=>{motion='stop';robot.rotation.y=0;robot.position.set(0,0,0);setView('iso');document.querySelectorAll('[data-motion]').forEach(b=>b.classList.toggle('active',b.dataset.motion==='stop'))});
 document.querySelectorAll('[data-motion]').forEach(b=>b.addEventListener('click',()=>{motion=b.dataset.motion;document.querySelectorAll('[data-motion]').forEach(el=>el.classList.toggle('active',el===b))}));
-$('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-layout-rev01.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
+$('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-layout-rev04.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
 canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width*2-1;pointer.y=-(e.clientY-r.top)/r.height*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(robot.children,true).filter(h=>h.object.userData.partId);if(hits.length){const id=hits[0].object.userData.partId;selected=id;$('partName').textContent=parts[id].name;$('partDescription').textContent=parts[id].description}});
 function resize(){const w=wrap.clientWidth,h=wrap.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
@@ -298,13 +320,16 @@ const clock=new THREE.Clock();let distance=0;
 function animate(){requestAnimationFrame(animate);const dt=Math.min(.05,clock.getDelta());orbit.update();
  if(motion!=='stop'&&explode===0){
   const wSpeed=motion==='forward'?1.9:1.5;
-  wheels.forEach(w=>{const dir=motion==='forward'?1:w.sign;w.tire.rotation.x+=dt*wSpeed*dir;w.hub.rotation.x+=dt*wSpeed*dir;w.cap.rotation.x+=dt*wSpeed*dir});
+  wheels.forEach(w=>{const dir=motion==='forward'?1:w.sign;w.group.rotation.x+=dt*wSpeed*dir});
   const steer=motion==='forward'?0:Math.PI/2;
   casters.forEach(c=>{const diff=Math.atan2(Math.sin(steer-c.rotation.y),Math.cos(steer-c.rotation.y));c.rotation.y+=diff*Math.min(1,dt*3)});
   if(motion==='turn')robot.rotation.y+=dt*.27;
   else {distance+=dt*13;robot.position.x=Math.sin(robot.rotation.y)*distance*.15;robot.position.z=Math.cos(robot.rotation.y)*distance*.15;if(distance>90){distance=0;robot.position.set(0,0,0)}}
  }else if(motion==='stop'){casters.forEach(c=>{c.rotation.y*=1-Math.min(1,dt*2)})}
  robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera)}
+window.amrReview={revision:SPEC.revision,counts:{motors:wheels.length,casters:casters.length,lidars:2,cameras:2},motor:MOTOR,
+ inspect:()=>({deckVisible:groups.deck.visible,explode,motion,solidBounds:new THREE.Box3().setFromObject(robot).getSize(new THREE.Vector3()).toArray()}),
+ partInfo:parts};
 applyVisibility();updateBattery();$('loading').remove();animate();
 </script>
 </body>

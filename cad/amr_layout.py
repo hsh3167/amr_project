@@ -1,41 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""AMR Project Rev 0.3 — parametric concept STEP assembly.
-Requires CadQuery 2.x.  Run: python cad/amr_layout.py
-Units mm. CAD coordinates: X right, Y forward, Z up.
-The caster catalogue, LiDAR datasheet, and Orbbec published
-dimensions inform bounding volumes but parts are NOT vendor-exact solids.\nThe exact ZLLG65ASM250-N V2 motor drawing is NOT verified; its Ø180 mm\ndiameter is given by the project owner, not inferred from sibling models.
-ONLY caster plate fixing pattern is taken directly from a catalogue;
-all chassis/motor/sensor bracket drilling patterns must be validated.
+"""AMR Rev04 dimension-guided layout, mm; X right, Y forward, Z up.
+Motor axial dimensions: supplied V2.02 PDF p.7. Undimensioned contours
+and all chassis brackets remain assumptions; see docs/motor-datasheet-review.md.
 """
 from pathlib import Path
 import math
 import cadquery as cq
 
-# Confirmed catalog geometry is separated from concept layout geometry.
-PARTS = {
-    "drive_motor": {"model": "ZLLG65ASM250-N V2", "count": 2,
-                    "tire_dia": 180.0,
-                    "tread_width": 44.0,   # PLACEHOLDER - exact N V2 tire width not verified
-                    "rated_voltage": 24.0,  # project-specified
-                    "tire_material": "Rubber",
-                    "brake": False,
-                    # shaft type, flange, encoder, rated current, torque and power: not verified
-                    "shaft_type": None, "shaft_thread": None,
-                    "rated_power_W": None, "rated_torque_Nm": None},
-    "caster": {"model": "GL-65-ASF", "count": 4,
-               "wheel_dia": 64.0, "tread_width": 23.0,
-               "overall_height": 82.0, "swivel_offset": 22.0,
-               "plate_width": 65.0, "plate_depth": 48.0,
-               "hole_pitch_x": 54.0, "hole_pitch_y": 24.0,
-               "plate_hole_dia": 7.0, "capacity_each_kg": 50.0},
-    "lidar": {"model": "SICK TiM571-2050101", "count": 2,
-              "width": 76.25, "depth": 74.39, "height": 101.12,
-              "scan_deg": 270.0},
-    "camera": {"model": "Orbbec Astra Mini Pro MX6000 A V1.2", "count": 2,
-               "width": 84.9, "height": 20.0, "depth": 19.92,
-               "horizontal_depth_fov_deg": 58.4},
-}
+import json
+PARTS = json.loads((Path(__file__).with_name("parts.json")).read_text(encoding="utf-8"))
 P = {
     "base_width": 390.0,  # concept, not a manufacturer dimension
     "base_length": 530.0,
@@ -59,13 +33,15 @@ P = {
 }
 OUT = Path(__file__).resolve().parent.parent / "cad-output"
 OUT.mkdir(exist_ok=True, parents=True)
-assy = cq.Assembly(name="AMR_6W_Rev03")
+assy = cq.Assembly(name="AMR_6W_Rev04")
 part_count = 0
+components = {}
 
 def add(obj, name, color):
     global part_count
     shape = obj.val() if isinstance(obj, cq.Workplane) else obj
     assy.add(shape, name=name, color=cq.Color(*color))
+    components[name] = shape
     part_count += 1
 
 def box(w, d, h, x, y, z):
@@ -84,9 +60,14 @@ outline = [(-195,-265),(195,-265),(195,-99),(145,-99),
 base = (cq.Workplane("XY").polyline(outline).close()
         .extrude(P["base_thickness"]).translate((0,0,P["base_bottom_z"])))
 add(base,"01_lower_Al_plate_CONCEPT",(.60,.71,.78))
-for s in (-1,1):
-    add(box(70,27,5,s*164,0,119),"02_wheel_bracket_upper_"+str(s),(.29,.43,.56))
-    add(box(8,90,46,s*143,0,94),"03_wheel_bracket_vertical_"+str(s),(.29,.43,.56))
+# Concept steel L bracket, 6mm; actual clamp, washer/nut stack and strength TBD.
+# The axle flats, not the six undimensioned cover screws, react motor torque.
+for side in (-1,1):
+    bx=side*(P["drive_track"]/2-41)
+    bracket=box(6,90,70,bx,0,90)
+    slot=cylx(7.15,8,bx,0,90).intersect(box(10,10.2,20,bx,0,90))
+    add(bracket.cut(slot),"02_axle_flat_bracket_CONCEPT_"+str(side),(.29,.43,.56))
+    add(box(43,90,6,side*151.5,0,123),"03_bracket_bridge_CONCEPT_"+str(side),(.29,.43,.56))
 for y in (-215,215):
     add(box(320,18,12,0,y,111),"04_base_crossmember_"+str(y),(.61,.70,.79))
 for x in (-146,146):
@@ -103,20 +84,28 @@ top=top.faces(">Z").workplane().pushPoints(hole_pts).hole(8.4)
 add(top,"20_upper_Al_plate_PLACEHOLDER_HOLES",(.72,.81,.89))
 add(box(155,155,5,0,0,299),"21_arm_reinforcement_PLACEHOLDER",(.25,.40,.55))
 
-# User-confirmed Ø180 OD, tread-width and face/shaft body deliberately estimated.
+# Motor coordinates u: tire midplane=0, positive inward toward shaft.
+# p.7 chain: outer face=-31.1, body inner face=33.1, thread start=35.2,
+# shaft end=58.7. Total metal envelope=89.8; cable tail excluded.
 wheel=PARTS["drive_motor"]
+outer=-wheel["tread_width"]/2-wheel["outer_face_to_tire"]
+shaft_end=outer+wheel["overall_axial"]
+body_end=shaft_end-wheel["body_face_to_shaft_end"]
 for side in (-1,1):
     n="LEFT" if side<0 else "RIGHT"
-    xc=side*P["drive_track"]/2
-    z=wheel["tire_dia"]/2
-    # Annulus, +X extrusion. Shaft position shown only as placeholder.
-    tire=(cq.Workplane("YZ").circle(wheel["tire_dia"]/2).circle(45)
-          .extrude(wheel["tread_width"])
+    xc=side*P["drive_track"]/2; z=wheel["tire_dia"]/2
+    tire=(cq.Workplane("YZ").circle(wheel["tire_dia"]/2)
+          .circle(wheel["assumed_body_dia"]/2).extrude(wheel["tread_width"])
           .translate((xc-wheel["tread_width"]/2,0,z)))
-    add(tire,"30_180mm_rubber_tire_"+n,(.09,.13,.18))
-    add(cylx(47,44,xc,0,z),"31_motor_hub_PLACEHOLDER_"+n,(.27,.48,.83))
-    add(cylx(51,28,side*173,0,z),"32_motor_body_SIMPLIFIED_"+n,(.31,.41,.51))
-    add(cylx(8,45,side*150,0,z),"33_motor_shaft_UNKNOWN_"+n,(.16,.27,.35))
+    add(tire,"30_NBR_OD180_W42p5_"+n,(.09,.13,.18))
+    # OD140 casing is explicitly ASSUMED; axial limits are drawing-derived.
+    casing=cylx(wheel["assumed_body_dia"]/2,body_end-outer,
+                xc-side*(outer+body_end)/2,0,z)
+    add(casing,"31_casing_OD140_ASSUMED_axial_DATASHEET_"+n,(.27,.48,.83))
+    axle=cylx(wheel["shaft_dia"]/2,shaft_end-body_end,
+              xc-side*(body_end+shaft_end)/2,0,z)
+    axle=axle.intersect(box(100,wheel["shaft_flat"],30,xc-side*45,0,z))
+    add(axle,"32_D14_AF10_M14x1p5_THREAD_BLANK_"+n,(.16,.27,.35))
 
 # Caster actual height is 82mm. Unlike Rev01, caster wheels contact Z=0.
 # A DROP/HANGER is required from chassis bottom (Z=116) to the caster plate
@@ -126,7 +115,11 @@ for x in (-P["caster_x"],P["caster_x"]):
     for y in (-P["caster_y"],P["caster_y"]):
         n=("L" if x<0 else "R")+("F" if y>0 else "B")
         # Conceptual drop spacer (real attachment and fasteners still required).
-        add(box(37,45,34,x,y,99),"40_caster_DROP_hanger_"+n,(.30,.45,.58))
+        drop=P["base_bottom_z"]-caster["overall_height"]
+        for i,(dx,dy) in enumerate(((-27,-12),(-27,12),(27,-12),(27,12))):
+            spacer=(cq.Workplane("XY").center(x+dx,y+dy).circle(5.5).circle(3.5)
+                    .extrude(drop).translate((0,0,caster["overall_height"])))
+            add(spacer,"40_caster_spacer_CONCEPT_"+n+str(i),(.30,.45,.58))
         plate=box(65,48,5,x,y,79.5)
         p=[(x+dx,y+dy) for dx in (-27,27) for dy in (-12,12)]
         plate=plate.faces(">Z").workplane().pushPoints(p).hole(7)
@@ -145,7 +138,7 @@ add(box(P["battery_width"],P["battery_length"],P["battery_height"],
 add(box(165,104,7,0,122,146),"51_controller_PCB_DUMMY",(.12,.46,.37))
 add(box(146,82,23,0,122,161),"52_control_computer_DUMMY",(.13,.19,.28))
 for x in (-124,124):
-    add(box(70,98,44,x,65,156),"53_motor_driver_DUMMY_"+str(x),(.28,.38,.52))
+    add(box(70,98,44,x,85,156),"53_motor_driver_DUMMY_"+str(x),(.28,.38,.52))
 
 # TiM571-2050101 x2; sensor footprint from official SICK PDF, body simplified.
 # Front looks toward +Y, rear toward -Y; scan line unobstructed assuming
@@ -159,20 +152,43 @@ for direction in (1,-1):
         "61_SICK_TiM571_base_"+n,(.85,.88,.90))
     add(box(61,60,lidar["height"]-36,0,yy,348+(lidar["height"]-36)/2),
         "62_SICK_TiM571_optical_body_"+n,(.09,.16,.21))
-    add(cylz(22,3,0,yy,413),
+    add(cylz(22,3,0,yy,410.12),
         "63_SICK_scanner_top_"+n,(.20,.80,.79))
 # Orbbec Astra Mini Pro (MX6000) x2; ±23° diagonal front.
 cam=PARTS["camera"]
 for side in (-1,1):
     n="LEFT" if side<0 else "RIGHT"
     x=side*P["camera_x"]; y=P["camera_y"]; z=P["camera_z"]
-    angle=side*P["camera_yaw_deg"]
+    angle=-side*P["camera_yaw_deg"]
     body=box(cam["width"],cam["depth"],cam["height"],0,0,0)
     body=body.rotate((0,0,0),(0,0,1),angle).translate((x,y,z))
     add(body,"70_Orbbec_Astra_Mini_Pro_MX6000_"+n,(.65,.50,.82))
     add(box(28,26,18,x,y-6,318),"71_camera_bracket_PLACEHOLDER_"+n,(.67,.72,.80))
 
-outfile=OUT/"amr_6w_layout_rev03.step"
+outfile=OUT/"amr_6w_layout_rev04.step"
 assy.save(str(outfile))
-print("Generated:",outfile,"/ components:",part_count)
-print("WARNING: dimensionally guided concept only; perform collision/fastener/stability review before fabrication.")
+# Reopen the exchange file, not just the in-memory assembly.
+reloaded=cq.importers.importStep(str(outfile)).val()
+solids=reloaded.Solids()
+assert solids and all(v.isValid() and v.Volume()>0 for v in solids)
+ground = {name: shape.BoundingBox().zmin for name,shape in components.items()
+          if name.startswith(("30_", "44_"))}
+assert len(ground)==6 and all(abs(z)<1e-6 for z in ground.values())
+for n in ("LEFT","RIGHT"):
+    tire_bb=components["30_NBR_OD180_W42p5_"+n].BoundingBox()
+    assert abs(tire_bb.xlen-wheel["tread_width"])<1e-6
+    assert abs(tire_bb.zlen-wheel["tire_dia"])<1e-6
+    axle_bb=components["32_D14_AF10_M14x1p5_THREAD_BLANK_"+n].BoundingBox()
+    assert abs(axle_bb.ylen-wheel["shaft_flat"])<1e-6
+assert len(solids)==part_count
+bb=reloaded.BoundingBox()
+manifest={"revision":PARTS["revision"],"components":part_count,"solid_count":len(solids),
+          "valid_solids":True,"step_bytes":outfile.stat().st_size,
+          "bounds_mm":{"x":[bb.xmin,bb.xmax],"y":[bb.ymin,bb.ymax],"z":[bb.zmin,bb.zmax]},
+          "motor_u_mm":{"outer_face":outer,"body_face":body_end,"shaft_end":shaft_end},
+          "ground_mm":ground,
+          "caster_drop_mm":P["base_bottom_z"]-caster["overall_height"],
+          "counts":{k:PARTS[k]["count"] for k in ("drive_motor","caster","lidar","camera")},
+          "scope":"Solid validity, file roundtrip, nominal contact, dimensions only; no structural/load/dynamics qualification."}
+(OUT/"validation_rev04.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")
+print(json.dumps(manifest,indent=2))

@@ -1,40 +1,31 @@
-# AMR engineering decisions — Rev 0.1 (2026-11-04)
+# AMR 설계 판단 — Rev04 (2026-11-09)
 
-## CAD software decision
-Recommendation: **FreeCAD 1.1 for production-ready part/assembly CAD and drawings**; keep **CadQuery** as the repeatable initial STEP generator; use **SolidCraft 0.30.1** experimentally for simple AI-assisted models. The GitHub Pages Three.js viewer is for team reviews only, not parametric editing or dynamics validation.
+## 도면 반영 범위
 
-| Task | Tool | Reason |
-|---|---|---|
-| Team review in browser | Three.js | no installation / interactive part selection |
-| Revision-0.1 STEP model | CadQuery | reproducible scripted build via GitHub Actions |
-| Real design with accurate vendor CAD | FreeCAD 1.1 | Assembly, TechDraw, STEP and FEM/CAM ecosystem |
-| AI CAD experiments | SolidCraft stable v0.30.1 | built-in MCP, CLI, parametric browser and desktop editors |
+[모터 스펙시트 판독](motor-datasheet-review.md)을 치수/사양의 근거로 사용합니다. 기존 임의44mm 폭과 Ø16×45 축을 교체했습니다. 실제 단축의 치수 및 길이연쇄를 반영했고 케이스Ø140/타이어 내경, 단순 포크, 브라켓은 명시적으로 가정입니다. 커버6개 나사의 위치를 장착 PCD로 추정하지 않습니다. M14너트20Nm/243 도포 주기를 체결계획에 반영하되 실제 와셔·너트·돌출 길이·유효 체결산 수를 확인합니다.
 
-FreeCAD 1.1 (March 25, 2026) provides Assembly animation/BOM and TechDraw improvements. SolidCraft has assemblies, sketch/parametric modelling and experimental sheet-metal support, but documentation explicitly defers production drawings, CAM and simulation. The 2026-11-03 SolidCraft 0.40.0-rc.2 is a prerelease with a new kernel and incompatible file-format changes vs stable v0.30.1. Do not use an RC as the sole project master. STEP is good for exchange, but importing STEP does not preserve full native parametric history.
+## 캐스터 접지와 구동륜 반력
 
-Sources: https://blog.freecad.org/2026/03/25/freecad-version-1-1-released/ ; https://freecad.github.io/Website/download/releases/1-1/ ; https://docs.solidcraft.io/ ; https://github.com/tangency-labs/solidcraft/releases
+좌표계는 X우측/Y전방/Z상방, 지면Z0. 모터 타이어 중심Z90, 캐스터 축Z32, 캐스터 장착면Z82입니다. 하판 밑면Z116이므로 드롭/스페이서116-82=34mm. 캐스터 판 두께5는 가정이며 전체82 안에 포함하므로 설치높이에5를 다시 더하지 않습니다. 각 스페이서는 판의54×24 패턴 위에 배치했습니다. 체결/프레임 연결은 미완성 설계입니다.
 
-## Battery selection
-**First choice:** reuse company-approved and verified 7S9P battery if chemistry, dimensions, charger, battery health, BMS current and 24V drive input range are suitable. 7S9P only specifies 7 series groups × 9 parallel cells; it does not specify energy or safe discharge current.
+Ø180±2 타이어 편차만으로 구동륜 중심 높이가±1mm이고 압축/캐스터/판 평면도 편차가 더해집니다. 6개 휠을 모두 강체로 같은 지면에 놓는 방식은 하중을 균등하게 만들지 않습니다. 불균일 바닥에서 중앙 구동륜이 뜨거나 캐스터가 과하중될 수 있으므로 조절식 캐스터 장착 또는 구동축/캐스터 탄성 지지를 검토합니다. 임의로1~2mm 낮추는 값은 시험 없이 확정하지 않습니다.
 
-For ordinary 3.6V nominal Li-ion cells, a 7S9P pack is 25.2V nominal, up to 29.4V at full charge. With 3.0Ah cells assumed, theoretical capacity is 27Ah and nominal energy is about 680Wh. Other chemistries have different voltage ranges.
+정적 총중량W와 각 접점의 정상반력 Ni에 대해 ΣNi=W와 모멘트 평형을 만족하면서 구동륜에 필요한 Ni를 확보해야 합니다. 가용 견인력은 μ×(구동륜 두 개 반력 합)과 모터 토크 한계 중 작은 쪽입니다. μ는 바닥/타이어별 실험값이 필요합니다. 4Nm/0.09m=약44.4N/륜, 합88.9N은 모터 정격토크에서의 이상적인 환산이며 적재량을 의미하지 않습니다. 스톨은 연속 운용점이 아닙니다.
 
-| New-pack comparison (web listed 2026-11-04) | Price |
-|---|---:|
-| Novavolt KC 24V 10Ah Li-ion 7S2P | ₩191,000 |
-| Novavolt industrial 24V 12Ah LiFePO4 8S2P | ₩207,000 |
-| Novavolt industrial 24V 6Ah LiFePO4 8S1P | ₩129,000 |
+캐스터 회전 중심±138/±215에서 휠이22mm 옵셋으로 선회합니다. 바퀴 자체 스위프 반경은22+sqrt(32²+11.5²)≈56.0mm이며 포크/헤드 여유가 더 필요합니다. 현재 직진자세 STEP 경계566.8mm를 최대 선회/배선 엔벨로프로 쓰지 않습니다. 전후 휠 스위프, 전장/배선/프레임 간격과 턱 통과를 실제 CAD에서 확인합니다.
 
-Prices exclude charger, wiring, shipping and pack integration. Sources: https://shop.novavolt.co.kr/kc_ncm ; https://shop.novavolt.co.kr/lfp_industrial
+## 전원과7S9P
 
-**Mandatory checks:** motor-driver maximum DC bus voltage including regenerative spikes; combined motor startup/stall current; BMS continuous and peak current; charger chemistry; pack state of health; fuse rated for DC; cable/connector ratings; safe power disconnect and E-stop. Do not disassemble/rebuild used packs. For early testing keep to flat ground because the motors have no brakes.
+보유팩 재사용은 화학종/정격/BMS/상태/충전기/치수 확인 후 결정합니다. 일반 Li-ion7S는25.2V공칭(3.6V/셀 가정)/29.4V완충이며 모터18~30V와 공칭으로 겹칩니다. 그러나 완충에서0.6V 여유만으로 회생/과도전압 적합성을 보증할 수 없습니다. **모터 입력범위와 드라이버 DC버스 한계는 별도**입니다. 드라이버의 정상/절대최대전압, 저전압차단, 전류 제한, 회생저항/제동초퍼 또는 클램프, BMS의 회생충전 허용과 만충 차단을 확인합니다. 일반 TVS만으로 지속 회생 에너지를 처리한다고 가정하지 않습니다.
 
-## Mechanical design considerations
-Central Ø169mm 2WD plus four fixed-height swivel casters can lose traction on slightly uneven ground. Allow adjustment by caster shims/mounting slots and verify normal force distribution. Keep battery low and central. Future arm installation requires new center-of-gravity, tipping and top-deck bending calculations.
+LiDAR9~28V에는 안정화24V계통을 사용하고, 카메라5V/USB 및 제어기 전원도 분리합니다. DC/DC는29.4V와 검증된 과도전압을 견디고 저전압 영역에서도 필요한24V를 유지하는 방식으로 선정합니다. 모터 정격10A/스톨30A는 드라이버 전류 정의(상 RMS/피크/DC버스)를 대조해야 하므로 BMS 용량을 단순20A/60A로 확정하지 않습니다. DC퓨즈/접촉기/비상정지와 제어전원 유지/회생 경로를 전장 설계에서 결정합니다.
 
-## Unknowns before release for fabrication
-1. Actual wheel motor flange and mounting holes, wheel width, encoder and matching driver.
-2. Actual caster diameter, swivel offset, assembly height, mount hole pattern and load rating.
-3. Physical 7S9P pack dimensions and BMS documentation.
-4. LiDAR and camera models, optical field of view and mounting envelopes.
-5. Required payload, vehicle target mass, speed and future arm reach/loads.
+## 센서와 상판
+
+TiM571 전후2개를 반대 방향으로 배치하더라도 프레임/케이블/로봇암에 의한 가림을 검토하기 전360° 감지를 보증하지 않습니다. 안전등급 스캐너로 사용하지 않습니다. 카메라는 MX6000 제품군 외형과2×M2만 확인되며 특정 A V1.2 PCB의 실제 홀/배선 확인이 필요합니다. 구조광2대의 상호간섭 및 USB 대역폭을 시험합니다. ±23°는 배치 가정입니다.
+
+향후 로봇암 설치는 현재4mm 상판/155mm 보강 더미/임의124mm 패턴으로 승인하지 않습니다. 최대 작동반경에서 무게중심/지지다각형/전도 모멘트, 상판 휨, 프로파일 접합 강성, 정지·가속 하중을 다시 계산합니다. 차량 목표 총중량·적재량·목표속도·턱 높이가 아직 필요합니다.
+
+## CAD 운영
+
+CadQuery 파라미터/STEP을 변경 추적하고, 세부 제작도면 및 실제 체결 조립 검증은 FreeCAD 등에서 수행합니다. 웹 애니메이션은 회전 방향과 배치 이해를 위한 데모이며 동역학/SLAM/강도 검증이 아닙니다. 생성 파일 검사 결과와 공개 페이지의 실제 배포 버전을 구분하여 확인합니다.

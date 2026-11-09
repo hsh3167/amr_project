@@ -1,19 +1,19 @@
 Category,Item,Qty,Unit,Supply,Specification,Status,Cost_KRW,Notes
-Mechanical,ZLLG65ASM250-N V2 rubber wheel motor,2,ea,Company reuse,24V / user-confirmed OD180 / no brake,Specified,0,N V2 OEM drawing unverified; tire width shaft mount and driver unknown
+Mechanical,ZLLG65ASM250-N V2.02 NBR wheel motor,2,ea,Company reuse,OD180+-2 / W42.5+-1 / axial89.8+-1 / 24V 18-30V / 4Nm 500rpm 10A / stall11.7Nm 30A / encoder1024,Datasheet-guided,0,PDF pp3-8; shaft D14 AF10 M14x1.5 thread23.5; casing OD140 assumed; conflicts documented
 Mechanical,GL-65-ASF swivel caster,4,ea,Company reuse,OD64 / height82 / offset22 / plate65x48 / 54x24 holes,Specified,0,Confirm EUS vs TUN caster compound
 Mechanical,Lower aluminum plate,1,ea,Buy or scrap,390x530x4 assumed,Concept,TBD,Wheel wells / machining and safety margins pending
 Mechanical,Upper aluminum plate,1,ea,Buy or scrap,420x550x4 assumed,Concept,TBD,Reserved for optional robot arm
 Mechanical,2020 aluminum extrusion,4,ea,Buy or scrap,20x20x183 assumed,Concept,TBD,Use offcuts and standard joins
-Mechanical,Motor mount brackets,2,set,Machine or 3D print test,Actual wheel motor mount not known,Concept,TBD,Structural production brackets should be metal
+Mechanical,Motor mount brackets,2,set,Machine or 3D print test,Single-axle AF10 / M14x1.5 torque reaction; bracket6t slot10.2 assumed,Concept,TBD,Nut20Nm with243 per PDF p8; stack and strength TBD
 Mechanical,Caster mounts or shims,4,set,Make,Height adjustment and spacing,Concept,TBD,Contact loading control
 Mechanical,Fasteners/corner brackets,1,set,Buy or reuse,Standard M4/M5/M6 as required,Concept,TBD,Final thread sizes not confirmed
 Electrical,SICK TiM571-2050101 LiDAR,2,ea,Company reuse,270-degree scan / 9-28V / front and rear,Specified,0,Check optical scan plane and M12 connectors
 Electrical,Orbbec Astra Mini Pro MX6000 A V1.2,2,ea,Company reuse,84.9x20x19.92 / front left and right,Specified,0,Dual camera placement +-23 degrees is conceptual
 Electrical,Battery pack,1,ea,Company reuse if approved,7S9P pack chemistry and BMS unknown,Pending,0,Replace placeholder model with actual pack
-Electrical,Motor driver,2,ea,Check existing stock,Compatible with specific wheel motor,Pending,TBD,Check hall/encoder and regen
+Electrical,Motor driver,2,ea,Check existing stock,3-phase servo; 5V single-ended1024-line AB/Hall; current and regen compatibility TBD,Pending,TBD,Motor18-30V is not driver bus rating; 7S full29.4V leaves0.6V to30V; thermistor pin4/5 conflict
 Electrical,Computer/SBC,1,ea,Check existing stock,ROS2 capable,Pending,TBD,Raspberry Pi 5 or used mini PC
 Electrical,Microcontroller,1,ea,Check existing stock,Wheel motor low-level bridge,Pending,TBD,Depends on driver interface
-Electrical,DC-DC converter,1,set,Reuse or buy,24V battery to SBC and sensors rails,Pending,TBD,Size by actual load
+Electrical,DC-DC converter,1,set,Reuse or buy,Regulated24V for TiM571 + 5V USB/compute; input and transient range TBD,Pending,TBD,TiM571 maximum28V; do not connect29.4V pack directly
 Electrical,Fuse DC power disconnect and E-stop,1,set,Buy rated parts,Properly rated DC circuit protection,Required,TBD,No battery connection before protections installed
 Electrical,Wiring connectors and harness,1,set,Buy or reuse,Current-rated battery and motor wiring,Required,TBD,Strain relief/cable routing
 Electrical,Compatible battery charger,1,ea,Company reuse if approved,Match exact cell chemistry and BMS,Required,TBD,Never use chemistry-mismatched charger
