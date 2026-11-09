@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0a111d">
-  <meta name="description" content="University AMR Project: interactive 3D CAD concept, 2WD + 4 casters, 24V 169mm hub motors.">
+  <meta name="description" content="University AMR Project: interactive 3D CAD concept, 2WD + 4 casters, 24V Ø180mm ZLLG65ASM250-N V2 rubber hub motors, four GL-65-ASF casters, dual SICK TiM571 and dual Orbbec Astra Mini Pro.">
   <title>AMR PROJECT · Layout Lab</title>
   <style>
     :root{font-family:Inter,"Pretendard","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;color:#eaf2ff;background:#080e19;--bg:#080e19;--panel:#0f1929;--line:#22324a;--muted:#91a1b9;--blue:#4b93ff;--teal:#48d9c9;--warn:#ffcc73}
@@ -55,13 +55,13 @@
 <div class="app">
   <header>
     <div class="brand"><div class="mark">A</div><div><strong>AMR PROJECT</strong><small>UNIVERSITY ROBOTICS · LAYOUT LAB</small></div></div>
-    <div class="header-right"><span class="chip"><b>●</b> REV 0.1 · CONCEPT ONLY</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    <div class="header-right"><span class="chip"><b>●</b> REV 0.3 · CONCEPT ONLY</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </header>
   <main class="workspace">
     <aside class="left">
       <div class="eyebrow">MECHANICAL CONCEPT</div>
       <h1>6-Wheel Differential AMR</h1>
-      <p class="intro">회사 보유품을 재사용하는 저비용 교육용 AMR. 판재 + 알루미늄 프로파일 프레임, 중앙 허브모터 2개, 캐스터 4개, 상부 확장 플랫폼.</p>
+      <p class="intro">선정 부품 기반 6륜 AMR. ZLLG65ASM250-N V2 Ø180 고무타이어 2개, GL-65-ASF 캐스터 4개, SICK TiM571 2개, Orbbec Astra Mini Pro 2개, 판재+프로파일 구조.</p>
       <div class="section">
         <h2>카메라 시점</h2>
         <div class="tabs"><button class="control active" data-view="iso">3D</button><button class="control" data-view="top">TOP</button><button class="control" data-view="front">FRONT</button></div>
@@ -70,18 +70,19 @@
       <div class="section">
         <h2>구성품 표시</h2>
         <label class="toggle"><span><i class="swatch" style="background:#adbdcc"></i>상부 판재</span><input type="checkbox" id="showDeck" checked></label>
-        <label class="toggle"><span><i class="swatch" style="background:#5687ef"></i>휠모터 2개</span><input type="checkbox" id="showMotors" checked></label>
-        <label class="toggle"><span><i class="swatch" style="background:#96acbe"></i>캐스터 4개</span><input type="checkbox" id="showCasters" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#5687ef"></i>Ø180 휠모터 2개</span><input type="checkbox" id="showMotors" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#96acbe"></i>GL-65-ASF ×4</span><input type="checkbox" id="showCasters" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#e5ab62"></i>배터리(가설계)</span><input type="checkbox" id="showBattery" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#77d0a5"></i>전장부</span><input type="checkbox" id="showElectronics" checked></label>
-        <label class="toggle"><span><i class="swatch" style="background:#46d6d6"></i>LiDAR</span><input type="checkbox" id="showLidar" checked></label>
-        <label class="toggle"><span><i class="swatch" style="background:#d3a5fa"></i>카메라</span><input type="checkbox" id="showCameras" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#46d6d6"></i>SICK TiM571 ×2</span><input type="checkbox" id="showLidar" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#d3a5fa"></i>Astra Mini Pro ×2</span><input type="checkbox" id="showCameras" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#ffcc73"></i>로봇암 장착 영역</span><input type="checkbox" id="showArm"></label>
         <label class="toggle"><span><i class="swatch" style="background:#8ebcff"></i>부품 라벨</span><input type="checkbox" id="showLabels" checked></label>
       </div>
       <div class="section">
-        <h2>카메라 구성</h2>
-        <select id="cameraMode" aria-label="카메라 구성"><option value="single">전방 카메라 1개 (기본)</option><option value="dual">전방 대각선 카메라 2개</option></select>
+        <h2>센서 배치 · Rev 0.3</h2>
+        <p class="hint">LiDAR: 전·후방 각 1개 (수평 270°). 카메라: 전방 좌·우 각 1개 (가설계 ±23°).</p>
+        <label class="toggle"><span><i class="swatch" style="background:#43e1d3"></i>LiDAR 스캔 각도 개념선</span><input type="checkbox" id="showFov"></label>
       </div>
       <div class="section">
         <div class="range-row"><span>분해 뷰 (Explode)</span><strong id="explodeVal">0%</strong></div>
@@ -89,21 +90,21 @@
         <div class="hint">간섭과 조립 구조 설명용 시각화입니다.</div>
       </div>
       <div class="section">
-        <h2>설계 근거</h2><p class="hint">확정: 2WD, Ø169, 24V, 브레이크 없음, 전후 캐스터 각 2개, LiDAR, 카메라, 상판.</p><p class="hint" style="margin-top:8px">미확정: 부품 장착 홀, 캐스터 규격, 판두께, 배터리 치수, 로봇암 하중, 전체 치수.</p>
+        <h2>설계 근거</h2><p class="hint">확정: ZLLG65ASM250-N V2 ×2 (사용자 지정 Ø180·24V·고무타이어·브레이크 없음), GL-65-ASF ×4, SICK TiM571-2050101 ×2, Astra Mini Pro MX6000 A V1.2 ×2.</p><p class="hint" style="margin-top:8px">미확정: N V2의 정확한 외형·축·체결부·타이어 폭, 판두께, 배터리 치수, 센서 장착부, 로봇암 하중.</p>
       </div>
     </aside>
     <section class="scene-wrap" aria-label="Interactive AMR 3D model">
       <canvas id="viewport"></canvas>
       <div id="loading">3D 모델 불러오는 중…<br>인터넷 연결이 필요합니다 (Three.js CDN).</div>
       <div id="labels"></div>
-      <div class="scene-top"><h2>LOW-COST AMR / GENERAL ARRANGEMENT</h2><p>선행 레이아웃 · 검증 전 가설계 치수 [mm]</p></div>
+      <div class="scene-top"><h2>LOW-COST AMR / GENERAL ARRANGEMENT</h2><p>선정 부품 기반 배치 · 제작 검증 전 [mm]</p></div>
       <div class="top-actions"><button class="icon-btn" id="resetCamera">⟳ 시점 초기화</button><button class="icon-btn" id="saveImage">↓ PNG</button></div>
       <div class="footer">NOT FOR MANUFACTURING · NO FEA / COLLISION / SLAM VALIDATION</div>
       <div class="status">
         <div class="stats">
           <div class="stat"><b>≈470 mm</b><span>전체 폭*</span></div>
-          <div class="stat"><b>≈590 mm</b><span>전체 길이*</span></div>
-          <div class="stat"><b>Ø169 mm</b><span>구동륜</span></div>
+          <div class="stat"><b>≈610 mm</b><span>전체 길이*</span></div>
+          <div class="stat"><b>Ø180 mm</b><span>구동륜</span></div>
           <div class="stat"><b>24 V</b><span>휠모터 정격</span></div>
         </div>
         <div class="motion"><button class="active" data-motion="stop">■ 정지</button><button data-motion="forward">↑ 직진</button><button data-motion="turn">↻ 제자리 회전</button></div>
@@ -113,16 +114,19 @@
       <div class="eyebrow">COMPONENT INSPECTOR</div>
       <div class="legend">부품을 클릭하면 설명 표시</div>
       <h2 id="partName" class="detail-title">개념 배치 v0.1</h2>
-      <p id="partDescription" class="detail-text">상판을 숨기거나 분해 뷰를 조정하면 구동부, 전장품, 배터리 위치를 확인할 수 있습니다. 파란 구동륜은 고정축 차동구동, 회색 캐스터는 자유 회전 구조입니다.</p>
+      <p id="partDescription" class="detail-text">상판을 숨기거나 분해 뷰를 조정하면 구동부·배터리·전장품을 확인할 수 있습니다. 전후 LiDAR 2개와 전방 대각 카메라 2개를 적용했습니다. 세부 브라켓은 미확정입니다.</p>
       <div class="section" style="margin-top:18px">
         <h2>기본 배치값 (초안)</h2>
-        <div class="spec"><span>전체 엔벨로프</span><b>W470 × L590 × H≈360*</b></div>
+        <div class="spec"><span>전체 엔벨로프</span><b>W≈470 × L≈610 × H≈420*</b></div>
         <div class="spec"><span>상판 / 하판</span><b>420×550 / 390×530</b></div>
         <div class="spec"><span>드라이브 축 간격</span><b>422 (가설계)</b></div>
-        <div class="spec"><span>캐스터</span><b>Ø70 × 4 (가정)</b></div>
+        <div class="spec"><span>캐스터</span><b>GL-65-ASF · Ø64 ×4</b></div>
         <div class="spec"><span>프레임</span><b>20×20 프로파일 (가정)</b></div>
         <div class="spec"><span>상판 높이</span><b>≈305 (가설계)</b></div>
         <div class="spec"><span>배터리 공간</span><b>235×155×95 (가정)</b></div>
+        <div class="spec"><span>LiDAR</span><b>SICK TiM571 ×2</b></div>
+        <div class="spec"><span>카메라</span><b>Orbbec Astra Mini Pro ×2</b></div>
+        <div class="spec"><span>휠 지름 / 축 중심높이</span><b>Ø180 / 90</b></div>
       </div>
       <div class="section">
         <h2>배터리 선정 · 7S9P 우선 검토</h2>
@@ -148,7 +152,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
-const DIM={baseW:390,baseL:530,deckW:420,deckL:550,baseY:118,deckY:305,driveDia:169,track:422,driveWidth:40,casterDia:70,casterX:138,casterZ:215};
+const DIM={baseW:390,baseL:530,deckW:420,deckL:550,baseY:118,deckY:305,driveDia:180,track:422,driveWidth:44,casterDia:64,casterOffset:22,casterHeight:82,casterX:138,casterZ:215};
 const $=id=>document.getElementById(id);
 const canvas=$('viewport'), wrap=document.querySelector('.scene-wrap');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,preserveDrawingBuffer:true});
@@ -187,25 +191,31 @@ box(deck,155,5,155,0,299,0,M.edge,true);
 for(const x of [-62,62])for(const z of [-62,62]){const b=cyl(deck,6,3,x,310,z,M.bolt);b.material=M.bolt}
 tag(deck,'deck');
 for(const sign of [-1,1]){
-  const id=sign<0?'motorL':'motorR';const g=part(id,sign<0?'좌측 24V 휠인모터':'우측 24V 휠인모터','Ø169mm, 브레이크 없음. 실제 휠 폭·엔코더·축 체결부·기구 고정홀·허용 하중·드라이버 사양 확인 후 교체해야 하는 단순 대체 형상입니다.',[sign*145,0,0]);
-  const wg=new THREE.Group();wg.position.set(sign*211,84.5,0);g.add(wg);wheels.push({group:wg,sign});
-  const tire=cyl(wg,84.5,40,0,0,0,M.tire);tire.rotation.z=Math.PI/2;wheels[wheels.length-1].tire=tire;
-  const hub=cyl(wg,42,42,0,0,0,M.hub);hub.rotation.z=Math.PI/2;wheels[wheels.length-1].hub=hub;
-  const cap=cyl(wg,21,45,0,0,0,M.profile);cap.rotation.z=Math.PI/2;wheels[wheels.length-1].cap=cap;
-  for(let i=0;i<8;i++){const a=i*Math.PI/4;const dot=cyl(wg,4.5,44,Math.cos(a)*30,Math.sin(a)*30,0,M.bolt);dot.rotation.z=Math.PI/2}
-  const motor=cyl(g,50,31,sign*174,84.5,0,M.edge);motor.rotation.z=Math.PI/2;
-  const axle=cyl(g,15,16,sign*155,84.5,0,M.bolt);axle.rotation.z=Math.PI/2;
+  const id=sign<0?'motorL':'motorR';
+  const g=part(id,sign<0?'좌측 ZLLG65ASM250-N V2':'우측 ZLLG65ASM250-N V2',
+    'Ø180mm 고무타이어 / 24V / 브레이크 없음. N V2의 실제 축·외형·장착 홀은 아직 미확보. 타이어 폭 44mm와 허브·모터 외형은 가설계이며 이전 -4096 V2 규격을 가져온 것이 아닙니다.',
+    [sign*145,0,0]);
+  const wg=new THREE.Group();wg.position.set(sign*211,90,0);g.add(wg);wheels.push({group:wg,sign});
+  const tire=cyl(wg,90,44,0,0,0,M.tire);tire.rotation.z=Math.PI/2;wheels[wheels.length-1].tire=tire;
+  const hub=cyl(wg,46,44,0,0,0,M.hub);hub.rotation.z=Math.PI/2;wheels[wheels.length-1].hub=hub;
+  const cap=cyl(wg,20,48,0,0,0,M.profile);cap.rotation.z=Math.PI/2;wheels[wheels.length-1].cap=cap;
+  for(let i=0;i<8;i++){const a=i*Math.PI/4;const dot=cyl(wg,4,46,Math.cos(a)*29,Math.sin(a)*29,0,M.bolt);dot.rotation.z=Math.PI/2}
+  const motor=cyl(g,51,28,sign*173,90,0,M.edge);motor.rotation.z=Math.PI/2;
+  const axle=cyl(g,8,45,sign*150,90,0,M.bolt);axle.rotation.z=Math.PI/2;
   tag(g,id);
 }
 for(const x of [-138,138])for(const z of [-215,215]){
   const id='caster'+(x<0?'L':'R')+(z>0?'F':'B');
-  const g=part(id,'자유회전 캐스터','4개 배치. Ø70mm / 스위블 오프셋 14mm는 임시값이며 실물 캐스터의 전체 높이와 회전 간섭범위를 반드시 측정해야 합니다.',[Math.sign(x)*100,0,Math.sign(z)*90]);
+  const g=part(id,'GL-65-ASF 캐스터',
+    'Ø64mm 휠, 전체 높이 82mm, 오프셋 22mm, 상부판 65×48mm. 하부판과 캐스터 높이차를 맞추는 드롭 브라켓은 가설계. 실제 접지하중·장착부 확인 필요.',
+    [Math.sign(x)*100,0,Math.sign(z)*90]);
   const sw=new THREE.Group();sw.position.set(x,0,z);g.add(sw);casters.push(sw);
-  box(sw,76,5,75,0,113,0,M.fork,true);
-  cyl(sw,12,24,0,95,0,M.edge);
-  for(const sx of [-17,17])box(sw,5,45,23,sx,68,-14,M.fork);
-  const casterWheel=cyl(sw,35,26,0,35,-14,M.caster);casterWheel.rotation.z=Math.PI/2;
-  cyl(sw,13,29,0,35,-14,M.bolt).rotation.z=Math.PI/2;
+  box(sw,38,34,40,0,99,0,M.edge,true);
+  box(sw,65,5,48,0,79.5,0,M.fork,true);
+  for(const sx of [-17,17])box(sw,4.5,38,32,sx,51,-12,M.fork);
+  cyl(sw,12,15,0,68,0,M.edge);
+  const cw=cyl(sw,32,23,0,32,-22,M.caster);cw.rotation.z=Math.PI/2;
+  cyl(sw,12,26,0,32,-22,M.bolt).rotation.z=Math.PI/2;
   tag(g,id);
 }
 const battery=part('battery','7S9P 배터리 가설계','회사에서 확보 가능한 7S9P 팩을 우선 검토합니다. 화면상 235×155×95mm는 공간예약용 임시 크기입니다. 실제 팩 치수, 셀 타입, 전류, BMS, 충전기 확인 전 장착 확정 금지.',[0,45,-170]);
@@ -218,22 +228,33 @@ box(electronics,165,7,104,0,146,122,M.pcb,true);box(electronics,146,23,82,0,161,
 for(const x of [-124,124]){box(electronics,70,44,98,x,156,65,M.edge,true);for(let i=0;i<5;i++)box(electronics,50,3,3,x,181,27+i*18,M.profile)}
 box(electronics,45,22,35,0,140,232,M.edge);
 tag(electronics,'electronics');
-const sensor=part('lidar','전방 LiDAR 1개','전방 상판에 1개 배치. 실제 시야각 및 주행 방향의 가림, 센서 설치높이, 장착 홀과 케이블 방향은 모델 확정 후 검토합니다.',[0,110,115]);
-box(sensor,94,6,68,0,313,223,M.edge,true);
-cyl(sensor,30,17,0,327,223,M.black);cyl(sensor,32,8,0,339,223,M.lidar);
-tag(sensor,'lidar');
-function makeCamera(id,x,z,yaw,description,explosion){
- const g=part(id,'전방 비전 카메라',description,explosion);
- const pivot=new THREE.Group();pivot.position.set(x,0,z);pivot.rotation.y=yaw;g.add(pivot);
- box(pivot,22,21,38,0,331,0,M.camera,true);
- const lens=cyl(pivot,9,8,0,331,21,M.black);lens.rotation.x=Math.PI/2;
- const iris=cyl(pivot,5,9,0,331,24,M.lidar);iris.rotation.x=Math.PI/2;
- box(pivot,11,21,11,0,313,-3,M.fork);
+const lidarFov=new THREE.Group();robot.add(lidarFov);
+for(const sign of [1,-1]){
+  const front=sign===1,id=front?'lidarFront':'lidarRear',zz=sign*230;
+  const g=part(id,front?'전방 SICK TiM571-2050101':'후방 SICK TiM571-2050101',
+    'SICK TiM571-2050101, 수평 270° 스캔. 76.25×74.39×101.12mm 외형 기반 단순화 모델입니다. 광학 스캔면 위치·M12 커넥터·브라켓 고정홀은 추가 검토 필요.',
+    [0,120,sign*140]);
+  box(g,94,5,85,0,310.5,zz,M.edge,true);
+  box(g,76.25,36,74.39,0,334,zz,M.fork,true);
+  box(g,61,65.12,60,0,384.56,zz,M.black,true);
+  box(g,42,4,8,0,389,zz+sign*31,M.lidar);
+  cyl(g,22,4,0,416,zz,M.lidar);tag(g,id);
+  const a0=(front?-45:135)*Math.PI/180, a1=a0+Math.PI*1.5, pts=[];
+  for(let i=0;i<=54;i++){const a=a0+(a1-a0)*i/54;pts.push(new THREE.Vector3(Math.sin(a)*165,421,zz+Math.cos(a)*165))}
+  lidarFov.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x42dbcb,transparent:true,opacity:.5})));
+}
+function makeCamera(id,sign){
+ const g=part(id,sign<0?'좌측 Orbbec Astra Mini Pro':'우측 Orbbec Astra Mini Pro',
+  'Orbbec Astra Mini Pro MX6000 A V1.2. 외형 84.9×20×19.92mm, 전방 ±23°는 초기 배치. 커넥터·USB 배선·장착 홀·시야 간섭은 실물 확인 필요.',
+  [sign*90,100,140]);
+ const pivot=new THREE.Group();pivot.position.set(sign*120,0,266);pivot.rotation.y=sign*(23*Math.PI/180);g.add(pivot);
+ box(pivot,84.9,20,19.92,0,335,0,M.camera,true);
+ for(const cx of [-26,26]){const lens=cyl(pivot,7.8,4,cx,335,11,M.black);lens.rotation.x=Math.PI/2;const inner=cyl(pivot,4.5,5,cx,335,13,M.lidar);inner.rotation.x=Math.PI/2}
+ box(pivot,28,18,26,0,317,-6,M.fork,true);
  tag(g,id);return g;
 }
-makeCamera('cameraSingle',100,278,0,'카메라 1개 기본안. 실물 렌즈 화각과 주행 방향 시야를 확인해야 합니다.',[85,90,140]);
-makeCamera('cameraLeft',-158,225,-.47,'대각선 2개 옵션. 좌우 시야 확보용이며 실제 FOV에 따라 설치각 조정.',[-80,90,130]);
-makeCamera('cameraRight',158,225,.47,'대각선 2개 옵션. 좌우 시야 확보용이며 실제 FOV에 따라 설치각 조정.',[80,90,130]);
+makeCamera('cameraLeft',-1);
+makeCamera('cameraRight',1);
 const arm=part('arm','향후 로봇암 설치 영역','로봇암은 현재 포함하지 않습니다. 상판 중앙 약 Ø150mm 가상 영역을 표시하며, 미래 암 하중·작업반경·무게중심·전도 검토가 선행되어야 합니다.',[0,150,0]);
 cyl(arm,75,6,0,312,0,M.ghost);const volume=cyl(arm,75,120,0,375,0,M.ghost);volume.material.side=THREE.DoubleSide;
 tag(arm,'arm');
@@ -242,24 +263,24 @@ function line(a,b){const pts=[new THREE.Vector3(...a),new THREE.Vector3(...b)];c
 line([-235,7,-322],[235,7,-322]);for(const x of [-235,235])line([x,5,-332],[x,9,-312]);
 line([-283,7,-295],[-283,7,295]);for(const z of [-295,295])line([-293,5,z],[-273,9,z]);
 const annotations=[
- {id:'motorL',text:'Ø169 · WHEEL',pos:[-230,155,0]},
- {id:'casterLF',text:'CASTER ×4',pos:[-138,140,215]},
- {id:'lidar',text:'LiDAR',pos:[0,375,223]},
+ {id:'motorL',text:'ZLLG65ASM250-N V2 · Ø180',pos:[-230,160,0]},
+ {id:'casterLF',text:'GL-65-ASF ×4',pos:[-138,133,215]},
+ {id:'lidarFront',text:'TiM571 FRONT',pos:[0,440,230]},
+ {id:'lidarRear',text:'TiM571 REAR',pos:[0,440,-230]},
+ {id:'cameraRight',text:'ASTRA MINI PRO ×2',pos:[120,355,266]},
  {id:'battery',text:'7S9P BATTERY',pos:[0,238,-52]},
- {id:'deck',text:'TOP PLATE',pos:[-30,320,-192]},
+ {id:'deck',text:'TOP PLATE',pos:[-30,321,-192]},
  {id:'electronics',text:'CONTROLLERS',pos:[0,204,120]}
 ].map(a=>{const node=document.createElement('div');node.className='annotation';node.textContent=a.text;$('labels').append(node);return {...a,node}});
-let cameraMode='single',explode=0,motion='stop',selected=null,autoTurning=0;
-const optionMap={showDeck:['deck'],showMotors:['motorL','motorR'],showCasters:Object.keys(groups).filter(x=>x.startsWith('caster')),showBattery:['battery'],showElectronics:['electronics'],showLidar:['lidar'],showCameras:['cameraSingle','cameraLeft','cameraRight'],showArm:['arm']};
+let explode=0,motion='stop',selected=null;
+const optionMap={showDeck:['deck'],showMotors:['motorL','motorR'],showCasters:Object.keys(groups).filter(x=>x.startsWith('caster')),showBattery:['battery'],showElectronics:['electronics'],showLidar:['lidarFront','lidarRear'],showCameras:['cameraLeft','cameraRight'],showArm:['arm']};
 function applyVisibility(){
  Object.entries(optionMap).forEach(([control,ids])=>ids.forEach(id=>{groups[id].visible=$(control).checked}));
- groups.cameraSingle.visible=$('showCameras').checked&&cameraMode==='single';
- groups.cameraLeft.visible=$('showCameras').checked&&cameraMode==='dual';
- groups.cameraRight.visible=$('showCameras').checked&&cameraMode==='dual';
+ lidarFov.visible=$('showLidar').checked&&$('showFov').checked;
  if(selected&&!groups[selected]?.visible)selected=null;
 }
 Object.keys(optionMap).forEach(k=>$(k).addEventListener('change',applyVisibility));
-$('cameraMode').addEventListener('change',e=>{cameraMode=e.target.value;applyVisibility()});
+$('showFov').addEventListener('change',applyVisibility);
 $('explode').addEventListener('input',e=>{explode=Number(e.target.value)/100;$('explodeVal').textContent=e.target.value+'%';Object.values(groups).forEach(g=>g.position.copy(g.userData.explode).multiplyScalar(explode))});
 function updateBattery(){const ah=Number($('cellCapacity').value);$('estimatedAh').textContent=Number.isFinite(ah)&&ah>=1&&ah<=6?(9*ah).toFixed(1)+' Ah':'입력 확인';$('estimatedWh').textContent=Number.isFinite(ah)&&ah>=1&&ah<=6?Math.round(7*3.6*9*ah)+' Wh':'—'}
 $('cellCapacity').addEventListener('input',updateBattery);
