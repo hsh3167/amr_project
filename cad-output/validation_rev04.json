@@ -1,0 +1,42 @@
+{
+  "revision": "0.4",
+  "components": 80,
+  "solid_count": 80,
+  "valid_solids": true,
+  "step_bytes": 1468717,
+  "bounds_mm": {
+    "x": [
+      -242.1,
+      242.1
+    ],
+    "y": [
+      -275.0,
+      291.7547647447509
+    ],
+    "z": [
+      0.0,
+      413.12
+    ]
+  },
+  "motor_u_mm": {
+    "outer_face": -31.1,
+    "body_face": 33.099999999999994,
+    "shaft_end": 58.699999999999996
+  },
+  "ground_mm": {
+    "30_NBR_OD180_W42p5_LEFT": 0.0,
+    "30_NBR_OD180_W42p5_RIGHT": 0.0,
+    "44_GL65_wheel_64OD_LB": 0.0,
+    "44_GL65_wheel_64OD_LF": 0.0,
+    "44_GL65_wheel_64OD_RB": 0.0,
+    "44_GL65_wheel_64OD_RF": 0.0
+  },
+  "caster_drop_mm": 34.0,
+  "counts": {
+    "drive_motor": 2,
+    "caster": 4,
+    "lidar": 2,
+    "camera": 2
+  },
+  "scope": "Solid validity, file roundtrip, nominal contact, dimensions only; no structural/load/dynamics qualification."
+}
