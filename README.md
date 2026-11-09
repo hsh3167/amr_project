@@ -1,125 +1,75 @@
-# AMR PROJECT — 6-Wheel Differential Mobile Base
+# 대학생 AMR 프로젝트 — Rev 0.3
 
-University / educational AMR, minimal cash expenditure. **Revision 0.1: dimensional concept only; NOT a released drawing.**
+**6-wheel differential mobile base / 구조 레이아웃 검토용.** 확정 부품과 1차 가정 치수를 구분합니다. 현재는 제작도면이 아닌 CAD 선행배치 모델입니다.
 
-## Live 3D viewer
+## 3D 모델 보기
 
-After enabling GitHub Pages in **Settings → Pages → Deploy from a branch → main / (root)**:
+- [브라우저 3D 레이아웃 (GitHub Pages)](https://hsh3167.github.io/amr_project/) — 좌우 회전·확대·TOP/FRONT·부품 숨기기·분해 보기·PNG 저장·개념 모션
+- [CadQuery 파라메트릭 생성 소스](cad/amr_layout.py)
+- [최신 3D STEP](cad-output/amr_6w_layout_rev03.step) — GitHub Actions가 자동 생성함
+- [1차 BOM](bom/concept_bom.csv)
+- [설계 판단 및 리스크](docs/engineering-decisions.md)
 
-- **Viewer:** https://hsh3167.github.io/amr_project/
-- Launch file: [index.html](index.html)
-- Orbit, zoom, pan, Top/Front/isometric views, exploded view, visibility toggles
-- Switch camera configuration between 1 front-facing camera or 2 diagonal cameras
-- Click a part for an explanation, export PNG screenshot, preview visual forward/turn movement
-- **IMPORTANT:** The web animation is only a kinematic illustration. It is NOT a structural simulation, traction/vehicle-dynamics model, robot-arm simulation, sensor FOV verification or ROS2/Nav2 SLAM simulator.
-- Browser needs internet to load Three.js from jsDelivr.
+> **중요:** 웹의 주행 모션은 시각적 데모일 뿐 실제 차량 동역학/접지력/SLAM/간섭/강도 검증이 아닙니다. STEP 모델은 제조사 CAD 원본이 아니며, 부품 간섭 및 체결부 실측 전 제작 금지. 브라우저 3D는 Three.js CDN 연결이 필요합니다.
 
-## Design requirements and assumptions
+## 확정 부품 (기본 수량)
 
-All lengths in **mm**.
+| 분류 | 품명 | 수량 | 확정/카탈로그 정보 | 아직 미확인 |
+|---|---|---:|---|---|
+| 구동륜 | **ZLLG65ASM250-N V2** | 2 | **Ø180mm**(프로젝트 사용자 정정), 고무타이어, 24V, 브레이크 없음(프로젝트 조건) | 정확한 N V2의 실물 치수, 트레드폭, 축/마운트, 전력/토크/드라이버 |
+| 캐스터 | **GL-65-ASF** | 4 | Ø64mm, 설치 높이 82mm, 옵셋 22mm, 플레이트 65×48mm, 피치 54×24mm, 7mm 홀, 정격하중 50kg/개 | 휠 종류 suffix: EUS(고탄성 우레탄) vs TUN(사출 우레탄), 장착부 실측 |
+| LiDAR | **SICK TiM571-2050101** | 2 | 약 76.25×74.39×101.12mm 외형 범위, 270° 스캔, 공급전압 9–28V | 실제 광학 스캔면, 커넥터/케이블 공간, 시야 가림 |
+| Camera | **Orbbec Astra Mini Pro / MX6000 A V1.2** | 2 | 84.90×20.00×19.92mm, 깊이 시야각 H58.4°, USB2.0 | 카메라 각도, 케이블 굴곡 반경, 마운트 체결 위치 |
+| 배터리 | 보유 회사 7S9P | 1(후보) | 7 직렬·9 병렬 토폴로지만 확인 | 셀 화학종/규격/BMS/전압/최대전류/잔존용량/크기/충전기 |
 
-| Item | Revision 0.1 | Status |
-|---|---|---|
-| Drive | 2 × 24 V, brake-less in-wheel motors, Ø169 | **Given** |
-| Support | 4 × swivel caster; 2 front, 2 rear | **Given** |
-| Structure | Aluminum plates + extrusions | **Given** |
-| LiDAR | 1, front | **Given** |
-| Cameras | 1 front by default; option for 2 diagonal front cameras | **Given** |
-| Top deck | Removable, future manipulator expansion | **Given** |
-| Nominal envelope | W≈470 × L≈590 × H≈360, incl. sensors | *Assumption* |
-| Top plate | 420 × 550 × t4 | *Assumption* |
-| Base plate | 390 × 530 × t4, with central side wheel cutouts | *Assumption* |
-| Four corner posts | 20 × 20 extrusions, approx. 183 long | *Assumption* |
-| Drive wheel track | 422 (center-to-center), wheel width 40 | *Assumption* |
-| Drive axle height | 84.5 above floor (Ø169/2) | Geometric |
-| Swivel casters | Ø70, offset 14; positions X=±138, Y=±215 | *Assumption* |
-| Battery CAD envelope | 235 × 155 × 95 | *Placeholder only* |
-| Center robot-arm bolt pattern | 124 × 124 with Ø8.4 holes | *Placeholder only* |
+**참고:** 공개 검색에서 `ZLLG65ASM250-N V2`의 정확한 **제조사 원본 도면을 확보하지 못했으므로**, 유사모델 `-4096 V2`의 사양을 절대로 혼용하지 않습니다. Ø180mm는 사용자 확인 치수입니다.
 
-Coordinates: **X=width left/right; Y=forward/backward; Z=height** in CAD. In the interactive web viewer, Three.js uses **X=width, Z=forward, Y=height**.
+## 현재 레이아웃 — 미확정 치수 모두 [가정]
 
-### Mechanical decisions
+| 항목 | 설정 |
+|---|---|
+| 본체 전체 엔벨로프(센서 포함) | 약 W470×L610×H420mm |
+| 상판 | 420×550×t4mm, 탈착식 |
+| 하부판 | 390×530×t4mm, 중앙 휠 웰 |
+| 20×20 프로파일 | 상하판 연결 4개 |
+| 구동륜 센터 트랙 | 422mm |
+| 구동륜 중심 높이 | Ø180/2 = **90mm** |
+| 캐스터 중심 | X±138mm, 종방향 Y±215mm |
+| 캐스터 어댑터 | 상판/하판 높이 차이를 위한 약 34mm 드롭 브라켓 (추정) |
+| LiDAR | 전방(+Y), 후방(-Y) 각각 1개, 상판 높이 위치 |
+| 카메라 | 전방 좌우 각 1개, ±23° 대각 배치 (가설계) |
+| 향후 로봇암 | 상판 중앙 예비 체결영역 150×150mm |
+| 배터리 더미 | 235×155×95mm, 낮은 위치 중심 근처 |
 
-1. Build a flat **lower plate with two side wheel wells** and a removable **upper plate** connected by **four standard 20×20 extrusions**, minimizing fabrication operations.
-2. Mount two Ø169 hub wheels at the center of the robot's longitudinal axis. Rear/front casters are mounted symmetrically at the four corners.
-3. Place the battery low near the center to avoid a high center of gravity; reserve a central upper-deck mounting region for a future arm.
-4. Locate the control computer and motor drivers for access from the side while keeping cables within the chassis.
-5. Design the motor brackets as **replaceable subcomponents**: hole positions, axle mount geometry, and shock isolation are unknown today.
-6. Add a way to **shim/adjust caster height or hub-wheel contact loading** after prototype testing. Rigid 6-wheel assemblies can unload the central drive wheels on uneven floors.
-7. Start tests on flat indoor floors. The motors do **not** have holding brakes; do not operate on ramps, and review emergency stopping and possible regenerative bus overvoltage with the electronics lead.
+## 캐스터 접지 · 모터 높이
 
-## Editable CAD: CadQuery → STEP
+현재 모터는 지면에서 중심고 90mm로 배치하며, 캐스터 GL-65-ASF의 **설치 높이 82mm**에 맞춰 하부판 아래에 **드롭 브라켓(가설계)**을 설정했습니다. 6개 휠의 동시 접지/구동륜 수직반력은 아직 검증되지 않았습니다. 가공 전 캐스터 시밍/높이 조절 기능을 확보하고, 실측 바퀴 반지름과 타이어 처짐을 반영해 계산해야 합니다.
 
-[**CAD generator source:** cad/amr_layout.py](cad/amr_layout.py)
+## 배터리 및 전원
 
-The repository includes a **parametric CAD script** that exports a real multi-part STEP assembly. The visible web layout is a visual concept and is **not** automatically generated from the STEP file. To generate STEP locally:
+기존 7S9P 팩은 셀 종류·BMS·충전기·사용승인을 확인한 뒤 사용합니다. 7S 리튬이온(셀당 공칭 3.6V **가정**)은 공칭 25.2V, 최대 29.4V입니다. 3Ah 셀이라면 27Ah, 약 680Wh가 계산됩니다. 실제 BMS 전류, 회생 전압, 모터 드라이버 입력 허용범위, 보호퓨즈, 비상정지 회로를 사전 검토하세요. 브레이크 없는 AMR은 시험 초기 평지에서만 운용합니다.
 
-~~~bash
-pip install cadquery
+## STEP 재생성
+
+```bash
+pip install cadquery==2.5.2
 python cad/amr_layout.py
-~~~
+# cad-output/amr_6w_layout_rev03.step
+```
 
-Output: **cad-output/amr_6w_layout_rev01.step**.
+GitHub Actions에서도 STEP이 자동 생성됩니다. 부품 고유 CAD가 없는 요소는 단순 입체 더미이며 실제 제조용 정확도를 보장하지 않습니다.
 
-You can import the STEP into SolidWorks or FreeCAD. Dimensions can be changed at the top of the Python script under the P dictionary. **Replace all dummy motor/caster geometry with accurate vendor CAD before making fabrication drawings.** The STEP file is not proof of fit, strength, or manufacturability.
+## 검증 및 후속 작업
 
-## Battery decision — low-cost first
+1. **N V2 모터의 제조사 도면 또는 실물 측정**: Ø180 기준 외 타이어 폭, 샤프트 형상, 외측 허브 깊이, 배선 출구, 드라이버 모델 확인
+2. **GL-65-ASF 휠 종류 확인**: EUS 혹은 TUN, 실제 강성/접지/스위블 저항 검토
+3. LiDAR 2개 스캔면 높이와 카메라 2개 FoV 및 상호 간섭 검토
+4. 배터리 및 전장 실물 크기 확정
+5. 하부/상판 브라켓과 체결 홀을 도면화하여 FreeCAD·SolidWorks 등에서 실제 조립 검증
 
-**Priority 1: Reuse the approved company 7S9P pack, but only after checking the exact chemistry, BMS, charger, power budget, state of health and dimensions.**
-
-The topology \`7S9P\` alone does not define actual Ah, peak/continuous discharge current or physical size.
-
-| Candidate | Nominal / full voltage | Cost reference* | Comment |
-|---|---|---:|---|
-| Reuse company 7S9P | Depends on chemistry; 7S Li-ion commonly 25.2–25.9V nominal / **29.4V fully charged** | 0 KRW if authorized | First choice *if compatible and healthy* |
-| Novavolt KC 7S2P Li-ion 10Ah | 24V-class / 29.4V charged | 191,000 KRW | New-pack backup, check BMS current |
-| Novavolt 8S2P LiFePO4 12Ah | 25.6V nominal / **29.2V fully charged** | 207,000 KRW | Robust option, but heavier per Wh; check output rating |
-| Novavolt 8S1P LiFePO4 6Ah | 25.6V nominal / 29.2V charged | 129,000 KRW | Cheapest small-pack option, check motor acceleration-current requirement |
-| Powercraft LiFePO4 8S2P 6.6Ah | 25.6V nominal / 29.2V charged | 162,000 KRW | 35A BMS listed; continuous pack current must be verified |
-
-\*Website list prices observed on **2026-11-04**; stock, BMS current, charger and shipping costs can change. This is not an electrical signoff.
-
-Sources:
-- https://shop.novavolt.co.kr/kc_ncm
-- https://shop.novavolt.co.kr/lfp_industrial
-- https://m.powercraft.co.kr/goods/goods_list.php?cateCd=119
-- https://powercraft.co.kr/goods/goods_view.php?goodsNo=1961
-
-### Critical pack integration checks
-
-- Confirm **cell chemistry** and **charger**. Never assume 7S means 29.4V unless it is 7S Li-ion (NMC/NCA etc). An 8S LiFePO4 charger typically targets 29.2V; the two charger profiles are **not interchangeable by assumption**.
-- Check driver input-voltage limit against **maximum charge voltage, regen voltage spikes, undervoltage threshold**. A motor labeled "24V" does not prove the controller accepts 29.4V.
-- Verify BMS continuous discharge current exceeds the **combined load** including both motor acceleration/stall limits, SBC, sensors and DC/DC converter, plus design margin.
-- Verify pack age, swelling, drop damage, balancing, cell voltages and health using approved qualified procedures. Do not dismantle/rebuild a used battery pack.
-- Add an **appropriately rated fuse near battery +**, protected wiring, a DC-rated power disconnect / motor power E-stop scheme, DC/DC rails, isolated low-voltage logic as needed, and charger connector safeguards.
-- Brake-less wheels may drift on slopes; motor-controller stopping is not equivalent to a holding brake.
-- Before arm installation, recalculate stability, braking, load on casters and motor wheel traction.
-
-### Approximate capacity math, only if 7S9P Li-ion
-
-At assumed 3.6V nominal **per cell** and 3.0Ah **per cell**, pack is approximately **25.2V × 27Ah = 680.4Wh**. At 2.5Ah/cell, total is 22.5Ah and 567Wh; at 4.0Ah/cell it is 36Ah and 907Wh. Actual cell specs and pack condition override the math.
-
-## BOM and work planning
-
-See [bom/concept_bom.csv](bom/concept_bom.csv). Costs are deliberately marked **TBD** until motor/controller specifications and vendor drawings are collected.
-
-### Before fabrication
-
-- [ ] Company owner has authorized component reuse and external student project use
-- [ ] Capture the *actual wheel motor* 3D CAD, motor flange holes, encoder signals, power and drive specs
-- [ ] Capture the actual caster drawings: wheel Ø, swivel offset, mounting holes, overall height, loading capacity
-- [ ] Capture actual battery label, chemistry, dimensions, mass, charger and BMS current/communications
-- [ ] Agree on payload, future robot-arm mass/torque, max velocity and floor type
-- [ ] Confirm actual motor controllers, SBC, DC/DC, LiDAR and camera footprints
-- [ ] Verify wheel/caster contact loading, center of gravity, motor mount stiffness and E-stop
-- [ ] Replace dummy STEP solids and generate drawings and real BOM
-
-### Proposed project phases
-
-- **Phase 0**: layout review + verify reused parts
-- **Phase 1**: chassis, power distribution, manual teleoperation
-- **Phase 2**: odometry + LiDAR SLAM + Nav2 autonomous motion
-- **Phase 3**: camera-based localization/object detection
-- **Phase 4**: optional robot-arm mounting and manipulation after stability review
-
-License: project-created code and concept material may be reused for educational purposes; external part geometry and vendor documentation remain subject to their own licenses.
+## 공식 제조사 자료
+- [SICK TiM571-2050101 PDF](https://www.sick.com/media/pdf/4/44/444/dataSheet_TiM571-2050101_1075091_ko.pdf)
+- [Orbbec Astra Mini Pro](https://store.orbbec.com/products/astra-mini-pro)
+- [GL-65-ASF EUS 옵션](https://www.gdok.co.kr/sub/caster_detail.php?gd_model_type=%ED%8F%89%ED%8C%90%EC%B7%A8%EB%B6%80%ED%98%95&gd_type2=EUS&gm_code=pd15&gs_code=&gs_name=GL-65&gs_type=GL)
+- [GL-65-ASF TUN 옵션](https://www.gdok.co.kr/sub/caster_detail.php?gd_model_type=%ED%8F%89%ED%8C%90%EC%B7%A8%EB%B6%80%ED%98%95&gd_type2=TUN&gm_code=pd07&gs_code=&gs_name=GL-65&gs_type=GL)
+- [ZLTECH 250 시리즈 참고(동일 N V2 아님)](https://zltech.co.kr/product/view.php?pcode=PROD00000000098)
