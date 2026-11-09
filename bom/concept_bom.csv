@@ -1,15 +1,14 @@
 Category,Item,Qty,Unit,Supply,Specification,Status,Cost_KRW,Notes
-Mechanical,In-wheel motor,2,ea,Company reuse,24V / 169mm dia / no brake,Given,0,Mounting/encoder/driver need verification
-Mechanical,Swivel caster,4,ea,Company reuse,2 front + 2 rear,Given,0,Diameter/height/offset unspecified
+Mechanical,ZLLG65ASM250-N V2 rubber wheel motor,2,ea,Company reuse,24V / user-confirmed OD180 / no brake,Specified,0,N V2 OEM drawing unverified; tire width shaft mount and driver unknown
+Mechanical,GL-65-ASF swivel caster,4,ea,Company reuse,OD64 / height82 / offset22 / plate65x48 / 54x24 holes,Specified,0,Confirm EUS vs TUN caster compound
 Mechanical,Lower aluminum plate,1,ea,Buy or scrap,390x530x4 assumed,Concept,TBD,Wheel wells / machining and safety margins pending
 Mechanical,Upper aluminum plate,1,ea,Buy or scrap,420x550x4 assumed,Concept,TBD,Reserved for optional robot arm
 Mechanical,2020 aluminum extrusion,4,ea,Buy or scrap,20x20x183 assumed,Concept,TBD,Use offcuts and standard joins
 Mechanical,Motor mount brackets,2,set,Machine or 3D print test,Actual wheel motor mount not known,Concept,TBD,Structural production brackets should be metal
 Mechanical,Caster mounts or shims,4,set,Make,Height adjustment and spacing,Concept,TBD,Contact loading control
 Mechanical,Fasteners/corner brackets,1,set,Buy or reuse,Standard M4/M5/M6 as required,Concept,TBD,Final thread sizes not confirmed
-Electrical,LiDAR,1,ea,Company reuse,Forward/front mount,Given,0,Confirm model and voltage/interface
-Electrical,Camera,1,ea,Company reuse,Front; optional dual cameras,Given,0,Confirm FoV
-Electrical,Optional second camera,1,ea,Company reuse if needed,Diagonal front pair option,Optional,0,Start with one
+Electrical,SICK TiM571-2050101 LiDAR,2,ea,Company reuse,270-degree scan / 9-28V / front and rear,Specified,0,Check optical scan plane and M12 connectors
+Electrical,Orbbec Astra Mini Pro MX6000 A V1.2,2,ea,Company reuse,84.9x20x19.92 / front left and right,Specified,0,Dual camera placement +-23 degrees is conceptual
 Electrical,Battery pack,1,ea,Company reuse if approved,7S9P pack chemistry and BMS unknown,Pending,0,Replace placeholder model with actual pack
 Electrical,Motor driver,2,ea,Check existing stock,Compatible with specific wheel motor,Pending,TBD,Check hall/encoder and regen
 Electrical,Computer/SBC,1,ea,Check existing stock,ROS2 capable,Pending,TBD,Raspberry Pi 5 or used mini PC
