@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""AMR Project Rev 0.2 — parametric concept STEP assembly.
+"""AMR Project Rev 0.3 — parametric concept STEP assembly.
 Requires CadQuery 2.x.  Run: python cad/amr_layout.py
 Units mm. CAD coordinates: X right, Y forward, Z up.
-The motor drawing, caster catalogue, LiDAR datasheet, and Orbbec published
-dimensions inform bounding volumes but parts are NOT vendor-exact solids.
+The caster catalogue, LiDAR datasheet, and Orbbec published
+dimensions inform bounding volumes but parts are NOT vendor-exact solids.\nThe exact ZLLG65ASM250-N V2 motor drawing is NOT verified; its Ø180 mm\ndiameter is given by the project owner, not inferred from sibling models.
 ONLY caster plate fixing pattern is taken directly from a catalogue;
 all chassis/motor/sensor bracket drilling patterns must be validated.
 """
@@ -14,14 +14,15 @@ import cadquery as cq
 
 # Confirmed catalog geometry is separated from concept layout geometry.
 PARTS = {
-    "drive_motor": {"model": "ZLLG65ASM250-4096 V2.0", "count": 2,
-                    "tire_dia": 173.0, "tire_dia_tolerance": 2.0,
-                    "tread_width": 44.0, "tread_width_tol": 1.0,
-                    "wheel_dia_user_nominal": 170.0,
-                    "single_shaft": True, "rated_voltage": 24.0,
-                    "rated_rpm": 160, "rated_torque_Nm": 6.0,
-                    "power_W": 350, "shaft_thread": "M16x1.5",
-                    "motor_mass_kg": 3.75},
+    "drive_motor": {"model": "ZLLG65ASM250-N V2", "count": 2,
+                    "tire_dia": 180.0,
+                    "tread_width": 44.0,   # PLACEHOLDER - exact N V2 tire width not verified
+                    "rated_voltage": 24.0,  # project-specified
+                    "tire_material": "Rubber",
+                    "brake": False,
+                    # shaft type, flange, encoder, rated current, torque and power: not verified
+                    "shaft_type": None, "shaft_thread": None,
+                    "rated_power_W": None, "rated_torque_Nm": None},
     "caster": {"model": "GL-65-ASF", "count": 4,
                "wheel_dia": 64.0, "tread_width": 23.0,
                "overall_height": 82.0, "swivel_offset": 22.0,
@@ -58,7 +59,7 @@ P = {
 }
 OUT = Path(__file__).resolve().parent.parent / "cad-output"
 OUT.mkdir(exist_ok=True, parents=True)
-assy = cq.Assembly(name="AMR_6W_Rev02")
+assy = cq.Assembly(name="AMR_6W_Rev03")
 part_count = 0
 
 def add(obj, name, color):
@@ -102,20 +103,20 @@ top=top.faces(">Z").workplane().pushPoints(hole_pts).hole(8.4)
 add(top,"20_upper_Al_plate_PLACEHOLDER_HOLES",(.72,.81,.89))
 add(box(155,155,5,0,0,299),"21_arm_reinforcement_PLACEHOLDER",(.25,.40,.55))
 
-# Accurate OD/tread-width wheels, but face/shaft body simplified.
+# User-confirmed Ø180 OD, tread-width and face/shaft body deliberately estimated.
 wheel=PARTS["drive_motor"]
 for side in (-1,1):
     n="LEFT" if side<0 else "RIGHT"
     xc=side*P["drive_track"]/2
     z=wheel["tire_dia"]/2
-    # Annulus, +X extrusion. Existing shaft is on chassis-inboard side.
+    # Annulus, +X extrusion. Shaft position shown only as placeholder.
     tire=(cq.Workplane("YZ").circle(wheel["tire_dia"]/2).circle(45)
           .extrude(wheel["tread_width"])
           .translate((xc-wheel["tread_width"]/2,0,z)))
-    add(tire,"30_173mm_rubber_tire_"+n,(.09,.13,.18))
-    add(cylx(47,44,xc,0,z),"31_motor_hub_"+n,(.27,.48,.83))
+    add(tire,"30_180mm_rubber_tire_"+n,(.09,.13,.18))
+    add(cylx(47,44,xc,0,z),"31_motor_hub_PLACEHOLDER_"+n,(.27,.48,.83))
     add(cylx(51,28,side*173,0,z),"32_motor_body_SIMPLIFIED_"+n,(.31,.41,.51))
-    add(cylx(8,45,side*150,0,z),"33_M16_shaft_SIMPLIFIED_"+n,(.16,.27,.35))
+    add(cylx(8,45,side*150,0,z),"33_motor_shaft_UNKNOWN_"+n,(.16,.27,.35))
 
 # Caster actual height is 82mm. Unlike Rev01, caster wheels contact Z=0.
 # A DROP/HANGER is required from chassis bottom (Z=116) to the caster plate
@@ -171,7 +172,7 @@ for side in (-1,1):
     add(body,"70_Orbbec_Astra_Mini_Pro_MX6000_"+n,(.65,.50,.82))
     add(box(28,26,18,x,y-6,318),"71_camera_bracket_PLACEHOLDER_"+n,(.67,.72,.80))
 
-outfile=OUT/"amr_6w_layout_rev02.step"
+outfile=OUT/"amr_6w_layout_rev03.step"
 assy.save(str(outfile))
 print("Generated:",outfile,"/ components:",part_count)
 print("WARNING: dimensionally guided concept only; perform collision/fastener/stability review before fabrication.")
