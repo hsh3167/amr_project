@@ -56,7 +56,7 @@
 <div class="app">
   <header>
     <div class="brand"><div class="mark">A</div><div><strong>AMR PROJECT</strong><small>UNIVERSITY ROBOTICS · LAYOUT LAB</small></div></div>
-    <div class="header-right"><span class="chip"><b>●</b> REV 0.4 · CONCEPT ONLY</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    <div class="header-right"><span class="chip"><b>●</b> REV 0.5 · CONCEPT ONLY</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </header>
   <main class="workspace">
     <aside class="left">
@@ -71,6 +71,7 @@
       <div class="section">
         <h2>구성품 표시</h2>
         <label class="toggle"><span><i class="swatch" style="background:#adbdcc"></i>상부 판재</span><input type="checkbox" id="showDeck" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#adbdcc"></i>알루미늄 주기둥 ×4</span><input type="checkbox" id="showProfiles" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#5687ef"></i>Ø180 휠모터 2개</span><input type="checkbox" id="showMotors" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#96acbe"></i>GL-65-ASF ×4</span><input type="checkbox" id="showCasters" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#e5ab62"></i>배터리(가설계)</span><input type="checkbox" id="showBattery" checked></label>
@@ -81,17 +82,18 @@
         <label class="toggle"><span><i class="swatch" style="background:#8ebcff"></i>부품 라벨</span><input type="checkbox" id="showLabels" checked></label>
       </div>
       <div class="section">
-        <h2>센서 배치 · Rev 0.4</h2>
-        <p class="hint">LiDAR: 전·후방 각 1개 (수평 270°). 카메라: 전방 좌·우 각 1개 (가설계 ±23°).</p>
-        <label class="toggle"><span><i class="swatch" style="background:#43e1d3"></i>LiDAR 스캔 각도 개념선</span><input type="checkbox" id="showFov"></label>
+        <h2>센서 배치 · Rev 0.5</h2>
+        <p class="hint">LiDAR: 전방 좌측·후방 우측 대각 배치. 스캔면 공칭 약241mm, 각270°의 사각90°는 차체 안쪽을 향합니다. 카메라: 상판 아래 전방 좌우 ±15°/하향10°(가정).</p>
+        <label class="toggle"><span><i class="swatch" style="background:#43e1d3"></i>LiDAR 270° / 안쪽 사각90°</span><input type="checkbox" id="showFov"></label>
       </div>
       <div class="section">
         <div class="range-row"><span>분해 뷰 (Explode)</span><strong id="explodeVal">0%</strong></div>
         <input id="explode" type="range" min="0" max="100" step="1" value="0" aria-label="분해 뷰">
         <div class="hint">간섭과 조립 구조 설명용 시각화입니다.</div>
       </div>
+      <div class="section"><p class="hint">스캔선은 가림 검토용 개념선입니다. 각 센서의 원점과 높이는 실물에서 확인해야 합니다.</p><a class="hint" href="https://github.com/hsh3167/amr_project/blob/main/docs/layout-rev05.md">배치 변경 근거 보기 ↗</a></div>
       <div class="section">
-        <h2>설계 근거</h2><p class="hint">확정: ZLLG65ASM250-N V2.02 ×2 (PDF p.7: Ø180±2·폭42.5±1·단축 M14×1.5·NBR·브레이크 없음), GL-65-ASF ×4, SICK TiM571-2050101 ×2, Astra Mini Pro MX6000 A V1.2 ×2.</p><p class="hint" style="margin-top:8px">가정: 케이스 Ø140, 타이어 내경, 브라켓·판두께·배터리·센서 장착부. 본문 사양과 도면 표의 충돌은 검토 문서에 기록했습니다.</p>
+        <h2>설계 근거</h2><p class="hint">확정: ZLLG65ASM250-N V2.02 ×2 (PDF p.7: Ø180±2·폭42.5±1·단축 M14×1.5·NBR·브레이크 없음), GL-65-ASF ×4, SICK TiM571-2050101 ×2, Astra Mini Pro MX6000 A V1.2 ×2.</p><p class="hint" style="margin-top:8px">기둥 재질: 알루미늄 프로파일 확정. 단면20×20 및 슬롯은 가정. 가정: 케이스 Ø140, 타이어 내경, 브라켓·판두께·배터리·센서 장착부. 본문 사양과 도면 표의 충돌은 검토 문서에 기록했습니다.</p>
       </div>
     </aside>
     <section class="scene-wrap" aria-label="Interactive AMR 3D model">
@@ -103,8 +105,8 @@
       <div class="footer">NOT FOR MANUFACTURING · NO FEA / COLLISION / SLAM VALIDATION</div>
       <div class="status">
         <div class="stats">
-          <div class="stat"><b>484.2 mm</b><span>현재 모델 폭*</span></div>
-          <div class="stat"><b>566.8 mm</b><span>현재 모델 길이*</span></div>
+          <div class="stat"><b>546.5 mm</b><span>현재 모델 폭*</span></div>
+          <div class="stat"><b>606.5 mm</b><span>현재 모델 길이*</span></div>
           <div class="stat"><b>Ø180 mm</b><span>구동륜</span></div>
           <div class="stat"><b>24 V</b><span>휠모터 정격</span></div>
         </div>
@@ -114,15 +116,15 @@
     <aside class="right">
       <div class="eyebrow">COMPONENT INSPECTOR</div>
       <div class="legend">부품을 클릭하면 설명 표시</div>
-      <h2 id="partName" class="detail-title">도면 반영 배치 Rev 0.4</h2>
-      <p id="partDescription" class="detail-text">상판을 숨기거나 분해 뷰를 조정하면 구동부·배터리·전장품을 확인할 수 있습니다. 전후 LiDAR 2개와 전방 대각 카메라 2개를 적용했습니다. 세부 브라켓은 미확정입니다.</p>
+      <h2 id="partName" class="detail-title">도면 반영 배치 Rev 0.5</h2>
+      <p id="partDescription" class="detail-text">상판을 숨기거나 분해 뷰를 조정하면 구동부·배터리·전장품을 확인할 수 있습니다. 대각 코너 LiDAR 2개와 상판 아래 카메라 2개를 적용했습니다. 모든 수직 기둥은 알루미늄 프로파일입니다. 세부 브라켓은 미확정입니다.</p>
       <div class="section" style="margin-top:18px">
         <h2>기본 배치값 (초안)</h2>
-        <div class="spec"><span>전체 엔벨로프</span><b>W484.2 × L566.8 × H413.12*</b></div>
+        <div class="spec"><span>전체 엔벨로프</span><b>W546.5 × L606.5 × H307*</b></div>
         <div class="spec"><span>상판 / 하판</span><b>420×550 / 390×530</b></div>
         <div class="spec"><span>드라이브 축 간격</span><b>422 (가설계)</b></div>
         <div class="spec"><span>캐스터</span><b>GL-65-ASF · Ø64 ×4</b></div>
-        <div class="spec"><span>프레임</span><b>20×20 프로파일 (가정)</b></div>
+        <div class="spec"><span>프레임</span><b>Al 20×20 · 기둥8개</b></div>
         <div class="spec"><span>상판 높이</span><b>≈305 (가설계)</b></div>
         <div class="spec"><span>배터리 공간</span><b>235×155×95 (가정)</b></div>
         <div class="spec"><span>LiDAR</span><b>SICK TiM571 ×2</b></div>
@@ -145,7 +147,7 @@
         <ul class="list"><li>Ø14 / AF10 / M14×1.5 <strong>축 고정 및 토크반력 브라켓</strong></li><li>구동륜·캐스터 <strong>접지하중 / 높이</strong> 확인</li><li>배터리·드라이버 간 <strong>케이블/방열 공간</strong></li><li>급정지 시 <strong>전도 / 제동 / 전원 차단</strong></li><li>차후 로봇암의 <strong>하중 및 작동반력</strong></li></ul>
         <div class="callout" style="margin-top:13px">이 화면의 주행 애니메이션은 <b>개념적 운동 표현</b>입니다. 실제 동역학/전도/마찰/주행제어/SLAM 시뮬레이션은 아닙니다.</div>
       </div>
-      <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_6w_layout_rev04.step">STEP 다운로드 ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
+      <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_6w_layout_rev05.step">STEP 다운로드 ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
     </aside>
   </main>
 </div>
@@ -153,7 +155,8 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
-const SPEC=await fetch('./cad/parts.json').then(r=>{if(!r.ok)throw Error('Part data unavailable');return r.json()});
+const [SPEC,LAYOUT]=await Promise.all(['./cad/parts.json','./cad/layout.json'].map(url=>fetch(url,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Layout data unavailable');return r.json()})));
+const LP=LAYOUT.parameters;
 const MOTOR=SPEC.drive_motor;
 const DIM={baseW:390,baseL:530,deckW:420,deckL:550,baseY:118,deckY:305,driveDia:MOTOR.tire_dia,track:422,driveWidth:MOTOR.tread_width,casterDia:64,casterOffset:22,casterHeight:82,casterX:138,casterZ:215};
 const $=id=>document.getElementById(id);
@@ -172,13 +175,24 @@ const grid=new THREE.GridHelper(2600,52,0x3f6486,0x22364e);grid.position.y=-1;gr
 const robot=new THREE.Group();scene.add(robot);
 const mat=(color,metalness=.25,roughness=.55,more={})=>new THREE.MeshStandardMaterial({color,metalness,roughness,...more});
 const M={plate:mat(0xa8b8c8,.75,.32),edge:mat(0x3c5b7e,.55,.45),profile:mat(0x98adbf,.82,.3),black:mat(0x172437,.15,.82),tire:mat(0x171f2c,.06,.94),hub:mat(0x4775dc,.65,.3),caster:mat(0x7c93a8,.2,.74),fork:mat(0xb2c0ca,.75,.31),battery:mat(0xdba462,.22,.48),pcb:mat(0x237966,.4,.45),lidar:mat(0x43e1d3,.2,.3,{polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}),camera:mat(0xae87e3,.25,.47),ghost:mat(0xffd276,.2,.45,{transparent:true,opacity:.19,depthWrite:false}),bolt:mat(0x23354d,.45,.5)};
-const groups={},parts={},wheels=[],casters=[];
+const groups={},parts={},wheels=[],casters=[],columnManifest=[];
 function part(id,name,description,explode=[0,0,0]){const obj=new THREE.Group();obj.userData.id=id;obj.userData.explode=new THREE.Vector3(...explode);groups[id]=obj;parts[id]={name,description};robot.add(obj);return obj;}
 function tag(obj,id){obj.traverse(o=>{if(o.isMesh)o.userData.partId=id});}
 function box(g,w,h,d,x,y,z,material,edges=false){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);if(edges){const lines=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry),new THREE.LineBasicMaterial({color:0x314b6b,transparent:true,opacity:.66}));mesh.add(lines)}return mesh}
 function cyl(g,r,h,x,y,z,material,rad=64){const o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,rad),material);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;g.add(o);return o}
 function rod(g,a,b,r,material){const dir=new THREE.Vector3().subVectors(b,a);const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,dir.length(),10),material);m.position.copy(a).add(b).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir.normalize());g.add(m);return m}
 function plate(g,points,y,thickness,material,holes=[]){const sh=new THREE.Shape();points.forEach((p,i)=>i?sh.lineTo(p[0],p[1]):sh.moveTo(p[0],p[1]));sh.closePath();holes.forEach(([x,z,r])=>{const h=new THREE.Path();h.absarc(x,z,r,0,Math.PI*2,false);sh.holes.push(h)});const geo=new THREE.ExtrudeGeometry(sh,{depth:thickness,bevelEnabled:false,curveSegments:28});geo.rotateX(Math.PI/2);const o=new THREE.Mesh(geo,material);o.position.y=y+thickness/2;o.castShadow=true;o.receiveShadow=true;g.add(o);return o}
+// Generic nominal20mm T-slot: actual purchased cross-section remains to verify.
+function extrusion20(g,x,z,bottom,top){
+ const sh=new THREE.Shape(),points=[];
+ const side=[[-10,-10],[-3,-10],[-3,-8],[-5,-8],[-5,-5.5],[5,-5.5],[5,-8],[3,-8],[3,-10],[10,-10]];
+ for(let k=0;k<4;k++){const a=k*Math.PI/2;side.forEach(([px,py],i)=>{if(k&&i===0)return;points.push([px*Math.cos(a)-py*Math.sin(a),px*Math.sin(a)+py*Math.cos(a)])})}
+ points.forEach(([px,py],i)=>i?sh.lineTo(px,py):sh.moveTo(px,py));sh.closePath();
+ const h=new THREE.Path();h.absarc(0,0,LAYOUT.profile.assumed_core_dia/2,0,Math.PI*2,true);sh.holes.push(h);
+ const geo=new THREE.ExtrudeGeometry(sh,{depth:top-bottom,bevelEnabled:false,curveSegments:20});geo.rotateX(-Math.PI/2);
+ const mesh=new THREE.Mesh(geo,M.profile);mesh.position.set(x,bottom,z);mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);
+ columnManifest.push({section:20,length:top-bottom,material:'Aluminum extrusion'});return mesh;
+}
 const base=part('base','하부 알루미늄 판재','390×530mm 가설계. 중앙 휠모터와 간섭하지 않도록 양 측면에 휠 웰을 만들었으며, 판두께/볼트 패턴은 미확정입니다.');
 plate(base,[[-195,-265],[195,-265],[195,-99],[145,-99],[145,99],[195,99],[195,265],[-195,265],[-195,99],[-145,99],[-145,-99],[-195,-99]],DIM.baseY,4,M.plate,[[0,-155,5],[0,155,5]]);
 for(const sign of [-1,1]){
@@ -195,11 +209,11 @@ for(const sign of [-1,1]){
 }
 for(const z of [-215,215]){box(base,320,12,18,0,111,z,M.profile,true)}
 tag(base,'base');
-const profiles=part('profiles','알루미늄 프로파일','20×20mm 압출 프로파일 4개를 기본으로 가정했습니다. 상·하판 간격, 연결 브라켓, 체결 강도는 추후 계산해야 합니다.',[0,70,0]);
-for(const x of [-146,146])for(const z of [-208,208]){box(profiles,20,183,20,x,211.5,z,M.profile,true);box(profiles,32,4,32,x,121,z,M.edge);box(profiles,32,4,32,x,301,z,M.edge)}
+const profiles=part('profiles','알루미늄 프로파일 주기둥 ×4','모든 수직 기둥은 알루미늄 프로파일. 주기둥4×183mm, LiDAR 지지2×40mm, 카메라 행거2×40mm입니다. 단면20×20과 슬롯은 범용 가정이며 구매품/접합 강도 검증이 필요합니다.',[0,70,0]);
+for(const [x,z] of LAYOUT.profile.main_columns_xy){extrusion20(profiles,x,z,LAYOUT.profile.main_bottom_z,LAYOUT.profile.main_top_z);box(profiles,32,4,32,x,121,z,M.edge);box(profiles,32,4,32,x,301,z,M.edge)}
 tag(profiles,'profiles');
 const deck=part('deck','탈착식 상부 판재','420×550mm 가설계. LiDAR/카메라 설치 및 향후 로봇암 체결용. 장착 예상 영역은 중앙 150×150mm이며 실제 암 정격하중/볼트 패턴은 미정입니다.',[0,170,0]);
-const dholes=[];for(const x of [-146,146])for(const z of [-208,208])dholes.push([x,z,4.2]);for(const x of [-62,62])for(const z of [-62,62])dholes.push([x,z,4.2]);
+const dholes=[];for(const x of [-146,146])for(const z of [-208,208])dholes.push([x,z,2.75]);for(const x of [-62,62])for(const z of [-62,62])dholes.push([x,z,4.2]);
 plate(deck,[[-210,-275],[210,-275],[210,275],[-210,275]],DIM.deckY,4,mat(0x93abc0,.6,.37,{transparent:true,opacity:.85}),dholes);
 box(deck,155,5,155,0,299,0,M.edge,true);
 for(const x of [-62,62])for(const z of [-62,62]){const b=cyl(deck,6,3,x,310,z,M.bolt);b.material=M.bolt}
@@ -245,38 +259,43 @@ box(battery,235,95,155,0,173.5,-52,M.battery,true);
 for(let z=-110;z<=0;z+=32)box(battery,217,2,3,0,222,z,M.edge);
 box(battery,65,4,34,-55,224,-51,M.black);
 tag(battery,'battery');
-const electronics=part('electronics','전장부 / 제어기 / 드라이버','Raspberry Pi 5 또는 미니 PC, MCU, 모터 드라이버 2개를 가정한 배치입니다. 실제 모델·소비전력·방열 요구사항은 전장 담당과 협의가 필요합니다.',[160,75,40]);
-box(electronics,165,7,104,0,146,122,M.pcb,true);box(electronics,146,23,82,0,161,122,M.black,true);
+const electronics=part('electronics','전장부 / 전방 제어기·후방 전원부','전방은 제어기와 통신, 후방은 퓨즈·차단·DC/DC 공간, 측면은 모터 드라이버로 구분합니다. 배터리는 낮게 유지하고 신호/동력 배선 분리를 계획합니다. 실제 하드웨어 치수와 방열은 미확정입니다.',[160,75,40]);
+box(electronics,165,7,104,0,LAYOUT.electronics.pcb_center_z,LAYOUT.electronics.logic_y,M.pcb,true);box(electronics,146,23,82,0,LAYOUT.electronics.computer_center_z,LAYOUT.electronics.logic_y,M.black,true);
 for(const x of [-124,124]){box(electronics,70,44,98,x,156,85,M.edge,true);for(let i=0;i<5;i++)box(electronics,50,3,3,x,181,47+i*18,M.profile)}
-box(electronics,45,22,35,0,140,232,M.edge);
+box(electronics,160,40,65,0,LAYOUT.electronics.power_bay_center_z,LAYOUT.electronics.power_bay_y,M.edge,true);
 tag(electronics,'electronics');
 const lidarFov=new THREE.Group();robot.add(lidarFov);
-for(const sign of [1,-1]){
-  const front=sign===1,id=front?'lidarFront':'lidarRear',zz=sign*230;
-  const g=part(id,front?'전방 SICK TiM571-2050101':'후방 SICK TiM571-2050101',
-    'SICK TiM571-2050101, 수평 270° 스캔. 76.25×74.39×101.12mm 외형 기반 단순화 모델입니다. 광학 스캔면 위치·M12 커넥터·브라켓 고정홀은 추가 검토 필요.',
-    [0,120,sign*140]);
-  box(g,94,5,85,0,310,zz,M.edge,true);
-  box(g,76.25,36,74.39,0,330,zz,M.fork,true);
-  box(g,61,65.12,60,0,380.56,zz,M.black,true);
-  box(g,42,4,8,0,389,zz+sign*31,M.lidar);
-  cyl(g,22,3,0,411.62,zz,M.lidar);tag(g,id);
-  const a0=(front?-135:45)*Math.PI/180, a1=a0+Math.PI*1.5, pts=[];
-  for(let i=0;i<=54;i++){const a=a0+(a1-a0)*i/54;pts.push(new THREE.Vector3(Math.sin(a)*165,421,zz+Math.cos(a)*165))}
-  lidarFov.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x42dbcb,transparent:true,opacity:.5})));
+for(const pose of LAYOUT.lidars){
+ const id=pose.id,x=pose.x,z=pose.y,z0=pose.bbox_bottom_z;
+ const g=part(id,pose.name==='FRONT_LEFT'?'전방 좌측 SICK TiM571':'후방 우측 SICK TiM571',
+  '대각 코너 배치:270°는 바깥쪽, 사각90°는 차체 안쪽. 공칭 스캔면 약241mm. 실제 광학 원점/케이블/커버의 가림은 실물 확인 필요. 센서 지지 기둥도 알루미늄 프로파일입니다.',[Math.sign(x)*110,70,Math.sign(z)*100]);
+ const local=new THREE.Group();local.position.set(x,0,z);local.rotation.y=pose.heading_deg*Math.PI/180;g.add(local);
+ box(local,80,3,70,0,z0-1.5,0,M.edge,true);
+ const sx=pose.support_x,sz=pose.support_y,bridgeLength=Math.hypot(x-sx,z-sz)+25;
+ const bridge=box(g,bridgeLength,3,25,(x+sx)/2,z0-1.5,(z+sz)/2,M.edge,true);bridge.rotation.y=-Math.atan2(z-sz,x-sx);
+ extrusion20(g,sx,sz,LP.base_bottom_z+LP.base_thickness,z0-3);
+ box(local,SPEC.lidar.width,36,SPEC.lidar.depth,0,z0+18,0,M.fork,true);
+ box(local,61,SPEC.lidar.height-36,60,0,z0+36+(SPEC.lidar.height-36)/2,0,M.black,true);
+ box(local,42,4,1,0,pose.scan_z,30,M.lidar);
+ cyl(local,22,3,0,z0+SPEC.lidar.height-1.5,0,M.lidar);tag(g,id);
+ const heading=pose.heading_deg*Math.PI/180,pts=[];
+ for(let i=0;i<=108;i++){const a=heading-3*Math.PI/4+i/108*3*Math.PI/2;pts.push(new THREE.Vector3(x+Math.sin(a)*240,pose.scan_z,z+Math.cos(a)*240))}
+ lidarFov.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:pose.heading_deg<0?0x43e1d3:0x8fa9ff,transparent:true,opacity:.8})));
+ for(const delta of [-135,135]){const a=heading+delta*Math.PI/180;const ray=[new THREE.Vector3(x,pose.scan_z,z),new THREE.Vector3(x+Math.sin(a)*240,pose.scan_z,z+Math.cos(a)*240)];lidarFov.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(ray),new THREE.LineBasicMaterial({color:0x43e1d3,transparent:true,opacity:.45})))}
+ const blind=[];for(let i=0;i<=30;i++){const a=heading+Math.PI*3/4+i/30*Math.PI/2;blind.push(new THREE.Vector3(x+Math.sin(a)*105,pose.scan_z,z+Math.cos(a)*105))}
+ const arc=new THREE.Line(new THREE.BufferGeometry().setFromPoints(blind),new THREE.LineDashedMaterial({color:0xffcc73,dashSize:8,gapSize:6,transparent:true,opacity:.7}));arc.computeLineDistances();lidarFov.add(arc);
 }
 function makeCamera(id,sign){
  const g=part(id,sign<0?'좌측 Orbbec Astra Mini Pro':'우측 Orbbec Astra Mini Pro',
-  'Orbbec Astra Mini Pro MX6000 A V1.2. 외형 84.9×20×19.92mm, 전방 ±23°는 초기 배치. 커넥터·USB 배선·장착 홀·시야 간섭은 실물 확인 필요.',
-  [sign*90,100,140]);
- const pivot=new THREE.Group();pivot.position.set(sign*120,0,266);pivot.rotation.y=sign*(23*Math.PI/180);g.add(pivot);
- box(pivot,84.9,20,19.92,0,335,0,M.camera,true);
- for(const cx of [-26,26]){const lens=cyl(pivot,7.8,1,cx,335,9,M.black);lens.rotation.x=Math.PI/2;const inner=cyl(pivot,4.5,.5,cx,335,9.5,M.lidar);inner.rotation.x=Math.PI/2}
- box(g,28,18,26,sign*120,318,260,M.fork,true);
- tag(g,id);return g;
+  '상판 아래 전방 카메라:좌우 ±15°, 하향10° 가정. 알루미늄 프로파일 행거는 스캔면 약241mm 위에만 배치했습니다. USB/구조광 상호간섭과 실제 마운트 확인 필요.',[sign*80,70,120]);
+ const pivot=new THREE.Group();pivot.position.set(sign*LP.camera_x,LP.camera_z,LP.camera_y);pivot.rotation.order='YXZ';pivot.rotation.y=sign*LP.camera_yaw_deg*Math.PI/180;pivot.rotation.x=LP.camera_pitch_down_deg*Math.PI/180;g.add(pivot);
+ box(pivot,SPEC.camera.width,SPEC.camera.height,SPEC.camera.depth,0,0,0,M.camera,true);
+ for(const cx of [-26,26]){const lens=cyl(pivot,7.8,1,cx,0,9,M.black);lens.rotation.x=Math.PI/2;const inner=cyl(pivot,4.5,.5,cx,0,9.5,M.lidar);inner.rotation.x=Math.PI/2}
+ const cm=LAYOUT.camera_mount,x=sign*LP.camera_x;
+ box(g,cm.plate_width,cm.plate_thickness,cm.plate_depth,x,cm.plate_center_z,cm.plate_y,M.fork,true);
+ extrusion20(g,x,cm.profile_y,cm.profile_bottom_z,cm.profile_top_z);tag(g,id);return g;
 }
-makeCamera('cameraLeft',-1);
-makeCamera('cameraRight',1);
+makeCamera('cameraLeft',-1);makeCamera('cameraRight',1);
 const arm=part('arm','향후 로봇암 설치 영역','로봇암은 현재 포함하지 않습니다. 상판 중앙 약 Ø150mm 가상 영역을 표시하며, 미래 암 하중·작업반경·무게중심·전도 검토가 선행되어야 합니다.',[0,150,0]);
 cyl(arm,75,6,0,312,0,M.ghost);const volume=cyl(arm,75,120,0,375,0,M.ghost);volume.material.side=THREE.DoubleSide;
 tag(arm,'arm');
@@ -287,30 +306,30 @@ line([-283,7,-275],[-283,7,291.75]);for(const z of [-275,291.75])line([-293,5,z]
 const annotations=[
  {id:'motorL',text:'ZLLG65ASM250-N V2.02 · Ø180',pos:[-230,160,0]},
  {id:'casterLF',text:'GL-65-ASF ×4',pos:[-138,133,215]},
- {id:'lidarFront',text:'TiM571 FRONT',pos:[0,440,230]},
- {id:'lidarRear',text:'TiM571 REAR',pos:[0,440,-230]},
- {id:'cameraRight',text:'ASTRA MINI PRO ×2',pos:[120,355,266]},
+ {id:'lidarFrontLeft',text:'TiM571 FRONT LEFT · 270°',pos:[-220,278,250]},
+ {id:'lidarRearRight',text:'TiM571 REAR RIGHT · 270°',pos:[220,278,-250]},
+ {id:'cameraRight',text:'ASTRA MINI PRO ×2',pos:[90,300,278]},
  {id:'battery',text:'7S9P BATTERY',pos:[0,238,-52]},
  {id:'deck',text:'TOP PLATE',pos:[-30,321,-192]},
- {id:'electronics',text:'CONTROLLERS',pos:[0,204,120]}
+ {id:'electronics',text:'CONTROLLERS',pos:[0,204,180]}
 ].map(a=>{const node=document.createElement('div');node.className='annotation';node.textContent=a.text;$('labels').append(node);return {...a,node}});
 let explode=0,motion='stop',selected=null;
-const optionMap={showDeck:['deck'],showMotors:['motorL','motorR'],showCasters:Object.keys(groups).filter(x=>x.startsWith('caster')),showBattery:['battery'],showElectronics:['electronics'],showLidar:['lidarFront','lidarRear'],showCameras:['cameraLeft','cameraRight'],showArm:['arm']};
+const optionMap={showDeck:['deck'],showProfiles:['profiles'],showMotors:['motorL','motorR'],showCasters:Object.keys(groups).filter(x=>x.startsWith('caster')),showBattery:['battery'],showElectronics:['electronics'],showLidar:LAYOUT.lidars.map(p=>p.id),showCameras:['cameraLeft','cameraRight'],showArm:['arm']};
 function applyVisibility(){
  Object.entries(optionMap).forEach(([control,ids])=>ids.forEach(id=>{groups[id].visible=$(control).checked}));
- lidarFov.visible=$('showLidar').checked&&$('showFov').checked;
+ lidarFov.visible=$('showLidar').checked&&$('showFov').checked&&explode===0;
  if(selected&&!groups[selected]?.visible)selected=null;
 }
 Object.keys(optionMap).forEach(k=>$(k).addEventListener('change',applyVisibility));
 $('showFov').addEventListener('change',applyVisibility);
-$('explode').addEventListener('input',e=>{explode=Number(e.target.value)/100;$('explodeVal').textContent=e.target.value+'%';Object.values(groups).forEach(g=>g.position.copy(g.userData.explode).multiplyScalar(explode))});
+$('explode').addEventListener('input',e=>{explode=Number(e.target.value)/100;$('explodeVal').textContent=e.target.value+'%';Object.values(groups).forEach(g=>g.position.copy(g.userData.explode).multiplyScalar(explode));applyVisibility()});
 function updateBattery(){const ah=Number($('cellCapacity').value);$('estimatedAh').textContent=Number.isFinite(ah)&&ah>=1&&ah<=6?(9*ah).toFixed(1)+' Ah':'입력 확인';$('estimatedWh').textContent=Number.isFinite(ah)&&ah>=1&&ah<=6?Math.round(7*3.6*9*ah)+' Wh':'—'}
 $('cellCapacity').addEventListener('input',updateBattery);
-function setView(view){const d={iso:[860,740,980],top:[0,1250,1],front:[0,260,1250]};camera.position.set(...d[view]);orbit.target.set(0,155,0);orbit.update();document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view))}
+function setView(view){const d={iso:[860,740,980],top:[0,1600,1],front:[0,260,1250]};camera.position.set(...d[view]);orbit.target.set(0,155,0);orbit.update();document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view))}
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 $('resetCamera').addEventListener('click',()=>{motion='stop';robot.rotation.y=0;robot.position.set(0,0,0);setView('iso');document.querySelectorAll('[data-motion]').forEach(b=>b.classList.toggle('active',b.dataset.motion==='stop'))});
 document.querySelectorAll('[data-motion]').forEach(b=>b.addEventListener('click',()=>{motion=b.dataset.motion;document.querySelectorAll('[data-motion]').forEach(el=>el.classList.toggle('active',el===b))}));
-$('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-layout-rev04.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
+$('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-layout-rev05.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
 canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width*2-1;pointer.y=-(e.clientY-r.top)/r.height*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(robot.children,true).filter(h=>h.object.userData.partId);if(hits.length){const id=hits[0].object.userData.partId;selected=id;$('partName').textContent=parts[id].name;$('partDescription').textContent=parts[id].description}});
 function resize(){const w=wrap.clientWidth,h=wrap.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
@@ -327,7 +346,7 @@ function animate(){requestAnimationFrame(animate);const dt=Math.min(.05,clock.ge
   else {distance+=dt*13;robot.position.x=Math.sin(robot.rotation.y)*distance*.15;robot.position.z=Math.cos(robot.rotation.y)*distance*.15;if(distance>90){distance=0;robot.position.set(0,0,0)}}
  }else if(motion==='stop'){casters.forEach(c=>{c.rotation.y*=1-Math.min(1,dt*2)})}
  robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera)}
-window.amrReview={revision:SPEC.revision,counts:{motors:wheels.length,casters:casters.length,lidars:Object.keys(groups).filter(k=>k.startsWith('lidar')).length,cameras:Object.keys(groups).filter(k=>k.startsWith('camera')).length},motor:MOTOR,
+window.amrReview={revision:SPEC.revision,layout:LAYOUT,columns:columnManifest,counts:{motors:wheels.length,casters:casters.length,lidars:Object.keys(groups).filter(k=>k.startsWith('lidar')).length,cameras:Object.keys(groups).filter(k=>k.startsWith('camera')).length},motor:MOTOR,
  inspect:()=>({deckVisible:groups.deck.visible,explode,motion,sceneBoundsWithHelpers:new THREE.Box3().setFromObject(robot).getSize(new THREE.Vector3()).toArray()}),
  partInfo:parts};
 applyVisibility();updateBattery();$('loading').remove();animate();

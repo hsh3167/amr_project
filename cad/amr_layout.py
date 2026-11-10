@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""AMR Rev04 dimension-guided layout, mm; X right, Y forward, Z up.
+"""AMR Rev05 dimension-guided layout, mm; X right, Y forward, Z up.
 Motor axial dimensions: supplied V2.02 PDF p.7. Undimensioned contours
 and all chassis brackets remain assumptions; see docs/motor-datasheet-review.md.
 """
@@ -10,30 +10,13 @@ import cadquery as cq
 
 import json
 PARTS = json.loads((Path(__file__).with_name("parts.json")).read_text(encoding="utf-8"))
-P = {
-    "base_width": 390.0,  # concept, not a manufacturer dimension
-    "base_length": 530.0,
-    "base_bottom_z": 116.0,  # preserves battery clearance under top deck
-    "base_thickness": 4.0,
-    "top_width": 420.0,
-    "top_length": 550.0,
-    "top_bottom_z": 303.0,
-    "top_thickness": 4.0,
-    "extrusion": 20.0,
-    "drive_track": 422.0,  # concept center-to-center
-    "caster_x": 138.0,
-    "caster_y": 215.0,
-    "battery_width": 235.0, "battery_length": 155.0,
-    "battery_height": 95.0,
-    "battery_y": -52.0, "battery_center_z": 173.5,
-    "arm_bolt_pitch": 124.0,  # placeholder only
-    "camera_x": 120.0, "camera_y": 266.0,
-    "camera_z": 335.0, "camera_yaw_deg": 23.0,
-    "lidar_y": 230.0, "lidar_bottom_z": 312.0,
-}
+LAYOUT = json.loads(Path(__file__).with_name("layout.json").read_text(encoding="utf-8"))
+P = LAYOUT["parameters"]
+PROFILE = LAYOUT["profile"]
+profile_parts = []
 OUT = Path(__file__).resolve().parent.parent / "cad-output"
 OUT.mkdir(exist_ok=True, parents=True)
-assy = cq.Assembly(name="AMR_6W_Rev04")
+assy = cq.Assembly(name="AMR_6W_Rev05")
 part_count = 0
 components = {}
 
@@ -53,6 +36,19 @@ def cylx(r, length, x, y, z):
 def cylz(r, height, x, y, zbottom):
     return cq.Workplane("XY").center(x,y).circle(r).extrude(height).translate((0,0,zbottom))
 
+def extrusion20(x,y,bottom,top,name):
+    """Generic visual T-slot, not a purchased vendor's manufacturing profile."""
+    w=PROFILE["nominal_section"];h=top-bottom
+    profile=cq.Workplane("XY").rect(w,w).circle(PROFILE["assumed_core_dia"]/2).extrude(h)
+    for angle in (0,90,180,270):
+        mouth=box(PROFILE["assumed_slot_mouth"],2,h+2,0,w/2-1,h/2)
+        undercut=box(PROFILE["assumed_slot_inner_width"],2.5,h+2,0,w/2-3.25,h/2)
+        for cutter in (mouth,undercut):
+            profile=profile.cut(cutter.rotate((0,0,0),(0,0,1),angle))
+    shape=profile.translate((x,y,bottom))
+    add(shape,name,(.67,.77,.84))
+    profile_parts.append({"name":name,"material":PROFILE["material"],"section_mm":w,"length_mm":h})
+
 # Lower plate includes side slots for central wheel clearance.
 outline = [(-195,-265),(195,-265),(195,-99),(145,-99),
            (145,99),(195,99),(195,265),(-195,265),
@@ -70,17 +66,16 @@ for side in (-1,1):
     add(box(43,90,6,side*151.5,0,123),"03_bracket_bridge_CONCEPT_"+str(side),(.29,.43,.56))
 for y in (-215,215):
     add(box(320,18,12,0,y,111),"04_base_crossmember_"+str(y),(.61,.70,.79))
-for x in (-146,146):
-    for y in (-208,208):
-        n=("L" if x<0 else "R")+("F" if y>0 else "B")
-        add(box(20,20,183,x,y,211.5),"10_2020_extrusion_"+n,(.67,.77,.84))
-        add(box(32,32,4,x,y,121),"11_corner_lower_"+n,(.33,.49,.63))
-        add(box(32,32,4,x,y,301),"12_corner_upper_"+n,(.33,.49,.63))
+for x,y in PROFILE["main_columns_xy"]:
+    n=("L" if x<0 else "R")+("F" if y>0 else "B")
+    extrusion20(x,y,PROFILE["main_bottom_z"],PROFILE["main_top_z"],"10_2020_Al_column_"+n)
+    add(box(32,32,4,x,y,121),"11_corner_lower_"+n,(.33,.49,.63))
+    add(box(32,32,4,x,y,301),"12_corner_upper_"+n,(.33,.49,.63))
 # Upper plate: M4/M8 prototype holes are NOT qualified for an arm.
 top=box(P["top_width"],P["top_length"],P["top_thickness"],0,0,305)
-hole_pts=[(x,y) for x in (-146,146) for y in (-208,208)]
-hole_pts += [(x,y) for x in (-62,62) for y in (-62,62)]
-top=top.faces(">Z").workplane().pushPoints(hole_pts).hole(8.4)
+top=top.faces(">Z").workplane().pushPoints(PROFILE["main_columns_xy"]).hole(5.5)
+arm_holes=[(x,y) for x in (-62,62) for y in (-62,62)]
+top=top.faces(">Z").workplane().pushPoints(arm_holes).hole(8.4)
 add(top,"20_upper_Al_plate_PLACEHOLDER_HOLES",(.72,.81,.89))
 add(box(155,155,5,0,0,299),"21_arm_reinforcement_PLACEHOLDER",(.25,.40,.55))
 
@@ -135,37 +130,53 @@ for x in (-P["caster_x"],P["caster_x"]):
 add(box(P["battery_width"],P["battery_length"],P["battery_height"],
         0,P["battery_y"],P["battery_center_z"]),
     "50_company_7S9P_BATTERY_DUMMY",(.86,.63,.36))
-add(box(165,104,7,0,122,146),"51_controller_PCB_DUMMY",(.12,.46,.37))
-add(box(146,82,23,0,122,161),"52_control_computer_DUMMY",(.13,.19,.28))
-for x in (-124,124):
-    add(box(70,98,44,x,85,156),"53_motor_driver_DUMMY_"+str(x),(.28,.38,.52))
+E=LAYOUT["electronics"]
+add(box(165,104,7,0,E["logic_y"],E["pcb_center_z"]),"51_controller_PCB_DUMMY",(.12,.46,.37))
+add(box(146,82,23,0,E["logic_y"],E["computer_center_z"]),"52_control_computer_DUMMY",(.13,.19,.28))
+for x in (-E["driver_x"],E["driver_x"]):
+    add(box(70,98,44,x,E["driver_y"],E["driver_center_z"]),"53_motor_driver_DUMMY_"+str(x),(.28,.38,.52))
 
-# TiM571-2050101 x2; sensor footprint from official SICK PDF, body simplified.
-# Front looks toward +Y, rear toward -Y; scan line unobstructed assuming
-# both are placed above the top deck and no future arm occludes them.
-lidar=PARTS["lidar"]
-for direction in (1,-1):
-    n="FRONT" if direction==1 else "REAR"
-    yy=direction*P["lidar_y"]
-    add(box(94,85,5,0,yy,310),"60_lidar_mount_"+n,(.28,.43,.54))
-    add(box(lidar["width"],lidar["depth"],36,0,yy,330),
-        "61_SICK_TiM571_base_"+n,(.85,.88,.90))
-    add(box(61,60,lidar["height"]-36,0,yy,348+(lidar["height"]-36)/2),
-        "62_SICK_TiM571_optical_body_"+n,(.09,.16,.21))
-    add(cylz(22,3,0,yy,410.12),
-        "63_SICK_scanner_top_"+n,(.20,.80,.79))
-# Orbbec Astra Mini Pro (MX6000) x2; ±23° diagonal front.
-cam=PARTS["camera"]
+# Rear power service bay is an envelope reservation, not a selected product.
+add(box(160,65,40,0,E["power_bay_y"],E["power_bay_center_z"]),
+    "54_REAR_power_distribution_DUMMY",(.65,.39,.24))
+
+# Two diagonal outboard scanners. The270deg apertures face out;
+# their90deg blind quadrants point into the chassis at the same scan plane.
+lidar=PARTS["lidar"];mount=LAYOUT["lidar_mount"]
+for pose in LAYOUT["lidars"]:
+    n=pose["name"];x=pose["x"];y=pose["y"];z0=pose["bbox_bottom_z"]
+    yaw=-pose["heading_deg"];pt=mount["plate_thickness"]
+    def placed(obj):
+        return obj.rotate((0,0,0),(0,0,1),yaw).translate((x,y,0))
+    sensorplate=placed(box(mount["plate_width"],mount["plate_depth"],pt,0,0,z0-pt/2))
+    sx=pose["support_x"];sy=pose["support_y"]
+    length=math.hypot(x-sx,y-sy)+25
+    bridge=box(length,25,pt,0,0,z0-pt/2)
+    bridge=bridge.rotate((0,0,0),(0,0,1),math.degrees(math.atan2(y-sy,x-sx)))
+    bridge=bridge.translate(((x+sx)/2,(y+sy)/2,0))
+    add(sensorplate.union(bridge),"60_diagonal_lidar_mount_CONCEPT_"+n,(.28,.43,.54))
+    extrusion20(sx,sy,P["base_bottom_z"]+P["base_thickness"],z0-pt,"64_2020_Al_lidar_column_"+n)
+    add(placed(box(lidar["width"],lidar["depth"],36,0,0,z0+18)),
+        "61_SICK_TiM571_envelope_base_"+n,(.85,.88,.90))
+    add(placed(box(61,60,lidar["height"]-36,0,0,z0+36+(lidar["height"]-36)/2)),
+        "62_SICK_TiM571_optical_envelope_"+n,(.09,.16,.21))
+    add(cylz(22,3,x,y,z0+lidar["height"]-3),"63_SICK_scanner_top_"+n,(.20,.80,.79))
+
+# Cameras hang from upper deck using Al profiles. All supports stay above
+# the nominal241mm scan plane to avoid two new laser occluders.
+cam=PARTS["camera"];cm=LAYOUT["camera_mount"]
 for side in (-1,1):
     n="LEFT" if side<0 else "RIGHT"
-    x=side*P["camera_x"]; y=P["camera_y"]; z=P["camera_z"]
-    angle=-side*P["camera_yaw_deg"]
+    x=side*P["camera_x"];y=P["camera_y"];z=P["camera_z"]
     body=box(cam["width"],cam["depth"],cam["height"],0,0,0)
-    body=body.rotate((0,0,0),(0,0,1),angle).translate((x,y,z))
+    body=body.rotate((0,0,0),(1,0,0),-P["camera_pitch_down_deg"])
+    body=body.rotate((0,0,0),(0,0,1),-side*P["camera_yaw_deg"]).translate((x,y,z))
     add(body,"70_Orbbec_Astra_Mini_Pro_MX6000_"+n,(.65,.50,.82))
-    add(box(28,26,18,x,y-6,318),"71_camera_bracket_PLACEHOLDER_"+n,(.67,.72,.80))
+    add(box(cm["plate_width"],cm["plate_depth"],cm["plate_thickness"],x,cm["plate_y"],cm["plate_center_z"]),
+        "71_camera_adapter_CONCEPT_"+n,(.67,.72,.80))
+    extrusion20(x,cm["profile_y"],cm["profile_bottom_z"],cm["profile_top_z"],"72_2020_Al_camera_column_"+n)
 
-outfile=OUT/"amr_6w_layout_rev04.step"
+outfile=OUT/"amr_6w_layout_rev05.step"
 assy.save(str(outfile))
 # Reopen the exchange file, not just the in-memory assembly.
 reloaded=cq.importers.importStep(str(outfile)).val()
@@ -182,13 +193,46 @@ for n in ("LEFT","RIGHT"):
     assert abs(axle_bb.ylen-wheel["shaft_flat"])<1e-6
 assert len(solids)==part_count
 bb=reloaded.BoundingBox()
-manifest={"revision":PARTS["revision"],"components":part_count,"solid_count":len(solids),
+# Geometric FOV sampling at the actual layout's nominal scan plane.
+import sys
+sys.path.insert(0,str(Path(__file__).parent))
+from validate_layout import coverage
+scan_check=coverage(LAYOUT)
+assert all(not row["missed"] for row in scan_check["perimeters"])
+assert len(profile_parts)==8
+actual_counts={"drive_motor":sum(n.startswith("30_") for n in components),
+               "caster":sum(n.startswith("41_") for n in components),
+               "lidar":sum(n.startswith("61_") for n in components),
+               "camera":sum(n.startswith("70_") for n in components)}
+assert all(actual_counts[k]==PARTS[k]["count"] for k in actual_counts)
+scan_z=LAYOUT["lidars"][0]["scan_z"]
+assert all(abs(pose["scan_z"]-scan_z)<1e-6 for pose in LAYOUT["lidars"])
+below=("30_","31_","32_","50_","51_","52_","53_","54_","64_")
+above=("20_","70_","71_","72_")
+assert all(shape.BoundingBox().zmax<scan_z for n,shape in components.items() if n.startswith(below))
+assert all(shape.BoundingBox().zmin>scan_z for n,shape in components.items() if n.startswith(above))
+collision_pairs=[]
+for n,shape in components.items():
+    if n.startswith(("61_","62_")):
+        for k,obstacle in components.items():
+            if k.startswith(("10_","20_","50_","51_","52_","53_","70_")):
+                volume=shape.intersect(obstacle).Volume()
+                if volume>0.01:collision_pairs.append((n,k,volume))
+    if n.startswith("70_"):
+        for k,obstacle in components.items():
+            if k.startswith(("10_","20_")):
+                volume=shape.intersect(obstacle).Volume()
+                if volume>0.01:collision_pairs.append((n,k,volume))
+assert not collision_pairs,collision_pairs
+manifest={"revision":LAYOUT["revision"],"components":part_count,"solid_count":len(solids),
           "valid_solids":True,"step_bytes":outfile.stat().st_size,
           "bounds_mm":{"x":[bb.xmin,bb.xmax],"y":[bb.ymin,bb.ymax],"z":[bb.zmin,bb.zmax]},
           "motor_u_mm":{"outer_face":outer,"body_face":body_end,"shaft_end":shaft_end},
           "ground_mm":ground,
           "caster_drop_mm":P["base_bottom_z"]-caster["overall_height"],
-          "counts":{k:PARTS[k]["count"] for k in ("drive_motor","caster","lidar","camera")},
+          "aluminum_profile_columns":profile_parts,"lidar_coverage_sampling":scan_check,
+          "selected_sensor_collisions":collision_pairs,"scan_plane_vertical_clearance_checked":True,
+          "counts":actual_counts,
           "scope":"Solid validity, file roundtrip, nominal contact, dimensions only; no structural/load/dynamics qualification."}
-(OUT/"validation_rev04.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")
+(OUT/"validation_rev05.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")
 print(json.dumps(manifest,indent=2))
