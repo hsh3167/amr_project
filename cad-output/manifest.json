@@ -1,0 +1,3533 @@
+{
+  "engine": "build123d",
+  "root": "amr_current",
+  "files": [
+    "amr_current.step",
+    "amr_current.glb"
+  ],
+  "step_roundtrip": [
+    {
+      "file": "amr_current.step",
+      "raw_import_valid": false,
+      "valid_after_explicit_normalization": true,
+      "normalized_components": [
+        {
+          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
+          "minimum_topology_tolerance_mm": 1e-05,
+          "volume_change_mm3": 0.0
+        },
+        {
+          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
+          "minimum_topology_tolerance_mm": 1e-05,
+          "volume_change_mm3": 0.0
+        }
+      ],
+      "solids": 231
+    }
+  ],
+  "components": [
+    {
+      "name": "01_lower_Al_plate_CONCEPT",
+      "group": "chassis",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 747600.0,
+      "bounds_mm": [
+        [
+          -195.0,
+          195.0
+        ],
+        [
+          -265.0,
+          265.0
+        ],
+        [
+          116.0,
+          120.0
+        ]
+      ],
+      "center_mm": [
+        0.0,
+        1.366188536772336e-15,
+        118.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "20_upper_Al_plate_PLACEHOLDER_HOLES",
+      "group": "payload_interface",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 922733.1841783666,
+      "bounds_mm": [
+        [
+          -210.0,
+          210.0
+        ],
+        [
+          -275.0,
+          275.0
+        ],
+        [
+          303.0,
+          307.0
+        ]
+      ],
+      "center_mm": [
+        1.3083557498892529e-14,
+        -2.7223734979615162e-15,
+        304.99999999999983
+      ],
+      "solids": 1
+    },
+    {
+      "name": "21_arm_reinforcement_PLACEHOLDER",
+      "group": "payload_interface",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 120124.99999999999,
+      "bounds_mm": [
+        [
+          -77.5,
+          77.5
+        ],
+        [
+          -77.5,
+          77.5
+        ],
+        [
+          296.5,
+          301.5
+        ]
+      ],
+      "center_mm": [
+        1.4210854715202004e-14,
+        1.4210854715202004e-14,
+        299.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "10_2020_Al_column_LB",
+      "group": "structure",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 183,
+        "section_mm": 20
+      },
+      "volume_mm3": 43580.64048077343,
+      "bounds_mm": [
+        [
+          -156.0,
+          -136.0
+        ],
+        [
+          -218.0,
+          -198.0
+        ],
+        [
+          120.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        -146.0,
+        -208.0,
+        211.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "11_corner_lower_LB",
+      "group": "structure",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 4095.999999999999,
+      "bounds_mm": [
+        [
+          -162.0,
+          -130.0
+        ],
+        [
+          -224.0,
+          -192.0
+        ],
+        [
+          119.0,
+          123.0
+        ]
+      ],
+      "center_mm": [
+        -146.0,
+        -208.0,
+        121.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "12_corner_upper_LB",
+      "group": "structure",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 4095.999999999999,
+      "bounds_mm": [
+        [
+          -162.0,
+          -130.0
+        ],
+        [
+          -224.0,
+          -192.0
+        ],
+        [
+          299.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        -146.0,
+        -208.0,
+        301.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "10_2020_Al_column_LF",
+      "group": "structure",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 183,
+        "section_mm": 20
+      },
+      "volume_mm3": 43580.64048077343,
+      "bounds_mm": [
+        [
+          -156.0,
+          -136.0
+        ],
+        [
+          198.0,
+          218.0
+        ],
+        [
+          120.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        -146.0,
+        208.0,
+        211.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "11_corner_lower_LF",
+      "group": "structure",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 4095.999999999999,
+      "bounds_mm": [
+        [
+          -162.0,
+          -130.0
+        ],
+        [
+          192.0,
+          224.0
+        ],
+        [
+          119.0,
+          123.0
+        ]
+      ],
+      "center_mm": [
+        -146.0,
+        208.0,
+        121.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "12_corner_upper_LF",
+      "group": "structure",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 4095.999999999999,
+      "bounds_mm": [
+        [
+          -162.0,
+          -130.0
+        ],
+        [
+          192.0,
+          224.0
+        ],
+        [
+          299.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        -146.0,
+        208.0,
+        301.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "10_2020_Al_column_RB",
+      "group": "structure",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 183,
+        "section_mm": 20
+      },
+      "volume_mm3": 43580.64048077343,
+      "bounds_mm": [
+        [
+          136.0,
+          156.0
+        ],
+        [
+          -218.0,
+          -198.0
+        ],
+        [
+          120.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        146.0,
+        -208.0,
+        211.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "11_corner_lower_RB",
+      "group": "structure",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 4095.999999999999,
+      "bounds_mm": [
+        [
+          130.0,
+          162.0
+        ],
+        [
+          -224.0,
+          -192.0
+        ],
+        [
+          119.0,
+          123.0
+        ]
+      ],
+      "center_mm": [
+        146.0,
+        -208.0,
+        121.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "12_corner_upper_RB",
+      "group": "structure",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 4095.999999999999,
+      "bounds_mm": [
+        [
+          130.0,
+          162.0
+        ],
+        [
+          -224.0,
+          -192.0
+        ],
+        [
+          299.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        146.0,
+        -208.0,
+        301.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "10_2020_Al_column_RF",
+      "group": "structure",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 183,
+        "section_mm": 20
+      },
+      "volume_mm3": 43580.64048077343,
+      "bounds_mm": [
+        [
+          136.0,
+          156.0
+        ],
+        [
+          198.0,
+          218.0
+        ],
+        [
+          120.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        146.0,
+        208.0,
+        211.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "11_corner_lower_RF",
+      "group": "structure",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 4095.999999999999,
+      "bounds_mm": [
+        [
+          130.0,
+          162.0
+        ],
+        [
+          192.0,
+          224.0
+        ],
+        [
+          119.0,
+          123.0
+        ]
+      ],
+      "center_mm": [
+        146.0,
+        208.0,
+        121.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "12_corner_upper_RF",
+      "group": "structure",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 4095.999999999999,
+      "bounds_mm": [
+        [
+          130.0,
+          162.0
+        ],
+        [
+          192.0,
+          224.0
+        ],
+        [
+          299.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        146.0,
+        208.0,
+        301.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "30_NBR_OD180_W42p5_LEFT",
+      "group": "motor_left",
+      "status": "datasheet_dimension",
+      "metadata": {
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 427256.6008882119,
+      "bounds_mm": [
+        [
+          -232.25,
+          -189.75
+        ],
+        [
+          -90.0,
+          90.0
+        ],
+        [
+          0.0,
+          180.0
+        ]
+      ],
+      "center_mm": [
+        -210.99999999999997,
+        5.874350963537429e-16,
+        90.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "31_casing_OD140_ASSUMED_axial_DATASHEET_LEFT",
+      "group": "motor_left",
+      "status": "assumed_casing",
+      "metadata": {
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 988282.2169662768,
+      "bounds_mm": [
+        [
+          -242.1,
+          -177.9
+        ],
+        [
+          -70.0,
+          70.0
+        ],
+        [
+          20.0,
+          160.0
+        ]
+      ],
+      "center_mm": [
+        -210.00000000000003,
+        1.2606462339927814e-15,
+        90.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "32_D14_AF10_M14x1p5_THREAD_BLANK_LEFT",
+      "group": "motor_left",
+      "status": "datasheet_dimension",
+      "metadata": {
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 3250.147438006989,
+      "bounds_mm": [
+        [
+          -177.90000000000003,
+          -152.30000000000004
+        ],
+        [
+          -5.0,
+          5.000000000000001
+        ],
+        [
+          83.0,
+          97.0
+        ]
+      ],
+      "center_mm": [
+        -165.10000000000002,
+        6.552005468566091e-16,
+        89.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "30_NBR_OD180_W42p5_RIGHT",
+      "group": "motor_right",
+      "status": "datasheet_dimension",
+      "metadata": {
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 427256.6008882119,
+      "bounds_mm": [
+        [
+          189.75,
+          232.25
+        ],
+        [
+          -90.0,
+          90.0
+        ],
+        [
+          0.0,
+          180.0
+        ]
+      ],
+      "center_mm": [
+        210.99999999999997,
+        5.874350963537429e-16,
+        90.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "31_casing_OD140_ASSUMED_axial_DATASHEET_RIGHT",
+      "group": "motor_right",
+      "status": "assumed_casing",
+      "metadata": {
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 988282.2169662768,
+      "bounds_mm": [
+        [
+          177.9,
+          242.1
+        ],
+        [
+          -70.0,
+          70.0
+        ],
+        [
+          20.0,
+          160.0
+        ]
+      ],
+      "center_mm": [
+        210.00000000000003,
+        1.2606462339927814e-15,
+        90.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "32_D14_AF10_M14x1p5_THREAD_BLANK_RIGHT",
+      "group": "motor_right",
+      "status": "datasheet_dimension",
+      "metadata": {
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 3250.147438006989,
+      "bounds_mm": [
+        [
+          152.3,
+          177.9
+        ],
+        [
+          -5.0,
+          5.000000000000001
+        ],
+        [
+          83.0,
+          97.0
+        ]
+      ],
+      "center_mm": [
+        165.10000000000002,
+        5.586064566975899e-16,
+        90.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "43_GL65_OEM_fork_LB",
+      "group": "caster_lb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "LB",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 10760.880677689083,
+      "bounds_mm": [
+        [
+          -161.5,
+          -116.49999999999982
+        ],
+        [
+          -243.00000010000062,
+          -193.49999999999977
+        ],
+        [
+          25.999999999999403,
+          77.49761779634
+        ]
+      ],
+      "center_mm": [
+        -138.07354507666767,
+        -224.1112064694331,
+        57.94177205412502
+      ],
+      "solids": 1
+    },
+    {
+      "name": "41_GL65_OEM_plate_head_LB",
+      "group": "caster_lb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "LB",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 9827.346034863727,
+      "bounds_mm": [
+        [
+          -162.0000001,
+          -113.99999989999995
+        ],
+        [
+          -247.50000010000002,
+          -182.4999999
+        ],
+        [
+          68.79761769634251,
+          83.00000019999919
+        ]
+      ],
+      "center_mm": [
+        -137.99999103002804,
+        -215.00150373262582,
+        78.72768320789986
+      ],
+      "solids": 1
+    },
+    {
+      "name": "44_GL65_OEM_wheel_LB",
+      "group": "caster_lb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "LB",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 63283.89226011394,
+      "bounds_mm": [
+        [
+          -153.19999999999973,
+          -122.79999999999967
+        ],
+        [
+          -269.00000009999957,
+          -204.99999990000092
+        ],
+        [
+          1.1686097468332243e-15,
+          64.00000019999862
+        ]
+      ],
+      "center_mm": [
+        -137.99838556729586,
+        -236.99998844454265,
+        32.00003267417703
+      ],
+      "solids": 1
+    },
+    {
+      "name": "43_GL65_OEM_fork_LF",
+      "group": "caster_lf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "LF",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 10760.88067768908,
+      "bounds_mm": [
+        [
+          -161.5,
+          -116.49999999999982
+        ],
+        [
+          186.99999989999938,
+          236.50000000000023
+        ],
+        [
+          25.999999999999403,
+          77.49761779634
+        ]
+      ],
+      "center_mm": [
+        -138.07354507666764,
+        205.8887935305669,
+        57.94177205412502
+      ],
+      "solids": 1
+    },
+    {
+      "name": "41_GL65_OEM_plate_head_LF",
+      "group": "caster_lf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "LF",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 9827.346034863729,
+      "bounds_mm": [
+        [
+          -162.0000001,
+          -113.99999989999995
+        ],
+        [
+          182.49999989999998,
+          247.5000001
+        ],
+        [
+          68.79761769634251,
+          83.00000019999919
+        ]
+      ],
+      "center_mm": [
+        -137.99999103002804,
+        214.9984962673742,
+        78.72768320789984
+      ],
+      "solids": 1
+    },
+    {
+      "name": "44_GL65_OEM_wheel_LF",
+      "group": "caster_lf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "LF",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 63283.89226011394,
+      "bounds_mm": [
+        [
+          -153.19999999999973,
+          -122.79999999999967
+        ],
+        [
+          160.9999999000005,
+          225.00000009999908
+        ],
+        [
+          1.1686097468332243e-15,
+          64.00000019999862
+        ]
+      ],
+      "center_mm": [
+        -137.99838556729586,
+        193.00001155545732,
+        32.00003267417703
+      ],
+      "solids": 1
+    },
+    {
+      "name": "43_GL65_OEM_fork_RB",
+      "group": "caster_rb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "RB",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 10760.880677689112,
+      "bounds_mm": [
+        [
+          114.5,
+          159.5000001000002
+        ],
+        [
+          -243.00000010000062,
+          -193.49999999999977
+        ],
+        [
+          25.999999999999403,
+          77.49761779634
+        ]
+      ],
+      "center_mm": [
+        137.9264549233324,
+        -224.1112064694332,
+        57.941772054124996
+      ],
+      "solids": 1
+    },
+    {
+      "name": "41_GL65_OEM_plate_head_RB",
+      "group": "caster_rb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "RB",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 9827.346034863727,
+      "bounds_mm": [
+        [
+          113.99999990000002,
+          162.00000010000008
+        ],
+        [
+          -247.50000010000002,
+          -182.4999999
+        ],
+        [
+          68.79761779634251,
+          83.00000019999919
+        ]
+      ],
+      "center_mm": [
+        138.000008969972,
+        -215.00150373262582,
+        78.72768320789984
+      ],
+      "solids": 1
+    },
+    {
+      "name": "44_GL65_OEM_wheel_RB",
+      "group": "caster_rb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "RB",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 63283.89226011394,
+      "bounds_mm": [
+        [
+          122.80000000000027,
+          153.20000000000033
+        ],
+        [
+          -269.00000009999957,
+          -204.99999990000092
+        ],
+        [
+          1.1686097468332243e-15,
+          64.00000019999862
+        ]
+      ],
+      "center_mm": [
+        138.00161443270414,
+        -236.99998844454268,
+        32.00003267417703
+      ],
+      "solids": 1
+    },
+    {
+      "name": "43_GL65_OEM_fork_RF",
+      "group": "caster_rf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "RF",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 10760.880677689102,
+      "bounds_mm": [
+        [
+          114.5,
+          159.5000001000002
+        ],
+        [
+          186.99999989999938,
+          236.50000000000023
+        ],
+        [
+          25.999999999999403,
+          77.49761779634
+        ]
+      ],
+      "center_mm": [
+        137.9264549233324,
+        205.8887935305669,
+        57.94177205412501
+      ],
+      "solids": 1
+    },
+    {
+      "name": "41_GL65_OEM_plate_head_RF",
+      "group": "caster_rf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "RF",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 9827.346034863733,
+      "bounds_mm": [
+        [
+          113.99999990000002,
+          162.00000010000008
+        ],
+        [
+          182.49999989999998,
+          247.5000001
+        ],
+        [
+          68.79761779634251,
+          83.00000019999919
+        ]
+      ],
+      "center_mm": [
+        138.000008969972,
+        214.9984962673742,
+        78.72768320789984
+      ],
+      "solids": 1
+    },
+    {
+      "name": "44_GL65_OEM_wheel_RF",
+      "group": "caster_rf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "moving_wheel": "RF",
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 63283.89226011394,
+      "bounds_mm": [
+        [
+          122.80000000000027,
+          153.20000000000033
+        ],
+        [
+          160.9999999000005,
+          225.00000009999908
+        ],
+        [
+          1.1686097468332243e-15,
+          64.00000019999862
+        ]
+      ],
+      "center_mm": [
+        138.00161443270414,
+        193.00001155545732,
+        32.00003267417703
+      ],
+      "solids": 1
+    },
+    {
+      "name": "50_company_7S9P_BATTERY_DUMMY",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {},
+      "volume_mm3": 3460375.0,
+      "bounds_mm": [
+        [
+          -117.5,
+          117.5
+        ],
+        [
+          -129.5,
+          25.5
+        ],
+        [
+          126.0,
+          221.0
+        ]
+      ],
+      "center_mm": [
+        0.0,
+        -52.0,
+        173.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "51_controller_PCB_DUMMY",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {},
+      "volume_mm3": 120120.0,
+      "bounds_mm": [
+        [
+          -82.5,
+          82.5
+        ],
+        [
+          128.0,
+          232.0
+        ],
+        [
+          142.5,
+          149.5
+        ]
+      ],
+      "center_mm": [
+        0.0,
+        180.0,
+        146.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "52_control_computer_DUMMY",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {},
+      "volume_mm3": 275356.0,
+      "bounds_mm": [
+        [
+          -73.0,
+          73.0
+        ],
+        [
+          139.0,
+          221.0
+        ],
+        [
+          149.5,
+          172.5
+        ]
+      ],
+      "center_mm": [
+        0.0,
+        180.0,
+        161.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "54_REAR_power_distribution_DUMMY",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {},
+      "volume_mm3": 416000.0,
+      "bounds_mm": [
+        [
+          -80.0,
+          80.0
+        ],
+        [
+          -232.5,
+          -167.5
+        ],
+        [
+          129.0,
+          169.0
+        ]
+      ],
+      "center_mm": [
+        0.0,
+        -200.0,
+        149.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "53_motor_driver_DUMMY_-124",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {},
+      "volume_mm3": 301840.0,
+      "bounds_mm": [
+        [
+          -159.0,
+          -89.0
+        ],
+        [
+          76.0,
+          174.0
+        ],
+        [
+          134.0,
+          178.0
+        ]
+      ],
+      "center_mm": [
+        -124.0,
+        125.0,
+        156.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "53_motor_driver_DUMMY_124",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {},
+      "volume_mm3": 301840.0,
+      "bounds_mm": [
+        [
+          89.0,
+          159.0
+        ],
+        [
+          76.0,
+          174.0
+        ],
+        [
+          134.0,
+          178.0
+        ]
+      ],
+      "center_mm": [
+        124.0,
+        125.0,
+        156.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "60_diagonal_lidar_mount_CONCEPT_FRONT_LEFT",
+      "group": "lidars",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 19649.398013736358,
+      "bounds_mm": [
+        [
+          -273.03300858899104,
+          -152.5913216889704
+        ],
+        [
+          196.96699141100893,
+          303.03300858899104
+        ],
+        [
+          160.0,
+          163.0
+        ]
+      ],
+      "center_mm": [
+        -213.5437683850695,
+        245.43781495201554,
+        161.50000000000003
+      ],
+      "solids": 1
+    },
+    {
+      "name": "64_2020_Al_lidar_column_FRONT_LEFT",
+      "group": "lidars",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 40,
+        "section_mm": 20
+      },
+      "volume_mm3": 9525.823055906758,
+      "bounds_mm": [
+        [
+          -180.0,
+          -160.0
+        ],
+        [
+          205.0,
+          225.0
+        ],
+        [
+          120.0,
+          160.0
+        ]
+      ],
+      "center_mm": [
+        -170.0,
+        215.0,
+        140.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "61_SICK_TiM571_envelope_base_FRONT_LEFT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 204200.55,
+      "bounds_mm": [
+        [
+          -273.25928275897076,
+          -166.74071724102924
+        ],
+        [
+          196.74071724102924,
+          303.25928275897076
+        ],
+        [
+          163.0,
+          199.0
+        ]
+      ],
+      "center_mm": [
+        -220.0,
+        250.0,
+        181.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "62_SICK_TiM571_optical_envelope_FRONT_LEFT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 238339.19999999998,
+      "bounds_mm": [
+        [
+          -262.77996026178613,
+          -177.22003973821387
+        ],
+        [
+          207.22003973821387,
+          292.77996026178613
+        ],
+        [
+          199.0,
+          264.12
+        ]
+      ],
+      "center_mm": [
+        -220.0,
+        250.0,
+        231.56
+      ],
+      "solids": 1
+    },
+    {
+      "name": "63_SICK_scanner_top_FRONT_LEFT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 4561.592533012379,
+      "bounds_mm": [
+        [
+          -242.0,
+          -198.0
+        ],
+        [
+          228.0,
+          272.0
+        ],
+        [
+          261.12,
+          264.12
+        ]
+      ],
+      "center_mm": [
+        -220.0,
+        250.0,
+        262.62
+      ],
+      "solids": 1
+    },
+    {
+      "name": "60_diagonal_lidar_mount_CONCEPT_REAR_RIGHT",
+      "group": "lidars",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 19649.398013736358,
+      "bounds_mm": [
+        [
+          152.5913216889704,
+          273.03300858899104
+        ],
+        [
+          -303.03300858899104,
+          -196.96699141100893
+        ],
+        [
+          160.0,
+          163.0
+        ]
+      ],
+      "center_mm": [
+        213.5437683850695,
+        -245.4378149520156,
+        161.50000000000003
+      ],
+      "solids": 1
+    },
+    {
+      "name": "64_2020_Al_lidar_column_REAR_RIGHT",
+      "group": "lidars",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 40,
+        "section_mm": 20
+      },
+      "volume_mm3": 9525.823055906758,
+      "bounds_mm": [
+        [
+          160.0,
+          180.0
+        ],
+        [
+          -225.0,
+          -205.0
+        ],
+        [
+          120.0,
+          160.0
+        ]
+      ],
+      "center_mm": [
+        170.0,
+        -215.0,
+        140.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "61_SICK_TiM571_envelope_base_REAR_RIGHT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 204200.55,
+      "bounds_mm": [
+        [
+          166.74071724102924,
+          273.25928275897076
+        ],
+        [
+          -303.25928275897076,
+          -196.74071724102924
+        ],
+        [
+          163.0,
+          199.0
+        ]
+      ],
+      "center_mm": [
+        220.0,
+        -250.0,
+        181.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "62_SICK_TiM571_optical_envelope_REAR_RIGHT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 238339.2,
+      "bounds_mm": [
+        [
+          177.22003973821387,
+          262.77996026178613
+        ],
+        [
+          -292.77996026178613,
+          -207.22003973821387
+        ],
+        [
+          199.0,
+          264.12
+        ]
+      ],
+      "center_mm": [
+        220.0,
+        -250.0,
+        231.56
+      ],
+      "solids": 1
+    },
+    {
+      "name": "63_SICK_scanner_top_REAR_RIGHT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 4561.592533012379,
+      "bounds_mm": [
+        [
+          198.0,
+          242.0
+        ],
+        [
+          -272.0,
+          -228.0
+        ],
+        [
+          261.12,
+          264.12
+        ]
+      ],
+      "center_mm": [
+        220.0,
+        -250.0,
+        262.62
+      ],
+      "solids": 1
+    },
+    {
+      "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
+      "group": "cameras",
+      "status": "manufacturer_step_family_revision_reference",
+      "metadata": {
+        "source": "AstraMiniPro_3D_V0.1_20221012.stp",
+        "source_solids": 58,
+        "placement_repair": {
+          "cache_key": "74dba519c5be8be23bc2",
+          "repairs": [],
+          "source_preserved": true,
+          "pose": [
+            -1,
+            90,
+            278,
+            275,
+            10,
+            15
+          ],
+          "source_solid_volume_mm3": 13831.14760859772,
+          "placed_solid_volume_mm3": 13831.147608597721,
+          "minimum_topology_tolerance_mm": 1e-05,
+          "open_reference_shells_excluded": 3
+        },
+        "datum": "original bounding-box center; source optics +Z mapped to local +Y",
+        "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
+      },
+      "volume_mm3": 13831.147608597721,
+      "bounds_mm": [
+        [
+          -130.00381821959914,
+          -46.11607497491715
+        ],
+        [
+          254.9729471113061,
+          294.34032240046406
+        ],
+        [
+          264.5715021691329,
+          286.67554934756686
+        ]
+      ],
+      "center_mm": [
+        -89.87498357188932,
+        273.6033524383695,
+        275.41376053382555
+      ],
+      "solids": 58
+    },
+    {
+      "name": "71_camera_adapter_CONCEPT_LEFT",
+      "group": "cameras",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 5999.999999999999,
+      "bounds_mm": [
+        [
+          -110.0,
+          -70.0
+        ],
+        [
+          231.0,
+          281.0
+        ],
+        [
+          260.0,
+          263.0
+        ]
+      ],
+      "center_mm": [
+        -90.0,
+        256.0,
+        261.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "72_2020_Al_camera_column_LEFT",
+      "group": "cameras",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 40,
+        "section_mm": 20
+      },
+      "volume_mm3": 9525.82305590676,
+      "bounds_mm": [
+        [
+          -100.0,
+          -80.0
+        ],
+        [
+          225.0,
+          245.0
+        ],
+        [
+          263.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        -90.0,
+        235.0,
+        283.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
+      "group": "cameras",
+      "status": "manufacturer_step_family_revision_reference",
+      "metadata": {
+        "source": "AstraMiniPro_3D_V0.1_20221012.stp",
+        "source_solids": 58,
+        "placement_repair": {
+          "cache_key": "479afbcea2e223e76948",
+          "repairs": [],
+          "source_preserved": true,
+          "pose": [
+            1,
+            90,
+            278,
+            275,
+            10,
+            15
+          ],
+          "source_solid_volume_mm3": 13831.14760859772,
+          "placed_solid_volume_mm3": 13831.147608597716,
+          "minimum_topology_tolerance_mm": 1e-05,
+          "open_reference_shells_excluded": 3
+        },
+        "datum": "original bounding-box center; source optics +Z mapped to local +Y",
+        "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
+      },
+      "volume_mm3": 13831.147608597716,
+      "bounds_mm": [
+        [
+          46.11607497537959,
+          130.003818305512
+        ],
+        [
+          254.97294711131642,
+          294.60993394730303
+        ],
+        [
+          264.5715021691329,
+          286.67554934756686
+        ]
+      ],
+      "center_mm": [
+        87.9099436218196,
+        274.12988330608766,
+        275.41376053382623
+      ],
+      "solids": 58
+    },
+    {
+      "name": "71_camera_adapter_CONCEPT_RIGHT",
+      "group": "cameras",
+      "status": "concept",
+      "metadata": {},
+      "volume_mm3": 5999.999999999999,
+      "bounds_mm": [
+        [
+          70.0,
+          110.0
+        ],
+        [
+          231.0,
+          281.0
+        ],
+        [
+          260.0,
+          263.0
+        ]
+      ],
+      "center_mm": [
+        90.0,
+        256.0,
+        261.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "72_2020_Al_camera_column_RIGHT",
+      "group": "cameras",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 40,
+        "section_mm": 20
+      },
+      "volume_mm3": 9525.82305590676,
+      "bounds_mm": [
+        [
+          80.0,
+          100.0
+        ],
+        [
+          225.0,
+          245.0
+        ],
+        [
+          263.0,
+          303.0
+        ]
+      ],
+      "center_mm": [
+        90.0,
+        235.0,
+        283.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_carrier_LB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": "LB"
+      },
+      "volume_mm3": 24411.309830014845,
+      "bounds_mm": [
+        [
+          -180.0,
+          -96.0
+        ],
+        [
+          -253.0,
+          -177.0
+        ],
+        [
+          83.0,
+          87.0
+        ]
+      ],
+      "center_mm": [
+        -138.00000000000003,
+        -215.00000000000009,
+        85.00000000000003
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_fixed_seat_LB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 25536.0,
+      "bounds_mm": [
+        [
+          -180.0,
+          -96.0
+        ],
+        [
+          -253.0,
+          -177.0
+        ],
+        [
+          112.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        -138.0,
+        -215.0,
+        114.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_-32_LB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 2060.8847807549037,
+      "bounds_mm": [
+        [
+          -174.0,
+          -166.0
+        ],
+        [
+          -219.0,
+          -211.0
+        ],
+        [
+          75.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        -170.0,
+        -215.0,
+        95.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_-32_LB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.3836025571663,
+      "bounds_mm": [
+        [
+          -177.0,
+          -163.0
+        ],
+        [
+          -222.0,
+          -208.0
+        ],
+        [
+          75.0,
+          78.0
+        ]
+      ],
+      "center_mm": [
+        -169.99999999999997,
+        -215.0,
+        76.50000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_-32_LB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.3836025571663,
+      "bounds_mm": [
+        [
+          -177.0,
+          -163.0
+        ],
+        [
+          -222.0,
+          -208.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        -169.99999999999997,
+        -215.0,
+        93.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_32_LB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 2060.884780754903,
+      "bounds_mm": [
+        [
+          -110.0,
+          -102.0
+        ],
+        [
+          -219.0,
+          -211.0
+        ],
+        [
+          75.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        -106.0,
+        -215.0,
+        95.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_32_LB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716634,
+      "bounds_mm": [
+        [
+          -113.0,
+          -99.0
+        ],
+        [
+          -222.0,
+          -208.0
+        ],
+        [
+          75.0,
+          78.0
+        ]
+      ],
+      "center_mm": [
+        -105.99999999999997,
+        -215.0,
+        76.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_32_LB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716634,
+      "bounds_mm": [
+        [
+          -113.0,
+          -99.0
+        ],
+        [
+          -222.0,
+          -208.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        -105.99999999999997,
+        -215.0,
+        93.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_spring_LB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null,
+        "rate_N_mm": null,
+        "preload_N": null,
+        "travel_mm": 10
+      },
+      "volume_mm3": 1200.2401572055276,
+      "bounds_mm": [
+        [
+          -147.0000020583398,
+          -128.99999794166018
+        ],
+        [
+          -224.0000020583398,
+          -205.99999794166146
+        ],
+        [
+          87.00530350352456,
+          111.99469649647563
+        ]
+      ],
+      "center_mm": [
+        -138.0000002146038,
+        -215.00000000086462,
+        99.50000000951583
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_carrier_LF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": "LF"
+      },
+      "volume_mm3": 24411.309830014845,
+      "bounds_mm": [
+        [
+          -180.0,
+          -96.0
+        ],
+        [
+          177.0,
+          253.0
+        ],
+        [
+          83.0,
+          87.0
+        ]
+      ],
+      "center_mm": [
+        -138.00000000000003,
+        215.00000000000009,
+        85.00000000000003
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_fixed_seat_LF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 25536.0,
+      "bounds_mm": [
+        [
+          -180.0,
+          -96.0
+        ],
+        [
+          177.0,
+          253.0
+        ],
+        [
+          112.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        -138.0,
+        215.0,
+        114.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_-32_LF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 2060.8847807549037,
+      "bounds_mm": [
+        [
+          -174.0,
+          -166.0
+        ],
+        [
+          211.0,
+          219.0
+        ],
+        [
+          75.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        -170.0,
+        215.0,
+        95.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_-32_LF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.3836025571663,
+      "bounds_mm": [
+        [
+          -177.0,
+          -163.0
+        ],
+        [
+          208.0,
+          222.0
+        ],
+        [
+          75.0,
+          78.0
+        ]
+      ],
+      "center_mm": [
+        -169.99999999999997,
+        215.0,
+        76.50000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_-32_LF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.3836025571663,
+      "bounds_mm": [
+        [
+          -177.0,
+          -163.0
+        ],
+        [
+          208.0,
+          222.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        -169.99999999999997,
+        215.0,
+        93.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_32_LF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 2060.884780754903,
+      "bounds_mm": [
+        [
+          -110.0,
+          -102.0
+        ],
+        [
+          211.0,
+          219.0
+        ],
+        [
+          75.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        -106.0,
+        215.0,
+        95.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_32_LF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716634,
+      "bounds_mm": [
+        [
+          -113.0,
+          -99.0
+        ],
+        [
+          208.0,
+          222.0
+        ],
+        [
+          75.0,
+          78.0
+        ]
+      ],
+      "center_mm": [
+        -105.99999999999997,
+        215.0,
+        76.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_32_LF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716634,
+      "bounds_mm": [
+        [
+          -113.0,
+          -99.0
+        ],
+        [
+          208.0,
+          222.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        -105.99999999999997,
+        215.0,
+        93.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_spring_LF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null,
+        "rate_N_mm": null,
+        "preload_N": null,
+        "travel_mm": 10
+      },
+      "volume_mm3": 1200.2401572055276,
+      "bounds_mm": [
+        [
+          -147.0000020583398,
+          -128.99999794166018
+        ],
+        [
+          205.9999979416602,
+          224.00000205833854
+        ],
+        [
+          87.00530350352456,
+          111.99469649647563
+        ]
+      ],
+      "center_mm": [
+        -138.0000002146038,
+        214.99999999913538,
+        99.50000000951583
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_carrier_RB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": "RB"
+      },
+      "volume_mm3": 24411.309830014845,
+      "bounds_mm": [
+        [
+          96.0,
+          180.0
+        ],
+        [
+          -253.0,
+          -177.0
+        ],
+        [
+          83.0,
+          87.0
+        ]
+      ],
+      "center_mm": [
+        138.00000000000003,
+        -215.00000000000009,
+        85.00000000000003
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_fixed_seat_RB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 25536.0,
+      "bounds_mm": [
+        [
+          96.0,
+          180.0
+        ],
+        [
+          -253.0,
+          -177.0
+        ],
+        [
+          112.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        138.0,
+        -215.0,
+        114.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_-32_RB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 2060.884780754903,
+      "bounds_mm": [
+        [
+          102.0,
+          110.0
+        ],
+        [
+          -219.0,
+          -211.0
+        ],
+        [
+          75.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        106.0,
+        -215.0,
+        95.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_-32_RB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716634,
+      "bounds_mm": [
+        [
+          99.0,
+          113.0
+        ],
+        [
+          -222.0,
+          -208.0
+        ],
+        [
+          75.0,
+          78.0
+        ]
+      ],
+      "center_mm": [
+        105.99999999999997,
+        -215.0,
+        76.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_-32_RB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716634,
+      "bounds_mm": [
+        [
+          99.0,
+          113.0
+        ],
+        [
+          -222.0,
+          -208.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        105.99999999999997,
+        -215.0,
+        93.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_32_RB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 2060.8847807549037,
+      "bounds_mm": [
+        [
+          166.0,
+          174.0
+        ],
+        [
+          -219.0,
+          -211.0
+        ],
+        [
+          75.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        170.0,
+        -215.0,
+        95.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_32_RB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.3836025571663,
+      "bounds_mm": [
+        [
+          163.0,
+          177.0
+        ],
+        [
+          -222.0,
+          -208.0
+        ],
+        [
+          75.0,
+          78.0
+        ]
+      ],
+      "center_mm": [
+        169.99999999999997,
+        -215.0,
+        76.50000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_32_RB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.3836025571663,
+      "bounds_mm": [
+        [
+          163.0,
+          177.0
+        ],
+        [
+          -222.0,
+          -208.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        169.99999999999997,
+        -215.0,
+        93.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_spring_RB",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "rate_N_mm": null,
+        "preload_N": null,
+        "travel_mm": 10
+      },
+      "volume_mm3": 1200.2401572055276,
+      "bounds_mm": [
+        [
+          128.9999979416602,
+          147.00000205833982
+        ],
+        [
+          -224.0000020583398,
+          -205.99999794166146
+        ],
+        [
+          87.00530350352456,
+          111.99469649647563
+        ]
+      ],
+      "center_mm": [
+        137.9999997853962,
+        -215.00000000086462,
+        99.50000000951583
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_carrier_RF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": "RF"
+      },
+      "volume_mm3": 24411.309830014845,
+      "bounds_mm": [
+        [
+          96.0,
+          180.0
+        ],
+        [
+          177.0,
+          253.0
+        ],
+        [
+          83.0,
+          87.0
+        ]
+      ],
+      "center_mm": [
+        138.00000000000003,
+        215.00000000000009,
+        85.00000000000003
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_fixed_seat_RF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 25536.0,
+      "bounds_mm": [
+        [
+          96.0,
+          180.0
+        ],
+        [
+          177.0,
+          253.0
+        ],
+        [
+          112.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        138.0,
+        215.0,
+        114.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_-32_RF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 2060.884780754903,
+      "bounds_mm": [
+        [
+          102.0,
+          110.0
+        ],
+        [
+          211.0,
+          219.0
+        ],
+        [
+          75.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        106.0,
+        215.0,
+        95.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_-32_RF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716634,
+      "bounds_mm": [
+        [
+          99.0,
+          113.0
+        ],
+        [
+          208.0,
+          222.0
+        ],
+        [
+          75.0,
+          78.0
+        ]
+      ],
+      "center_mm": [
+        105.99999999999997,
+        215.0,
+        76.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_-32_RF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716634,
+      "bounds_mm": [
+        [
+          99.0,
+          113.0
+        ],
+        [
+          208.0,
+          222.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        105.99999999999997,
+        215.0,
+        93.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_32_RF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 2060.8847807549037,
+      "bounds_mm": [
+        [
+          166.0,
+          174.0
+        ],
+        [
+          211.0,
+          219.0
+        ],
+        [
+          75.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        170.0,
+        215.0,
+        95.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_32_RF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.3836025571663,
+      "bounds_mm": [
+        [
+          163.0,
+          177.0
+        ],
+        [
+          208.0,
+          222.0
+        ],
+        [
+          75.0,
+          78.0
+        ]
+      ],
+      "center_mm": [
+        169.99999999999997,
+        215.0,
+        76.50000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_32_RF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.3836025571663,
+      "bounds_mm": [
+        [
+          163.0,
+          177.0
+        ],
+        [
+          208.0,
+          222.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        169.99999999999997,
+        215.0,
+        93.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_spring_RF",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null,
+        "rate_N_mm": null,
+        "preload_N": null,
+        "travel_mm": 10
+      },
+      "volume_mm3": 1200.2401572055276,
+      "bounds_mm": [
+        [
+          128.9999979416602,
+          147.00000205833982
+        ],
+        [
+          205.9999979416602,
+          224.00000205833854
+        ],
+        [
+          87.00530350352456,
+          111.99469649647563
+        ]
+      ],
+      "center_mm": [
+        137.9999997853962,
+        214.99999999913538,
+        99.50000000951583
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_axle_clamp_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 20806.1087848696,
+      "bounds_mm": [
+        [
+          -173.0,
+          -167.0
+        ],
+        [
+          -45.0,
+          45.0
+        ],
+        [
+          70.0,
+          110.0
+        ]
+      ],
+      "center_mm": [
+        -170.00000000000003,
+        -7.648156358169449e-16,
+        89.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_carrier_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 5971.0619901184555,
+      "bounds_mm": [
+        [
+          -167.0,
+          -149.0
+        ],
+        [
+          -45.0,
+          45.0
+        ],
+        [
+          105.0,
+          109.0
+        ]
+      ],
+      "center_mm": [
+        -158.0,
+        -1.5231707580294028e-16,
+        107.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_fixed_bridge_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 33482.2569324761,
+      "bounds_mm": [
+        [
+          -174.0,
+          -130.0
+        ],
+        [
+          -70.0,
+          70.0
+        ],
+        [
+          120.0,
+          126.0
+        ]
+      ],
+      "center_mm": [
+        -151.37679056560535,
+        -8.149044763682859e-16,
+        123.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_upper_seat_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 14560.0,
+      "bounds_mm": [
+        [
+          -171.0,
+          -145.0
+        ],
+        [
+          -70.0,
+          70.0
+        ],
+        [
+          166.0,
+          170.0
+        ]
+      ],
+      "center_mm": [
+        -158.0,
+        0.0,
+        168.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "81_2020_Al_suspension_column_LEFT-60",
+      "group": "suspension",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 40,
+        "section_mm": 20
+      },
+      "volume_mm3": 9525.823055906758,
+      "bounds_mm": [
+        [
+          -168.0,
+          -148.0
+        ],
+        [
+          -70.0,
+          -50.0
+        ],
+        [
+          126.0,
+          166.0
+        ]
+      ],
+      "center_mm": [
+        -158.0,
+        -60.0,
+        146.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "81_2020_Al_suspension_column_LEFT60",
+      "group": "suspension",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 40,
+        "section_mm": 20
+      },
+      "volume_mm3": 9525.823055906758,
+      "bounds_mm": [
+        [
+          -168.0,
+          -148.0
+        ],
+        [
+          50.0,
+          70.0
+        ],
+        [
+          126.0,
+          166.0
+        ]
+      ],
+      "center_mm": [
+        -158.0,
+        60.0,
+        146.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_-35_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 5127.079210658543,
+      "bounds_mm": [
+        [
+          -162.0,
+          -154.0
+        ],
+        [
+          -39.0,
+          -31.0
+        ],
+        [
+          68.0,
+          170.0
+        ]
+      ],
+      "center_mm": [
+        -158.0,
+        -35.0,
+        119.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_-35_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716645,
+      "bounds_mm": [
+        [
+          -165.0,
+          -151.0
+        ],
+        [
+          -42.0,
+          -28.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        -157.99999999999994,
+        -34.99999999999999,
+        93.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_-35_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 101.12786751905546,
+      "bounds_mm": [
+        [
+          -165.0,
+          -151.0
+        ],
+        [
+          -42.0,
+          -28.0
+        ],
+        [
+          119.0,
+          120.0
+        ]
+      ],
+      "center_mm": [
+        -158.00000000000003,
+        -35.00000000000001,
+        119.50000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_35_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 5127.079210658543,
+      "bounds_mm": [
+        [
+          -162.0,
+          -154.0
+        ],
+        [
+          31.0,
+          39.0
+        ],
+        [
+          68.0,
+          170.0
+        ]
+      ],
+      "center_mm": [
+        -158.0,
+        35.0,
+        119.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_35_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716645,
+      "bounds_mm": [
+        [
+          -165.0,
+          -151.0
+        ],
+        [
+          28.0,
+          42.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        -158.0,
+        35.0,
+        93.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_35_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 101.12786751905548,
+      "bounds_mm": [
+        [
+          -165.0,
+          -151.0
+        ],
+        [
+          28.0,
+          42.0
+        ],
+        [
+          119.0,
+          120.0
+        ]
+      ],
+      "center_mm": [
+        -158.0,
+        34.99999999999999,
+        119.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_spring_LEFT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null,
+        "rate_N_mm": null,
+        "preload_N": null,
+        "travel_mm": 20
+      },
+      "volume_mm3": 2297.0111883152804,
+      "bounds_mm": [
+        [
+          -168.00000172180137,
+          -147.99999827819912
+        ],
+        [
+          -10.000001721800796,
+          10.000001721800986
+        ],
+        [
+          109.02085523361522,
+          165.97914476638027
+        ]
+      ],
+      "center_mm": [
+        -158.00000089441687,
+        -1.2568285183267554e-09,
+        137.49999997711748
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_axle_clamp_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 20806.1087848696,
+      "bounds_mm": [
+        [
+          167.0,
+          173.0
+        ],
+        [
+          -45.0,
+          45.0
+        ],
+        [
+          70.0,
+          110.0
+        ]
+      ],
+      "center_mm": [
+        170.00000000000003,
+        -7.648156358169449e-16,
+        89.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_carrier_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 5971.0619901184555,
+      "bounds_mm": [
+        [
+          149.0,
+          167.0
+        ],
+        [
+          -45.0,
+          45.0
+        ],
+        [
+          105.0,
+          109.0
+        ]
+      ],
+      "center_mm": [
+        157.99999999999997,
+        -1.5231707580294028e-16,
+        107.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_fixed_bridge_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 33482.2569324761,
+      "bounds_mm": [
+        [
+          130.0,
+          174.0
+        ],
+        [
+          -70.0,
+          70.0
+        ],
+        [
+          120.0,
+          126.0
+        ]
+      ],
+      "center_mm": [
+        151.37679056560538,
+        -2.607694324378515e-15,
+        123.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_upper_seat_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 14560.0,
+      "bounds_mm": [
+        [
+          145.0,
+          171.0
+        ],
+        [
+          -70.0,
+          70.0
+        ],
+        [
+          166.0,
+          170.0
+        ]
+      ],
+      "center_mm": [
+        158.0,
+        0.0,
+        168.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "81_2020_Al_suspension_column_RIGHT-60",
+      "group": "suspension",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 40,
+        "section_mm": 20
+      },
+      "volume_mm3": 9525.823055906758,
+      "bounds_mm": [
+        [
+          148.0,
+          168.0
+        ],
+        [
+          -70.0,
+          -50.0
+        ],
+        [
+          126.0,
+          166.0
+        ]
+      ],
+      "center_mm": [
+        158.0,
+        -60.0,
+        146.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "81_2020_Al_suspension_column_RIGHT60",
+      "group": "suspension",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Aluminum extrusion",
+        "length_mm": 40,
+        "section_mm": 20
+      },
+      "volume_mm3": 9525.823055906758,
+      "bounds_mm": [
+        [
+          148.0,
+          168.0
+        ],
+        [
+          50.0,
+          70.0
+        ],
+        [
+          126.0,
+          166.0
+        ]
+      ],
+      "center_mm": [
+        158.0,
+        60.0,
+        146.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_-35_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 5127.079210658543,
+      "bounds_mm": [
+        [
+          154.0,
+          162.0
+        ],
+        [
+          -39.0,
+          -31.0
+        ],
+        [
+          68.0,
+          170.0
+        ]
+      ],
+      "center_mm": [
+        158.0,
+        -35.0,
+        119.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_-35_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716645,
+      "bounds_mm": [
+        [
+          151.0,
+          165.0
+        ],
+        [
+          -42.0,
+          -28.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        157.9999999999999,
+        -34.99999999999999,
+        93.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_-35_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 101.12786751905546,
+      "bounds_mm": [
+        [
+          151.0,
+          165.0
+        ],
+        [
+          -42.0,
+          -28.0
+        ],
+        [
+          119.0,
+          120.0
+        ]
+      ],
+      "center_mm": [
+        158.00000000000003,
+        -35.00000000000001,
+        119.50000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_guide_35_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 5127.079210658543,
+      "bounds_mm": [
+        [
+          154.0,
+          162.0
+        ],
+        [
+          31.0,
+          39.0
+        ],
+        [
+          68.0,
+          170.0
+        ]
+      ],
+      "center_mm": [
+        158.0,
+        35.0,
+        119.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_droop_stop_35_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 303.38360255716645,
+      "bounds_mm": [
+        [
+          151.0,
+          165.0
+        ],
+        [
+          28.0,
+          42.0
+        ],
+        [
+          92.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        157.99999999999997,
+        35.0,
+        93.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bump_stop_35_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null
+      },
+      "volume_mm3": 101.12786751905548,
+      "bounds_mm": [
+        [
+          151.0,
+          165.0
+        ],
+        [
+          28.0,
+          42.0
+        ],
+        [
+          119.0,
+          120.0
+        ]
+      ],
+      "center_mm": [
+        158.0,
+        34.99999999999999,
+        119.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_spring_RIGHT",
+      "group": "suspension",
+      "status": "suspension_concept",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "rate_N_mm": null,
+        "preload_N": null,
+        "travel_mm": 20
+      },
+      "volume_mm3": 2297.0111883152804,
+      "bounds_mm": [
+        [
+          147.99999827819863,
+          168.00000172180088
+        ],
+        [
+          -10.000001721800796,
+          10.000001721800986
+        ],
+        [
+          109.02085523361522,
+          165.97914476638027
+        ]
+      ],
+      "center_mm": [
+        157.99999910558313,
+        -1.2568285183267554e-09,
+        137.49999997711748
+      ],
+      "solids": 1
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "valid": true,
+  "components": 117,
+  "solids": 231,
+  "errors": [],
+  "counts": {
+    "drive_motor": 2,
+    "caster": 4,
+    "lidar": 2,
+    "camera": 2
+  },
+  "lidar_sampling": {
+    "method": "2D sample rays; nominal270deg FOV; main-column occlusion; conservative wheel/deck perimeter",
+    "scan_z_mm": [
+      240.83,
+      240.83
+    ],
+    "perimeters": [
+      {
+        "margin_mm": 50,
+        "samples": 404,
+        "visible": 404,
+        "missed": []
+      },
+      {
+        "margin_mm": 200,
+        "samples": 404,
+        "visible": 404,
+        "missed": []
+      },
+      {
+        "margin_mm": 500,
+        "samples": 404,
+        "visible": 404,
+        "missed": []
+      },
+      {
+        "margin_mm": 1000,
+        "samples": 404,
+        "visible": 404,
+        "missed": []
+      }
+    ],
+    "limitations": "No real optical housing origin, glass, range accuracy, cable/cover/arm occlusion, floor obstacles or safety validation."
+  },
+  "scan_plane_vertical_clearance_checked": true,
+  "selected_sensor_collisions": [],
+  "suspension_collision_sampling": {
+    "sampled_poses": 30,
+    "boolean_pairs": 84,
+    "hits": [],
+    "scope": "One wheel at a time, five sampled positions; springs/mates excluded; no continuous swept-volume or dynamic clearance proof"
+  },
+  "step_roundtrip": [
+    {
+      "file": "amr_current.step",
+      "raw_import_valid": false,
+      "valid_after_explicit_normalization": true,
+      "normalized_components": [
+        {
+          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
+          "minimum_topology_tolerance_mm": 1e-05,
+          "volume_change_mm3": 0.0
+        },
+        {
+          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
+          "minimum_topology_tolerance_mm": 1e-05,
+          "volume_change_mm3": 0.0
+        }
+      ],
+      "solids": 231
+    }
+  ]
+}
