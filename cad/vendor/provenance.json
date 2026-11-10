@@ -1,0 +1,20 @@
+{
+  "retrieved": "2026-11-11",
+  "units": "mm; no scaling or geometry healing",
+  "sources": [
+    {
+      "file": "GL-65-ASF-EUS.stp.gz",
+      "sha256_original": "df690d4ffc19edba7fe936a951fcc898d6806da8e27b234f6868c62aa2c7463e",
+      "original_bytes": 877887,
+      "source": "https://www.gdok.co.kr/data/product/gd_file3_2024062409450217.zip",
+      "note": "Manufacturer GDOK ZIP; EUS suffix reference, actual compound unconfirmed"
+    },
+    {
+      "file": "AstraMiniPro_3D_V0.1_20221012.stp.gz",
+      "sha256_original": "67aaaf94a19a5239d32a807ff7c2ae92d905ad0f5d676b9e295222f301bfcf43",
+      "original_bytes": 13593595,
+      "source": "https://xm917ch2uk.feishu.cn/drive/folder/X6WrfJsbaloeSKdTTAicOlFVn19",
+      "note": "Linked by official https://www.orbbec.com.cn/index/Download2025/info.html?cate=121&id=1 ; original filename/version retained"
+    }
+  ]
+}

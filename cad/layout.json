@@ -1,5 +1,5 @@
 {
-  "revision": "0.5",
+  "revision": "0.6",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
     "base_width": 390,
@@ -101,10 +101,33 @@
     "pcb_center_z": 146,
     "computer_center_z": 161,
     "driver_x": 124,
-    "driver_y": 85,
+    "driver_y": 125,
     "driver_center_z": 156,
     "power_bay_y": -200,
     "power_bay_center_z": 149,
     "status": "Envelope reservations only; rear power bay/central low battery/front logic/side drives, hardware and harness routes TBD."
+  },
+  "suspension": {
+    "status": "Six independent vertical guided spring stages; concept dimensions only; mass, rates, preload, damping, fatigue and fasteners not qualified",
+    "drive": {
+      "travel_mm": 20,
+      "spring_od_mm": 20,
+      "wire_mm": 3,
+      "turns": 6,
+      "loaded_length_mm": 57,
+      "free_length_mm_assumed": 72,
+      "rate_N_mm": null,
+      "preload_N": null
+    },
+    "caster": {
+      "travel_mm": 10,
+      "spring_od_mm": 18,
+      "wire_mm": 2.5,
+      "turns": 5,
+      "loaded_length_mm": 25,
+      "free_length_mm_assumed": 34,
+      "rate_N_mm": null,
+      "preload_N": null
+    }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "revision": "0.5",
+  "revision": "0.6",
   "drive_motor": {
     "model": "ZLLG65ASM250-N V2.02",
     "count": 2,
@@ -65,7 +65,10 @@
     "hole_pitch_y": 24.0,
     "plate_hole_dia": 7.0,
     "capacity_each_kg": 50.0,
-    "status": "Manufacturer catalogue; EUS/TUN compound suffix and actual unit remain to confirm; fork/head geometry simplified."
+    "status": "Manufacturer STEP EUS reference imported unscaled; CAD height83 vs catalogue82; tread23 vs modeled wheel/hub overall30.4. Actual EUS/TUN unit and contact height require verification.",
+    "cad_height": 83,
+    "model_reference": "GL-65-ASF-EUS",
+    "cad_wheel_assembly_width": 30.4
   },
   "lidar": {
     "model": "SICK TiM571-2050101",
@@ -87,6 +90,9 @@
     "height": 20.0,
     "depth": 19.92,
     "horizontal_depth_fov_deg": 58.4,
-    "status": "Official Astra Mini Pro/MX6000 family dimensions; A V1.2 PCB revision hole coordinates and unit label need inspection; mounting 2xM2, pitch unknown."
+    "status": "Official family STEP file V0.1 dated20221012 imported unscaled; 58 solids. Official 2D V1.2 dated20221019:84.9x20x19.92REF,2xD2.2/M2 pitch80. 3D depth24.264 differs; exact MX6000 A V1.2 hardware and mounting adapter pending.",
+    "mount_hole_pitch": 80,
+    "mount_hole_dia": 2.2,
+    "cad_depth": 24.2640002
   }
 }

@@ -1,15 +1,15 @@
 Category,Item,Qty,Unit,Supply,Specification,Status,Cost_KRW,Notes
 Mechanical,ZLLG65ASM250-N V2.02 NBR wheel motor,2,ea,Company reuse,OD180+-2 / W42.5+-1 / axial89.8+-1 / 24V 18-30V / 4Nm 500rpm 10A / stall11.7Nm 30A / encoder1024,Datasheet-guided,0,PDF pp3-8; shaft D14 AF10 M14x1.5 thread23.5; casing OD140 assumed; conflicts documented
-Mechanical,GL-65-ASF swivel caster,4,ea,Company reuse,OD64 / height82 / offset22 / plate65x48 / 54x24 holes,Specified,0,Confirm EUS vs TUN caster compound
+Mechanical,GL-65-ASF swivel caster,4,ea,Company reuse,OD64 / catalogue H82 / official CAD H83 / offset22 / plate48X65Y / holes24X54Y,Manufacturer EUS STEP reference,0,Confirm actual EUS/TUN; CAD wheel/hub width30.4 vs tread23; independent spring stage each
 Mechanical,Lower aluminum plate,1,ea,Buy or scrap,390x530x4 assumed,Concept,TBD,Wheel wells / machining and safety margins pending
 Mechanical,Upper aluminum plate,1,ea,Buy or scrap,420x550x4 assumed,Concept,TBD,Reserved for optional robot arm
-Mechanical,2020 aluminum extrusion,8,ea,Buy or scrap,Aluminum T-slot nominal20x20; 183mm x4 main +40mm x4 sensor supports,Material confirmed; section assumed,TBD,All vertical columns aluminum; generic slot6/inner10/core4.2 not vendor profile
+Mechanical,2020 aluminum extrusion,12,ea,Buy or scrap,183mm x4 main +40mm x4 sensor +40mm x4 suspension; generic20x20,Material confirmed; section assumed,TBD,All vertical columns aluminum; brand/section/end taps/stiffness pending
 Mechanical,Sensor adapter plates and cantilever bridges,4,set,Make,LiDAR80x70x3 plus bridge; camera40x50x3 assumed,Concept,TBD,M3 SICK /M2 camera actual patterns and connections pending
 Mechanical,Motor mount brackets,2,set,Machine or 3D print test,Single-axle AF10 / M14x1.5 torque reaction; bracket6t slot10.2 assumed,Concept,TBD,Nut20Nm with243 per PDF p8; stack and strength TBD
 Mechanical,Caster mounts or shims,4,set,Make,Height adjustment and spacing,Concept,TBD,Contact loading control
 Mechanical,Fasteners/corner brackets,1,set,Buy or reuse,Standard M4/M5/M6 as required,Concept,TBD,Final thread sizes not confirmed
 Electrical,SICK TiM571-2050101 LiDAR,2,ea,Company reuse,270-degree /9-28V /front-left +rear-right diagonal /scan plane approx241mm,Specified,0,Blind90 inward; optical origin and housing clearance need confirmation
-Electrical,Orbbec Astra Mini Pro MX6000 A V1.2,2,ea,Company reuse,84.9x20x19.92 / front left and right,Specified,0,Under deck; front left/right +-15deg and10deg down assumed; Al hanger above scan plane
+Electrical,Orbbec Astra Mini Pro MX6000 A V1.2,2,ea,Company reuse,84.9x20x19.92 / front left and right,Official family STEP V0.1 reference,0,58 solids each; 3D depth24.264 vs drawingV1.2 depth19.92; M2 pitch80; exact hardware/adapter pending
 Electrical,Battery pack,1,ea,Company reuse if approved,7S9P pack chemistry and BMS unknown,Pending,0,Replace placeholder model with actual pack
 Electrical,Motor driver,2,ea,Check existing stock,3-phase servo; 5V single-ended1024-line AB/Hall; current and regen compatibility TBD,Pending,TBD,Motor18-30V is not driver bus rating; 7S full29.4V leaves0.6V to30V; thermistor pin4/5 conflict
 Electrical,Computer/SBC,1,ea,Check existing stock,ROS2 capable,Pending,TBD,Front service bay Y180; model envelope pending
@@ -21,3 +21,4 @@ Electrical,Compatible battery charger,1,ea,Company reuse if approved,Match exact
 Software,ROS2/Linux,1,set,Open source,Nav2 SLAM Toolbox and teleop,Proposed,0,Depends on compute and drivers
 Software,Interactive 3D viewer,1,set,Open source,Three.js GitHub Pages,Done,0,Illustrative not dynamic simulation
 CAD,Parametric STEP generator,1,set,Open source,CadQuery Python source,Done,0,CadQuery2.5.2; common layout.json/parts.json; datasheet motor dimensions and labeled assumptions
+Mechanical,Independent guided spring stages,6,set,Design pending,2 drive +/-10mm; 4 caster +/-5mm; guide rods/carriers/seats/stops/springs,Concept; not load-qualified,TBD,Rates/preload/damping/bushings/fasteners/fatigue and measured wheel loads TBD

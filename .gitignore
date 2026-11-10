@@ -2,3 +2,6 @@ tmp/
 __pycache__/
 *.pyc
 .venv/
+output/
+.pytest_cache/
+cad/vendor/*.stp

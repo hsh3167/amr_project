@@ -1,52 +1,56 @@
-name: Generate AMR STEP CAD
+name: Generate build123d AMR CAD
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - 'cad/amr_layout.py'
-      - 'cad/parts.json'
-      - 'cad/layout.json'
-      - 'cad/validate_layout.py'
+      - 'cad/**'
+      - 'requirements-cad.txt'
+      - 'pytest.ini'
       - '.github/workflows/generate-step.yml'
-
 permissions:
   contents: write
-
 concurrency:
   group: generate-amr-step
   cancel-in-progress: false
-
 jobs:
   generate-step:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          persist-credentials: true
-
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+          python-version: '3.10'
+          cache: pip
+          cache-dependency-path: requirements-cad.txt
+      - name: Install isolated CAD dependencies
+        run: pip install --no-compile -r requirements-cad.txt
+      - name: Restore derived vendor cache
+        uses: actions/cache@v4
         with:
-          python-version: '3.11'
-
-      - name: Install CadQuery
-        run: |
-          python -m pip install --upgrade pip
-          pip install cadquery==2.5.2
-
-      - name: Generate STEP assembly
-        run: python cad/amr_layout.py
-
-      - name: Commit generated STEP
+          path: output/cache
+          key: cad-vendor-${{ runner.os }}-${{ hashFiles('cad/parts/vendor.py', 'cad/vendor/**', 'cad/layout.json', 'requirements-cad.txt') }}
+      - name: Verify unchanged Rev05 conversion
+        run: python -m cad compare --output output/baselinecheck
+      - name: Run geometry tests
+        run: python -m pytest
+      - name: Generate and validate current assembly
+        run: python -m cad build --format step,glb --collisions --output cad-output
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amr-cad-verification
+          path: |
+            cad-output/amr_current.*
+            cad-output/manifest.json
+            cad-output/build_report.json
+            output/baselinecheck/compare_report.json
+      - name: Commit generated CAD
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cad-output/amr_6w_layout_rev05.step cad-output/validation_rev05.json
+          git add cad-output/amr_current.step cad-output/amr_current.glb cad-output/manifest.json cad-output/build_report.json
           if ! git diff --cached --quiet; then
-            git commit -m "build(cad): update parametric AMR STEP assembly"
+            git commit -m "build(cad): generate verified build123d STEP and viewer meshes"
             git push
-          else
-            echo "STEP assembly unchanged"
           fi

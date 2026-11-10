@@ -1,0 +1,110 @@
+{
+  "revision": "0.5",
+  "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
+  "parameters": {
+    "base_width": 390,
+    "base_length": 530,
+    "base_bottom_z": 116,
+    "base_thickness": 4,
+    "top_width": 420,
+    "top_length": 550,
+    "top_bottom_z": 303,
+    "top_thickness": 4,
+    "extrusion": 20,
+    "drive_track": 422,
+    "caster_x": 138,
+    "caster_y": 215,
+    "battery_width": 235,
+    "battery_length": 155,
+    "battery_height": 95,
+    "battery_y": -52,
+    "battery_center_z": 173.5,
+    "arm_bolt_pitch": 124,
+    "camera_x": 90,
+    "camera_y": 278,
+    "camera_z": 275,
+    "camera_yaw_deg": 15,
+    "camera_pitch_down_deg": 10
+  },
+  "profile": {
+    "material": "Aluminum extrusion (all vertical columns)",
+    "nominal_section": 20,
+    "assumed_core_dia": 4.2,
+    "assumed_slot_mouth": 6,
+    "assumed_slot_inner_width": 10,
+    "section_status": "Generic visual T-slot section; actual purchased profile cross-section, alloy, end taps and stiffness need verification.",
+    "main_columns_xy": [
+      [
+        -146,
+        -208
+      ],
+      [
+        -146,
+        208
+      ],
+      [
+        146,
+        -208
+      ],
+      [
+        146,
+        208
+      ]
+    ],
+    "main_bottom_z": 120,
+    "main_top_z": 303
+  },
+  "lidars": [
+    {
+      "id": "lidarFrontLeft",
+      "name": "FRONT_LEFT",
+      "x": -220,
+      "y": 250,
+      "heading_deg": -45,
+      "bbox_bottom_z": 163,
+      "scan_z": 240.83,
+      "support_x": -170,
+      "support_y": 215
+    },
+    {
+      "id": "lidarRearRight",
+      "name": "REAR_RIGHT",
+      "x": 220,
+      "y": -250,
+      "heading_deg": 135,
+      "bbox_bottom_z": 163,
+      "scan_z": 240.83,
+      "support_x": 170,
+      "support_y": -215
+    }
+  ],
+  "lidar_mount": {
+    "plate_width": 80,
+    "plate_depth": 70,
+    "plate_thickness": 3,
+    "scan_offset_above_envelope_min": 77.83,
+    "optical_datum_status": "62.46 above body-bottom reference from SICK drawing; 15.37 connector allowance derived from101.12-85.75. Translating these to this simplified centered envelope is a layout assumption; verify actual optical origin and ROS TF.",
+    "fov_status": "270 degrees aimed outward; blind90 toward chassis. Geometric sampling only, no safety certification or guaranteed detection."
+  },
+  "camera_mount": {
+    "profile_y": 235,
+    "profile_bottom_z": 263,
+    "profile_top_z": 303,
+    "plate_y": 256,
+    "plate_center_z": 261.5,
+    "plate_width": 40,
+    "plate_depth": 50,
+    "plate_thickness": 3
+  },
+  "electronics": {
+    "logic_y": 180,
+    "pcb_center_z": 146,
+    "computer_center_z": 161,
+    "driver_x": 124,
+    "driver_y": 85,
+    "driver_center_z": 156,
+    "power_bay_y": -200,
+    "power_bay_center_z": 149,
+    "status": "Envelope reservations only; rear power bay/central low battery/front logic/side drives, hardware and harness routes TBD."
+  }
+}

@@ -1,0 +1,61 @@
+# FreeCAD review/import macro. Design source remains build123d Python.
+import os
+import json
+from pathlib import Path
+import FreeCAD as App
+import Import
+
+root=Path(__file__).resolve().parents[2]
+step=Path(os.environ.get('AMR_CAD_STEP',str(root/'output/cad/amr_current.step')))
+target=Path(os.environ.get('AMR_CAD_NATIVE',str(root/'output/freecad/amr_review.FCStd')))
+report=Path(os.environ.get('AMR_CAD_REVIEW_REPORT',str(root/'output/freecad/review_report.json')))
+report.parent.mkdir(parents=True,exist_ok=True)
+try:
+    if not step.exists():raise FileNotFoundError(str(step))
+    doc=App.newDocument('AMR_Review')
+    Import.insert(str(step),doc.Name)
+    doc.recompute()
+    features=[o for o in doc.Objects if hasattr(o,'Shape') and not o.Shape.isNull()]
+    leaves=[o for o in features if not any(c in features for c in o.OutList)]
+    invalid=[o for o in leaves if not o.Shape.isValid()]
+    normalized=[]
+    for obj in invalid:
+        stack=[obj];seen=set();camera=False
+        while stack:
+            parent=stack.pop()
+            if parent.Name in seen:continue
+            seen.add(parent.Name)
+            if parent.Label.startswith('70_'):camera=True;break
+            stack.extend(parent.InList)
+        if camera:
+            shape=obj.Shape;volume=shape.Volume
+            shape.limitTolerance(1e-5)
+            if abs(shape.Volume-volume)>1e-8:raise RuntimeError('Normalization changed volume')
+            obj.Shape=shape
+            normalized.append(obj.Label)
+    doc.recompute()
+    bad=[o.Label for o in leaves if not o.Shape.isValid()]
+    solids=sum(len(o.Shape.Solids) for o in leaves)
+    if not leaves or bad:raise RuntimeError('Invalid imported shapes: '+str(bad))
+    if App.GuiUp:
+        import FreeCADGui as Gui
+        Gui.activeDocument().activeView().viewAxonometric()
+        Gui.activeDocument().activeView().fitAll()
+        Gui.activeDocument().activeView().saveImage(str(target.with_suffix('.png')),1400,1000,'Current')
+        gui=True
+    else:
+        gui=False
+    if os.environ.get('AMR_SAVE_NATIVE','1')=='1':
+        target.parent.mkdir(parents=True,exist_ok=True)
+        doc.saveAs(str(target))
+    data={'valid':True,'step':str(step),'native':str(target),'gui':gui,
+          'objects':len(doc.Objects),'shape_features':len(leaves),'solids':solids,
+          'labels':[o.Label for o in leaves],
+          'raw_invalid_labels':[o.Label for o in invalid],
+          'normalized_camera_labels':normalized,'minimum_topology_tolerance_mm':1e-5,
+          'note':'Review/measure/section here; edits are not synchronized back to Python.'}
+    report.write_text(json.dumps(data,indent=2,ensure_ascii=True)+'\n',encoding='utf-8')
+    print('AMR review import OK; solids='+str(solids))
+except Exception as exc:
+    report.write_text(json.dumps({'valid':False,'error':str(exc)},ensure_ascii=True),encoding='utf-8')
+    raise
