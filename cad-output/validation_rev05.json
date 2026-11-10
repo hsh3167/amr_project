@@ -1,0 +1,128 @@
+{
+  "revision": "0.5",
+  "components": 85,
+  "solid_count": 85,
+  "valid_solids": true,
+  "step_bytes": 2601040,
+  "bounds_mm": {
+    "x": [
+      -273.259282758935,
+      273.25928275897
+    ],
+    "y": [
+      -303.259282758935,
+      303.25928275898
+    ],
+    "z": [
+      0.0,
+      307.0
+    ]
+  },
+  "motor_u_mm": {
+    "outer_face": -31.1,
+    "body_face": 33.099999999999994,
+    "shaft_end": 58.699999999999996
+  },
+  "ground_mm": {
+    "30_NBR_OD180_W42p5_LEFT": 0.0,
+    "30_NBR_OD180_W42p5_RIGHT": 0.0,
+    "44_GL65_wheel_64OD_LB": 0.0,
+    "44_GL65_wheel_64OD_LF": 0.0,
+    "44_GL65_wheel_64OD_RB": 0.0,
+    "44_GL65_wheel_64OD_RF": 0.0
+  },
+  "caster_drop_mm": 34.0,
+  "aluminum_profile_columns": [
+    {
+      "name": "10_2020_Al_column_LB",
+      "material": "Aluminum extrusion (all vertical columns)",
+      "section_mm": 20,
+      "length_mm": 183
+    },
+    {
+      "name": "10_2020_Al_column_LF",
+      "material": "Aluminum extrusion (all vertical columns)",
+      "section_mm": 20,
+      "length_mm": 183
+    },
+    {
+      "name": "10_2020_Al_column_RB",
+      "material": "Aluminum extrusion (all vertical columns)",
+      "section_mm": 20,
+      "length_mm": 183
+    },
+    {
+      "name": "10_2020_Al_column_RF",
+      "material": "Aluminum extrusion (all vertical columns)",
+      "section_mm": 20,
+      "length_mm": 183
+    },
+    {
+      "name": "64_2020_Al_lidar_column_FRONT_LEFT",
+      "material": "Aluminum extrusion (all vertical columns)",
+      "section_mm": 20,
+      "length_mm": 40
+    },
+    {
+      "name": "64_2020_Al_lidar_column_REAR_RIGHT",
+      "material": "Aluminum extrusion (all vertical columns)",
+      "section_mm": 20,
+      "length_mm": 40
+    },
+    {
+      "name": "72_2020_Al_camera_column_LEFT",
+      "material": "Aluminum extrusion (all vertical columns)",
+      "section_mm": 20,
+      "length_mm": 40
+    },
+    {
+      "name": "72_2020_Al_camera_column_RIGHT",
+      "material": "Aluminum extrusion (all vertical columns)",
+      "section_mm": 20,
+      "length_mm": 40
+    }
+  ],
+  "lidar_coverage_sampling": {
+    "method": "2D sample rays; nominal270deg FOV; main-column occlusion; conservative wheel/deck perimeter",
+    "scan_z_mm": [
+      240.83,
+      240.83
+    ],
+    "perimeters": [
+      {
+        "margin_mm": 50,
+        "samples": 404,
+        "visible": 404,
+        "missed": []
+      },
+      {
+        "margin_mm": 200,
+        "samples": 404,
+        "visible": 404,
+        "missed": []
+      },
+      {
+        "margin_mm": 500,
+        "samples": 404,
+        "visible": 404,
+        "missed": []
+      },
+      {
+        "margin_mm": 1000,
+        "samples": 404,
+        "visible": 404,
+        "missed": []
+      }
+    ],
+    "limitations": "No real optical housing origin, glass, range accuracy, cable/cover/arm occlusion, floor obstacles or safety validation."
+  },
+  "selected_sensor_collisions": [],
+  "scan_plane_vertical_clearance_checked": true,
+  "counts": {
+    "drive_motor": 2,
+    "caster": 4,
+    "lidar": 2,
+    "camera": 2
+  },
+  "scope": "Solid validity, file roundtrip, nominal contact, dimensions only; no structural/load/dynamics qualification."
+}
