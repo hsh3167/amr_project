@@ -171,7 +171,7 @@ const floor=new THREE.Mesh(new THREE.PlaneGeometry(6000,6000),new THREE.MeshStan
 const grid=new THREE.GridHelper(2600,52,0x3f6486,0x22364e);grid.position.y=-1;grid.material.transparent=true;grid.material.opacity=.34;scene.add(grid);
 const robot=new THREE.Group();scene.add(robot);
 const mat=(color,metalness=.25,roughness=.55,more={})=>new THREE.MeshStandardMaterial({color,metalness,roughness,...more});
-const M={plate:mat(0xa8b8c8,.75,.32),edge:mat(0x3c5b7e,.55,.45),profile:mat(0x98adbf,.82,.3),black:mat(0x172437,.15,.82),tire:mat(0x171f2c,.06,.94),hub:mat(0x4775dc,.65,.3),caster:mat(0x7c93a8,.2,.74),fork:mat(0xb2c0ca,.75,.31),battery:mat(0xdba462,.22,.48),pcb:mat(0x237966,.4,.45),lidar:mat(0x43e1d3,.2,.3),camera:mat(0xae87e3,.25,.47),ghost:mat(0xffd276,.2,.45,{transparent:true,opacity:.19,depthWrite:false}),bolt:mat(0x23354d,.45,.5)};
+const M={plate:mat(0xa8b8c8,.75,.32),edge:mat(0x3c5b7e,.55,.45),profile:mat(0x98adbf,.82,.3),black:mat(0x172437,.15,.82),tire:mat(0x171f2c,.06,.94),hub:mat(0x4775dc,.65,.3),caster:mat(0x7c93a8,.2,.74),fork:mat(0xb2c0ca,.75,.31),battery:mat(0xdba462,.22,.48),pcb:mat(0x237966,.4,.45),lidar:mat(0x43e1d3,.2,.3,{polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}),camera:mat(0xae87e3,.25,.47),ghost:mat(0xffd276,.2,.45,{transparent:true,opacity:.19,depthWrite:false}),bolt:mat(0x23354d,.45,.5)};
 const groups={},parts={},wheels=[],casters=[];
 function part(id,name,description,explode=[0,0,0]){const obj=new THREE.Group();obj.userData.id=id;obj.userData.explode=new THREE.Vector3(...explode);groups[id]=obj;parts[id]={name,description};robot.add(obj);return obj;}
 function tag(obj,id){obj.traverse(o=>{if(o.isMesh)o.userData.partId=id});}
@@ -327,8 +327,8 @@ function animate(){requestAnimationFrame(animate);const dt=Math.min(.05,clock.ge
   else {distance+=dt*13;robot.position.x=Math.sin(robot.rotation.y)*distance*.15;robot.position.z=Math.cos(robot.rotation.y)*distance*.15;if(distance>90){distance=0;robot.position.set(0,0,0)}}
  }else if(motion==='stop'){casters.forEach(c=>{c.rotation.y*=1-Math.min(1,dt*2)})}
  robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera)}
-window.amrReview={revision:SPEC.revision,counts:{motors:wheels.length,casters:casters.length,lidars:2,cameras:2},motor:MOTOR,
- inspect:()=>({deckVisible:groups.deck.visible,explode,motion,solidBounds:new THREE.Box3().setFromObject(robot).getSize(new THREE.Vector3()).toArray()}),
+window.amrReview={revision:SPEC.revision,counts:{motors:wheels.length,casters:casters.length,lidars:Object.keys(groups).filter(k=>k.startsWith('lidar')).length,cameras:Object.keys(groups).filter(k=>k.startsWith('camera')).length},motor:MOTOR,
+ inspect:()=>({deckVisible:groups.deck.visible,explode,motion,sceneBoundsWithHelpers:new THREE.Box3().setFromObject(robot).getSize(new THREE.Vector3()).toArray()}),
  partInfo:parts};
 applyVisibility();updateBattery();$('loading').remove();animate();
 </script>
