@@ -6,7 +6,7 @@ from .validate_layout import coverage
 
 def metrics(shape):
     b=shape.bounding_box();c=shape.center(CenterOf.MASS)
-    return {'volume_mm3':shape.volume,'bounds_mm':[[b.min.X,b.max.X],[b.min.Y,b.max.Y],[b.min.Z,b.max.Z]],
+    return {'volume_mm3':sum(s.volume for s in shape.solids()),'bounds_mm':[[b.min.X,b.max.X],[b.min.Y,b.max.Y],[b.min.Z,b.max.Z]],
             'center_mm':[c.X,c.Y,c.Z], 'solids':len(shape.solids())}
 
 def overlap(a,b,tol=1e-6):
@@ -43,7 +43,7 @@ def suspension_collisions(records,d):
 def validate(records,d,full=False,collisions=False):
     errors=[]
     for item in records:
-        if not item.shape.is_valid or not item.shape.solids() or item.shape.volume<=0:
+        if not item.shape.is_valid or not item.shape.solids() or sum(s.volume for s in item.shape.solids())<=0:
             errors.append('Invalid solid: '+item.name)
     names=[x.name for x in records]
     if len(names)!=len(set(names)):errors.append('Duplicate part names')

@@ -26,3 +26,15 @@ def test_official_caster_height_and_six_wheel_motion_contract():
     assert validate(r,d)['valid']
     contacts={x.metadata.get('moving_wheel'):x.shape.bounding_box().min.Z for x in r if x.name.startswith(('30_','44_'))}
     assert contacts==pytest.approx({'LF':5,'LEFT':-10,'RIGHT':0},abs=1e-5)
+
+def test_cached_multisolid_component_retains_name_and_geometry(tmp_path):
+    from build123d import Compound,import_step
+    from cad.parts.common import PartRecord,box
+    from cad.export import write
+    shape=Compound([box(10,10,10),box(10,10,10,20,0,0)])
+    record=PartRecord('OEM_reference','fixture',shape)
+    write([record],tmp_path,formats=('step',),name='cache_roundtrip')
+    result=import_step(tmp_path/'cache_roundtrip.step')
+    assert result.is_valid and len(result.solids())==2
+    assert sum(s.volume for s in result.solids())==pytest.approx(2000)
+    assert result.children[0].children[0].label=='OEM_reference'

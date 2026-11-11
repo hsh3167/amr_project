@@ -56,7 +56,7 @@
 <div class="app">
   <header>
     <div class="brand"><div class="mark">A</div><div><strong>AMR PROJECT</strong><small>UNIVERSITY ROBOTICS · LAYOUT LAB</small></div></div>
-    <div class="header-right"><span class="chip"><b>●</b> REV 0.5 · CONCEPT ONLY</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    <div class="header-right"><span class="chip"><b>●</b> REV 0.6 · BUILD123D</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </header>
   <main class="workspace">
     <aside class="left">
@@ -82,7 +82,18 @@
         <label class="toggle"><span><i class="swatch" style="background:#8ebcff"></i>부품 라벨</span><input type="checkbox" id="showLabels" checked></label>
       </div>
       <div class="section">
-        <h2>센서 배치 · Rev 0.5</h2>
+        <h2>6륜 독립 서스펜션</h2>
+        <label class="toggle"><span>서스펜션 구조 표시</span><input type="checkbox" id="showSuspension" checked></label>
+        <p class="hint">바퀴별 위치 확인용. +는 범프, −는 드룹. 하중 해석이 아닙니다. 스프링 변형 표시는 개념 표현입니다.</p>
+<label class="mini-label" for="poseLEFT">왼쪽 구동륜 <output id="valueLEFT">0 mm</output></label><input id="poseLEFT" data-wheel="LEFT" type="range" min="-10" max="10" value="0" step="1">
+<label class="mini-label" for="poseRIGHT">오른쪽 구동륜 <output id="valueRIGHT">0 mm</output></label><input id="poseRIGHT" data-wheel="RIGHT" type="range" min="-10" max="10" value="0" step="1">
+<label class="mini-label" for="poseLF">전방 좌측 캐스터 <output id="valueLF">0 mm</output></label><input id="poseLF" data-wheel="LF" type="range" min="-5" max="5" value="0" step="1">
+<label class="mini-label" for="poseLB">후방 좌측 캐스터 <output id="valueLB">0 mm</output></label><input id="poseLB" data-wheel="LB" type="range" min="-5" max="5" value="0" step="1">
+<label class="mini-label" for="poseRF">전방 우측 캐스터 <output id="valueRF">0 mm</output></label><input id="poseRF" data-wheel="RF" type="range" min="-5" max="5" value="0" step="1">
+<label class="mini-label" for="poseRB">후방 우측 캐스터 <output id="valueRB">0 mm</output></label><input id="poseRB" data-wheel="RB" type="range" min="-5" max="5" value="0" step="1">
+<button class="control" id="resetSuspension">공칭 위치로 복귀</button></div>
+<div class="section">
+        <h2>센서 배치 · Rev 0.6</h2>
         <p class="hint">LiDAR: 전방 좌측·후방 우측 대각 배치. 스캔면 공칭 약241mm, 각270°의 사각90°는 차체 안쪽을 향합니다. 카메라: 상판 아래 전방 좌우 ±15°/하향10°(가정).</p>
         <label class="toggle"><span><i class="swatch" style="background:#43e1d3"></i>LiDAR 270° / 안쪽 사각90°</span><input type="checkbox" id="showFov"></label>
       </div>
@@ -102,7 +113,7 @@
       <div id="labels"></div>
       <div class="scene-top"><h2>LOW-COST AMR / GENERAL ARRANGEMENT</h2><p>선정 부품 기반 배치 · 제작 검증 전 [mm]</p></div>
       <div class="top-actions"><button class="icon-btn" id="resetCamera">⟳ 시점 초기화</button><button class="icon-btn" id="saveImage">↓ PNG</button></div>
-      <div class="footer">NOT FOR MANUFACTURING · NO FEA / COLLISION / SLAM VALIDATION</div>
+      <div class="footer">개념 모델 · 강도·하중 검증 전</div>
       <div class="status">
         <div class="stats">
           <div class="stat"><b>546.5 mm</b><span>현재 모델 폭*</span></div>
@@ -116,7 +127,7 @@
     <aside class="right">
       <div class="eyebrow">COMPONENT INSPECTOR</div>
       <div class="legend">부품을 클릭하면 설명 표시</div>
-      <h2 id="partName" class="detail-title">도면 반영 배치 Rev 0.5</h2>
+      <h2 id="partName" class="detail-title">도면 반영 배치 Rev 0.6</h2>
       <p id="partDescription" class="detail-text">상판을 숨기거나 분해 뷰를 조정하면 구동부·배터리·전장품을 확인할 수 있습니다. 대각 코너 LiDAR 2개와 상판 아래 카메라 2개를 적용했습니다. 모든 수직 기둥은 알루미늄 프로파일입니다. 세부 브라켓은 미확정입니다.</p>
       <div class="section" style="margin-top:18px">
         <h2>기본 배치값 (초안)</h2>
@@ -124,7 +135,7 @@
         <div class="spec"><span>상판 / 하판</span><b>420×550 / 390×530</b></div>
         <div class="spec"><span>드라이브 축 간격</span><b>422 (가설계)</b></div>
         <div class="spec"><span>캐스터</span><b>GL-65-ASF · Ø64 ×4</b></div>
-        <div class="spec"><span>프레임</span><b>Al 20×20 · 기둥8개</b></div>
+        <div class="spec"><span>프레임</span><b>Al 20×20 · 기둥12개</b></div>
         <div class="spec"><span>상판 높이</span><b>≈305 (가설계)</b></div>
         <div class="spec"><span>배터리 공간</span><b>235×155×95 (가정)</b></div>
         <div class="spec"><span>LiDAR</span><b>SICK TiM571 ×2</b></div>
@@ -147,12 +158,13 @@
         <ul class="list"><li>Ø14 / AF10 / M14×1.5 <strong>축 고정 및 토크반력 브라켓</strong></li><li>구동륜·캐스터 <strong>접지하중 / 높이</strong> 확인</li><li>배터리·드라이버 간 <strong>케이블/방열 공간</strong></li><li>급정지 시 <strong>전도 / 제동 / 전원 차단</strong></li><li>차후 로봇암의 <strong>하중 및 작동반력</strong></li></ul>
         <div class="callout" style="margin-top:13px">이 화면의 주행 애니메이션은 <b>개념적 운동 표현</b>입니다. 실제 동역학/전도/마찰/주행제어/SLAM 시뮬레이션은 아닙니다.</div>
       </div>
-      <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_6w_layout_rev05.step">STEP 다운로드 ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
+      <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_current.step">STEP 다운로드 ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
     </aside>
   </main>
 </div>
 <script type="module">
 import * as THREE from 'three';
+import {loadNativeCAD} from './web/native-cad.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 const [SPEC,LAYOUT]=await Promise.all(['./cad/parts.json','./cad/layout.json'].map(url=>fetch(url,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Layout data unavailable');return r.json()})));
@@ -329,7 +341,7 @@ function setView(view){const d={iso:[860,740,980],top:[0,1600,1],front:[0,260,12
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 $('resetCamera').addEventListener('click',()=>{motion='stop';robot.rotation.y=0;robot.position.set(0,0,0);setView('iso');document.querySelectorAll('[data-motion]').forEach(b=>b.classList.toggle('active',b.dataset.motion==='stop'))});
 document.querySelectorAll('[data-motion]').forEach(b=>b.addEventListener('click',()=>{motion=b.dataset.motion;document.querySelectorAll('[data-motion]').forEach(el=>el.classList.toggle('active',el===b))}));
-$('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-layout-rev05.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
+$('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-layout-rev06.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
 canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width*2-1;pointer.y=-(e.clientY-r.top)/r.height*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(robot.children,true).filter(h=>h.object.userData.partId);if(hits.length){const id=hits[0].object.userData.partId;selected=id;$('partName').textContent=parts[id].name;$('partDescription').textContent=parts[id].description}});
 function resize(){const w=wrap.clientWidth,h=wrap.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
@@ -349,7 +361,18 @@ function animate(){requestAnimationFrame(animate);const dt=Math.min(.05,clock.ge
 window.amrReview={revision:SPEC.revision,layout:LAYOUT,columns:columnManifest,counts:{motors:wheels.length,casters:casters.length,lidars:Object.keys(groups).filter(k=>k.startsWith('lidar')).length,cameras:Object.keys(groups).filter(k=>k.startsWith('camera')).length},motor:MOTOR,
  inspect:()=>({deckVisible:groups.deck.visible,explode,motion,sceneBoundsWithHelpers:new THREE.Box3().setFromObject(robot).getSize(new THREE.Vector3()).toArray()}),
  partInfo:parts};
-applyVisibility();updateBattery();$('loading').remove();animate();
+robot.visible=false;
+try{
+ const native=await loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,layout:LAYOUT});
+ window.amrReview.native=native;window.amrReview.columns=native.columns;
+ optionMap.showSuspension=['suspension'];
+ $('showSuspension').addEventListener('change',applyVisibility);
+ document.querySelectorAll('[data-wheel]').forEach(input=>input.addEventListener('input',()=>{motion='stop';native.setPose(input.dataset.wheel,Number(input.value));$('value'+input.dataset.wheel).textContent=input.value+' mm'}));
+ $('resetSuspension').addEventListener('click',()=>{for(const input of document.querySelectorAll('[data-wheel]')){input.value=0;native.setPose(input.dataset.wheel,0);$('value'+input.dataset.wheel).textContent='0 mm'}});
+ $('partName').textContent='build123d 조립 모델 · Rev 0.6';
+ $('partDescription').textContent='STEP과 같은 build123d 형상에서 생성한 표시 모델입니다. 공식 캐스터·카메라 CAD와 6륜 독립 서스펜션 개념 구조를 확인할 수 있습니다. 미확정 사양은 문서에 구분했습니다.';
+ applyVisibility();updateBattery();robot.visible=true;$('loading').remove();animate();
+}catch(error){$('loading').textContent='CAD 불러오기 실패: '+error.message;console.error(error)}
 </script>
 </body>
 </html>

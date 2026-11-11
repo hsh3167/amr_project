@@ -3,10 +3,10 @@
 중앙 2WD + 캐스터4개의 6륜 차동구동 AMR. 2026-11-09 도착한 **ZLLG65ASM250-N V2.02** 23쪽 스펙시트의 실제 외형도를 반영했습니다. 레이아웃 검토 모델이며 제작 승인 도면은 아닙니다.
 
 - **[인터랙티브 3D 보기](https://hsh3167.github.io/amr_project/)**
-- [최신 STEP 다운로드](cad-output/amr_6w_layout_rev05.step) / [STEP 검증 결과](cad-output/validation_rev05.json)
-- [파라메트릭 CAD](cad/amr_layout.py) / [공통 부품 치수·사양](cad/parts.json)
-- [도면 판독·사양 충돌·근거](docs/motor-datasheet-review.md) / [기구·전원 설계 판단](docs/engineering-decisions.md)
-- [BOM](bom/concept_bom.csv) / **[Rev05 배치 변경 근거·좌표](docs/layout-rev05.md)**
+- [최신 STEP 다운로드](../cad-output/amr_6w_layout_rev05.step) / [STEP 검증 결과](../cad-output/validation_rev05.json)
+- [파라메트릭 CAD](../cad/amr_layout.py) / [공통 부품 치수·사양](../cad/parts.json)
+- [도면 판독·사양 충돌·근거](motor-datasheet-review.md) / [기구·전원 설계 판단](engineering-decisions.md)
+- [BOM](../bom/concept_bom.csv) / **[Rev05 배치 변경 근거·좌표](layout-rev05.md)**
 
 ## 확정 부품과 가정
 
@@ -18,7 +18,7 @@
 | GL-65-ASF | 4 | Ø64×23, 설치높이82, 옵셋22, 판65×48, 홀54×24/Ø7 | 보유품 EUS/TUN suffix; 포크·스위블은 단순화 |
 | 회사 배터리7S9P | 1 후보 | 직렬7/병렬9 구성 | 화학종·용량·BMS·치수·상태 미확정 |
 
-모터 본문 정격은 **24V, 18~30V 사용, 4Nm, 500rpm, 10A**, 스톨 **11.7Nm/30A**, 엔코더 **1024라인**(5V 단일종단 A/B)입니다. p.7 도면 표의24~48V/250W/12Nm/560rpm/3.25kg는 본문과 차이가 있으므로 [충돌 목록](docs/motor-datasheet-review.md)을 함께 확인합니다. 특히 48V 사용을 승인한 것으로 해석하지 않습니다.
+모터 본문 정격은 **24V, 18~30V 사용, 4Nm, 500rpm, 10A**, 스톨 **11.7Nm/30A**, 엔코더 **1024라인**(5V 단일종단 A/B)입니다. p.7 도면 표의24~48V/250W/12Nm/560rpm/3.25kg는 본문과 차이가 있으므로 [충돌 목록](motor-datasheet-review.md)을 함께 확인합니다. 특히 48V 사용을 승인한 것으로 해석하지 않습니다.
 
 ## Rev05 배치 변경
 

@@ -30,5 +30,13 @@ def build_records(design=None,only=None):
 
 def assemble(records,name='AMR'):
     groups=OrderedDict()
-    for item in records:groups.setdefault(item.group,[]).append(item.shape)
+    for item in records:
+        shape=item.shape
+        # BREP cache reloads retain topology but not the Python assembly tree.
+        # Restore solid children so cache hits export the same compact assembly
+        # as cache misses instead of duplicating large OEM geometry definitions.
+        if isinstance(shape,Compound) and not shape.children and len(shape.solids())>1:
+            shape=Compound(label=item.name,children=list(shape.solids()))
+            shape.color=item.shape.color
+        groups.setdefault(item.group,[]).append(shape)
     return Compound(label=name,children=[Compound(label=k,children=v) for k,v in groups.items()])

@@ -8,6 +8,7 @@ from build123d import export_step,export_stl,import_step,export_gltf
 from .assembly import assemble
 from .validation import metrics
 from OCP.ShapeFix import ShapeFix_ShapeTolerance
+from OCP.BRepTools import BRepTools
 
 def normalize_oem_roundtrip(root):
     """Explicit import normalization for the supplied OEM camera's STEP p-curves.
@@ -18,9 +19,9 @@ def normalize_oem_roundtrip(root):
     normalized=[]
     def walk(node):
         if node.label.startswith('70_'):
-            before=node.volume
+            before=sum(s.volume for s in node.solids())
             ShapeFix_ShapeTolerance().LimitTolerance(node.wrapped,1e-5)
-            delta=abs(node.volume-before)
+            delta=abs(sum(s.volume for s in node.solids())-before)
             if delta>1e-8:raise ValueError('Camera import normalization changed volume')
             normalized.append({'name':node.label,'minimum_topology_tolerance_mm':1e-5,'volume_change_mm3':delta})
         else:
@@ -61,7 +62,9 @@ def write(records,folder,formats=('step',),individual=False,name='amr_current'):
         elif fmt=='glb':
             with tempfile.TemporaryDirectory() as temp:
                 tmp=Path(temp)/'amr.glb'
-                if not export_gltf(root,tmp,binary=True,linear_deflection=.15,angular_deflection=.2):raise ValueError('GLB export failed')
+                # Display tessellation is independent of STEP and printable STL.
+                BRepTools.Clean_s(root.wrapped)
+                if not export_gltf(root,tmp,binary=True,linear_deflection=.4,angular_deflection=.35):raise ValueError('GLB export failed')
                 path.write_bytes(tmp.read_bytes())
         else:raise ValueError('Unsupported format: '+fmt)
         files.append(path.name)
