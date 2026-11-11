@@ -38,3 +38,15 @@ def test_cached_multisolid_component_retains_name_and_geometry(tmp_path):
     assert result.is_valid and len(result.solids())==2
     assert sum(s.volume for s in result.solids())==pytest.approx(2000)
     assert result.children[0].children[0].label=='OEM_reference'
+
+def test_individual_step_contains_geometry_after_assembly_export(tmp_path):
+    from build123d import import_step
+    from cad.parts.common import PartRecord,box
+    from cad.export import write
+
+    record=PartRecord('mount','fixture',box(10,20,30))
+    write([record],tmp_path,individual=True)
+    part=import_step(tmp_path/'parts/mount.step')
+    assert part.label=='mount'
+    assert part.is_valid and len(part.solids())==1
+    assert part.solids()[0].volume==pytest.approx(6000)

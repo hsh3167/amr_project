@@ -4,7 +4,7 @@ import json
 from io import BytesIO
 import re
 import tempfile
-from build123d import export_step,export_stl,import_step,export_gltf
+from build123d import Shape,export_step,export_stl,import_step,export_gltf
 from .assembly import assemble
 from .validation import metrics
 from OCP.ShapeFix import ShapeFix_ShapeTolerance
@@ -31,8 +31,20 @@ def normalize_oem_roundtrip(root):
 
 def step_file(shape,path):
     # OCCT Windows filename handling fails for some long non-ASCII part paths.
-    stream=BytesIO();export_step(shape,stream,timestamp='2026-11-11T00:00:00')
-    Path(path).write_bytes(stream.getvalue())
+    if shape.parent is not None:
+        # XDE expects a root object. Keep the BRep and placement without its
+        # assembly parent, which is outside the individual export traversal.
+        standalone=Shape.cast(shape.wrapped)
+        standalone.label=shape.label
+        standalone.color=shape.color
+        shape=standalone
+    stream=BytesIO()
+    if not export_step(shape,stream,timestamp='2026-11-11T00:00:00'):
+        raise ValueError(f'STEP write failed: {path}')
+    data=stream.getvalue()
+    if b'\nDATA;\n#' not in data:
+        raise ValueError(f'STEP contains no geometry: {path}')
+    Path(path).write_bytes(data)
 
 def stl_file(shape,path):
     with tempfile.TemporaryDirectory() as temp:
