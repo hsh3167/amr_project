@@ -20,6 +20,13 @@ def box(w,d,h,x=0,y=0,z=0):
 def cylx(r,length,x=0,y=0,z=0):
     return Solid.make_cylinder(r,length,Plane(origin=(x-length/2,y,z),z_dir=(1,0,0)))
 
+def cyly(r,length,x=0,y=0,z=0):
+    return Solid.make_cylinder(r,length,Plane(origin=(x,y-length/2,z),z_dir=(0,1,0)))
+
+def span(x0,x1,y0,y1,z0,z1):
+    """Axis-aligned box from extents."""
+    return box(abs(x1-x0),abs(y1-y0),abs(z1-z0),(x0+x1)/2,(y0+y1)/2,(z0+z1)/2)
+
 def cylz(r,height,x=0,y=0,bottom=0):
     return Solid.make_cylinder(r,height).translate((x,y,bottom))
 

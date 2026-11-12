@@ -16,16 +16,18 @@ def test_full_component_count_and_contacts():
     assert len(records)==85
     assert report['valid'],report
 
-def test_official_caster_height_and_six_wheel_motion_contract():
+def test_official_caster_height_and_rev10_motion_contract():
     d=load_design();r=build_records(d,['caster_lf'])
     assert len(r)==3
     assert max(x.shape.bounding_box().max.Z for x in r)==pytest.approx(83,abs=1e-5)
     assert validate(r,d)['valid']
-    d.motion={'LF':5,'LEFT':-10}
-    r=build_records(d,['caster_lf','motor_left','motor_right'])
+    d.motion={'REAR':2,'LEFT':-10}
+    r=build_records(d,['caster_lf','caster_lb','motor_left','motor_right'])
     assert validate(r,d)['valid']
-    contacts={x.metadata.get('moving_wheel'):x.shape.bounding_box().min.Z for x in r if x.name.startswith(('30_','44_'))}
-    assert contacts==pytest.approx({'LF':3.970043805,'LEFT':-10,'RIGHT':0},abs=1e-5)
+    contacts={(x.metadata.get('caster') or x.metadata.get('moving_wheel')):x.shape.bounding_box().min.Z
+              for x in r if x.name.startswith(('30_','44_'))}
+    # Swing-arm camber lowers the tire edge 1.09 mm below the wheel-centre travel.
+    assert contacts==pytest.approx({'LF':0,'LB':2.004831,'LEFT':-11.085242,'RIGHT':0},abs=1e-4)
 
 def test_cached_multisolid_component_retains_name_and_geometry(tmp_path):
     from build123d import Compound,import_step
@@ -56,45 +58,42 @@ def test_misumi_spring_stack_stays_within_catalog_travel():
     from cad.validation import catalog_suspension_report
 
     report=catalog_suspension_report(load_design())
-    assert report['target_mass_kg']==30
-    assert report['modules']['drive']['spring_lengths_mm']==[67,57,47]
-    assert report['modules']['caster']['spring_lengths_mm']==[29.5,24.5,19.5]
-    for module in report['modules'].values():
-        assert module['forces_N'][0]>0
-        assert module['min_solid_margin_mm']>0
-        assert module['max_working_deflection_margin_mm']>0
-    assert abs(report['estimated_static_offset_mm'])<1
+    drive=report['drive']
+    assert drive['sku']=='X-SWU17-70' and drive['installed_length_mm']==40
+    assert drive['forces_N'][0]>0 and drive['min_solid_margin_mm']>0 and drive['max_working_deflection_margin_mm']>0
+    assert 90<drive['estimated_ground_force_N']<120
+    for case in report['static_cases'].values():
+        assert 0<case['caster_capacity_ratio']<.5
 
 
-def test_caster_rockers_rotate_about_fixed_pins():
+def test_rev10_arms_rotate_about_fixed_pins_and_meet_stops():
     from build123d import CenterOf
-
-    from cad.caster_motion import pose_shape, rocker_pivot
+    from cad.caster_motion import half_travel, pose_shape, drive_pivot, rear_pivot
 
     d=load_design()
-    nominal=build_records(d,['suspension'])
-    d.motion={'LF':5,'RB':-5}
-    records=build_records(d,['suspension'])
-    old={r.name:r for r in nominal}
-    parts={r.name:r for r in records}
-    for wheel in ('LF','LB','RF','RB'):
-        pin=parts['80_caster_hinge_pin_'+wheel]
-        bush=parts['80_caster_pivot_bushings_'+wheel]
-        arm=parts['80_caster_rocker_arm_'+wheel]
+    nominal={r.name:r for r in build_records(d,['suspension'])}
+    for key in ('LEFT','RIGHT'):
+        pin=nominal['80_drive_hinge_pin_'+key]
         assert pin.metadata['moving_wheel'] is None
-        assert len(bush.shape.solids())==2
-        assert tuple(pin.shape.center(CenterOf.MASS))[1:]==pytest.approx(rocker_pivot(d,wheel)[1:])
-        old_arm=old[arm.name].shape.center(CenterOf.MASS)
-        moved_arm=arm.shape.center(CenterOf.MASS)
-        if wheel in d.motion:
-            assert moved_arm.Y!=pytest.approx(old_arm.Y)
-            assert (moved_arm.Z-old_arm.Z)*d.motion[wheel]>0
-        else:
-            assert tuple(moved_arm)==pytest.approx(tuple(old_arm))
-    arm=old['80_caster_rocker_arm_LF'].shape
-    clevis=old['80_caster_clevis_with_stops_LF'].shape
-    for sign in (-1,1):
-        at_stop=pose_shape(d,arm,'LF',sign*5)&clevis
-        assert at_stop is None or at_stop.volume<.01
-        beyond_stop=pose_shape(d,arm,'LF',sign*5.25)&clevis
-        assert beyond_stop is not None and beyond_stop.volume>.1
+        c=pin.shape.center(CenterOf.MASS)
+        assert (c.X,c.Z)==pytest.approx((drive_pivot(d,key)[0],drive_pivot(d,key)[2]),abs=1e-6)
+        arm=nominal['80_drive_swing_arm_6t_bent_'+key].shape
+        washer=nominal['80_drive_droop_stop_washer_nut_'+key].shape
+        sleeve=nominal['80_drive_bump_stop_sleeve_'+key].shape
+        for value,stop in ((-10,washer),(10,sleeve)):
+            at=pose_shape(d,arm,key,value)&stop
+            assert at is None or at.volume<.01
+            beyond=pose_shape(d,arm,key,value*1.15)&stop
+            assert beyond is not None and beyond.volume>.1
+    pin=nominal['80_caster_rear_hinge_pin_REAR'].shape.center(CenterOf.MASS)
+    assert (pin.X,pin.Z)==pytest.approx((rear_pivot(d)[0],rear_pivot(d)[2]),abs=1e-6)
+    beam=nominal['80_caster_rear_roll_beam_6t_REAR'].shape
+    half=half_travel(d,'REAR')
+    for value,name in ((half,'L'),(-half,'R')):
+        stop=nominal['80_caster_rear_roll_stop_'+name+'_REAR'].shape
+        at=pose_shape(d,beam,'REAR',value)&stop
+        assert at is None or at.volume<.01
+        beyond=pose_shape(d,beam,'REAR',value*1.3)&stop
+        assert beyond is not None and beyond.volume>.1
+    for wheel in ('LF','RF'):
+        assert nominal['80_caster_fixed_box_bracket_'+wheel].metadata['moving_wheel'] is None

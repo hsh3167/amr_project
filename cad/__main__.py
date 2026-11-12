@@ -5,6 +5,7 @@ from .parameters import ROOT,load_design,set_parameter
 from .assembly import GROUPS,build_records
 from .export import write
 from .validation import validate,compare_baseline
+from .caster_motion import MOTION_KEYS,half_travel
 
 def main():
     parser=argparse.ArgumentParser(description='AMR CAD: build only requested groups; exports are explicit')
@@ -15,7 +16,7 @@ def main():
         p=sub.add_parser(command);p.add_argument('--variant',choices=['baseline','current'],default='baseline' if command=='compare' else 'current')
         p.add_argument('--part',action='append',choices=GROUPS)
         p.add_argument('--output',type=Path,default=ROOT/'output/cad')
-        p.add_argument('--pose',action='append',default=[],help='Independent travel mm: LEFT/RIGHT axle or LF/LB/RF/RB caster rocker seat')
+        p.add_argument('--pose',action='append',default=[],help='Travel mm: LEFT/RIGHT drive wheel centre, REAR = left rear caster seat on the roll beam')
         if command!='compare':p.add_argument('--collisions',action='store_true')
         if command=='build':
             p.add_argument('--format',default='step',help='step,stl or none')
@@ -27,8 +28,8 @@ def main():
     d=load_design(args.variant)
     for entry in args.pose:
         wheel,value=entry.split('=');value=float(value)
-        if d.variant=='baseline' or wheel not in ('LEFT','RIGHT','LF','LB','RF','RB'):parser.error('Pose requires current variant and a valid wheel name')
-        half=d.layout['suspension']['drive' if wheel in ('LEFT','RIGHT') else 'caster']['travel_mm']/2
+        if d.variant=='baseline' or wheel not in MOTION_KEYS:parser.error('Pose requires current variant and LEFT, RIGHT or REAR')
+        half=half_travel(d,wheel)
         if not -half<=value<=half:parser.error('Pose exceeds designed stroke')
         d.motion[wheel]=value
     records=build_records(d,args.part)

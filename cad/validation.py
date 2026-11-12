@@ -1,7 +1,8 @@
 """Geometric checks only. Strength, tire compliance and safety remain separate."""
 import math
 from build123d import Axis, CenterOf, import_step
-from .caster_motion import CASTER_WHEELS, caster_xy, pose_shape, rocker_angle, rocker_pivot
+from .caster_motion import (CASTER_WHEELS, DRIVE_WHEELS, MOTION_KEYS, REAR_CASTERS, caster_xy, half_travel,
+                            motion_angle, pose_shape, rotate_point)
 from .parameters import ROOT
 from .validate_layout import coverage
 
@@ -18,87 +19,85 @@ def bounds_overlap(a,b,tol=1e-6):
     return all(min(x,y)-max(u,v)>tol for x,y,u,v in zip(a[1],b[1],a[0],b[0]))
 
 def suspension_collisions(records,d):
-    """Five independently sampled poses per wheel from the nominal assembly."""
+    """Five sampled poses per motion key (LEFT, RIGHT, REAR) from the nominal assembly."""
     hits=[];tested=0
     fixed=[r for r in records if not r.metadata.get('moving_wheel') and 'spring_length_mm' not in r.metadata]
     moving=[r for r in records if r.metadata.get('moving_wheel')]
     boxes={}
     for r in fixed+moving:
         box=r.shape.bounding_box();boxes[id(r)]=(tuple(box.min),tuple(box.max))
-    for wheel in ('LEFT','RIGHT',*CASTER_WHEELS):
-        half=d.layout['suspension']['drive' if wheel in ('LEFT','RIGHT') else 'caster']['travel_mm']/2
-        own=[r for r in moving if r.metadata['moving_wheel']==wheel]
-        obstacles=fixed+[r for r in moving if r.metadata['moving_wheel']!=wheel]
+    poses=0
+    for key in MOTION_KEYS:
+        half=half_travel(d,key)
+        own=[r for r in moving if r.metadata['moving_wheel']==key and 'spring_length_mm' not in r.metadata]
+        obstacles=fixed+[r for r in moving if r.metadata['moving_wheel']!=key and 'spring_length_mm' not in r.metadata]
         for dz in (-half,-half/2,0,half/2,half):
+            poses+=1
             for a in own:
-                if wheel in CASTER_WHEELS:
-                    shape=pose_shape(d,a.shape,wheel,dz)
-                    bounds=shape.bounding_box()
-                    moved_box=(tuple(bounds.min),tuple(bounds.max))
-                else:
-                    bb=boxes[id(a)]
-                    moved_box=((bb[0][0],bb[0][1],bb[0][2]+dz),(bb[1][0],bb[1][1],bb[1][2]+dz))
-                    shape=None
+                shape=pose_shape(d,a.shape,key,dz)
+                bounds=shape.bounding_box();moved_box=(tuple(bounds.min),tuple(bounds.max))
                 for b in obstacles:
                     if not bounds_overlap(moved_box,boxes[id(b)]):continue
-                    if shape is None:shape=pose_shape(d,a.shape,wheel,dz)
                     tested+=1;cut=shape&b.shape;volume=0 if cut is None else cut.volume
-                    if volume>.01:hits.append({'wheel':wheel,'displacement_mm':dz,'a':a.name,'b':b.name,'volume_mm3':volume})
-    return {'sampled_poses':30,'boolean_pairs':tested,'hits':hits,'scope':'One wheel at a time, five sampled positions; springs/mates excluded; no continuous swept-volume or dynamic clearance proof'}
+                    if volume>.01:hits.append({'wheel':key,'displacement_mm':dz,'a':a.name,'b':b.name,'volume_mm3':volume})
+    return {'sampled_poses':poses,'boolean_pairs':tested,'hits':hits,
+            'scope':'One motion key at a time (two drive swing arms, one rear roll beam), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof'}
 
 
 def catalog_suspension_report(d):
     from .parts.suspension import spring_state
 
-    target=d.layout['suspension']['design_mass_kg']
-    modules={kind:spring_state(d,kind) for kind in ('drive','caster')}
-    for kind,state in modules.items():
-        estimate=d.layout['suspension'][kind]['unsprung_mass_kg_estimate']
-        state['estimated_ground_force_N']=round(state['forces_N'][1]+estimate*9.80665,3)
-    q=d.layout['suspension']['caster']
-    arm=q['arm_length_mm']
-    trail=d.parts['caster']['swivel_offset']
-    caster=modules['caster']
-    unsprung=q['unsprung_mass_kg_estimate']*9.80665
-    caster['nominal_tilt_limit_deg']=round(math.degrees(math.asin(q['travel_mm']/2/arm)),3)
-    caster['nominal_contact_load_range_N']=[
-        round(caster['forces_N'][1]*arm/(arm+direction*trail)+unsprung,3) for direction in (1,-1)]
-    total=2*modules['drive']['estimated_ground_force_N']+4*modules['caster']['estimated_ground_force_N']
-    stiffness=2*d.layout['suspension']['drive']['rate_N_mm']+4*d.layout['suspension']['caster']['rate_N_mm']
-    return {'target_mass_kg':target,'modules':modules,'nominal_total_ground_force_N':round(total,3),
-            'estimated_static_offset_mm':round((target*9.80665-total)/stiffness,3),
-            'nominal_drive_load_fraction':round(2*modules['drive']['estimated_ground_force_N']/total,4),
-            'scope':'Centered static estimate at caster swivel radius equal to the arm length; the reported caster load range varies with swivel. Measure on prototype.'}
+    g=9.80665
+    s=d.layout['suspension'];q=s['drive'];r=s['rear_rocker']
+    drive=spring_state(d)
+    unsprung=q['unsprung_mass_kg_estimate']*g
+    drive['ground_force_N']=[round(f*drive['lever_ratio']+unsprung,3) for f in drive['forces_N']]
+    drive['estimated_ground_force_N']=drive['ground_force_N'][1]
+    capacity=d.parts['caster']['capacity_each_kg']*g
+    cases={}
+    for label,mass in (('with_arm',s['design_mass_kg']),('without_arm',s['design_mass_without_arm_kg'])):
+        weight=mass*g
+        casters=weight-2*drive['estimated_ground_force_N']
+        each=casters/4
+        cases[label]={'mass_kg':mass,'drive_each_N':drive['estimated_ground_force_N'],'caster_each_N':round(each,3),
+                      'drive_load_fraction':round(2*drive['estimated_ground_force_N']/weight,4),
+                      'caster_capacity_ratio':round(each/capacity,4)}
+    return {'concept':'Rev10 drive side swing arms + fixed front casters + rear roll beam',
+            'design_mass_kg':s['design_mass_kg'],'drive':drive,
+            'rear_rocker':{'roll_limit_deg':r['roll_limit_deg'],'caster_seat_travel_mm':half_travel(d,'REAR')},
+            'static_cases':cases,
+            'scope':'Centered CG, flat floor, catalog spring rate. Drive load is set by the spring and is independent of payload; casters carry the rest. Measure on prototype.'}
 
 
 def caster_swivel_clearance(records,d):
-    """Screen the OEM moving fork and wheel against its new hardware."""
-    half=d.layout['suspension']['caster']['travel_mm']/2
+    """Screen each OEM moving fork and wheel against its mounting hardware."""
+    half=half_travel(d,'REAR')
     hits=[];pairs=0;poses=0
+    def bounds(shape):
+        b=shape.bounding_box()
+        return (tuple(b.min),tuple(b.max))
     for wheel in CASTER_WHEELS:
-        rotating=[r for r in records if r.metadata.get('moving_wheel')==wheel and r.name.startswith(('43_','44_'))]
+        rotating=[r for r in records if r.metadata.get('caster')==wheel and r.name.startswith(('43_','44_'))]
         if not rotating:
             continue
+        key='REAR' if wheel in REAR_CASTERS else None
         x,y=caster_xy(d,wheel)
         axis=Axis((x,y,0),(0,0,1))
         nearby=[r for r in records if r.group=='chassis' or
-                (r.group=='suspension' and r.metadata.get('wheel')==wheel and 'spring_length_mm' not in r.metadata)]
-        def bounds(shape):
-            b=shape.bounding_box()
-            return (tuple(b.min),tuple(b.max))
-
+                (r.group=='suspension' and r.metadata.get('wheel') in (wheel,key) and 'spring_length_mm' not in r.metadata)]
+        levels=(-half,0,half) if key else (0,)
         obstacles={}
-        for dz in (-half,0,half):
+        for dz in levels:
             obstacles[dz]=[]
             for obstacle in nearby:
-                other=pose_shape(d,obstacle.shape,wheel,dz) if obstacle.metadata.get('moving_wheel') else obstacle.shape
+                other=pose_shape(d,obstacle.shape,key,dz) if obstacle.metadata.get('moving_wheel') else obstacle.shape
                 obstacles[dz].append((obstacle.name,other,bounds(other)))
         for angle in range(0,360,45):
             shapes=[(r.name,r.shape.rotate(axis,angle)) for r in rotating]
-            for dz in (-half,0,half):
+            for dz in levels:
                 poses+=1
                 for name,shape in shapes:
-                    moved=pose_shape(d,shape,wheel,dz)
+                    moved=pose_shape(d,shape,key,dz)
                     moved_bounds=bounds(moved)
                     for obstacle,other,other_bounds in obstacles[dz]:
                         if not bounds_overlap(moved_bounds,other_bounds):continue
@@ -108,7 +107,23 @@ def caster_swivel_clearance(records,d):
                         if volume>.01:
                             hits.append({'wheel':wheel,'steer_deg':angle,'displacement_mm':dz,'a':name,'b':obstacle,'volume_mm3':volume})
     return {'sampled_poses':poses,'boolean_pairs':pairs,'hits':hits,
-            'scope':'OEM fork and wheel, 45-degree swivel increments followed by rocker rotation at droop, nominal and bump; local hardware and chassis'}
+            'scope':'OEM fork and wheel, 45-degree swivel increments; rear casters also at both roll limits; local hardware and chassis'}
+
+
+def expected_contact(d,item):
+    """Lowest Z of a posed wheel: tilted cylinder about the +Y pivot."""
+    key=item.metadata.get('moving_wheel');value=d.motion.get(key,0) if key else 0
+    if not value:return 0.0
+    if item.name.startswith('30_'):
+        side=-1 if key=='LEFT' else 1
+        radius=d.parts['drive_motor']['tire_dia']/2;half=d.parts['drive_motor']['tread_width']/2
+        x=side*d.p['drive_track']/2
+    else:
+        radius=d.parts['caster']['wheel_dia']/2;half=0  # crowned OEM tread: lowest point stays on the mid-plane
+        x=caster_xy(d,item.metadata['caster'])[0]
+    a=motion_angle(d,key,value)
+    zc=rotate_point(d,key,value,(x,radius))[1]
+    return zc-radius*math.cos(a)-half*abs(math.sin(a))
 
 def validate(records,d,full=False,collisions=False):
     errors=[]
@@ -119,27 +134,18 @@ def validate(records,d,full=False,collisions=False):
     if len(names)!=len(set(names)):errors.append('Duplicate part names')
     wheels=[x for x in records if x.name.startswith(('30_','44_'))]
     for item in wheels:
-        wheel=item.metadata.get('moving_wheel')
-        offset=d.motion.get(wheel,0)
-        expected=offset
-        if offset and wheel in CASTER_WHEELS:
-            _,y=caster_xy(d,wheel)
-            _,pivot_y,pivot_z=rocker_pivot(d,wheel)
-            angle=rocker_angle(d,wheel,offset)
-            caster=d.parts['caster']
-            radius=caster['wheel_dia']/2
-            expected=pivot_z+(y-caster['swivel_offset']-pivot_y)*math.sin(angle)+(radius-pivot_z)*math.cos(angle)-radius
-        if abs(item.shape.bounding_box().min.Z-expected)>1e-5:errors.append('Wheel contact/pose: '+item.name)
+        tolerance=1e-5 if item.name.startswith('30_') or not d.motion.get('REAR') else .05
+        if abs(item.shape.bounding_box().min.Z-expected_contact(d,item))>tolerance:errors.append('Wheel contact/pose: '+item.name)
     for item in records:
-        if item.name.startswith('30_'):
+        if item.name.startswith('30_') and not d.motion.get(item.metadata.get('moving_wheel')):
             b=item.shape.bounding_box()
             if abs(b.size.X-d.parts['drive_motor']['tread_width'])>1e-5 or abs(b.size.Z-180)>1e-5:
                 errors.append('Drive tire dimensions: '+item.name)
-        if item.name.startswith('32_') and abs(item.shape.bounding_box().size.Y-d.parts['drive_motor']['shaft_flat'])>1e-5:
+        if item.name.startswith('32_') and not d.motion.get(item.metadata.get('moving_wheel')) and abs(item.shape.bounding_box().size.Y-d.parts['drive_motor']['shaft_flat'])>1e-5:
             errors.append('Motor shaft flat: '+item.name)
     for group in ('motor_left','motor_right'):
         motor=[x for x in records if x.group==group]
-        if len(motor)==3:
+        if len(motor)==3 and not any(d.motion.get(x.metadata.get('moving_wheel')) for x in motor):
             bounds=[x.shape.bounding_box() for x in motor]
             if abs(max(b.max.X for b in bounds)-min(b.min.X for b in bounds)-d.parts['drive_motor']['overall_axial'])>1e-5:
                 errors.append('Motor overall axial dimension: '+group)

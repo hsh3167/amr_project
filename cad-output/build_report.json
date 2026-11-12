@@ -1,57 +1,57 @@
 {
   "valid": true,
-  "components": 159,
-  "solids": 337,
+  "components": 119,
+  "solids": 293,
   "errors": [],
   "suspension_catalog": {
-    "target_mass_kg": 30,
-    "modules": {
-      "drive": {
-        "sku": "X-SWU17-70",
-        "travel_mm": 20,
-        "spring_lengths_mm": [
-          67.0,
-          57,
-          47.0
-        ],
-        "forces_N": [
-          10.59,
-          45.89,
-          81.19
-        ],
-        "min_solid_margin_mm": 26.0,
-        "max_working_deflection_margin_mm": 15.5,
-        "installed_length_mm": 57,
-        "estimated_ground_force_N": 83.155
+    "concept": "Rev10 drive side swing arms + fixed front casters + rear roll beam",
+    "design_mass_kg": 55,
+    "drive": {
+      "sku": "X-SWU17-70",
+      "travel_mm": 20,
+      "seat_travel_mm": 12.223,
+      "lever_ratio": 0.614,
+      "spring_lengths_mm": [
+        46.111,
+        40,
+        33.889
+      ],
+      "forces_N": [
+        84.328,
+        105.9,
+        127.472
+      ],
+      "min_solid_margin_mm": 12.889,
+      "max_working_deflection_margin_mm": 2.389,
+      "installed_length_mm": 40,
+      "ground_force_N": [
+        87.081,
+        100.327,
+        113.572
+      ],
+      "estimated_ground_force_N": 100.327
+    },
+    "rear_rocker": {
+      "roll_limit_deg": 1.0,
+      "caster_seat_travel_mm": 2.409
+    },
+    "static_cases": {
+      "with_arm": {
+        "mass_kg": 55,
+        "drive_each_N": 100.327,
+        "caster_each_N": 84.678,
+        "drive_load_fraction": 0.372,
+        "caster_capacity_ratio": 0.1727
       },
-      "caster": {
-        "sku": "X-SWU10.5-30",
-        "travel_mm": 10,
-        "spring_lengths_mm": [
-          29.5,
-          24.5,
-          19.5
-        ],
-        "forces_N": [
-          2.155,
-          23.705,
-          45.255
-        ],
-        "min_solid_margin_mm": 10.5,
-        "max_working_deflection_margin_mm": 6.0,
-        "installed_length_mm": 24.5,
-        "estimated_ground_force_N": 31.55,
-        "nominal_tilt_limit_deg": 2.866,
-        "nominal_contact_load_range_N": [
-          27.276,
-          38.236
-        ]
+      "without_arm": {
+        "mass_kg": 35,
+        "drive_each_N": 100.327,
+        "caster_each_N": 35.645,
+        "drive_load_fraction": 0.5846,
+        "caster_capacity_ratio": 0.0727
       }
     },
-    "nominal_total_ground_force_N": 292.51,
-    "estimated_static_offset_mm": 0.07,
-    "nominal_drive_load_fraction": 0.5686,
-    "scope": "Centered static estimate at caster swivel radius equal to the arm length; the reported caster load range varies with swivel. Measure on prototype."
+    "scope": "Centered CG, flat floor, catalog spring rate. Drive load is set by the spring and is independent of payload; casters carry the rest. Measure on prototype."
   },
   "counts": {
     "drive_motor": 2,
@@ -101,16 +101,16 @@
   },
   "selected_sensor_collisions": [],
   "suspension_collision_sampling": {
-    "sampled_poses": 30,
-    "boolean_pairs": 470,
+    "sampled_poses": 15,
+    "boolean_pairs": 235,
     "hits": [],
-    "scope": "One wheel at a time, five sampled positions; springs/mates excluded; no continuous swept-volume or dynamic clearance proof"
+    "scope": "One motion key at a time (two drive swing arms, one rear roll beam), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
   },
   "caster_swivel_sampling": {
-    "sampled_poses": 96,
-    "boolean_pairs": 224,
+    "sampled_poses": 64,
+    "boolean_pairs": 160,
     "hits": [],
-    "scope": "OEM fork and wheel, 45-degree swivel increments followed by rocker rotation at droop, nominal and bump; local hardware and chassis"
+    "scope": "OEM fork and wheel, 45-degree swivel increments; rear casters also at both roll limits; local hardware and chassis"
   },
   "step_roundtrip": [
     {
@@ -129,7 +129,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 337
+      "solids": 293
     }
   ]
 }

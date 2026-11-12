@@ -1,6 +1,6 @@
 # 대학생 AMR 프로젝트 — build123d / Rev09
 
-2WD 차동구동 + 캐스터 4개, **30kg 기준 6륜 독립 서스펜션**입니다. 각 GL-65 캐스터는 미스미 Ø10 힌지 핀과 무급유 부시를 쓰는 독립 로커암에 장착합니다. 상판 윗면은 지면에서 287mm입니다. 설계 원본은 build123d Python과 JSON이며, FreeCAD에서 측정·단면·조립을 검토합니다. [서스펜션 상세](docs/suspension-misumi.md) · [미스미 구매 BOM](bom/suspension_misumi.csv)
+2WD 차동구동 + 캐스터 4개입니다. **Rev10 서스펜션**은 구동륜 측면 스윙암 2개(MISUMI X-SWU17-70), 전방 고정 캐스터 2개, 후방 롤 빔 캐스터 2개로 된 3점 지지 구조이며 용접이 없습니다. 판재는 강판 3t, 상판 윗면은 지면에서 286mm입니다. 설계 원본은 build123d Python과 JSON이며, FreeCAD에서 측정·단면·조립을 검토합니다. [서스펜션 상세](docs/suspension-misumi.md) · [미스미 구매 BOM](bom/suspension_misumi.csv)
 
 - [3D 뷰어](https://hsh3167.github.io/amr_project/) · [최신 STEP](cad-output/amr_current.step) · [검증 결과](cad-output/build_report.json)
 - [최신 설계 상태](design_state.md) · [생성/수정/FreeCAD 실행 방법](docs/build123d-workflow.md)

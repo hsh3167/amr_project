@@ -1,4 +1,5 @@
 from .common import *
+from ..caster_motion import pose_shape
 
 def make(d,side):
     wheel=d.parts['drive_motor'];n='LEFT' if side<0 else 'RIGHT';group='motor_left' if side<0 else 'motor_right'
@@ -13,6 +14,6 @@ def make(d,side):
     if d.variant!='baseline':
         for item in records:
             item.metadata['moving_wheel']=n
-            item.shape=item.shape.translate((0,0,d.motion.get(n,0)))
+            item.shape=pose_shape(d,item.shape,n,d.motion.get(n,0))
             item.__post_init__()
     return records

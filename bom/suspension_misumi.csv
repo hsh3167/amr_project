@@ -1,26 +1,25 @@
 Module,Manufacturer,Order code,Quantity,Dimensions or role,Source,Status
-Drive,MISUMI,X-SWU17-70,2,OD17 ID10.5 L70 k3.53 N/mm solid21 working deflection38.5,https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog candidate for 30 kg design
-Caster,MISUMI,X-SWU10.5-30,4,OD10.5 ID6 L30 k4.31 N/mm solid9 working deflection16.5,https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog candidate for 30 kg design
-Drive,MISUMI,PSFJW10-46-M5-N5,4,D10 g6 L46 two M5 tapped ends,https://kr.misumi-ec.com/vona2/detail/110302634470/,Configured length
-Caster,MISUMI,CLBKHM10-63.2,4,D10 g6 hardened low-head hinge pin with M6 retainer thread,https://kr.misumi-ec.com/pdf/fa/2018/p1_065_2021_202108.pdf,Catalog configured length; check final stack and tap depth
-Drive,MISUMI,PSFJW6-28-M3-N3,2,D6 g6 L28 moving spring guide,https://kr.misumi-ec.com/vona2/detail/110302634470/,Configured length
-Drive,MISUMI,MPBZ10-20,4,ID10 F7 OD14 m6 L20 oil-free brass,https://kr.misumi-ec.com/pdf/fa/2013/p0283.pdf,Catalog dimensions
-Caster,MISUMI,C-MPFZ10-15,8,ID10 F7 OD14 L15 flange OD22 thickness2; two per pivot,https://in.misumi-ec.com/pdf/fa/2014/p1_383.pdf,Catalog candidate; check H7 bore and axial float after press fit
-Drive,MISUMI,CB3-10,2,Moving spring guide attachment,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
-Drive,MISUMI,CB4-10,2,Drive pilot tube,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
-Caster,MISUMI,CB6-8,4,One hinge pin retention screw per corner,https://kr.misumi-ec.com/vona2/detail/110100141750/,Use specified retention method and verify torque and thread engagement
-Caster,Standard,M6 washer OD16 t1,4,Hinge pin outboard retainer, ,Check actual washer and head dimensions
-Drive,MISUMI,CB5-12,4,Top spring seat to tapped extrusion ends,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
-Drive,MISUMI,CB5-14,8,Guide shaft at both ends,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
-Caster,MISUMI,CB5-16,16,Top seat to chassis,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
-Drive,MISUMI,CB5-18,8,Fixed steel yoke to chassis,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
-Caster,MISUMI,CB6-16,16,GL-65 caster plate to moving carrier,https://kr.misumi-ec.com/vona2/detail/110100141750/,Check real caster plate stack
+Drive,MISUMI,X-SWU17-70,2,OD17 ID10.5 L70 k3.53 N/mm solid21 working deflection38.5; installed 40mm at X+-145, lever ratio 0.614,https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog CK68 checked 2026-11-12: k3.53 solid21 F(55%L 1M cycles)38.5 load +-10%
+Drive,MISUMI,CLBKHM10-86,2,D10 g6 hardened low-head hinge pin with M6 retainer thread; swing-arm pivot,https://kr.misumi-ec.com/pdf/fa/2018/p1_065_2021_202108.pdf,Catalog p1_065 checked 2026-11-12: D10 L25.0-100.0 step0.1 head16 tap M6
+Caster rear,MISUMI,CLBKHM10-71,1,D10 g6 hardened low-head hinge pin; roll-beam pivot,https://kr.misumi-ec.com/pdf/fa/2018/p1_065_2021_202108.pdf,Catalog p1_065 checked 2026-11-12: D10 L25.0-100.0 step0.1 head16 tap M6
+Drive and caster rear,Standard,6900ZZ,6,Deep-groove ball bearing 10x22x6; two per pivot in 6t walls/tabs (22 H7),,Standard size; select supplier and retention
+Drive and caster rear,MISUMI,CB6-8,3,One pin retention screw per pivot,https://kr.misumi-ec.com/vona2/detail/110100141750/,Verify torque and thread engagement
+Drive and caster rear,Standard,M6 washer OD16 t1,3,Pin outboard retainer, ,Check actual washer and head dimensions
+Drive,Fabricate or MISUMI collar,Pivot spacer OD14 ID10.1 t2,4,Clamps bearing inner ring to bracket ear, ,Select catalog collar if available
+Caster rear,Fabricate or MISUMI collar,Pivot spacer tube OD14 ID10.1 L26,2,Spaces bearing inner rings from fixed tab, ,Select catalog collar if available
+Drive,Standard,M6x65 hex bolt + M6 nut + washer OD12,2,Spring guide; nut/washer under arm web = droop stop, ,Length per CAD 64.7; adjust droop with nut
+Drive,Fabricate,Bump stop tube OD9 ID6.5 L33.6,2,Inside spring on guide bolt = bump stop, ,Urethane or steel tube; cut to CAD length
+Drive,MISUMI,CB5-14,12,Pivot bracket (4) and spring hanger (2) per side,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Caster,MISUMI,CB5-14,12,Front box brackets (4 each) and rear L bracket (4),https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Caster,MISUMI,CB6-16,16,GL-65 caster plate to bracket/beam,https://kr.misumi-ec.com/vona2/detail/110100141750/,Check real caster plate stack
 Drive and caster,Standard,M5 hex nut,24,Chassis joints, ,Envelope and quantity
 Caster,Standard,M6 hex nut,16,OEM caster plate joints, ,Envelope and quantity
+Caster rear,Standard,M8 hex bolt ~30 + M8 nut,2,Roll stops at X+-100; set 1 deg gap, ,Add urethane cap if impact noise
 Drive,Motor supplier,M14x1.5 axle nut,2,Check included nut AF and actual thickness, ,Trial fit required
-Drive,Fabricate,S45C moving torque carrier,2,AF10.2 trial slot and two D14 H7 bores at Y pitch70, ,Machine both bores in one setup
-Drive,Fabricate,Steel double-supported guide yoke,2,Top bridge with 4 M5 chassis fasteners and 2 lower feet, ,Align end seats after fabrication
-Caster,Fabricate,S355 rocker and fixed clevis,4 sets,5mm rocker and 5mm pivot ears; integrated sloped stops, ,Coaxially finish hinge bores after welding; verify end contact and fatigue
-Drive,Fabricate,Retainers and stroke stops,2 sets,Drive OD18, ,Stops contact carrier housing and preserve bush end clearance
-Drive,Fabricate,Telescoping fixed spring pilot,2,OD9.5 bore6.5 length42 with M4 top attachment, ,Check guide overlap and assembled clearance
-Caster,Fabricate,Preload shim,4,0.5mm shim over integrated OD4.7 pilot, ,Adjust after six-wheel scale measurement
+Drive,Fabricate,Axle washer and 4.9mm trial spacer,2 sets,Rev09 axle stack, ,Confirm stationary shoulder
+Drive,Fabricate,S355 6t swing arm,2,Laser cut + 3 bends; two 22 H7 bearing bores; AF10.2 trial slot; spring seat hole 9, ,Ream bores after bending
+Drive,Fabricate,4.5t U pivot bracket,2,Laser cut + 2 bends; ears 10 H7 reamed together, ,No welding
+Drive,Fabricate,4.5t C spring hanger,2,Laser cut + 2 bends; spring top seat Z149, ,Shim under seat to tune drive load
+Caster front,Fabricate,4.5t box bracket,2,Laser cut + 4 bends; sets GL-65 height 83 to base Z117, ,No welding
+Caster rear,Fabricate,S355 6t roll beam,1,Laser cut + 2 bent tabs; 22 H7 bearing bores; centre window, ,Ream bores after bending
+Caster rear,Fabricate,6t L pivot bracket,1,Laser cut + 1 bend; pin hole 10 H7, ,No welding
