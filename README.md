@@ -27,4 +27,4 @@ Rev05 85부품의 순수 엔진 전환을 먼저 비교 검증했습니다. Rev0
 
 모터 정격24V/사용18–30V,4Nm/500rpm/10A,스톨11.7Nm/30A,1024라인은 수신 사양서를 유지합니다. 4.2V 완충 리튬이온7S라면29.4V로30V까지0.6V뿐입니다. **모터 사용 범위와 드라이버 허용전압은 별개**이며 회생전압·BMS·클램프를 함께 선정합니다. TiM571 최대28V에는 안정화24V를 공급합니다. [사양서 충돌·축 상세](docs/motor-datasheet-review.md)를 참고합니다.
 
-GitHub Actions는 동일한 build123d CLI로 기준 비교/검사 후 STEP과 웹 표시용 GLB를 생성합니다. Three.js 뷰어는 같은 BRep에서 내보낸 표시 파일을 읽습니다. CadQuery2.5.2 기존 환경과 고정 Rev05 스크립트 `cad/amr_layout_cadquery.py`, 기준 STEP은 복원을 위해 보존합니다.
+GitHub Actions는 동일한 build123d CLI로 기준 비교/검사 후 STEP과 웹 표시용 GLB를 생성합니다. Three.js 뷰어는 GLB를 읽고 두 LiDAR 외형에는 SICK TiM5xx 공용 STL을 표시합니다. [형상 출처와 정렬 기준](docs/vendor-cad.md). CadQuery2.5.2 기존 환경과 고정 Rev05 스크립트 `cad/amr_layout_cadquery.py`, 기준 STEP은 복원을 위해 보존합니다.

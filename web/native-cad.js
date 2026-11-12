@@ -1,12 +1,51 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {STLLoader} from 'three/addons/loaders/STLLoader.js';
 
-// Display meshes exported from the same build123d BReps as the STEP.
+async function loadLidarVisual() {
+  try {
+    const geometry = await new STLLoader().loadAsync('web/vendor/sick/sick_tim_5xx.stl');
+    geometry.computeBoundingBox();
+    if (geometry.getAttribute('position').count === 0 ||
+        !Number.isFinite(geometry.boundingBox.min.z) || geometry.boundingBox.isEmpty()) {
+      throw new Error('Empty SICK TiM5xx mesh');
+    }
+    return geometry;
+  } catch (error) {
+    console.warn('SICK TiM5xx visual unavailable; showing CAD envelopes.', error);
+    return null;
+  }
+}
+
+function addLidarVisuals(geometry, layout, groups, parts, tag) {
+  const material = new THREE.MeshStandardMaterial({color:0x657988, roughness:.72});
+  // The STL uses ROS metres (X forward, Y left, Z up); the viewer uses mm.
+  const rosToViewer = new THREE.Matrix4().set(
+    0,-1000,0,0, 0,0,1000,0, 1000,0,0,0, 0,0,0,1,
+  );
+  for (const pose of layout.lidars) {
+    const mount = new THREE.Group();
+    mount.position.set(pose.x,pose.bbox_bottom_z,pose.y);
+    mount.rotation.y = THREE.MathUtils.degToRad(pose.heading_deg);
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.name = 'SICK TiM5xx family STL';
+    mesh.applyMatrix4(rosToViewer);
+    // Seat the lowest point of the family mesh on the existing mount plate.
+    mesh.position.y = -geometry.boundingBox.min.z * 1000;
+    mount.add(mesh);
+    groups[pose.id].add(mount);
+    tag(mesh, pose.id);
+    parts[pose.id].description += ' 외형은 SICK 공식 TiM5xx 공용 STL입니다. FOV는 설계 스캔면을 사용합니다.';
+  }
+}
+
+// Display the build123d meshes with the SICK family visual on both sensor mounts.
 export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,layout}){
   const version=encodeURIComponent(layout.revision);
-  const [gltf,manifest]=await Promise.all([
+  const [gltf,manifest,lidarVisual]=await Promise.all([
     new GLTFLoader().loadAsync(`cad-output/amr_current.glb?rev=${version}`),
-    fetch(`cad-output/manifest.json?rev=${version}`).then(r=>{if(!r.ok)throw new Error('CAD manifest missing');return r.json()})
+    fetch(`cad-output/manifest.json?rev=${version}`).then(r=>{if(!r.ok)throw new Error('CAD manifest missing');return r.json()}),
+    loadLidarVisual(),
   ]);
   const suspension=part('suspension','30kg 기준 6륜 독립 서스펜션','구동륜 ±10mm: MISUMI X-SWU17-70과 양단 지지 가이드. 캐스터 ±5mm: X-SWU10.5-30과 고정 부시를 통과하는 가동 샤프트.');
   const wrapper=new THREE.Group();wrapper.scale.set(1000,1000,-1000);wrapper.add(gltf.scene);robot.add(wrapper);
@@ -38,6 +77,7 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     const name=r.name.replace(/[\[\].: /]/g,'_');
     const node=namedNodes.get(r.name)||namedNodes.get(name);
     if(!node){missing.push(r.name);continue}
+    if(lidarVisual&&r.group==='lidars'&&r.status==='drawing_envelope')continue;
     const id=groupFor(r),wheel=r.metadata?.moving_wheel;
     let parent=groups[id];
     if(r.name.startsWith('30_')||r.name.startsWith('31_'))parent=rolling[wheel];
@@ -55,6 +95,7 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
   }
   robot.remove(wrapper);
   if(missing.length)throw new Error('CAD nodes missing: '+missing.join(', '));
+  if(lidarVisual)addLidarVisuals(lidarVisual,layout,groups,parts,tag);
   parts.casterLF.description='공식 GL-65-ASF-EUS STEP 기준. 설치높이83mm(카탈로그82), 판48X×65Y/홀24X×54Y. 실물 EUS/TUN 확인 필요. 4개 캐스터에 각각 독립 스프링 지지.';
   for(const n of ['LB','RF','RB'])parts['caster'+n].description=parts.casterLF.description;
   for(const id of ['cameraLeft','cameraRight'])parts[id].description='Orbbec 공식 Astra Mini Pro 3D V0.1의 58솔리드. 2D V1.2는 M2 피치80/깊이19.92, 3D 깊이24.264. 실물 버전·어댑터 확인 필요.';
@@ -72,7 +113,7 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     if(springs[wheel])springs[wheel].pivot.scale.y=(springs[wheel].length-mm)/springs[wheel].length;
     poses[wheel]=mm;
   }
-  return {engine:'build123d',components:manifest.components.length,solids:manifest.components.reduce((n,r)=>n+r.solids,0),poses,setPose,
+  return {engine:'build123d',lidarVisual:lidarVisual?'sick_tim_5xx.stl':'drawing_envelope',components:manifest.components.length,solids:manifest.components.reduce((n,r)=>n+r.solids,0),poses,setPose,
     bounds_mm:{min:bounds.min.toArray(),max:bounds.max.toArray(),width:size.x,length:size.z,height:size.y},
     columns:manifest.components.filter(r=>r.status==='generic_profile').map(r=>r.metadata),manifest};
 }
