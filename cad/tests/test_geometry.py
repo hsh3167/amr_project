@@ -50,3 +50,17 @@ def test_individual_step_contains_geometry_after_assembly_export(tmp_path):
     assert part.label=='mount'
     assert part.is_valid and len(part.solids())==1
     assert part.solids()[0].volume==pytest.approx(6000)
+
+
+def test_misumi_spring_stack_stays_within_catalog_travel():
+    from cad.validation import catalog_suspension_report
+
+    report=catalog_suspension_report(load_design())
+    assert report['target_mass_kg']==30
+    assert report['modules']['drive']['spring_lengths_mm']==[67,57,47]
+    assert report['modules']['caster']['spring_lengths_mm']==[29.5,24.5,19.5]
+    for module in report['modules'].values():
+        assert module['forces_N'][0]>0
+        assert module['min_solid_margin_mm']>0
+        assert module['max_working_deflection_margin_mm']>0
+    assert abs(report['estimated_static_offset_mm'])<1

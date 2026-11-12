@@ -1,0 +1,24 @@
+Module,Manufacturer,Order code,Quantity,Dimensions or role,Source,Status
+Drive,MISUMI,X-SWU17-70,2,OD17 ID10.5 L70 k3.53 N/mm solid21 working deflection38.5,https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog candidate for 30 kg design
+Caster,MISUMI,X-SWU10.5-30,4,OD10.5 ID6 L30 k4.31 N/mm solid9 working deflection16.5,https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog candidate for 30 kg design
+Drive,MISUMI,PSFJW10-46-M5-N5,4,D10 g6 L46 two M5 tapped ends,https://kr.misumi-ec.com/vona2/detail/110302634470/,Configured length
+Caster,MISUMI,PSFJW8-46-M4-N4,8,D8 g6 L46 two M4 tapped ends; moving shaft with upper retainer,https://kr.misumi-ec.com/vona2/detail/110302634470/,Configured length
+Drive,MISUMI,PSFJW6-28-M3-N3,2,D6 g6 L28 moving spring guide,https://kr.misumi-ec.com/vona2/detail/110302634470/,Configured length
+Drive,MISUMI,MPBZ10-20,4,ID10 F7 OD14 m6 L20 oil-free brass,https://kr.misumi-ec.com/pdf/fa/2013/p0283.pdf,Catalog dimensions
+Caster,MISUMI,MPBZ8-10,8,ID8 F7 OD12 m6 L10 oil-free brass,https://kr.misumi-ec.com/pdf/fa/2013/p0283.pdf,Catalog dimensions
+Drive,MISUMI,CB3-10,2,Moving spring guide attachment,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Drive and caster,MISUMI,CB4-10,18,Drive pilot tube 2 and caster shaft ends 16,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Drive,MISUMI,CB5-12,4,Top spring seat to tapped extrusion ends,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Drive,MISUMI,CB5-14,8,Guide shaft at both ends,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Caster,MISUMI,CB5-16,16,Top seat to chassis,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Drive,MISUMI,CB5-18,8,Fixed steel yoke to chassis,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Caster,MISUMI,CB6-16,16,GL-65 caster plate to moving carrier,https://kr.misumi-ec.com/vona2/detail/110100141750/,Check real caster plate stack
+Drive and caster,Standard,M5 hex nut,24,Chassis joints, ,Envelope and quantity
+Caster,Standard,M6 hex nut,16,OEM caster plate joints, ,Envelope and quantity
+Drive,Motor supplier,M14x1.5 axle nut,2,Check included nut AF and actual thickness, ,Trial fit required
+Drive,Fabricate,S45C moving torque carrier,2,AF10.2 trial slot and two D14 H7 bores at Y pitch70, ,Machine both bores in one setup
+Drive,Fabricate,Steel double-supported guide yoke,2,Top bridge with 4 M5 chassis fasteners and 2 lower feet, ,Align end seats after fabrication
+Caster,Fabricate,6061-T6 moving carrier and fixed seat,4 sets,86x76 base and Ø12 H7 bores at X pitch64, ,Fit bush OD and verify plate height
+Drive and caster,Fabricate,Retainers and stroke stops,6 sets,Drive OD18 and caster droop OD15 bump OD16, ,Stops contact carrier housing and preserve bush end clearance
+Drive,Fabricate,Telescoping fixed spring pilot,2,OD9.5 bore6.5 length42 with M4 top attachment, ,Check guide overlap and assembled clearance
+Caster,Fabricate,Lower pilot and preload shim,4 sets,Guide OD4.9 and preload shim0.5, ,Adjust after six-wheel scale measurement

@@ -20,5 +20,5 @@ Electrical,Wiring connectors and harness,1,set,Buy or reuse,Current-rated batter
 Electrical,Compatible battery charger,1,ea,Company reuse if approved,Match exact cell chemistry and BMS,Required,TBD,Never use chemistry-mismatched charger
 Software,ROS2/Linux,1,set,Open source,Nav2 SLAM Toolbox and teleop,Proposed,0,Depends on compute and drivers
 Software,Interactive 3D viewer,1,set,Open source,Three.js GitHub Pages,Done,0,Illustrative not dynamic simulation
-CAD,Parametric STEP generator,1,set,Open source,CadQuery Python source,Done,0,CadQuery2.5.2; common layout.json/parts.json; datasheet motor dimensions and labeled assumptions
-Mechanical,Independent guided spring stages,6,set,Design pending,2 drive +/-10mm; 4 caster +/-5mm; guide rods/carriers/seats/stops/springs,Concept; not load-qualified,TBD,Rates/preload/damping/bushings/fasteners/fatigue and measured wheel loads TBD
+CAD,Parametric STEP generator,1,set,Open source,build123d Python source,Done,0,Common layout.json/parts.json with Rev05 CadQuery baseline preserved
+Mechanical,Independent guided spring stages,6,set,MISUMI plus fabricated brackets,30kg design target; 2 drive +/-10mm; 4 caster +/-5mm,Prototype validation pending,TBD,See suspension_misumi.csv for stock hardware and quantities

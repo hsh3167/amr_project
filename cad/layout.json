@@ -1,5 +1,5 @@
 {
-  "revision": "0.6",
+  "revision": "0.7",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
     "base_width": 390,
@@ -108,26 +108,51 @@
     "status": "Envelope reservations only; rear power bay/central low battery/front logic/side drives, hardware and harness routes TBD."
   },
   "suspension": {
-    "status": "Six independent vertical guided spring stages; concept dimensions only; mass, rates, preload, damping, fatigue and fasteners not qualified",
+    "status": "30 kg design target; six guided modules with MISUMI shafts, bushes and springs; prototype load validation pending",
+    "design_mass_kg": 30,
     "drive": {
       "travel_mm": 20,
-      "spring_od_mm": 20,
-      "wire_mm": 3,
-      "turns": 6,
+      "spring_sku": "X-SWU17-70",
+      "spring_od_mm": 17,
+      "spring_id_mm": 10.5,
+      "display_turns": 6,
       "loaded_length_mm": 57,
-      "free_length_mm_assumed": 72,
-      "rate_N_mm": null,
-      "preload_N": null
+      "free_length_mm": 70,
+      "solid_length_mm": 21,
+      "max_deflection_mm": 38.5,
+      "rate_N_mm": 3.53,
+      "shim_mm": 0,
+      "unsprung_mass_kg_estimate": 3.8,
+      "shaft_sku": "PSFJW10-46-M5-N5",
+      "shaft_d_mm": 10,
+      "shaft_length_mm": 46,
+      "shaft_tap_mm": 5,
+      "bush_sku": "MPBZ10-20",
+      "bush_id_mm": 10.013,
+      "bush_od_mm": 14,
+      "bush_length_mm": 20
     },
     "caster": {
       "travel_mm": 10,
-      "spring_od_mm": 18,
-      "wire_mm": 2.5,
-      "turns": 5,
+      "spring_sku": "X-SWU10.5-30",
+      "spring_od_mm": 10.5,
+      "spring_id_mm": 6,
+      "display_turns": 4,
       "loaded_length_mm": 25,
-      "free_length_mm_assumed": 34,
-      "rate_N_mm": null,
-      "preload_N": null
+      "free_length_mm": 30,
+      "solid_length_mm": 9,
+      "max_deflection_mm": 16.5,
+      "rate_N_mm": 4.31,
+      "shim_mm": 0.5,
+      "unsprung_mass_kg_estimate": 0.8,
+      "shaft_sku": "PSFJW8-46-M4-N4",
+      "shaft_d_mm": 8,
+      "shaft_length_mm": 46,
+      "shaft_tap_mm": 4,
+      "bush_sku": "MPBZ8-10",
+      "bush_id_mm": 8.013,
+      "bush_od_mm": 12,
+      "bush_length_mm": 10
     }
   }
 }

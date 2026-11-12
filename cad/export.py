@@ -4,11 +4,37 @@ import json
 from io import BytesIO
 import re
 import tempfile
-from build123d import Shape,export_step,export_stl,import_step,export_gltf
+from build123d import Location,Shape,Unit,export_step,export_stl,import_step
+from build123d.exporters3d import _create_xde
 from .assembly import assemble
 from .validation import metrics
 from OCP.ShapeFix import ShapeFix_ShapeTolerance
 from OCP.BRepTools import BRepTools
+from OCP.Message import Message_ProgressRange
+from OCP.RWGltf import RWGltf_CafWriter
+from OCP.TCollection import TCollection_AsciiString
+from OCP.TColStd import TColStd_IndexedDataMapOfStringString
+
+def display_glb(root,path):
+    """Tessellate the CAD assembly and merge faces by material within each part."""
+    original=root.location
+    try:
+        # Same Y-up and millimetre-to-metre convention as build123d export_gltf.
+        root.location *= Location((0,0,0),(1,0,0),-90)
+        BRepTools.Clean_s(root.wrapped)
+        root.mesh(.4,.35)
+        # Reuse build123d's named, colored assembly writer (pinned version).
+        document=_create_xde(root,Unit.MM,auto_naming=False)
+        writer=RWGltf_CafWriter(TCollection_AsciiString(str(path)),True)
+        writer.SetParallel(True)
+        writer.SetMergeFaces(True)
+        # CAD materials are solid colors and have no UV-mapped textures.
+        writer.SetForcedUVExport(False)
+        if not writer.Perform(document,TColStd_IndexedDataMapOfStringString(),Message_ProgressRange()):
+            raise ValueError('GLB export failed')
+    finally:
+        BRepTools.Clean_s(root.wrapped)
+        root.location=original
 
 def normalize_oem_roundtrip(root):
     """Explicit import normalization for the supplied OEM camera's STEP p-curves.
@@ -74,9 +100,7 @@ def write(records,folder,formats=('step',),individual=False,name='amr_current'):
         elif fmt=='glb':
             with tempfile.TemporaryDirectory() as temp:
                 tmp=Path(temp)/'amr.glb'
-                # Display tessellation is independent of STEP and printable STL.
-                BRepTools.Clean_s(root.wrapped)
-                if not export_gltf(root,tmp,binary=True,linear_deflection=.4,angular_deflection=.35):raise ValueError('GLB export failed')
+                display_glb(root,tmp)
                 path.write_bytes(tmp.read_bytes())
         else:raise ValueError('Unsupported format: '+fmt)
         files.append(path.name)

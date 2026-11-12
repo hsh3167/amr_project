@@ -4,7 +4,12 @@ def make(d):
     p=d.p;w=p['base_width']/2;l=p['base_length']/2;inner=w-50;well=99
     outline=[(-w,-l),(w,-l),(w,-well),(inner,-well),(inner,well),(w,well),
              (w,l),(-w,l),(-w,well),(-inner,well),(-inner,-well),(-w,-well)]
-    r=[PartRecord('01_lower_Al_plate_CONCEPT','chassis',polygon_plate(outline,p['base_thickness'],p['base_bottom_z']),(.60,.71,.78))]
+    base=polygon_plate(outline,p['base_thickness'],p['base_bottom_z'])
+    if d.variant!='baseline':
+        from .suspension import chassis_mount_holes
+        for x,y,diameter in chassis_mount_holes(d):
+            base=drilled(base,[(x,y)],diameter,p['base_bottom_z'],p['base_thickness'])
+    r=[PartRecord('01_lower_Al_plate_CONCEPT','chassis',base,(.60,.71,.78))]
     if d.variant=='baseline':
         for y in (-215,215):r.append(PartRecord('04_base_crossmember_'+str(y),'chassis',box(320,18,12,0,y,111),(.61,.70,.79)))
     top=box(p['top_width'],p['top_length'],p['top_thickness'],0,0,p['top_bottom_z']+p['top_thickness']/2)

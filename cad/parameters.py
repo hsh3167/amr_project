@@ -35,11 +35,18 @@ def validate_parameters(d):
     if d.variant!='baseline':
         for kind,maximum in (('drive',20),('caster',10)):
             q=d.layout['suspension'][kind]
-            for key in ('travel_mm','spring_od_mm','wire_mm','turns','loaded_length_mm','free_length_mm_assumed'):
+            for key in ('travel_mm','spring_od_mm','spring_id_mm','display_turns','loaded_length_mm','free_length_mm',
+                        'solid_length_mm','max_deflection_mm','rate_N_mm','shaft_d_mm','shaft_length_mm',
+                        'bush_id_mm','bush_od_mm','bush_length_mm'):
                 if not isinstance(q[key],(int,float)) or not math.isfinite(q[key]) or q[key]<=0:raise ValueError('Invalid suspension parameter: '+key)
             if q['travel_mm']>maximum:raise ValueError('Frame redesign required for greater '+kind+' travel')
-            if q['spring_od_mm']<=2*q['wire_mm'] or q['loaded_length_mm']-q['travel_mm']/2<=(q['turns']+1)*q['wire_mm']:
-                raise ValueError('Concept spring geometry has insufficient clearance: '+kind)
+            if q['shim_mm']<0 or q['spring_od_mm']<=q['spring_id_mm'] or not q['shaft_d_mm']<q['bush_id_mm']<q['bush_od_mm']:
+                raise ValueError('Spring or guide fit is invalid: '+kind)
+            installed=q['loaded_length_mm']-q['shim_mm']
+            half=q['travel_mm']/2
+            if (installed+half>q['free_length_mm'] or installed-half<=q['solid_length_mm']
+                    or q['free_length_mm']-(installed-half)>q['max_deflection_mm']):
+                raise ValueError('Catalog spring travel is exceeded: '+kind)
 
 def set_parameter(key, value):
     path=ROOT/"cad/layout.json"
