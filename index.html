@@ -17,7 +17,7 @@
     aside{background:#0c1523;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#37445a transparent;padding:23px 19px}
     .left{border-right:1px solid var(--line)}.right{border-left:1px solid var(--line)}.eyebrow{color:#6e92c4;font-weight:700;letter-spacing:.17em;font-size:10px;text-transform:uppercase;margin:0 0 9px}
     h1{font-size:22px;margin:0 0 10px;letter-spacing:-.035em;line-height:1.35}h2{font-size:14px;margin:0 0 13px;color:#d8e7ff}p{margin:0}.intro{font-size:12px;line-height:1.75;color:var(--muted);margin-bottom:24px}
-    .section{padding:19px 0;border-top:1px solid var(--line)}.section:first-of-type{border-top:0}.mini-label{font-size:11px;color:#94a9c5;display:block;margin-bottom:9px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+    .section{padding:19px 0;border-top:1px solid var(--line)}.section:first-of-type{border-top:0}.mini-label{font-size:11px;color:#94a9c5;display:block;margin-bottom:9px}.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
     button.control{border:1px solid #2e405b;background:#132137;border-radius:8px;color:#b8cce9;font-size:12px;padding:10px 7px;transition:background .15s,border .15s}
     button.control:hover,button.control:focus-visible{border-color:#6d96c6;outline:none}button.control.active{color:#fff;border-color:#4e8ceb;background:#18395f}
     .toggle{display:flex;align-items:center;gap:9px;justify-content:space-between;font-size:12px;color:#c6d5eb;padding:7px 0}.toggle span:first-child{display:flex;align-items:center;gap:8px}
@@ -65,7 +65,7 @@
       <p class="intro">선정 부품 기반 6륜 AMR. ZLLG65ASM250-N V2.02 Ø180 고무타이어 2개, GL-65-ASF 캐스터 4개, SICK TiM571 2개, Orbbec Astra Mini Pro 2개, 판재+프로파일 구조.</p>
       <div class="section">
         <h2>카메라 시점</h2>
-        <div class="tabs"><button class="control active" data-view="iso">3D</button><button class="control" data-view="top">TOP</button><button class="control" data-view="front">FRONT</button></div>
+        <div class="tabs"><button class="control active" data-view="iso">3D</button><button class="control" data-view="top">상부</button><button class="control" data-view="front">전면</button><button class="control" data-view="bottom">하부</button></div>
         <p class="hint" style="margin-top:10px">마우스 드래그: 회전 · 휠: 확대 · 우클릭: 이동</p>
       </div>
       <div class="section">
@@ -187,6 +187,7 @@ const orbit=new OrbitControls(camera,canvas);orbit.target.set(0,150,0);orbit.ena
 scene.add(new THREE.HemisphereLight(0xb9d8ff,0x31435d,2.0));
 const key=new THREE.DirectionalLight(0xf3f9ff,3);key.position.set(-430,820,390);scene.add(key);
 const fill=new THREE.DirectionalLight(0x549ce8,1.2);fill.position.set(470,300,-600);scene.add(fill);
+const undersideLight=new THREE.DirectionalLight(0xe6efff,2.5);undersideLight.position.set(-240,-560,400);undersideLight.visible=false;scene.add(undersideLight);
 const floor=new THREE.Mesh(new THREE.PlaneGeometry(6000,6000),new THREE.MeshStandardMaterial({color:0x0d1a29,roughness:1,transparent:true,opacity:.5}));floor.rotation.x=-Math.PI/2;floor.position.y=-3;scene.add(floor);
 const grid=new THREE.GridHelper(2600,52,0x3f6486,0x22364e);grid.position.y=-1;grid.material.transparent=true;grid.material.opacity=.34;scene.add(grid);
 const robot=new THREE.Group();scene.add(robot);
@@ -261,7 +262,18 @@ $('showLabels').addEventListener('change',requestRender);
 $('explode').addEventListener('input',e=>{explode=Number(e.target.value)/100;$('explodeVal').textContent=e.target.value+'%';Object.values(groups).forEach(g=>g.position.copy(g.userData.explode).multiplyScalar(explode));applyVisibility()});
 function updateBattery(){const ah=Number($('cellCapacity').value);$('estimatedAh').textContent=Number.isFinite(ah)&&ah>=1&&ah<=6?(9*ah).toFixed(1)+' Ah':'입력 확인';$('estimatedWh').textContent=Number.isFinite(ah)&&ah>=1&&ah<=6?Math.round(7*3.6*9*ah)+' Wh':'—'}
 $('cellCapacity').addEventListener('input',updateBattery);
-function setView(view){const d={iso:[860,740,980],top:[0,1600,1],front:[0,260,1250]};camera.position.set(...d[view]);orbit.target.set(0,155,0);orbit.update();document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));requestRender()}
+function setView(view){
+ const views={iso:[860,740,980],top:[0,1600,1],front:[0,260,1250],bottom:[440,-445,620]};
+ const fromBelow=view==='bottom';
+ floor.visible=grid.visible=!fromBelow;
+ undersideLight.visible=fromBelow;
+ orbit.maxPolarAngle=fromBelow?Math.PI-.05:Math.PI/2-.015;
+ camera.position.set(...views[view]);
+ orbit.target.set(0,fromBelow?80:155,0);
+ orbit.update();
+ document.querySelectorAll('[data-view]').forEach(button=>button.classList.toggle('active',button.dataset.view===view));
+ requestRender();
+}
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 function setMotion(value){
  motion=value;
