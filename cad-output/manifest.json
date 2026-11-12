@@ -22,7 +22,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 365
+      "solids": 357
     }
   ],
   "components": [
@@ -31,7 +31,7 @@
       "group": "chassis",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 736810.2628630982,
+      "volume_mm3": 745319.2037334933,
       "bounds_mm": [
         [
           -195.0,
@@ -47,9 +47,9 @@
         ]
       ],
       "center_mm": [
-        5.339874155092661e-15,
-        9.233069505338212e-16,
-        118.00000000000018
+        -7.143492288282042e-15,
+        5.344806324338118e-15,
+        118.00000000000006
       ],
       "solids": 1
     },
@@ -69,14 +69,14 @@
           275.0
         ],
         [
-          303.0,
-          307.0
+          283.0,
+          287.0
         ]
       ],
       "center_mm": [
         1.3083557498892529e-14,
         -2.7223734979615162e-15,
-        304.99999999999983
+        285.0
       ],
       "solids": 1
     },
@@ -85,7 +85,7 @@
       "group": "payload_interface",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 120124.99999999999,
+      "volume_mm3": 119016.64611181353,
       "bounds_mm": [
         [
           -77.5,
@@ -96,14 +96,14 @@
           77.5
         ],
         [
-          296.5,
-          301.5
+          278.0,
+          283.0
         ]
       ],
       "center_mm": [
-        1.4210854715202004e-14,
-        1.4210854715202004e-14,
-        299.0
+        -3.576336036472139e-15,
+        -2.4453579736561635e-16,
+        280.5
       ],
       "solids": 1
     },
@@ -113,10 +113,10 @@
       "status": "generic_profile",
       "metadata": {
         "material": "Aluminum extrusion",
-        "length_mm": 183,
+        "length_mm": 163,
         "section_mm": 20
       },
-      "volume_mm3": 43580.64048077343,
+      "volume_mm3": 38817.72895282004,
       "bounds_mm": [
         [
           -156.0,
@@ -128,13 +128,13 @@
         ],
         [
           120.0,
-          303.0
+          283.0
         ]
       ],
       "center_mm": [
         -146.0,
         -208.0,
-        211.5
+        201.5
       ],
       "solids": 1
     },
@@ -181,14 +181,14 @@
           -192.0
         ],
         [
-          299.0,
-          303.0
+          279.0,
+          283.0
         ]
       ],
       "center_mm": [
         -146.0,
         -208.0,
-        301.0
+        281.0
       ],
       "solids": 1
     },
@@ -198,10 +198,10 @@
       "status": "generic_profile",
       "metadata": {
         "material": "Aluminum extrusion",
-        "length_mm": 183,
+        "length_mm": 163,
         "section_mm": 20
       },
-      "volume_mm3": 43580.64048077343,
+      "volume_mm3": 38817.72895282004,
       "bounds_mm": [
         [
           -156.0,
@@ -213,13 +213,13 @@
         ],
         [
           120.0,
-          303.0
+          283.0
         ]
       ],
       "center_mm": [
         -146.0,
         208.0,
-        211.5
+        201.5
       ],
       "solids": 1
     },
@@ -266,14 +266,14 @@
           224.0
         ],
         [
-          299.0,
-          303.0
+          279.0,
+          283.0
         ]
       ],
       "center_mm": [
         -146.0,
         208.0,
-        301.0
+        281.0
       ],
       "solids": 1
     },
@@ -283,10 +283,10 @@
       "status": "generic_profile",
       "metadata": {
         "material": "Aluminum extrusion",
-        "length_mm": 183,
+        "length_mm": 163,
         "section_mm": 20
       },
-      "volume_mm3": 43580.64048077343,
+      "volume_mm3": 38817.72895282004,
       "bounds_mm": [
         [
           136.0,
@@ -298,13 +298,13 @@
         ],
         [
           120.0,
-          303.0
+          283.0
         ]
       ],
       "center_mm": [
         146.0,
         -208.0,
-        211.5
+        201.5
       ],
       "solids": 1
     },
@@ -351,14 +351,14 @@
           -192.0
         ],
         [
-          299.0,
-          303.0
+          279.0,
+          283.0
         ]
       ],
       "center_mm": [
         146.0,
         -208.0,
-        301.0
+        281.0
       ],
       "solids": 1
     },
@@ -368,10 +368,10 @@
       "status": "generic_profile",
       "metadata": {
         "material": "Aluminum extrusion",
-        "length_mm": 183,
+        "length_mm": 163,
         "section_mm": 20
       },
-      "volume_mm3": 43580.64048077343,
+      "volume_mm3": 38817.72895282004,
       "bounds_mm": [
         [
           136.0,
@@ -383,13 +383,13 @@
         ],
         [
           120.0,
-          303.0
+          283.0
         ]
       ],
       "center_mm": [
         146.0,
         208.0,
-        211.5
+        201.5
       ],
       "solids": 1
     },
@@ -436,14 +436,14 @@
           224.0
         ],
         [
-          299.0,
-          303.0
+          279.0,
+          283.0
         ]
       ],
       "center_mm": [
         146.0,
         208.0,
-        301.0
+        281.0
       ],
       "solids": 1
     },
@@ -1441,26 +1441,26 @@
         "source": "AstraMiniPro_3D_V0.1_20221012.stp",
         "source_solids": 58,
         "placement_repair": {
-          "cache_key": "74dba519c5be8be23bc2",
+          "cache_key": "46f48284e9b11270775e",
           "repairs": [],
           "source_preserved": true,
           "pose": [
             -1,
             90,
             278,
-            275,
+            267,
             10,
             15
           ],
           "source_solid_volume_mm3": 13831.14760859772,
-          "placed_solid_volume_mm3": 13831.147608597721,
+          "placed_solid_volume_mm3": 13831.147608597723,
           "minimum_topology_tolerance_mm": 1e-05,
           "open_reference_shells_excluded": 3
         },
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.147608597721,
+      "volume_mm3": 13831.147608597723,
       "bounds_mm": [
         [
           -130.00381821959914,
@@ -1471,14 +1471,14 @@
           294.34032240046406
         ],
         [
-          264.5715021691329,
-          286.67554934756686
+          256.5715021691329,
+          278.67554934756686
         ]
       ],
       "center_mm": [
-        -89.87498357188932,
-        273.6033524383695,
-        275.41376053382555
+        -89.87498357188935,
+        273.6033524383707,
+        267.41376053382584
       ],
       "solids": 58
     },
@@ -1498,14 +1498,14 @@
           281.0
         ],
         [
-          260.0,
-          263.0
+          252.0,
+          255.0
         ]
       ],
       "center_mm": [
         -90.0,
         256.0,
-        261.5
+        253.5
       ],
       "solids": 1
     },
@@ -1515,10 +1515,10 @@
       "status": "generic_profile",
       "metadata": {
         "material": "Aluminum extrusion",
-        "length_mm": 40,
+        "length_mm": 28,
         "section_mm": 20
       },
-      "volume_mm3": 9525.82305590676,
+      "volume_mm3": 6668.076139134731,
       "bounds_mm": [
         [
           -100.0,
@@ -1529,14 +1529,14 @@
           245.0
         ],
         [
-          263.0,
-          303.0
+          255.0,
+          283.0
         ]
       ],
       "center_mm": [
         -90.0,
         235.0,
-        283.0
+        269.0
       ],
       "solids": 1
     },
@@ -1548,26 +1548,26 @@
         "source": "AstraMiniPro_3D_V0.1_20221012.stp",
         "source_solids": 58,
         "placement_repair": {
-          "cache_key": "479afbcea2e223e76948",
+          "cache_key": "8c7591099c02cee12123",
           "repairs": [],
           "source_preserved": true,
           "pose": [
             1,
             90,
             278,
-            275,
+            267,
             10,
             15
           ],
           "source_solid_volume_mm3": 13831.14760859772,
-          "placed_solid_volume_mm3": 13831.147608597716,
+          "placed_solid_volume_mm3": 13831.14760859772,
           "minimum_topology_tolerance_mm": 1e-05,
           "open_reference_shells_excluded": 3
         },
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.147608597716,
+      "volume_mm3": 13831.14760859772,
       "bounds_mm": [
         [
           46.11607497537959,
@@ -1578,14 +1578,14 @@
           294.60993394730303
         ],
         [
-          264.5715021691329,
-          286.67554934756686
+          256.5715021691329,
+          278.67554934756686
         ]
       ],
       "center_mm": [
-        87.9099436218196,
-        274.12988330608766,
-        275.41376053382623
+        87.9099436218197,
+        274.1298833060874,
+        267.4137605338268
       ],
       "solids": 58
     },
@@ -1605,14 +1605,14 @@
           281.0
         ],
         [
-          260.0,
-          263.0
+          252.0,
+          255.0
         ]
       ],
       "center_mm": [
         90.0,
         256.0,
-        261.5
+        253.5
       ],
       "solids": 1
     },
@@ -1622,10 +1622,10 @@
       "status": "generic_profile",
       "metadata": {
         "material": "Aluminum extrusion",
-        "length_mm": 40,
+        "length_mm": 28,
         "section_mm": 20
       },
-      "volume_mm3": 9525.82305590676,
+      "volume_mm3": 6668.076139134731,
       "bounds_mm": [
         [
           80.0,
@@ -1636,14 +1636,14 @@
           245.0
         ],
         [
-          263.0,
-          303.0
+          255.0,
+          283.0
         ]
       ],
       "center_mm": [
         90.0,
         235.0,
-        283.0
+        269.0
       ],
       "solids": 1
     },
@@ -1654,371 +1654,187 @@
       "metadata": {
         "wheel": "LB",
         "moving_wheel": "LB",
-        "material": "6061-T6"
+        "material": "S355 steel, plate and flange"
       },
-      "volume_mm3": 25469.37439356814,
+      "volume_mm3": 30694.522639862545,
       "bounds_mm": [
         [
-          -181.0,
-          -95.0
+          -168.0,
+          -108.0
         ],
         [
-          -253.0,
-          -177.0
+          -251.0,
+          -151.0
         ],
         [
-          83.0,
-          87.0
+          65.0,
+          105.0
         ]
       ],
       "center_mm": [
-        -137.99999999999991,
-        -215.09991176108548,
-        84.99999999999997
+        -138.00000000000003,
+        -189.5434159568778,
+        85.0
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_fixed_seat_12H7_LB",
+      "name": "80_caster_fixed_bracket_with_stops_LB",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": null,
-        "material": "6061-T6 with replaceable press-fit bushes",
+        "material": "S355 steel",
         "pilot_d_mm": 4.9
       },
-      "volume_mm3": 34281.10196391598,
+      "volume_mm3": 57947.82170588622,
       "bounds_mm": [
         [
-          -181.0,
-          -95.0
+          -175.0,
+          -101.0
         ],
         [
           -253.0,
-          -177.0
+          -133.0
         ],
         [
-          92.0,
-          128.0
+          58.0,
+          116.0
         ]
       ],
       "center_mm": [
-        -137.99999999999994,
-        -210.11895772511556,
-        112.70772522526994
+        -138.00000000000006,
+        -174.47720105970433,
+        104.21946126730093
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_guide_1_LB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": "LB",
-        "sku": "PSFJW8-46-M4-N4"
-      },
-      "volume_mm3": 2060.884780754903,
-      "bounds_mm": [
-        [
-          -174.0,
-          -166.0
-        ],
-        [
-          -199.0,
-          -191.0
-        ],
-        [
-          87.0,
-          133.0
-        ]
-      ],
-      "center_mm": [
-        -170.00000000000003,
-        -195.0,
-        109.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bushing_1_LB",
+      "name": "80_caster_wide_rail_LB",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": null,
-        "sku": "MPBZ8-10",
-        "housing_fit": "12 H7; bore F7; shaft g6"
+        "sku": "SSEBWML12-54"
       },
-      "volume_mm3": 626.6835752151961,
+      "volume_mm3": 6977.8042300495135,
       "bounds_mm": [
         [
-          -176.0,
-          -164.0
+          -147.0,
+          -129.0
         ],
         [
-          -201.0,
-          -189.0
+          -146.5,
+          -139.0
         ],
         [
-          117.0,
-          127.0
+          58.0,
+          112.0
         ]
       ],
       "center_mm": [
-        -170.0,
-        -195.0,
-        121.99999999999997
+        -138.0,
+        -142.7139115289227,
+        85.0
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_droop_retainer_1_LB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": "LB"
-      },
-      "volume_mm3": 484.52783496315396,
-      "bounds_mm": [
-        [
-          -177.5,
-          -162.5
-        ],
-        [
-          -202.5,
-          -187.5
-        ],
-        [
-          133.0,
-          136.0
-        ]
-      ],
-      "center_mm": [
-        -170.00000000000003,
-        -194.99999999999997,
-        134.5
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_upper_bolt_1_LB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": "LB",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.6017461694917,
-      "bounds_mm": [
-        [
-          -173.5,
-          -166.5
-        ],
-        [
-          -198.5,
-          -191.5
-        ],
-        [
-          126.0,
-          140.0
-        ]
-      ],
-      "center_mm": [
-        -170.0,
-        -194.99999999999997,
-        134.85393258426964
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_lower_bolt_1_LB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": "LB",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.6017461694917,
-      "bounds_mm": [
-        [
-          -173.5,
-          -166.5
-        ],
-        [
-          -198.5,
-          -191.5
-        ],
-        [
-          79.0,
-          93.0
-        ]
-      ],
-      "center_mm": [
-        -170.0,
-        -194.99999999999997,
-        84.14606741573033
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_2_LB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": "LB",
-        "sku": "PSFJW8-46-M4-N4"
-      },
-      "volume_mm3": 2060.884780754903,
-      "bounds_mm": [
-        [
-          -110.0,
-          -102.0
-        ],
-        [
-          -199.0,
-          -191.0
-        ],
-        [
-          87.0,
-          133.0
-        ]
-      ],
-      "center_mm": [
-        -105.99999999999999,
-        -195.0,
-        109.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bushing_2_LB",
+      "name": "80_caster_rail_bolts_LB",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": null,
-        "sku": "MPBZ8-10",
-        "housing_fit": "12 H7; bore F7; shaft g6"
+        "sku": "CB3-8",
+        "quantity": 2
       },
-      "volume_mm3": 626.6835752151958,
+      "volume_mm3": 255.64710218586944,
       "bounds_mm": [
         [
-          -112.0,
-          -100.0
+          -140.75,
+          -135.25
         ],
         [
-          -201.0,
-          -189.0
+          -145.0,
+          -134.0
         ],
         [
-          117.0,
-          127.0
+          67.25,
+          102.75
         ]
       ],
       "center_mm": [
-        -105.99999999999997,
-        -194.99999999999994,
-        121.99999999999997
+        -138.0,
+        -141.0668202764977,
+        85.00000000000001
       ],
-      "solids": 1
+      "solids": 2
     },
     {
-      "name": "80_caster_droop_retainer_2_LB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": "LB"
-      },
-      "volume_mm3": 484.5278349631538,
-      "bounds_mm": [
-        [
-          -113.5,
-          -98.5
-        ],
-        [
-          -202.5,
-          -187.5
-        ],
-        [
-          133.0,
-          136.0
-        ]
-      ],
-      "center_mm": [
-        -106.0,
-        -195.0,
-        134.50000000000003
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_upper_bolt_2_LB",
+      "name": "80_caster_wide_block_LB",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": "LB",
-        "sku": "CB4-10"
+        "sku": "SSEBWML12-54"
       },
-      "volume_mm3": 279.60174616949155,
+      "volume_mm3": 12194.432587712827,
       "bounds_mm": [
         [
-          -109.5,
-          -102.5
+          -158.0,
+          -118.0
         ],
         [
-          -198.5,
-          -191.5
+          -151.0,
+          -139.5
         ],
         [
-          126.0,
-          140.0
+          66.0,
+          104.0
         ]
       ],
       "center_mm": [
-        -106.0,
-        -195.00000000000003,
-        134.85393258426967
+        -138.00000000000006,
+        -146.07060414357858,
+        85.00000000000001
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_guide_lower_bolt_2_LB",
+      "name": "80_caster_block_bolts_LB",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": "LB",
-        "sku": "CB4-10"
+        "sku": "CB4-10",
+        "quantity": 4
       },
-      "volume_mm3": 279.60174616949155,
+      "volume_mm3": 1118.4069846779664,
       "bounds_mm": [
         [
-          -109.5,
-          -102.5
+          -158.0,
+          -118.0
         ],
         [
-          -198.5,
-          -191.5
+          -160.0,
+          -146.0
         ],
         [
-          79.0,
-          93.0
+          75.5,
+          94.5
         ]
       ],
       "center_mm": [
-        -106.0,
-        -195.00000000000003,
-        84.14606741573033
+        -138.0,
+        -154.85393258426961,
+        84.99999999999997
       ],
-      "solids": 1
+      "solids": 4
     },
     {
       "name": "80_caster_frame_bolts_LB",
@@ -2033,12 +1849,12 @@
       "volume_mm3": 2391.5374075452296,
       "bounds_mm": [
         [
-          -164.25,
-          -111.75
+          -169.25,
+          -106.75
         ],
         [
           -248.25,
-          -181.75
+          -142.75
         ],
         [
           104.0,
@@ -2046,9 +1862,9 @@
         ]
       ],
       "center_mm": [
-        -138.00000000000003,
-        -215.0,
-        116.98275862068968
+        -138.0,
+        -195.5,
+        116.98275862068962
       ],
       "solids": 4
     },
@@ -2064,12 +1880,12 @@
       "volume_mm3": 572.6507481162861,
       "bounds_mm": [
         [
-          -164.618802153517,
-          -111.38119784648299
+          -169.618802153517,
+          -106.38119784648299
         ],
         [
           -248.0,
-          -182.0
+          -143.0
         ],
         [
           108.0,
@@ -2077,9 +1893,9 @@
         ]
       ],
       "center_mm": [
-        -137.99999999999991,
-        -214.99999999999991,
-        110.00000000000001
+        -138.00000000000009,
+        -195.5,
+        110.0
       ],
       "solids": 4
     },
@@ -2255,371 +2071,187 @@
       "metadata": {
         "wheel": "LF",
         "moving_wheel": "LF",
-        "material": "6061-T6"
+        "material": "S355 steel, plate and flange"
       },
-      "volume_mm3": 25469.37439356814,
+      "volume_mm3": 30694.522639862553,
       "bounds_mm": [
         [
-          -181.0,
-          -95.0
+          -168.0,
+          -108.0
         ],
         [
-          177.0,
-          253.0
+          151.0,
+          251.0
         ],
         [
-          83.0,
-          87.0
+          65.0,
+          105.0
         ]
       ],
       "center_mm": [
-        -137.99999999999994,
-        215.0999117610855,
-        84.99999999999996
+        -138.00000000000003,
+        189.54341595687774,
+        85.0
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_fixed_seat_12H7_LF",
+      "name": "80_caster_fixed_bracket_with_stops_LF",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LF",
         "moving_wheel": null,
-        "material": "6061-T6 with replaceable press-fit bushes",
+        "material": "S355 steel",
         "pilot_d_mm": 4.9
       },
-      "volume_mm3": 34281.10196391597,
+      "volume_mm3": 57947.821705886236,
       "bounds_mm": [
         [
-          -181.0,
-          -95.0
+          -175.0,
+          -101.0
         ],
         [
-          177.0,
+          133.0,
           253.0
         ],
         [
-          92.0,
-          128.0
+          58.0,
+          116.0
         ]
       ],
       "center_mm": [
-        -138.0000000000001,
-        210.11895772511565,
-        112.70772522526997
+        -138.0,
+        174.47720105970433,
+        104.21946126730096
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_guide_1_LF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": "LF",
-        "sku": "PSFJW8-46-M4-N4"
-      },
-      "volume_mm3": 2060.884780754903,
-      "bounds_mm": [
-        [
-          -174.0,
-          -166.0
-        ],
-        [
-          191.0,
-          199.0
-        ],
-        [
-          87.0,
-          133.0
-        ]
-      ],
-      "center_mm": [
-        -170.00000000000003,
-        195.0,
-        109.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bushing_1_LF",
+      "name": "80_caster_wide_rail_LF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LF",
         "moving_wheel": null,
-        "sku": "MPBZ8-10",
-        "housing_fit": "12 H7; bore F7; shaft g6"
+        "sku": "SSEBWML12-54"
       },
-      "volume_mm3": 626.6835752151961,
+      "volume_mm3": 6977.8042300495135,
       "bounds_mm": [
         [
-          -176.0,
-          -164.0
+          -147.0,
+          -129.0
         ],
         [
-          189.0,
-          201.0
+          139.0,
+          146.5
         ],
         [
-          117.0,
-          127.0
+          58.0,
+          112.0
         ]
       ],
       "center_mm": [
-        -170.0,
-        195.0,
-        121.99999999999997
+        -138.00000000000003,
+        142.71391152892272,
+        85.0
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_droop_retainer_1_LF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": "LF"
-      },
-      "volume_mm3": 484.52783496315396,
-      "bounds_mm": [
-        [
-          -177.5,
-          -162.5
-        ],
-        [
-          187.5,
-          202.5
-        ],
-        [
-          133.0,
-          136.0
-        ]
-      ],
-      "center_mm": [
-        -170.00000000000003,
-        194.99999999999997,
-        134.5
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_upper_bolt_1_LF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": "LF",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.6017461694917,
-      "bounds_mm": [
-        [
-          -173.5,
-          -166.5
-        ],
-        [
-          191.5,
-          198.5
-        ],
-        [
-          126.0,
-          140.0
-        ]
-      ],
-      "center_mm": [
-        -170.0,
-        194.99999999999997,
-        134.85393258426964
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_lower_bolt_1_LF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": "LF",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.6017461694917,
-      "bounds_mm": [
-        [
-          -173.5,
-          -166.5
-        ],
-        [
-          191.5,
-          198.5
-        ],
-        [
-          79.0,
-          93.0
-        ]
-      ],
-      "center_mm": [
-        -170.0,
-        194.99999999999997,
-        84.14606741573033
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_2_LF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": "LF",
-        "sku": "PSFJW8-46-M4-N4"
-      },
-      "volume_mm3": 2060.884780754903,
-      "bounds_mm": [
-        [
-          -110.0,
-          -102.0
-        ],
-        [
-          191.0,
-          199.0
-        ],
-        [
-          87.0,
-          133.0
-        ]
-      ],
-      "center_mm": [
-        -105.99999999999999,
-        195.0,
-        109.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bushing_2_LF",
+      "name": "80_caster_rail_bolts_LF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LF",
         "moving_wheel": null,
-        "sku": "MPBZ8-10",
-        "housing_fit": "12 H7; bore F7; shaft g6"
+        "sku": "CB3-8",
+        "quantity": 2
       },
-      "volume_mm3": 626.6835752151958,
+      "volume_mm3": 255.64710218586944,
       "bounds_mm": [
         [
-          -112.0,
-          -100.0
+          -140.75,
+          -135.25
         ],
         [
-          189.0,
-          201.0
+          134.0,
+          145.0
         ],
         [
-          117.0,
-          127.0
+          67.25,
+          102.75
         ]
       ],
       "center_mm": [
-        -105.99999999999997,
-        194.99999999999994,
-        121.99999999999997
+        -138.00000000000003,
+        141.06682027649768,
+        85.00000000000001
       ],
-      "solids": 1
+      "solids": 2
     },
     {
-      "name": "80_caster_droop_retainer_2_LF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": "LF"
-      },
-      "volume_mm3": 484.5278349631538,
-      "bounds_mm": [
-        [
-          -113.5,
-          -98.5
-        ],
-        [
-          187.5,
-          202.5
-        ],
-        [
-          133.0,
-          136.0
-        ]
-      ],
-      "center_mm": [
-        -106.0,
-        195.0,
-        134.50000000000003
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_upper_bolt_2_LF",
+      "name": "80_caster_wide_block_LF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LF",
         "moving_wheel": "LF",
-        "sku": "CB4-10"
+        "sku": "SSEBWML12-54"
       },
-      "volume_mm3": 279.60174616949155,
+      "volume_mm3": 12194.432587712818,
       "bounds_mm": [
         [
-          -109.5,
-          -102.5
+          -158.0,
+          -118.0
         ],
         [
-          191.5,
-          198.5
+          139.5,
+          151.0
         ],
         [
-          126.0,
-          140.0
+          66.0,
+          104.0
         ]
       ],
       "center_mm": [
-        -106.0,
-        195.00000000000003,
-        134.85393258426967
+        -137.99999999999997,
+        146.07060414357846,
+        85.0
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_guide_lower_bolt_2_LF",
+      "name": "80_caster_block_bolts_LF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LF",
         "moving_wheel": "LF",
-        "sku": "CB4-10"
+        "sku": "CB4-10",
+        "quantity": 4
       },
-      "volume_mm3": 279.60174616949155,
+      "volume_mm3": 1118.4069846779664,
       "bounds_mm": [
         [
-          -109.5,
-          -102.5
+          -158.0,
+          -118.0
         ],
         [
-          191.5,
-          198.5
+          146.0,
+          160.0
         ],
         [
-          79.0,
-          93.0
+          75.5,
+          94.5
         ]
       ],
       "center_mm": [
-        -106.0,
-        195.00000000000003,
-        84.14606741573033
+        -138.0,
+        154.85393258426964,
+        84.99999999999997
       ],
-      "solids": 1
+      "solids": 4
     },
     {
       "name": "80_caster_frame_bolts_LF",
@@ -2634,11 +2266,11 @@
       "volume_mm3": 2391.5374075452296,
       "bounds_mm": [
         [
-          -164.25,
-          -111.75
+          -169.25,
+          -106.75
         ],
         [
-          181.75,
+          142.75,
           248.25
         ],
         [
@@ -2648,8 +2280,8 @@
       ],
       "center_mm": [
         -138.00000000000003,
-        215.00000000000003,
-        116.98275862068968
+        195.49999999999994,
+        116.98275862068964
       ],
       "solids": 4
     },
@@ -2665,11 +2297,11 @@
       "volume_mm3": 572.6507481162861,
       "bounds_mm": [
         [
-          -164.618802153517,
-          -111.38119784648299
+          -169.618802153517,
+          -106.38119784648299
         ],
         [
-          182.0,
+          143.0,
           248.0
         ],
         [
@@ -2678,8 +2310,8 @@
         ]
       ],
       "center_mm": [
-        -137.99999999999991,
-        215.0,
+        -137.99999999999994,
+        195.50000000000003,
         110.00000000000001
       ],
       "solids": 4
@@ -2856,371 +2488,187 @@
       "metadata": {
         "wheel": "RB",
         "moving_wheel": "RB",
-        "material": "6061-T6"
+        "material": "S355 steel, plate and flange"
       },
-      "volume_mm3": 25469.37439356814,
+      "volume_mm3": 30694.522639862545,
       "bounds_mm": [
         [
-          95.0,
-          181.0
+          108.0,
+          168.0
+        ],
+        [
+          -251.0,
+          -151.0
+        ],
+        [
+          65.0,
+          105.0
+        ]
+      ],
+      "center_mm": [
+        138.00000000000003,
+        -189.5434159568778,
+        85.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_fixed_bracket_with_stops_RB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "material": "S355 steel",
+        "pilot_d_mm": 4.9
+      },
+      "volume_mm3": 57947.82170588622,
+      "bounds_mm": [
+        [
+          101.0,
+          175.0
         ],
         [
           -253.0,
-          -177.0
+          -133.0
         ],
         [
-          83.0,
-          87.0
+          58.0,
+          116.0
+        ]
+      ],
+      "center_mm": [
+        138.0,
+        -174.47720105970433,
+        104.21946126730093
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_wide_rail_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "sku": "SSEBWML12-54"
+      },
+      "volume_mm3": 6977.8042300495135,
+      "bounds_mm": [
+        [
+          129.0,
+          147.0
+        ],
+        [
+          -146.5,
+          -139.0
+        ],
+        [
+          58.0,
+          112.0
+        ]
+      ],
+      "center_mm": [
+        138.0,
+        -142.7139115289227,
+        85.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_rail_bolts_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "sku": "CB3-8",
+        "quantity": 2
+      },
+      "volume_mm3": 255.64710218586944,
+      "bounds_mm": [
+        [
+          135.25,
+          140.75
+        ],
+        [
+          -145.0,
+          -134.0
+        ],
+        [
+          67.25,
+          102.75
+        ]
+      ],
+      "center_mm": [
+        138.00000000000003,
+        -141.0668202764977,
+        85.00000000000001
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_wide_block_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": "RB",
+        "sku": "SSEBWML12-54"
+      },
+      "volume_mm3": 12194.432587712827,
+      "bounds_mm": [
+        [
+          118.0,
+          158.0
+        ],
+        [
+          -151.0,
+          -139.5
+        ],
+        [
+          66.0,
+          104.0
+        ]
+      ],
+      "center_mm": [
+        137.99999999999994,
+        -146.07060414357858,
+        85.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_block_bolts_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": "RB",
+        "sku": "CB4-10",
+        "quantity": 4
+      },
+      "volume_mm3": 1118.4069846779664,
+      "bounds_mm": [
+        [
+          118.0,
+          158.0
+        ],
+        [
+          -160.0,
+          -146.0
+        ],
+        [
+          75.5,
+          94.5
         ]
       ],
       "center_mm": [
         137.99999999999997,
-        -215.09991176108548,
-        84.99999999999996
+        -154.85393258426967,
+        84.99999999999997
       ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_fixed_seat_12H7_RB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": null,
-        "material": "6061-T6 with replaceable press-fit bushes",
-        "pilot_d_mm": 4.9
-      },
-      "volume_mm3": 34281.10196391598,
-      "bounds_mm": [
-        [
-          95.0,
-          181.0
-        ],
-        [
-          -253.0,
-          -177.0
-        ],
-        [
-          92.0,
-          128.0
-        ]
-      ],
-      "center_mm": [
-        138.00000000000014,
-        -210.11895772511556,
-        112.70772522526994
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_1_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB",
-        "sku": "PSFJW8-46-M4-N4"
-      },
-      "volume_mm3": 2060.884780754903,
-      "bounds_mm": [
-        [
-          102.0,
-          110.0
-        ],
-        [
-          -199.0,
-          -191.0
-        ],
-        [
-          87.0,
-          133.0
-        ]
-      ],
-      "center_mm": [
-        106.00000000000001,
-        -195.0,
-        109.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bushing_1_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": null,
-        "sku": "MPBZ8-10",
-        "housing_fit": "12 H7; bore F7; shaft g6"
-      },
-      "volume_mm3": 626.6835752151958,
-      "bounds_mm": [
-        [
-          100.0,
-          112.0
-        ],
-        [
-          -201.0,
-          -189.0
-        ],
-        [
-          117.0,
-          127.0
-        ]
-      ],
-      "center_mm": [
-        105.99999999999997,
-        -194.99999999999994,
-        121.99999999999997
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_droop_retainer_1_RB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB"
-      },
-      "volume_mm3": 484.5278349631538,
-      "bounds_mm": [
-        [
-          98.5,
-          113.5
-        ],
-        [
-          -202.5,
-          -187.5
-        ],
-        [
-          133.0,
-          136.0
-        ]
-      ],
-      "center_mm": [
-        106.0,
-        -194.99999999999994,
-        134.5
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_upper_bolt_1_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.60174616949155,
-      "bounds_mm": [
-        [
-          102.5,
-          109.5
-        ],
-        [
-          -198.5,
-          -191.5
-        ],
-        [
-          126.0,
-          140.0
-        ]
-      ],
-      "center_mm": [
-        105.99999999999999,
-        -195.00000000000003,
-        134.85393258426967
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_lower_bolt_1_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.60174616949155,
-      "bounds_mm": [
-        [
-          102.5,
-          109.5
-        ],
-        [
-          -198.5,
-          -191.5
-        ],
-        [
-          79.0,
-          93.0
-        ]
-      ],
-      "center_mm": [
-        106.00000000000001,
-        -195.00000000000003,
-        84.14606741573033
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_2_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB",
-        "sku": "PSFJW8-46-M4-N4"
-      },
-      "volume_mm3": 2060.884780754903,
-      "bounds_mm": [
-        [
-          166.0,
-          174.0
-        ],
-        [
-          -199.0,
-          -191.0
-        ],
-        [
-          87.0,
-          133.0
-        ]
-      ],
-      "center_mm": [
-        169.99999999999997,
-        -195.0,
-        109.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bushing_2_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": null,
-        "sku": "MPBZ8-10",
-        "housing_fit": "12 H7; bore F7; shaft g6"
-      },
-      "volume_mm3": 626.6835752151961,
-      "bounds_mm": [
-        [
-          164.0,
-          176.0
-        ],
-        [
-          -201.0,
-          -189.0
-        ],
-        [
-          117.0,
-          127.0
-        ]
-      ],
-      "center_mm": [
-        169.99999999999997,
-        -195.0,
-        121.99999999999997
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_droop_retainer_2_RB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB"
-      },
-      "volume_mm3": 484.52783496315396,
-      "bounds_mm": [
-        [
-          162.5,
-          177.5
-        ],
-        [
-          -202.5,
-          -187.5
-        ],
-        [
-          133.0,
-          136.0
-        ]
-      ],
-      "center_mm": [
-        170.0,
-        -194.99999999999997,
-        134.5
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_upper_bolt_2_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.6017461694917,
-      "bounds_mm": [
-        [
-          166.5,
-          173.5
-        ],
-        [
-          -198.5,
-          -191.5
-        ],
-        [
-          126.0,
-          140.0
-        ]
-      ],
-      "center_mm": [
-        170.0,
-        -194.99999999999997,
-        134.85393258426964
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_lower_bolt_2_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.6017461694917,
-      "bounds_mm": [
-        [
-          166.5,
-          173.5
-        ],
-        [
-          -198.5,
-          -191.5
-        ],
-        [
-          79.0,
-          93.0
-        ]
-      ],
-      "center_mm": [
-        169.99999999999997,
-        -194.99999999999997,
-        84.14606741573033
-      ],
-      "solids": 1
+      "solids": 4
     },
     {
       "name": "80_caster_frame_bolts_RB",
@@ -3235,12 +2683,12 @@
       "volume_mm3": 2391.53740754523,
       "bounds_mm": [
         [
-          111.75,
-          164.25
+          106.75,
+          169.25
         ],
         [
           -248.25,
-          -181.75
+          -142.75
         ],
         [
           104.0,
@@ -3249,8 +2697,8 @@
       ],
       "center_mm": [
         138.0,
-        -215.00000000000003,
-        116.98275862068967
+        -195.49999999999997,
+        116.98275862068964
       ],
       "solids": 4
     },
@@ -3263,15 +2711,15 @@
         "moving_wheel": null,
         "quantity": 4
       },
-      "volume_mm3": 572.6507481162861,
+      "volume_mm3": 572.6507481162862,
       "bounds_mm": [
         [
-          111.38119784648299,
-          164.618802153517
+          106.38119784648299,
+          169.618802153517
         ],
         [
           -248.0,
-          -182.0
+          -143.0
         ],
         [
           108.0,
@@ -3279,9 +2727,9 @@
         ]
       ],
       "center_mm": [
-        138.0,
-        -214.99999999999997,
-        109.99999999999996
+        138.00000000000006,
+        -195.50000000000017,
+        110.00000000000001
       ],
       "solids": 4
     },
@@ -3457,371 +2905,187 @@
       "metadata": {
         "wheel": "RF",
         "moving_wheel": "RF",
-        "material": "6061-T6"
+        "material": "S355 steel, plate and flange"
       },
-      "volume_mm3": 25469.374393568138,
+      "volume_mm3": 30694.522639862553,
       "bounds_mm": [
         [
-          95.0,
-          181.0
+          108.0,
+          168.0
         ],
         [
-          177.0,
-          253.0
+          151.0,
+          251.0
         ],
         [
-          83.0,
-          87.0
+          65.0,
+          105.0
         ]
       ],
       "center_mm": [
         137.99999999999994,
-        215.0999117610855,
-        84.99999999999997
+        189.54341595687777,
+        85.00000000000003
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_fixed_seat_12H7_RF",
+      "name": "80_caster_fixed_bracket_with_stops_RF",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RF",
         "moving_wheel": null,
-        "material": "6061-T6 with replaceable press-fit bushes",
+        "material": "S355 steel",
         "pilot_d_mm": 4.9
       },
-      "volume_mm3": 34281.10196391597,
+      "volume_mm3": 57947.821705886236,
       "bounds_mm": [
         [
-          95.0,
-          181.0
+          101.0,
+          175.0
         ],
         [
-          177.0,
+          133.0,
           253.0
         ],
         [
-          92.0,
-          128.0
+          58.0,
+          116.0
         ]
       ],
       "center_mm": [
-        138.00000000000017,
-        210.11895772511565,
-        112.70772522526997
+        137.99999999999994,
+        174.47720105970433,
+        104.21946126730096
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_guide_1_RF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": "RF",
-        "sku": "PSFJW8-46-M4-N4"
-      },
-      "volume_mm3": 2060.884780754903,
-      "bounds_mm": [
-        [
-          102.0,
-          110.0
-        ],
-        [
-          191.0,
-          199.0
-        ],
-        [
-          87.0,
-          133.0
-        ]
-      ],
-      "center_mm": [
-        106.00000000000001,
-        195.0,
-        109.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bushing_1_RF",
+      "name": "80_caster_wide_rail_RF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "RF",
         "moving_wheel": null,
-        "sku": "MPBZ8-10",
-        "housing_fit": "12 H7; bore F7; shaft g6"
+        "sku": "SSEBWML12-54"
       },
-      "volume_mm3": 626.6835752151958,
+      "volume_mm3": 6977.8042300495135,
       "bounds_mm": [
         [
-          100.0,
+          129.0,
+          147.0
+        ],
+        [
+          139.0,
+          146.5
+        ],
+        [
+          58.0,
           112.0
-        ],
-        [
-          189.0,
-          201.0
-        ],
-        [
-          117.0,
-          127.0
         ]
       ],
       "center_mm": [
-        105.99999999999997,
-        194.99999999999994,
-        121.99999999999997
+        138.00000000000003,
+        142.71391152892272,
+        85.0
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_droop_retainer_1_RF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": "RF"
-      },
-      "volume_mm3": 484.5278349631538,
-      "bounds_mm": [
-        [
-          98.5,
-          113.5
-        ],
-        [
-          187.5,
-          202.5
-        ],
-        [
-          133.0,
-          136.0
-        ]
-      ],
-      "center_mm": [
-        106.0,
-        194.99999999999994,
-        134.5
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_upper_bolt_1_RF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": "RF",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.60174616949155,
-      "bounds_mm": [
-        [
-          102.5,
-          109.5
-        ],
-        [
-          191.5,
-          198.5
-        ],
-        [
-          126.0,
-          140.0
-        ]
-      ],
-      "center_mm": [
-        105.99999999999999,
-        195.00000000000003,
-        134.85393258426967
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_lower_bolt_1_RF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": "RF",
-        "sku": "CB4-10"
-      },
-      "volume_mm3": 279.60174616949155,
-      "bounds_mm": [
-        [
-          102.5,
-          109.5
-        ],
-        [
-          191.5,
-          198.5
-        ],
-        [
-          79.0,
-          93.0
-        ]
-      ],
-      "center_mm": [
-        106.00000000000001,
-        195.00000000000003,
-        84.14606741573033
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_2_RF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": "RF",
-        "sku": "PSFJW8-46-M4-N4"
-      },
-      "volume_mm3": 2060.884780754903,
-      "bounds_mm": [
-        [
-          166.0,
-          174.0
-        ],
-        [
-          191.0,
-          199.0
-        ],
-        [
-          87.0,
-          133.0
-        ]
-      ],
-      "center_mm": [
-        169.99999999999997,
-        195.0,
-        109.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bushing_2_RF",
+      "name": "80_caster_rail_bolts_RF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "RF",
         "moving_wheel": null,
-        "sku": "MPBZ8-10",
-        "housing_fit": "12 H7; bore F7; shaft g6"
+        "sku": "CB3-8",
+        "quantity": 2
       },
-      "volume_mm3": 626.6835752151961,
+      "volume_mm3": 255.64710218586944,
       "bounds_mm": [
         [
-          164.0,
-          176.0
+          135.25,
+          140.75
         ],
         [
-          189.0,
-          201.0
+          134.0,
+          145.0
         ],
         [
-          117.0,
-          127.0
+          67.25,
+          102.75
         ]
       ],
       "center_mm": [
-        169.99999999999997,
-        195.0,
-        121.99999999999997
+        138.00000000000006,
+        141.06682027649768,
+        85.00000000000001
       ],
-      "solids": 1
+      "solids": 2
     },
     {
-      "name": "80_caster_droop_retainer_2_RF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": "RF"
-      },
-      "volume_mm3": 484.52783496315396,
-      "bounds_mm": [
-        [
-          162.5,
-          177.5
-        ],
-        [
-          187.5,
-          202.5
-        ],
-        [
-          133.0,
-          136.0
-        ]
-      ],
-      "center_mm": [
-        170.0,
-        194.99999999999997,
-        134.5
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_upper_bolt_2_RF",
+      "name": "80_caster_wide_block_RF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "RF",
         "moving_wheel": "RF",
-        "sku": "CB4-10"
+        "sku": "SSEBWML12-54"
       },
-      "volume_mm3": 279.6017461694917,
+      "volume_mm3": 12194.432587712818,
       "bounds_mm": [
         [
-          166.5,
-          173.5
+          118.0,
+          158.0
         ],
         [
-          191.5,
-          198.5
+          139.5,
+          151.0
         ],
         [
-          126.0,
-          140.0
+          66.0,
+          104.0
         ]
       ],
       "center_mm": [
-        170.0,
-        194.99999999999997,
-        134.85393258426964
+        138.00000000000003,
+        146.07060414357846,
+        85.0
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_guide_lower_bolt_2_RF",
+      "name": "80_caster_block_bolts_RF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "RF",
         "moving_wheel": "RF",
-        "sku": "CB4-10"
+        "sku": "CB4-10",
+        "quantity": 4
       },
-      "volume_mm3": 279.6017461694917,
+      "volume_mm3": 1118.4069846779664,
       "bounds_mm": [
         [
-          166.5,
-          173.5
+          118.0,
+          158.0
         ],
         [
-          191.5,
-          198.5
+          146.0,
+          160.0
         ],
         [
-          79.0,
-          93.0
+          75.5,
+          94.5
         ]
       ],
       "center_mm": [
-        169.99999999999997,
-        194.99999999999997,
-        84.14606741573033
+        137.99999999999997,
+        154.85393258426967,
+        85.0
       ],
-      "solids": 1
+      "solids": 4
     },
     {
       "name": "80_caster_frame_bolts_RF",
@@ -3836,11 +3100,11 @@
       "volume_mm3": 2391.53740754523,
       "bounds_mm": [
         [
-          111.75,
-          164.25
+          106.75,
+          169.25
         ],
         [
-          181.75,
+          142.75,
           248.25
         ],
         [
@@ -3849,9 +3113,9 @@
         ]
       ],
       "center_mm": [
-        138.0,
-        215.00000000000006,
-        116.98275862068967
+        137.99999999999997,
+        195.49999999999994,
+        116.98275862068964
       ],
       "solids": 4
     },
@@ -3864,14 +3128,14 @@
         "moving_wheel": null,
         "quantity": 4
       },
-      "volume_mm3": 572.6507481162861,
+      "volume_mm3": 572.6507481162862,
       "bounds_mm": [
         [
-          111.38119784648299,
-          164.618802153517
+          106.38119784648299,
+          169.618802153517
         ],
         [
-          182.0,
+          143.0,
           248.0
         ],
         [
@@ -3880,9 +3144,9 @@
         ]
       ],
       "center_mm": [
-        138.0,
-        215.00000000000009,
-        109.99999999999996
+        137.99999999999986,
+        195.49999999999983,
+        109.99999999999991
       ],
       "solids": 4
     },

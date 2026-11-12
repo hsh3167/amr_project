@@ -1,7 +1,7 @@
 {
   "valid": true,
-  "components": 191,
-  "solids": 365,
+  "components": 167,
+  "solids": 357,
   "errors": [],
   "suspension_catalog": {
     "target_mass_kg": 30,
@@ -89,16 +89,21 @@
     "limitations": "No real optical housing origin, glass, range accuracy, cable/cover/arm occlusion, floor obstacles or safety validation."
   },
   "scan_plane_vertical_clearance_checked": true,
+  "deck_sensor_clearance_mm": {
+    "deck_underside_above_scan": 42.17,
+    "deck_underside_above_camera_top": 4.324,
+    "lowest_camera_mount_above_scan": 11.17
+  },
   "selected_sensor_collisions": [],
   "suspension_collision_sampling": {
     "sampled_poses": 30,
-    "boolean_pairs": 482,
+    "boolean_pairs": 542,
     "hits": [],
     "scope": "One wheel at a time, five sampled positions; springs/mates excluded; no continuous swept-volume or dynamic clearance proof"
   },
   "caster_swivel_sampling": {
     "sampled_poses": 96,
-    "boolean_pairs": 96,
+    "boolean_pairs": 384,
     "hits": [],
     "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump; local hardware and chassis"
   },
@@ -119,7 +124,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 365
+      "solids": 357
     }
   ]
 }
