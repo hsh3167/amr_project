@@ -53,27 +53,17 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     loadFile('manifest.json').then(r=>r.json()),
     loadLidarVisual(),
   ]);
-  const suspension=part('suspension','Rev10 구동 스윙암 + 후방 롤 빔','구동륜은 진행 방향과 평행한 Ø10 핀을 축으로 도는 6t 절곡 스윙암과 MISUMI X-SWU17-70 스프링을 사용합니다. 전방 캐스터 2개는 고정, 후방 캐스터 2개는 하나의 롤 빔(±1° 스토퍼)에 달려 3점 지지를 만듭니다. 용접 없이 레이저 절단·절곡품과 카탈로그 핀·베어링으로 구성합니다.');
+  const suspension=part('suspension','Rev11 6륜 독립 수직 서스펜션','6개 바퀴마다 MISUMI 와이드 미니어처 레일 1개(구동 SSEBWML16, 캐스터 SSEBWML14)와 스프링 1개(구동 X-SWU21-70, 캐스터 X-SWU17-35)를 씁니다. M8 가이드 볼트의 너트가 처짐 스토퍼, 스프링 속 슬리브가 범프 스토퍼입니다. 판금 절곡 브래킷이며 용접과 리밍이 없습니다.');
   const wrapper=new THREE.Group();wrapper.scale.set(1000,1000,-1000);wrapper.add(gltf.scene);robot.add(wrapper);
-  const rolling={},swivels={},holders={},springs={},pivots={LEFT:[],RIGHT:[],REAR:[]};
-  const S=layout.suspension,drive=S.drive,rear=S.rear_rocker,LP=layout.parameters;
-  // Viewer axes: X=CAD X, Y=CAD Z, Z=CAD Y. A CAD rotation a about +Y is rotation.z=-a here.
-  const pivotGroup=(parent,x,y,z,key)=>{const g=new THREE.Group();g.position.set(x,y,z);parent.add(g);pivots[key].push(g);return g};
-  const armMotor={},armSusp={};
+  const rolling={},swivels={},moves={},springs={};
+  const S=layout.suspension,LP=layout.parameters;
   for(const [n,id,side] of [['LEFT','motorL',-1],['RIGHT','motorR',1]]){
-    armMotor[n]=pivotGroup(groups[id],side*drive.pivot_x_mm,drive.pivot_z_mm,0,n);
-    armSusp[n]=pivotGroup(suspension,side*drive.pivot_x_mm,drive.pivot_z_mm,0,n);
-    const o=new THREE.Group();o.position.set(side*(LP.drive_track/2-drive.pivot_x_mm),90-drive.pivot_z_mm,0);armMotor[n].add(o);
+    const o=new THREE.Group();o.position.set(side*LP.drive_track/2,90,0);groups[id].add(o);
     rolling[n]=o;wheels.push({group:o,sign:side});
   }
-  const rearBeam=pivotGroup(suspension,0,rear.pivot_z_mm,-LP.caster_y,'REAR');
   for(const n of ['LF','LB','RF','RB']){
     const x=(n[0]==='L'?-1:1)*LP.caster_x,y=(n[1]==='F'?1:-1)*LP.caster_y;
-    const swivel=new THREE.Group();
-    if(n[1]==='B'){
-      const holder=pivotGroup(groups['caster'+n],0,rear.pivot_z_mm,-LP.caster_y,'REAR');
-      swivel.position.set(x,-rear.pivot_z_mm,0);holder.add(swivel);holders[n]=holder;
-    }else{swivel.position.set(x,0,y);groups['caster'+n].add(swivel);holders[n]=groups['caster'+n]}
+    const swivel=new THREE.Group();swivel.position.set(x,0,y);groups['caster'+n].add(swivel);
     swivels[n]=swivel;casters.push(swivel);
   }
   function groupFor(r){
@@ -98,44 +88,35 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     if(lidarVisual&&r.group==='lidars'&&r.status==='drawing_envelope')continue;
     const id=groupFor(r),wheel=r.metadata?.moving_wheel,caster=r.metadata?.caster;
     let parent=groups[id];
-    if(wheel==='LEFT'||wheel==='RIGHT')parent=r.group==='suspension'?armSusp[wheel]:armMotor[wheel];
-    if(wheel==='REAR')parent=r.group==='suspension'?rearBeam:holders[caster];
     if(r.name.startsWith('30_')||r.name.startsWith('31_'))parent=rolling[wheel];
     if(r.name.startsWith('43_')||r.name.startsWith('44_'))parent=swivels[caster];
     parent.updateWorldMatrix(true,false);parent.attach(node);tag(node,id);
     if(r.metadata?.sku)node.traverse(mesh=>{if(mesh.isMesh)mesh.userData.sku=r.metadata.sku});
+    if(wheel&&!r.name.startsWith('30_')&&!r.name.startsWith('31_'))(moves[wheel]??=[]).push({node,y:node.position.y});
     if(Number.isFinite(r.metadata?.spring_length_mm)){
       const {wheel:n,spring_top_z:top,spring_length_mm:length,spring_xy:[x,y]}=r.metadata;
       const pivot=new THREE.Group();
       pivot.position.set(x,top,y);
       suspension.add(pivot);pivot.updateWorldMatrix(true,false);pivot.attach(node);
-      springs[n]={pivot,length,x,seatZ:top-length};
+      springs[n]={pivot,length};
     }
   }
   robot.remove(wrapper);
   if(missing.length)throw new Error('CAD nodes missing: '+missing.join(', '));
   if(lidarVisual)addLidarVisuals(lidarVisual,layout,groups,parts,tag);
-  for(const n of ['LF','RF'])parts['caster'+n].description='공식 GL-65-ASF-EUS STEP 기준(장착높이 83mm, 판 48×65mm, 홀 24×54mm). 4.5t 절곡 박스 브래킷으로 하판에 고정합니다.';
-  for(const n of ['LB','RB'])parts['caster'+n].description='공식 GL-65-ASF-EUS STEP 기준. 후방 캐스터 2개는 하나의 6t 롤 빔에 달려 차체 중심의 Ø10 핀을 축으로 ±1° 기울고, 양 끝 M8 스토퍼 볼트로 제한됩니다.';
+    for(const n of ['LF','LB','RF','RB'])parts['caster'+n].description='공식 GL-65-ASF-EUS STEP 기준(장착높이 83mm, 판 48×65mm, 홀 24×54mm). 6t 절곡 캐리어에 달려 SSEBWML14 레일로 ±5mm 수직 이동하며 X-SWU17-35 스프링이 받칩니다.';
   for(const id of ['cameraLeft','cameraRight'])parts[id].description='Orbbec 공식 Astra Mini Pro 3D V0.1의 58솔리드. 2D V1.2는 M2 피치80/깊이19.92, 3D 깊이24.264. 실물 버전·어댑터 확인 필요.';
   parts.profiles.description='주기둥4개와 센서 지지4개는 알루미늄 프로파일입니다. 공칭20×20 단면과 슬롯은 제조사 미지정 범용 형상입니다.';
-  const poses={LEFT:0,RIGHT:0,REAR:0};
-  const armLength=LP.drive_track/2-drive.pivot_x_mm;
-  const angleFor=(key,mm)=>key==='REAR'?Math.asin(mm/LP.caster_x):-(key==='LEFT'?-1:1)*Math.asin(mm/armLength);
-  const halfFor=key=>key==='REAR'?LP.caster_x*Math.tan(rear.roll_limit_deg*Math.PI/180):drive.travel_mm/2;
-  function setPose(key,mm){
-    if(!(key in poses)||!Number.isFinite(mm))throw new Error('Invalid suspension pose');
-    if(Math.abs(mm)>halfFor(key)+1e-6)throw new Error('Stroke exceeded');
-    const a=angleFor(key,mm);
-    for(const g of pivots[key])g.rotation.z=-a;
-    const spring=springs[key];
-    if(spring){
-      // Seat point (x, seatZ) rotated about the arm pivot; the coil top stays fixed.
-      const side=key==='LEFT'?-1:1,rx=spring.x-side*drive.pivot_x_mm,rz=spring.seatZ-drive.pivot_z_mm;
-      const dz=-rx*Math.sin(a)+rz*Math.cos(a)-rz;
-      spring.pivot.scale.y=(spring.length-dz)/spring.length;
-    }
-    poses[key]=mm;
+  const poses={LEFT:0,RIGHT:0,LF:0,LB:0,RF:0,RB:0};
+  function setPose(wheel,mm){
+    if(!(wheel in poses)||!Number.isFinite(mm))throw new Error('Invalid wheel pose');
+    const half=S[['LEFT','RIGHT'].includes(wheel)?'drive':'caster'].travel_mm/2;
+    if(Math.abs(mm)>half+1e-9)throw new Error('Stroke exceeded');
+    // Every Rev11 module is rail-guided and translates vertically; the spring top stays fixed.
+    for(const item of moves[wheel]||[])item.node.position.y=item.y+mm;
+    if(rolling[wheel])rolling[wheel].position.y=90+mm;
+    if(springs[wheel])springs[wheel].pivot.scale.y=(springs[wheel].length-mm)/springs[wheel].length;
+    poses[wheel]=mm;
   }
   return {engine:'build123d',lidarVisual:lidarVisual?'sick_tim_5xx.stl':'drawing_envelope',components:manifest.components.length,solids:manifest.components.reduce((n,r)=>n+r.solids,0),poses,setPose,
     bounds_mm:{min:bounds.min.toArray(),max:bounds.max.toArray(),width:size.x,length:size.z,height:size.y},

@@ -1,57 +1,94 @@
 {
   "valid": true,
-  "components": 119,
-  "solids": 293,
+  "components": 141,
+  "solids": 319,
   "errors": [],
   "suspension_catalog": {
-    "concept": "Rev10 drive side swing arms + fixed front casters + rear roll beam",
+    "concept": "Rev11 six independent vertical rail modules",
     "design_mass_kg": 55,
-    "drive": {
-      "sku": "X-SWU17-70",
-      "travel_mm": 20,
-      "seat_travel_mm": 12.223,
-      "lever_ratio": 0.614,
-      "spring_lengths_mm": [
-        46.111,
-        40,
-        33.889
-      ],
-      "forces_N": [
-        84.328,
-        105.9,
-        127.472
-      ],
-      "min_solid_margin_mm": 12.889,
-      "max_working_deflection_margin_mm": 2.389,
-      "installed_length_mm": 40,
-      "ground_force_N": [
-        87.081,
-        100.327,
-        113.572
-      ],
-      "estimated_ground_force_N": 100.327
+    "modules": {
+      "drive": {
+        "sku": "X-SWU21-70",
+        "travel_mm": 20,
+        "spring_lengths_mm": [
+          62.5,
+          52.5,
+          42.5
+        ],
+        "forces_N": [
+          40.425,
+          94.325,
+          148.225
+        ],
+        "min_solid_margin_mm": 21.5,
+        "max_working_deflection_margin_mm": 11.0,
+        "installed_length_mm": 52.5,
+        "shim_removed_force_N": 83.545,
+        "ground_force_N": [
+          77.69,
+          131.59,
+          185.49
+        ],
+        "estimated_ground_force_N": 131.59,
+        "wheel_rate_N_mm": 5.39
+      },
+      "caster": {
+        "sku": "X-SWU17-35",
+        "travel_mm": 10,
+        "spring_lengths_mm": [
+          31.0,
+          26,
+          21.0
+        ],
+        "forces_N": [
+          27.84,
+          62.64,
+          97.44
+        ],
+        "min_solid_margin_mm": 10.5,
+        "max_working_deflection_margin_mm": 5.3,
+        "installed_length_mm": 26,
+        "shim_removed_force_N": 48.72,
+        "ground_force_N": [
+          36.176,
+          70.976,
+          105.776
+        ],
+        "estimated_ground_force_N": 70.976,
+        "wheel_rate_N_mm": 6.96
+      }
     },
-    "rear_rocker": {
-      "roll_limit_deg": 1.0,
-      "caster_seat_travel_mm": 2.409
-    },
+    "combined_wheel_rate_N_mm": 38.62,
     "static_cases": {
       "with_arm": {
         "mass_kg": 55,
-        "drive_each_N": 100.327,
-        "caster_each_N": 84.678,
-        "drive_load_fraction": 0.372,
-        "caster_capacity_ratio": 0.1727
+        "preload_shims": true,
+        "body_sink_mm": -0.2,
+        "within_travel": true,
+        "drive_each_N": 130.513,
+        "drive_load_fraction": 0.4839,
+        "caster_each_N": 69.585
       },
-      "without_arm": {
+      "without_arm_shims_removed": {
         "mass_kg": 35,
-        "drive_each_N": 100.327,
-        "caster_each_N": 35.645,
-        "drive_load_fraction": 0.5846,
-        "caster_capacity_ratio": 0.0727
+        "preload_shims": false,
+        "body_sink_mm": -3.278,
+        "within_travel": true,
+        "drive_each_N": 103.14,
+        "drive_load_fraction": 0.601,
+        "caster_each_N": 34.238
+      },
+      "without_arm_shims_kept": {
+        "mass_kg": 35,
+        "preload_shims": true,
+        "body_sink_mm": -5.278,
+        "within_travel": false,
+        "drive_each_N": 103.14,
+        "drive_load_fraction": 0.601,
+        "caster_each_N": 34.238
       }
     },
-    "scope": "Centered CG, flat floor, catalog spring rate. Drive load is set by the spring and is independent of payload; casters carry the rest. Measure on prototype."
+    "scope": "Centered CG, flat floor, catalog spring rate (load +-10%). Body sink is the common spring travel from nominal; remove the 2 mm preload shims without the arm. Measure on prototype."
   },
   "counts": {
     "drive_motor": 2,
@@ -101,16 +138,16 @@
   },
   "selected_sensor_collisions": [],
   "suspension_collision_sampling": {
-    "sampled_poses": 15,
-    "boolean_pairs": 235,
+    "sampled_poses": 30,
+    "boolean_pairs": 208,
     "hits": [],
-    "scope": "One motion key at a time (two drive swing arms, one rear roll beam), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
+    "scope": "One wheel at a time (six vertical rail modules), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
   },
   "caster_swivel_sampling": {
-    "sampled_poses": 64,
-    "boolean_pairs": 160,
+    "sampled_poses": 96,
+    "boolean_pairs": 300,
     "hits": [],
-    "scope": "OEM fork and wheel, 45-degree swivel increments; rear casters also at both roll limits; local hardware and chassis"
+    "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump; local hardware and chassis"
   },
   "step_roundtrip": [
     {
@@ -129,7 +166,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 293
+      "solids": 319
     }
   ]
 }

@@ -4,13 +4,6 @@ def make(d):
     p=d.p;w=p['base_width']/2;l=p['base_length']/2;inner=w-50;well=99
     outline=[(-w,-l),(w,-l),(w,-well),(inner,-well),(inner,well),(w,well),
              (w,l),(-w,l),(-w,well),(-inner,well),(-inner,-well),(-w,-well)]
-    if d.variant!='baseline':
-        # Rev10: notch for the drive spring that passes from the swing arm to the hanger.
-        from .suspension import drive_spring_notch
-        half,edge=drive_spring_notch(d)
-        right=[(inner,-well),(inner,-half),(edge,-half),(edge,half),(inner,half),(inner,well)]
-        left=[(-x,-y) for x,y in right]
-        outline=[(-w,-l),(w,-l),(w,-well),*right,(w,well),(w,l),(-w,l),(-w,well),*left,(-w,-well)]
     base=polygon_plate(outline,p['base_thickness'],p['base_bottom_z'])
     if d.variant!='baseline':
         from .suspension import chassis_mount_holes

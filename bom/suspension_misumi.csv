@@ -1,25 +1,24 @@
 Module,Manufacturer,Order code,Quantity,Dimensions or role,Source,Status
-Drive,MISUMI,X-SWU17-70,2,OD17 ID10.5 L70 k3.53 N/mm solid21 working deflection38.5; installed 40mm at X+-145, lever ratio 0.614,https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog CK68 checked 2026-11-12: k3.53 solid21 F(55%L 1M cycles)38.5 load +-10%
-Drive,MISUMI,CLBKHM10-86,2,D10 g6 hardened low-head hinge pin with M6 retainer thread; swing-arm pivot,https://kr.misumi-ec.com/pdf/fa/2018/p1_065_2021_202108.pdf,Catalog p1_065 checked 2026-11-12: D10 L25.0-100.0 step0.1 head16 tap M6
-Caster rear,MISUMI,CLBKHM10-71,1,D10 g6 hardened low-head hinge pin; roll-beam pivot,https://kr.misumi-ec.com/pdf/fa/2018/p1_065_2021_202108.pdf,Catalog p1_065 checked 2026-11-12: D10 L25.0-100.0 step0.1 head16 tap M6
-Drive and caster rear,Standard,6900ZZ,6,Deep-groove ball bearing 10x22x6; two per pivot in 6t walls/tabs (22 H7),,Standard size; select supplier and retention
-Drive and caster rear,MISUMI,CB6-8,3,One pin retention screw per pivot,https://kr.misumi-ec.com/vona2/detail/110100141750/,Verify torque and thread engagement
-Drive and caster rear,Standard,M6 washer OD16 t1,3,Pin outboard retainer, ,Check actual washer and head dimensions
-Drive,Fabricate or MISUMI collar,Pivot spacer OD14 ID10.1 t2,4,Clamps bearing inner ring to bracket ear, ,Select catalog collar if available
-Caster rear,Fabricate or MISUMI collar,Pivot spacer tube OD14 ID10.1 L26,2,Spaces bearing inner rings from fixed tab, ,Select catalog collar if available
-Drive,Standard,M6x65 hex bolt + M6 nut + washer OD12,2,Spring guide; nut/washer under arm web = droop stop, ,Length per CAD 64.7; adjust droop with nut
-Drive,Fabricate,Bump stop tube OD9 ID6.5 L33.6,2,Inside spring on guide bolt = bump stop, ,Urethane or steel tube; cut to CAD length
-Drive,MISUMI,CB5-14,12,Pivot bracket (4) and spring hanger (2) per side,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
-Caster,MISUMI,CB5-14,12,Front box brackets (4 each) and rear L bracket (4),https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
-Caster,MISUMI,CB6-16,16,GL-65 caster plate to bracket/beam,https://kr.misumi-ec.com/vona2/detail/110100141750/,Check real caster plate stack
-Drive and caster,Standard,M5 hex nut,24,Chassis joints, ,Envelope and quantity
-Caster,Standard,M6 hex nut,16,OEM caster plate joints, ,Envelope and quantity
-Caster rear,Standard,M8 hex bolt ~30 + M8 nut,2,Roll stops at X+-100; set 1 deg gap, ,Add urethane cap if impact noise
-Drive,Motor supplier,M14x1.5 axle nut,2,Check included nut AF and actual thickness, ,Trial fit required
-Drive,Fabricate,Axle washer and 4.9mm trial spacer,2 sets,Rev09 axle stack, ,Confirm stationary shoulder
-Drive,Fabricate,S355 6t swing arm,2,Laser cut + 3 bends; two 22 H7 bearing bores; AF10.2 trial slot; spring seat hole 9, ,Ream bores after bending
-Drive,Fabricate,4.5t U pivot bracket,2,Laser cut + 2 bends; ears 10 H7 reamed together, ,No welding
-Drive,Fabricate,4.5t C spring hanger,2,Laser cut + 2 bends; spring top seat Z149, ,Shim under seat to tune drive load
-Caster front,Fabricate,4.5t box bracket,2,Laser cut + 4 bends; sets GL-65 height 83 to base Z117, ,No welding
-Caster rear,Fabricate,S355 6t roll beam,1,Laser cut + 2 bent tabs; 22 H7 bearing bores; centre window, ,Ream bores after bending
-Caster rear,Fabricate,6t L pivot bracket,1,Laser cut + 1 bend; pin hole 10 H7, ,No welding
+Drive,MISUMI,SSEBWML16-80,2,Wide miniature rail+block H16 W74 L55; rail 42 wide; C0 8.5kN MA40.2 MB43.6 MC148 N.m,https://in.misumi-ec.com/pdf/fa/2014/p1_561_001.pdf,Catalog p1_561 checked 2026-11-12; confirm rail hole layout F40 G15 and price
+Caster,MISUMI,SSEBWML14-70,4,Wide miniature rail+block H14 W51 L44.3; rail 24 wide; C0 5.3kN MA20.6 MB22.3 MC52.1 N.m,https://in.misumi-ec.com/pdf/fa/2014/p1_561_001.pdf,Catalog p1_561 checked 2026-11-12; rail L min 70
+Drive,MISUMI,X-SWU21-70,2,OD21 ID13.5 L70 k5.39 N/mm solid21 F(55%L)38.5; installed 52.5,https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog CK68 checked 2026-11-12; load +-10%
+Caster,MISUMI,X-SWU17-35,4,OD17 ID10.5 L35 k6.96 N/mm solid10.5 F(55%L)19.3; installed 26,https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog CK68 checked 2026-11-12; load +-10%
+Drive and caster,Standard,M8 hex bolt + 2 M8 nuts + washer OD16,6,Spring guide; nut/washer under carrier = droop stop (lock with second nut),,Drive length ~76 caster ~52 per CAD
+Drive,Fabricate,Bump sleeve tube OD13 ID8.4 L42.4,2,Loose on guide bolt inside spring = bump stop,,Steel or urethane tube
+Caster,Fabricate,Bump sleeve tube OD10 ID8.4 L20.9,4,Loose on guide bolt inside spring = bump stop,,Steel or urethane tube
+Drive and caster,Fabricate or washer,Preload shim 2mm,6,Remove when the robot arm is not mounted,,Use standard washers
+Drive,MISUMI,CB4 (rail) / CB5 (block),2 sets,Rail and block screws per SSEBWML16 drawing,https://kr.misumi-ec.com/vona2/detail/110100141750/,Check lengths on order drawing
+Caster,MISUMI,CB4 (rail and block),4 sets,Rail and block screws per SSEBWML14 drawing,https://kr.misumi-ec.com/vona2/detail/110100141750/,Check lengths on order drawing
+Drive,MISUMI,CB5-16,8,Rail bracket flange to base plate,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Drive,MISUMI,CB5-14,4,Spring hanger to base plate,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Caster,MISUMI,CB5-16,16,Rail bracket flange to base plate,https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate
+Caster,MISUMI,CB6-16,16,GL-65 caster plate to carrier,https://kr.misumi-ec.com/vona2/detail/110100141750/,Check real caster plate stack
+Drive and caster,Standard,M5 hex nut,28,Chassis joints,,Envelope and quantity
+Caster,Standard,M6 hex nut,16,OEM caster plate joints,,Envelope and quantity
+Drive,Motor supplier,M14x1.5 axle nut,2,Check included nut AF and actual thickness,,Trial fit required
+Drive,Fabricate,Axle washer and 4.9mm trial spacer,2 sets,Rev09 axle stack,,Confirm stationary shoulder
+Drive,Fabricate,S355 6t carrier,2,Laser cut + 1 bend; AF10.2 trial slot; block holes; spring tab hole 9,,No welding
+Drive,Fabricate,6t rail bracket L,2,Laser cut + 1 bend; rail face as rolled,,Check flatness under rail
+Drive,Fabricate,4.5t C spring hanger,2,Laser cut + 2 bends; spring top Z169.5,,No welding
+Caster,Fabricate,S355 6t carrier,4,Laser cut + 1 bend; caster M6 holes; block holes,,No welding
+Caster,Fabricate,6t rail bracket L,4,Laser cut + 1 bend; flange under base plate,,Check flatness under rail
