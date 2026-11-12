@@ -3,14 +3,13 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 // Display meshes exported from the same build123d BReps as the STEP.
 export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,layout}){
+  const version=encodeURIComponent(layout.revision);
   const [gltf,manifest]=await Promise.all([
-    new GLTFLoader().loadAsync('cad-output/amr_current.glb'),
-    fetch('cad-output/manifest.json').then(r=>{if(!r.ok)throw new Error('CAD manifest missing');return r.json()})
+    new GLTFLoader().loadAsync(`cad-output/amr_current.glb?rev=${version}`),
+    fetch(`cad-output/manifest.json?rev=${version}`).then(r=>{if(!r.ok)throw new Error('CAD manifest missing');return r.json()})
   ]);
-  const suspension=part('suspension','6륜 독립 서스펜션','구동륜 ±10mm / 캐스터 ±5mm의 개념 구조. 스프링 강성·예압·감쇠와 체결 강도는 미확정입니다.');
+  const suspension=part('suspension','30kg 기준 6륜 독립 서스펜션','구동륜 ±10mm: MISUMI X-SWU17-70과 양단 지지 가이드. 캐스터 ±5mm: X-SWU10.5-30과 고정 부시를 통과하는 가동 샤프트.');
   const wrapper=new THREE.Group();wrapper.scale.set(1000,1000,-1000);wrapper.add(gltf.scene);robot.add(wrapper);
-  for(const [id,g] of Object.entries(groups))if(id!=='arm')g.clear();
-  wheels.length=0;casters.length=0;
   const rolling={},swivels={},moves={},springs={};
   for(const [n,id,side] of [['LEFT','motorL',-1],['RIGHT','motorR',1]]){
     const o=new THREE.Group();o.position.set(side*layout.parameters.drive_track/2,90,0);groups[id].add(o);
@@ -32,23 +31,26 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
   }
   wrapper.updateMatrixWorld(true);
   const bounds=new THREE.Box3().setFromObject(wrapper),size=bounds.getSize(new THREE.Vector3());
+  const namedNodes=new Map();
+  gltf.scene.traverse(node=>{if(node.name&&!namedNodes.has(node.name))namedNodes.set(node.name,node)});
   const missing=[];
   for(const r of manifest.components){
     const name=r.name.replace(/[\[\].: /]/g,'_');
-    const node=gltf.scene.getObjectByName(r.name)||gltf.scene.getObjectByName(name);
+    const node=namedNodes.get(r.name)||namedNodes.get(name);
     if(!node){missing.push(r.name);continue}
     const id=groupFor(r),wheel=r.metadata?.moving_wheel;
     let parent=groups[id];
     if(r.name.startsWith('30_')||r.name.startsWith('31_'))parent=rolling[wheel];
     if(r.name.startsWith('43_')||r.name.startsWith('44_'))parent=swivels[wheel];
     parent.updateWorldMatrix(true,false);parent.attach(node);tag(node,id);
-    node.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});
+    if(r.metadata?.sku)node.traverse(mesh=>{if(mesh.isMesh)mesh.userData.sku=r.metadata.sku});
     if(wheel&&!r.name.startsWith('30_')&&!r.name.startsWith('31_'))(moves[wheel]??=[]).push({node,y:node.position.y});
-    if(r.name.includes('_spring_')){
-      const n=r.metadata.wheel,drive=['LEFT','RIGHT'].includes(n),pivot=new THREE.Group();
-      pivot.position.set(drive?(n==='LEFT'?-1:1)*(layout.parameters.drive_track/2-53):(n[0]==='L'?-1:1)*layout.parameters.caster_x,drive?166:112,drive?0:(n[1]==='F'?1:-1)*layout.parameters.caster_y);
+    if(Number.isFinite(r.metadata?.spring_length_mm)){
+      const {wheel:n,spring_top_z:top,spring_length_mm:length,spring_xy:[x,y]}=r.metadata;
+      const pivot=new THREE.Group();
+      pivot.position.set(x,top,y);
       suspension.add(pivot);pivot.updateWorldMatrix(true,false);pivot.attach(node);
-      springs[n]={pivot,length:drive?57:25};
+      springs[n]={pivot,length};
     }
   }
   robot.remove(wrapper);
