@@ -1,6 +1,7 @@
 """Geometric checks only. Strength, tire compliance and safety remain separate."""
 import math
 from build123d import Axis, CenterOf, import_step
+from .caster_motion import CASTER_WHEELS, caster_xy, pose_shape, rocker_angle, rocker_pivot
 from .parameters import ROOT
 from .validate_layout import coverage
 
@@ -17,25 +18,30 @@ def bounds_overlap(a,b,tol=1e-6):
     return all(min(x,y)-max(u,v)>tol for x,y,u,v in zip(a[1],b[1],a[0],b[0]))
 
 def suspension_collisions(records,d):
-    """Five independently sampled poses per wheel; positive volume, broad-phase first."""
+    """Five independently sampled poses per wheel from the nominal assembly."""
     hits=[];tested=0
     fixed=[r for r in records if not r.metadata.get('moving_wheel') and 'spring_length_mm' not in r.metadata]
     moving=[r for r in records if r.metadata.get('moving_wheel')]
     boxes={}
     for r in fixed+moving:
         box=r.shape.bounding_box();boxes[id(r)]=(tuple(box.min),tuple(box.max))
-    for wheel in ('LEFT','RIGHT','LF','LB','RF','RB'):
+    for wheel in ('LEFT','RIGHT',*CASTER_WHEELS):
         half=d.layout['suspension']['drive' if wheel in ('LEFT','RIGHT') else 'caster']['travel_mm']/2
         own=[r for r in moving if r.metadata['moving_wheel']==wheel]
         obstacles=fixed+[r for r in moving if r.metadata['moving_wheel']!=wheel]
         for dz in (-half,-half/2,0,half/2,half):
             for a in own:
-                offset=dz-d.motion.get(wheel,0);bb=boxes[id(a)]
-                moved_box=((bb[0][0],bb[0][1],bb[0][2]+offset),(bb[1][0],bb[1][1],bb[1][2]+offset))
-                shape=None
+                if wheel in CASTER_WHEELS:
+                    shape=pose_shape(d,a.shape,wheel,dz)
+                    bounds=shape.bounding_box()
+                    moved_box=(tuple(bounds.min),tuple(bounds.max))
+                else:
+                    bb=boxes[id(a)]
+                    moved_box=((bb[0][0],bb[0][1],bb[0][2]+dz),(bb[1][0],bb[1][1],bb[1][2]+dz))
+                    shape=None
                 for b in obstacles:
                     if not bounds_overlap(moved_box,boxes[id(b)]):continue
-                    if shape is None:shape=a.shape.translate((0,0,offset))
+                    if shape is None:shape=pose_shape(d,a.shape,wheel,dz)
                     tested+=1;cut=shape&b.shape;volume=0 if cut is None else cut.volume
                     if volume>.01:hits.append({'wheel':wheel,'displacement_mm':dz,'a':a.name,'b':b.name,'volume_mm3':volume})
     return {'sampled_poses':30,'boolean_pairs':tested,'hits':hits,'scope':'One wheel at a time, five sampled positions; springs/mates excluded; no continuous swept-volume or dynamic clearance proof'}
@@ -49,24 +55,31 @@ def catalog_suspension_report(d):
     for kind,state in modules.items():
         estimate=d.layout['suspension'][kind]['unsprung_mass_kg_estimate']
         state['estimated_ground_force_N']=round(state['forces_N'][1]+estimate*9.80665,3)
+    q=d.layout['suspension']['caster']
+    arm=q['arm_length_mm']
+    trail=d.parts['caster']['swivel_offset']
+    caster=modules['caster']
+    unsprung=q['unsprung_mass_kg_estimate']*9.80665
+    caster['nominal_tilt_limit_deg']=round(math.degrees(math.asin(q['travel_mm']/2/arm)),3)
+    caster['nominal_contact_load_range_N']=[
+        round(caster['forces_N'][1]*arm/(arm+direction*trail)+unsprung,3) for direction in (1,-1)]
     total=2*modules['drive']['estimated_ground_force_N']+4*modules['caster']['estimated_ground_force_N']
     stiffness=2*d.layout['suspension']['drive']['rate_N_mm']+4*d.layout['suspension']['caster']['rate_N_mm']
     return {'target_mass_kg':target,'modules':modules,'nominal_total_ground_force_N':round(total,3),
             'estimated_static_offset_mm':round((target*9.80665-total)/stiffness,3),
             'nominal_drive_load_fraction':round(2*modules['drive']['estimated_ground_force_N']/total,4),
-            'scope':'Centered static model, catalog nominal rates and estimated unsprung masses; measure six contact loads on prototype'}
+            'scope':'Centered static estimate at caster swivel radius equal to the arm length; the reported caster load range varies with swivel. Measure on prototype.'}
 
 
 def caster_swivel_clearance(records,d):
     """Screen the OEM moving fork and wheel against its new hardware."""
     half=d.layout['suspension']['caster']['travel_mm']/2
     hits=[];pairs=0;poses=0
-    for wheel in ('LF','LB','RF','RB'):
+    for wheel in CASTER_WHEELS:
         rotating=[r for r in records if r.metadata.get('moving_wheel')==wheel and r.name.startswith(('43_','44_'))]
         if not rotating:
             continue
-        x=d.p['caster_x']*(-1 if wheel[0]=='L' else 1)
-        y=d.p['caster_y']*(1 if wheel[1]=='F' else -1)
+        x,y=caster_xy(d,wheel)
         axis=Axis((x,y,0),(0,0,1))
         nearby=[r for r in records if r.group=='chassis' or
                 (r.group=='suspension' and r.metadata.get('wheel')==wheel and 'spring_length_mm' not in r.metadata)]
@@ -78,14 +91,14 @@ def caster_swivel_clearance(records,d):
         for dz in (-half,0,half):
             obstacles[dz]=[]
             for obstacle in nearby:
-                other=obstacle.shape.translate((0,0,dz)) if obstacle.metadata.get('moving_wheel') else obstacle.shape
+                other=pose_shape(d,obstacle.shape,wheel,dz) if obstacle.metadata.get('moving_wheel') else obstacle.shape
                 obstacles[dz].append((obstacle.name,other,bounds(other)))
         for angle in range(0,360,45):
             shapes=[(r.name,r.shape.rotate(axis,angle)) for r in rotating]
             for dz in (-half,0,half):
                 poses+=1
                 for name,shape in shapes:
-                    moved=shape.translate((0,0,dz))
+                    moved=pose_shape(d,shape,wheel,dz)
                     moved_bounds=bounds(moved)
                     for obstacle,other,other_bounds in obstacles[dz]:
                         if not bounds_overlap(moved_bounds,other_bounds):continue
@@ -95,7 +108,7 @@ def caster_swivel_clearance(records,d):
                         if volume>.01:
                             hits.append({'wheel':wheel,'steer_deg':angle,'displacement_mm':dz,'a':name,'b':obstacle,'volume_mm3':volume})
     return {'sampled_poses':poses,'boolean_pairs':pairs,'hits':hits,
-            'scope':'OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump; local hardware and chassis'}
+            'scope':'OEM fork and wheel, 45-degree swivel increments followed by rocker rotation at droop, nominal and bump; local hardware and chassis'}
 
 def validate(records,d,full=False,collisions=False):
     errors=[]
@@ -106,8 +119,17 @@ def validate(records,d,full=False,collisions=False):
     if len(names)!=len(set(names)):errors.append('Duplicate part names')
     wheels=[x for x in records if x.name.startswith(('30_','44_'))]
     for item in wheels:
-        offset=d.motion.get(item.metadata.get('moving_wheel'),0)
-        if abs(item.shape.bounding_box().min.Z-offset)>1e-5:errors.append('Wheel contact/pose: '+item.name)
+        wheel=item.metadata.get('moving_wheel')
+        offset=d.motion.get(wheel,0)
+        expected=offset
+        if offset and wheel in CASTER_WHEELS:
+            _,y=caster_xy(d,wheel)
+            _,pivot_y,pivot_z=rocker_pivot(d,wheel)
+            angle=rocker_angle(d,wheel,offset)
+            caster=d.parts['caster']
+            radius=caster['wheel_dia']/2
+            expected=pivot_z+(y-caster['swivel_offset']-pivot_y)*math.sin(angle)+(radius-pivot_z)*math.cos(angle)-radius
+        if abs(item.shape.bounding_box().min.Z-expected)>1e-5:errors.append('Wheel contact/pose: '+item.name)
     for item in records:
         if item.name.startswith('30_'):
             b=item.shape.bounding_box()

@@ -1,5 +1,5 @@
 {
-  "revision": "0.8",
+  "revision": "0.9",
   "drive_motor": {
     "model": "ZLLG65ASM250-N V2.02",
     "count": 2,

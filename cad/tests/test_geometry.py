@@ -25,7 +25,7 @@ def test_official_caster_height_and_six_wheel_motion_contract():
     r=build_records(d,['caster_lf','motor_left','motor_right'])
     assert validate(r,d)['valid']
     contacts={x.metadata.get('moving_wheel'):x.shape.bounding_box().min.Z for x in r if x.name.startswith(('30_','44_'))}
-    assert contacts==pytest.approx({'LF':5,'LEFT':-10,'RIGHT':0},abs=1e-5)
+    assert contacts==pytest.approx({'LF':3.970043805,'LEFT':-10,'RIGHT':0},abs=1e-5)
 
 def test_cached_multisolid_component_retains_name_and_geometry(tmp_path):
     from build123d import Compound,import_step
@@ -66,18 +66,35 @@ def test_misumi_spring_stack_stays_within_catalog_travel():
     assert abs(report['estimated_static_offset_mm'])<1
 
 
-def test_caster_guide_rail_remains_fixed_and_block_moves():
+def test_caster_rockers_rotate_about_fixed_pins():
+    from build123d import CenterOf
+
+    from cad.caster_motion import pose_shape, rocker_pivot
+
     d=load_design()
+    nominal=build_records(d,['suspension'])
     d.motion={'LF':5,'RB':-5}
     records=build_records(d,['suspension'])
-    guides={r.name:r for r in records if r.name.startswith('80_caster_wide_')}
-    assert len(guides)==8
-    assert validate(list(guides.values()),d)['valid']
+    old={r.name:r for r in nominal}
+    parts={r.name:r for r in records}
     for wheel in ('LF','LB','RF','RB'):
-        rail=guides['80_caster_wide_rail_'+wheel]
-        block=guides['80_caster_wide_block_'+wheel]
-        rail_bounds=rail.shape.bounding_box()
-        block_bounds=block.shape.bounding_box()
-        assert rail_bounds.center().Z==pytest.approx(85)
-        assert block_bounds.center().Z==pytest.approx(85+d.motion.get(wheel,0))
-        assert min(block_bounds.min.Z-rail_bounds.min.Z,rail_bounds.max.Z-block_bounds.max.Z)>=3-1e-6
+        pin=parts['80_caster_hinge_pin_'+wheel]
+        bush=parts['80_caster_pivot_bushings_'+wheel]
+        arm=parts['80_caster_rocker_arm_'+wheel]
+        assert pin.metadata['moving_wheel'] is None
+        assert len(bush.shape.solids())==2
+        assert tuple(pin.shape.center(CenterOf.MASS))[1:]==pytest.approx(rocker_pivot(d,wheel)[1:])
+        old_arm=old[arm.name].shape.center(CenterOf.MASS)
+        moved_arm=arm.shape.center(CenterOf.MASS)
+        if wheel in d.motion:
+            assert moved_arm.Y!=pytest.approx(old_arm.Y)
+            assert (moved_arm.Z-old_arm.Z)*d.motion[wheel]>0
+        else:
+            assert tuple(moved_arm)==pytest.approx(tuple(old_arm))
+    arm=old['80_caster_rocker_arm_LF'].shape
+    clevis=old['80_caster_clevis_with_stops_LF'].shape
+    for sign in (-1,1):
+        at_stop=pose_shape(d,arm,'LF',sign*5)&clevis
+        assert at_stop is None or at_stop.volume<.01
+        beyond_stop=pose_shape(d,arm,'LF',sign*5.25)&clevis
+        assert beyond_stop is not None and beyond_stop.volume>.1

@@ -53,16 +53,28 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     loadFile('manifest.json').then(r=>r.json()),
     loadLidarVisual(),
   ]);
-  const suspension=part('suspension','30kg 기준 6륜 독립 서스펜션','구동륜 ±10mm: MISUMI X-SWU17-70과 양단 지지 가이드. 캐스터 ±5mm: 각 모서리에 와이드 레일 SSEBWML12-54 한 세트, X-SWU10.5-30과 브래킷 상하 스토퍼.');
+  const suspension=part('suspension','30kg 기준 6륜 독립 서스펜션','구동륜 ±10mm는 양단 지지 가이드를 사용합니다. 캐스터는 개별 로커암과 미스미 Ø10 힌지 핀, 플랜지 무급유 부시, 압축 스프링으로 움직입니다.');
   const wrapper=new THREE.Group();wrapper.scale.set(1000,1000,-1000);wrapper.add(gltf.scene);robot.add(wrapper);
-  const rolling={},swivels={},moves={},springs={};
+  const rolling={},swivels={},rockers={},moves={},springs={};
+  const casterSetup=layout.suspension.caster;
   for(const [n,id,side] of [['LEFT','motorL',-1],['RIGHT','motorR',1]]){
     const o=new THREE.Group();o.position.set(side*layout.parameters.drive_track/2,90,0);groups[id].add(o);
     rolling[n]=o;wheels.push({group:o,sign:side});
   }
   for(const n of ['LF','LB','RF','RB']){
-    const o=new THREE.Group();o.position.set(n[0]==='L'?-layout.parameters.caster_x:layout.parameters.caster_x,0,n[1]==='F'?layout.parameters.caster_y:-layout.parameters.caster_y);
-    groups['caster'+n].add(o);swivels[n]=o;casters.push(o);
+    const x=(n[0]==='L'?-1:1)*layout.parameters.caster_x;
+    const outward=n[1]==='F'?1:-1;
+    const {arm_length_mm:length,pivot_z_mm:z}=casterSetup;
+    const caster=new THREE.Group(),arm=new THREE.Group(),swivel=new THREE.Group();
+    caster.position.set(x,z,outward*(layout.parameters.caster_y-length));
+    arm.position.copy(caster.position);
+    swivel.position.set(0,-z,outward*length);
+    groups['caster'+n].add(caster);
+    suspension.add(arm);
+    caster.add(swivel);
+    rockers[n]={caster,arm,outward};
+    swivels[n]=swivel;
+    casters.push(swivel);
   }
   function groupFor(r){
     if(r.group.startsWith('caster_'))return 'caster'+r.group.slice(7).toUpperCase();
@@ -86,11 +98,12 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     if(lidarVisual&&r.group==='lidars'&&r.status==='drawing_envelope')continue;
     const id=groupFor(r),wheel=r.metadata?.moving_wheel;
     let parent=groups[id];
+    if(rockers[wheel])parent=r.group==='suspension'?rockers[wheel].arm:rockers[wheel].caster;
     if(r.name.startsWith('30_')||r.name.startsWith('31_'))parent=rolling[wheel];
     if(r.name.startsWith('43_')||r.name.startsWith('44_'))parent=swivels[wheel];
     parent.updateWorldMatrix(true,false);parent.attach(node);tag(node,id);
     if(r.metadata?.sku)node.traverse(mesh=>{if(mesh.isMesh)mesh.userData.sku=r.metadata.sku});
-    if(wheel&&!r.name.startsWith('30_')&&!r.name.startsWith('31_'))(moves[wheel]??=[]).push({node,y:node.position.y});
+    if(wheel&&!rockers[wheel]&&!r.name.startsWith('30_')&&!r.name.startsWith('31_'))(moves[wheel]??=[]).push({node,y:node.position.y});
     if(Number.isFinite(r.metadata?.spring_length_mm)){
       const {wheel:n,spring_top_z:top,spring_length_mm:length,spring_xy:[x,y]}=r.metadata;
       const pivot=new THREE.Group();
@@ -102,7 +115,7 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
   robot.remove(wrapper);
   if(missing.length)throw new Error('CAD nodes missing: '+missing.join(', '));
   if(lidarVisual)addLidarVisuals(lidarVisual,layout,groups,parts,tag);
-  parts.casterLF.description='공식 GL-65-ASF-EUS STEP 기준. 설치높이83mm(카탈로그82), 판48X×65Y/홀24X×54Y. 실물 EUS/TUN 확인 필요. 4개 캐스터에 각각 독립 스프링 지지.';
+  parts.casterLF.description='공식 GL-65-ASF-EUS STEP 기준. 장착높이 83mm, 판 48×65mm, 홀 24×54mm. 독립 로커의 장착점은 ±5mm 이동하고, 끝 자세에서 선회축은 약 2.87° 기울어집니다.';
   for(const n of ['LB','RF','RB'])parts['caster'+n].description=parts.casterLF.description;
   for(const id of ['cameraLeft','cameraRight'])parts[id].description='Orbbec 공식 Astra Mini Pro 3D V0.1의 58솔리드. 2D V1.2는 M2 피치80/깊이19.92, 3D 깊이24.264. 실물 버전·어댑터 확인 필요.';
   parts.profiles.description='주기둥4개와 센서 지지4개, 서스펜션 지지4개 모두 알루미늄 프로파일입니다. 공칭20×20 단면과 슬롯은 제조사 미지정 범용 형상입니다.';
@@ -114,6 +127,10 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     for(const item of moves[wheel]||[]){
       // Rolling wheel nodes are relative to an axle pivot whose Y axis remains vertical.
       item.node.position.y=item.y+mm;
+    }
+    if(rockers[wheel]){
+      const {caster,arm,outward}=rockers[wheel];
+      caster.rotation.x=arm.rotation.x=-outward*Math.asin(mm/casterSetup.arm_length_mm);
     }
     if(rolling[wheel])rolling[wheel].position.y=90+mm;
     if(springs[wheel])springs[wheel].pivot.scale.y=(springs[wheel].length-mm)/springs[wheel].length;

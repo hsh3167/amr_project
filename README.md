@@ -1,6 +1,6 @@
-# 대학생 AMR 프로젝트 — build123d / Rev08
+# 대학생 AMR 프로젝트 — build123d / Rev09
 
-2WD 차동구동 + 캐스터 4개, **30kg 기준 6륜 독립 서스펜션**입니다. 구동륜은 미스미 샤프트와 부시, GL-65 캐스터는 각 1세트의 와이드 레일로 안내합니다. 상판 윗면은 지면에서 287mm입니다. 설계 원본은 build123d Python과 JSON이며, FreeCAD에서 측정·단면·조립을 검토합니다. [서스펜션 상세](docs/suspension-misumi.md) · [미스미 구매 BOM](bom/suspension_misumi.csv)
+2WD 차동구동 + 캐스터 4개, **30kg 기준 6륜 독립 서스펜션**입니다. 각 GL-65 캐스터는 미스미 Ø10 힌지 핀과 무급유 부시를 쓰는 독립 로커암에 장착합니다. 상판 윗면은 지면에서 287mm입니다. 설계 원본은 build123d Python과 JSON이며, FreeCAD에서 측정·단면·조립을 검토합니다. [서스펜션 상세](docs/suspension-misumi.md) · [미스미 구매 BOM](bom/suspension_misumi.csv)
 
 - [3D 뷰어](https://hsh3167.github.io/amr_project/) · [최신 STEP](cad-output/amr_current.step) · [검증 결과](cad-output/build_report.json)
 - [최신 설계 상태](design_state.md) · [생성/수정/FreeCAD 실행 방법](docs/build123d-workflow.md)
@@ -15,7 +15,7 @@ powershell -ExecutionPolicy Bypass -File tools/setup_cad.ps1
 powershell -ExecutionPolicy Bypass -File tools/review_freecad.ps1
 ```
 
-필요한 부품만 생성하고 출력 형식을 선택할 수 있습니다. JSON 편집 또는 `python -m cad param parameters.base_length 530`으로 AI 없이 치수를 변경합니다. `--pose LEFT=10 --pose LF=-5`로 독립 스트로크 위치를 생성합니다. 출력은 `output/cad/`, 개별 부품은 그 아래 `parts/`입니다. FreeCAD 검토 사본은 `output/freecad/amr_review.FCStd`입니다.
+필요한 부품만 생성하고 출력 형식을 선택할 수 있습니다. JSON 편집 또는 `python -m cad param parameters.base_length 530`으로 AI 없이 치수를 변경합니다. `--pose LEFT=10 --pose LF=-5`는 좌측 구동륜 축을 10mm 올리고 전방 좌측 캐스터 로커의 장착점을 5mm 내립니다. 출력은 `output/cad/`, 개별 부품은 그 아래 `parts/`입니다. FreeCAD 검토 사본은 `output/freecad/amr_review.FCStd`입니다.
 
 확정 구매품은 ZLLG65ASM250-N V2 2개/Ø180, GL-65-ASF 4개, SICK TiM571-2050101 2개, Astra Mini Pro MX6000 A V1.2 2개입니다. 대각 LiDAR, 카메라 위치, 판재 크기와 좌표계는 Rev05를 유지합니다. 모든 수직 구조 기둥은 Al2020 범용 프로파일입니다. 미래 로봇암용 상판/보강/체결 영역은 별도 조립 그룹이며 실제 암 볼트 패턴·반력·전도는 미검증입니다.
 

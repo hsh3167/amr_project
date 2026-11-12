@@ -56,7 +56,7 @@
 <div class="app">
   <header>
     <div class="brand"><div class="mark">A</div><div><strong>AMR PROJECT</strong><small>UNIVERSITY ROBOTICS · LAYOUT LAB</small></div></div>
-    <div class="header-right"><span class="chip"><b>●</b> REV <span id="layoutRevision">0.8</span> · BUILD123D</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    <div class="header-right"><span class="chip"><b>●</b> REV <span id="layoutRevision">0.9</span> · BUILD123D</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </header>
   <main class="workspace">
     <aside class="left">
@@ -90,7 +90,7 @@
       <div class="section">
         <h2>6륜 독립 서스펜션</h2>
         <label class="toggle"><span>서스펜션 구조 표시</span><input type="checkbox" id="showSuspension" checked></label>
-        <p class="hint">바퀴별 위치 확인용. +는 범프, −는 드룹. 하중 해석이 아닙니다. 스프링 변형 표시는 개념 표현입니다.</p>
+        <p class="hint">+는 올라감, −는 내려감입니다. 캐스터 값은 로커암 장착점 기준입니다. 스프링 변형은 표시용입니다.</p>
 <label class="mini-label" for="poseLEFT">왼쪽 구동륜 <output id="valueLEFT">0 mm</output></label><input id="poseLEFT" data-wheel="LEFT" type="range" min="-10" max="10" value="0" step="1">
 <label class="mini-label" for="poseRIGHT">오른쪽 구동륜 <output id="valueRIGHT">0 mm</output></label><input id="poseRIGHT" data-wheel="RIGHT" type="range" min="-10" max="10" value="0" step="1">
 <label class="mini-label" for="poseLF">전방 좌측 캐스터 <output id="valueLF">0 mm</output></label><input id="poseLF" data-wheel="LF" type="range" min="-5" max="5" value="0" step="1">
@@ -169,7 +169,7 @@
 </div>
 <script type="module">
 import * as THREE from 'three';
-import {loadNativeCAD} from './web/native-cad.js?rev=08';
+import {loadNativeCAD} from './web/native-cad.js?rev=09';
 import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
@@ -333,7 +333,7 @@ try{
  $('deckHeight').textContent=`${deckTop} mm`;
  const {width,length,height}=native.bounds_mm;
  $('envelopeDimensions').textContent=`W${width.toFixed(1)} × L${length.toFixed(1)} × H${height.toFixed(1)}`;
- $('partDescription').textContent=(native.lidarVisual==='drawing_envelope'?'build123d 조립 형상을 표시합니다.':'build123d 조립 형상과 SICK TiM5xx 공용 LiDAR 외형을 표시합니다.')+' 구동륜 2개와 캐스터 4개가 각각 독립적으로 움직이며, 캐스터마다 미스미 와이드 레일 한 세트를 사용합니다.';
+ $('partDescription').textContent=(native.lidarVisual==='drawing_envelope'?'build123d 조립 형상을 표시합니다.':'build123d 조립 형상과 SICK TiM5xx 공용 LiDAR 외형을 표시합니다.')+' 구동륜 2개와 캐스터 4개는 각각 독립적으로 움직입니다. 각 캐스터에는 Ø10 힌지 핀과 로커암이 있습니다.';
  ready=true;applyVisibility();updateBattery();robot.visible=true;$('loading').remove();
  window.amrReview.readyMs=Math.round(performance.now()-bootTime);requestRender();
 }catch(error){$('loading').textContent='CAD 불러오기 실패: '+error.message;console.error(error)}

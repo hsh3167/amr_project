@@ -7,6 +7,7 @@ import hashlib,json
 from build123d import import_step, Compound,import_brep,export_brep,Location,Rotation
 from OCP.ShapeFix import ShapeFix_ShapeTolerance
 from ..parameters import ROOT
+from ..caster_motion import pose_shape
 from .common import *
 
 @lru_cache(maxsize=2)
@@ -24,7 +25,7 @@ def caster_records(d,x,y,n,group):
     # Source top-plate center -> origin XY, wheel tangent -> ground; axle -> X.
     for index,prefix in ((0,'43_GL65_OEM_fork_'),(1,'41_GL65_OEM_plate_head_'),(2,'44_GL65_OEM_wheel_')):
         s=rz(original.solids()[index].translate((-19.251901528418,23.9893391369419,51.7488089481697)),-90)
-        r.append(PartRecord(prefix+n,group,s.translate((x,y,d.motion.get(n,0))),(.55,.64,.72),
+        r.append(PartRecord(prefix+n,group,pose_shape(d,s.translate((x,y,0)),n,d.motion.get(n,0)),(.55,.64,.72),
                             'manufacturer_step_EUS_reference',{'source':'GL-65-ASF-EUS.stp','moving_wheel':n,'cad_height_mm':83}))
     return r
 

@@ -15,7 +15,7 @@ def main():
         p=sub.add_parser(command);p.add_argument('--variant',choices=['baseline','current'],default='baseline' if command=='compare' else 'current')
         p.add_argument('--part',action='append',choices=GROUPS)
         p.add_argument('--output',type=Path,default=ROOT/'output/cad')
-        p.add_argument('--pose',action='append',default=[],help='Independent wheel displacement mm: LEFT,RIGHT,LF,LB,RF,RB=value')
+        p.add_argument('--pose',action='append',default=[],help='Independent travel mm: LEFT/RIGHT axle or LF/LB/RF/RB caster rocker seat')
         if command!='compare':p.add_argument('--collisions',action='store_true')
         if command=='build':
             p.add_argument('--format',default='step',help='step,stl or none')

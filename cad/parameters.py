@@ -38,9 +38,10 @@ def validate_parameters(d):
         for kind,maximum in (('drive',20),('caster',10)):
             q=d.layout['suspension'][kind]
             guide_keys = (('shaft_d_mm','shaft_length_mm','bush_id_mm','bush_od_mm','bush_length_mm') if kind=='drive'
-                          else ('guide_length_mm','guide_width_mm','guide_height_mm','guide_hole_pitch_mm',
-                                'block_width_mm','block_length_mm','block_hole_pitch_width_mm',
-                                'block_hole_pitch_length_mm','assembly_height_mm','guide_backset_mm','guide_center_z_mm'))
+                          else ('arm_length_mm','arm_thickness_mm','pivot_z_mm','pin_d_mm','pin_length_mm',
+                                'pin_head_d_mm','pin_head_thickness_mm','ear_thickness_mm','ear_clear_span_mm',
+                                'barrel_width_mm','barrel_od_mm','bush_length_mm','bush_od_mm','bush_bore_model_mm',
+                                'bush_flange_d_mm','bush_flange_thickness_mm'))
             for key in ('travel_mm','spring_od_mm','spring_id_mm','display_turns','loaded_length_mm','free_length_mm',
                         'solid_length_mm','max_deflection_mm','rate_N_mm',*guide_keys):
                 if not isinstance(q[key],(int,float)) or not math.isfinite(q[key]) or q[key]<=0:raise ValueError('Invalid suspension parameter: '+key)
@@ -49,9 +50,16 @@ def validate_parameters(d):
                 raise ValueError('Spring fit is invalid: '+kind)
             if kind=='drive' and not q['shaft_d_mm']<q['bush_id_mm']<q['bush_od_mm']:
                 raise ValueError('Drive shaft and bushing fit is invalid')
-            if kind=='caster' and (q['guide_length_mm']<=q['block_length_mm']+q['travel_mm']
-                    or q['guide_height_mm']>=q['assembly_height_mm']):
-                raise ValueError('Caster rail clearance is invalid')
+            if kind=='caster':
+                bushing_stack=q['barrel_width_mm']+2*q['bush_flange_thickness_mm']
+                support_stack=q['ear_clear_span_mm']+2*q['ear_thickness_mm']
+                if not (bushing_stack<q['ear_clear_span_mm'] and support_stack<q['pin_length_mm']
+                        and q['pin_d_mm']<q['bush_bore_model_mm']<q['bush_od_mm']<q['barrel_od_mm']
+                        and q['arm_length_mm']>q['travel_mm']/2):
+                    raise ValueError('Caster rocker pin stack or travel is invalid')
+                if (abs(q['pivot_z_mm']-(d.parts['caster']['cad_height']+q['arm_thickness_mm']))>1e-8
+                        or not d.p['base_bottom_z']-5<q['pivot_z_mm']+q['loaded_length_mm']<d.p['base_bottom_z']):
+                    raise ValueError('Caster rocker pivot and spring seat height are inconsistent')
             installed=q['loaded_length_mm']-q['shim_mm']
             half=q['travel_mm']/2
             if (installed+half>q['free_length_mm'] or installed-half<=q['solid_length_mm']

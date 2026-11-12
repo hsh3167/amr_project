@@ -1,5 +1,5 @@
 {
-  "revision": "0.8",
+  "revision": "0.9",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
     "base_width": 390,
@@ -106,7 +106,7 @@
     "status": "Envelope reservations only; rear power bay/central low battery/front logic/side drives, hardware and harness routes TBD."
   },
   "suspension": {
-    "status": "30 kg design target; independent suspension with MISUMI shaft-guided drive modules and one wide guide per caster; prototype load validation pending",
+    "status": "30 kg design target; MISUMI shaft-guided drive wheels and independent caster rockers with double-shear hinge pins; prototype loads pending",
     "design_mass_kg": 30,
     "drive": {
       "travel_mm": 20,
@@ -143,19 +143,24 @@
       "rate_N_mm": 4.31,
       "shim_mm": 0.5,
       "unsprung_mass_kg_estimate": 0.8,
-      "guide_sku": "SSEBWML12-54",
-      "guide_length_mm": 54,
-      "guide_width_mm": 18,
-      "guide_height_mm": 7.5,
-      "guide_hole_pitch_mm": 30,
-      "block_width_mm": 40,
-      "block_length_mm": 38,
-      "block_hole_pitch_width_mm": 33,
-      "block_hole_pitch_length_mm": 12,
-      "assembly_height_mm": 12,
-      "guide_backset_mm": 76,
-      "guide_center_z_mm": 85,
-      "static_moment_Nm": [13.7, 16.3, 30.4]
+      "arm_length_mm": 100,
+      "arm_thickness_mm": 5,
+      "pivot_z_mm": 88,
+      "pin_sku": "CLBKHM10-63.2",
+      "pin_d_mm": 10,
+      "pin_length_mm": 63.2,
+      "pin_head_d_mm": 16,
+      "pin_head_thickness_mm": 1.5,
+      "ear_thickness_mm": 5,
+      "ear_clear_span_mm": 53,
+      "barrel_width_mm": 48,
+      "barrel_od_mm": 22,
+      "bush_sku": "C-MPFZ10-15",
+      "bush_length_mm": 15,
+      "bush_od_mm": 14,
+      "bush_bore_model_mm": 10.02,
+      "bush_flange_d_mm": 22,
+      "bush_flange_thickness_mm": 2
     }
   }
 }

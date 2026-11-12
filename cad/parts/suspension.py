@@ -1,6 +1,7 @@
 """Independent, guided suspension for the 30 kg AMR. Catalog dimensions in mm."""
-from math import cos, pi, sin
-from build123d import Axis, Circle, Compound, Helix, Plane, Solid, sweep
+from math import cos, pi, sin, tan
+from build123d import Axis, Circle, Compound, Face, Helix, Plane, Solid, Vector, Wire, sweep
+from ..caster_motion import CASTER_WHEELS, caster_xy, pose_shape, rocker_angle, rocker_pivot
 from .common import PartRecord, box, cylx, cylz, drilled, polygon_plate
 from .structure import column
 
@@ -76,7 +77,7 @@ def make(d):
 
     def add(name,shape,wheel,moving=False,sku=None,**metadata):
         if moving:
-            shape=shape.translate((0,0,d.motion.get(wheel,0)))
+            shape=pose_shape(d,shape,wheel,d.motion.get(wheel,0))
         color=(.77,.64,.36) if 'bushing' in name else (.48,.65,.78)
         status='misumi_catalog_envelope' if sku else 'suspension_fabrication_design'
         records.append(PartRecord('80_'+name+'_'+wheel,'suspension',shape,color,status,
@@ -95,84 +96,93 @@ def make(d):
             geometry='catalog envelope with illustrative round-wire sweep')
 
     q=suspension['caster']
-    half=q['travel_mm']/2
     plate_bottom=d.parts['caster']['cad_height']
-    fixed_bottom=p['base_bottom_z']-4
-    for x in (-p['caster_x'],p['caster_x']):
-        for y in (-p['caster_y'],p['caster_y']):
-            wheel=('L' if x<0 else 'R')+('F' if y>0 else 'B')
-            outward=1 if y>0 else -1
-            back=-q['guide_backset_mm']
-            rail_face=back+q['guide_height_mm']
-            block_face=back+q['assembly_height_mm']
-            guide_z=q['guide_center_z_mm']
-            rail_bottom=guide_z-q['guide_length_mm']/2
-            rail_top=guide_z+q['guide_length_mm']/2
-            block_bottom=guide_z-q['block_length_mm']/2
-            block_top=guide_z+q['block_length_mm']/2
-            carrier_top=plate_bottom+4
+    arm_thickness=q['arm_thickness_mm']
+    pivot_z=q['pivot_z_mm']
+    length=q['arm_length_mm']
+    fixed_bottom=p['base_bottom_z']-5
+    spring_top=pivot_z+q['loaded_length_mm']
+    max_angle=abs(rocker_angle(d,'LF',q['travel_mm']/2))
+    ear_thickness=q['ear_thickness_mm']
+    ear_x=(q['ear_clear_span_mm']+ear_thickness)/2
+    pin_half=q['pin_length_mm']/2
+    barrel_width=q['barrel_width_mm']
 
-            def section(width, inner, outer, low, high, dx=0):
-                return box(width,outer-inner,high-low,x+dx,y+outward*(inner+outer)/2,(low+high)/2)
+    for wheel in CASTER_WHEELS:
+        x,y=caster_xy(d,wheel)
+        _,pin_y,_=rocker_pivot(d,wheel)
+        outward=1 if y>0 else -1
 
-            def cross_bore(diameter, inner, outer, z, dx=0):
-                return Solid.make_cylinder(diameter/2,outer-inner,
-                    Plane(origin=(x+dx,y+outward*inner,z),z_dir=(0,outward,0)))
+        def section(width, inner, outer, low, high, dx=0):
+            return box(width,outer-inner,high-low,x+dx,y+outward*(inner+outer)/2,(low+high)/2)
 
-            def cross_screw(diameter, length, seat, z, dx=0):
-                return screw(0,0,0,diameter,length).rotate(Axis.X,-outward*90).translate(
-                    (x+dx,y+outward*seat,z))
+        caster_bolts=[(x+dx,y+dy) for dx in (-12,12) for dy in (-27,27)]
+        outline=[(-24,-length-4),(24,-length-4),(24,-72),(32,-64),
+                 (32,35),(-32,35),(-32,-64),(-24,-72)]
+        arm=polygon_plate([(x+dx,y+outward*dy) for dx,dy in outline],arm_thickness,plate_bottom)
+        barrel=cylx(q['barrel_od_mm']/2,barrel_width,x,pin_y,pivot_z)
+        arm=(arm+barrel)-cylx(q['bush_od_mm']/2,barrel_width+2,x,pin_y,pivot_z)
+        arm=drilled(arm,caster_bolts,6.6,plate_bottom,arm_thickness)
+        arm+=cylz(2.35,4.5+q['shim_mm'],x,y,pivot_z)
+        add('caster_rocker_arm',arm,wheel,True,material='S355 plate and welded bearing sleeve')
 
-            caster_bolts=[(x+dx,y+dy) for dx in (-12,12) for dy in (-27,27)]
-            carrier=section(60,block_face,36,plate_bottom,carrier_top)
-            carrier=drilled(carrier,caster_bolts,6.6,plate_bottom,4)
-            riser=section(42,block_face,block_face+5,block_bottom-1,block_top+1)
-            for dx in (-q['block_hole_pitch_width_mm']/2,q['block_hole_pitch_width_mm']/2):
-                for dz in (-q['block_hole_pitch_length_mm']/2,q['block_hole_pitch_length_mm']/2):
-                    riser-=cross_bore(4.5,block_face-1,block_face+6,guide_z+dz,dx)
-            add('caster_carrier',carrier+riser,wheel,True,material='S355 steel, plate and flange')
+        mounts=caster_mounts(x,y)
+        fixed=section(74,-length-13,38,fixed_bottom,p['base_bottom_z'])
+        fixed=drilled(fixed,mounts,5.5,fixed_bottom,5)
+        fixed-=cylz(8,spring_top-fixed_bottom+1,x,y,fixed_bottom-1)
+        fixed+=cylz(2.35,5,x,y,spring_top-5)
+        for sign in (-1,1):
+            ear=section(ear_thickness,-length-12,-length+12,pivot_z-12,fixed_bottom,sign*ear_x)
+            ear-=cylx(q['pin_d_mm']/2+.005,ear_thickness+2,x+sign*ear_x,pin_y,pivot_z)
+            fixed+=ear+section(7,-length-12,-68,100,fixed_bottom,sign*32)
 
-            fixed=section(74,back-6,38,fixed_bottom,p['base_bottom_z'])
-            mounts=caster_mounts(x,y)
-            fixed=drilled(fixed,mounts,5.5,fixed_bottom,4)
-            backing=section(44,back-6,back,rail_bottom,fixed_bottom)
-            rail=section(q['guide_width_mm'],back,rail_face,rail_bottom,rail_top)
-            rail_bolts=[]
-            for dz in (-q['guide_hole_pitch_mm']/2,q['guide_hole_pitch_mm']/2):
-                backing-=cross_bore(2.5,back-7,back+1,guide_z+dz)
-                rail-=cross_bore(3.5,back-1,rail_face+1,guide_z+dz)
-                rail-=cross_bore(6,rail_face-4.5,rail_face+1,guide_z+dz)
-                rail_bolts.append(cross_screw(3,8,rail_face-4.5,guide_z+dz))
-            fixed+=backing
-            # Side cheeks capture the carrier edges. The free gap is travel + plate thickness.
-            for dx in (-32,32):
-                cheek=section(10,-61,-46,plate_bottom-half-4,fixed_bottom,dx)
-                slot=section(8,-62,-45,plate_bottom-half,carrier_top+half,dx-2 if dx>0 else dx+2)
-                fixed+=cheek-slot
-            fixed+=cylz(2.45,8,x,y,fixed_bottom-8)
-            add('caster_fixed_bracket_with_stops',fixed,wheel,material='S355 steel',pilot_d_mm=4.9)
-            add('caster_wide_rail',rail,wheel,sku=q['guide_sku'])
-            add('caster_rail_bolts',Compound(rail_bolts),wheel,sku='CB3-8',quantity=2)
-            block=section(q['block_width_mm'],back+.5,block_face,block_bottom,block_top)
-            block-=section(q['guide_width_mm']+.4,back,rail_face+.2,block_bottom-1,block_top+1)
-            block_bolts=[]
-            for dx in (-q['block_hole_pitch_width_mm']/2,q['block_hole_pitch_width_mm']/2):
-                for dz in (-q['block_hole_pitch_length_mm']/2,q['block_hole_pitch_length_mm']/2):
-                    block-=cross_bore(4,block_face-5,block_face+1,guide_z+dz,dx)
-                    block_bolts.append(cross_screw(4,10,block_face+5,guide_z+dz,dx))
-            add('caster_wide_block',block,wheel,True,sku=q['guide_sku'])
-            add('caster_block_bolts',Compound(block_bolts),wheel,True,sku='CB4-10',quantity=4)
-            frame_top=p['base_bottom_z']+p['base_thickness']
-            add('caster_frame_bolts',Compound([screw(a,b,frame_top,5,16) for a,b in mounts]),wheel,sku='CB5-16',quantity=4)
-            add('caster_frame_nuts',Compound([nut(a,b,fixed_bottom-4,8,4,5) for a,b in mounts]),wheel,quantity=4)
-            add('caster_plate_bolts',Compound([screw(a,b,plate_bottom-5,6,16,True) for a,b in caster_bolts]),
-                wheel,True,sku='CB6-16',quantity=4,plate_thickness_reference_mm=5)
-            add('caster_plate_nuts',Compound([nut(a,b,plate_bottom+4,10,5,6) for a,b in caster_bolts]),wheel,True,quantity=4)
-            spring_bottom=plate_bottom+4+q['shim_mm']
-            if q['shim_mm']>0:
-                add('caster_preload_shim',ring(x,y,plate_bottom+4,q['shim_mm'],13,5.1),wheel,True)
-            add('caster_lower_pilot',cylz(2.45,6+q['shim_mm'],x,y,plate_bottom+4),wheel,True)
-            add_spring(x,y,spring_bottom,fixed_bottom,q,'caster',wheel)
+            # Faces follow the arm at the two stroke limits. A single window
+            # provides both stops with face contact, without a stop fastener.
+            low_y,high_y=-51,-40
+            cheek=section(9,low_y,high_y,75,fixed_bottom,sign*31)
+            window_x=x+(25 if sign>0 else -33)
+            def stop_point(s, upper):
+                delta=(s+length)*tan(max_angle)
+                z=pivot_z+delta if upper else pivot_z-delta-arm_thickness/cos(max_angle)
+                return Vector(window_x,y+outward*s,z)
+            window=Face(Wire.make_polygon([
+                stop_point(low_y-1,False),stop_point(high_y+1,False),
+                stop_point(high_y+1,True),stop_point(low_y-1,True),
+            ],close=True))
+            fixed+=cheek-Solid.extrude(window,(8,0,0))
+        add('caster_clevis_with_stops',fixed,wheel,material='S355 formed or welded bracket')
+
+        pin=cylx(q['pin_d_mm']/2,q['pin_length_mm'],x,pin_y,pivot_z)
+        head_t=q['pin_head_thickness_mm']
+        pin+=cylx(q['pin_head_d_mm']/2,head_t,x-pin_half-head_t/2,pin_y,pivot_z)
+        pin-=cylx(3,10,x+pin_half-4,pin_y,pivot_z)
+        add('caster_hinge_pin',pin,wheel,sku=q['pin_sku'])
+        keeper=cylx(8,1,x+pin_half+.5,pin_y,pivot_z)-cylx(3.2,3,x+pin_half+.5,pin_y,pivot_z)
+        keeper+=screw(0,0,0,6,8).rotate(Axis.Y,90).translate((x+pin_half+1,pin_y,pivot_z))
+        add('caster_pin_retainer',keeper,wheel,sku='CB6-8',washer='M6 OD16 t1')
+
+        flange=q['bush_flange_thickness_mm']
+        sleeve=q['bush_length_mm']-flange
+        bushes=[]
+        for sign in (-1,1):
+            flange_x=x+sign*(barrel_width/2+flange/2)
+            sleeve_x=x+sign*(barrel_width/2-sleeve/2)
+            bush=cylx(q['bush_od_mm']/2,sleeve,sleeve_x,pin_y,pivot_z)
+            bush+=cylx(q['bush_flange_d_mm']/2,flange,flange_x,pin_y,pivot_z)
+            bush-=cylx(q['bush_bore_model_mm']/2,q['bush_length_mm']+2,
+                        x+sign*(barrel_width/2+(flange-sleeve)/2),pin_y,pivot_z)
+            bushes.append(bush)
+        add('caster_pivot_bushings',Compound(bushes),wheel,True,sku=q['bush_sku'],quantity=2)
+
+        frame_top=p['base_bottom_z']+p['base_thickness']
+        add('caster_frame_bolts',Compound([screw(a,b,frame_top,5,16) for a,b in mounts]),wheel,sku='CB5-16',quantity=4)
+        add('caster_frame_nuts',Compound([nut(a,b,fixed_bottom-4,8,4,5) for a,b in mounts]),wheel,quantity=4)
+        add('caster_plate_bolts',Compound([screw(a,b,plate_bottom-5,6,16,True) for a,b in caster_bolts]),
+            wheel,True,sku='CB6-16',quantity=4,plate_thickness_reference_mm=5)
+        add('caster_plate_nuts',Compound([nut(a,b,pivot_z,10,5,6) for a,b in caster_bolts]),wheel,True,quantity=4)
+        if q['shim_mm']>0:
+            add('caster_preload_shim',ring(x,y,pivot_z,q['shim_mm'],13,5.1),wheel,True)
+        add_spring(x,y,pivot_z+q['shim_mm'],spring_top,q,'caster',wheel)
 
     q=suspension['drive']
     half=q['travel_mm']/2
