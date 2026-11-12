@@ -10,7 +10,12 @@ def drive_mounts(d, side):
 
 
 def caster_mounts(x, y):
-    return [(x+dx, y+dy) for dx in (-32, 32) for dy in (-24, 24)]
+    return [(x+dx, y+dy) for dx in (-22, 22) for dy in (-29, 29)]
+
+
+def caster_guides(x, y):
+    guide_y=y-(20 if y>0 else -20)
+    return [(x+dx,guide_y) for dx in (-32,32)]
 
 
 def chassis_mount_holes(d):
@@ -18,7 +23,7 @@ def chassis_mount_holes(d):
     for x in (-d.p['caster_x'], d.p['caster_x']):
         for y in (-d.p['caster_y'], d.p['caster_y']):
             holes.extend((a,b,5.5) for a,b in caster_mounts(x,y))
-            holes.extend((x+dx,y,18.4) for dx in (-32,32))
+            holes.extend((a,b,18.4) for a,b in caster_guides(x,y))
     return holes
 
 
@@ -104,7 +109,7 @@ def make(d):
     for x in (-p['caster_x'],p['caster_x']):
         for y in (-p['caster_y'],p['caster_y']):
             wheel=('L' if x<0 else 'R')+('F' if y>0 else 'B')
-            guides=[(x+dx,y) for dx in (-32,32)]
+            guides=caster_guides(x,y)
             caster_bolts=[(x+dx,y+dy) for dx in (-12,12) for dy in (-27,27)]
             carrier=box(86,76,4,x,y,plate_bottom+2)
             carrier=drilled(carrier,caster_bolts,6.6,plate_bottom,4)
