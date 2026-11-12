@@ -42,9 +42,15 @@ function addLidarVisuals(geometry, layout, groups, parts, tag) {
 // Display the build123d meshes with the SICK family visual on both sensor mounts.
 export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,layout}){
   const version=encodeURIComponent(layout.revision);
+  const output=new URL('../cad-output/',import.meta.url);
+  const loadFile=async (file)=>{
+    const response=await fetch(new URL(`${file}?rev=${version}`,output),{cache:'no-cache'});
+    if(!response.ok)throw new Error(`CAD file missing: ${file}`);
+    return response;
+  };
   const [gltf,manifest,lidarVisual]=await Promise.all([
-    new GLTFLoader().loadAsync(`cad-output/amr_current.glb?rev=${version}`),
-    fetch(`cad-output/manifest.json?rev=${version}`).then(r=>{if(!r.ok)throw new Error('CAD manifest missing');return r.json()}),
+    loadFile('amr_current.glb').then(r=>r.arrayBuffer()).then(data=>new GLTFLoader().parseAsync(data,output.href)),
+    loadFile('manifest.json').then(r=>r.json()),
     loadLidarVisual(),
   ]);
   const suspension=part('suspension','30kg 기준 6륜 독립 서스펜션','구동륜 ±10mm: MISUMI X-SWU17-70과 양단 지지 가이드. 캐스터 ±5mm: 각 모서리에 와이드 레일 SSEBWML12-54 한 세트, X-SWU10.5-30과 브래킷 상하 스토퍼.');
