@@ -1,7 +1,7 @@
 """Geometric checks only. Strength, tire compliance and safety remain separate."""
 import math
 from build123d import Axis, CenterOf, import_step
-from .caster_motion import CASTER_WHEELS, DRIVE_WHEELS, MOTION_KEYS, caster_xy, half_travel, pose_shape
+from .caster_motion import CASTER_WHEELS, DRIVE_WHEELS, MOTION_KEYS, caster_xy, half_travel, motion_angle, pose_shape, rotate_point
 from .parameters import ROOT
 from .validate_layout import coverage
 
@@ -40,7 +40,7 @@ def suspension_collisions(records,d):
                     tested+=1;cut=shape&b.shape;volume=0 if cut is None else cut.volume
                     if volume>.01:hits.append({'wheel':key,'displacement_mm':dz,'a':a.name,'b':b.name,'volume_mm3':volume})
     return {'sampled_poses':poses,'boolean_pairs':tested,'hits':hits,
-            'scope':'One wheel at a time (six vertical rail modules), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof'}
+            'scope':'One wheel at a time (six hinge modules), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof'}
 
 
 def catalog_suspension_report(d):
@@ -51,30 +51,30 @@ def catalog_suspension_report(d):
     modules={}
     for kind in ('drive','caster'):
         state=spring_state(d,kind)
-        unsprung=s[kind]['unsprung_mass_kg_estimate']*g
-        state['ground_force_N']=[round(f+unsprung,3) for f in state['forces_N']]
+        r=state['lever_ratio'];unsprung=s[kind]['unsprung_mass_kg_estimate']*g
+        state['ground_force_N']=[round(f*r+unsprung,3) for f in state['forces_N']]
         state['estimated_ground_force_N']=state['ground_force_N'][1]
-        state['wheel_rate_N_mm']=s[kind]['rate_N_mm']
+        state['wheel_rate_N_mm']=round(s[kind]['rate_N_mm']*r*r,3)
         modules[kind]=state
-    rate=2*s['drive']['rate_N_mm']+4*s['caster']['rate_N_mm']
+    rate=2*modules['drive']['wheel_rate_N_mm']+4*modules['caster']['wheel_rate_N_mm']
     def case(mass,shims=True):
-        total=0
-        for kind,count in (('drive',2),('caster',4)):
-            m=modules[kind];unsprung=s[kind]['unsprung_mass_kg_estimate']*g
-            spring=m['forces_N'][1] if shims else m['shim_removed_force_N']
-            total+=count*(spring+unsprung)
-        sink=(mass*g-total)/rate
-        drive=modules['drive']['ground_force_N'][1]-(0 if shims else modules['drive']['forces_N'][1]-modules['drive']['shim_removed_force_N'])+s['drive']['rate_N_mm']*sink
+        ground={}
+        for kind in ('drive','caster'):
+            m=modules[kind];spring=m['forces_N'][1] if shims else m['shim_removed_force_N']
+            ground[kind]=spring*m['lever_ratio']+s[kind]['unsprung_mass_kg_estimate']*g
+        sink=(mass*g-2*ground['drive']-4*ground['caster'])/rate
+        drive=ground['drive']+modules['drive']['wheel_rate_N_mm']*sink
+        caster=ground['caster']+modules['caster']['wheel_rate_N_mm']*sink
         within=all(abs(sink)<=s[k]['travel_mm']/2 for k in ('drive','caster'))
         return {'mass_kg':mass,'preload_shims':shims,'body_sink_mm':round(sink,3),'within_travel':within,
-                'drive_each_N':round(drive,3),'drive_load_fraction':round(2*drive/(mass*g),4),
-                'caster_each_N':round((mass*g-2*drive)/4,3)}
+                'drive_each_N':round(drive,3),'caster_each_N':round(caster,3),
+                'drive_load_fraction':round(2*drive/(mass*g),4)}
     cases={'with_arm':case(s['design_mass_kg']),
            'without_arm_shims_removed':case(s['design_mass_without_arm_kg'],False),
            'without_arm_shims_kept':case(s['design_mass_without_arm_kg'])}
-    return {'concept':'Rev11 six independent vertical rail modules','design_mass_kg':s['design_mass_kg'],
+    return {'concept':'Rev12 six independent hinge + spring modules','design_mass_kg':s['design_mass_kg'],
             'modules':modules,'combined_wheel_rate_N_mm':round(rate,3),'static_cases':cases,
-            'scope':'Centered CG, flat floor, catalog spring rate (load +-10%). Body sink is the common spring travel from nominal; remove the 2 mm preload shims without the arm. Measure on prototype.'}
+            'scope':'Centered CG, flat floor, catalog spring rate (load +-10%), small-angle lever ratio. Caster load also varies with swivel direction (contact 68-112 mm from the hinge). Remove preload shims without the arm. Measure on prototype.'}
 
 
 def caster_swivel_clearance(records,d):
@@ -114,13 +114,23 @@ def caster_swivel_clearance(records,d):
                         if volume>.01:
                             hits.append({'wheel':wheel,'steer_deg':angle,'displacement_mm':dz,'a':name,'b':obstacle,'volume_mm3':volume})
     return {'sampled_poses':poses,'boolean_pairs':pairs,'hits':hits,
-            'scope':'OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump; local hardware and chassis'}
+            'scope':'OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump of its hinge arm; local hardware and chassis'}
 
 
 def expected_contact(d,item):
-    """Every Rev11 module translates vertically, so the contact equals the pose value."""
-    key=item.metadata.get('moving_wheel')
-    return float(d.motion.get(key,0)) if key else 0.0
+    """Lowest Z of a wheel tilted by its hinge arm (rotation about +Y)."""
+    key=item.metadata.get('moving_wheel');value=d.motion.get(key,0) if key else 0
+    if not value:return 0.0
+    if item.name.startswith('30_'):
+        side=-1 if key=='LEFT' else 1
+        radius=d.parts['drive_motor']['tire_dia']/2;half=d.parts['drive_motor']['tread_width']/2
+        x=side*d.p['drive_track']/2
+    else:
+        radius=d.parts['caster']['wheel_dia']/2;half=0  # crowned OEM tread
+        x=caster_xy(d,item.metadata['caster'])[0]
+    a=motion_angle(d,key,value)
+    zc=rotate_point(d,key,value,(x,radius))[1]
+    return zc-radius*math.cos(a)-half*abs(math.sin(a))
 
 
 def validate(records,d,full=False,collisions=False):
@@ -132,7 +142,8 @@ def validate(records,d,full=False,collisions=False):
     if len(names)!=len(set(names)):errors.append('Duplicate part names')
     wheels=[x for x in records if x.name.startswith(('30_','44_'))]
     for item in wheels:
-        if abs(item.shape.bounding_box().min.Z-expected_contact(d,item))>1e-5:errors.append('Wheel contact/pose: '+item.name)
+        tolerance=.05 if item.name.startswith('44_') else 1e-5
+        if abs(item.shape.bounding_box().min.Z-expected_contact(d,item))>tolerance:errors.append('Wheel contact/pose: '+item.name)
     for item in records:
         if item.name.startswith('30_') and not d.motion.get(item.metadata.get('moving_wheel')):
             b=item.shape.bounding_box()

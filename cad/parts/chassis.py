@@ -1,7 +1,7 @@
 from .common import *
 
 def make(d):
-    p=d.p;w=p['base_width']/2;l=p['base_length']/2;inner=w-50;well=99
+    p=d.p;w=p['base_width']/2;l=p['base_length']/2;inner=p.get('base_well_inner_x',w-50);well=99
     outline=[(-w,-l),(w,-l),(w,-well),(inner,-well),(inner,well),(w,well),
              (w,l),(-w,l),(-w,well),(-inner,well),(-inner,-well),(-w,-well)]
     base=polygon_plate(outline,p['base_thickness'],p['base_bottom_z'])

@@ -22,7 +22,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 319
+      "solids": 293
     }
   ],
   "components": [
@@ -31,7 +31,7 @@
       "group": "chassis",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 558023.3630591404,
+      "volume_mm3": 592448.744799447,
       "bounds_mm": [
         [
           -195.0,
@@ -47,8 +47,8 @@
         ]
       ],
       "center_mm": [
-        2.9467698481132967e-15,
-        -0.04342732210850813,
+        -7.730989994212816e-15,
+        0.026884814751501975,
         118.50000000000004
       ],
       "solids": 1
@@ -1660,196 +1660,36 @@
       "solids": 1
     },
     {
-      "name": "80_drive_carrier_6t_bent_LEFT",
+      "name": "80_drive_swing_arm_6t_LEFT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": "LEFT",
-        "material": "S355 6t laser-cut, 1 bend; AF10.2 trial slot"
+        "material": "S355 6t laser-cut tray, 3 bends; AF10.2 trial slot; M8 tapped seat",
+        "arm_length_mm": 130.0
       },
-      "volume_mm3": 58464.40527745843,
+      "volume_mm3": 114214.26441295253,
       "bounds_mm": [
         [
           -173.0,
-          -146.0
+          -69.0
         ],
         [
-          -45.0,
-          95.0
+          -44.0,
+          44.0
         ],
         [
-          50.0,
-          115.0
+          66.0,
+          108.0
         ]
       ],
       "center_mm": [
-        -168.92761842699508,
-        21.35560229784237,
-        84.74864277322226
+        -127.9437844318355,
+        0.06601471722791062,
+        79.91763583546195
       ],
       "solids": 1
-    },
-    {
-      "name": "80_drive_rail_LEFT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": null,
-        "sku": "SSEBWML16-80",
-        "moments_Nm": [
-          40.2,
-          43.6,
-          148
-        ]
-      },
-      "volume_mm3": 31920.0,
-      "bounds_mm": [
-        [
-          -160.5,
-          -151.0
-        ],
-        [
-          34.0,
-          76.0
-        ],
-        [
-          45.0,
-          125.0
-        ]
-      ],
-      "center_mm": [
-        -155.75,
-        55.0,
-        85.0
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_drive_rail_block_LEFT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": "LEFT",
-        "sku": "SSEBWML16 block"
-      },
-      "volume_mm3": 36355.00000000001,
-      "bounds_mm": [
-        [
-          -167.0,
-          -154.0
-        ],
-        [
-          18.0,
-          92.0
-        ],
-        [
-          57.5,
-          112.5
-        ]
-      ],
-      "center_mm": [
-        -161.8661119515885,
-        55.00000000000002,
-        85.0
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_drive_rail_bracket_L_LEFT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": null,
-        "material": "6t sheet, 1 bend; rail face as rolled, check flatness"
-      },
-      "volume_mm3": 51749.80093337347,
-      "bounds_mm": [
-        [
-          -151.0,
-          -120.0
-        ],
-        [
-          15.0,
-          95.0
-        ],
-        [
-          42.0,
-          126.0
-        ]
-      ],
-      "center_mm": [
-        -144.5600406212881,
-        54.99999999999999,
-        92.61379615692573
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_drive_bracket_bolts_LEFT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": null,
-        "sku": "CB5-16",
-        "quantity": 4
-      },
-      "volume_mm3": 2391.53740754523,
-      "bounds_mm": [
-        [
-          -144.25,
-          -123.75
-        ],
-        [
-          25.75,
-          84.25
-        ],
-        [
-          110.0,
-          131.0
-        ]
-      ],
-      "center_mm": [
-        -134.0,
-        54.99999999999998,
-        122.98275862068961
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_drive_bracket_nuts_LEFT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": null,
-        "quantity": 4
-      },
-      "volume_mm3": 572.6507481162859,
-      "bounds_mm": [
-        [
-          -144.618802153517,
-          -123.38119784648299
-        ],
-        [
-          26.0,
-          84.0
-        ],
-        [
-          113.0,
-          117.0
-        ]
-      ],
-      "center_mm": [
-        -133.99999999999994,
-        54.99999999999998,
-        114.99999999999999
-      ],
-      "solids": 4
     },
     {
       "name": "80_drive_axial_spacer_trial_LEFT",
@@ -1944,98 +1784,163 @@
       "solids": 1
     },
     {
-      "name": "80_drive_spring_hanger_C_LEFT",
+      "name": "80_drive_hinge_bracket_U_LEFT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
-        "material": "4.5t sheet, 2 bends"
+        "material": "4.5t sheet, 2 bends; ream both ear holes together"
       },
-      "volume_mm3": 13638.32277214045,
+      "volume_mm3": 18466.07792941994,
       "bounds_mm": [
         [
-          -168.0,
-          -120.0
+          -96.0,
+          -66.0
         ],
         [
-          -45.0,
-          -5.0
+          -49.0,
+          49.0
         ],
         [
-          120.0,
-          174.0
+          83.0,
+          117.0
         ]
       ],
       "center_mm": [
-        -140.51836502713277,
-        -25.0,
-        147.78210194632734
+        -81.0,
+        0.0,
+        109.6414104477943
       ],
       "solids": 1
     },
     {
-      "name": "80_drive_hanger_bolts_LEFT",
+      "name": "80_drive_bracket_bolts_LEFT",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
         "sku": "CB5-14",
-        "quantity": 2
+        "quantity": 4
       },
-      "volume_mm3": 1117.2288874328701,
+      "volume_mm3": 2234.45777486574,
       "bounds_mm": [
         [
-          -132.25,
-          -123.75
+          -92.25,
+          -69.75
         ],
         [
-          -39.25,
-          -10.75
+          -29.25,
+          29.25
         ],
         [
-          110.5,
-          129.5
+          106.0,
+          125.0
         ]
       ],
       "center_mm": [
-        -128.0,
-        -24.999999999999996,
-        122.32513181019333
+        -81.0,
+        -2.035157504436566e-15,
+        117.82513181019333
       ],
-      "solids": 2
+      "solids": 4
     },
     {
-      "name": "80_drive_hanger_nuts_LEFT",
+      "name": "80_drive_bracket_nuts_LEFT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
-        "quantity": 2
+        "quantity": 4
       },
-      "volume_mm3": 286.3253740581431,
+      "volume_mm3": 572.6507481162864,
       "bounds_mm": [
         [
-          -132.618802153517,
-          -123.38119784648299
+          -92.61880215351701,
+          -69.38119784648299
         ],
         [
-          -39.0,
-          -11.0
+          -29.0,
+          29.0
         ],
         [
-          113.0,
-          117.0
+          108.5,
+          112.5
         ]
       ],
       "center_mm": [
-        -128.0,
-        -25.00000000000001,
-        114.99999999999997
+        -80.99999999999997,
+        -1.191164123287201e-15,
+        110.49999999999997
       ],
-      "solids": 2
+      "solids": 4
+    },
+    {
+      "name": "80_drive_hinge_pin_LEFT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null,
+        "sku": "CLBKHM10-99",
+        "length_mm": 99.0,
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+      },
+      "volume_mm3": 7822.565707438585,
+      "bounds_mm": [
+        [
+          -89.0,
+          -73.0
+        ],
+        [
+          -50.5,
+          50.0
+        ],
+        [
+          87.0,
+          103.0
+        ]
+      ],
+      "center_mm": [
+        -81.0,
+        -2.9012048192771096,
+        95.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_pin_retainer_LEFT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null,
+        "sku": "CB6-8",
+        "washer": "M6 OD16 t1"
+      },
+      "volume_mm3": 866.3255901539216,
+      "bounds_mm": [
+        [
+          -89.0,
+          -73.0
+        ],
+        [
+          43.0,
+          57.0
+        ],
+        [
+          87.0,
+          103.0
+        ]
+      ],
+      "center_mm": [
+        -80.99999999999999,
+        51.489991296779785,
+        94.99999999999999
+      ],
+      "solids": 1
     },
     {
       "name": "80_drive_preload_shim_LEFT",
@@ -2043,28 +1948,28 @@
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LEFT",
-        "moving_wheel": null,
+        "moving_wheel": "LEFT",
         "remove_without_arm": true
       },
-      "volume_mm3": 649.4300333500819,
+      "volume_mm3": 1623.5750833752052,
       "bounds_mm": [
         [
-          -167.0,
-          -145.0
+          -166.0,
+          -144.0
         ],
         [
           -36.0,
           -14.0
         ],
         [
-          167.5,
-          169.5
+          72.0,
+          77.0
         ]
       ],
       "center_mm": [
-        -156.0,
+        -155.00000000000006,
         -25.000000000000004,
-        168.49999999999997
+        74.5
       ],
       "solids": 1
     },
@@ -2076,99 +1981,70 @@
         "wheel": "LEFT",
         "moving_wheel": null,
         "sku": "X-SWU21-70",
-        "spring_top_z": 167.5,
-        "spring_length_mm": 52.5,
+        "spring_top_z": 117,
+        "spring_length_mm": 40,
         "spring_xy": [
-          -156,
+          -155,
           -25
         ],
         "rate_N_mm": 5.39,
         "free_length_mm": 70,
-        "nominal_spring_force_N": 94.325,
+        "nominal_spring_force_N": 161.7,
+        "lever_ratio": 0.5692,
         "geometry": "catalog envelope with illustrative round-wire sweep"
       },
-      "volume_mm3": 3631.3642665641096,
+      "volume_mm3": 3613.47447613257,
       "bounds_mm": [
         [
-          -166.50000180290078,
-          -145.49999819709913
+          -165.50000180290934,
+          -144.49999819709066
         ],
         [
-          -35.50000180290111,
-          -14.499998197098915
+          -35.50000180290946,
+          -14.499998197090772
         ],
         [
-          115.02072481233672,
-          167.47927518766463
+          77.0115445655435,
+          116.98845543445638
         ]
       ],
       "center_mm": [
-        -156.00000083255887,
-        -25.000000001298933,
-        141.24999997946952
+        -155.00000069789775,
+        -25.000000000854484,
+        96.9999999934412
       ],
       "solids": 1
     },
     {
-      "name": "80_drive_bump_stop_sleeve_LEFT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": "LEFT",
-        "material": "Loose steel or urethane tube on the guide bolt; cut to CAD length"
-      },
-      "volume_mm3": 3282.004566445659,
-      "bounds_mm": [
-        [
-          -162.5,
-          -149.5
-        ],
-        [
-          -31.5,
-          -18.5
-        ],
-        [
-          115.0,
-          157.45
-        ]
-      ],
-      "center_mm": [
-        -156.00000000000003,
-        -24.999999999999993,
-        136.225
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_drive_guide_bolt_M8_LEFT",
+      "name": "80_drive_stud_M8_LEFT",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LEFT",
-        "moving_wheel": null,
-        "sku": "M8 hex bolt",
-        "length_mm": 84.65
+        "moving_wheel": "LEFT",
+        "sku": "M8 stud",
+        "length_mm": 70.0,
+        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 5316.831406935365,
+      "volume_mm3": 3520.180532710146,
       "bounds_mm": [
         [
-          -162.5,
-          -149.5
+          -159.0,
+          -151.0
         ],
         [
-          -31.5,
-          -18.5
+          -29.0,
+          -21.0
         ],
         [
-          89.35000000000001,
-          182.0
+          66.0,
+          136.03176654458514
         ]
       ],
       "center_mm": [
-        -156.00000000000003,
+        -155.0,
         -25.0,
-        140.926861262113
+        101.01588327229257
       ],
       "solids": 1
     },
@@ -2178,222 +2054,95 @@
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LEFT",
-        "moving_wheel": null,
-        "adjust": "Nut sets the droop limit; lock with a second nut"
+        "moving_wheel": "LEFT",
+        "adjust": "Turn the nut to set the droop limit; lock with a second nut"
       },
-      "volume_mm3": 857.634046756542,
+      "volume_mm3": 857.6340467565418,
       "bounds_mm": [
         [
-          -164.0,
-          -148.0
+          -163.0,
+          -147.0
         ],
         [
           -33.0,
           -17.0
         ],
         [
-          90.85000000000001,
-          98.95
+          126.43176654458514,
+          134.53176654458514
         ]
       ],
       "center_mm": [
-        -155.99999999999997,
+        -155.0,
         -24.999999999999996,
-        95.20043980774031
+        130.18132673684482
       ],
       "solids": 1
     },
     {
-      "name": "80_drive_carrier_6t_bent_RIGHT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": "RIGHT",
-        "material": "S355 6t laser-cut, 1 bend; AF10.2 trial slot"
-      },
-      "volume_mm3": 58464.40527745842,
-      "bounds_mm": [
-        [
-          146.0,
-          173.0
-        ],
-        [
-          -45.0,
-          95.0
-        ],
-        [
-          50.0,
-          115.0
-        ]
-      ],
-      "center_mm": [
-        168.927618426995,
-        21.35560229784237,
-        84.74864277322223
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_drive_rail_RIGHT",
+      "name": "80_drive_bump_stop_bolt_M6_LEFT",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
-        "wheel": "RIGHT",
+        "wheel": "LEFT",
         "moving_wheel": null,
-        "sku": "SSEBWML16-80",
-        "moments_Nm": [
-          40.2,
-          43.6,
-          148
-        ]
+        "sku": "M6 hex bolt + jam nut",
+        "tip_z": 76.887,
+        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
       },
-      "volume_mm3": 31920.0,
+      "volume_mm3": 1981.860569315308,
       "bounds_mm": [
         [
-          151.0,
-          160.5
-        ],
-        [
-          34.0,
-          76.0
-        ],
-        [
-          45.0,
-          125.0
-        ]
-      ],
-      "center_mm": [
-        155.75,
-        55.0,
-        85.0
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_drive_rail_block_RIGHT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": "RIGHT",
-        "sku": "SSEBWML16 block"
-      },
-      "volume_mm3": 36355.0,
-      "bounds_mm": [
-        [
-          154.0,
-          167.0
-        ],
-        [
-          18.0,
-          92.0
-        ],
-        [
-          57.5,
-          112.5
-        ]
-      ],
-      "center_mm": [
-        161.8661119515885,
-        55.0,
-        85.0
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_drive_rail_bracket_L_RIGHT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": null,
-        "material": "6t sheet, 1 bend; rail face as rolled, check flatness"
-      },
-      "volume_mm3": 51749.80093337348,
-      "bounds_mm": [
-        [
-          120.0,
-          151.0
+          -145.77350269189625,
+          -134.22649730810375
         ],
         [
           15.0,
-          95.0
+          25.0
         ],
         [
-          42.0,
+          76.88737906717219,
           126.0
         ]
       ],
       "center_mm": [
-        144.56004062128812,
-        54.99999999999999,
-        92.61379615692574
+        -140.00000000000006,
+        19.999999999999996,
+        106.64536017480296
       ],
       "solids": 1
     },
     {
-      "name": "80_drive_bracket_bolts_RIGHT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": null,
-        "sku": "CB5-16",
-        "quantity": 4
-      },
-      "volume_mm3": 2391.53740754523,
-      "bounds_mm": [
-        [
-          123.75,
-          144.25
-        ],
-        [
-          25.75,
-          84.25
-        ],
-        [
-          110.0,
-          131.0
-        ]
-      ],
-      "center_mm": [
-        134.0,
-        54.999999999999986,
-        122.98275862068964
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_drive_bracket_nuts_RIGHT",
+      "name": "80_drive_swing_arm_6t_RIGHT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RIGHT",
-        "moving_wheel": null,
-        "quantity": 4
+        "moving_wheel": "RIGHT",
+        "material": "S355 6t laser-cut tray, 3 bends; AF10.2 trial slot; M8 tapped seat",
+        "arm_length_mm": 130.0
       },
-      "volume_mm3": 572.6507481162855,
+      "volume_mm3": 114214.2644129525,
       "bounds_mm": [
         [
-          123.38119784648299,
-          144.618802153517
+          69.0,
+          173.0
         ],
         [
-          26.0,
-          84.0
+          -44.0,
+          44.0
         ],
         [
-          113.0,
-          117.0
+          66.0,
+          108.0
         ]
       ],
       "center_mm": [
-        133.99999999999997,
-        55.0,
-        114.99999999999997
+        127.9437844318354,
+        0.0660147172279176,
+        79.91763583546201
       ],
-      "solids": 4
+      "solids": 1
     },
     {
       "name": "80_drive_axial_spacer_trial_RIGHT",
@@ -2488,98 +2237,163 @@
       "solids": 1
     },
     {
-      "name": "80_drive_spring_hanger_C_RIGHT",
+      "name": "80_drive_hinge_bracket_U_RIGHT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
-        "material": "4.5t sheet, 2 bends"
+        "material": "4.5t sheet, 2 bends; ream both ear holes together"
       },
-      "volume_mm3": 13638.322772140453,
+      "volume_mm3": 18466.07792941994,
       "bounds_mm": [
         [
-          120.0,
-          168.0
+          66.0,
+          96.0
         ],
         [
-          -45.0,
-          -5.0
+          -49.0,
+          49.0
         ],
         [
-          120.0,
-          174.0
+          83.0,
+          117.0
         ]
       ],
       "center_mm": [
-        140.51836502713275,
-        -24.999999999999993,
-        147.78210194632734
+        80.99999999999993,
+        0.0,
+        109.6414104477943
       ],
       "solids": 1
     },
     {
-      "name": "80_drive_hanger_bolts_RIGHT",
+      "name": "80_drive_bracket_bolts_RIGHT",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
         "sku": "CB5-14",
-        "quantity": 2
+        "quantity": 4
       },
-      "volume_mm3": 1117.2288874328701,
+      "volume_mm3": 2234.45777486574,
       "bounds_mm": [
         [
-          123.75,
-          132.25
+          69.75,
+          92.25
         ],
         [
-          -39.25,
-          -10.75
+          -29.25,
+          29.25
         ],
         [
-          110.5,
-          129.5
+          106.0,
+          125.0
         ]
       ],
       "center_mm": [
-        128.00000000000003,
-        -24.999999999999996,
-        122.32513181019334
+        81.0,
+        -2.035157504436566e-15,
+        117.82513181019333
       ],
-      "solids": 2
+      "solids": 4
     },
     {
-      "name": "80_drive_hanger_nuts_RIGHT",
+      "name": "80_drive_bracket_nuts_RIGHT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
-        "quantity": 2
+        "quantity": 4
       },
-      "volume_mm3": 286.32537405814276,
+      "volume_mm3": 572.6507481162864,
       "bounds_mm": [
         [
-          123.38119784648299,
-          132.618802153517
+          69.38119784648299,
+          92.61880215351701
         ],
         [
-          -39.0,
-          -11.0
+          -29.0,
+          29.0
         ],
         [
-          113.0,
-          117.0
+          108.5,
+          112.5
         ]
       ],
       "center_mm": [
-        127.99999999999997,
-        -24.99999999999999,
-        114.99999999999996
+        80.99999999999999,
+        -1.191164123287201e-15,
+        110.49999999999997
       ],
-      "solids": 2
+      "solids": 4
+    },
+    {
+      "name": "80_drive_hinge_pin_RIGHT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "sku": "CLBKHM10-99",
+        "length_mm": 99.0,
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+      },
+      "volume_mm3": 7822.565707438585,
+      "bounds_mm": [
+        [
+          73.0,
+          89.0
+        ],
+        [
+          -50.5,
+          50.0
+        ],
+        [
+          87.0,
+          103.0
+        ]
+      ],
+      "center_mm": [
+        81.0,
+        -2.9012048192771096,
+        95.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_pin_retainer_RIGHT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "sku": "CB6-8",
+        "washer": "M6 OD16 t1"
+      },
+      "volume_mm3": 866.3255901539216,
+      "bounds_mm": [
+        [
+          73.0,
+          89.0
+        ],
+        [
+          43.0,
+          57.0
+        ],
+        [
+          87.0,
+          103.0
+        ]
+      ],
+      "center_mm": [
+        80.99999999999999,
+        51.489991296779785,
+        94.99999999999999
+      ],
+      "solids": 1
     },
     {
       "name": "80_drive_preload_shim_RIGHT",
@@ -2587,28 +2401,28 @@
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RIGHT",
-        "moving_wheel": null,
+        "moving_wheel": "RIGHT",
         "remove_without_arm": true
       },
-      "volume_mm3": 649.4300333500819,
+      "volume_mm3": 1623.5750833752052,
       "bounds_mm": [
         [
-          145.0,
-          167.0
+          144.0,
+          166.0
         ],
         [
           -36.0,
           -14.0
         ],
         [
-          167.5,
-          169.5
+          72.0,
+          77.0
         ]
       ],
       "center_mm": [
-        156.0,
+        155.0,
         -25.000000000000004,
-        168.49999999999997
+        74.5
       ],
       "solids": 1
     },
@@ -2620,99 +2434,70 @@
         "wheel": "RIGHT",
         "moving_wheel": null,
         "sku": "X-SWU21-70",
-        "spring_top_z": 167.5,
-        "spring_length_mm": 52.5,
+        "spring_top_z": 117,
+        "spring_length_mm": 40,
         "spring_xy": [
-          156,
+          155,
           -25
         ],
         "rate_N_mm": 5.39,
         "free_length_mm": 70,
-        "nominal_spring_force_N": 94.325,
+        "nominal_spring_force_N": 161.7,
+        "lever_ratio": 0.5692,
         "geometry": "catalog envelope with illustrative round-wire sweep"
       },
-      "volume_mm3": 3631.3642665641096,
+      "volume_mm3": 3613.47447613257,
       "bounds_mm": [
         [
-          145.49999819709922,
-          166.50000180290087
+          144.49999819709066,
+          165.50000180290934
         ],
         [
-          -35.50000180290111,
-          -14.499998197098915
+          -35.50000180290946,
+          -14.499998197090772
         ],
         [
-          115.02072481233672,
-          167.47927518766463
+          77.0115445655435,
+          116.98845543445638
         ]
       ],
       "center_mm": [
-        155.99999916744113,
-        -25.000000001298933,
-        141.24999997946952
+        154.99999930210225,
+        -25.000000000854484,
+        96.9999999934412
       ],
       "solids": 1
     },
     {
-      "name": "80_drive_bump_stop_sleeve_RIGHT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": "RIGHT",
-        "material": "Loose steel or urethane tube on the guide bolt; cut to CAD length"
-      },
-      "volume_mm3": 3282.004566445659,
-      "bounds_mm": [
-        [
-          149.5,
-          162.5
-        ],
-        [
-          -31.5,
-          -18.5
-        ],
-        [
-          115.0,
-          157.45
-        ]
-      ],
-      "center_mm": [
-        155.99999999999994,
-        -24.999999999999993,
-        136.225
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_drive_guide_bolt_M8_RIGHT",
+      "name": "80_drive_stud_M8_RIGHT",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "RIGHT",
-        "moving_wheel": null,
-        "sku": "M8 hex bolt",
-        "length_mm": 84.65
+        "moving_wheel": "RIGHT",
+        "sku": "M8 stud",
+        "length_mm": 70.0,
+        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 5316.831406935365,
+      "volume_mm3": 3520.180532710146,
       "bounds_mm": [
         [
-          149.5,
-          162.5
+          151.0,
+          159.0
         ],
         [
-          -31.5,
-          -18.5
+          -29.0,
+          -21.0
         ],
         [
-          89.35000000000001,
-          182.0
+          66.0,
+          136.03176654458514
         ]
       ],
       "center_mm": [
-        156.00000000000003,
+        155.0,
         -25.0,
-        140.926861262113
+        101.01588327229257
       ],
       "solids": 1
     },
@@ -2722,222 +2507,95 @@
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RIGHT",
-        "moving_wheel": null,
-        "adjust": "Nut sets the droop limit; lock with a second nut"
+        "moving_wheel": "RIGHT",
+        "adjust": "Turn the nut to set the droop limit; lock with a second nut"
       },
-      "volume_mm3": 857.634046756542,
+      "volume_mm3": 857.6340467565418,
       "bounds_mm": [
         [
-          148.0,
-          164.0
+          147.0,
+          163.0
         ],
         [
           -33.0,
           -17.0
         ],
         [
-          90.85000000000001,
-          98.95
+          126.43176654458514,
+          134.53176654458514
         ]
       ],
       "center_mm": [
-        155.99999999999997,
+        155.0,
         -24.999999999999996,
-        95.20043980774031
+        130.18132673684482
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_carrier_6t_bent_LF",
+      "name": "80_drive_bump_stop_bolt_M6_RIGHT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "sku": "M6 hex bolt + jam nut",
+        "tip_z": 76.887,
+        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+      },
+      "volume_mm3": 1981.860569315308,
+      "bounds_mm": [
+        [
+          134.22649730810375,
+          145.77350269189625
+        ],
+        [
+          15.0,
+          25.0
+        ],
+        [
+          76.88737906717219,
+          126.0
+        ]
+      ],
+      "center_mm": [
+        140.00000000000003,
+        19.999999999999996,
+        106.64536017480296
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_swing_arm_6t_LF",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LF",
         "moving_wheel": "LF",
-        "material": "S355 6t laser-cut, 1 bend"
+        "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
+        "arm_length_mm": 90
       },
-      "volume_mm3": 56463.209836646616,
+      "volume_mm3": 56588.391641873866,
       "bounds_mm": [
         [
           -173.0,
-          -103.0
+          -36.0
         ],
         [
-          152.0,
-          250.0
+          184.99999999999991,
+          245.0
         ],
         [
-          43.699999999999996,
-          89.0
+          83.0,
+          110.0
         ]
       ],
       "center_mm": [
-        -137.99999999999994,
-        187.55870952697998,
-        79.37868142669154
+        -96.68284153607675,
+        214.99999999999952,
+        87.9902753206409
       ],
       "solids": 1
-    },
-    {
-      "name": "80_caster_rail_LF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": null,
-        "sku": "SSEBWML14-70",
-        "moments_Nm": [
-          20.6,
-          22.3,
-          52.1
-        ]
-      },
-      "volume_mm3": 13440.0,
-      "bounds_mm": [
-        [
-          -150.0,
-          -126.0
-        ],
-        [
-          138.0,
-          146.0
-        ],
-        [
-          31.849999999999994,
-          101.85
-        ]
-      ],
-      "center_mm": [
-        -138.0,
-        142.0,
-        66.85
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_rail_block_LF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": "LF",
-        "sku": "SSEBWML14 block"
-      },
-      "volume_mm3": 18761.050000000003,
-      "bounds_mm": [
-        [
-          -163.5,
-          -112.5
-        ],
-        [
-          141.0,
-          152.0
-        ],
-        [
-          44.69999999999999,
-          89.0
-        ]
-      ],
-      "center_mm": [
-        -138.0,
-        147.39285714285717,
-        66.85
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_rail_bracket_L_LF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": null,
-        "material": "6t sheet, 1 bend; rail face as rolled, check flatness"
-      },
-      "volume_mm3": 47372.80093337345,
-      "bounds_mm": [
-        [
-          -173.0,
-          -103.0
-        ],
-        [
-          105.0,
-          138.0
-        ],
-        [
-          29.849999999999994,
-          117.0
-        ]
-      ],
-      "center_mm": [
-        -138.00000000000006,
-        131.23081155256727,
-        82.64937905848582
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bracket_bolts_LF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": null,
-        "sku": "CB5-16",
-        "quantity": 4
-      },
-      "volume_mm3": 2391.53740754523,
-      "bounds_mm": [
-        [
-          -170.25,
-          -105.75
-        ],
-        [
-          108.75,
-          131.25
-        ],
-        [
-          104.0,
-          125.0
-        ]
-      ],
-      "center_mm": [
-        -137.99999999999997,
-        119.99999999999999,
-        116.98275862068964
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_caster_bracket_nuts_LF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": null,
-        "quantity": 4
-      },
-      "volume_mm3": 572.650748116286,
-      "bounds_mm": [
-        [
-          -170.618802153517,
-          -105.38119784648299
-        ],
-        [
-          109.0,
-          131.0
-        ],
-        [
-          107.0,
-          111.0
-        ]
-      ],
-      "center_mm": [
-        -137.99999999999997,
-        119.99999999999987,
-        108.99999999999996
-      ],
-      "solids": 4
     },
     {
       "name": "80_caster_plate_bolts_LF",
@@ -3004,6 +2662,165 @@
       "solids": 4
     },
     {
+      "name": "80_caster_hinge_bracket_U_LF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null,
+        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+      },
+      "volume_mm3": 13954.902579404878,
+      "bounds_mm": [
+        [
+          -63.0,
+          -33.0
+        ],
+        [
+          179.5,
+          250.5
+        ],
+        [
+          88.0,
+          117.0
+        ]
+      ],
+      "center_mm": [
+        -47.99999999999997,
+        215.0,
+        109.99991476964324
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_bracket_bolts_LF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null,
+        "sku": "CB5-14",
+        "quantity": 2
+      },
+      "volume_mm3": 1117.2288874328704,
+      "bounds_mm": [
+        [
+          -52.25,
+          -43.75
+        ],
+        [
+          195.75,
+          234.25
+        ],
+        [
+          106.0,
+          125.0
+        ]
+      ],
+      "center_mm": [
+        -47.99999999999999,
+        215.00000000000003,
+        117.82513181019333
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_bracket_nuts_LF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null,
+        "quantity": 2
+      },
+      "volume_mm3": 286.32537405814327,
+      "bounds_mm": [
+        [
+          -52.61880215351701,
+          -43.38119784648299
+        ],
+        [
+          196.0,
+          234.0
+        ],
+        [
+          108.5,
+          112.5
+        ]
+      ],
+      "center_mm": [
+        -48.0,
+        214.99999999999986,
+        110.5
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_hinge_pin_LF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null,
+        "sku": "CLBKHM10-72",
+        "length_mm": 72.0,
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+      },
+      "volume_mm3": 5701.990666265475,
+      "bounds_mm": [
+        [
+          -56.0,
+          -40.0
+        ],
+        [
+          178.0,
+          251.5
+        ],
+        [
+          92.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        -48.00000000000001,
+        212.1504132231405,
+        100.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_pin_retainer_LF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": null,
+        "sku": "CB6-8",
+        "washer": "M6 OD16 t1"
+      },
+      "volume_mm3": 866.3255901539213,
+      "bounds_mm": [
+        [
+          -56.0,
+          -40.0
+        ],
+        [
+          244.5,
+          258.5
+        ],
+        [
+          92.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        -48.0,
+        252.9899912967798,
+        99.99999999999999
+      ],
+      "solids": 1
+    },
+    {
       "name": "80_caster_preload_shim_LF",
       "group": "suspension",
       "status": "suspension_fabrication_design",
@@ -3012,25 +2829,25 @@
         "moving_wheel": "LF",
         "remove_without_arm": true
       },
-      "volume_mm3": 398.1026210628984,
+      "volume_mm3": 995.2565526572461,
       "bounds_mm": [
         [
-          -147.0,
-          -129.0
+          -122.0,
+          -104.0
         ],
         [
-          161.0,
-          179.0
+          206.0,
+          224.0
         ],
         [
           89.0,
-          91.0
+          94.0
         ]
       ],
       "center_mm": [
-        -138.0,
-        170.0,
-        90.0
+        -113.00000000000001,
+        215.0,
+        91.50000000000001
       ],
       "solids": 1
     },
@@ -3043,98 +2860,69 @@
         "moving_wheel": null,
         "sku": "X-SWU17-35",
         "spring_top_z": 117,
-        "spring_length_mm": 26,
+        "spring_length_mm": 23,
         "spring_xy": [
-          -138,
-          170
+          -113,
+          215
         ],
         "rate_N_mm": 6.96,
         "free_length_mm": 35,
-        "nominal_spring_force_N": 62.64,
+        "nominal_spring_force_N": 83.52,
+        "lever_ratio": 0.7222,
         "geometry": "catalog envelope with illustrative round-wire sweep"
       },
-      "volume_mm3": 1445.7773314920328,
+      "volume_mm3": 1442.7395927535276,
       "bounds_mm": [
         [
-          -146.49999094911206,
-          -129.4999998999919
+          -121.49999094911269,
+          -104.49999989999408
         ],
         [
-          161.5000003996178,
-          178.49999960038187
+          206.5000003996179,
+          223.49999960038224
         ],
         [
-          91.01390451191482,
-          116.986095488085
+          94.01051230727886,
+          116.98948769272126
         ]
       ],
       "center_mm": [
-        -137.99999700108867,
-        169.99999999345664,
-        103.99999999099843
+        -112.99999707985157,
+        214.9999999946877,
+        105.49999999284756
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_bump_stop_sleeve_LF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LF",
-        "moving_wheel": "LF",
-        "material": "Loose steel or urethane tube on the guide bolt; cut to CAD length"
-      },
-      "volume_mm3": 484.40845444231627,
-      "bounds_mm": [
-        [
-          -143.0,
-          -133.0
-        ],
-        [
-          165.0,
-          175.0
-        ],
-        [
-          91.0,
-          111.95
-        ]
-      ],
-      "center_mm": [
-        -137.99999999999997,
-        169.99999999999994,
-        101.475
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_bolt_M8_LF",
+      "name": "80_caster_stud_M8_LF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LF",
-        "moving_wheel": null,
-        "sku": "M8 hex bolt",
-        "length_mm": 51.65
+        "moving_wheel": "LF",
+        "sku": "M8 stud",
+        "length_mm": 50.7,
+        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 3658.070485839953,
+      "volume_mm3": 2550.2918159736278,
       "bounds_mm": [
         [
-          -144.5,
-          -131.5
+          -117.0,
+          -109.0
         ],
         [
-          163.5,
-          176.5
+          211.0,
+          219.0
         ],
         [
-          68.35000000000001,
-          128.0
+          83.0,
+          133.73644360487617
         ]
       ],
       "center_mm": [
-        -137.99999999999997,
-        170.00000000000003,
-        102.83254895225008
+        -113.0,
+        215.0,
+        108.36822180243809
       ],
       "solids": 1
     },
@@ -3144,222 +2932,95 @@
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LF",
-        "moving_wheel": null,
-        "adjust": "Nut sets the droop limit; lock with a second nut"
+        "moving_wheel": "LF",
+        "adjust": "Turn the nut to set the droop limit; lock with a second nut"
       },
-      "volume_mm3": 857.6340467565419,
+      "volume_mm3": 857.634046756544,
       "bounds_mm": [
         [
-          -146.0,
-          -130.0
-        ],
-        [
-          162.0,
-          178.0
-        ],
-        [
-          69.85000000000001,
-          77.95
-        ]
-      ],
-      "center_mm": [
-        -138.0,
-        170.00000000000006,
-        74.20043980774037
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_carrier_6t_bent_LB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": "LB",
-        "material": "S355 6t laser-cut, 1 bend"
-      },
-      "volume_mm3": 56463.20983664664,
-      "bounds_mm": [
-        [
-          -173.0,
-          -103.0
-        ],
-        [
-          -250.0,
-          -152.0
-        ],
-        [
-          43.699999999999996,
-          89.0
-        ]
-      ],
-      "center_mm": [
-        -138.0,
-        -187.55870952697998,
-        79.37868142669153
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_rail_LB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": null,
-        "sku": "SSEBWML14-70",
-        "moments_Nm": [
-          20.6,
-          22.3,
-          52.1
-        ]
-      },
-      "volume_mm3": 13440.0,
-      "bounds_mm": [
-        [
-          -150.0,
-          -126.0
-        ],
-        [
-          -146.0,
-          -138.0
-        ],
-        [
-          31.849999999999994,
-          101.85
-        ]
-      ],
-      "center_mm": [
-        -138.0,
-        -142.0,
-        66.85
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_rail_block_LB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": "LB",
-        "sku": "SSEBWML14 block"
-      },
-      "volume_mm3": 18761.050000000003,
-      "bounds_mm": [
-        [
-          -163.5,
-          -112.5
-        ],
-        [
-          -152.0,
-          -141.0
-        ],
-        [
-          44.69999999999999,
-          89.0
-        ]
-      ],
-      "center_mm": [
-        -138.0,
-        -147.39285714285717,
-        66.85
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_rail_bracket_L_LB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": null,
-        "material": "6t sheet, 1 bend; rail face as rolled, check flatness"
-      },
-      "volume_mm3": 47372.800933373466,
-      "bounds_mm": [
-        [
-          -173.0,
-          -103.0
-        ],
-        [
-          -138.0,
+          -121.0,
           -105.0
         ],
         [
-          29.849999999999994,
-          117.0
+          207.0,
+          223.0
+        ],
+        [
+          124.13644360487619,
+          132.23644360487617
         ]
       ],
       "center_mm": [
-        -137.99999999999994,
-        -131.23081155256725,
-        82.64937905848579
+        -113.00000000000003,
+        214.99999999999997,
+        127.88600379713584
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_bracket_bolts_LB",
+      "name": "80_caster_bump_stop_bolt_M6_LF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
-        "wheel": "LB",
+        "wheel": "LF",
         "moving_wheel": null,
-        "sku": "CB5-16",
-        "quantity": 4
+        "sku": "M6 hex bolt + jam nut",
+        "tip_z": 91.456,
+        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
       },
-      "volume_mm3": 2391.53740754523,
+      "volume_mm3": 1569.9459856636984,
       "bounds_mm": [
         [
-          -170.25,
-          -105.75
+          -93.77350269189625,
+          -82.22649730810375
         ],
         [
-          -131.25,
-          -108.75
+          210.0,
+          220.0
         ],
         [
-          104.0,
-          125.0
+          91.45587731601523,
+          126.0
         ]
       ],
       "center_mm": [
-        -137.99999999999997,
-        -119.99999999999996,
-        116.98275862068962
+        -87.99999999999999,
+        215.0,
+        112.54190568496456
       ],
-      "solids": 4
+      "solids": 1
     },
     {
-      "name": "80_caster_bracket_nuts_LB",
+      "name": "80_caster_swing_arm_6t_LB",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LB",
-        "moving_wheel": null,
-        "quantity": 4
+        "moving_wheel": "LB",
+        "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
+        "arm_length_mm": 90
       },
-      "volume_mm3": 572.650748116286,
+      "volume_mm3": 56588.391641873866,
       "bounds_mm": [
         [
-          -170.618802153517,
-          -105.38119784648299
+          -173.0,
+          -36.0
         ],
         [
-          -131.0,
-          -109.0
+          -245.0,
+          -184.99999999999991
         ],
         [
-          107.0,
-          111.0
+          83.0,
+          110.0
         ]
       ],
       "center_mm": [
-        -138.00000000000003,
-        -120.0,
-        108.99999999999999
+        -96.68284153607675,
+        -214.99999999999957,
+        87.99027532064092
       ],
-      "solids": 4
+      "solids": 1
     },
     {
       "name": "80_caster_plate_bolts_LB",
@@ -3426,6 +3087,165 @@
       "solids": 4
     },
     {
+      "name": "80_caster_hinge_bracket_U_LB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null,
+        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+      },
+      "volume_mm3": 13954.902579404878,
+      "bounds_mm": [
+        [
+          -63.0,
+          -33.0
+        ],
+        [
+          -250.5,
+          -179.5
+        ],
+        [
+          88.0,
+          117.0
+        ]
+      ],
+      "center_mm": [
+        -47.99999999999997,
+        -215.0,
+        109.99991476964324
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_bracket_bolts_LB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null,
+        "sku": "CB5-14",
+        "quantity": 2
+      },
+      "volume_mm3": 1117.2288874328704,
+      "bounds_mm": [
+        [
+          -52.25,
+          -43.75
+        ],
+        [
+          -234.25,
+          -195.75
+        ],
+        [
+          106.0,
+          125.0
+        ]
+      ],
+      "center_mm": [
+        -47.99999999999999,
+        -215.0,
+        117.82513181019333
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_bracket_nuts_LB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null,
+        "quantity": 2
+      },
+      "volume_mm3": 286.32537405814327,
+      "bounds_mm": [
+        [
+          -52.61880215351701,
+          -43.38119784648299
+        ],
+        [
+          -234.0,
+          -196.0
+        ],
+        [
+          108.5,
+          112.5
+        ]
+      ],
+      "center_mm": [
+        -48.0,
+        -214.99999999999997,
+        110.5
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_hinge_pin_LB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null,
+        "sku": "CLBKHM10-72",
+        "length_mm": 72.0,
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+      },
+      "volume_mm3": 5701.990666265475,
+      "bounds_mm": [
+        [
+          -56.0,
+          -40.0
+        ],
+        [
+          -252.0,
+          -178.5
+        ],
+        [
+          92.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        -48.00000000000001,
+        -217.84958677685952,
+        100.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_pin_retainer_LB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null,
+        "sku": "CB6-8",
+        "washer": "M6 OD16 t1"
+      },
+      "volume_mm3": 866.3255901539213,
+      "bounds_mm": [
+        [
+          -56.0,
+          -40.0
+        ],
+        [
+          -185.5,
+          -171.5
+        ],
+        [
+          92.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        -48.0,
+        -177.0100087032202,
+        99.99999999999999
+      ],
+      "solids": 1
+    },
+    {
       "name": "80_caster_preload_shim_LB",
       "group": "suspension",
       "status": "suspension_fabrication_design",
@@ -3434,25 +3254,25 @@
         "moving_wheel": "LB",
         "remove_without_arm": true
       },
-      "volume_mm3": 398.1026210628984,
+      "volume_mm3": 995.2565526572461,
       "bounds_mm": [
         [
-          -147.0,
-          -129.0
+          -122.0,
+          -104.0
         ],
         [
-          -179.0,
-          -161.0
+          -224.0,
+          -206.0
         ],
         [
           89.0,
-          91.0
+          94.0
         ]
       ],
       "center_mm": [
-        -138.0,
-        -170.0,
-        90.0
+        -113.00000000000001,
+        -215.0,
+        91.50000000000001
       ],
       "solids": 1
     },
@@ -3465,98 +3285,69 @@
         "moving_wheel": null,
         "sku": "X-SWU17-35",
         "spring_top_z": 117,
-        "spring_length_mm": 26,
+        "spring_length_mm": 23,
         "spring_xy": [
-          -138,
-          -170
+          -113,
+          -215
         ],
         "rate_N_mm": 6.96,
         "free_length_mm": 35,
-        "nominal_spring_force_N": 62.64,
+        "nominal_spring_force_N": 83.52,
+        "lever_ratio": 0.7222,
         "geometry": "catalog envelope with illustrative round-wire sweep"
       },
-      "volume_mm3": 1445.7773314920328,
+      "volume_mm3": 1442.7395927535276,
       "bounds_mm": [
         [
-          -146.49999094911206,
-          -129.4999998999919
+          -121.49999094911269,
+          -104.49999989999408
         ],
         [
-          -178.4999996003822,
-          -161.50000039961813
+          -223.4999996003821,
+          -206.50000039961776
         ],
         [
-          91.01390451191482,
-          116.986095488085
+          94.01051230727886,
+          116.98948769272126
         ]
       ],
       "center_mm": [
-        -137.99999700108867,
-        -170.00000000654336,
-        103.99999999099843
+        -112.99999707985157,
+        -215.0000000053123,
+        105.49999999284756
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_bump_stop_sleeve_LB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LB",
-        "moving_wheel": "LB",
-        "material": "Loose steel or urethane tube on the guide bolt; cut to CAD length"
-      },
-      "volume_mm3": 484.40845444231627,
-      "bounds_mm": [
-        [
-          -143.0,
-          -133.0
-        ],
-        [
-          -175.0,
-          -165.0
-        ],
-        [
-          91.0,
-          111.95
-        ]
-      ],
-      "center_mm": [
-        -137.99999999999997,
-        -169.99999999999994,
-        101.475
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_bolt_M8_LB",
+      "name": "80_caster_stud_M8_LB",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "LB",
-        "moving_wheel": null,
-        "sku": "M8 hex bolt",
-        "length_mm": 51.65
+        "moving_wheel": "LB",
+        "sku": "M8 stud",
+        "length_mm": 50.7,
+        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 3658.070485839953,
+      "volume_mm3": 2550.2918159736278,
       "bounds_mm": [
         [
-          -144.5,
-          -131.5
+          -117.0,
+          -109.0
         ],
         [
-          -176.5,
-          -163.5
+          -219.0,
+          -211.0
         ],
         [
-          68.35000000000001,
-          128.0
+          83.0,
+          133.73644360487617
         ]
       ],
       "center_mm": [
-        -137.99999999999997,
-        -170.00000000000003,
-        102.83254895225008
+        -113.0,
+        -215.0,
+        108.36822180243809
       ],
       "solids": 1
     },
@@ -3566,222 +3357,95 @@
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LB",
-        "moving_wheel": null,
-        "adjust": "Nut sets the droop limit; lock with a second nut"
+        "moving_wheel": "LB",
+        "adjust": "Turn the nut to set the droop limit; lock with a second nut"
       },
-      "volume_mm3": 857.6340467565419,
+      "volume_mm3": 857.634046756544,
       "bounds_mm": [
         [
-          -146.0,
-          -130.0
+          -121.0,
+          -105.0
         ],
         [
-          -178.0,
-          -162.0
+          -223.0,
+          -207.0
         ],
         [
-          69.85000000000001,
-          77.95
+          124.13644360487619,
+          132.23644360487617
         ]
       ],
       "center_mm": [
-        -138.0,
-        -170.00000000000006,
-        74.20043980774037
+        -113.00000000000003,
+        -215.00000000000003,
+        127.88600379713584
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_carrier_6t_bent_RF",
+      "name": "80_caster_bump_stop_bolt_M6_LB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": null,
+        "sku": "M6 hex bolt + jam nut",
+        "tip_z": 91.456,
+        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+      },
+      "volume_mm3": 1569.9459856636984,
+      "bounds_mm": [
+        [
+          -93.77350269189625,
+          -82.22649730810375
+        ],
+        [
+          -220.0,
+          -210.0
+        ],
+        [
+          91.45587731601523,
+          126.0
+        ]
+      ],
+      "center_mm": [
+        -87.99999999999999,
+        -215.0,
+        112.54190568496456
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_swing_arm_6t_RF",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RF",
         "moving_wheel": "RF",
-        "material": "S355 6t laser-cut, 1 bend"
+        "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
+        "arm_length_mm": 90
       },
-      "volume_mm3": 56463.209836646616,
+      "volume_mm3": 56588.39164187389,
       "bounds_mm": [
         [
-          103.0,
+          36.0,
           173.0
         ],
         [
-          152.0,
-          250.0
+          184.99999999999991,
+          245.0
         ],
         [
-          43.699999999999996,
-          89.0
+          83.0,
+          110.0
         ]
       ],
       "center_mm": [
-        138.0,
-        187.55870952697998,
-        79.37868142669154
+        96.68284153607668,
+        214.9999999999995,
+        87.99027532064085
       ],
       "solids": 1
-    },
-    {
-      "name": "80_caster_rail_RF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": null,
-        "sku": "SSEBWML14-70",
-        "moments_Nm": [
-          20.6,
-          22.3,
-          52.1
-        ]
-      },
-      "volume_mm3": 13440.0,
-      "bounds_mm": [
-        [
-          126.0,
-          150.0
-        ],
-        [
-          138.0,
-          146.0
-        ],
-        [
-          31.849999999999994,
-          101.85
-        ]
-      ],
-      "center_mm": [
-        138.0,
-        142.0,
-        66.85
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_rail_block_RF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": "RF",
-        "sku": "SSEBWML14 block"
-      },
-      "volume_mm3": 18761.050000000003,
-      "bounds_mm": [
-        [
-          112.5,
-          163.5
-        ],
-        [
-          141.0,
-          152.0
-        ],
-        [
-          44.69999999999999,
-          89.0
-        ]
-      ],
-      "center_mm": [
-        138.0,
-        147.39285714285717,
-        66.85
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_rail_bracket_L_RF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": null,
-        "material": "6t sheet, 1 bend; rail face as rolled, check flatness"
-      },
-      "volume_mm3": 47372.80093337345,
-      "bounds_mm": [
-        [
-          103.0,
-          173.0
-        ],
-        [
-          105.0,
-          138.0
-        ],
-        [
-          29.849999999999994,
-          117.0
-        ]
-      ],
-      "center_mm": [
-        138.0,
-        131.23081155256727,
-        82.64937905848582
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bracket_bolts_RF",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": null,
-        "sku": "CB5-16",
-        "quantity": 4
-      },
-      "volume_mm3": 2391.53740754523,
-      "bounds_mm": [
-        [
-          105.75,
-          170.25
-        ],
-        [
-          108.75,
-          131.25
-        ],
-        [
-          104.0,
-          125.0
-        ]
-      ],
-      "center_mm": [
-        138.0,
-        120.00000000000001,
-        116.98275862068962
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_caster_bracket_nuts_RF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": null,
-        "quantity": 4
-      },
-      "volume_mm3": 572.650748116286,
-      "bounds_mm": [
-        [
-          105.38119784648299,
-          170.618802153517
-        ],
-        [
-          109.0,
-          131.0
-        ],
-        [
-          107.0,
-          111.0
-        ]
-      ],
-      "center_mm": [
-        137.99999999999991,
-        120.0,
-        109.00000000000001
-      ],
-      "solids": 4
     },
     {
       "name": "80_caster_plate_bolts_RF",
@@ -3848,6 +3512,165 @@
       "solids": 4
     },
     {
+      "name": "80_caster_hinge_bracket_U_RF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null,
+        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+      },
+      "volume_mm3": 13954.902579404878,
+      "bounds_mm": [
+        [
+          33.0,
+          63.0
+        ],
+        [
+          179.5,
+          250.5
+        ],
+        [
+          88.0,
+          117.0
+        ]
+      ],
+      "center_mm": [
+        47.99999999999997,
+        215.0,
+        109.99991476964324
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_bracket_bolts_RF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null,
+        "sku": "CB5-14",
+        "quantity": 2
+      },
+      "volume_mm3": 1117.2288874328704,
+      "bounds_mm": [
+        [
+          43.75,
+          52.25
+        ],
+        [
+          195.75,
+          234.25
+        ],
+        [
+          106.0,
+          125.0
+        ]
+      ],
+      "center_mm": [
+        47.99999999999999,
+        215.00000000000003,
+        117.82513181019333
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_bracket_nuts_RF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null,
+        "quantity": 2
+      },
+      "volume_mm3": 286.32537405814327,
+      "bounds_mm": [
+        [
+          43.38119784648299,
+          52.61880215351701
+        ],
+        [
+          196.0,
+          234.0
+        ],
+        [
+          108.5,
+          112.5
+        ]
+      ],
+      "center_mm": [
+        48.0,
+        214.99999999999991,
+        110.49999999999997
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_hinge_pin_RF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null,
+        "sku": "CLBKHM10-72",
+        "length_mm": 72.0,
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+      },
+      "volume_mm3": 5701.990666265475,
+      "bounds_mm": [
+        [
+          40.0,
+          56.0
+        ],
+        [
+          178.0,
+          251.5
+        ],
+        [
+          92.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        48.00000000000001,
+        212.1504132231405,
+        100.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_pin_retainer_RF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null,
+        "sku": "CB6-8",
+        "washer": "M6 OD16 t1"
+      },
+      "volume_mm3": 866.3255901539213,
+      "bounds_mm": [
+        [
+          40.0,
+          56.0
+        ],
+        [
+          244.5,
+          258.5
+        ],
+        [
+          92.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        48.0,
+        252.9899912967798,
+        99.99999999999999
+      ],
+      "solids": 1
+    },
+    {
       "name": "80_caster_preload_shim_RF",
       "group": "suspension",
       "status": "suspension_fabrication_design",
@@ -3856,25 +3679,25 @@
         "moving_wheel": "RF",
         "remove_without_arm": true
       },
-      "volume_mm3": 398.1026210628984,
+      "volume_mm3": 995.2565526572461,
       "bounds_mm": [
         [
-          129.0,
-          147.0
+          104.0,
+          122.0
         ],
         [
-          161.0,
-          179.0
+          206.0,
+          224.0
         ],
         [
           89.0,
-          91.0
+          94.0
         ]
       ],
       "center_mm": [
-        138.0,
-        170.0,
-        90.0
+        113.00000000000004,
+        214.99999999999997,
+        91.50000000000001
       ],
       "solids": 1
     },
@@ -3887,98 +3710,69 @@
         "moving_wheel": null,
         "sku": "X-SWU17-35",
         "spring_top_z": 117,
-        "spring_length_mm": 26,
+        "spring_length_mm": 23,
         "spring_xy": [
-          138,
-          170
+          113,
+          215
         ],
         "rate_N_mm": 6.96,
         "free_length_mm": 35,
-        "nominal_spring_force_N": 62.64,
+        "nominal_spring_force_N": 83.52,
+        "lever_ratio": 0.7222,
         "geometry": "catalog envelope with illustrative round-wire sweep"
       },
-      "volume_mm3": 1445.7773314920328,
+      "volume_mm3": 1442.7395927535276,
       "bounds_mm": [
         [
-          129.50000905088794,
-          146.5000001000081
+          104.50000905088731,
+          121.50000010000592
         ],
         [
-          161.5000003996178,
-          178.49999960038187
+          206.5000003996179,
+          223.49999960038224
         ],
         [
-          91.01390451191482,
-          116.986095488085
+          94.01051230727886,
+          116.98948769272126
         ]
       ],
       "center_mm": [
-        138.00000299891133,
-        169.99999999345664,
-        103.99999999099843
+        113.00000292014843,
+        214.9999999946877,
+        105.49999999284756
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_bump_stop_sleeve_RF",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RF",
-        "moving_wheel": "RF",
-        "material": "Loose steel or urethane tube on the guide bolt; cut to CAD length"
-      },
-      "volume_mm3": 484.40845444231627,
-      "bounds_mm": [
-        [
-          133.0,
-          143.0
-        ],
-        [
-          165.0,
-          175.0
-        ],
-        [
-          91.0,
-          111.95
-        ]
-      ],
-      "center_mm": [
-        137.99999999999994,
-        169.99999999999994,
-        101.475
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_bolt_M8_RF",
+      "name": "80_caster_stud_M8_RF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "RF",
-        "moving_wheel": null,
-        "sku": "M8 hex bolt",
-        "length_mm": 51.65
+        "moving_wheel": "RF",
+        "sku": "M8 stud",
+        "length_mm": 50.7,
+        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 3658.070485839953,
+      "volume_mm3": 2550.2918159736278,
       "bounds_mm": [
         [
-          131.5,
-          144.5
+          109.0,
+          117.0
         ],
         [
-          163.5,
-          176.5
+          211.0,
+          219.0
         ],
         [
-          68.35000000000001,
-          128.0
+          83.0,
+          133.73644360487617
         ]
       ],
       "center_mm": [
-        138.0,
-        170.00000000000003,
-        102.83254895225008
+        113.0,
+        215.0,
+        108.36822180243809
       ],
       "solids": 1
     },
@@ -3988,222 +3782,95 @@
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RF",
-        "moving_wheel": null,
-        "adjust": "Nut sets the droop limit; lock with a second nut"
+        "moving_wheel": "RF",
+        "adjust": "Turn the nut to set the droop limit; lock with a second nut"
       },
-      "volume_mm3": 857.6340467565419,
+      "volume_mm3": 857.634046756544,
       "bounds_mm": [
         [
-          130.0,
-          146.0
+          105.0,
+          121.0
         ],
         [
-          162.0,
-          178.0
+          207.0,
+          223.0
         ],
         [
-          69.85000000000001,
-          77.95
+          124.13644360487619,
+          132.23644360487617
         ]
       ],
       "center_mm": [
-        138.00000000000009,
-        170.00000000000006,
-        74.20043980774037
+        113.0,
+        215.00000000000003,
+        127.88600379713584
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_carrier_6t_bent_RB",
+      "name": "80_caster_bump_stop_bolt_M6_RF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": null,
+        "sku": "M6 hex bolt + jam nut",
+        "tip_z": 91.456,
+        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+      },
+      "volume_mm3": 1569.9459856636984,
+      "bounds_mm": [
+        [
+          82.22649730810375,
+          93.77350269189625
+        ],
+        [
+          210.0,
+          220.0
+        ],
+        [
+          91.45587731601523,
+          126.0
+        ]
+      ],
+      "center_mm": [
+        88.0,
+        215.0,
+        112.54190568496456
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_swing_arm_6t_RB",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RB",
         "moving_wheel": "RB",
-        "material": "S355 6t laser-cut, 1 bend"
+        "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
+        "arm_length_mm": 90
       },
-      "volume_mm3": 56463.20983664664,
+      "volume_mm3": 56588.39164187388,
       "bounds_mm": [
         [
-          103.0,
+          36.0,
           173.0
         ],
         [
-          -250.0,
-          -152.0
+          -245.0,
+          -184.99999999999991
         ],
         [
-          43.699999999999996,
-          89.0
+          83.0,
+          110.0
         ]
       ],
       "center_mm": [
-        138.00000000000003,
-        -187.55870952697998,
-        79.37868142669153
+        96.68284153607667,
+        -214.99999999999946,
+        87.9902753206409
       ],
       "solids": 1
-    },
-    {
-      "name": "80_caster_rail_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": null,
-        "sku": "SSEBWML14-70",
-        "moments_Nm": [
-          20.6,
-          22.3,
-          52.1
-        ]
-      },
-      "volume_mm3": 13440.0,
-      "bounds_mm": [
-        [
-          126.0,
-          150.0
-        ],
-        [
-          -146.0,
-          -138.0
-        ],
-        [
-          31.849999999999994,
-          101.85
-        ]
-      ],
-      "center_mm": [
-        138.0,
-        -142.0,
-        66.85
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_rail_block_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB",
-        "sku": "SSEBWML14 block"
-      },
-      "volume_mm3": 18761.050000000003,
-      "bounds_mm": [
-        [
-          112.5,
-          163.5
-        ],
-        [
-          -152.0,
-          -141.0
-        ],
-        [
-          44.69999999999999,
-          89.0
-        ]
-      ],
-      "center_mm": [
-        138.00000000000006,
-        -147.39285714285717,
-        66.85
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_rail_bracket_L_RB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": null,
-        "material": "6t sheet, 1 bend; rail face as rolled, check flatness"
-      },
-      "volume_mm3": 47372.800933373466,
-      "bounds_mm": [
-        [
-          103.0,
-          173.0
-        ],
-        [
-          -138.0,
-          -105.0
-        ],
-        [
-          29.849999999999994,
-          117.0
-        ]
-      ],
-      "center_mm": [
-        137.99999999999997,
-        -131.23081155256725,
-        82.64937905848579
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_bracket_bolts_RB",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": null,
-        "sku": "CB5-16",
-        "quantity": 4
-      },
-      "volume_mm3": 2391.53740754523,
-      "bounds_mm": [
-        [
-          105.75,
-          170.25
-        ],
-        [
-          -131.25,
-          -108.75
-        ],
-        [
-          104.0,
-          125.0
-        ]
-      ],
-      "center_mm": [
-        138.0,
-        -120.00000000000001,
-        116.98275862068962
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_caster_bracket_nuts_RB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": null,
-        "quantity": 4
-      },
-      "volume_mm3": 572.650748116286,
-      "bounds_mm": [
-        [
-          105.38119784648299,
-          170.618802153517
-        ],
-        [
-          -131.0,
-          -109.0
-        ],
-        [
-          107.0,
-          111.0
-        ]
-      ],
-      "center_mm": [
-        138.0,
-        -120.00000000000004,
-        109.00000000000003
-      ],
-      "solids": 4
     },
     {
       "name": "80_caster_plate_bolts_RB",
@@ -4270,6 +3937,165 @@
       "solids": 4
     },
     {
+      "name": "80_caster_hinge_bracket_U_RB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+      },
+      "volume_mm3": 13954.902579404878,
+      "bounds_mm": [
+        [
+          33.0,
+          63.0
+        ],
+        [
+          -250.5,
+          -179.5
+        ],
+        [
+          88.0,
+          117.0
+        ]
+      ],
+      "center_mm": [
+        47.99999999999997,
+        -215.0,
+        109.99991476964324
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_bracket_bolts_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "sku": "CB5-14",
+        "quantity": 2
+      },
+      "volume_mm3": 1117.2288874328704,
+      "bounds_mm": [
+        [
+          43.75,
+          52.25
+        ],
+        [
+          -234.25,
+          -195.75
+        ],
+        [
+          106.0,
+          125.0
+        ]
+      ],
+      "center_mm": [
+        47.99999999999999,
+        -215.0,
+        117.82513181019333
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_bracket_nuts_RB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "quantity": 2
+      },
+      "volume_mm3": 286.32537405814327,
+      "bounds_mm": [
+        [
+          43.38119784648299,
+          52.61880215351701
+        ],
+        [
+          -234.0,
+          -196.0
+        ],
+        [
+          108.5,
+          112.5
+        ]
+      ],
+      "center_mm": [
+        48.0,
+        -215.0,
+        110.49999999999997
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_hinge_pin_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "sku": "CLBKHM10-72",
+        "length_mm": 72.0,
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+      },
+      "volume_mm3": 5701.990666265475,
+      "bounds_mm": [
+        [
+          40.0,
+          56.0
+        ],
+        [
+          -252.0,
+          -178.5
+        ],
+        [
+          92.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        48.00000000000001,
+        -217.84958677685952,
+        100.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_pin_retainer_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "sku": "CB6-8",
+        "washer": "M6 OD16 t1"
+      },
+      "volume_mm3": 866.3255901539213,
+      "bounds_mm": [
+        [
+          40.0,
+          56.0
+        ],
+        [
+          -185.5,
+          -171.5
+        ],
+        [
+          92.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        48.0,
+        -177.0100087032202,
+        99.99999999999999
+      ],
+      "solids": 1
+    },
+    {
       "name": "80_caster_preload_shim_RB",
       "group": "suspension",
       "status": "suspension_fabrication_design",
@@ -4278,25 +4104,25 @@
         "moving_wheel": "RB",
         "remove_without_arm": true
       },
-      "volume_mm3": 398.1026210628984,
+      "volume_mm3": 995.2565526572461,
       "bounds_mm": [
         [
-          129.0,
-          147.0
+          104.0,
+          122.0
         ],
         [
-          -179.0,
-          -161.0
+          -224.0,
+          -206.0
         ],
         [
           89.0,
-          91.0
+          94.0
         ]
       ],
       "center_mm": [
-        138.0,
-        -170.0,
-        90.0
+        113.00000000000004,
+        -214.99999999999997,
+        91.50000000000001
       ],
       "solids": 1
     },
@@ -4309,98 +4135,69 @@
         "moving_wheel": null,
         "sku": "X-SWU17-35",
         "spring_top_z": 117,
-        "spring_length_mm": 26,
+        "spring_length_mm": 23,
         "spring_xy": [
-          138,
-          -170
+          113,
+          -215
         ],
         "rate_N_mm": 6.96,
         "free_length_mm": 35,
-        "nominal_spring_force_N": 62.64,
+        "nominal_spring_force_N": 83.52,
+        "lever_ratio": 0.7222,
         "geometry": "catalog envelope with illustrative round-wire sweep"
       },
-      "volume_mm3": 1445.7773314920328,
+      "volume_mm3": 1442.7395927535276,
       "bounds_mm": [
         [
-          129.50000905088794,
-          146.5000001000081
+          104.50000905088731,
+          121.50000010000592
         ],
         [
-          -178.4999996003822,
-          -161.50000039961813
+          -223.4999996003821,
+          -206.50000039961776
         ],
         [
-          91.01390451191482,
-          116.986095488085
+          94.01051230727886,
+          116.98948769272126
         ]
       ],
       "center_mm": [
-        138.00000299891133,
-        -170.00000000654336,
-        103.99999999099843
+        113.00000292014843,
+        -215.0000000053123,
+        105.49999999284756
       ],
       "solids": 1
     },
     {
-      "name": "80_caster_bump_stop_sleeve_RB",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RB",
-        "moving_wheel": "RB",
-        "material": "Loose steel or urethane tube on the guide bolt; cut to CAD length"
-      },
-      "volume_mm3": 484.40845444231627,
-      "bounds_mm": [
-        [
-          133.0,
-          143.0
-        ],
-        [
-          -175.0,
-          -165.0
-        ],
-        [
-          91.0,
-          111.95
-        ]
-      ],
-      "center_mm": [
-        137.99999999999994,
-        -169.99999999999994,
-        101.475
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_caster_guide_bolt_M8_RB",
+      "name": "80_caster_stud_M8_RB",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
       "metadata": {
         "wheel": "RB",
-        "moving_wheel": null,
-        "sku": "M8 hex bolt",
-        "length_mm": 51.65
+        "moving_wheel": "RB",
+        "sku": "M8 stud",
+        "length_mm": 50.7,
+        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 3658.070485839953,
+      "volume_mm3": 2550.2918159736278,
       "bounds_mm": [
         [
-          131.5,
-          144.5
+          109.0,
+          117.0
         ],
         [
-          -176.5,
-          -163.5
+          -219.0,
+          -211.0
         ],
         [
-          68.35000000000001,
-          128.0
+          83.0,
+          133.73644360487617
         ]
       ],
       "center_mm": [
-        138.0,
-        -170.00000000000003,
-        102.83254895225008
+        113.0,
+        -215.0,
+        108.36822180243809
       ],
       "solids": 1
     },
@@ -4410,28 +4207,61 @@
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RB",
-        "moving_wheel": null,
-        "adjust": "Nut sets the droop limit; lock with a second nut"
+        "moving_wheel": "RB",
+        "adjust": "Turn the nut to set the droop limit; lock with a second nut"
       },
-      "volume_mm3": 857.6340467565419,
+      "volume_mm3": 857.634046756544,
       "bounds_mm": [
         [
-          130.0,
-          146.0
+          105.0,
+          121.0
         ],
         [
-          -178.0,
-          -162.0
+          -223.0,
+          -207.0
         ],
         [
-          69.85000000000001,
-          77.95
+          124.13644360487619,
+          132.23644360487617
         ]
       ],
       "center_mm": [
-        138.00000000000009,
-        -170.00000000000006,
-        74.20043980774037
+        113.0,
+        -215.00000000000003,
+        127.88600379713584
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_bump_stop_bolt_M6_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": null,
+        "sku": "M6 hex bolt + jam nut",
+        "tip_z": 91.456,
+        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+      },
+      "volume_mm3": 1569.9459856636984,
+      "bounds_mm": [
+        [
+          82.22649730810375,
+          93.77350269189625
+        ],
+        [
+          -220.0,
+          -210.0
+        ],
+        [
+          91.45587731601523,
+          126.0
+        ]
+      ],
+      "center_mm": [
+        88.0,
+        -215.0,
+        112.54190568496456
       ],
       "solids": 1
     }

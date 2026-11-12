@@ -1,6 +1,6 @@
 # 대학생 AMR 프로젝트 — build123d / Rev09
 
-2WD 차동구동 + 캐스터 4개입니다. **Rev11 서스펜션**은 6개 바퀴가 각각 MISUMI 와이드 미니어처 레일과 스프링으로 독립 수직 이동하는 구조이며 용접이 없습니다. 판재는 강판 3t, 상판 윗면은 지면에서 286mm입니다. 설계 원본은 build123d Python과 JSON이며, FreeCAD에서 측정·단면·조립을 검토합니다. [서스펜션 상세](docs/suspension-misumi.md) · [미스미 구매 BOM](bom/suspension_misumi.csv)
+2WD 차동구동 + 캐스터 4개입니다. **Rev12 서스펜션**은 6개 바퀴가 각각 짧은 경첩 암과 MISUMI 힌지 핀·스프링으로 독립적으로 움직이는 단순한 구조이며 용접·레일이 없습니다. 판재는 강판 3t, 상판 윗면은 지면에서 286mm입니다. 설계 원본은 build123d Python과 JSON이며, FreeCAD에서 측정·단면·조립을 검토합니다. [서스펜션 상세](docs/suspension-misumi.md) · [미스미 구매 BOM](bom/suspension_misumi.csv)
 
 - [3D 뷰어](https://hsh3167.github.io/amr_project/) · [최신 STEP](cad-output/amr_current.step) · [검증 결과](cad-output/build_report.json)
 - [최신 설계 상태](design_state.md) · [생성/수정/FreeCAD 실행 방법](docs/build123d-workflow.md)

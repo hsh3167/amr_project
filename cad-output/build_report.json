@@ -1,94 +1,98 @@
 {
   "valid": true,
-  "components": 141,
-  "solids": 319,
+  "components": 135,
+  "solids": 293,
   "errors": [],
   "suspension_catalog": {
-    "concept": "Rev11 six independent vertical rail modules",
+    "concept": "Rev12 six independent hinge + spring modules",
     "design_mass_kg": 55,
     "modules": {
       "drive": {
         "sku": "X-SWU21-70",
         "travel_mm": 20,
+        "lever_ratio": 0.5692,
+        "spring_travel_mm": 11.385,
         "spring_lengths_mm": [
-          62.5,
-          52.5,
-          42.5
+          45.692,
+          40,
+          34.308
         ],
         "forces_N": [
-          40.425,
-          94.325,
-          148.225
+          131.02,
+          161.7,
+          192.38
         ],
-        "min_solid_margin_mm": 21.5,
-        "max_working_deflection_margin_mm": 11.0,
-        "installed_length_mm": 52.5,
-        "shim_removed_force_N": 83.545,
+        "min_solid_margin_mm": 13.308,
+        "max_working_deflection_margin_mm": 2.808,
+        "installed_length_mm": 40,
+        "shim_removed_force_N": 134.75,
         "ground_force_N": [
-          77.69,
-          131.59,
-          185.49
+          109.881,
+          127.344,
+          144.807
         ],
-        "estimated_ground_force_N": 131.59,
-        "wheel_rate_N_mm": 5.39
+        "estimated_ground_force_N": 127.344,
+        "wheel_rate_N_mm": 1.746
       },
       "caster": {
         "sku": "X-SWU17-35",
         "travel_mm": 10,
+        "lever_ratio": 0.7222,
+        "spring_travel_mm": 7.222,
         "spring_lengths_mm": [
-          31.0,
-          26,
-          21.0
+          26.611,
+          23,
+          19.389
         ],
         "forces_N": [
-          27.84,
-          62.64,
-          97.44
+          58.387,
+          83.52,
+          108.653
         ],
-        "min_solid_margin_mm": 10.5,
-        "max_working_deflection_margin_mm": 5.3,
-        "installed_length_mm": 26,
+        "min_solid_margin_mm": 8.889,
+        "max_working_deflection_margin_mm": 3.689,
+        "installed_length_mm": 23,
         "shim_removed_force_N": 48.72,
         "ground_force_N": [
-          36.176,
-          70.976,
-          105.776
+          50.503,
+          68.654,
+          86.805
         ],
-        "estimated_ground_force_N": 70.976,
-        "wheel_rate_N_mm": 6.96
+        "estimated_ground_force_N": 68.654,
+        "wheel_rate_N_mm": 3.63
       }
     },
-    "combined_wheel_rate_N_mm": 38.62,
+    "combined_wheel_rate_N_mm": 18.012,
     "static_cases": {
       "with_arm": {
         "mass_kg": 55,
         "preload_shims": true,
-        "body_sink_mm": -0.2,
+        "body_sink_mm": 0.559,
         "within_travel": true,
-        "drive_each_N": 130.513,
-        "drive_load_fraction": 0.4839,
-        "caster_each_N": 69.585
+        "drive_each_N": 128.319,
+        "caster_each_N": 70.682,
+        "drive_load_fraction": 0.4758
       },
       "without_arm_shims_removed": {
         "mass_kg": 35,
         "preload_shims": false,
-        "body_sink_mm": -3.278,
+        "body_sink_mm": -3.046,
         "within_travel": true,
-        "drive_each_N": 103.14,
-        "drive_load_fraction": 0.601,
-        "caster_each_N": 34.238
+        "drive_each_N": 106.686,
+        "caster_each_N": 32.465,
+        "drive_load_fraction": 0.6217
       },
       "without_arm_shims_kept": {
         "mass_kg": 35,
         "preload_shims": true,
-        "body_sink_mm": -5.278,
+        "body_sink_mm": -10.33,
         "within_travel": false,
-        "drive_each_N": 103.14,
-        "drive_load_fraction": 0.601,
-        "caster_each_N": 34.238
+        "drive_each_N": 109.307,
+        "caster_each_N": 31.155,
+        "drive_load_fraction": 0.6369
       }
     },
-    "scope": "Centered CG, flat floor, catalog spring rate (load +-10%). Body sink is the common spring travel from nominal; remove the 2 mm preload shims without the arm. Measure on prototype."
+    "scope": "Centered CG, flat floor, catalog spring rate (load +-10%), small-angle lever ratio. Caster load also varies with swivel direction (contact 68-112 mm from the hinge). Remove preload shims without the arm. Measure on prototype."
   },
   "counts": {
     "drive_motor": 2,
@@ -139,15 +143,15 @@
   "selected_sensor_collisions": [],
   "suspension_collision_sampling": {
     "sampled_poses": 30,
-    "boolean_pairs": 208,
+    "boolean_pairs": 226,
     "hits": [],
-    "scope": "One wheel at a time (six vertical rail modules), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
+    "scope": "One wheel at a time (six hinge modules), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
   },
   "caster_swivel_sampling": {
     "sampled_poses": 96,
-    "boolean_pairs": 300,
+    "boolean_pairs": 128,
     "hits": [],
-    "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump; local hardware and chassis"
+    "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump of its hinge arm; local hardware and chassis"
   },
   "step_roundtrip": [
     {
@@ -166,7 +170,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 319
+      "solids": 293
     }
   ]
 }

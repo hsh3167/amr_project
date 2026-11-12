@@ -1,18 +1,18 @@
-"""Rev11 suspension: six independent vertical modules.
+"""Rev12 suspension: six independent hinge + spring modules (pivot axis +Y).
 
-Each wheel: one MISUMI wide miniature rail on a bent-sheet fixed bracket, a bent
-moving carrier on the block, one X-SWU spring on an M8 guide bolt. The guide-bolt
-nut is the droop stop and a loose sleeve inside the spring is the bump stop.
-No welding and no reamed bores. Rev09 (twin shafts + plain bushes, welded
-rockers) and Rev10 (swing arms) stay in git history. Dimensions in mm.
+Per wheel: one bent-sheet bracket under the base plate, one bent arm, one catalog
+hinge pin, one X-SWU spring between the arm and the base plate underside on an
+M8 stud. The stud's top nut is the droop stop and an M6 bolt through the base
+plate is the bump stop. No welding, rails, hangers or bearings. Earlier concepts
+(Rev09 shafts/rockers, Rev10 swing arm + seesaw, Rev11 rails) are in git history.
+Dimensions in mm.
 """
 from math import cos, pi, sin
 from build123d import Axis, Circle, Compound, Helix, Plane, sweep
-from ..caster_motion import CASTER_WHEELS, caster_xy, pose_shape
-from .common import PartRecord, cylx, cylz, drilled, polygon_plate, span
+from ..caster_motion import CASTER_WHEELS, caster_xy, pivot_of, pose_shape, rotate_point, seat_travel
+from .common import PartRecord, cylx, cyly, cylz, drilled, polygon_plate, span
 
 SCREW_HEAD = {3: 5.5, 4: 7, 5: 8.5, 6: 10, 8: 13}
-NUT = {5: (8, 4), 6: (10, 5), 8: (13, 6.5)}
 
 
 def ring(x, y, bottom, height, od, bore):
@@ -41,13 +41,35 @@ def coil(x, y, bottom, height, q):
     return sweep(section, path=path, is_frenet=True).translate((x, y, bottom+wire/2))
 
 
+def spring_point(d, key):
+    """(x, y, seat z) of the spring on the moving arm."""
+    if key in ('LEFT', 'RIGHT'):
+        q = d.layout['suspension']['drive']
+        side = -1 if key == 'LEFT' else 1
+        return side*q['spring_x_mm'], q['spring_y_mm'], q['arm_bottom_z_mm']+q['arm_thickness_mm']
+    q = d.layout['suspension']['caster']
+    x, y = caster_xy(d, key)
+    side = -1 if x < 0 else 1
+    return x-side*q['spring_offset_mm'], y, d.parts['caster']['cad_height']+q['arm_thickness_mm']
+
+
+def lever_ratio(d, kind):
+    """Spring travel / wheel travel (also wheel force / spring force)."""
+    key = 'RIGHT' if kind == 'drive' else 'RF'
+    (px, _, _), length = pivot_of(d, key)
+    x, _, _ = spring_point(d, key)
+    return abs(x-px)/length
+
+
 def spring_state(d, kind):
     q = d.layout['suspension'][kind]
-    half = q['travel_mm']/2
+    ratio = lever_ratio(d, kind)
+    half = q['travel_mm']/2*ratio
     installed = q['loaded_length_mm']-q['shim_mm']
     free, rate = q['free_length_mm'], q['rate_N_mm']
-    lengths = [installed+half, installed, installed-half]
-    return {'sku': q['spring_sku'], 'travel_mm': q['travel_mm'], 'spring_lengths_mm': lengths,
+    lengths = [round(installed+half, 3), installed, round(installed-half, 3)]
+    return {'sku': q['spring_sku'], 'travel_mm': q['travel_mm'], 'lever_ratio': round(ratio, 4),
+            'spring_travel_mm': round(2*half, 3), 'spring_lengths_mm': lengths,
             'forces_N': [round(rate*max(0, free-length), 3) for length in lengths],
             'min_solid_margin_mm': round(lengths[2]-q['solid_length_mm'], 3),
             'max_working_deflection_margin_mm': round(q['max_deflection_mm']-(free-lengths[2]), 3),
@@ -55,54 +77,33 @@ def spring_state(d, kind):
             'shim_removed_force_N': round(rate*max(0, free-q['loaded_length_mm']), 3)}
 
 
-def drive_layout(d, side):
-    q = d.layout['suspension']['drive']
-    base_top = d.p['base_bottom_z']+d.p['base_thickness']
-    bracket = [(side*a, b) for a in (128, 140) for b in (30, 80)]
-    hanger = [(side*128, b) for b in (-35, -15)]
-    return q, base_top, bracket, hanger
+def bracket_holes(d, key):
+    (px, py, _), _ = pivot_of(d, key)
+    if key in ('LEFT', 'RIGHT'):
+        return [(px+dx, py+dy) for dx in (-7, 7) for dy in (-25, 25)]
+    return [(px, py+dy) for dy in (-15, 15)]
 
 
-def caster_layout(d, wheel):
-    x, y = caster_xy(d, wheel)
-    o = 1 if y > 0 else -1
-    q = d.layout['suspension']['caster']
-    flange = [(x+dx, y-o*dy) for dx in (-28, 28) for dy in (88, 102)]
-    guide = (x, y-o*q['spring_offset_mm'])
-    return q, x, y, o, flange, guide
+def bump_stop_xy(d, key):
+    if key in ('LEFT', 'RIGHT'):
+        return (140 if key == 'RIGHT' else -140), 20
+    x, y = caster_xy(d, key)
+    off = d.layout['suspension']['caster']['bump_stop_offset_mm']
+    return x-(off if x > 0 else -off), y
+
+
+def stud_hole(d, key):
+    return 13 if key in ('LEFT', 'RIGHT') else 12
 
 
 def chassis_mount_holes(d):
     holes = []
-    for side in (-1, 1):
-        _, _, bracket, hanger = drive_layout(d, side)
-        holes.extend((a, b, 5.5) for a, b in bracket+hanger)
-    for wheel in CASTER_WHEELS:
-        _, _, _, _, flange, guide = caster_layout(d, wheel)
-        holes.extend((a, b, 5.5) for a, b in flange)
-        holes.append((*guide, 8.5))
+    for key in ('LEFT', 'RIGHT', *CASTER_WHEELS):
+        holes.extend((a, b, 5.5) for a, b in bracket_holes(d, key))
+        x, y, _ = spring_point(d, key)
+        holes.append((x, y, stud_hole(d, key)))
+        holes.append((*bump_stop_xy(d, key), 6.5))
     return holes
-
-
-def rail_block(q, axis, face, normal, center, z_bottom, block_center_z):
-    """Rail on a mounting face and the block riding on it.
-
-    axis 'x': mounting face normal is X (drive); 'y': normal is Y (caster).
-    face: coordinate of the rail mounting face; normal: +1/-1 direction from the
-    face toward the block; center: rail centreline in the other horizontal axis.
-    """
-    h, w, rh, length = q['rail_h_mm'], q['rail_w_mm'], q['rail_height_mm'], q['rail_length_mm']
-    bw, bl = q['block_w_mm'], q['block_l_mm']
-
-    def piece(c0, c1, a0, a1, z0, z1):
-        n0, n1 = sorted((face+normal*a0, face+normal*a1))
-        return span(n0, n1, c0, c1, z0, z1) if axis == 'x' else span(c0, c1, n0, n1, z0, z1)
-
-    rail = piece(center-w/2, center+w/2, 0, rh, z_bottom, z_bottom+length)
-    zb0, zb1 = block_center_z-bl/2, block_center_z+bl/2
-    block = piece(center-bw/2, center+bw/2, 3, h, zb0, zb1)
-    block -= piece(center-w/2-.5, center+w/2+.5, 2, rh+.5, zb0-1, zb1+1)
-    return rail, block
 
 
 def make(d):
@@ -114,133 +115,139 @@ def make(d):
     def add(name, shape, wheel, moving=False, sku=None, **metadata):
         if moving:
             shape = pose_shape(d, shape, wheel, d.motion.get(wheel, 0))
-        color = (.77, .64, .36) if 'rail' in name or 'block' in name else (.48, .65, .78)
+        color = (.77, .64, .36) if 'pin' in name else (.48, .65, .78)
         status = 'misumi_catalog_envelope' if sku else 'suspension_fabrication_design'
         records.append(PartRecord('80_'+name+'_'+wheel, 'suspension', shape, color, status,
                                   {'wheel': wheel, 'moving_wheel': wheel if moving else None,
                                    **({'sku': sku} if sku else {}), **metadata}))
 
-    def spring_stack(kind, wheel, x, y, seat, top, sleeve_od):
-        """Shim on the moving seat, coil, loose bump sleeve, fixed guide bolt and droop nut."""
+    def hinge(kind, key, x0, x1, ear_y, ear_bottom, q):
+        """Fixed U bracket under the base plate, hinge pin and retainer."""
+        (px, py, pz), _ = pivot_of(d, key)
+        bt = q['bracket_thickness_mm']
+        bracket = span(min(x0, x1), max(x0, x1), py-ear_y-bt, py+ear_y+bt, base_bottom-bt, base_bottom)
+        for sy in (-1, 1):
+            y0, y1 = sorted((py+sy*ear_y, py+sy*(ear_y+bt)))
+            bracket += span(px-12, px+12, y0, y1, ear_bottom, base_bottom-bt)
+        bracket -= cyly(q['pin_d_mm']/2+.005, 2*(ear_y+bt)+2, px, py, pz)
+        holes = bracket_holes(d, key)
+        bracket = drilled(bracket, holes, 5.5, base_bottom-bt, bt)
+        add(kind+'_hinge_bracket_U', bracket, key, material=f'{bt}t sheet, 2 bends; ream both ear holes together')
+        add(kind+'_bracket_bolts', Compound([screw(a, b, base_top, 5, 14) for a, b in holes]), key,
+            sku='CB5-14', quantity=len(holes))
+        add(kind+'_bracket_nuts', Compound([nut(a, b, base_bottom-bt-4, 8, 4, 5) for a, b in holes]), key,
+            quantity=len(holes))
+        span_y = 2*(ear_y+bt)
+        length = round(span_y+1, 1)
+        lo = py-ear_y-bt
+        pin = cyly(q['pin_d_mm']/2, length, px, lo+length/2, pz)
+        pin += cyly(q['pin_head_d_mm']/2, q['pin_head_thickness_mm'], px, lo-q['pin_head_thickness_mm']/2, pz)
+        pin -= cyly(3, 10, px, lo+length-4, pz)
+        add(kind+'_hinge_pin', pin, key, sku=q['pin_sku'], length_mm=length,
+            fit='Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1')
+        end = lo+length
+        keeper = cyly(8, 1, px, end+.5, pz)-cyly(3.2, 3, px, end+.5, pz)
+        keeper += cyly(3, 8, px, end-3, pz)+cyly(5, 6, px, end+4, pz)
+        add(kind+'_pin_retainer', keeper, key, sku='CB6-8', washer='M6 OD16 t1')
+
+    def spring_stack(kind, key, washer_od):
         q = d.layout['suspension'][kind]
         half = q['travel_mm']/2
+        x, y, seat = spring_point(d, key)
         state = spring_state(d, kind)
-        dz = d.motion.get(wheel, 0)
-        if abs(top-seat-q['loaded_length_mm']) > 1e-6:
-            raise ValueError('Spring stack and catalog seating length differ: '+wheel)
-        bottom = seat
-        if kind == 'caster' and q['shim_mm'] > 0:
-            add(kind+'_preload_shim', ring(x, y, seat, q['shim_mm'], q['spring_od_mm']+1, 8.4), wheel, True,
-                remove_without_arm=True)
-            bottom = seat+q['shim_mm']
-        if kind == 'drive' and q['shim_mm'] > 0:
-            add(kind+'_preload_shim', ring(x, y, top-q['shim_mm'], q['shim_mm'], q['spring_od_mm']+1, 8.4), wheel,
-                remove_without_arm=True)
+        if abs(base_bottom-seat-q['loaded_length_mm']) > 1e-6:
+            raise ValueError('Spring gap and catalog seating length differ: '+key)
+        value = d.motion.get(key, 0)
+        bottom = seat+q['shim_mm']
+        add(kind+'_preload_shim', ring(x, y, seat, q['shim_mm'], q['spring_od_mm']+1, 8.4), key, True,
+            remove_without_arm=True)
         length = state['installed_length_mm']
-        add(kind+'_spring_coil', coil(x, y, bottom+dz, length-dz, q), wheel, sku=q['spring_sku'],
+        dz = seat_travel(d, key, value, x, bottom)
+        add(kind+'_spring_coil', coil(x, y, bottom+dz, length-dz, q), key, sku=q['spring_sku'],
             spring_top_z=bottom+length, spring_length_mm=length, spring_xy=[x, y], rate_N_mm=q['rate_N_mm'],
             free_length_mm=q['free_length_mm'], nominal_spring_force_N=state['forces_N'][1],
-            geometry='catalog envelope with illustrative round-wire sweep')
-        sleeve_top = bottom+length-half-.05
-        add(kind+'_bump_stop_sleeve', ring(x, y, bottom, sleeve_top-bottom, sleeve_od, 8.4), wheel, True,
-            material='Loose steel or urethane tube on the guide bolt; cut to CAD length')
+            lever_ratio=state['lever_ratio'], geometry='catalog envelope with illustrative round-wire sweep')
+        # Washer and nut on the stud land on the base plate top at full droop.
+        w = washer_od/2
+        drop = min(seat_travel(d, key, -half, x+dx, base_top) for dx in (-w, w))
+        washer_bottom = base_top-drop+.05
+        nut_top = washer_bottom+1.6+6.5
+        stud = cylz(4, nut_top+1.5-(seat-q['arm_thickness_mm']), x, y, seat-q['arm_thickness_mm'])
+        add(kind+'_stud_M8', stud, key, True, sku='M8 stud', length_mm=round(nut_top+1.5-seat+q['arm_thickness_mm'], 1),
+            fit='Threaded into the arm (tapped M8) and locked with a nut')
+        stop = ring(x, y, washer_bottom, 1.6, washer_od, 8.4)+nut(x, y, washer_bottom+1.6, 13, 6.5, 8)
+        add(kind+'_droop_stop_washer_nut', stop, key, True, adjust='Turn the nut to set the droop limit; lock with a second nut')
         return state
 
-    def droop_stop(kind, wheel, x, y, carrier_bottom, head_bearing):
+    def bump_stop(kind, key, x, y, surface):
+        """M6 stop bolt through the base plate; its tip meets the arm at full bump."""
         half = d.layout['suspension'][kind]['travel_mm']/2
-        washer_top = carrier_bottom-half-.05
-        nut_bottom = washer_top-1.6-NUT[8][1]
-        end = nut_bottom-1.5
-        add(kind+'_guide_bolt_M8', screw(x, y, head_bearing, 8, head_bearing-end), wheel, sku='M8 hex bolt',
-            length_mm=round(head_bearing-end, 2))
-        add(kind+'_droop_stop_washer_nut', ring(x, y, washer_top-1.6, 1.6, 16, 8.4)+nut(x, y, nut_bottom, 13, 6.5, 8),
-            wheel, adjust='Nut sets the droop limit; lock with a second nut')
+        rise = max(seat_travel(d, key, half, x+dx, surface) for dx in (-3, 3))
+        tip = surface+rise+.05
+        stop = screw(x, y, base_top, 6, base_top-tip)+nut(x, y, base_bottom-5, 10, 5, 6)
+        add(kind+'_bump_stop_bolt_M6', stop, key, sku='M6 hex bolt + jam nut', tip_z=round(tip, 3),
+            adjust='Set the bump limit with the jam nut; urethane cap optional')
 
     # ---------------------------------------------------------------- drive
+    q = d.layout['suspension']['drive']
+    t = q['arm_thickness_mm']
     for side in (-1, 1):
         key = 'LEFT' if side < 0 else 'RIGHT'
-        q, _, bracket_holes, hanger_holes = drive_layout(d, side)
-        ct, cx = q['carrier_thickness_mm'], q['carrier_x_mm']
-        sx, sy, seat = q['spring_x_mm'], q['spring_y_mm'], q['spring_bottom_z_mm']
-        bt, ht = q['bracket_thickness_mm'], q['hanger_thickness_mm']
+        (px, _, pz), _ = pivot_of(d, key)
 
         def X(a, b):
             return (side*a, side*b) if side > 0 else (side*b, side*a)
 
-        inner = cx-ct/2
-        carrier = span(*X(inner, cx+ct/2), -45, 95, 50, seat)
-        carrier += span(*X(sx-10, inner), -45, -5, seat-ct, seat)
-        carrier -= cylx(7.15, ct+2, side*cx, 0, 90) & span(*X(cx-4, cx+4), -5.1, 5.1, 80, 100)
-        carrier -= cylz(4.5, ct+2, side*sx, sy, seat-ct-1)
-        add('drive_carrier_6t_bent', carrier, key, True, material='S355 6t laser-cut, 1 bend; AF10.2 trial slot')
-        face = inner-q['rail_h_mm']
-        rail, block = rail_block(q, 'x', side*face, side, q['rail_y_mm'], q['rail_z_bottom_mm'], q['block_center_z_mm'])
-        add('drive_rail', rail, key, sku=q['rail_sku'], moments_Nm=[q['block_ma_Nm'], q['block_mb_Nm'], q['block_mc_Nm']])
-        add('drive_rail_block', block, key, True, sku=q['rail_sku'].split('-')[0]+' block')
-        rail_top = q['rail_z_bottom_mm']+q['rail_length_mm']
-        bracket = span(*X(120, face), 15, 95, base_top, base_top+bt)
-        bracket += span(*X(face-bt, face), 15, 95, q['rail_z_bottom_mm']-3, max(rail_top, base_top+bt))
-        bracket = drilled(bracket, bracket_holes, 5.5, base_top, bt)
-        add('drive_rail_bracket_L', bracket, key, material='6t sheet, 1 bend; rail face as rolled, check flatness')
-        add('drive_bracket_bolts', Compound([screw(a, b, base_top+bt, 5, 16) for a, b in bracket_holes]),
-            key, sku='CB5-16', quantity=4)
-        add('drive_bracket_nuts', Compound([nut(a, b, base_bottom-4, 8, 4, 5) for a, b in bracket_holes]), key, quantity=4)
-        # Axle stack: unchanged trial dimensions, now carried by the vertical carrier.
-        spacer = cylx(9, 4.9, side*(cx+5.45), 0, 90)-cylx(7.15, 6, side*(cx+5.45), 0, 90)
+        wy, top, bot, ex = q['arm_wall_y_mm'], q['arm_top_z_mm'], q['arm_bottom_z_mm'], q['end_wall_x_mm']
+        a0 = abs(px)-12
+        arm = span(*X(a0, ex+t/2), -(wy+t), wy+t, bot, bot+t)
+        for sy in (-1, 1):
+            y0, y1 = sorted((sy*wy, sy*(wy+t)))
+            arm += span(*X(a0, ex+t/2), y0, y1, bot+t, top)
+        arm += span(*X(ex-t/2, ex+t/2), -(wy+t), wy+t, bot+t, top)
+        arm -= cyly(q['pin_d_mm']/2+.01, 2*(wy+t)+2, px, 0, pz)
+        arm -= cylx(7.15, t+2, side*ex, 0, 90) & span(*X(ex-4, ex+4), -5.1, 5.1, 80, 100)
+        sx, sy_, _ = spring_point(d, key)
+        arm -= cylz(4, t+2, sx, sy_, bot-1)
+        add('drive_swing_arm_6t', arm, key, True, material='S355 6t laser-cut tray, 3 bends; AF10.2 trial slot; M8 tapped seat',
+            arm_length_mm=round(d.p['drive_track']/2-q['pivot_x_mm'], 1))
+        # Axle stack: unchanged trial dimensions, carried by the arm end wall.
+        spacer = cylx(9, 4.9, side*(ex+5.45), 0, 90)-cylx(7.15, 6, side*(ex+5.45), 0, 90)
         add('drive_axial_spacer_trial', spacer, key, True, fit='Confirm stationary shoulder and bearing-face diameters on motor')
-        washer = cylx(10, 1, side*(cx-3.5), 0, 90)-cylx(7.15, 3, side*(cx-3.5), 0, 90)
+        washer = cylx(10, 1, side*(ex-3.5), 0, 90)-cylx(7.15, 3, side*(ex-3.5), 0, 90)
         add('drive_axle_washer', washer, key, True)
-        axle_nut = nut(0, 0, 0, 22, 8, 14.3).rotate(Axis.Y, 90).translate((side*(cx-4)-8*(side > 0), 0, 90))
+        axle_nut = nut(0, 0, 0, 22, 8, 14.3).rotate(Axis.Y, 90).translate((side*(ex-4)-8*(side > 0), 0, 90))
         add('drive_axle_M14x1p5_nut_envelope', axle_nut, key, True, fit='OEM nut thickness and wrench envelope assumed')
-        # C hanger carries the spring top over the wheel well.
-        top = seat+q['loaded_length_mm']
-        hanger = span(*X(120, 141), -45, -5, base_top, base_top+ht)
-        hanger += span(*X(141-ht, 141), -40, -10, base_top, top+ht)
-        hanger += span(*X(141-ht, sx+12), -40, -10, top, top+ht)
-        hanger = drilled(hanger, [(side*sx, sy)], 8.5, top, ht)
-        hanger = drilled(hanger, hanger_holes, 5.5, base_top, ht)
-        add('drive_spring_hanger_C', hanger, key, material='4.5t sheet, 2 bends')
-        add('drive_hanger_bolts', Compound([screw(a, b, base_top+ht, 5, 14) for a, b in hanger_holes]), key, sku='CB5-14', quantity=2)
-        add('drive_hanger_nuts', Compound([nut(a, b, base_bottom-4, 8, 4, 5) for a, b in hanger_holes]), key, quantity=2)
-        spring_stack('drive', key, side*sx, sy, seat, top, 13)
-        droop_stop('drive', key, side*sx, sy, seat-ct, top+ht)
+        hinge('drive', key, side*(abs(px)-15), side*(abs(px)+15), wy+t+q['ear_gap_mm'], 83, q)
+        spring_stack('drive', key, 16)
+        bump_stop('drive', key, side*140, 20, bot+t)
 
     # ---------------------------------------------------------------- casters
+    q = d.layout['suspension']['caster']
+    t = q['arm_thickness_mm']
     plate_top = d.parts['caster']['cad_height']
     for wheel in CASTER_WHEELS:
-        q, x, y, o, flange_holes, (gx, gy) = caster_layout(d, wheel)
-        ct, li = q['carrier_thickness_mm'], q['carrier_leg_inner_mm']
-        bt = q['bracket_thickness_mm']
-
-        def Y(a, b):
-            """Y extents from offsets measured toward the robot centre (positive = inboard)."""
-            return tuple(sorted((y-o*a, y-o*b)))
-
-        carrier_top = plate_top+ct
+        x, y = caster_xy(d, wheel)
+        side = -1 if x < 0 else 1
+        (px, _, pz), _ = pivot_of(d, wheel)
+        hw = q['arm_half_width_mm']
+        x0, x1 = sorted((px-side*12, x+side*35))
+        arm = span(x0, x1, y-hw, y+hw, plate_top, plate_top+t)
+        t0, t1 = sorted((px-side*12, px+side*25))
+        for sy in (-1, 1):
+            y0, y1 = sorted((y+sy*(hw-t), y+sy*hw))
+            arm += span(t0, t1, y0, y1, plate_top+t, q['tab_top_z_mm'])
+        arm -= cyly(q['pin_d_mm']/2+.01, 2*hw+2, px, y, pz)
         bolts = [(x+dx, y+dy) for dx in (-12, 12) for dy in (-27, 27)]
-        carrier = span(x-35, x+35, *Y(-35, li+ct), plate_top, carrier_top)
-        block_top_z = carrier_top
-        carrier += span(x-35, x+35, *Y(li, li+ct), block_top_z-q['block_l_mm']-1, carrier_top)
-        carrier = drilled(carrier, bolts, 6.6, plate_top, ct)
-        carrier = drilled(carrier, [(gx, gy)], 9, plate_top, ct)
-        add('caster_carrier_6t_bent', carrier, wheel, True, material='S355 6t laser-cut, 1 bend')
-        face = li+ct+q['rail_h_mm']
-        bc = block_top_z-q['block_l_mm']/2
-        rail_bottom = bc-q['block_l_mm']/2-q['travel_mm']/2-((q['rail_length_mm']-q['block_l_mm']-q['travel_mm'])/2)
-        rail, block = rail_block(q, 'y', y-o*face, o, x, rail_bottom, bc)
-        add('caster_rail', rail, wheel, sku=q['rail_sku'], moments_Nm=[q['block_ma_Nm'], q['block_mb_Nm'], q['block_mc_Nm']])
-        add('caster_rail_block', block, wheel, True, sku=q['rail_sku'].split('-')[0]+' block')
-        bracket = span(x-35, x+35, *Y(face, face+bt), rail_bottom-2, base_bottom)
-        bracket += span(x-35, x+35, *Y(face, 110), base_bottom-bt, base_bottom)
-        bracket = drilled(bracket, flange_holes, 5.5, base_bottom-bt, bt)
-        add('caster_rail_bracket_L', bracket, wheel, material='6t sheet, 1 bend; rail face as rolled, check flatness')
-        add('caster_bracket_bolts', Compound([screw(a, b, base_top, 5, 16) for a, b in flange_holes]),
-            wheel, sku='CB5-16', quantity=4)
-        add('caster_bracket_nuts', Compound([nut(a, b, base_bottom-bt-4, 8, 4, 5) for a, b in flange_holes]),
-            wheel, quantity=4)
+        arm = drilled(arm, bolts, 6.6, plate_top, t)
+        sx, sy_, _ = spring_point(d, wheel)
+        arm -= cylz(4, t+2, sx, sy_, plate_top-1)
+        add('caster_swing_arm_6t', arm, wheel, True, material='S355 6t laser-cut, 2 bent tabs; M8 tapped seat',
+            arm_length_mm=q['arm_length_mm'])
         add('caster_plate_bolts', Compound([screw(a, b, plate_top-5, 6, 16, True) for a, b in bolts]),
             wheel, True, sku='CB6-16', quantity=4, plate_thickness_reference_mm=5)
-        add('caster_plate_nuts', Compound([nut(a, b, carrier_top, 10, 5, 6) for a, b in bolts]), wheel, True, quantity=4)
-        spring_stack('caster', wheel, gx, gy, carrier_top, base_bottom, 10)
-        droop_stop('caster', wheel, gx, gy, plate_top, base_top)
+        add('caster_plate_nuts', Compound([nut(a, b, plate_top+t, 10, 5, 6) for a, b in bolts]), wheel, True, quantity=4)
+        hinge('caster', wheel, px-15, px+15, hw+q['ear_gap_mm'], 88, q)
+        spring_stack('caster', wheel, 16)
+        bump_stop('caster', wheel, *bump_stop_xy(d, wheel), plate_top+t)
     return records

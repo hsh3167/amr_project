@@ -88,9 +88,9 @@
         <label class="toggle"><span><i class="swatch" style="background:#8ebcff"></i>부품 라벨</span><input type="checkbox" id="showLabels" checked></label>
       </div>
       <div class="section">
-        <h2>6륜 독립 수직 서스펜션 (Rev11)</h2>
+        <h2>6륜 독립 경첩 서스펜션 (Rev12)</h2>
         <label class="toggle"><span>서스펜션 구조 표시</span><input type="checkbox" id="showSuspension" checked></label>
-        <p class="hint">6개 바퀴가 각각 미니어처 레일로 수직 이동합니다. +는 올라감, −는 내려감. 스프링 변형은 표시용입니다.</p>
+        <p class="hint">6개 바퀴가 각각 진행 방향과 나란한 핀을 축으로 도는 짧은 암에 달려 독립적으로 움직입니다. 값은 구동륜 중심·캐스터 장착 중심의 상하 이동이며 +는 올라감입니다. 스프링 변형은 표시용입니다.</p>
 <label class="mini-label" for="poseLEFT">왼쪽 구동륜 <output id="valueLEFT">0 mm</output></label><input id="poseLEFT" data-wheel="LEFT" type="range" min="-10" max="10" value="0" step="1">
 <label class="mini-label" for="poseRIGHT">오른쪽 구동륜 <output id="valueRIGHT">0 mm</output></label><input id="poseRIGHT" data-wheel="RIGHT" type="range" min="-10" max="10" value="0" step="1">
 <label class="mini-label" for="poseLF">전방 좌측 캐스터 <output id="valueLF">0 mm</output></label><input id="poseLF" data-wheel="LF" type="range" min="-5" max="5" value="0" step="1">
@@ -345,7 +345,7 @@ try{
  $('deckHeight').textContent=`${deckTop} mm`;
  const {width,length,height}=native.bounds_mm;
  $('envelopeDimensions').textContent=`W${width.toFixed(1)} × L${length.toFixed(1)} × H${height.toFixed(1)}`;
- $('partDescription').textContent=(native.lidarVisual==='drawing_envelope'?'build123d 조립 형상을 표시합니다.':'build123d 조립 형상과 SICK TiM5xx 공용 LiDAR 외형을 표시합니다.')+' 구동륜 2개와 캐스터 4개가 각각 레일 가이드로 독립 수직 이동합니다.';
+ $('partDescription').textContent=(native.lidarVisual==='drawing_envelope'?'build123d 조립 형상을 표시합니다.':'build123d 조립 형상과 SICK TiM5xx 공용 LiDAR 외형을 표시합니다.')+' 구동륜 2개와 캐스터 4개가 각각 독립 경첩 암으로 움직입니다.';
  ready=true;applyVisibility();updateBattery();robot.visible=true;$('loading').remove();
  window.amrReview.readyMs=Math.round(performance.now()-bootTime);requestRender();
 }catch(error){$('loading').textContent='CAD 불러오기 실패: '+error.message;console.error(error)}

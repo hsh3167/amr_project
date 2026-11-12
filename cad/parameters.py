@@ -35,27 +35,36 @@ def validate_parameters(d):
     if d.p["top_bottom_z"]<=d.layout["camera_mount"]["profile_bottom_z"]:
         raise ValueError("Upper deck must be above the camera hanger seat")
     if d.variant!='baseline':
+        s=d.layout['suspension']
         for kind,maximum in (('drive',20),('caster',10)):
-            q=d.layout['suspension'][kind]
+            q=s[kind]
             for key in ('travel_mm','spring_od_mm','spring_id_mm','display_turns','loaded_length_mm','free_length_mm',
-                        'solid_length_mm','max_deflection_mm','rate_N_mm','unsprung_mass_kg_estimate','rail_h_mm',
-                        'rail_w_mm','rail_height_mm','rail_length_mm','block_w_mm','block_l_mm','carrier_thickness_mm',
-                        'bracket_thickness_mm'):
+                        'solid_length_mm','max_deflection_mm','rate_N_mm','unsprung_mass_kg_estimate','pivot_z_mm',
+                        'arm_thickness_mm','bracket_thickness_mm','pin_d_mm','pin_head_d_mm'):
                 if not isinstance(q[key],(int,float)) or not math.isfinite(q[key]) or q[key]<=0:
                     raise ValueError('Invalid suspension parameter: '+kind+'.'+key)
             if q['travel_mm']>maximum:raise ValueError('Frame redesign required for greater '+kind+' travel')
             if q['shim_mm']<0 or q['spring_od_mm']<=q['spring_id_mm']:raise ValueError('Spring fit is invalid: '+kind)
-            if q['spring_id_mm']<=8.4:raise ValueError('Spring must pass the M8 guide bolt: '+kind)
-            if q['rail_length_mm']<q['block_l_mm']+q['travel_mm']:raise ValueError('Rail too short for block travel: '+kind)
-            if not q['rail_height_mm']<q['rail_h_mm']:raise ValueError('Rail height exceeds assembly height: '+kind)
+            if q['spring_id_mm']<=8.4:raise ValueError('Spring must pass the M8 stud: '+kind)
+            if kind=='drive':
+                length=d.p['drive_track']/2-q['pivot_x_mm'];ratio=(q['spring_x_mm']-q['pivot_x_mm'])/length
+                seat=q['arm_bottom_z_mm']+q['arm_thickness_mm']
+                if not 0<q['pivot_x_mm']<q['spring_x_mm']<q['end_wall_x_mm']<d.p['drive_track']/2:
+                    raise ValueError('Drive pivot, spring and axle order is invalid')
+                rise=q['travel_mm']/2*(q['end_wall_x_mm']+q['arm_thickness_mm']/2-q['pivot_x_mm'])/length
+                if q['arm_top_z_mm']+rise>=d.p['base_bottom_z']:raise ValueError('Drive arm reaches the base plate at full bump')
+                if q['spring_x_mm']+q['spring_od_mm']/2>=d.p.get('base_well_inner_x',d.p['base_width']/2-50):
+                    raise ValueError('Drive spring must sit under the base plate')
+            else:
+                ratio=(q['arm_length_mm']-q['spring_offset_mm'])/q['arm_length_mm'];seat=d.parts['caster']['cad_height']+q['arm_thickness_mm']
+                if q['arm_length_mm']<=q['travel_mm']:raise ValueError('Caster arm too short')
+            if abs(d.p['base_bottom_z']-seat-q['loaded_length_mm'])>1e-6:
+                raise ValueError('Spring gap does not match the base plate: '+kind)
             installed=q['loaded_length_mm']-q['shim_mm']
-            half=q['travel_mm']/2
+            half=q['travel_mm']/2*ratio
             if (installed+half>q['free_length_mm'] or installed-half<=q['solid_length_mm']
                     or q['free_length_mm']-(installed-half)>q['max_deflection_mm']):
                 raise ValueError('Catalog spring travel is exceeded: '+kind)
-        c=d.layout['suspension']['caster']
-        if abs(d.p['base_bottom_z']-d.parts['caster']['cad_height']-c['carrier_thickness_mm']-c['loaded_length_mm'])>1e-6:
-            raise ValueError('Caster spring gap does not match base plate height')
 
 def set_parameter(key, value):
     path=ROOT/"cad/layout.json"
