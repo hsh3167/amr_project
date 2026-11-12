@@ -56,7 +56,7 @@
 <div class="app">
   <header>
     <div class="brand"><div class="mark">A</div><div><strong>AMR PROJECT</strong><small>UNIVERSITY ROBOTICS · LAYOUT LAB</small></div></div>
-    <div class="header-right"><span class="chip"><b>●</b> REV 0.7 · BUILD123D</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    <div class="header-right"><span class="chip"><b>●</b> REV <span id="layoutRevision">0.8</span> · BUILD123D</span><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </header>
   <main class="workspace">
     <aside class="left">
@@ -99,7 +99,7 @@
 <label class="mini-label" for="poseRB">후방 우측 캐스터 <output id="valueRB">0 mm</output></label><input id="poseRB" data-wheel="RB" type="range" min="-5" max="5" value="0" step="1">
 <button class="control" id="resetSuspension">공칭 위치로 복귀</button></div>
 <div class="section">
-        <h2>센서 배치 · Rev 0.7</h2>
+        <h2>센서 배치</h2>
         <p class="hint">LiDAR: 전방 좌측·후방 우측 대각 배치. 스캔면 공칭 약241mm, 각270°의 사각90°는 차체 안쪽을 향합니다. 카메라: 상판 아래 전방 좌우 ±15°/하향10°(가정).</p>
       </div>
       <div class="section">
@@ -132,16 +132,16 @@
     <aside class="right">
       <div class="eyebrow">COMPONENT INSPECTOR</div>
       <div class="legend">부품을 클릭하면 설명 표시</div>
-      <h2 id="partName" class="detail-title">도면 반영 배치 Rev 0.7</h2>
+      <h2 id="partName" class="detail-title">도면 반영 배치</h2>
       <p id="partDescription" class="detail-text">상판을 숨기거나 분해 뷰를 조정하면 구동부·배터리·전장품을 확인할 수 있습니다. 대각 코너 LiDAR 2개와 상판 아래 카메라 2개를 적용했습니다. 모든 수직 기둥은 알루미늄 프로파일입니다. 세부 브라켓은 미확정입니다.</p>
       <div class="section" style="margin-top:18px">
         <h2>기본 배치값 (초안)</h2>
-        <div class="spec"><span>전체 엔벨로프</span><b>W546.5 × L606.5 × H307*</b></div>
+        <div class="spec"><span>전체 엔벨로프</span><b id="envelopeDimensions">—</b></div>
         <div class="spec"><span>상판 / 하판</span><b>420×550 / 390×530</b></div>
         <div class="spec"><span>드라이브 축 간격</span><b>422 (가설계)</b></div>
         <div class="spec"><span>캐스터</span><b>GL-65-ASF · Ø64 ×4</b></div>
         <div class="spec"><span>프레임</span><b>Al 20×20 · 기둥12개</b></div>
-        <div class="spec"><span>상판 높이</span><b>≈305 (가설계)</b></div>
+        <div class="spec"><span>상판 윗면 높이</span><b id="deckHeight">—</b></div>
         <div class="spec"><span>배터리 공간</span><b>235×155×95 (가정)</b></div>
         <div class="spec"><span>LiDAR</span><b>SICK TiM571 ×2</b></div>
         <div class="spec"><span>카메라</span><b>Orbbec Astra Mini Pro ×2</b></div>
@@ -194,7 +194,7 @@ const groups={},parts={},wheels=[],casters=[];
 function part(id,name,description,explode=[0,0,0]){const obj=new THREE.Group();obj.userData.id=id;obj.userData.explode=new THREE.Vector3(...explode);groups[id]=obj;parts[id]={name,description};robot.add(obj);return obj;}
 function tag(obj,id){obj.traverse(o=>{if(o.isMesh)o.userData.partId=id});}
 part('base','하부 알루미늄 판재','390×530mm 가설계. 중앙 휠모터와 간섭하지 않도록 양 측면에 휠 웰을 만들었으며, 판두께/볼트 패턴은 미확정입니다.');
-part('profiles','알루미늄 프로파일 주기둥 ×4','모든 수직 기둥은 알루미늄 프로파일. 주기둥4×183mm, LiDAR 지지2×40mm, 카메라 행거2×40mm입니다. 단면20×20과 슬롯은 범용 가정이며 구매품/접합 강도 검증이 필요합니다.',[0,70,0]);
+part('profiles','알루미늄 프로파일 주기둥 ×4',`모든 수직 기둥은 알루미늄 프로파일. 주기둥 4개는 ${LP.top_bottom_z-LAYOUT.profile.main_bottom_z}mm입니다. 단면 20×20과 슬롯은 범용 가정이며 구매품과 접합 강도를 확인해야 합니다.`,[0,70,0]);
 part('deck','탈착식 상부 판재','420×550mm 가설계. LiDAR/카메라 설치 및 향후 로봇암 체결용. 장착 예상 영역은 중앙 150×150mm이며 실제 암 정격하중/볼트 패턴은 미정입니다.',[0,170,0]);
 part('battery','7S9P 배터리 가설계','회사에서 확보 가능한 7S9P 팩을 우선 검토합니다. 화면상 235×155×95mm는 공간예약용 임시 크기입니다. 실제 팩 치수, 셀 타입, 전류, BMS, 충전기 확인 전 장착 확정 금지.',[0,45,-170]);
 part('electronics','전장부 / 전방 제어기·후방 전원부','전방은 제어기와 통신, 후방은 퓨즈·차단·DC/DC 공간, 측면은 모터 드라이버로 구분합니다. 배터리는 낮게 유지하고 신호/동력 배선 분리를 계획합니다. 실제 하드웨어 치수와 방열은 미확정입니다.',[160,75,40]);
@@ -225,7 +225,8 @@ function makeCamera(id,sign){
 makeCamera('cameraLeft',-1);makeCamera('cameraRight',1);
 const arm=part('arm','향후 로봇암 설치 영역','로봇암은 현재 포함하지 않습니다. 상판 중앙 약 Ø150mm 가상 영역을 표시하며, 미래 암 하중·작업반경·무게중심·전도 검토가 선행되어야 합니다.',[0,150,0]);
 const armMaterial=new THREE.MeshStandardMaterial({color:0xffd276,metalness:.2,roughness:.45,transparent:true,opacity:.19,depthWrite:false,side:THREE.DoubleSide});
-for(const [height,y] of [[6,312],[120,375]]){
+const deckTop=LP.top_bottom_z+LP.top_thickness;
+for(const [height,y] of [[6,deckTop+5],[120,deckTop+68]]){
  const mesh=new THREE.Mesh(new THREE.CylinderGeometry(75,75,height,32),armMaterial);
  mesh.position.y=y;arm.add(mesh);
 }
@@ -239,9 +240,9 @@ const annotations=[
  {id:'casterLF',text:'GL-65-ASF ×4',pos:[-138,133,215]},
  {id:'lidarFrontLeft',text:'TiM571 FRONT LEFT · 270°',pos:[-220,278,250]},
  {id:'lidarRearRight',text:'TiM571 REAR RIGHT · 270°',pos:[220,278,-250]},
- {id:'cameraRight',text:'ASTRA MINI PRO ×2',pos:[90,300,278]},
+ {id:'cameraRight',text:'ASTRA MINI PRO ×2',pos:[LP.camera_x,LP.camera_z+25,LP.camera_y]},
  {id:'battery',text:'7S9P BATTERY',pos:[0,238,-52]},
- {id:'deck',text:'TOP PLATE',pos:[-30,321,-192]},
+ {id:'deck',text:'TOP PLATE',pos:[-30,deckTop+14,-192]},
  {id:'electronics',text:'CONTROLLERS',pos:[0,204,180]}
 ].map(a=>{const node=document.createElement('div');node.className='annotation';node.textContent=a.text;$('labels').append(node);return {...a,node}});
 let explode=0,motion='stop',selected=null;
@@ -327,8 +328,12 @@ try{
  $('showSuspension').addEventListener('change',applyVisibility);
  document.querySelectorAll('[data-wheel]').forEach(input=>input.addEventListener('input',()=>{setMotion('stop');native.setPose(input.dataset.wheel,Number(input.value));$('value'+input.dataset.wheel).textContent=input.value+' mm'}));
  $('resetSuspension').addEventListener('click',()=>{for(const input of document.querySelectorAll('[data-wheel]')){input.value=0;native.setPose(input.dataset.wheel,0);$('value'+input.dataset.wheel).textContent='0 mm'}requestRender()});
- $('partName').textContent='build123d 조립 모델 · Rev 0.7';
- $('partDescription').textContent=(native.lidarVisual==='drawing_envelope'?'build123d 조립 형상을 표시합니다.':'build123d 조립 형상과 SICK TiM5xx 공용 LiDAR 외형을 표시합니다.')+' 30kg 설계 기준의 MISUMI 가이드·부시·스프링과 6개 독립 서스펜션을 확인할 수 있습니다.';
+ $('partName').textContent=`build123d 조립 모델 · Rev ${LAYOUT.revision}`;
+ $('layoutRevision').textContent=LAYOUT.revision;
+ $('deckHeight').textContent=`${deckTop} mm`;
+ const {width,length,height}=native.bounds_mm;
+ $('envelopeDimensions').textContent=`W${width.toFixed(1)} × L${length.toFixed(1)} × H${height.toFixed(1)}`;
+ $('partDescription').textContent=(native.lidarVisual==='drawing_envelope'?'build123d 조립 형상을 표시합니다.':'build123d 조립 형상과 SICK TiM5xx 공용 LiDAR 외형을 표시합니다.')+' 구동륜 2개와 캐스터 4개가 각각 독립적으로 움직이며, 캐스터마다 미스미 와이드 레일 한 세트를 사용합니다.';
  ready=true;applyVisibility();updateBattery();robot.visible=true;$('loading').remove();
  window.amrReview.readyMs=Math.round(performance.now()-bootTime);requestRender();
 }catch(error){$('loading').textContent='CAD 불러오기 실패: '+error.message;console.error(error)}

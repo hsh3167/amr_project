@@ -143,6 +143,13 @@ def validate(records,d,full=False,collisions=False):
         if any(x.shape.bounding_box().min.Z<=scan_z for x in records if x.name.startswith(above)):
             errors.append('Above-scan component crosses scan plane')
         report['scan_plane_vertical_clearance_checked']=True
+        report['deck_sensor_clearance_mm']={
+            'deck_underside_above_scan':round(d.p['top_bottom_z']-scan_z,3),
+            'deck_underside_above_camera_top':round(d.p['top_bottom_z']-max(
+                x.shape.bounding_box().max.Z for x in records if x.name.startswith('70_')),3),
+            'lowest_camera_mount_above_scan':round(min(
+                x.shape.bounding_box().min.Z for x in records if x.name.startswith(('70_','71_','72_')))-scan_z,3),
+        }
     if collisions:
         hits=[]
         for a in records:

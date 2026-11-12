@@ -64,3 +64,20 @@ def test_misumi_spring_stack_stays_within_catalog_travel():
         assert module['min_solid_margin_mm']>0
         assert module['max_working_deflection_margin_mm']>0
     assert abs(report['estimated_static_offset_mm'])<1
+
+
+def test_caster_guide_rail_remains_fixed_and_block_moves():
+    d=load_design()
+    d.motion={'LF':5,'RB':-5}
+    records=build_records(d,['suspension'])
+    guides={r.name:r for r in records if r.name.startswith('80_caster_wide_')}
+    assert len(guides)==8
+    assert validate(list(guides.values()),d)['valid']
+    for wheel in ('LF','LB','RF','RB'):
+        rail=guides['80_caster_wide_rail_'+wheel]
+        block=guides['80_caster_wide_block_'+wheel]
+        rail_bounds=rail.shape.bounding_box()
+        block_bounds=block.shape.bounding_box()
+        assert rail_bounds.center().Z==pytest.approx(85)
+        assert block_bounds.center().Z==pytest.approx(85+d.motion.get(wheel,0))
+        assert min(block_bounds.min.Z-rail_bounds.min.Z,rail_bounds.max.Z-block_bounds.max.Z)>=3-1e-6

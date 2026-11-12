@@ -1,6 +1,6 @@
 """Independent, guided suspension for the 30 kg AMR. Catalog dimensions in mm."""
 from math import cos, pi, sin
-from build123d import Axis, Circle, Compound, Helix, Plane, sweep
+from build123d import Axis, Circle, Compound, Helix, Plane, Solid, sweep
 from .common import PartRecord, box, cylx, cylz, drilled, polygon_plate
 from .structure import column
 
@@ -10,12 +10,8 @@ def drive_mounts(d, side):
 
 
 def caster_mounts(x, y):
-    return [(x+dx, y+dy) for dx in (-22, 22) for dy in (-29, 29)]
-
-
-def caster_guides(x, y):
-    guide_y=y-(20 if y>0 else -20)
-    return [(x+dx,guide_y) for dx in (-32,32)]
+    outward = 1 if y > 0 else -1
+    return [(x+dx, y+outward*dy) for dx in (-27,27) for dy in (-68,29)]
 
 
 def chassis_mount_holes(d):
@@ -23,7 +19,6 @@ def chassis_mount_holes(d):
     for x in (-d.p['caster_x'], d.p['caster_x']):
         for y in (-d.p['caster_y'], d.p['caster_y']):
             holes.extend((a,b,5.5) for a,b in caster_mounts(x,y))
-            holes.extend((a,b,18.4) for a,b in caster_guides(x,y))
     return holes
 
 
@@ -103,36 +98,70 @@ def make(d):
     half=q['travel_mm']/2
     plate_bottom=d.parts['caster']['cad_height']
     fixed_bottom=p['base_bottom_z']-4
-    shaft_bottom=plate_bottom+4
-    shaft_top=shaft_bottom+q['shaft_length_mm']
-    housing_top=shaft_top-half
     for x in (-p['caster_x'],p['caster_x']):
         for y in (-p['caster_y'],p['caster_y']):
             wheel=('L' if x<0 else 'R')+('F' if y>0 else 'B')
-            guides=caster_guides(x,y)
+            outward=1 if y>0 else -1
+            back=-q['guide_backset_mm']
+            rail_face=back+q['guide_height_mm']
+            block_face=back+q['assembly_height_mm']
+            guide_z=q['guide_center_z_mm']
+            rail_bottom=guide_z-q['guide_length_mm']/2
+            rail_top=guide_z+q['guide_length_mm']/2
+            block_bottom=guide_z-q['block_length_mm']/2
+            block_top=guide_z+q['block_length_mm']/2
+            carrier_top=plate_bottom+4
+
+            def section(width, inner, outer, low, high, dx=0):
+                return box(width,outer-inner,high-low,x+dx,y+outward*(inner+outer)/2,(low+high)/2)
+
+            def cross_bore(diameter, inner, outer, z, dx=0):
+                return Solid.make_cylinder(diameter/2,outer-inner,
+                    Plane(origin=(x+dx,y+outward*inner,z),z_dir=(0,outward,0)))
+
+            def cross_screw(diameter, length, seat, z, dx=0):
+                return screw(0,0,0,diameter,length).rotate(Axis.X,-outward*90).translate(
+                    (x+dx,y+outward*seat,z))
+
             caster_bolts=[(x+dx,y+dy) for dx in (-12,12) for dy in (-27,27)]
-            carrier=box(86,76,4,x,y,plate_bottom+2)
+            carrier=section(60,block_face,36,plate_bottom,carrier_top)
             carrier=drilled(carrier,caster_bolts,6.6,plate_bottom,4)
-            carrier=drilled(carrier,guides,4.5,plate_bottom,4)
-            add('caster_carrier',carrier,wheel,True,material='6061-T6')
-            fixed=box(86,76,4,x,y,fixed_bottom+2)
+            riser=section(42,block_face,block_face+5,block_bottom-1,block_top+1)
+            for dx in (-q['block_hole_pitch_width_mm']/2,q['block_hole_pitch_width_mm']/2):
+                for dz in (-q['block_hole_pitch_length_mm']/2,q['block_hole_pitch_length_mm']/2):
+                    riser-=cross_bore(4.5,block_face-1,block_face+6,guide_z+dz,dx)
+            add('caster_carrier',carrier+riser,wheel,True,material='S355 steel, plate and flange')
+
+            fixed=section(74,back-6,38,fixed_bottom,p['base_bottom_z'])
             mounts=caster_mounts(x,y)
             fixed=drilled(fixed,mounts,5.5,fixed_bottom,4)
-            for a,b in guides:
-                fixed+=cylz(9,housing_top-fixed_bottom,a,b,fixed_bottom)
-            fixed=drilled(fixed,guides,q['bush_od_mm'],fixed_bottom,housing_top-fixed_bottom)
-            for a,b in guides:
-                fixed+=ring(a,b,shaft_bottom+half,fixed_bottom-shaft_bottom-half,16,8.3)
+            backing=section(44,back-6,back,rail_bottom,fixed_bottom)
+            rail=section(q['guide_width_mm'],back,rail_face,rail_bottom,rail_top)
+            rail_bolts=[]
+            for dz in (-q['guide_hole_pitch_mm']/2,q['guide_hole_pitch_mm']/2):
+                backing-=cross_bore(2.5,back-7,back+1,guide_z+dz)
+                rail-=cross_bore(3.5,back-1,rail_face+1,guide_z+dz)
+                rail-=cross_bore(6,rail_face-4.5,rail_face+1,guide_z+dz)
+                rail_bolts.append(cross_screw(3,8,rail_face-4.5,guide_z+dz))
+            fixed+=backing
+            # Side cheeks capture the carrier edges. The free gap is travel + plate thickness.
+            for dx in (-32,32):
+                cheek=section(10,-61,-46,plate_bottom-half-4,fixed_bottom,dx)
+                slot=section(8,-62,-45,plate_bottom-half,carrier_top+half,dx-2 if dx>0 else dx+2)
+                fixed+=cheek-slot
             fixed+=cylz(2.45,8,x,y,fixed_bottom-8)
-            add('caster_fixed_seat_12H7',fixed,wheel,material='6061-T6 with replaceable press-fit bushes',pilot_d_mm=4.9)
-            for i,(a,b) in enumerate(guides):
-                tag=str(i+1)
-                add('caster_guide_'+tag,guide_shaft(a,b,shaft_bottom,q),wheel,True,sku=q['shaft_sku'])
-                add('caster_bushing_'+tag,ring(a,b,housing_top-1-q['bush_length_mm'],q['bush_length_mm'],q['bush_od_mm'],q['bush_id_mm']),
-                    wheel,sku=q['bush_sku'],housing_fit='12 H7; bore F7; shaft g6')
-                add('caster_droop_retainer_'+tag,ring(a,b,shaft_top,3,15,4.4),wheel,True)
-                add('caster_guide_upper_bolt_'+tag,screw(a,b,shaft_top+3,4,10),wheel,True,sku='CB4-10')
-                add('caster_guide_lower_bolt_'+tag,screw(a,b,plate_bottom,4,10,True),wheel,True,sku='CB4-10')
+            add('caster_fixed_bracket_with_stops',fixed,wheel,material='S355 steel',pilot_d_mm=4.9)
+            add('caster_wide_rail',rail,wheel,sku=q['guide_sku'])
+            add('caster_rail_bolts',Compound(rail_bolts),wheel,sku='CB3-8',quantity=2)
+            block=section(q['block_width_mm'],back+.5,block_face,block_bottom,block_top)
+            block-=section(q['guide_width_mm']+.4,back,rail_face+.2,block_bottom-1,block_top+1)
+            block_bolts=[]
+            for dx in (-q['block_hole_pitch_width_mm']/2,q['block_hole_pitch_width_mm']/2):
+                for dz in (-q['block_hole_pitch_length_mm']/2,q['block_hole_pitch_length_mm']/2):
+                    block-=cross_bore(4,block_face-5,block_face+1,guide_z+dz,dx)
+                    block_bolts.append(cross_screw(4,10,block_face+5,guide_z+dz,dx))
+            add('caster_wide_block',block,wheel,True,sku=q['guide_sku'])
+            add('caster_block_bolts',Compound(block_bolts),wheel,True,sku='CB4-10',quantity=4)
             frame_top=p['base_bottom_z']+p['base_thickness']
             add('caster_frame_bolts',Compound([screw(a,b,frame_top,5,16) for a,b in mounts]),wheel,sku='CB5-16',quantity=4)
             add('caster_frame_nuts',Compound([nut(a,b,fixed_bottom-4,8,4,5) for a,b in mounts]),wheel,quantity=4)

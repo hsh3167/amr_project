@@ -47,7 +47,7 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     fetch(`cad-output/manifest.json?rev=${version}`).then(r=>{if(!r.ok)throw new Error('CAD manifest missing');return r.json()}),
     loadLidarVisual(),
   ]);
-  const suspension=part('suspension','30kg 기준 6륜 독립 서스펜션','구동륜 ±10mm: MISUMI X-SWU17-70과 양단 지지 가이드. 캐스터 ±5mm: X-SWU10.5-30과 고정 부시를 통과하는 가동 샤프트.');
+  const suspension=part('suspension','30kg 기준 6륜 독립 서스펜션','구동륜 ±10mm: MISUMI X-SWU17-70과 양단 지지 가이드. 캐스터 ±5mm: 각 모서리에 와이드 레일 SSEBWML12-54 한 세트, X-SWU10.5-30과 브래킷 상하 스토퍼.');
   const wrapper=new THREE.Group();wrapper.scale.set(1000,1000,-1000);wrapper.add(gltf.scene);robot.add(wrapper);
   const rolling={},swivels={},moves={},springs={};
   for(const [n,id,side] of [['LEFT','motorL',-1],['RIGHT','motorR',1]]){

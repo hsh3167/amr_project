@@ -32,16 +32,26 @@ def validate_parameters(d):
             raise ValueError(f"{key} must be positive and finite")
     if d.p["top_bottom_z"]<=d.p["base_bottom_z"]+d.p["base_thickness"]:
         raise ValueError("Upper deck must be above lower plate")
+    if d.p["top_bottom_z"]<=d.layout["camera_mount"]["profile_bottom_z"]:
+        raise ValueError("Upper deck must be above the camera hanger seat")
     if d.variant!='baseline':
         for kind,maximum in (('drive',20),('caster',10)):
             q=d.layout['suspension'][kind]
+            guide_keys = (('shaft_d_mm','shaft_length_mm','bush_id_mm','bush_od_mm','bush_length_mm') if kind=='drive'
+                          else ('guide_length_mm','guide_width_mm','guide_height_mm','guide_hole_pitch_mm',
+                                'block_width_mm','block_length_mm','block_hole_pitch_width_mm',
+                                'block_hole_pitch_length_mm','assembly_height_mm','guide_backset_mm','guide_center_z_mm'))
             for key in ('travel_mm','spring_od_mm','spring_id_mm','display_turns','loaded_length_mm','free_length_mm',
-                        'solid_length_mm','max_deflection_mm','rate_N_mm','shaft_d_mm','shaft_length_mm',
-                        'bush_id_mm','bush_od_mm','bush_length_mm'):
+                        'solid_length_mm','max_deflection_mm','rate_N_mm',*guide_keys):
                 if not isinstance(q[key],(int,float)) or not math.isfinite(q[key]) or q[key]<=0:raise ValueError('Invalid suspension parameter: '+key)
             if q['travel_mm']>maximum:raise ValueError('Frame redesign required for greater '+kind+' travel')
-            if q['shim_mm']<0 or q['spring_od_mm']<=q['spring_id_mm'] or not q['shaft_d_mm']<q['bush_id_mm']<q['bush_od_mm']:
-                raise ValueError('Spring or guide fit is invalid: '+kind)
+            if q['shim_mm']<0 or q['spring_od_mm']<=q['spring_id_mm']:
+                raise ValueError('Spring fit is invalid: '+kind)
+            if kind=='drive' and not q['shaft_d_mm']<q['bush_id_mm']<q['bush_od_mm']:
+                raise ValueError('Drive shaft and bushing fit is invalid')
+            if kind=='caster' and (q['guide_length_mm']<=q['block_length_mm']+q['travel_mm']
+                    or q['guide_height_mm']>=q['assembly_height_mm']):
+                raise ValueError('Caster rail clearance is invalid')
             installed=q['loaded_length_mm']-q['shim_mm']
             half=q['travel_mm']/2
             if (installed+half>q['free_length_mm'] or installed-half<=q['solid_length_mm']

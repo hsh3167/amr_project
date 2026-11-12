@@ -15,9 +15,15 @@ def make(d):
     top=box(p['top_width'],p['top_length'],p['top_thickness'],0,0,p['top_bottom_z']+p['top_thickness']/2)
     top=drilled(top,d.profile['main_columns_xy'],5.5,p['top_bottom_z'],p['top_thickness'])
     pitch=p['arm_bolt_pitch']/2
-    top=drilled(top,[(x,y) for x in (-pitch,pitch) for y in (-pitch,pitch)],8.4,p['top_bottom_z'],p['top_thickness'])
+    arm_mounts=[(x,y) for x in (-pitch,pitch) for y in (-pitch,pitch)]
+    top=drilled(top,arm_mounts,8.4,p['top_bottom_z'],p['top_thickness'])
     r.append(PartRecord('20_upper_Al_plate_PLACEHOLDER_HOLES','payload_interface',top,(.72,.81,.89)))
-    r.append(PartRecord('21_arm_reinforcement_PLACEHOLDER','payload_interface',box(155,155,5,0,0,299),(.25,.40,.55)))
+    if d.variant=='baseline':
+        reinforcement=box(155,155,5,0,0,299)
+    else:
+        bottom=p['top_bottom_z']-5
+        reinforcement=drilled(box(155,155,5,0,0,bottom+2.5),arm_mounts,8.4,bottom,5)
+    r.append(PartRecord('21_arm_reinforcement_PLACEHOLDER','payload_interface',reinforcement,(.25,.40,.55)))
     return r
 
 def brackets(d):

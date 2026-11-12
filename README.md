@@ -1,6 +1,6 @@
-# 대학생 AMR 프로젝트 — build123d / Rev07
+# 대학생 AMR 프로젝트 — build123d / Rev08
 
-2WD 차동구동 + 캐스터4개, **30kg 기준 6륜 독립 서스펜션**입니다. 미스미 가이드 샤프트·무급유 부시·스프링을 적용했습니다. 설계 원본은 build123d Python과 JSON이며, FreeCAD에서 측정·단면·조립을 검토합니다. [서스펜션 상세](docs/suspension-misumi.md) · [미스미 구매 BOM](bom/suspension_misumi.csv)
+2WD 차동구동 + 캐스터 4개, **30kg 기준 6륜 독립 서스펜션**입니다. 구동륜은 미스미 샤프트와 부시, GL-65 캐스터는 각 1세트의 와이드 레일로 안내합니다. 상판 윗면은 지면에서 287mm입니다. 설계 원본은 build123d Python과 JSON이며, FreeCAD에서 측정·단면·조립을 검토합니다. [서스펜션 상세](docs/suspension-misumi.md) · [미스미 구매 BOM](bom/suspension_misumi.csv)
 
 - [3D 뷰어](https://hsh3167.github.io/amr_project/) · [최신 STEP](cad-output/amr_current.step) · [검증 결과](cad-output/build_report.json)
 - [최신 설계 상태](design_state.md) · [생성/수정/FreeCAD 실행 방법](docs/build123d-workflow.md)

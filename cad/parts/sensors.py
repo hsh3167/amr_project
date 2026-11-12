@@ -29,5 +29,5 @@ def cameras(d):
             from .vendor import camera_records
             r.extend(camera_records(d,side))
         r.append(PartRecord('71_camera_adapter_CONCEPT_'+n,'cameras',box(cm['plate_width'],cm['plate_depth'],cm['plate_thickness'],x,cm['plate_y'],cm['plate_center_z']),(.67,.72,.80)))
-        r.append(column(d,x,cm['profile_y'],cm['profile_bottom_z'],cm['profile_top_z'],'72_2020_Al_camera_column_'+n,'cameras'))
+        r.append(column(d,x,cm['profile_y'],cm['profile_bottom_z'],p['top_bottom_z'],'72_2020_Al_camera_column_'+n,'cameras'))
     return r

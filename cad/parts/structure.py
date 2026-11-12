@@ -17,7 +17,8 @@ def make(d):
     result=[]
     for x,y in d.profile['main_columns_xy']:
         n=('L' if x<0 else 'R')+('F' if y>0 else 'B')
-        result.append(column(d,x,y,d.profile['main_bottom_z'],d.profile['main_top_z'],'10_2020_Al_column_'+n,'structure'))
-        for prefix,z in (('11_corner_lower_',121),('12_corner_upper_',301)):
+        deck_bottom=d.p['top_bottom_z']
+        result.append(column(d,x,y,d.profile['main_bottom_z'],deck_bottom,'10_2020_Al_column_'+n,'structure'))
+        for prefix,z in (('11_corner_lower_',121),('12_corner_upper_',deck_bottom-2)):
             result.append(PartRecord(prefix+n,'structure',box(32,32,4,x,y,z),(.33,.49,.63)))
     return result
