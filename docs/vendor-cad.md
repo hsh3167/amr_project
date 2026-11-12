@@ -8,7 +8,7 @@
 |---|---|---|
 | GL-65-ASF | [제조사 ZIP](https://www.gdok.co.kr/data/product/gd_file3_2024062409450217.zip)의 GL-65-ASF-EUS STEP, 3솔리드 | EUS/TUN 실물 suffix. CAD 설치높이83, 카탈로그82의 차이. 휠+허브 총폭30.4와 트레드23 구별 |
 | Astra Mini Pro | [Orbbec 공식 다운로드](https://www.orbbec.com.cn/index/Download2025/info.html?cate=121&id=1)에서 연결한 [제조사 폴더](https://xm917ch2uk.feishu.cn/drive/folder/X6WrfJsbaloeSKdTTAicOlFVn19)의 3D V0.1/20221012 STEP, 58솔리드 | 2D V1.2/20221019와 깊이 차이. 구매품 MX6000 A V1.2 라벨/기판·마운트 확인 |
-| SICK TiM571-2050101 | 기존 공식 치수도 기반 엔벨로프 유지 | SICK CAD 다운로드는 EPLAN ECAD였다. 정확한 기구 STEP 미확보. 제조사 sick_scan_xd의 TiM5xx STL은 제품군용이며 열린 메시여서 제작 STEP으로 대체하지 않음 |
+| SICK TiM571-2050101 | 기존 공식 치수도 기반 엔벨로프 유지 | [품번 1075091 공식 다운로드](https://www.sick.com/us/en/catalog/products/lidar-and-radar-sensors/lidar-sensors/tim/tim571-2050101/p/p412444?tab=downloads)의 CAD 항목은 [EPLAN EDZ](https://www.sick.com/media/eplan/SICK.1075091.edz) 1건. [SICK TiM5xx 공용 STL](https://github.com/SICKAG/sick_scan_xd/blob/develop/meshes/sick_tim_5xx.stl)은 열린 시각화 메시. 정확한 품번의 STEP 확보 및 [SICK AAS](https://aas.sick.com/) 로그인 후 제공 여부 미확인 |
 | ZLLG65ASM250-N V2.02 | 수신23쪽 사양서 치수 형상 유지 | 정확한 제조사 STEP 미확보. Ø140 케이싱은 계속 가정. 다른4096/L/V3 모델로 대체하지 않음 |
 | Al2020 | 범용 T슬롯 파라메트릭 형상 | 구매 제조사/단면/재질등급·접합 상세 미선정 |
 
