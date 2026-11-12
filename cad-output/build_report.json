@@ -1,7 +1,7 @@
 {
   "valid": true,
-  "components": 167,
-  "solids": 357,
+  "components": 159,
+  "solids": 337,
   "errors": [],
   "suspension_catalog": {
     "target_mass_kg": 30,
@@ -40,13 +40,18 @@
         "min_solid_margin_mm": 10.5,
         "max_working_deflection_margin_mm": 6.0,
         "installed_length_mm": 24.5,
-        "estimated_ground_force_N": 31.55
+        "estimated_ground_force_N": 31.55,
+        "nominal_tilt_limit_deg": 2.866,
+        "nominal_contact_load_range_N": [
+          27.276,
+          38.236
+        ]
       }
     },
     "nominal_total_ground_force_N": 292.51,
     "estimated_static_offset_mm": 0.07,
     "nominal_drive_load_fraction": 0.5686,
-    "scope": "Centered static model, catalog nominal rates and estimated unsprung masses; measure six contact loads on prototype"
+    "scope": "Centered static estimate at caster swivel radius equal to the arm length; the reported caster load range varies with swivel. Measure on prototype."
   },
   "counts": {
     "drive_motor": 2,
@@ -97,15 +102,15 @@
   "selected_sensor_collisions": [],
   "suspension_collision_sampling": {
     "sampled_poses": 30,
-    "boolean_pairs": 542,
+    "boolean_pairs": 470,
     "hits": [],
     "scope": "One wheel at a time, five sampled positions; springs/mates excluded; no continuous swept-volume or dynamic clearance proof"
   },
   "caster_swivel_sampling": {
     "sampled_poses": 96,
-    "boolean_pairs": 384,
+    "boolean_pairs": 224,
     "hits": [],
-    "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump; local hardware and chassis"
+    "scope": "OEM fork and wheel, 45-degree swivel increments followed by rocker rotation at droop, nominal and bump; local hardware and chassis"
   },
   "step_roundtrip": [
     {
@@ -124,7 +129,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 357
+      "solids": 337
     }
   ]
 }
