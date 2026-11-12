@@ -150,6 +150,19 @@ def make(d):
         keeper += cyly(3, 8, px, end-3, pz)+cyly(5, 6, px, end+4, pz)
         add(kind+'_pin_retainer', keeper, key, sku='CB6-8', washer='M6 OD16 t1')
 
+    def bushes(kind, key, outer, q):
+        """Two flanged oil-free bushes pressed into the arm from outside; flanges face the bracket ears."""
+        (px, py, pz), _ = pivot_of(d, key)
+        ft, length = q['bush_flange_t_mm'], q['bush_length_mm']
+        parts = []
+        for sy in (-1, 1):
+            face = py+sy*outer
+            sleeve = cyly(q['bush_od_mm']/2, length-ft, px, face-sy*(length-ft)/2, pz)
+            flange = cyly(q['bush_flange_d_mm']/2, ft, px, face+sy*ft/2, pz)
+            parts.append(sleeve+flange-cyly(q['bush_bore_mm']/2, length+2, px, face-sy*(length/2-ft), pz))
+        add(kind+'_hinge_bushes', Compound(parts), key, True, sku=q['bush_sku'], quantity=2,
+            fit='Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer')
+
     def spring_stack(kind, key, washer_od):
         q = d.layout['suspension'][kind]
         half = q['travel_mm']/2
@@ -205,10 +218,11 @@ def make(d):
             y0, y1 = sorted((sy*wy, sy*(wy+t)))
             arm += span(*X(a0, ex+t/2), y0, y1, bot+t, top)
         arm += span(*X(ex-t/2, ex+t/2), -(wy+t), wy+t, bot+t, top)
-        arm -= cyly(q['pin_d_mm']/2+.01, 2*(wy+t)+2, px, 0, pz)
+        arm -= cyly(q['bush_od_mm']/2, 2*(wy+t)+2, px, 0, pz)
         arm -= cylx(7.15, t+2, side*ex, 0, 90) & span(*X(ex-4, ex+4), -5.1, 5.1, 80, 100)
         sx, sy_, _ = spring_point(d, key)
         arm -= cylz(4, t+2, sx, sy_, bot-1)
+        bushes('drive', key, wy+t, q)
         add('drive_swing_arm_6t', arm, key, True, material='S355 6t laser-cut tray, 3 bends; AF10.2 trial slot; M8 tapped seat',
             arm_length_mm=round(d.p['drive_track']/2-q['pivot_x_mm'], 1))
         # Axle stack: unchanged trial dimensions, carried by the arm end wall.
@@ -237,11 +251,12 @@ def make(d):
         for sy in (-1, 1):
             y0, y1 = sorted((y+sy*(hw-t), y+sy*hw))
             arm += span(t0, t1, y0, y1, plate_top+t, q['tab_top_z_mm'])
-        arm -= cyly(q['pin_d_mm']/2+.01, 2*hw+2, px, y, pz)
+        arm -= cyly(q['bush_od_mm']/2, 2*hw+2, px, y, pz)
         bolts = [(x+dx, y+dy) for dx in (-12, 12) for dy in (-27, 27)]
         arm = drilled(arm, bolts, 6.6, plate_top, t)
         sx, sy_, _ = spring_point(d, wheel)
         arm -= cylz(4, t+2, sx, sy_, plate_top-1)
+        bushes('caster', wheel, hw, q)
         add('caster_swing_arm_6t', arm, wheel, True, material='S355 6t laser-cut, 2 bent tabs; M8 tapped seat',
             arm_length_mm=q['arm_length_mm'])
         add('caster_plate_bolts', Compound([screw(a, b, plate_top-5, 6, 16, True) for a, b in bolts]),

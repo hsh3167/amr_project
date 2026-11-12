@@ -46,6 +46,10 @@ def validate_parameters(d):
             if q['travel_mm']>maximum:raise ValueError('Frame redesign required for greater '+kind+' travel')
             if q['shim_mm']<0 or q['spring_od_mm']<=q['spring_id_mm']:raise ValueError('Spring fit is invalid: '+kind)
             if q['spring_id_mm']<=8.4:raise ValueError('Spring must pass the M8 stud: '+kind)
+            if q['ear_gap_mm']<q['bush_flange_t_mm']+.3:raise ValueError('No room for the bush flange: '+kind)
+            if not q['pin_d_mm']<q['bush_bore_mm']<q['bush_od_mm']<q['bush_flange_d_mm']:raise ValueError('Hinge bush fit is invalid: '+kind)
+            wall=q['arm_wall_y_mm']+q['arm_thickness_mm'] if kind=='drive' else q['arm_half_width_mm']
+            if 2*(wall+q['ear_gap_mm']+q['bracket_thickness_mm'])+1>100:raise ValueError('Hinge pin longer than catalog CLBKHM10 L100: '+kind)
             if kind=='drive':
                 length=d.p['drive_track']/2-q['pivot_x_mm'];ratio=(q['spring_x_mm']-q['pivot_x_mm'])/length
                 seat=q['arm_bottom_z_mm']+q['arm_thickness_mm']

@@ -1,7 +1,7 @@
 {
   "valid": true,
-  "components": 135,
-  "solids": 293,
+  "components": 141,
+  "solids": 305,
   "errors": [],
   "suspension_catalog": {
     "concept": "Rev12 six independent hinge + spring modules",
@@ -143,7 +143,7 @@
   "selected_sensor_collisions": [],
   "suspension_collision_sampling": {
     "sampled_poses": 30,
-    "boolean_pairs": 226,
+    "boolean_pairs": 326,
     "hits": [],
     "scope": "One wheel at a time (six hinge modules), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
   },
@@ -170,7 +170,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 293
+      "solids": 305
     }
   ]
 }

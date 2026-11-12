@@ -26,7 +26,7 @@ def test_official_caster_height_and_six_wheel_motion_contract():
     assert validate(r,d)['valid']
     contacts={x.metadata.get('moving_wheel'):x.shape.bounding_box().min.Z for x in r if x.name.startswith(('30_','44_'))}
     # Hinge arms tilt the wheels: the tire edge drops 1.35 mm below the wheel-centre travel.
-    assert contacts==pytest.approx({'LF':5.123552,'LEFT':-11.353133,'RIGHT':0},abs=1e-4)
+    assert contacts==pytest.approx({'LF':5.12278,'LEFT':-11.353133,'RIGHT':0},abs=1e-4)
 
 def test_cached_multisolid_component_retains_name_and_geometry(tmp_path):
     from build123d import Compound,import_step
@@ -82,6 +82,9 @@ def test_rev12_hinge_modules_meet_both_stops():
         c=pin.shape.center(CenterOf.MASS);(px,_,pz),_=pivot_of(d,wheel)
         assert (c.X,c.Z)==pytest.approx((px,pz),abs=1e-6)
         assert parts['80_'+kind+'_swing_arm_6t_'+wheel].metadata['moving_wheel']==wheel
+        bush=parts['80_'+kind+'_hinge_bushes_'+wheel]
+        assert bush.metadata['moving_wheel']==wheel and len(bush.shape.solids())==2
+        assert bush.shape&pin.shape is None or (bush.shape&pin.shape).volume<1e-6
         arm=parts['80_'+kind+'_swing_arm_6t_'+wheel].shape
         nut=parts['80_'+kind+'_droop_stop_washer_nut_'+wheel].shape
         stop=parts['80_'+kind+'_bump_stop_bolt_M6_'+wheel].shape

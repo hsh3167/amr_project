@@ -22,7 +22,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 293
+      "solids": 305
     }
   ],
   "components": [
@@ -1660,6 +1660,39 @@
       "solids": 1
     },
     {
+      "name": "80_drive_hinge_bushes_LEFT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "sku": "MPFZ10-10",
+        "quantity": 2,
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+      },
+      "volume_mm3": 2406.4536894644734,
+      "bounds_mm": [
+        [
+          -92.0,
+          -70.0
+        ],
+        [
+          -44.5,
+          44.5
+        ],
+        [
+          84.0,
+          106.0
+        ]
+      ],
+      "center_mm": [
+        -81.0,
+        6.047037303096904e-15,
+        95.00000000000009
+      ],
+      "solids": 2
+    },
+    {
       "name": "80_drive_swing_arm_6t_LEFT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
@@ -1669,15 +1702,15 @@
         "material": "S355 6t laser-cut tray, 3 bends; AF10.2 trial slot; M8 tapped seat",
         "arm_length_mm": 130.0
       },
-      "volume_mm3": 114214.26441295253,
+      "volume_mm3": 110793.25940981413,
       "bounds_mm": [
         [
           -173.0,
           -69.0
         ],
         [
-          -44.0,
-          44.0
+          -42.5,
+          42.5
         ],
         [
           66.0,
@@ -1685,9 +1718,9 @@
         ]
       ],
       "center_mm": [
-        -127.9437844318355,
-        0.06601471722791062,
-        79.91763583546195
+        -128.19689478852084,
+        0.0680530783982673,
+        79.9204803833671
       ],
       "solids": 1
     },
@@ -1792,15 +1825,15 @@
         "moving_wheel": null,
         "material": "4.5t sheet, 2 bends; ream both ear holes together"
       },
-      "volume_mm3": 18466.07792941994,
+      "volume_mm3": 18601.077929419924,
       "bounds_mm": [
         [
           -96.0,
           -66.0
         ],
         [
-          -49.0,
-          49.0
+          -49.5,
+          49.5
         ],
         [
           83.0,
@@ -1808,9 +1841,9 @@
         ]
       ],
       "center_mm": [
-        -81.0,
+        -80.9999999999999,
         0.0,
-        109.6414104477943
+        109.67848677165921
       ],
       "solids": 1
     },
@@ -1884,19 +1917,19 @@
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
-        "sku": "CLBKHM10-99",
-        "length_mm": 99.0,
+        "sku": "CLBKHM10-100",
+        "length_mm": 100.0,
         "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
       },
-      "volume_mm3": 7822.565707438585,
+      "volume_mm3": 7901.10552377833,
       "bounds_mm": [
         [
           -89.0,
           -73.0
         ],
         [
-          -50.5,
-          50.0
+          -51.0,
+          50.5
         ],
         [
           87.0,
@@ -1905,7 +1938,7 @@
       ],
       "center_mm": [
         -81.0,
-        -2.9012048192771096,
+        -2.9025844930417497,
         95.00000000000001
       ],
       "solids": 1
@@ -1927,8 +1960,8 @@
           -73.0
         ],
         [
-          43.0,
-          57.0
+          43.5,
+          57.5
         ],
         [
           87.0,
@@ -1937,7 +1970,7 @@
       ],
       "center_mm": [
         -80.99999999999999,
-        51.489991296779785,
+        51.9899912967798,
         94.99999999999999
       ],
       "solids": 1
@@ -2113,6 +2146,39 @@
       "solids": 1
     },
     {
+      "name": "80_drive_hinge_bushes_RIGHT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "sku": "MPFZ10-10",
+        "quantity": 2,
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+      },
+      "volume_mm3": 2406.4536894644734,
+      "bounds_mm": [
+        [
+          70.0,
+          92.0
+        ],
+        [
+          -44.5,
+          44.5
+        ],
+        [
+          84.0,
+          106.0
+        ]
+      ],
+      "center_mm": [
+        81.0,
+        6.047037303096904e-15,
+        95.00000000000009
+      ],
+      "solids": 2
+    },
+    {
       "name": "80_drive_swing_arm_6t_RIGHT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
@@ -2122,15 +2188,15 @@
         "material": "S355 6t laser-cut tray, 3 bends; AF10.2 trial slot; M8 tapped seat",
         "arm_length_mm": 130.0
       },
-      "volume_mm3": 114214.2644129525,
+      "volume_mm3": 110793.25940981416,
       "bounds_mm": [
         [
           69.0,
           173.0
         ],
         [
-          -44.0,
-          44.0
+          -42.5,
+          42.5
         ],
         [
           66.0,
@@ -2138,9 +2204,9 @@
         ]
       ],
       "center_mm": [
-        127.9437844318354,
-        0.0660147172279176,
-        79.91763583546201
+        128.19689478852075,
+        0.06805307839826896,
+        79.92048038336713
       ],
       "solids": 1
     },
@@ -2245,15 +2311,15 @@
         "moving_wheel": null,
         "material": "4.5t sheet, 2 bends; ream both ear holes together"
       },
-      "volume_mm3": 18466.07792941994,
+      "volume_mm3": 18601.077929419924,
       "bounds_mm": [
         [
           66.0,
           96.0
         ],
         [
-          -49.0,
-          49.0
+          -49.5,
+          49.5
         ],
         [
           83.0,
@@ -2261,9 +2327,9 @@
         ]
       ],
       "center_mm": [
-        80.99999999999993,
+        80.99999999999996,
         0.0,
-        109.6414104477943
+        109.67848677165921
       ],
       "solids": 1
     },
@@ -2337,19 +2403,19 @@
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
-        "sku": "CLBKHM10-99",
-        "length_mm": 99.0,
+        "sku": "CLBKHM10-100",
+        "length_mm": 100.0,
         "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
       },
-      "volume_mm3": 7822.565707438585,
+      "volume_mm3": 7901.10552377833,
       "bounds_mm": [
         [
           73.0,
           89.0
         ],
         [
-          -50.5,
-          50.0
+          -51.0,
+          50.5
         ],
         [
           87.0,
@@ -2358,7 +2424,7 @@
       ],
       "center_mm": [
         81.0,
-        -2.9012048192771096,
+        -2.9025844930417497,
         95.00000000000001
       ],
       "solids": 1
@@ -2380,8 +2446,8 @@
           89.0
         ],
         [
-          43.0,
-          57.0
+          43.5,
+          57.5
         ],
         [
           87.0,
@@ -2390,7 +2456,7 @@
       ],
       "center_mm": [
         80.99999999999999,
-        51.489991296779785,
+        51.9899912967798,
         94.99999999999999
       ],
       "solids": 1
@@ -2566,6 +2632,39 @@
       "solids": 1
     },
     {
+      "name": "80_caster_hinge_bushes_LF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": "LF",
+        "sku": "MPFZ10-10",
+        "quantity": 2,
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+      },
+      "volume_mm3": 2406.4536894644752,
+      "bounds_mm": [
+        [
+          -59.0,
+          -37.0
+        ],
+        [
+          183.0,
+          247.0
+        ],
+        [
+          88.5,
+          110.5
+        ]
+      ],
+      "center_mm": [
+        -48.0,
+        214.99999999999997,
+        99.50000000000001
+      ],
+      "solids": 2
+    },
+    {
       "name": "80_caster_swing_arm_6t_LF",
       "group": "suspension",
       "status": "suspension_fabrication_design",
@@ -2575,7 +2674,7 @@
         "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 56588.391641873866,
+      "volume_mm3": 55687.38663873548,
       "bounds_mm": [
         [
           -173.0,
@@ -2591,9 +2690,9 @@
         ]
       ],
       "center_mm": [
-        -96.68284153607675,
-        214.99999999999952,
-        87.9902753206409
+        -97.47051512678688,
+        214.99999999999946,
+        87.81254757330619
       ],
       "solids": 1
     },
@@ -2670,15 +2769,15 @@
         "moving_wheel": null,
         "material": "4.5t sheet, 2 bends; ream both ear holes together"
       },
-      "volume_mm3": 13954.902579404878,
+      "volume_mm3": 14359.902579404881,
       "bounds_mm": [
         [
           -63.0,
           -33.0
         ],
         [
-          179.5,
-          250.5
+          178.0,
+          252.0
         ],
         [
           88.0,
@@ -2686,9 +2785,9 @@
         ]
       ],
       "center_mm": [
-        -47.99999999999997,
+        -48.00000000000001,
         215.0,
-        109.99991476964324
+        110.15854543520685
       ],
       "solids": 1
     },
@@ -2762,29 +2861,29 @@
       "metadata": {
         "wheel": "LF",
         "moving_wheel": null,
-        "sku": "CLBKHM10-72",
-        "length_mm": 72.0,
+        "sku": "CLBKHM10-75",
+        "length_mm": 75.0,
         "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
       },
-      "volume_mm3": 5701.990666265475,
+      "volume_mm3": 5937.6101152847095,
       "bounds_mm": [
         [
           -56.0,
           -40.0
         ],
         [
-          178.0,
-          251.5
+          176.5,
+          253.0
         ],
         [
-          92.0,
-          108.0
+          91.5,
+          107.5
         ]
       ],
       "center_mm": [
         -48.00000000000001,
-        212.1504132231405,
-        100.0
+        212.14285714285714,
+        99.5
       ],
       "solids": 1
     },
@@ -2805,18 +2904,18 @@
           -40.0
         ],
         [
-          244.5,
-          258.5
+          246.0,
+          260.0
         ],
         [
-          92.0,
-          108.0
+          91.5,
+          107.5
         ]
       ],
       "center_mm": [
         -48.0,
-        252.9899912967798,
-        99.99999999999999
+        254.4899912967798,
+        99.49999999999999
       ],
       "solids": 1
     },
@@ -2904,7 +3003,7 @@
         "length_mm": 50.7,
         "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 2550.2918159736278,
+      "volume_mm3": 2550.33063104116,
       "bounds_mm": [
         [
           -117.0,
@@ -2916,13 +3015,13 @@
         ],
         [
           83.0,
-          133.73644360487617
+          133.7372158061092
         ]
       ],
       "center_mm": [
         -113.0,
         215.0,
-        108.36822180243809
+        108.3686079030546
       ],
       "solids": 1
     },
@@ -2946,14 +3045,14 @@
           223.0
         ],
         [
-          124.13644360487619,
-          132.23644360487617
+          124.13721580610921,
+          132.2372158061092
         ]
       ],
       "center_mm": [
-        -113.00000000000003,
-        214.99999999999997,
-        127.88600379713584
+        -113.0,
+        215.0,
+        127.88677599836889
       ],
       "solids": 1
     },
@@ -2965,10 +3064,10 @@
         "wheel": "LF",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 91.456,
+        "tip_z": 91.455,
         "adjust": "Set the bump limit with the jam nut; urethane cap optional"
       },
-      "volume_mm3": 1569.9459856636984,
+      "volume_mm3": 1569.9678191391852,
       "bounds_mm": [
         [
           -93.77350269189625,
@@ -2979,16 +3078,49 @@
           220.0
         ],
         [
-          91.45587731601523,
+          91.45510511478221,
           126.0
         ]
       ],
       "center_mm": [
-        -87.99999999999999,
+        -88.0,
         215.0,
-        112.54190568496456
+        112.54161243709805
       ],
       "solids": 1
+    },
+    {
+      "name": "80_caster_hinge_bushes_LB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": "LB",
+        "sku": "MPFZ10-10",
+        "quantity": 2,
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+      },
+      "volume_mm3": 2406.4536894644752,
+      "bounds_mm": [
+        [
+          -59.0,
+          -37.0
+        ],
+        [
+          -247.0,
+          -183.0
+        ],
+        [
+          88.5,
+          110.5
+        ]
+      ],
+      "center_mm": [
+        -48.0,
+        -214.99999999999997,
+        99.50000000000001
+      ],
+      "solids": 2
     },
     {
       "name": "80_caster_swing_arm_6t_LB",
@@ -3000,7 +3132,7 @@
         "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 56588.391641873866,
+      "volume_mm3": 55687.38663873548,
       "bounds_mm": [
         [
           -173.0,
@@ -3016,9 +3148,9 @@
         ]
       ],
       "center_mm": [
-        -96.68284153607675,
-        -214.99999999999957,
-        87.99027532064092
+        -97.47051512678688,
+        -214.99999999999955,
+        87.81254757330619
       ],
       "solids": 1
     },
@@ -3095,15 +3227,15 @@
         "moving_wheel": null,
         "material": "4.5t sheet, 2 bends; ream both ear holes together"
       },
-      "volume_mm3": 13954.902579404878,
+      "volume_mm3": 14359.902579404881,
       "bounds_mm": [
         [
           -63.0,
           -33.0
         ],
         [
-          -250.5,
-          -179.5
+          -252.0,
+          -178.0
         ],
         [
           88.0,
@@ -3111,9 +3243,9 @@
         ]
       ],
       "center_mm": [
-        -47.99999999999997,
-        -215.0,
-        109.99991476964324
+        -48.00000000000001,
+        -214.99999999999994,
+        110.15854543520685
       ],
       "solids": 1
     },
@@ -3187,29 +3319,29 @@
       "metadata": {
         "wheel": "LB",
         "moving_wheel": null,
-        "sku": "CLBKHM10-72",
-        "length_mm": 72.0,
+        "sku": "CLBKHM10-75",
+        "length_mm": 75.0,
         "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
       },
-      "volume_mm3": 5701.990666265475,
+      "volume_mm3": 5937.6101152847095,
       "bounds_mm": [
         [
           -56.0,
           -40.0
         ],
         [
-          -252.0,
-          -178.5
+          -253.5,
+          -177.0
         ],
         [
-          92.0,
-          108.0
+          91.5,
+          107.5
         ]
       ],
       "center_mm": [
         -48.00000000000001,
-        -217.84958677685952,
-        100.0
+        -217.85714285714283,
+        99.5
       ],
       "solids": 1
     },
@@ -3230,18 +3362,18 @@
           -40.0
         ],
         [
-          -185.5,
-          -171.5
+          -184.0,
+          -170.0
         ],
         [
-          92.0,
-          108.0
+          91.5,
+          107.5
         ]
       ],
       "center_mm": [
         -48.0,
-        -177.0100087032202,
-        99.99999999999999
+        -175.51000870322022,
+        99.49999999999999
       ],
       "solids": 1
     },
@@ -3329,7 +3461,7 @@
         "length_mm": 50.7,
         "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 2550.2918159736278,
+      "volume_mm3": 2550.33063104116,
       "bounds_mm": [
         [
           -117.0,
@@ -3341,13 +3473,13 @@
         ],
         [
           83.0,
-          133.73644360487617
+          133.7372158061092
         ]
       ],
       "center_mm": [
         -113.0,
         -215.0,
-        108.36822180243809
+        108.3686079030546
       ],
       "solids": 1
     },
@@ -3371,14 +3503,14 @@
           -207.0
         ],
         [
-          124.13644360487619,
-          132.23644360487617
+          124.13721580610921,
+          132.2372158061092
         ]
       ],
       "center_mm": [
-        -113.00000000000003,
+        -113.0,
         -215.00000000000003,
-        127.88600379713584
+        127.88677599836889
       ],
       "solids": 1
     },
@@ -3390,10 +3522,10 @@
         "wheel": "LB",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 91.456,
+        "tip_z": 91.455,
         "adjust": "Set the bump limit with the jam nut; urethane cap optional"
       },
-      "volume_mm3": 1569.9459856636984,
+      "volume_mm3": 1569.9678191391852,
       "bounds_mm": [
         [
           -93.77350269189625,
@@ -3404,16 +3536,49 @@
           -210.0
         ],
         [
-          91.45587731601523,
+          91.45510511478221,
           126.0
         ]
       ],
       "center_mm": [
-        -87.99999999999999,
+        -88.0,
         -215.0,
-        112.54190568496456
+        112.54161243709805
       ],
       "solids": 1
+    },
+    {
+      "name": "80_caster_hinge_bushes_RF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": "RF",
+        "sku": "MPFZ10-10",
+        "quantity": 2,
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+      },
+      "volume_mm3": 2406.4536894644752,
+      "bounds_mm": [
+        [
+          37.0,
+          59.0
+        ],
+        [
+          183.0,
+          247.0
+        ],
+        [
+          88.5,
+          110.5
+        ]
+      ],
+      "center_mm": [
+        48.0,
+        214.99999999999997,
+        99.50000000000001
+      ],
+      "solids": 2
     },
     {
       "name": "80_caster_swing_arm_6t_RF",
@@ -3425,7 +3590,7 @@
         "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 56588.39164187389,
+      "volume_mm3": 55687.38663873551,
       "bounds_mm": [
         [
           36.0,
@@ -3441,9 +3606,9 @@
         ]
       ],
       "center_mm": [
-        96.68284153607668,
-        214.9999999999995,
-        87.99027532064085
+        97.47051512678684,
+        214.9999999999994,
+        87.81254757330615
       ],
       "solids": 1
     },
@@ -3520,15 +3685,15 @@
         "moving_wheel": null,
         "material": "4.5t sheet, 2 bends; ream both ear holes together"
       },
-      "volume_mm3": 13954.902579404878,
+      "volume_mm3": 14359.902579404881,
       "bounds_mm": [
         [
           33.0,
           63.0
         ],
         [
-          179.5,
-          250.5
+          178.0,
+          252.0
         ],
         [
           88.0,
@@ -3536,9 +3701,9 @@
         ]
       ],
       "center_mm": [
-        47.99999999999997,
+        47.99999999999998,
         215.0,
-        109.99991476964324
+        110.15854543520685
       ],
       "solids": 1
     },
@@ -3612,29 +3777,29 @@
       "metadata": {
         "wheel": "RF",
         "moving_wheel": null,
-        "sku": "CLBKHM10-72",
-        "length_mm": 72.0,
+        "sku": "CLBKHM10-75",
+        "length_mm": 75.0,
         "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
       },
-      "volume_mm3": 5701.990666265475,
+      "volume_mm3": 5937.6101152847095,
       "bounds_mm": [
         [
           40.0,
           56.0
         ],
         [
-          178.0,
-          251.5
+          176.5,
+          253.0
         ],
         [
-          92.0,
-          108.0
+          91.5,
+          107.5
         ]
       ],
       "center_mm": [
         48.00000000000001,
-        212.1504132231405,
-        100.0
+        212.14285714285714,
+        99.5
       ],
       "solids": 1
     },
@@ -3655,18 +3820,18 @@
           56.0
         ],
         [
-          244.5,
-          258.5
+          246.0,
+          260.0
         ],
         [
-          92.0,
-          108.0
+          91.5,
+          107.5
         ]
       ],
       "center_mm": [
         48.0,
-        252.9899912967798,
-        99.99999999999999
+        254.4899912967798,
+        99.49999999999999
       ],
       "solids": 1
     },
@@ -3754,7 +3919,7 @@
         "length_mm": 50.7,
         "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 2550.2918159736278,
+      "volume_mm3": 2550.33063104116,
       "bounds_mm": [
         [
           109.0,
@@ -3766,13 +3931,13 @@
         ],
         [
           83.0,
-          133.73644360487617
+          133.7372158061092
         ]
       ],
       "center_mm": [
         113.0,
         215.0,
-        108.36822180243809
+        108.3686079030546
       ],
       "solids": 1
     },
@@ -3796,14 +3961,14 @@
           223.0
         ],
         [
-          124.13644360487619,
-          132.23644360487617
+          124.13721580610921,
+          132.2372158061092
         ]
       ],
       "center_mm": [
-        113.0,
+        113.00000000000001,
         215.00000000000003,
-        127.88600379713584
+        127.88677599836889
       ],
       "solids": 1
     },
@@ -3815,10 +3980,10 @@
         "wheel": "RF",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 91.456,
+        "tip_z": 91.455,
         "adjust": "Set the bump limit with the jam nut; urethane cap optional"
       },
-      "volume_mm3": 1569.9459856636984,
+      "volume_mm3": 1569.9678191391852,
       "bounds_mm": [
         [
           82.22649730810375,
@@ -3829,16 +3994,49 @@
           220.0
         ],
         [
-          91.45587731601523,
+          91.45510511478221,
           126.0
         ]
       ],
       "center_mm": [
-        88.0,
+        88.00000000000001,
         215.0,
-        112.54190568496456
+        112.54161243709805
       ],
       "solids": 1
+    },
+    {
+      "name": "80_caster_hinge_bushes_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": "RB",
+        "sku": "MPFZ10-10",
+        "quantity": 2,
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+      },
+      "volume_mm3": 2406.4536894644752,
+      "bounds_mm": [
+        [
+          37.0,
+          59.0
+        ],
+        [
+          -247.0,
+          -183.0
+        ],
+        [
+          88.5,
+          110.5
+        ]
+      ],
+      "center_mm": [
+        48.0,
+        -214.99999999999997,
+        99.50000000000001
+      ],
+      "solids": 2
     },
     {
       "name": "80_caster_swing_arm_6t_RB",
@@ -3850,7 +4048,7 @@
         "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 56588.39164187388,
+      "volume_mm3": 55687.3866387355,
       "bounds_mm": [
         [
           36.0,
@@ -3866,9 +4064,9 @@
         ]
       ],
       "center_mm": [
-        96.68284153607667,
-        -214.99999999999946,
-        87.9902753206409
+        97.47051512678684,
+        -214.9999999999994,
+        87.81254757330619
       ],
       "solids": 1
     },
@@ -3945,15 +4143,15 @@
         "moving_wheel": null,
         "material": "4.5t sheet, 2 bends; ream both ear holes together"
       },
-      "volume_mm3": 13954.902579404878,
+      "volume_mm3": 14359.902579404881,
       "bounds_mm": [
         [
           33.0,
           63.0
         ],
         [
-          -250.5,
-          -179.5
+          -252.0,
+          -178.0
         ],
         [
           88.0,
@@ -3961,9 +4159,9 @@
         ]
       ],
       "center_mm": [
-        47.99999999999997,
-        -215.0,
-        109.99991476964324
+        47.99999999999998,
+        -214.99999999999994,
+        110.15854543520685
       ],
       "solids": 1
     },
@@ -4037,29 +4235,29 @@
       "metadata": {
         "wheel": "RB",
         "moving_wheel": null,
-        "sku": "CLBKHM10-72",
-        "length_mm": 72.0,
+        "sku": "CLBKHM10-75",
+        "length_mm": 75.0,
         "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
       },
-      "volume_mm3": 5701.990666265475,
+      "volume_mm3": 5937.6101152847095,
       "bounds_mm": [
         [
           40.0,
           56.0
         ],
         [
-          -252.0,
-          -178.5
+          -253.5,
+          -177.0
         ],
         [
-          92.0,
-          108.0
+          91.5,
+          107.5
         ]
       ],
       "center_mm": [
         48.00000000000001,
-        -217.84958677685952,
-        100.0
+        -217.85714285714283,
+        99.5
       ],
       "solids": 1
     },
@@ -4080,18 +4278,18 @@
           56.0
         ],
         [
-          -185.5,
-          -171.5
+          -184.0,
+          -170.0
         ],
         [
-          92.0,
-          108.0
+          91.5,
+          107.5
         ]
       ],
       "center_mm": [
         48.0,
-        -177.0100087032202,
-        99.99999999999999
+        -175.51000870322022,
+        99.49999999999999
       ],
       "solids": 1
     },
@@ -4179,7 +4377,7 @@
         "length_mm": 50.7,
         "fit": "Threaded into the arm (tapped M8) and locked with a nut"
       },
-      "volume_mm3": 2550.2918159736278,
+      "volume_mm3": 2550.33063104116,
       "bounds_mm": [
         [
           109.0,
@@ -4191,13 +4389,13 @@
         ],
         [
           83.0,
-          133.73644360487617
+          133.7372158061092
         ]
       ],
       "center_mm": [
         113.0,
         -215.0,
-        108.36822180243809
+        108.3686079030546
       ],
       "solids": 1
     },
@@ -4221,14 +4419,14 @@
           -207.0
         ],
         [
-          124.13644360487619,
-          132.23644360487617
+          124.13721580610921,
+          132.2372158061092
         ]
       ],
       "center_mm": [
-        113.0,
+        113.00000000000001,
         -215.00000000000003,
-        127.88600379713584
+        127.88677599836889
       ],
       "solids": 1
     },
@@ -4240,10 +4438,10 @@
         "wheel": "RB",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 91.456,
+        "tip_z": 91.455,
         "adjust": "Set the bump limit with the jam nut; urethane cap optional"
       },
-      "volume_mm3": 1569.9459856636984,
+      "volume_mm3": 1569.9678191391852,
       "bounds_mm": [
         [
           82.22649730810375,
@@ -4254,14 +4452,14 @@
           -210.0
         ],
         [
-          91.45587731601523,
+          91.45510511478221,
           126.0
         ]
       ],
       "center_mm": [
-        88.0,
+        88.00000000000001,
         -215.0,
-        112.54190568496456
+        112.54161243709805
       ],
       "solids": 1
     }

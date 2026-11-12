@@ -1,6 +1,7 @@
 Module,Manufacturer,Order code,Quantity,Dimensions or role,Source,Status
-Drive,MISUMI,CLBKHM10-99,2,D10 g6 hardened hinge pin head16 M6 tap; fixed in bracket ears,https://kr.misumi-ec.com/pdf/fa/2018/p1_065_2021_202108.pdf,Catalog p1_065 checked 2026-11-12: D10 L25.0-100.0 step0.1
-Caster,MISUMI,CLBKHM10-72,4,D10 g6 hardened hinge pin head16 M6 tap; fixed in bracket ears,https://kr.misumi-ec.com/pdf/fa/2018/p1_065_2021_202108.pdf,Catalog p1_065 checked 2026-11-12
+Drive,MISUMI,CLBKHM10-100,2,D10 g6 hardened hinge pin head16 M6 tap; fixed in bracket ears (catalog max L100),https://kr.misumi-ec.com/pdf/fa/2018/p1_065_2021_202108.pdf,Catalog p1_065 checked 2026-11-12: D10 L25.0-100.0 step0.1
+Caster,MISUMI,CLBKHM10-75,4,D10 g6 hardened hinge pin head16 M6 tap; fixed in bracket ears,https://kr.misumi-ec.com/pdf/fa/2018/p1_065_2021_202108.pdf,Catalog p1_065 checked 2026-11-12
+Drive and caster,MISUMI,MPFZ10-10,12,Flanged oil-free bush ID10 F7 OD14 m6 L10 flange22x2; two per arm pressed into 14 H7,https://in.misumi-ec.com/pdf/fa/2014/p1_383.pdf,Catalog p1_383 checked 2026-11-12; confirm flange thickness and price
 Drive and caster,MISUMI,CB6-8,6,Pin retention screw + M6 washer OD16 t1,https://kr.misumi-ec.com/vona2/detail/110100141750/,Verify torque and thread engagement
 Drive,MISUMI,X-SWU21-70,2,OD21 ID13.5 L70 k5.39 N/mm solid21 F(55%L)38.5; installed 40 (gap45 + shim5),https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog CK68 checked 2026-11-12; load +-10%
 Caster,MISUMI,X-SWU17-35,4,OD17 ID10.5 L35 k6.96 N/mm solid10.5 F(55%L)19.3; installed 23 (gap28 + shim5), 25mm inboard of the caster,https://kr.misumi-ec.com/pdf/mold/2016_CK/CK68.pdf,Catalog CK68 checked 2026-11-12; load +-10%
@@ -13,7 +14,7 @@ Drive and caster,Standard,M5 hex nut,16,Chassis joints,,Envelope and quantity
 Caster,Standard,M6 hex nut,16,OEM caster plate joints,,Envelope and quantity
 Drive,Motor supplier,M14x1.5 axle nut,2,Check included nut AF and actual thickness,,Trial fit required
 Drive,Fabricate,Axle washer and 4.9mm trial spacer,2 sets,Rev09 axle stack,,Confirm stationary shoulder
-Drive,Fabricate,S355 6t swing arm tray,2,Laser cut + 3 bends; AF10.2 trial slot; pin bore 10 H8; M8 tapped seat; ~0.9 kg,,No welding
-Caster,Fabricate,S355 6t swing arm,4,Laser cut + 2 bent tabs; pin bore 10 H8; caster M6 holes; M8 tapped seat; ~0.44 kg,,No welding
+Drive,Fabricate,S355 6t swing arm tray,2,Laser cut + 3 bends; AF10.2 trial slot; bush bore 14 H7; M8 tapped seat; ~0.9 kg,,No welding
+Caster,Fabricate,S355 6t swing arm,4,Laser cut + 2 bent tabs; bush bore 14 H7; caster M6 holes; M8 tapped seat; ~0.44 kg,,No welding
 Drive,Fabricate,4.5t U hinge bracket,2,Laser cut + 2 bends; ear holes 10 H7 reamed together,,No welding
 Caster,Fabricate,4.5t U hinge bracket,4,Laser cut + 2 bends; ear holes 10 H7 reamed together,,No welding
