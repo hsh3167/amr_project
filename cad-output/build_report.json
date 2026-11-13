@@ -27,11 +27,11 @@
         "installed_length_mm": 40,
         "shim_removed_force_N": 134.75,
         "ground_force_N": [
-          109.881,
-          127.344,
-          144.807
+          108.41,
+          125.873,
+          143.336
         ],
-        "estimated_ground_force_N": 127.344,
+        "estimated_ground_force_N": 125.873,
         "wheel_rate_N_mm": 1.746
       },
       "caster": {
@@ -67,29 +67,29 @@
       "with_arm": {
         "mass_kg": 55,
         "preload_shims": true,
-        "body_sink_mm": 0.559,
+        "body_sink_mm": 0.722,
         "within_travel": true,
-        "drive_each_N": 128.319,
-        "caster_each_N": 70.682,
-        "drive_load_fraction": 0.4758
+        "drive_each_N": 127.133,
+        "caster_each_N": 71.275,
+        "drive_load_fraction": 0.4714
       },
       "without_arm_shims_removed": {
         "mass_kg": 35,
         "preload_shims": false,
-        "body_sink_mm": -3.046,
+        "body_sink_mm": -2.882,
         "within_travel": true,
-        "drive_each_N": 106.686,
-        "caster_each_N": 32.465,
-        "drive_load_fraction": 0.6217
+        "drive_each_N": 105.5,
+        "caster_each_N": 33.058,
+        "drive_load_fraction": 0.6147
       },
       "without_arm_shims_kept": {
         "mass_kg": 35,
         "preload_shims": true,
-        "body_sink_mm": -10.33,
+        "body_sink_mm": -10.167,
         "within_travel": false,
-        "drive_each_N": 109.307,
-        "caster_each_N": 31.155,
-        "drive_load_fraction": 0.6369
+        "drive_each_N": 108.121,
+        "caster_each_N": 31.748,
+        "drive_load_fraction": 0.63
       }
     },
     "scope": "Centered CG, flat floor, catalog spring rate (load +-10%), small-angle lever ratio. Caster load also varies with swivel direction (contact 68-112 mm from the hinge). Remove preload shims without the arm. Measure on prototype."
