@@ -1,5 +1,5 @@
 {
-  "revision": "1.2",
+  "revision": "1.2a",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
     "base_width": 390,
