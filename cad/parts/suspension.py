@@ -1,4 +1,4 @@
-"""Rev12 suspension: six independent hinge + spring modules (pivot axis +Y).
+"""Rev12a suspension: six independent hinge + spring modules (pivot axis +Y).
 
 Per wheel: one bent-sheet bracket under the base plate, one bent arm, one catalog
 hinge pin, one X-SWU spring between the arm and the base plate underside on an
@@ -80,13 +80,15 @@ def spring_state(d, kind):
 def bracket_holes(d, key):
     (px, py, _), _ = pivot_of(d, key)
     if key in ('LEFT', 'RIGHT'):
-        return [(px+dx, py+dy) for dx in (-7, 7) for dy in (-25, 25)]
+        ys = d.layout['suspension']['drive']['bracket_hole_y_mm']
+        return [(px+dx, py+dy) for dx in (-7, 7) for dy in ys]
     return [(px, py+dy) for dy in (-15, 15)]
 
 
 def bump_stop_xy(d, key):
     if key in ('LEFT', 'RIGHT'):
-        return (140 if key == 'RIGHT' else -140), 20
+        q = d.layout['suspension']['drive']
+        return (q['bump_stop_x_mm'] if key == 'RIGHT' else -q['bump_stop_x_mm']), q['bump_stop_y_mm']
     x, y = caster_xy(d, key)
     off = d.layout['suspension']['caster']['bump_stop_offset_mm']
     return x-(off if x > 0 else -off), y
@@ -121,15 +123,18 @@ def make(d):
                                   {'wheel': wheel, 'moving_wheel': wheel if moving else None,
                                    **({'sku': sku} if sku else {}), **metadata}))
 
-    def hinge(kind, key, x0, x1, ear_y, ear_bottom, q):
-        """Fixed U bracket under the base plate, hinge pin and retainer."""
+    def hinge(kind, key, x0, x1, ear_lo, ear_hi, ear_bottom, q):
+        """Fixed U bracket under the base plate, hinge pin and retainer.
+
+        ear_lo / ear_hi: distance from the pivot (Y) to the inner face of the -Y / +Y ear.
+        """
         (px, py, pz), _ = pivot_of(d, key)
         bt = q['bracket_thickness_mm']
-        bracket = span(min(x0, x1), max(x0, x1), py-ear_y-bt, py+ear_y+bt, base_bottom-bt, base_bottom)
-        for sy in (-1, 1):
-            y0, y1 = sorted((py+sy*ear_y, py+sy*(ear_y+bt)))
+        lo, hi = py-ear_lo-bt, py+ear_hi+bt
+        bracket = span(min(x0, x1), max(x0, x1), lo, hi, base_bottom-bt, base_bottom)
+        for y0, y1 in ((lo, lo+bt), (hi-bt, hi)):
             bracket += span(px-12, px+12, y0, y1, ear_bottom, base_bottom-bt)
-        bracket -= cyly(q['pin_d_mm']/2+.005, 2*(ear_y+bt)+2, px, py, pz)
+        bracket -= cyly(q['pin_d_mm']/2+.005, hi-lo+2, px, (lo+hi)/2, pz)
         holes = bracket_holes(d, key)
         bracket = drilled(bracket, holes, 5.5, base_bottom-bt, bt)
         add(kind+'_hinge_bracket_U', bracket, key, material=f'{bt}t sheet, 2 bends; ream both ear holes together')
@@ -137,9 +142,7 @@ def make(d):
             sku='CB5-14', quantity=len(holes))
         add(kind+'_bracket_nuts', Compound([nut(a, b, base_bottom-bt-4, 8, 4, 5) for a, b in holes]), key,
             quantity=len(holes))
-        span_y = 2*(ear_y+bt)
-        length = round(span_y+1, 1)
-        lo = py-ear_y-bt
+        length = round(hi-lo+1, 1)
         pin = cyly(q['pin_d_mm']/2, length, px, lo+length/2, pz)
         pin += cyly(q['pin_head_d_mm']/2, q['pin_head_thickness_mm'], px, lo-q['pin_head_thickness_mm']/2, pz)
         pin -= cyly(3, 10, px, lo+length-4, pz)
@@ -150,12 +153,12 @@ def make(d):
         keeper += cyly(3, 8, px, end-3, pz)+cyly(5, 6, px, end+4, pz)
         add(kind+'_pin_retainer', keeper, key, sku='CB6-8', washer='M6 OD16 t1')
 
-    def bushes(kind, key, outer, q):
+    def bushes(kind, key, outer_lo, outer_hi, q):
         """Two flanged oil-free bushes pressed into the arm from outside; flanges face the bracket ears."""
         (px, py, pz), _ = pivot_of(d, key)
         ft, length = q['bush_flange_t_mm'], q['bush_length_mm']
         parts = []
-        for sy in (-1, 1):
+        for sy, outer in ((-1, outer_lo), (1, outer_hi)):
             face = py+sy*outer
             sleeve = cyly(q['bush_od_mm']/2, length-ft, px, face-sy*(length-ft)/2, pz)
             flange = cyly(q['bush_flange_d_mm']/2, ft, px, face+sy*ft/2, pz)
@@ -211,19 +214,22 @@ def make(d):
         def X(a, b):
             return (side*a, side*b) if side > 0 else (side*b, side*a)
 
-        wy, top, bot, ex = q['arm_wall_y_mm'], q['arm_top_z_mm'], q['arm_bottom_z_mm'], q['end_wall_x_mm']
+        # Rev12a: flat floor + two short pivot tabs + narrow axle wall (3 bends).
+        # Asymmetric about Y0: -Y side carries the spring and bump stop, +Y only the bush.
+        wy, wp = q['arm_wall_y_mm'], q['arm_wall_y_pos_mm']
+        top, bot, ex = q['arm_top_z_mm'], q['arm_bottom_z_mm'], q['end_wall_x_mm']
         a0 = abs(px)-12
-        arm = span(*X(a0, ex+t/2), -(wy+t), wy+t, bot, bot+t)
-        for sy in (-1, 1):
-            y0, y1 = sorted((sy*wy, sy*(wy+t)))
-            arm += span(*X(a0, ex+t/2), y0, y1, bot+t, top)
-        arm += span(*X(ex-t/2, ex+t/2), -(wy+t), wy+t, bot+t, top)
-        arm -= cyly(q['bush_od_mm']/2, 2*(wy+t)+2, px, 0, pz)
+        arm = span(*X(a0, ex+t/2), -(wy+t), wp+t, bot, bot+t)
+        for y0, y1 in ((-(wy+t), -wy), (wp, wp+t)):
+            arm += span(*X(a0, abs(px)+q['pivot_tab_x_mm']), y0, y1, bot+t, top)
+        eh = q['end_wall_half_width_mm']
+        arm += span(*X(ex-t/2, ex+t/2), -eh, eh, bot+t, top)
+        arm -= cyly(q['bush_od_mm']/2, wy+wp+2*t+2, px, (wp-wy)/2, pz)
         arm -= cylx(7.15, t+2, side*ex, 0, 90) & span(*X(ex-4, ex+4), -5.1, 5.1, 80, 100)
         sx, sy_, _ = spring_point(d, key)
         arm -= cylz(4, t+2, sx, sy_, bot-1)
-        bushes('drive', key, wy+t, q)
-        add('drive_swing_arm_6t', arm, key, True, material='S355 6t laser-cut tray, 3 bends; AF10.2 trial slot; M8 tapped seat',
+        bushes('drive', key, wy+t, wp+t, q)
+        add('drive_swing_arm_6t', arm, key, True, material='S355 6t laser-cut floor, 2 pivot tabs + axle wall (3 bends); AF10.2 trial slot; M8 tapped seat',
             arm_length_mm=round(d.p['drive_track']/2-q['pivot_x_mm'], 1))
         # Axle stack: unchanged trial dimensions, carried by the arm end wall.
         spacer = cylx(9, 4.9, side*(ex+5.45), 0, 90)-cylx(7.15, 6, side*(ex+5.45), 0, 90)
@@ -232,9 +238,9 @@ def make(d):
         add('drive_axle_washer', washer, key, True)
         axle_nut = nut(0, 0, 0, 22, 8, 14.3).rotate(Axis.Y, 90).translate((side*(ex-4)-8*(side > 0), 0, 90))
         add('drive_axle_M14x1p5_nut_envelope', axle_nut, key, True, fit='OEM nut thickness and wrench envelope assumed')
-        hinge('drive', key, side*(abs(px)-15), side*(abs(px)+15), wy+t+q['ear_gap_mm'], 83, q)
+        hinge('drive', key, side*(abs(px)-15), side*(abs(px)+15), wy+t+q['ear_gap_mm'], wp+t+q['ear_gap_mm'], 83, q)
         spring_stack('drive', key, 16)
-        bump_stop('drive', key, side*140, 20, bot+t)
+        bump_stop('drive', key, *bump_stop_xy(d, key), bot+t)
 
     # ---------------------------------------------------------------- casters
     q = d.layout['suspension']['caster']
@@ -256,13 +262,13 @@ def make(d):
         arm = drilled(arm, bolts, 6.6, plate_top, t)
         sx, sy_, _ = spring_point(d, wheel)
         arm -= cylz(4, t+2, sx, sy_, plate_top-1)
-        bushes('caster', wheel, hw, q)
+        bushes('caster', wheel, hw, hw, q)
         add('caster_swing_arm_6t', arm, wheel, True, material='S355 6t laser-cut, 2 bent tabs; M8 tapped seat',
             arm_length_mm=q['arm_length_mm'])
         add('caster_plate_bolts', Compound([screw(a, b, plate_top-5, 6, 16, True) for a, b in bolts]),
             wheel, True, sku='CB6-16', quantity=4, plate_thickness_reference_mm=5)
         add('caster_plate_nuts', Compound([nut(a, b, plate_top+t, 10, 5, 6) for a, b in bolts]), wheel, True, quantity=4)
-        hinge('caster', wheel, px-15, px+15, hw+q['ear_gap_mm'], 88, q)
+        hinge('caster', wheel, px-15, px+15, hw+q['ear_gap_mm'], hw+q['ear_gap_mm'], 88, q)
         spring_stack('caster', wheel, 16)
         bump_stop('caster', wheel, *bump_stop_xy(d, wheel), plate_top+t)
     return records

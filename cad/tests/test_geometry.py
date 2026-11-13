@@ -93,3 +93,18 @@ def test_rev12_hinge_modules_meet_both_stops():
             assert at is None or at.volume<.01
             beyond=pose_shape(d,shape,wheel,limit*1.2)&other
             assert beyond is not None and beyond.volume>.1
+
+
+def test_rev12a_compact_drive_arm():
+    """Drive arm keeps only short pivot tabs; the module is asymmetric and the pin is no longer at catalog L100."""
+    d=load_design()
+    parts={r.name:r for r in build_records(d,['suspension'])}
+    for wheel in ('LEFT','RIGHT'):
+        arm=parts['80_drive_swing_arm_6t_'+wheel].shape
+        assert arm.is_valid and len(arm.solids())==1 and arm.volume<65000
+        b=arm.bounding_box()
+        assert b.min.Y==pytest.approx(-42.5) and b.max.Y==pytest.approx(21)
+        pin=parts['80_drive_hinge_pin_'+wheel]
+        assert pin.metadata['sku']=='CLBKHM10-'+format(pin.metadata['length_mm'],'g') and pin.metadata['length_mm']<100
+        stop=parts['80_drive_bump_stop_bolt_M6_'+wheel].shape.bounding_box().center()
+        assert stop.Y==pytest.approx(d.layout['suspension']['drive']['bump_stop_y_mm'])
