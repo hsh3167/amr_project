@@ -1464,19 +1464,19 @@
             10,
             15
           ],
-          "source_solid_volume_mm3": 13831.147608597716,
-          "placed_solid_volume_mm3": 13831.147608597716,
+          "source_solid_volume_mm3": 13831.14760859772,
+          "placed_solid_volume_mm3": 13831.147608597723,
           "minimum_topology_tolerance_mm": 1e-05,
           "open_reference_shells_excluded": 3
         },
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.147608664709,
+      "volume_mm3": 13831.147608597723,
       "bounds_mm": [
         [
           -130.00381821959914,
-          -46.11607497491716
+          -46.11607497491715
         ],
         [
           254.9729471113061,
@@ -1488,9 +1488,9 @@
         ]
       ],
       "center_mm": [
-        -89.87498357218627,
-        273.6033524383799,
-        267.41376053383874
+        -89.87498357188935,
+        273.6033524383707,
+        267.41376053382584
       ],
       "solids": 58
     },
@@ -1571,18 +1571,18 @@
             10,
             15
           ],
-          "source_solid_volume_mm3": 13831.147608597716,
-          "placed_solid_volume_mm3": 13831.147608597712,
+          "source_solid_volume_mm3": 13831.14760859772,
+          "placed_solid_volume_mm3": 13831.14760859772,
           "minimum_topology_tolerance_mm": 1e-05,
           "open_reference_shells_excluded": 3
         },
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.147608664707,
+      "volume_mm3": 13831.14760859772,
       "bounds_mm": [
         [
-          46.1160749753796,
+          46.11607497537959,
           130.003818305512
         ],
         [
@@ -1595,9 +1595,9 @@
         ]
       ],
       "center_mm": [
-        87.90994362156701,
-        274.12988330624324,
-        267.41376053383635
+        87.9099436218197,
+        274.1298833060874,
+        267.4137605338268
       ],
       "solids": 58
     },
@@ -2374,7 +2374,7 @@
         "moving_wheel": null,
         "quantity": 4
       },
-      "volume_mm3": 572.6507481162864,
+      "volume_mm3": 572.6507481162865,
       "bounds_mm": [
         [
           69.38119784648299,
@@ -2707,7 +2707,7 @@
         "quantity": 4,
         "plate_thickness_reference_mm": 5
       },
-      "volume_mm3": 3694.5129606215964,
+      "volume_mm3": 3694.512960621596,
       "bounds_mm": [
         [
           -155.0,
@@ -3165,7 +3165,7 @@
         "quantity": 4,
         "plate_thickness_reference_mm": 5
       },
-      "volume_mm3": 3694.5129606215964,
+      "volume_mm3": 3694.512960621596,
       "bounds_mm": [
         [
           -155.0,
