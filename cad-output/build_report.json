@@ -50,7 +50,7 @@
           108.653
         ],
         "min_solid_margin_mm": 8.889,
-        "max_working_deflection_margin_mm": 3.689,
+        "max_working_deflection_margin_mm": 3.639,
         "installed_length_mm": 23,
         "shim_removed_force_N": 48.72,
         "ground_force_N": [
