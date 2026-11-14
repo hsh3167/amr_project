@@ -15,6 +15,91 @@
       "original_bytes": 13593595,
       "source": "https://xm917ch2uk.feishu.cn/drive/folder/X6WrfJsbaloeSKdTTAicOlFVn19",
       "note": "Linked by official https://www.orbbec.com.cn/index/Download2025/info.html?cate=121&id=1 ; original filename/version retained"
+    },
+    {
+      "file": "CLBKHM10-78.5.stp.gz",
+      "sha256_original": "ca47a2ea8041b1f127b324dd83c3339dbae0e8addea4eab6833e853b44d0538c",
+      "original_bytes": 46963,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110310520649/?HissuCode=CLBKHM10-78.5",
+      "retrieved": "2026-11-14",
+      "cad_format": "STEP AP214 (3D, mm, single solid)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0)",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 10920,
+        "min_order_qty": 1,
+        "seen": "2026-11-14",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download 2026-11-14 (logged in), SKU CLBKHM10-78.5, SolidWorks 2016 (SwSTEP 2.0), STEP AP214 (3D, mm, single solid). Used as drive hinge pin x2. Dimension reference only: measured 2026-11-14 and compared with cad/layout.json; not placed in the assembly (suspension parts stay catalog envelopes). L78.5 shaft length measured from flange underside; head t1.5 above"
+    },
+    {
+      "file": "CLBKHM10-75.stp.gz",
+      "sha256_original": "b3a7728b39bf19541fab440cb30c8830d144e9a07be615c6cc6962f1ccb653e2",
+      "original_bytes": 46961,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110310520649/?HissuCode=CLBKHM10-75",
+      "retrieved": "2026-11-14",
+      "cad_format": "STEP AP214 (3D, mm, single solid)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0)",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 10920,
+        "min_order_qty": 1,
+        "seen": "2026-11-14",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download 2026-11-14 (logged in), SKU CLBKHM10-75, SolidWorks 2016 (SwSTEP 2.0), STEP AP214 (3D, mm, single solid). Used as caster hinge pin x4. Dimension reference only: measured 2026-11-14 and compared with cad/layout.json; not placed in the assembly (suspension parts stay catalog envelopes). L75 shaft length measured from flange underside; head t1.5 above"
+    },
+    {
+      "file": "MPFZ10-10.stp.gz",
+      "sha256_original": "f90aeb7233bd9da1622722f3b6ddf0ab7152e0a2ecd1a5516c580278fb4017b4",
+      "original_bytes": 20067,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110302579350/?HissuCode=MPFZ10-10",
+      "retrieved": "2026-11-14",
+      "cad_format": "STEP AP214 (3D, mm, single solid)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0); STEP file stamped 2025-11-26",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 5874,
+        "min_order_qty": 1,
+        "seen": "2026-11-14",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download 2026-11-14 (logged in), SKU MPFZ10-10, SolidWorks 2016 (SwSTEP 2.0); STEP file stamped 2025-11-26, STEP AP214 (3D, mm, single solid). Used as hinge bush x12 (2 per arm). Dimension reference only: measured 2026-11-14 and compared with cad/layout.json; not placed in the assembly (suspension parts stay catalog envelopes). Standard MPFZ10-10 flanged oil-free bush, same SKU as the model (Rev12)"
+    },
+    {
+      "file": "X-SWU21-70.step.gz",
+      "sha256_original": "597137111b0af46183eb68d132193ac031986a3fd684217c256bc3afce9619c9",
+      "original_bytes": 263779,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110200190760/?HissuCode=X-SWU21-70",
+      "retrieved": "2026-11-14",
+      "cad_format": "STEP AP214 (3D, mm, single solid)",
+      "cad_version": "Spatial InterOp 3D (MISUMI export); no AP214 menu entry, generic STEP header is AP214",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 3834,
+        "min_order_qty": 10,
+        "seen": "2026-11-14",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download 2026-11-14 (logged in), SKU X-SWU21-70, Spatial InterOp 3D (MISUMI export); no AP214 menu entry, generic STEP header is AP214, STEP AP214 (3D, mm, single solid). Used as drive spring x2. Dimension reference only: measured 2026-11-14 and compared with cad/layout.json; not placed in the assembly (suspension parts stay catalog envelopes). Minimum order 10 pcs (38,340 KRW)"
+    },
+    {
+      "file": "X-SWU17-35.step.gz",
+      "sha256_original": "919c5fa9f8aba4c9ffbf2d9f9536237b162931b4449b956f8e3dd11addf7deef",
+      "original_bytes": 165117,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110200190760/?HissuCode=X-SWU17-35",
+      "retrieved": "2026-11-14",
+      "cad_format": "STEP AP214 (3D, mm, single solid)",
+      "cad_version": "Spatial InterOp 3D (MISUMI export); no AP214 menu entry, generic STEP header is AP214",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 2445,
+        "min_order_qty": 1,
+        "seen": "2026-11-14",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download 2026-11-14 (logged in), SKU X-SWU17-35, Spatial InterOp 3D (MISUMI export); no AP214 menu entry, generic STEP header is AP214, STEP AP214 (3D, mm, single solid). Used as caster spring x4. Dimension reference only: measured 2026-11-14 and compared with cad/layout.json; not placed in the assembly (suspension parts stay catalog envelopes). Download left as .tmp by browser; ZIP integrity tested, content copied read-only"
     }
   ]
 }

@@ -161,7 +161,7 @@
       "loaded_length_mm": 28,
       "free_length_mm": 35,
       "solid_length_mm": 10.5,
-      "max_deflection_mm": 19.3,
+      "max_deflection_mm": 19.25,
       "rate_N_mm": 6.96,
       "shim_mm": 5,
       "unsprung_mass_kg_estimate": 0.85,
