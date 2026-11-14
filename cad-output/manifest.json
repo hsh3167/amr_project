@@ -1488,11 +1488,11 @@
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.147608597723,
+      "volume_mm3": 13831.147608664716,
       "bounds_mm": [
         [
           -130.00381821959914,
-          -46.11607497491715
+          -46.11607497491716
         ],
         [
           254.9729471113061,
@@ -1504,9 +1504,9 @@
         ]
       ],
       "center_mm": [
-        -89.87498357188935,
-        273.6033524383707,
-        267.41376053382584
+        -89.87498357218627,
+        273.6033524383799,
+        267.41376053383874
       ],
       "solids": 58
     },
@@ -1595,10 +1595,10 @@
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.14760859772,
+      "volume_mm3": 13831.147608664714,
       "bounds_mm": [
         [
-          46.11607497537959,
+          46.1160749753796,
           130.003818305512
         ],
         [
@@ -1611,9 +1611,9 @@
         ]
       ],
       "center_mm": [
-        87.9099436218197,
-        274.1298833060874,
-        267.4137605338268
+        87.90994362156701,
+        274.12988330624324,
+        267.41376053383635
       ],
       "solids": 58
     },
