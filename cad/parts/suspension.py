@@ -65,7 +65,8 @@ def spring_point(d, key):
     q = d.layout['suspension']['caster']
     x, y = caster_xy(d, key)
     side = -1 if x < 0 else 1
-    return x-side*q['spring_offset_mm'], y, d.parts['caster']['cad_height']+q['arm_thickness_mm']
+    # Rev14: 3t floor + fixed seat spacer keeps the Rev12 spring seat height.
+    return x-side*q['spring_offset_mm'], y, d.parts['caster']['cad_height']+q['arm_thickness_mm']+q.get('seat_spacer_mm', 0)
 
 
 def lever_ratio(d, kind):
@@ -123,6 +124,25 @@ def chassis_mount_holes(d):
     return holes
 
 
+def boss_plates(xs, pz, ys):
+    """Flat 8t bosses inside the side walls: give the MPFZ sleeve (8 mm) its press length behind a 3t wall."""
+    return Compound([span(xs[0], xs[1], y0, y1, pz-10, pz+10) for y0, y1 in ys])
+
+
+def boss_screws(px, pz, faces, q):
+    """CB4-10 from outside the wall into each boss, clear of the bracket ear (px +-12), toward the wheel."""
+    dx = q['boss_screw_dx_mm']
+    s = 1 if px > 0 else -1
+    return [(px+s*dx, face, pz+dz, out) for face, out in faces for dz in (-6, 6)]
+
+
+def screw_y(x, face, z, out, q):
+    """CB4-10 along Y: head (D7 x 4) outside the wall face, 10 mm shank into wall + boss."""
+    head = cyly(3.5, 4, x, face+out*2, z)
+    shank = cyly(2, 10, x, face-out*5, z)
+    return head+shank
+
+
 def make(d):
     records = []
     p = d.p
@@ -152,9 +172,10 @@ def make(d):
         bracket -= cyly(q['pin_d_mm']/2+.005, hi-lo+2, px, (lo+hi)/2, pz)
         holes = bracket_holes(d, key)
         bracket = drilled(bracket, holes, 5.5, base_bottom-bt, bt)
-        add(kind+'_hinge_bracket_U', bracket, key, material=f'{bt}t sheet, 2 bends; ream both ear holes together')
-        add(kind+'_bracket_bolts', Compound([screw(a, b, base_top, 5, 14) for a, b in holes]), key,
-            sku='CB5-14', quantity=len(holes))
+        add(kind+'_hinge_bracket_U', bracket, key, material=f'S355 {bt}t sheet, 2 bends (bend limit 3t); ream both ear holes together')
+        # Rev14: base 3 + flange 3 + nut 4 -> CB5-12 ends 2 mm past the nut.
+        add(kind+'_bracket_bolts', Compound([screw(a, b, base_top, 5, 12) for a, b in holes]), key,
+            sku='CB5-12', quantity=len(holes))
         add(kind+'_bracket_nuts', Compound([nut(a, b, base_bottom-bt-4, 8, 4, 5) for a, b in holes]), key,
             quantity=len(holes))
         length = round(hi-lo+1, 1)
@@ -194,6 +215,11 @@ def make(d):
             raise ValueError('Spring gap and catalog seating length differ: '+key)
         value = d.motion.get(key, 0)
         bottom = seat+q['shim_mm']
+        spacer = q.get('seat_spacer_mm', 0)
+        floor = seat-spacer-q['arm_thickness_mm']
+        if spacer:
+            add(kind+'_seat_spacer', ring(x, y, seat-spacer, spacer, q['spring_od_mm']+1, 8.4), key, True,
+                material=f'{spacer}t flat washer/plate (fixed)')
         add(kind+'_preload_shim', ring(x, y, seat, q['shim_mm'], q['spring_od_mm']+1, 8.4), key, True,
             remove_without_arm=True)
         length = state['installed_length_mm']
@@ -208,9 +234,9 @@ def make(d):
         drop = min(seat_travel(d, key, -half, x+dx, base_top) for dx in (-w, w))
         washer_bottom = base_top-drop+.05
         nut_top = washer_bottom+1.6+6.5
-        stud = cylz(4, nut_top+1.5-(seat-q['arm_thickness_mm']), x, y, seat-q['arm_thickness_mm'])
-        add(kind+'_stud_M8', stud, key, True, sku='M8 stud', length_mm=round(nut_top+1.5-seat+q['arm_thickness_mm'], 1),
-            fit='Threaded into the arm (tapped M8) and locked with a nut')
+        stud = cylz(4, nut_top+1.5-floor, x, y, floor)
+        add(kind+'_stud_M8', stud, key, True, sku='M8 stud', length_mm=round(nut_top+1.5-floor, 1),
+            fit='Tapped M8 in the 3t floor + threadlocker; droop load below 100 N')
         stop = ring(x, y, washer_bottom, 1.6, washer_od, 8.4)+nut(x, y, washer_bottom+1.6, 13, 6.5, 8)
         add(kind+'_droop_stop_washer_nut', stop, key, True, adjust='Turn the nut to set the droop limit; lock with a second nut')
         return state
@@ -227,7 +253,8 @@ def make(d):
         top = max(s.bounding_box().max.Z for s in parts)
         add(kind+'_bump_stopper_'+q['bump_stopper_sku'], Compound(parts), key, True, sku=q['bump_stopper_sku'],
             status='misumi_step_exact', source=step+'.gz', color=(.35, .78, .45), tip_z=round(top, 3),
-            fit='M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip')
+            fit='M5x0.8 thread 7: 3t floor + M5 nut 4 underneath; urethane Shore A90 tip')
+        add(kind+'_bump_stopper_nut_M5', nut(x, y, surface-q['arm_thickness_mm']-4, 8, 4, 5), key, True, quantity=1)
         r = q['bump_stopper_d_mm']/2
         rise = max(seat_travel(d, key, half, x+dx, top) for dx in (-r, r))
         tip = top+rise+.05
@@ -245,26 +272,40 @@ def make(d):
         def X(a, b):
             return (side*a, side*b) if side > 0 else (side*b, side*a)
 
-        # Rev12a: flat floor + two short pivot tabs + narrow axle wall (3 bends).
-        # Asymmetric about Y0: -Y side carries the spring and bump stop, +Y only the bush.
+        # Rev14: 3t bent channel (bend limit 3t): floor + two full-length side walls + end wall (3 bends).
+        # Flat parts carry the thick features: 8t bosses for the bushes, a 3t torque plate on the axle flats.
         wy, wp = q['arm_wall_y_mm'], q['arm_wall_y_pos_mm']
         top, bot, ex = q['arm_top_z_mm'], q['arm_bottom_z_mm'], q['end_wall_x_mm']
         a0 = abs(px)-12
-        arm = span(*X(a0, ex+t/2), -(wy+t), wp+t, bot, bot+t)
+        arm = span(*X(a0, ex+t), -(wy+t), wp+t, bot, bot+t)
         for y0, y1 in ((-(wy+t), -wy), (wp, wp+t)):
-            arm += span(*X(a0, abs(px)+q['pivot_tab_x_mm']), y0, y1, bot+t, top)
-        eh = q['end_wall_half_width_mm']
-        arm += span(*X(ex-t/2, ex+t/2), -eh, eh, bot+t, top)
-        arm -= cyly(q['bush_od_mm']/2, wy+wp+2*t+2, px, (wp-wy)/2, pz)
+            arm += span(*X(a0, ex+t), y0, y1, bot+t, top)
+        arm += span(*X(ex, ex+t), -wy, wp, bot+t, top)
+        slot = cylx(7.15, 12, side*(ex+t/2), 0, 90) & span(*X(ex-5, ex+t+5), -5.1, 5.1, 80, 100)
+        arm -= slot
+        bosses = boss_plates(X(a0, abs(px)+q['pivot_tab_x_mm']), pz, ((-wy, -wy+q['boss_thickness_mm']), (wp-q['boss_thickness_mm'], wp)))
+        bore = cyly(q['bush_od_mm']/2, wy+wp+2*t+2, px, (wp-wy)/2, pz)
+        arm -= bore
+        bosses -= bore
         for cone in bore_chamfers(px, pz, ((-(wy+t), 1), (wp+t, -1)), q['bush_od_mm']/2):
             arm -= cone
-        arm -= cylx(7.15, t+2, side*ex, 0, 90) & span(*X(ex-4, ex+4), -5.1, 5.1, 80, 100)
+        screws = boss_screws(px, pz, ((-(wy+t), -1), (wp+t, 1)), q)
+        for s in screws:
+            arm -= cyly(2.25, 30, s[0], s[1], s[2])
+            bosses -= cyly(2.25, 30, s[0], s[1], s[2])
         sx, sy_, _ = spring_point(d, key)
         arm -= cylz(4, t+2, sx, sy_, bot-1)
-        arm -= cylz(q['bump_stopper_thread_d_mm']/2, t+2, *bump_stop_xy(d, key), bot-1)  # M5 tap for the stopper
+        arm -= cylz(q['bump_stopper_thread_d_mm']/2, t+2, *bump_stop_xy(d, key), bot-1)  # M5 for the stopper
         bushes('drive', key, wy+t, wp+t, q)
-        add('drive_swing_arm_6t', arm, key, True, material='S355 6t laser-cut floor, 2 pivot tabs + axle wall (3 bends); AF10.2 trial slot; M8 tapped seat',
+        add('drive_swing_arm_3t', arm, key, True,
+            material='S355 3t laser-cut, floor + 2 full-length side walls + end wall (3 bends); AF10.2 slot; M8 tapped seat',
             arm_length_mm=round(d.p['drive_track']/2-q['pivot_x_mm'], 1))
+        add('drive_pivot_bosses_8t', bosses, key, True, material='S355 8t flat laser-cut, bush bore 14 H7, 2x M4 tapped each',
+            quantity=2)
+        add('drive_boss_screws_CB4-10', Compound([screw_y(*s, q) for s in screws]), key, True, sku='CB4-10', quantity=4)
+        plate = span(*X(ex-3, ex), -wy, wp, bot+t, top)-slot
+        add('drive_axle_torque_plate_3t', plate, key, True,
+            material='S355 3t flat laser-cut, AF10.2 slot; clamped by the axle nut against the end wall')
         # Axle stack: unchanged trial dimensions, carried by the arm end wall.
         spacer = cylx(9, 4.9, side*(ex+5.45), 0, 90)-cylx(7.15, 6, side*(ex+5.45), 0, 90)
         add('drive_axial_spacer_trial', spacer, key, True, fit='Confirm stationary shoulder and bearing-face diameters on motor')
@@ -284,28 +325,45 @@ def make(d):
         x, y = caster_xy(d, wheel)
         side = -1 if x < 0 else 1
         (px, _, pz), _ = pivot_of(d, wheel)
-        hw = q['arm_half_width_mm']
+        # Rev14: 3t bent channel. Narrow section with side walls from the pivot; wider flat pad over the
+        # GL-65 plate so the 54 mm hole pitch keeps 7 mm edge distance (Rev13 holes broke out of the edge).
+        hw, pad = q['arm_half_width_mm'], q['caster_pad_half_width_mm']
         x0, x1 = sorted((px-side*12, x+side*35))
-        arm = span(x0, x1, y-hw, y+hw, plate_top, plate_top+t)
-        t0, t1 = sorted((px-side*12, px+side*25))
+        pad_start = x-side*q['caster_pad_inboard_mm']
+        n0, n1 = sorted((px-side*12, pad_start))
+        p0, p1 = sorted((pad_start, x+side*35))
+        arm = span(n0, n1, y-hw, y+hw, plate_top, plate_top+t)+span(p0, p1, y-pad, y+pad, plate_top, plate_top+t)
+        w0, w1 = sorted((px-side*12, pad_start-side*3))
         for sy in (-1, 1):
             y0, y1 = sorted((y+sy*(hw-t), y+sy*hw))
-            arm += span(t0, t1, y0, y1, plate_top+t, q['tab_top_z_mm'])
-        arm -= cyly(q['bush_od_mm']/2, 2*hw+2, px, y, pz)
+            arm += span(w0, w1, y0, y1, plate_top+t, q['tab_top_z_mm'])
+        b0, b1 = sorted((px-side*12, px+side*q['pivot_tab_x_mm']))
+        bosses = boss_plates((b0, b1), pz, ((y-hw+t, y-hw+t+q['boss_thickness_mm']), (y+hw-t-q['boss_thickness_mm'], y+hw-t)))
+        bore = cyly(q['bush_od_mm']/2, 2*hw+2, px, y, pz)
+        arm -= bore
+        bosses -= bore
         for cone in bore_chamfers(px, pz, ((y-hw, 1), (y+hw, -1)), q['bush_od_mm']/2):
             arm -= cone
+        screws = boss_screws(px, pz, ((y-hw, -1), (y+hw, 1)), q)
+        for s in screws:
+            arm -= cyly(2.25, 30, s[0], s[1], s[2])
+            bosses -= cyly(2.25, 30, s[0], s[1], s[2])
         bolts = [(x+dx, y+dy) for dx in (-12, 12) for dy in (-27, 27)]
         arm = drilled(arm, bolts, 6.6, plate_top, t)
         sx, sy_, _ = spring_point(d, wheel)
         arm -= cylz(4, t+2, sx, sy_, plate_top-1)
-        arm -= cylz(q['bump_stopper_thread_d_mm']/2, t+2, *bump_stop_xy(d, wheel), plate_top-1)  # M5 tap for the stopper
+        arm -= cylz(q['bump_stopper_thread_d_mm']/2, t+2, *bump_stop_xy(d, wheel), plate_top-1)  # M5 for the stopper
         bushes('caster', wheel, hw, hw, q)
-        add('caster_swing_arm_6t', arm, wheel, True, material='S355 6t laser-cut, 2 bent tabs; M8 tapped seat',
+        add('caster_swing_arm_3t', arm, wheel, True,
+            material='S355 3t laser-cut, narrow floor + 2 side walls (2 bends) + flat caster pad; M8 tapped seat',
             arm_length_mm=q['arm_length_mm'])
-        # Rev13: heads bear on the underside of the 2 mm OEM caster plate (measured from the GL-65 STEP).
+        add('caster_pivot_bosses_8t', bosses, wheel, True, material='S355 8t flat laser-cut, bush bore 14 H7, 2x M4 tapped each',
+            quantity=2)
+        add('caster_boss_screws_CB4-10', Compound([screw_y(*s, q) for s in screws]), wheel, True, sku='CB4-10', quantity=4)
+        # Heads bear on the 2 mm OEM plate; plate 2 + floor 3 + nut 5 -> CB6-12 ends 2 mm past the nut.
         under = plate_top-d.parts['caster']['plate_thickness_mm']
-        add('caster_plate_bolts', Compound([screw(a, b, under, 6, 16, True) for a, b in bolts]),
-            wheel, True, sku='CB6-16', quantity=4, plate_thickness_mm=d.parts['caster']['plate_thickness_mm'])
+        add('caster_plate_bolts', Compound([screw(a, b, under, 6, 12, True) for a, b in bolts]),
+            wheel, True, sku='CB6-12', quantity=4, plate_thickness_mm=d.parts['caster']['plate_thickness_mm'])
         add('caster_plate_nuts', Compound([nut(a, b, plate_top+t, 10, 5, 6) for a, b in bolts]), wheel, True, quantity=4)
         hinge('caster', wheel, px-15, px+15, hw+q['ear_gap_mm'], hw+q['ear_gap_mm'], 88, q)
         spring_stack('caster', wheel, 16)

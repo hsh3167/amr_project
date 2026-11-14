@@ -81,11 +81,11 @@ def test_rev12_hinge_modules_meet_both_stops():
         assert pin.metadata['moving_wheel'] is None
         c=pin.shape.center(CenterOf.MASS);(px,_,pz),_=pivot_of(d,wheel)
         assert (c.X,c.Z)==pytest.approx((px,pz),abs=1e-6)
-        assert parts['80_'+kind+'_swing_arm_6t_'+wheel].metadata['moving_wheel']==wheel
+        assert parts['80_'+kind+'_swing_arm_3t_'+wheel].metadata['moving_wheel']==wheel
         bush=parts['80_'+kind+'_hinge_bushes_'+wheel]
         assert bush.metadata['moving_wheel']==wheel and len(bush.shape.solids())==2
         assert bush.shape&pin.shape is None or (bush.shape&pin.shape).volume<1e-6
-        arm=parts['80_'+kind+'_swing_arm_6t_'+wheel].shape
+        arm=parts['80_'+kind+'_swing_arm_3t_'+wheel].shape
         nut=parts['80_'+kind+'_droop_stop_washer_nut_'+wheel].shape
         stop=parts['80_'+kind+'_bump_stop_bolt_M6_'+wheel].shape
         # Rev12b: the C-USLH10 urethane tip on the arm meets the M6 striker bolt.
@@ -99,14 +99,14 @@ def test_rev12_hinge_modules_meet_both_stops():
 
 
 def test_rev12a_compact_drive_arm():
-    """Drive arm keeps only short pivot tabs; the module is asymmetric and the pin is no longer at catalog L100."""
+    """Rev14: 3t channel arm, still asymmetric (-Y spring/stop side) with the CLBKHM10-78.5 pin span."""
     d=load_design()
     parts={r.name:r for r in build_records(d,['suspension'])}
     for wheel in ('LEFT','RIGHT'):
-        arm=parts['80_drive_swing_arm_6t_'+wheel].shape
+        arm=parts['80_drive_swing_arm_3t_'+wheel].shape
         assert arm.is_valid and len(arm.solids())==1 and arm.volume<65000
         b=arm.bounding_box()
-        assert b.min.Y==pytest.approx(-42.5) and b.max.Y==pytest.approx(21)
+        assert b.min.Y==pytest.approx(-44) and b.max.Y==pytest.approx(22.5)
         pin=parts['80_drive_hinge_pin_'+wheel]
         assert pin.metadata['sku']=='CLBKHM10-'+format(pin.metadata['length_mm'],'g') and pin.metadata['length_mm']<100
         stop=parts['80_drive_bump_stop_bolt_M6_'+wheel].shape.bounding_box().center()
@@ -166,4 +166,30 @@ def test_rev13_every_part_is_supported_and_caster_bolts_bear_on_the_plate():
     plate=d.parts['caster']['cad_height']-d.parts['caster']['plate_thickness_mm']
     for wheel in ('LF','LB','RF','RB'):
         bolts=parts['80_caster_plate_bolts_'+wheel].shape.bounding_box()
-        assert bolts.min.Z==pytest.approx(plate-6) and bolts.max.Z==pytest.approx(plate+16)
+        assert bolts.min.Z==pytest.approx(plate-6) and bolts.max.Z==pytest.approx(plate+12)
+
+
+def test_rev14_bend_limit_fastener_length_and_lidar_bracket():
+    """Bent sheet parts are at most 3t; bolts end about 2 mm past their nuts; each LiDAR hangs on a main column."""
+    d=load_design();s=d.layout['suspension']
+    for kind in ('drive','caster'):
+        assert s[kind]['arm_thickness_mm']<=3 and s[kind]['bracket_thickness_mm']<=3
+    records=build_records(d,['suspension','lidars','structure','chassis'])
+    parts={r.name:r for r in records}
+    for wheel in ('LEFT','RIGHT','LF','LB','RF','RB'):
+        kind='drive' if wheel in ('LEFT','RIGHT') else 'caster'
+        bolts=parts['80_'+kind+'_bracket_bolts_'+wheel].shape.bounding_box()
+        nuts=parts['80_'+kind+'_bracket_nuts_'+wheel].shape.bounding_box()
+        assert 0<nuts.min.Z-bolts.min.Z<=2.5
+        assert len(parts['80_'+kind+'_pivot_bosses_8t_'+wheel].shape.solids())==2
+    for wheel in ('LF','LB','RF','RB'):
+        bolts=parts['80_caster_plate_bolts_'+wheel].shape.bounding_box()
+        nuts=parts['80_caster_plate_nuts_'+wheel].shape.bounding_box()
+        assert 0<bolts.max.Z-nuts.max.Z<=2.5
+        # 54 mm hole pitch: holes keep at least 5 mm of edge on the caster pad.
+        arm=parts['80_caster_swing_arm_3t_'+wheel].shape.bounding_box()
+        assert arm.size.Y>=2*(27+3.3+5)
+    assert not any(n.startswith('64_') for n in parts)
+    for n in ('FRONT_LEFT','REAR_RIGHT'):
+        assert parts['65_lidar_bracket_bolts_M5_Tnut_'+n].metadata['quantity']==4
+        assert parts['60_lidar_bracket_3t_'+n].shape.is_valid

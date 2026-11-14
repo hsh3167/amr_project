@@ -10,8 +10,8 @@ def make(d):
         from .suspension import chassis_mount_holes
         for x,y,diameter in chassis_mount_holes(d):
             base=drilled(base,[(x,y)],diameter,p['base_bottom_z'],p['base_thickness'])
-        # Rev13: CB5-12 holes for the main and LiDAR column end bolts.
-        columns=[tuple(c) for c in d.profile['main_columns_xy']]+[(q['support_x'],q['support_y']) for q in d.layout['lidars']]
+        # Rev13/14: CB5-12 holes for the main column end bolts (Rev14: LiDAR brackets hang on the main columns).
+        columns=[tuple(c) for c in d.profile['main_columns_xy']]
         base=drilled(base,columns,5.5,p['base_bottom_z'],p['base_thickness'])
     r=[PartRecord('01_lower_Al_plate_CONCEPT' if d.variant=='baseline' else '01_lower_steel_plate_3t','chassis',base,(.60,.71,.78))]
     if d.variant=='baseline':

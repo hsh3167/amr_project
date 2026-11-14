@@ -40,7 +40,7 @@ def validate_parameters(d):
             q=s[kind]
             for key in ('travel_mm','spring_od_mm','spring_id_mm','display_turns','loaded_length_mm','free_length_mm',
                         'solid_length_mm','max_deflection_mm','rate_N_mm','unsprung_mass_kg_estimate','pivot_z_mm',
-                        'arm_thickness_mm','bracket_thickness_mm','pin_d_mm','pin_head_d_mm'):
+                        'arm_thickness_mm','bracket_thickness_mm','pin_d_mm','pin_head_d_mm','boss_thickness_mm'):
                 if not isinstance(q[key],(int,float)) or not math.isfinite(q[key]) or q[key]<=0:
                     raise ValueError('Invalid suspension parameter: '+kind+'.'+key)
             if q['travel_mm']>maximum:raise ValueError('Frame redesign required for greater '+kind+' travel')
@@ -70,7 +70,7 @@ def validate_parameters(d):
                 if not -q['arm_wall_y_mm']<q['bump_stop_y_mm']-6<q['bump_stop_y_mm']+6<q['arm_wall_y_pos_mm']:
                     raise ValueError('Drive bump stop must land on the arm floor')
             else:
-                ratio=(q['arm_length_mm']-q['spring_offset_mm'])/q['arm_length_mm'];seat=d.parts['caster']['cad_height']+q['arm_thickness_mm']
+                ratio=(q['arm_length_mm']-q['spring_offset_mm'])/q['arm_length_mm'];seat=d.parts['caster']['cad_height']+q['arm_thickness_mm']+q.get('seat_spacer_mm',0)
                 if q['arm_length_mm']<=q['travel_mm']:raise ValueError('Caster arm too short')
             if abs(d.p['base_bottom_z']-seat-q['loaded_length_mm'])>1e-6:
                 raise ValueError('Spring gap does not match the base plate: '+kind)
