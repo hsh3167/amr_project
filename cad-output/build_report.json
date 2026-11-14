@@ -1,7 +1,7 @@
 {
   "valid": true,
-  "components": 141,
-  "solids": 305,
+  "components": 147,
+  "solids": 317,
   "errors": [],
   "suspension_catalog": {
     "concept": "Rev12 six independent hinge + spring modules",
@@ -153,6 +153,109 @@
     "hits": [],
     "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump of its hinge arm; local hardware and chassis"
   },
+  "static_interference": {
+    "boolean_pairs": 224,
+    "hits": [],
+    "known_manufacturer_overlaps": [
+      {
+        "a": "43_GL65_OEM_fork_LB",
+        "b": "44_GL65_OEM_wheel_LB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      },
+      {
+        "a": "43_GL65_OEM_fork_LF",
+        "b": "44_GL65_OEM_wheel_LF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      },
+      {
+        "a": "43_GL65_OEM_fork_RB",
+        "b": "44_GL65_OEM_wheel_RB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      },
+      {
+        "a": "43_GL65_OEM_fork_RF",
+        "b": "44_GL65_OEM_wheel_RF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      }
+    ],
+    "scope": "All parts, nominal pose, BRep common volume > 0.01 mm3; contact without overlap is allowed"
+  },
+  "suspension_pose_interference": {
+    "sampled_poses": 12,
+    "boolean_pairs": 488,
+    "hits": [],
+    "known_manufacturer_overlaps": [
+      {
+        "a": "43_GL65_OEM_fork_LF",
+        "b": "44_GL65_OEM_wheel_LF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "LF",
+        "displacement_mm": -5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_LF",
+        "b": "44_GL65_OEM_wheel_LF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "LF",
+        "displacement_mm": 5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_LB",
+        "b": "44_GL65_OEM_wheel_LB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "LB",
+        "displacement_mm": -5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_LB",
+        "b": "44_GL65_OEM_wheel_LB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "LB",
+        "displacement_mm": 5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_RF",
+        "b": "44_GL65_OEM_wheel_RF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "RF",
+        "displacement_mm": -5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_RF",
+        "b": "44_GL65_OEM_wheel_RF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "RF",
+        "displacement_mm": 5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_RB",
+        "b": "44_GL65_OEM_wheel_RB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "RB",
+        "displacement_mm": -5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_RB",
+        "b": "44_GL65_OEM_wheel_RB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "RB",
+        "displacement_mm": 5.0
+      }
+    ],
+    "scope": "One wheel at a time at full droop and full bump; springs, stoppers and fasteners included; cameras excluded; not a swept-volume proof"
+  },
   "step_roundtrip": [
     {
       "file": "amr_current.step",
@@ -170,7 +273,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 305
+      "solids": 317
     }
   ]
 }

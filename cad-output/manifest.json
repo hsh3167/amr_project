@@ -22,7 +22,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 305
+      "solids": 317
     }
   ],
   "components": [
@@ -142,26 +142,28 @@
       "name": "11_corner_lower_LB",
       "group": "structure",
       "status": "concept",
-      "metadata": {},
-      "volume_mm3": 4095.999999999999,
+      "metadata": {
+        "material": "4t collar plate around the 20x20 column"
+      },
+      "volume_mm3": 1251.3599999999997,
       "bounds_mm": [
         [
-          -162.0,
-          -130.0
+          -159.5,
+          -132.5
         ],
         [
-          -224.0,
-          -192.0
+          -221.5,
+          -194.5
         ],
         [
-          119.0,
-          123.0
+          120.0,
+          124.0
         ]
       ],
       "center_mm": [
         -146.0,
         -208.0,
-        121.0
+        122.0
       ],
       "solids": 1
     },
@@ -169,16 +171,18 @@
       "name": "12_corner_upper_LB",
       "group": "structure",
       "status": "concept",
-      "metadata": {},
-      "volume_mm3": 4095.999999999999,
+      "metadata": {
+        "material": "4t collar plate around the 20x20 column"
+      },
+      "volume_mm3": 1251.3599999999997,
       "bounds_mm": [
         [
-          -162.0,
-          -130.0
+          -159.5,
+          -132.5
         ],
         [
-          -224.0,
-          -192.0
+          -221.5,
+          -194.5
         ],
         [
           279.0,
@@ -227,26 +231,28 @@
       "name": "11_corner_lower_LF",
       "group": "structure",
       "status": "concept",
-      "metadata": {},
-      "volume_mm3": 4095.999999999999,
+      "metadata": {
+        "material": "4t collar plate around the 20x20 column"
+      },
+      "volume_mm3": 1251.3599999999997,
       "bounds_mm": [
         [
-          -162.0,
-          -130.0
+          -159.5,
+          -132.5
         ],
         [
-          192.0,
-          224.0
+          194.5,
+          221.5
         ],
         [
-          119.0,
-          123.0
+          120.0,
+          124.0
         ]
       ],
       "center_mm": [
         -146.0,
         208.0,
-        121.0
+        122.0
       ],
       "solids": 1
     },
@@ -254,16 +260,18 @@
       "name": "12_corner_upper_LF",
       "group": "structure",
       "status": "concept",
-      "metadata": {},
-      "volume_mm3": 4095.999999999999,
+      "metadata": {
+        "material": "4t collar plate around the 20x20 column"
+      },
+      "volume_mm3": 1251.3599999999997,
       "bounds_mm": [
         [
-          -162.0,
-          -130.0
+          -159.5,
+          -132.5
         ],
         [
-          192.0,
-          224.0
+          194.5,
+          221.5
         ],
         [
           279.0,
@@ -312,26 +320,28 @@
       "name": "11_corner_lower_RB",
       "group": "structure",
       "status": "concept",
-      "metadata": {},
-      "volume_mm3": 4095.999999999999,
+      "metadata": {
+        "material": "4t collar plate around the 20x20 column"
+      },
+      "volume_mm3": 1251.3599999999997,
       "bounds_mm": [
         [
-          130.0,
-          162.0
+          132.5,
+          159.5
         ],
         [
-          -224.0,
-          -192.0
+          -221.5,
+          -194.5
         ],
         [
-          119.0,
-          123.0
+          120.0,
+          124.0
         ]
       ],
       "center_mm": [
-        146.0,
+        146.00000000000003,
         -208.0,
-        121.0
+        122.0
       ],
       "solids": 1
     },
@@ -339,16 +349,18 @@
       "name": "12_corner_upper_RB",
       "group": "structure",
       "status": "concept",
-      "metadata": {},
-      "volume_mm3": 4095.999999999999,
+      "metadata": {
+        "material": "4t collar plate around the 20x20 column"
+      },
+      "volume_mm3": 1251.3599999999997,
       "bounds_mm": [
         [
-          130.0,
-          162.0
+          132.5,
+          159.5
         ],
         [
-          -224.0,
-          -192.0
+          -221.5,
+          -194.5
         ],
         [
           279.0,
@@ -356,7 +368,7 @@
         ]
       ],
       "center_mm": [
-        146.0,
+        146.00000000000003,
         -208.0,
         281.0
       ],
@@ -397,26 +409,28 @@
       "name": "11_corner_lower_RF",
       "group": "structure",
       "status": "concept",
-      "metadata": {},
-      "volume_mm3": 4095.999999999999,
+      "metadata": {
+        "material": "4t collar plate around the 20x20 column"
+      },
+      "volume_mm3": 1251.3599999999997,
       "bounds_mm": [
         [
-          130.0,
-          162.0
+          132.5,
+          159.5
         ],
         [
-          192.0,
-          224.0
+          194.5,
+          221.5
         ],
         [
-          119.0,
-          123.0
+          120.0,
+          124.0
         ]
       ],
       "center_mm": [
-        146.0,
+        146.00000000000003,
         208.0,
-        121.0
+        122.0
       ],
       "solids": 1
     },
@@ -424,16 +438,18 @@
       "name": "12_corner_upper_RF",
       "group": "structure",
       "status": "concept",
-      "metadata": {},
-      "volume_mm3": 4095.999999999999,
+      "metadata": {
+        "material": "4t collar plate around the 20x20 column"
+      },
+      "volume_mm3": 1251.3599999999997,
       "bounds_mm": [
         [
-          130.0,
-          162.0
+          132.5,
+          159.5
         ],
         [
-          192.0,
-          224.0
+          194.5,
+          221.5
         ],
         [
           279.0,
@@ -441,7 +457,7 @@
         ]
       ],
       "center_mm": [
-        146.0,
+        146.00000000000003,
         208.0,
         281.0
       ],
@@ -1172,11 +1188,11 @@
       "group": "lidars",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 19649.398013736358,
+      "volume_mm3": 19620.143136201237,
       "bounds_mm": [
         [
           -273.03300858899104,
-          -152.5913216889704
+          -152.77400782904698
         ],
         [
           196.96699141100893,
@@ -1188,8 +1204,8 @@
         ]
       ],
       "center_mm": [
-        -213.5437683850695,
-        245.43781495201554,
+        -213.6311034204375,
+        245.4810586641734,
         161.50000000000003
       ],
       "solids": 1
@@ -1257,7 +1273,7 @@
       "group": "lidars",
       "status": "drawing_envelope",
       "metadata": {},
-      "volume_mm3": 238339.19999999998,
+      "volume_mm3": 227359.19999999998,
       "bounds_mm": [
         [
           -262.77996026178613,
@@ -1269,13 +1285,13 @@
         ],
         [
           199.0,
-          264.12
+          261.12
         ]
       ],
       "center_mm": [
         -220.0,
         250.0,
-        231.56
+        230.06
       ],
       "solids": 1
     },
@@ -1311,10 +1327,10 @@
       "group": "lidars",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 19649.398013736358,
+      "volume_mm3": 19620.14313620124,
       "bounds_mm": [
         [
-          152.5913216889704,
+          152.77400782904692,
           273.03300858899104
         ],
         [
@@ -1327,8 +1343,8 @@
         ]
       ],
       "center_mm": [
-        213.5437683850695,
-        -245.4378149520156,
+        213.6311034204375,
+        -245.48105866417333,
         161.50000000000003
       ],
       "solids": 1
@@ -1396,7 +1412,7 @@
       "group": "lidars",
       "status": "drawing_envelope",
       "metadata": {},
-      "volume_mm3": 238339.2,
+      "volume_mm3": 227359.19999999998,
       "bounds_mm": [
         [
           177.22003973821387,
@@ -1408,13 +1424,13 @@
         ],
         [
           199.0,
-          264.12
+          261.12
         ]
       ],
       "center_mm": [
         220.0,
         -250.0,
-        231.56
+        230.06
       ],
       "solids": 1
     },
@@ -1453,7 +1469,7 @@
         "source": "AstraMiniPro_3D_V0.1_20221012.stp",
         "source_solids": 58,
         "placement_repair": {
-          "cache_key": "626a8d0fb6cfdb5ea3ce",
+          "cache_key": "3367e11bb50084000f56",
           "repairs": [],
           "source_preserved": true,
           "pose": [
@@ -1560,7 +1576,7 @@
         "source": "AstraMiniPro_3D_V0.1_20221012.stp",
         "source_solids": 58,
         "placement_repair": {
-          "cache_key": "142adf194146b4b12fbd",
+          "cache_key": "24748dd014affb3863f7",
           "repairs": [],
           "source_preserved": true,
           "pose": [
@@ -1662,33 +1678,34 @@
     {
       "name": "80_drive_hinge_bushes_LEFT",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": "LEFT",
         "sku": "MPFZ10-10",
         "quantity": 2,
-        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+        "source": "MPFZ10-10.stp.gz",
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore, STEP nominal 10.0); flange = thrust washer"
       },
-      "volume_mm3": 2406.4536894644734,
+      "volume_mm3": 2334.9842849767183,
       "bounds_mm": [
         [
-          -92.0,
-          -70.0
+          -92.0000001,
+          -69.9999999
         ],
         [
-          -44.5,
-          23.0
+          -44.5000001,
+          23.0000001
         ],
         [
-          84.0,
-          106.0
+          83.9999999,
+          106.0000001
         ]
       ],
       "center_mm": [
-        -81.00000000000003,
-        -10.749999999999995,
-        95.0
+        -81.0,
+        -10.750000000000002,
+        94.99999999999999
       ],
       "solids": 2
     },
@@ -1702,7 +1719,7 @@
         "material": "S355 6t laser-cut floor, 2 pivot tabs + axle wall (3 bends); AF10.2 trial slot; M8 tapped seat",
         "arm_length_mm": 130.0
       },
-      "volume_mm3": 61305.259409814185,
+      "volume_mm3": 61176.19231162918,
       "bounds_mm": [
         [
           -173.0,
@@ -1710,7 +1727,7 @@
         ],
         [
           -42.5,
-          21.0
+          21.000000000000004
         ],
         [
           66.0,
@@ -1718,9 +1735,9 @@
         ]
       ],
       "center_mm": [
-        -119.57486014101612,
-        -9.304065849474753,
-        76.37952372030513
+        -119.56188235979639,
+        -9.273573413957774,
+        76.39030834046663
       ],
       "solids": 1
     },
@@ -1913,33 +1930,34 @@
     {
       "name": "80_drive_hinge_pin_LEFT",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
         "sku": "CLBKHM10-78.5",
         "length_mm": 78.5,
-        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+        "source": "CLBKHM10-78.5.stp.gz",
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. M6 tapped end, depth ~18.6"
       },
-      "volume_mm3": 6212.499472473817,
+      "volume_mm3": 6041.145796115171,
       "bounds_mm": [
         [
-          -89.0,
-          -73.0
+          -89.0000001,
+          -72.9999999
         ],
         [
-          -51.0,
-          29.0
+          -51.000000099999994,
+          29.0000001
         ],
         [
-          87.0,
-          103.0
+          86.9999999,
+          103.0000001
         ]
       ],
       "center_mm": [
-        -81.00000000000001,
-        -13.615233881163084,
-        94.99999999999999
+        -81.0,
+        -13.696023870140358,
+        95.0
       ],
       "solids": 1
     },
@@ -1951,9 +1969,10 @@
         "wheel": "LEFT",
         "moving_wheel": null,
         "sku": "CB6-8",
-        "washer": "M6 OD16 t1"
+        "washer": "M6 OD16 t1",
+        "thread": "engaged length 7 shown at the tap minor diameter"
       },
-      "volume_mm3": 866.3255901539216,
+      "volume_mm3": 801.3246424986123,
       "bounds_mm": [
         [
           -89.0,
@@ -1970,7 +1989,7 @@
       ],
       "center_mm": [
         -80.99999999999999,
-        30.4899912967798,
+        30.894763777095733,
         94.99999999999999
       ],
       "solids": 1
@@ -2024,27 +2043,27 @@
         "free_length_mm": 70,
         "nominal_spring_force_N": 161.7,
         "lever_ratio": 0.5692,
-        "geometry": "catalog envelope with illustrative round-wire sweep"
+        "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 3613.47447613257,
+      "volume_mm3": 3344.8614918191224,
       "bounds_mm": [
         [
-          -165.50000180290934,
-          -144.49999819709066
+          -165.50031918486863,
+          -144.4997138210363
         ],
         [
-          -35.50000180290946,
-          -14.499998197090772
+          -35.50028617842962,
+          -14.499680814605215
         ],
         [
-          77.0115445655435,
-          116.98845543445638
+          77.00301545719944,
+          116.99698454397294
         ]
       ],
       "center_mm": [
-        -155.00000069789775,
-        -25.000000000854484,
-        96.9999999934412
+        -155.1593358616885,
+        -24.840664138311915,
+        97.0000000000281
       ],
       "solids": 1
     },
@@ -2113,6 +2132,40 @@
       "solids": 1
     },
     {
+      "name": "80_drive_bump_stopper_C-USLH10_LEFT",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "sku": "C-USLH10",
+        "source": "C-USLH10.stp.gz",
+        "tip_z": 89.0,
+        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+      },
+      "volume_mm3": 1408.8911552645213,
+      "bounds_mm": [
+        [
+          -135.0000001,
+          -124.9999999
+        ],
+        [
+          -30.0000001,
+          -19.9999999
+        ],
+        [
+          64.9999999,
+          89.0000001
+        ]
+      ],
+      "center_mm": [
+        -129.99999999999997,
+        -24.999999999999996,
+        79.60853281087698
+      ],
+      "solids": 2
+    },
+    {
       "name": "80_drive_bump_stop_bolt_M6_LEFT",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
@@ -2120,10 +2173,10 @@
         "wheel": "LEFT",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 76.118,
-        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+        "tip_z": 93.222,
+        "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 2003.610056917084,
+      "volume_mm3": 1520.020672378505,
       "bounds_mm": [
         [
           -135.77350269189625,
@@ -2134,47 +2187,48 @@
           -20.0
         ],
         [
-          76.11814829794142,
+          93.22162407040413,
           126.0
         ]
       ],
       "center_mm": [
-        -129.99999999999994,
-        -24.999999999999996,
-        106.31815777010841
+        -129.99999999999997,
+        -24.999999999999993,
+        113.20548142484861
       ],
       "solids": 1
     },
     {
       "name": "80_drive_hinge_bushes_RIGHT",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": "RIGHT",
         "sku": "MPFZ10-10",
         "quantity": 2,
-        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+        "source": "MPFZ10-10.stp.gz",
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore, STEP nominal 10.0); flange = thrust washer"
       },
-      "volume_mm3": 2406.4536894644734,
+      "volume_mm3": 2334.9842849767183,
       "bounds_mm": [
         [
-          70.0,
-          92.0
+          69.9999999,
+          92.0000001
         ],
         [
-          -44.5,
-          23.0
+          -44.5000001,
+          23.0000001
         ],
         [
-          84.0,
-          106.0
+          83.9999999,
+          106.0000001
         ]
       ],
       "center_mm": [
-        81.00000000000003,
-        -10.749999999999995,
-        95.0
+        81.0,
+        -10.750000000000002,
+        94.99999999999999
       ],
       "solids": 2
     },
@@ -2188,7 +2242,7 @@
         "material": "S355 6t laser-cut floor, 2 pivot tabs + axle wall (3 bends); AF10.2 trial slot; M8 tapped seat",
         "arm_length_mm": 130.0
       },
-      "volume_mm3": 61305.25940981419,
+      "volume_mm3": 61176.19231162919,
       "bounds_mm": [
         [
           69.0,
@@ -2196,7 +2250,7 @@
         ],
         [
           -42.5,
-          21.0
+          21.000000000000004
         ],
         [
           66.0,
@@ -2204,9 +2258,9 @@
         ]
       ],
       "center_mm": [
-        119.57486014101609,
-        -9.30406584947476,
-        76.37952372030507
+        119.56188235979637,
+        -9.27357341395778,
+        76.39030834046659
       ],
       "solids": 1
     },
@@ -2399,33 +2453,34 @@
     {
       "name": "80_drive_hinge_pin_RIGHT",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
         "sku": "CLBKHM10-78.5",
         "length_mm": 78.5,
-        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+        "source": "CLBKHM10-78.5.stp.gz",
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. M6 tapped end, depth ~18.6"
       },
-      "volume_mm3": 6212.499472473817,
+      "volume_mm3": 6041.145796115171,
       "bounds_mm": [
         [
-          73.0,
-          89.0
+          72.9999999,
+          89.0000001
         ],
         [
-          -51.0,
-          29.0
+          -51.000000099999994,
+          29.0000001
         ],
         [
-          87.0,
-          103.0
+          86.9999999,
+          103.0000001
         ]
       ],
       "center_mm": [
-        81.00000000000001,
-        -13.615233881163084,
-        94.99999999999999
+        81.0,
+        -13.696023870140358,
+        95.0
       ],
       "solids": 1
     },
@@ -2437,9 +2492,10 @@
         "wheel": "RIGHT",
         "moving_wheel": null,
         "sku": "CB6-8",
-        "washer": "M6 OD16 t1"
+        "washer": "M6 OD16 t1",
+        "thread": "engaged length 7 shown at the tap minor diameter"
       },
-      "volume_mm3": 866.3255901539216,
+      "volume_mm3": 801.3246424986123,
       "bounds_mm": [
         [
           73.0,
@@ -2456,7 +2512,7 @@
       ],
       "center_mm": [
         80.99999999999999,
-        30.4899912967798,
+        30.894763777095733,
         94.99999999999999
       ],
       "solids": 1
@@ -2510,27 +2566,27 @@
         "free_length_mm": 70,
         "nominal_spring_force_N": 161.7,
         "lever_ratio": 0.5692,
-        "geometry": "catalog envelope with illustrative round-wire sweep"
+        "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 3613.47447613257,
+      "volume_mm3": 3344.8614918191224,
       "bounds_mm": [
         [
-          144.49999819709066,
-          165.50000180290934
+          144.49968081513137,
+          165.5002861789637
         ],
         [
-          -35.50000180290946,
-          -14.499998197090772
+          -35.50028617842962,
+          -14.499680814605215
         ],
         [
-          77.0115445655435,
-          116.98845543445638
+          77.00301545719944,
+          116.99698454397294
         ]
       ],
       "center_mm": [
-        154.99999930210225,
-        -25.000000000854484,
-        96.9999999934412
+        154.8406641383115,
+        -24.840664138311915,
+        97.0000000000281
       ],
       "solids": 1
     },
@@ -2599,6 +2655,40 @@
       "solids": 1
     },
     {
+      "name": "80_drive_bump_stopper_C-USLH10_RIGHT",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "sku": "C-USLH10",
+        "source": "C-USLH10.stp.gz",
+        "tip_z": 89.0,
+        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+      },
+      "volume_mm3": 1408.8911552645213,
+      "bounds_mm": [
+        [
+          124.9999999,
+          135.0000001
+        ],
+        [
+          -30.0000001,
+          -19.9999999
+        ],
+        [
+          64.9999999,
+          89.0000001
+        ]
+      ],
+      "center_mm": [
+        129.99999999999997,
+        -24.999999999999993,
+        79.60853281087697
+      ],
+      "solids": 2
+    },
+    {
       "name": "80_drive_bump_stop_bolt_M6_RIGHT",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
@@ -2606,10 +2696,10 @@
         "wheel": "RIGHT",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 76.118,
-        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+        "tip_z": 93.222,
+        "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 2003.6100569170835,
+      "volume_mm3": 1520.0206723785045,
       "bounds_mm": [
         [
           124.22649730810375,
@@ -2620,47 +2710,48 @@
           -20.0
         ],
         [
-          76.11814829794142,
+          93.22162407040413,
           126.0
         ]
       ],
       "center_mm": [
-        129.99999999999997,
-        -25.0,
-        106.31815777010841
+        130.00000000000003,
+        -24.999999999999996,
+        113.20548142484863
       ],
       "solids": 1
     },
     {
       "name": "80_caster_hinge_bushes_LF",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LF",
         "moving_wheel": "LF",
         "sku": "MPFZ10-10",
         "quantity": 2,
-        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+        "source": "MPFZ10-10.stp.gz",
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore, STEP nominal 10.0); flange = thrust washer"
       },
-      "volume_mm3": 2406.4536894644752,
+      "volume_mm3": 2334.984284976719,
       "bounds_mm": [
         [
-          -59.0,
-          -37.0
+          -59.0000001,
+          -36.9999999
         ],
         [
-          183.0,
-          247.0
+          182.9999999,
+          247.0000001
         ],
         [
-          88.5,
-          110.5
+          88.4999999,
+          110.5000001
         ]
       ],
       "center_mm": [
         -48.0,
         214.99999999999997,
-        99.50000000000001
+        99.49999999999999
       ],
       "solids": 2
     },
@@ -2674,7 +2765,7 @@
         "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 55687.38663873548,
+      "volume_mm3": 55558.319540550525,
       "bounds_mm": [
         [
           -173.0,
@@ -2690,9 +2781,9 @@
         ]
       ],
       "center_mm": [
-        -97.47051512678688,
-        214.99999999999946,
-        87.81254757330619
+        -97.50062091232142,
+        214.99999999999955,
+        87.81402288270485
       ],
       "solids": 1
     },
@@ -2857,32 +2948,33 @@
     {
       "name": "80_caster_hinge_pin_LF",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LF",
         "moving_wheel": null,
         "sku": "CLBKHM10-75",
         "length_mm": 75.0,
-        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+        "source": "CLBKHM10-75.stp.gz",
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. M6 tapped end, depth ~18.6"
       },
-      "volume_mm3": 5937.6101152847095,
+      "volume_mm3": 5766.25643892606,
       "bounds_mm": [
         [
-          -56.0,
-          -40.0
+          -56.0000001,
+          -39.9999999
         ],
         [
-          176.5,
-          253.0
+          176.4999999,
+          253.0000001
         ],
         [
-          91.5,
-          107.5
+          91.4999999,
+          107.5000001
         ]
       ],
       "center_mm": [
-        -48.00000000000001,
-        212.14285714285714,
+        -47.99999999999999,
+        212.07560716969456,
         99.5
       ],
       "solids": 1
@@ -2895,9 +2987,10 @@
         "wheel": "LF",
         "moving_wheel": null,
         "sku": "CB6-8",
-        "washer": "M6 OD16 t1"
+        "washer": "M6 OD16 t1",
+        "thread": "engaged length 7 shown at the tap minor diameter"
       },
-      "volume_mm3": 866.3255901539213,
+      "volume_mm3": 801.3246424986122,
       "bounds_mm": [
         [
           -56.0,
@@ -2914,8 +3007,8 @@
       ],
       "center_mm": [
         -48.0,
-        254.4899912967798,
-        99.49999999999999
+        254.8947637770957,
+        99.49999999999997
       ],
       "solids": 1
     },
@@ -2968,27 +3061,27 @@
         "free_length_mm": 35,
         "nominal_spring_force_N": 83.52,
         "lever_ratio": 0.7222,
-        "geometry": "catalog envelope with illustrative round-wire sweep"
+        "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 1442.7395927535276,
+      "volume_mm3": 1089.4985569052478,
       "bounds_mm": [
         [
-          -121.49999094911269,
-          -104.49999989999408
+          -121.50045012680562,
+          -104.49955277398928
         ],
         [
-          206.5000003996179,
-          223.49999960038224
+          206.49955277595308,
+          223.50045012484696
         ],
         [
-          94.01051230727886,
-          116.98948769272126
+          94.00437306553019,
+          116.99562693831135
         ]
       ],
       "center_mm": [
-        -112.99999707985157,
-        214.9999999946877,
-        105.49999999284756
+        -113.23460059056471,
+        215.23460059056856,
+        105.49999999988486
       ],
       "solids": 1
     },
@@ -3057,6 +3150,40 @@
       "solids": 1
     },
     {
+      "name": "80_caster_bump_stopper_C-USLH10_LF",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": "LF",
+        "sku": "C-USLH10",
+        "source": "C-USLH10.stp.gz",
+        "tip_z": 106.0,
+        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+      },
+      "volume_mm3": 1408.8911552645213,
+      "bounds_mm": [
+        [
+          -93.0000001,
+          -82.9999999
+        ],
+        [
+          209.9999999,
+          220.0000001
+        ],
+        [
+          81.9999999,
+          106.0000001
+        ]
+      ],
+      "center_mm": [
+        -87.99999999999999,
+        214.99999999999994,
+        96.60853281087698
+      ],
+      "solids": 2
+    },
+    {
       "name": "80_caster_bump_stop_bolt_M6_LF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
@@ -3064,10 +3191,10 @@
         "wheel": "LF",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 91.455,
-        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+        "tip_z": 108.54,
+        "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 1569.9678191391852,
+      "volume_mm3": 1086.9048858298354,
       "bounds_mm": [
         [
           -93.77350269189625,
@@ -3078,46 +3205,47 @@
           220.0
         ],
         [
-          91.45510511478221,
+          108.53996148381634,
           126.0
         ]
       ],
       "center_mm": [
-        -88.0,
+        -87.99999999999997,
         215.0,
-        112.54161243709805
+        118.11669057224074
       ],
       "solids": 1
     },
     {
       "name": "80_caster_hinge_bushes_LB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": "LB",
         "sku": "MPFZ10-10",
         "quantity": 2,
-        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+        "source": "MPFZ10-10.stp.gz",
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore, STEP nominal 10.0); flange = thrust washer"
       },
-      "volume_mm3": 2406.4536894644752,
+      "volume_mm3": 2334.9842849767188,
       "bounds_mm": [
         [
-          -59.0,
-          -37.0
+          -59.0000001,
+          -36.9999999
         ],
         [
-          -247.0,
-          -183.0
+          -247.0000001,
+          -182.9999999
         ],
         [
-          88.5,
-          110.5
+          88.4999999,
+          110.5000001
         ]
       ],
       "center_mm": [
         -48.0,
-        -214.99999999999997,
+        -215.0,
         99.50000000000001
       ],
       "solids": 2
@@ -3132,7 +3260,7 @@
         "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 55687.38663873548,
+      "volume_mm3": 55558.319540550496,
       "bounds_mm": [
         [
           -173.0,
@@ -3148,9 +3276,9 @@
         ]
       ],
       "center_mm": [
-        -97.47051512678688,
-        -214.99999999999955,
-        87.81254757330619
+        -97.50062091232144,
+        -214.99999999999957,
+        87.81402288270489
       ],
       "solids": 1
     },
@@ -3315,32 +3443,33 @@
     {
       "name": "80_caster_hinge_pin_LB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": null,
         "sku": "CLBKHM10-75",
         "length_mm": 75.0,
-        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+        "source": "CLBKHM10-75.stp.gz",
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. M6 tapped end, depth ~18.6"
       },
-      "volume_mm3": 5937.6101152847095,
+      "volume_mm3": 5766.25643892606,
       "bounds_mm": [
         [
-          -56.0,
-          -40.0
+          -56.0000001,
+          -39.9999999
         ],
         [
-          -253.5,
-          -177.0
+          -253.5000001,
+          -176.9999999
         ],
         [
-          91.5,
-          107.5
+          91.4999999,
+          107.5000001
         ]
       ],
       "center_mm": [
-        -48.00000000000001,
-        -217.85714285714283,
+        -47.99999999999999,
+        -217.92439283030544,
         99.5
       ],
       "solids": 1
@@ -3353,9 +3482,10 @@
         "wheel": "LB",
         "moving_wheel": null,
         "sku": "CB6-8",
-        "washer": "M6 OD16 t1"
+        "washer": "M6 OD16 t1",
+        "thread": "engaged length 7 shown at the tap minor diameter"
       },
-      "volume_mm3": 866.3255901539213,
+      "volume_mm3": 801.3246424986122,
       "bounds_mm": [
         [
           -56.0,
@@ -3372,8 +3502,8 @@
       ],
       "center_mm": [
         -48.0,
-        -175.51000870322022,
-        99.49999999999999
+        -175.10523622290432,
+        99.49999999999997
       ],
       "solids": 1
     },
@@ -3426,27 +3556,27 @@
         "free_length_mm": 35,
         "nominal_spring_force_N": 83.52,
         "lever_ratio": 0.7222,
-        "geometry": "catalog envelope with illustrative round-wire sweep"
+        "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 1442.7395927535276,
+      "volume_mm3": 1089.4985569052478,
       "bounds_mm": [
         [
-          -121.49999094911269,
-          -104.49999989999408
+          -121.50045012680562,
+          -104.49955277398928
         ],
         [
-          -223.4999996003821,
-          -206.50000039961776
+          -223.50044722404692,
+          -206.49954987515304
         ],
         [
-          94.01051230727886,
-          116.98948769272126
+          94.00437306553019,
+          116.99562693831135
         ]
       ],
       "center_mm": [
-        -112.99999707985157,
-        -215.0000000053123,
-        105.49999999284756
+        -113.23460059056471,
+        -214.76539940943144,
+        105.49999999988486
       ],
       "solids": 1
     },
@@ -3515,6 +3645,40 @@
       "solids": 1
     },
     {
+      "name": "80_caster_bump_stopper_C-USLH10_LB",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": "LB",
+        "sku": "C-USLH10",
+        "source": "C-USLH10.stp.gz",
+        "tip_z": 106.0,
+        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+      },
+      "volume_mm3": 1408.8911552645213,
+      "bounds_mm": [
+        [
+          -93.0000001,
+          -82.9999999
+        ],
+        [
+          -220.0000001,
+          -209.9999999
+        ],
+        [
+          81.9999999,
+          106.0000001
+        ]
+      ],
+      "center_mm": [
+        -87.99999999999999,
+        -214.99999999999994,
+        96.60853281087698
+      ],
+      "solids": 2
+    },
+    {
       "name": "80_caster_bump_stop_bolt_M6_LB",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
@@ -3522,10 +3686,10 @@
         "wheel": "LB",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 91.455,
-        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+        "tip_z": 108.54,
+        "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 1569.9678191391852,
+      "volume_mm3": 1086.9048858298354,
       "bounds_mm": [
         [
           -93.77350269189625,
@@ -3536,47 +3700,48 @@
           -210.0
         ],
         [
-          91.45510511478221,
+          108.53996148381634,
           126.0
         ]
       ],
       "center_mm": [
-        -88.0,
+        -87.99999999999997,
         -215.0,
-        112.54161243709805
+        118.11669057224074
       ],
       "solids": 1
     },
     {
       "name": "80_caster_hinge_bushes_RF",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RF",
         "moving_wheel": "RF",
         "sku": "MPFZ10-10",
         "quantity": 2,
-        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+        "source": "MPFZ10-10.stp.gz",
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore, STEP nominal 10.0); flange = thrust washer"
       },
-      "volume_mm3": 2406.4536894644752,
+      "volume_mm3": 2334.984284976719,
       "bounds_mm": [
         [
-          37.0,
-          59.0
+          36.9999999,
+          59.0000001
         ],
         [
-          183.0,
-          247.0
+          182.9999999,
+          247.0000001
         ],
         [
-          88.5,
-          110.5
+          88.4999999,
+          110.5000001
         ]
       ],
       "center_mm": [
         48.0,
         214.99999999999997,
-        99.50000000000001
+        99.49999999999999
       ],
       "solids": 2
     },
@@ -3590,7 +3755,7 @@
         "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 55687.38663873551,
+      "volume_mm3": 55558.31954055053,
       "bounds_mm": [
         [
           36.0,
@@ -3606,9 +3771,9 @@
         ]
       ],
       "center_mm": [
-        97.47051512678684,
-        214.9999999999994,
-        87.81254757330615
+        97.50062091232144,
+        214.99999999999955,
+        87.81402288270485
       ],
       "solids": 1
     },
@@ -3773,32 +3938,33 @@
     {
       "name": "80_caster_hinge_pin_RF",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RF",
         "moving_wheel": null,
         "sku": "CLBKHM10-75",
         "length_mm": 75.0,
-        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+        "source": "CLBKHM10-75.stp.gz",
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. M6 tapped end, depth ~18.6"
       },
-      "volume_mm3": 5937.6101152847095,
+      "volume_mm3": 5766.25643892606,
       "bounds_mm": [
         [
-          40.0,
-          56.0
+          39.9999999,
+          56.0000001
         ],
         [
-          176.5,
-          253.0
+          176.4999999,
+          253.0000001
         ],
         [
-          91.5,
-          107.5
+          91.4999999,
+          107.5000001
         ]
       ],
       "center_mm": [
         48.00000000000001,
-        212.14285714285714,
+        212.07560716969456,
         99.5
       ],
       "solids": 1
@@ -3811,9 +3977,10 @@
         "wheel": "RF",
         "moving_wheel": null,
         "sku": "CB6-8",
-        "washer": "M6 OD16 t1"
+        "washer": "M6 OD16 t1",
+        "thread": "engaged length 7 shown at the tap minor diameter"
       },
-      "volume_mm3": 866.3255901539213,
+      "volume_mm3": 801.3246424986122,
       "bounds_mm": [
         [
           40.0,
@@ -3830,8 +3997,8 @@
       ],
       "center_mm": [
         48.0,
-        254.4899912967798,
-        99.49999999999999
+        254.8947637770957,
+        99.49999999999997
       ],
       "solids": 1
     },
@@ -3884,27 +4051,27 @@
         "free_length_mm": 35,
         "nominal_spring_force_N": 83.52,
         "lever_ratio": 0.7222,
-        "geometry": "catalog envelope with illustrative round-wire sweep"
+        "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 1442.7395927535276,
+      "volume_mm3": 1089.4985569052478,
       "bounds_mm": [
         [
-          104.50000905088731,
-          121.50000010000592
+          104.49954987319438,
+          121.50044722601072
         ],
         [
-          206.5000003996179,
-          223.49999960038224
+          206.49955277595308,
+          223.50045012484696
         ],
         [
-          94.01051230727886,
-          116.98948769272126
+          94.00437306553019,
+          116.99562693831135
         ]
       ],
       "center_mm": [
-        113.00000292014843,
-        214.9999999946877,
-        105.49999999284756
+        112.76539940943529,
+        215.23460059056856,
+        105.49999999988486
       ],
       "solids": 1
     },
@@ -3973,6 +4140,40 @@
       "solids": 1
     },
     {
+      "name": "80_caster_bump_stopper_C-USLH10_RF",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": "RF",
+        "sku": "C-USLH10",
+        "source": "C-USLH10.stp.gz",
+        "tip_z": 106.0,
+        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+      },
+      "volume_mm3": 1408.8911552645213,
+      "bounds_mm": [
+        [
+          82.9999999,
+          93.0000001
+        ],
+        [
+          209.9999999,
+          220.0000001
+        ],
+        [
+          81.9999999,
+          106.0000001
+        ]
+      ],
+      "center_mm": [
+        87.99999999999997,
+        214.99999999999994,
+        96.60853281087698
+      ],
+      "solids": 2
+    },
+    {
       "name": "80_caster_bump_stop_bolt_M6_RF",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
@@ -3980,10 +4181,10 @@
         "wheel": "RF",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 91.455,
-        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+        "tip_z": 108.54,
+        "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 1569.9678191391852,
+      "volume_mm3": 1086.9048858298354,
       "bounds_mm": [
         [
           82.22649730810375,
@@ -3994,46 +4195,47 @@
           220.0
         ],
         [
-          91.45510511478221,
+          108.53996148381634,
           126.0
         ]
       ],
       "center_mm": [
         88.00000000000001,
         215.0,
-        112.54161243709805
+        118.11669057224074
       ],
       "solids": 1
     },
     {
       "name": "80_caster_hinge_bushes_RB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RB",
         "moving_wheel": "RB",
         "sku": "MPFZ10-10",
         "quantity": 2,
-        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore); flange = thrust washer"
+        "source": "MPFZ10-10.stp.gz",
+        "fit": "Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore, STEP nominal 10.0); flange = thrust washer"
       },
-      "volume_mm3": 2406.4536894644752,
+      "volume_mm3": 2334.9842849767188,
       "bounds_mm": [
         [
-          37.0,
-          59.0
+          36.9999999,
+          59.0000001
         ],
         [
-          -247.0,
-          -183.0
+          -247.0000001,
+          -182.9999999
         ],
         [
-          88.5,
-          110.5
+          88.4999999,
+          110.5000001
         ]
       ],
       "center_mm": [
         48.0,
-        -214.99999999999997,
+        -215.0,
         99.50000000000001
       ],
       "solids": 2
@@ -4048,7 +4250,7 @@
         "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 55687.3866387355,
+      "volume_mm3": 55558.31954055052,
       "bounds_mm": [
         [
           36.0,
@@ -4064,9 +4266,9 @@
         ]
       ],
       "center_mm": [
-        97.47051512678684,
-        -214.9999999999994,
-        87.81254757330619
+        97.50062091232142,
+        -214.99999999999952,
+        87.81402288270479
       ],
       "solids": 1
     },
@@ -4231,32 +4433,33 @@
     {
       "name": "80_caster_hinge_pin_RB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RB",
         "moving_wheel": null,
         "sku": "CLBKHM10-75",
         "length_mm": 75.0,
-        "fit": "Fixed in ear holes (H7), arm turns on it; grease. Catalog D10 L25-100 step 0.1"
+        "source": "CLBKHM10-75.stp.gz",
+        "fit": "Fixed in ear holes (H7), arm turns on it; grease. M6 tapped end, depth ~18.6"
       },
-      "volume_mm3": 5937.6101152847095,
+      "volume_mm3": 5766.25643892606,
       "bounds_mm": [
         [
-          40.0,
-          56.0
+          39.9999999,
+          56.0000001
         ],
         [
-          -253.5,
-          -177.0
+          -253.5000001,
+          -176.9999999
         ],
         [
-          91.5,
-          107.5
+          91.4999999,
+          107.5000001
         ]
       ],
       "center_mm": [
         48.00000000000001,
-        -217.85714285714283,
+        -217.92439283030544,
         99.5
       ],
       "solids": 1
@@ -4269,9 +4472,10 @@
         "wheel": "RB",
         "moving_wheel": null,
         "sku": "CB6-8",
-        "washer": "M6 OD16 t1"
+        "washer": "M6 OD16 t1",
+        "thread": "engaged length 7 shown at the tap minor diameter"
       },
-      "volume_mm3": 866.3255901539213,
+      "volume_mm3": 801.3246424986122,
       "bounds_mm": [
         [
           40.0,
@@ -4288,8 +4492,8 @@
       ],
       "center_mm": [
         48.0,
-        -175.51000870322022,
-        99.49999999999999
+        -175.10523622290432,
+        99.49999999999997
       ],
       "solids": 1
     },
@@ -4342,27 +4546,27 @@
         "free_length_mm": 35,
         "nominal_spring_force_N": 83.52,
         "lever_ratio": 0.7222,
-        "geometry": "catalog envelope with illustrative round-wire sweep"
+        "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 1442.7395927535276,
+      "volume_mm3": 1089.4985569052478,
       "bounds_mm": [
         [
-          104.50000905088731,
-          121.50000010000592
+          104.49954987319438,
+          121.50044722601072
         ],
         [
-          -223.4999996003821,
-          -206.50000039961776
+          -223.50044722404692,
+          -206.49954987515304
         ],
         [
-          94.01051230727886,
-          116.98948769272126
+          94.00437306553019,
+          116.99562693831135
         ]
       ],
       "center_mm": [
-        113.00000292014843,
-        -215.0000000053123,
-        105.49999999284756
+        112.76539940943529,
+        -214.76539940943144,
+        105.49999999988486
       ],
       "solids": 1
     },
@@ -4431,6 +4635,40 @@
       "solids": 1
     },
     {
+      "name": "80_caster_bump_stopper_C-USLH10_RB",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": "RB",
+        "sku": "C-USLH10",
+        "source": "C-USLH10.stp.gz",
+        "tip_z": 106.0,
+        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+      },
+      "volume_mm3": 1408.8911552645213,
+      "bounds_mm": [
+        [
+          82.9999999,
+          93.0000001
+        ],
+        [
+          -220.0000001,
+          -209.9999999
+        ],
+        [
+          81.9999999,
+          106.0000001
+        ]
+      ],
+      "center_mm": [
+        87.99999999999997,
+        -214.99999999999994,
+        96.60853281087698
+      ],
+      "solids": 2
+    },
+    {
       "name": "80_caster_bump_stop_bolt_M6_RB",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
@@ -4438,10 +4676,10 @@
         "wheel": "RB",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 91.455,
-        "adjust": "Set the bump limit with the jam nut; urethane cap optional"
+        "tip_z": 108.54,
+        "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 1569.9678191391852,
+      "volume_mm3": 1086.9048858298354,
       "bounds_mm": [
         [
           82.22649730810375,
@@ -4452,14 +4690,14 @@
           -210.0
         ],
         [
-          91.45510511478221,
+          108.53996148381634,
           126.0
         ]
       ],
       "center_mm": [
         88.00000000000001,
         -215.0,
-        112.54161243709805
+        118.11669057224074
       ],
       "solids": 1
     }
