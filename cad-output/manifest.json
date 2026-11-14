@@ -22,7 +22,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 317
+      "solids": 355
     }
   ],
   "components": [
@@ -31,7 +31,7 @@
       "group": "chassis",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 592448.744799447,
+      "volume_mm3": 592021.0954994769,
       "bounds_mm": [
         [
           -195.0,
@@ -47,9 +47,9 @@
         ]
       ],
       "center_mm": [
-        -9.640710318438539e-15,
-        0.051631968566801155,
-        118.50000000000004
+        9.277437148371965e-15,
+        0.0516692651688525,
+        118.50000000000003
       ],
       "solids": 1
     },
@@ -58,7 +58,7 @@
       "group": "payload_interface",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 692049.8881337749,
+      "volume_mm3": 691907.338367118,
       "bounds_mm": [
         [
           -210.0,
@@ -74,8 +74,8 @@
         ]
       ],
       "center_mm": [
-        1.5775704305831544e-14,
-        -4.8572978269204754e-15,
+        1.0808925585799522e-14,
+        -0.04841572463066489,
         284.5
       ],
       "solids": 1
@@ -106,6 +106,36 @@
         280.5
       ],
       "solids": 1
+    },
+    {
+      "name": "22_arm_mount_bolts_M8_PLACEHOLDER",
+      "group": "payload_interface",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M8x16 hex socket + M8 nut",
+        "quantity": 4
+      },
+      "volume_mm3": 9962.837225264819,
+      "bounds_mm": [
+        [
+          -69.50555349946514,
+          69.50555349946514
+        ],
+        [
+          -68.5,
+          68.5
+        ],
+        [
+          270.0,
+          294.0
+        ]
+      ],
+      "center_mm": [
+        -2.117898406251546e-14,
+        -1.1411090550924278e-14,
+        282.30091907876283
+      ],
+      "solids": 4
     },
     {
       "name": "10_2020_Al_column_LB",
@@ -139,62 +169,35 @@
       "solids": 1
     },
     {
-      "name": "11_corner_lower_LB",
+      "name": "13_column_end_bolts_CB5-12_LB",
       "group": "structure",
-      "status": "concept",
+      "status": "catalog_envelope",
       "metadata": {
-        "material": "4t collar plate around the 20x20 column"
+        "sku": "CB5-12",
+        "quantity": 2,
+        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
       },
-      "volume_mm3": 1251.3599999999997,
+      "volume_mm3": 934.6395224062313,
       "bounds_mm": [
         [
-          -159.5,
-          -132.5
+          -150.25,
+          -141.75
         ],
         [
-          -221.5,
-          -194.5
+          -212.25,
+          -203.75
         ],
         [
-          120.0,
-          124.0
+          112.0,
+          291.0
         ]
       ],
       "center_mm": [
-        -146.0,
-        -208.0,
-        122.0
+        -146.00000000000006,
+        -208.00000000000006,
+        201.49999999999994
       ],
-      "solids": 1
-    },
-    {
-      "name": "12_corner_upper_LB",
-      "group": "structure",
-      "status": "concept",
-      "metadata": {
-        "material": "4t collar plate around the 20x20 column"
-      },
-      "volume_mm3": 1251.3599999999997,
-      "bounds_mm": [
-        [
-          -159.5,
-          -132.5
-        ],
-        [
-          -221.5,
-          -194.5
-        ],
-        [
-          279.0,
-          283.0
-        ]
-      ],
-      "center_mm": [
-        -146.0,
-        -208.0,
-        281.0
-      ],
-      "solids": 1
+      "solids": 2
     },
     {
       "name": "10_2020_Al_column_LF",
@@ -228,62 +231,35 @@
       "solids": 1
     },
     {
-      "name": "11_corner_lower_LF",
+      "name": "13_column_end_bolts_CB5-12_LF",
       "group": "structure",
-      "status": "concept",
+      "status": "catalog_envelope",
       "metadata": {
-        "material": "4t collar plate around the 20x20 column"
+        "sku": "CB5-12",
+        "quantity": 2,
+        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
       },
-      "volume_mm3": 1251.3599999999997,
+      "volume_mm3": 934.6395224062313,
       "bounds_mm": [
         [
-          -159.5,
-          -132.5
+          -150.25,
+          -141.75
         ],
         [
-          194.5,
-          221.5
+          203.75,
+          212.25
         ],
         [
-          120.0,
-          124.0
+          112.0,
+          291.0
         ]
       ],
       "center_mm": [
-        -146.0,
-        208.0,
-        122.0
+        -146.00000000000006,
+        208.00000000000006,
+        201.49999999999994
       ],
-      "solids": 1
-    },
-    {
-      "name": "12_corner_upper_LF",
-      "group": "structure",
-      "status": "concept",
-      "metadata": {
-        "material": "4t collar plate around the 20x20 column"
-      },
-      "volume_mm3": 1251.3599999999997,
-      "bounds_mm": [
-        [
-          -159.5,
-          -132.5
-        ],
-        [
-          194.5,
-          221.5
-        ],
-        [
-          279.0,
-          283.0
-        ]
-      ],
-      "center_mm": [
-        -146.0,
-        208.0,
-        281.0
-      ],
-      "solids": 1
+      "solids": 2
     },
     {
       "name": "10_2020_Al_column_RB",
@@ -317,62 +293,35 @@
       "solids": 1
     },
     {
-      "name": "11_corner_lower_RB",
+      "name": "13_column_end_bolts_CB5-12_RB",
       "group": "structure",
-      "status": "concept",
+      "status": "catalog_envelope",
       "metadata": {
-        "material": "4t collar plate around the 20x20 column"
+        "sku": "CB5-12",
+        "quantity": 2,
+        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
       },
-      "volume_mm3": 1251.3599999999997,
+      "volume_mm3": 934.6395224062313,
       "bounds_mm": [
         [
-          132.5,
-          159.5
+          141.75,
+          150.25
         ],
         [
-          -221.5,
-          -194.5
+          -212.25,
+          -203.75
         ],
         [
-          120.0,
-          124.0
+          112.0,
+          291.0
         ]
       ],
       "center_mm": [
-        146.00000000000003,
-        -208.0,
-        122.0
+        145.9999999999999,
+        -208.00000000000006,
+        201.49999999999994
       ],
-      "solids": 1
-    },
-    {
-      "name": "12_corner_upper_RB",
-      "group": "structure",
-      "status": "concept",
-      "metadata": {
-        "material": "4t collar plate around the 20x20 column"
-      },
-      "volume_mm3": 1251.3599999999997,
-      "bounds_mm": [
-        [
-          132.5,
-          159.5
-        ],
-        [
-          -221.5,
-          -194.5
-        ],
-        [
-          279.0,
-          283.0
-        ]
-      ],
-      "center_mm": [
-        146.00000000000003,
-        -208.0,
-        281.0
-      ],
-      "solids": 1
+      "solids": 2
     },
     {
       "name": "10_2020_Al_column_RF",
@@ -406,62 +355,35 @@
       "solids": 1
     },
     {
-      "name": "11_corner_lower_RF",
+      "name": "13_column_end_bolts_CB5-12_RF",
       "group": "structure",
-      "status": "concept",
+      "status": "catalog_envelope",
       "metadata": {
-        "material": "4t collar plate around the 20x20 column"
+        "sku": "CB5-12",
+        "quantity": 2,
+        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
       },
-      "volume_mm3": 1251.3599999999997,
+      "volume_mm3": 934.6395224062313,
       "bounds_mm": [
         [
-          132.5,
-          159.5
+          141.75,
+          150.25
         ],
         [
-          194.5,
-          221.5
+          203.75,
+          212.25
         ],
         [
-          120.0,
-          124.0
+          112.0,
+          291.0
         ]
       ],
       "center_mm": [
-        146.00000000000003,
-        208.0,
-        122.0
+        145.9999999999999,
+        208.00000000000006,
+        201.49999999999994
       ],
-      "solids": 1
-    },
-    {
-      "name": "12_corner_upper_RF",
-      "group": "structure",
-      "status": "concept",
-      "metadata": {
-        "material": "4t collar plate around the 20x20 column"
-      },
-      "volume_mm3": 1251.3599999999997,
-      "bounds_mm": [
-        [
-          132.5,
-          159.5
-        ],
-        [
-          194.5,
-          221.5
-        ],
-        [
-          279.0,
-          283.0
-        ]
-      ],
-      "center_mm": [
-        146.00000000000003,
-        208.0,
-        281.0
-      ],
-      "solids": 1
+      "solids": 2
     },
     {
       "name": "30_NBR_OD180_W42p5_LEFT",
@@ -1091,14 +1013,14 @@
           221.0
         ],
         [
-          149.5,
-          172.5
+          159.5,
+          182.5
         ]
       ],
       "center_mm": [
         0.0,
         180.0,
-        161.0
+        171.0
       ],
       "solids": 1
     },
@@ -1184,15 +1106,201 @@
       "solids": 1
     },
     {
+      "name": "50_battery_support_pads",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "height_mm": 6.0,
+        "quantity": 4,
+        "supports": "50_company_7S9P_BATTERY_DUMMY"
+      },
+      "volume_mm3": 4241.150082346221,
+      "bounds_mm": [
+        [
+          -117.0,
+          117.0
+        ],
+        [
+          -129.0,
+          25.0
+        ],
+        [
+          120.0,
+          126.0
+        ]
+      ],
+      "center_mm": [
+        -2.3160092400488114e-14,
+        -52.00000000000002,
+        123.00000000000001
+      ],
+      "solids": 4
+    },
+    {
+      "name": "51_controller_PCB_standoffs_M4",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "height_mm": 22.5,
+        "quantity": 4,
+        "supports": "51_controller_PCB_DUMMY"
+      },
+      "volume_mm3": 3463.6059005827483,
+      "bounds_mm": [
+        [
+          -78.0,
+          78.0
+        ],
+        [
+          132.5,
+          227.5
+        ],
+        [
+          120.0,
+          142.5
+        ]
+      ],
+      "center_mm": [
+        -2.494567775562778e-14,
+        180.0,
+        131.25000000000003
+      ],
+      "solids": 4
+    },
+    {
+      "name": "52_control_computer_standoffs_M4",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "height_mm": 10.0,
+        "quantity": 4,
+        "supports": "52_control_computer_DUMMY"
+      },
+      "volume_mm3": 1539.3804002589986,
+      "bounds_mm": [
+        [
+          -68.5,
+          68.5
+        ],
+        [
+          143.5,
+          216.5
+        ],
+        [
+          149.5,
+          159.5
+        ]
+      ],
+      "center_mm": [
+        -3.2495027602725665e-14,
+        180.0,
+        154.50000000000003
+      ],
+      "solids": 4
+    },
+    {
+      "name": "54_REAR_power_distribution_standoffs_M4",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "height_mm": 9.0,
+        "quantity": 4,
+        "supports": "54_REAR_power_distribution_DUMMY"
+      },
+      "volume_mm3": 1385.4423602330992,
+      "bounds_mm": [
+        [
+          -75.5,
+          75.5
+        ],
+        [
+          -228.0,
+          -172.0
+        ],
+        [
+          120.0,
+          129.0
+        ]
+      ],
+      "center_mm": [
+        -2.4289212551532316e-14,
+        -200.0,
+        124.50000000000001
+      ],
+      "solids": 4
+    },
+    {
+      "name": "53_motor_driver_standoffs_M4_-124",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "height_mm": 14.0,
+        "quantity": 4,
+        "supports": "53_motor_driver_DUMMY_-124"
+      },
+      "volume_mm3": 2155.1325603625983,
+      "bounds_mm": [
+        [
+          -154.5,
+          -93.5
+        ],
+        [
+          80.5,
+          169.5
+        ],
+        [
+          120.0,
+          134.0
+        ]
+      ],
+      "center_mm": [
+        -124.00000000000001,
+        125.00000000000001,
+        127.00000000000001
+      ],
+      "solids": 4
+    },
+    {
+      "name": "53_motor_driver_standoffs_M4_124",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "height_mm": 14.0,
+        "quantity": 4,
+        "supports": "53_motor_driver_DUMMY_124"
+      },
+      "volume_mm3": 2155.1325603625983,
+      "bounds_mm": [
+        [
+          93.5,
+          154.5
+        ],
+        [
+          80.5,
+          169.5
+        ],
+        [
+          120.0,
+          134.0
+        ]
+      ],
+      "center_mm": [
+        123.99999999999999,
+        124.99999999999999,
+        126.99999999999999
+      ],
+      "solids": 4
+    },
+    {
       "name": "60_diagonal_lidar_mount_CONCEPT_FRONT_LEFT",
       "group": "lidars",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 19620.143136201237,
+      "volume_mm3": 18988.718486765003,
       "bounds_mm": [
         [
           -273.03300858899104,
-          -152.77400782904698
+          -158.6304479068868
         ],
         [
           196.96699141100893,
@@ -1204,9 +1312,9 @@
         ]
       ],
       "center_mm": [
-        -213.6311034204375,
-        245.4810586641734,
-        161.50000000000003
+        -215.20573418409472,
+        246.68407803565094,
+        161.5
       ],
       "solids": 1
     },
@@ -1222,12 +1330,12 @@
       "volume_mm3": 9525.823055906758,
       "bounds_mm": [
         [
-          -180.0,
-          -160.0
+          -186.0,
+          -166.0
         ],
         [
-          205.0,
-          225.0
+          210.0,
+          230.0
         ],
         [
           120.0,
@@ -1235,11 +1343,42 @@
         ]
       ],
       "center_mm": [
-        -170.0,
-        215.0,
+        -176.0,
+        220.0,
         140.0
       ],
       "solids": 1
+    },
+    {
+      "name": "65_lidar_column_bolts_CB5-12_FRONT_LEFT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "CB5-12",
+        "quantity": 2,
+        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
+      },
+      "volume_mm3": 934.6395224062314,
+      "bounds_mm": [
+        [
+          -180.25,
+          -171.75
+        ],
+        [
+          215.75,
+          224.25
+        ],
+        [
+          112.0,
+          168.0
+        ]
+      ],
+      "center_mm": [
+        -175.99999999999997,
+        220.00000000000003,
+        140.00000000000003
+      ],
+      "solids": 2
     },
     {
       "name": "61_SICK_TiM571_envelope_base_FRONT_LEFT",
@@ -1327,10 +1466,10 @@
       "group": "lidars",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 19620.14313620124,
+      "volume_mm3": 18988.718486765003,
       "bounds_mm": [
         [
-          152.77400782904692,
+          158.6304479068868,
           273.03300858899104
         ],
         [
@@ -1343,9 +1482,9 @@
         ]
       ],
       "center_mm": [
-        213.6311034204375,
-        -245.48105866417333,
-        161.50000000000003
+        215.20573418409467,
+        -246.68407803565094,
+        161.5
       ],
       "solids": 1
     },
@@ -1361,12 +1500,12 @@
       "volume_mm3": 9525.823055906758,
       "bounds_mm": [
         [
-          160.0,
-          180.0
+          166.0,
+          186.0
         ],
         [
-          -225.0,
-          -205.0
+          -230.0,
+          -210.0
         ],
         [
           120.0,
@@ -1374,11 +1513,42 @@
         ]
       ],
       "center_mm": [
-        170.0,
-        -215.0,
+        176.0,
+        -220.0,
         140.0
       ],
       "solids": 1
+    },
+    {
+      "name": "65_lidar_column_bolts_CB5-12_REAR_RIGHT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "CB5-12",
+        "quantity": 2,
+        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
+      },
+      "volume_mm3": 934.6395224062314,
+      "bounds_mm": [
+        [
+          171.75,
+          180.25
+        ],
+        [
+          -224.25,
+          -215.75
+        ],
+        [
+          112.0,
+          168.0
+        ]
+      ],
+      "center_mm": [
+        176.00000000000003,
+        -220.00000000000003,
+        140.00000000000003
+      ],
+      "solids": 2
     },
     {
       "name": "61_SICK_TiM571_envelope_base_REAR_RIGHT",
@@ -1488,11 +1658,11 @@
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.147608664716,
+      "volume_mm3": 13831.147608597723,
       "bounds_mm": [
         [
           -130.00381821959914,
-          -46.11607497491716
+          -46.11607497491715
         ],
         [
           254.9729471113061,
@@ -1504,9 +1674,9 @@
         ]
       ],
       "center_mm": [
-        -89.87498357218627,
-        273.6033524383799,
-        267.41376053383874
+        -89.87498357188935,
+        273.6033524383707,
+        267.41376053382584
       ],
       "solids": 58
     },
@@ -1515,15 +1685,15 @@
       "group": "cameras",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 5999.999999999999,
+      "volume_mm3": 19908.72511667168,
       "bounds_mm": [
         [
-          -110.0,
-          -70.0
+          -135.0,
+          -45.0
         ],
         [
-          231.0,
-          281.0
+          222.0,
+          296.0
         ],
         [
           252.0,
@@ -1531,9 +1701,38 @@
         ]
       ],
       "center_mm": [
-        -90.0,
-        256.0,
-        253.5
+        -89.99999999999997,
+        259.08592198595613,
+        253.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "71_camera_wedge_CONCEPT_LEFT",
+      "group": "cameras",
+      "status": "concept_support",
+      "metadata": {
+        "material": "3D-printed wedge; camera M2 screws pitch 80 not drawn"
+      },
+      "volume_mm3": 3307.743715380252,
+      "bounds_mm": [
+        [
+          -130.0981300737904,
+          -47.71785023576781
+        ],
+        [
+          255.5492071086428,
+          292.2999204418976
+        ],
+        [
+          255.0,
+          258.91132571617953
+        ]
+      ],
+      "center_mm": [
+        -88.56402957914264,
+        272.6408854311943,
+        256.3903977924244
       ],
       "solids": 1
     },
@@ -1569,6 +1768,37 @@
       "solids": 1
     },
     {
+      "name": "73_camera_column_bolts_CB5-12_LEFT",
+      "group": "cameras",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "CB5-12",
+        "quantity": 2,
+        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
+      },
+      "volume_mm3": 934.6395224062317,
+      "bounds_mm": [
+        [
+          -94.25,
+          -85.75
+        ],
+        [
+          230.75,
+          239.25
+        ],
+        [
+          247.0,
+          291.0
+        ]
+      ],
+      "center_mm": [
+        -89.99999999999999,
+        234.99999999999997,
+        269.00000000000006
+      ],
+      "solids": 2
+    },
+    {
       "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
       "group": "cameras",
       "status": "manufacturer_step_family_revision_reference",
@@ -1595,10 +1825,10 @@
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.147608664714,
+      "volume_mm3": 13831.14760859772,
       "bounds_mm": [
         [
-          46.1160749753796,
+          46.11607497537959,
           130.003818305512
         ],
         [
@@ -1611,9 +1841,9 @@
         ]
       ],
       "center_mm": [
-        87.90994362156701,
-        274.12988330624324,
-        267.41376053383635
+        87.9099436218197,
+        274.1298833060874,
+        267.4137605338268
       ],
       "solids": 58
     },
@@ -1622,15 +1852,15 @@
       "group": "cameras",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 5999.999999999999,
+      "volume_mm3": 19908.72511667168,
       "bounds_mm": [
         [
-          70.0,
-          110.0
+          45.0,
+          135.0
         ],
         [
-          231.0,
-          281.0
+          222.0,
+          296.0
         ],
         [
           252.0,
@@ -1639,8 +1869,37 @@
       ],
       "center_mm": [
         90.0,
-        256.0,
-        253.5
+        259.08592198595613,
+        253.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "71_camera_wedge_CONCEPT_RIGHT",
+      "group": "cameras",
+      "status": "concept_support",
+      "metadata": {
+        "material": "3D-printed wedge; camera M2 screws pitch 80 not drawn"
+      },
+      "volume_mm3": 3307.743715380252,
+      "bounds_mm": [
+        [
+          47.717850235767806,
+          130.0981300737904
+        ],
+        [
+          255.54920710864278,
+          292.2999204418976
+        ],
+        [
+          255.0,
+          258.91132571617953
+        ]
+      ],
+      "center_mm": [
+        88.56402957914267,
+        272.64088543119436,
+        256.39039779242444
       ],
       "solids": 1
     },
@@ -1674,6 +1933,37 @@
         269.0
       ],
       "solids": 1
+    },
+    {
+      "name": "73_camera_column_bolts_CB5-12_RIGHT",
+      "group": "cameras",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "CB5-12",
+        "quantity": 2,
+        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
+      },
+      "volume_mm3": 934.6395224062317,
+      "bounds_mm": [
+        [
+          85.75,
+          94.25
+        ],
+        [
+          230.75,
+          239.25
+        ],
+        [
+          247.0,
+          291.0
+        ]
+      ],
+      "center_mm": [
+        90.00000000000001,
+        234.99999999999997,
+        269.00000000000006
+      ],
+      "solids": 2
     },
     {
       "name": "80_drive_hinge_bushes_LEFT",
@@ -2796,7 +3086,7 @@
         "moving_wheel": "LF",
         "sku": "CB6-16",
         "quantity": 4,
-        "plate_thickness_reference_mm": 5
+        "plate_thickness_mm": 2.0
       },
       "volume_mm3": 3694.512960621596,
       "bounds_mm": [
@@ -2809,14 +3099,14 @@
           247.0
         ],
         [
-          72.0,
-          94.0
+          75.0,
+          97.0
         ]
       ],
       "center_mm": [
         -138.0,
         215.00000000000003,
-        80.38775510204084
+        83.38775510204084
       ],
       "solids": 4
     },
@@ -3291,7 +3581,7 @@
         "moving_wheel": "LB",
         "sku": "CB6-16",
         "quantity": 4,
-        "plate_thickness_reference_mm": 5
+        "plate_thickness_mm": 2.0
       },
       "volume_mm3": 3694.512960621596,
       "bounds_mm": [
@@ -3304,14 +3594,14 @@
           -183.0
         ],
         [
-          72.0,
-          94.0
+          75.0,
+          97.0
         ]
       ],
       "center_mm": [
         -138.0,
         -215.0,
-        80.38775510204084
+        83.38775510204084
       ],
       "solids": 4
     },
@@ -3786,7 +4076,7 @@
         "moving_wheel": "RF",
         "sku": "CB6-16",
         "quantity": 4,
-        "plate_thickness_reference_mm": 5
+        "plate_thickness_mm": 2.0
       },
       "volume_mm3": 3694.512960621596,
       "bounds_mm": [
@@ -3799,14 +4089,14 @@
           247.0
         ],
         [
-          72.0,
-          94.0
+          75.0,
+          97.0
         ]
       ],
       "center_mm": [
         138.0,
         215.00000000000003,
-        80.38775510204084
+        83.38775510204084
       ],
       "solids": 4
     },
@@ -4281,7 +4571,7 @@
         "moving_wheel": "RB",
         "sku": "CB6-16",
         "quantity": 4,
-        "plate_thickness_reference_mm": 5
+        "plate_thickness_mm": 2.0
       },
       "volume_mm3": 3694.512960621596,
       "bounds_mm": [
@@ -4294,14 +4584,14 @@
           -183.0
         ],
         [
-          72.0,
-          94.0
+          75.0,
+          97.0
         ]
       ],
       "center_mm": [
         138.0,
         -215.0,
-        80.38775510204084
+        83.38775510204084
       ],
       "solids": 4
     },

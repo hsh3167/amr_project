@@ -1,7 +1,7 @@
 {
   "valid": true,
-  "components": 147,
-  "solids": 317,
+  "components": 156,
+  "solids": 355,
   "errors": [],
   "suspension_catalog": {
     "concept": "Rev12 six independent hinge + spring modules",
@@ -154,7 +154,7 @@
     "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump of its hinge arm; local hardware and chassis"
   },
   "static_interference": {
-    "boolean_pairs": 224,
+    "boolean_pairs": 254,
     "hits": [],
     "known_manufacturer_overlaps": [
       {
@@ -186,7 +186,7 @@
   },
   "suspension_pose_interference": {
     "sampled_poses": 12,
-    "boolean_pairs": 488,
+    "boolean_pairs": 504,
     "hits": [],
     "known_manufacturer_overlaps": [
       {
@@ -256,6 +256,14 @@
     ],
     "scope": "One wheel at a time at full droop and full bump; springs, stoppers and fasteners included; cameras excluded; not a swept-volume proof"
   },
+  "support_connectivity": {
+    "root": "01_lower_steel_plate_3t",
+    "tolerance_mm": 0.2,
+    "contacts": 209,
+    "unsupported": [],
+    "isolated": [],
+    "scope": "Contact graph from the base plate at the nominal pose; geometric support only, not joint strength"
+  },
   "step_roundtrip": [
     {
       "file": "amr_current.step",
@@ -273,7 +281,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 317
+      "solids": 355
     }
   ]
 }
