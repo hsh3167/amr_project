@@ -1,7 +1,7 @@
 {
   "valid": true,
-  "components": 156,
-  "solids": 355,
+  "components": 178,
+  "solids": 413,
   "errors": [],
   "suspension_catalog": {
     "concept": "Rev12 six independent hinge + spring modules",
@@ -143,7 +143,7 @@
   "selected_sensor_collisions": [],
   "suspension_collision_sampling": {
     "sampled_poses": 30,
-    "boolean_pairs": 326,
+    "boolean_pairs": 474,
     "hits": [],
     "scope": "One wheel at a time (six hinge modules), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
   },
@@ -154,7 +154,7 @@
     "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump of its hinge arm; local hardware and chassis"
   },
   "static_interference": {
-    "boolean_pairs": 254,
+    "boolean_pairs": 320,
     "hits": [],
     "known_manufacturer_overlaps": [
       {
@@ -186,7 +186,7 @@
   },
   "suspension_pose_interference": {
     "sampled_poses": 12,
-    "boolean_pairs": 504,
+    "boolean_pairs": 690,
     "hits": [],
     "known_manufacturer_overlaps": [
       {
@@ -259,7 +259,7 @@
   "support_connectivity": {
     "root": "01_lower_steel_plate_3t",
     "tolerance_mm": 0.2,
-    "contacts": 209,
+    "contacts": 247,
     "unsupported": [],
     "isolated": [],
     "scope": "Contact graph from the base plate at the nominal pose; geometric support only, not joint strength"
@@ -281,7 +281,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 355
+      "solids": 413
     }
   ]
 }

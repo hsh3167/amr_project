@@ -22,7 +22,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 355
+      "solids": 413
     }
   ],
   "components": [
@@ -31,7 +31,7 @@
       "group": "chassis",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 592021.0954994769,
+      "volume_mm3": 592163.6452661336,
       "bounds_mm": [
         [
           -195.0,
@@ -47,9 +47,9 @@
         ]
       ],
       "center_mm": [
-        9.277437148371965e-15,
-        0.0516692651688525,
-        118.50000000000003
+        9.957136340147942e-15,
+        0.05165682698261074,
+        118.50000000000001
       ],
       "solids": 1
     },
@@ -1292,93 +1292,63 @@
       "solids": 4
     },
     {
-      "name": "60_diagonal_lidar_mount_CONCEPT_FRONT_LEFT",
+      "name": "60_lidar_bracket_3t_FRONT_LEFT",
       "group": "lidars",
-      "status": "concept",
-      "metadata": {},
-      "volume_mm3": 18988.718486765003,
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "S355 3t laser-cut, 2 bends (bend limit 3t); wraps two faces of the main column"
+      },
+      "volume_mm3": 28034.76409957188,
       "bounds_mm": [
         [
           -273.03300858899104,
-          -158.6304479068868
+          -136.0
         ],
         [
           196.96699141100893,
           303.03300858899104
         ],
         [
-          160.0,
+          128.0,
           163.0
         ]
       ],
       "center_mm": [
-        -215.20573418409472,
-        246.68407803565094,
-        161.5
+        -196.90114145329125,
+        238.4066356215968,
+        159.28094233480743
       ],
       "solids": 1
     },
     {
-      "name": "64_2020_Al_lidar_column_FRONT_LEFT",
-      "group": "lidars",
-      "status": "generic_profile",
-      "metadata": {
-        "material": "Aluminum extrusion",
-        "length_mm": 40,
-        "section_mm": 20
-      },
-      "volume_mm3": 9525.823055906758,
-      "bounds_mm": [
-        [
-          -186.0,
-          -166.0
-        ],
-        [
-          210.0,
-          230.0
-        ],
-        [
-          120.0,
-          160.0
-        ]
-      ],
-      "center_mm": [
-        -176.0,
-        220.0,
-        140.0
-      ],
-      "solids": 1
-    },
-    {
-      "name": "65_lidar_column_bolts_CB5-12_FRONT_LEFT",
+      "name": "65_lidar_bracket_bolts_M5_Tnut_FRONT_LEFT",
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "CB5-12",
-        "quantity": 2,
-        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
+        "sku": "M5x10 hex socket + M5 T-nut for 2020 slot 6",
+        "quantity": 4
       },
-      "volume_mm3": 934.6395224062314,
+      "volume_mm3": 2418.6534094420117,
       "bounds_mm": [
         [
-          -180.25,
-          -171.75
+          -164.0,
+          -141.20000000000002
         ],
         [
-          215.75,
-          224.25
+          203.2,
+          226.0
         ],
         [
-          112.0,
-          168.0
+          131.0,
+          157.0
         ]
       ],
       "center_mm": [
-        -175.99999999999997,
-        220.00000000000003,
-        140.00000000000003
+        -151.73425170556382,
+        213.73425170556388,
+        143.99999999999997
       ],
-      "solids": 2
+      "solids": 8
     },
     {
       "name": "61_SICK_TiM571_envelope_base_FRONT_LEFT",
@@ -1462,14 +1432,16 @@
       "solids": 1
     },
     {
-      "name": "60_diagonal_lidar_mount_CONCEPT_REAR_RIGHT",
+      "name": "60_lidar_bracket_3t_REAR_RIGHT",
       "group": "lidars",
-      "status": "concept",
-      "metadata": {},
-      "volume_mm3": 18988.718486765003,
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "S355 3t laser-cut, 2 bends (bend limit 3t); wraps two faces of the main column"
+      },
+      "volume_mm3": 28034.764099571883,
       "bounds_mm": [
         [
-          158.6304479068868,
+          136.0,
           273.03300858899104
         ],
         [
@@ -1477,78 +1449,46 @@
           -196.96699141100893
         ],
         [
-          160.0,
+          128.0,
           163.0
         ]
       ],
       "center_mm": [
-        215.20573418409467,
-        -246.68407803565094,
-        161.5
+        196.90114145329116,
+        -238.40663562159682,
+        159.2809423348074
       ],
       "solids": 1
     },
     {
-      "name": "64_2020_Al_lidar_column_REAR_RIGHT",
-      "group": "lidars",
-      "status": "generic_profile",
-      "metadata": {
-        "material": "Aluminum extrusion",
-        "length_mm": 40,
-        "section_mm": 20
-      },
-      "volume_mm3": 9525.823055906758,
-      "bounds_mm": [
-        [
-          166.0,
-          186.0
-        ],
-        [
-          -230.0,
-          -210.0
-        ],
-        [
-          120.0,
-          160.0
-        ]
-      ],
-      "center_mm": [
-        176.0,
-        -220.0,
-        140.0
-      ],
-      "solids": 1
-    },
-    {
-      "name": "65_lidar_column_bolts_CB5-12_REAR_RIGHT",
+      "name": "65_lidar_bracket_bolts_M5_Tnut_REAR_RIGHT",
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "CB5-12",
-        "quantity": 2,
-        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
+        "sku": "M5x10 hex socket + M5 T-nut for 2020 slot 6",
+        "quantity": 4
       },
-      "volume_mm3": 934.6395224062314,
+      "volume_mm3": 2418.6534094420117,
       "bounds_mm": [
         [
-          171.75,
-          180.25
+          141.2,
+          164.0
         ],
         [
-          -224.25,
-          -215.75
+          -226.0,
+          -203.20000000000002
         ],
         [
-          112.0,
-          168.0
+          131.0,
+          157.0
         ]
       ],
       "center_mm": [
-        176.00000000000003,
-        -220.00000000000003,
-        140.00000000000003
+        151.73425170556382,
+        -213.73425170556382,
+        144.00000000000003
       ],
-      "solids": 2
+      "solids": 8
     },
     {
       "name": "61_SICK_TiM571_envelope_base_REAR_RIGHT",
@@ -1984,8 +1924,8 @@
           -69.9999999
         ],
         [
-          -44.5000001,
-          23.0000001
+          -46.0000001,
+          24.5000001
         ],
         [
           83.9999999,
@@ -1993,41 +1933,136 @@
         ]
       ],
       "center_mm": [
-        -81.0,
-        -10.750000000000002,
-        94.99999999999999
+        -81.00000000000001,
+        -10.749999999999993,
+        95.00000000000004
       ],
       "solids": 2
     },
     {
-      "name": "80_drive_swing_arm_6t_LEFT",
+      "name": "80_drive_swing_arm_3t_LEFT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": "LEFT",
-        "material": "S355 6t laser-cut floor, 2 pivot tabs + axle wall (3 bends); AF10.2 trial slot; M8 tapped seat",
+        "material": "S355 3t laser-cut, floor + 2 full-length side walls + end wall (3 bends); AF10.2 slot; M8 tapped seat",
         "arm_length_mm": 130.0
       },
-      "volume_mm3": 61176.19231162918,
+      "volume_mm3": 48013.615715271284,
       "bounds_mm": [
         [
           -173.0,
           -69.0
         ],
         [
-          -42.5,
-          21.000000000000004
+          -44.0,
+          22.500000000000004
         ],
         [
-          66.0,
+          69.0,
           108.0
         ]
       ],
       "center_mm": [
-        -119.56188235979639,
-        -9.273573413957774,
-        76.39030834046663
+        -128.20333559198608,
+        -10.776636644628574,
+        81.54145120608415
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_pivot_bosses_8t_LEFT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "material": "S355 8t flat laser-cut, bush bore 14 H7, 2x M4 tapped each",
+        "quantity": 2
+      },
+      "volume_mm3": 8868.053349704056,
+      "bounds_mm": [
+        [
+          -106.0,
+          -69.0
+        ],
+        [
+          -41.0,
+          19.5
+        ],
+        [
+          85.0,
+          105.0
+        ]
+      ],
+      "center_mm": [
+        -88.64532114868193,
+        -10.750000000000002,
+        94.99999999999997
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_drive_boss_screws_CB4-10_LEFT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "sku": "CB4-10",
+        "quantity": 4
+      },
+      "volume_mm3": 1118.4069846779662,
+      "bounds_mm": [
+        [
+          -102.5,
+          -95.5
+        ],
+        [
+          -48.0,
+          26.5
+        ],
+        [
+          85.5,
+          104.5
+        ]
+      ],
+      "center_mm": [
+        -99.00000000000003,
+        -10.750000000000004,
+        94.99999999999999
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_drive_axle_torque_plate_3t_LEFT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "material": "S355 3t flat laser-cut, AF10.2 slot; clamped by the axle nut against the end wall"
+      },
+      "volume_mm3": 6137.054392434801,
+      "bounds_mm": [
+        [
+          -170.0,
+          -167.0
+        ],
+        [
+          -41.0,
+          19.5
+        ],
+        [
+          72.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        -168.49999999999997,
+        -11.44531162809736,
+        89.99999999999999
       ],
       "solids": 1
     },
@@ -2130,9 +2165,9 @@
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
-        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+        "material": "S355 3t sheet, 2 bends (bend limit 3t); ream both ear holes together"
       },
-      "volume_mm3": 15698.577929419924,
+      "volume_mm3": 10681.71861961328,
       "bounds_mm": [
         [
           -96.0,
@@ -2149,8 +2184,8 @@
       ],
       "center_mm": [
         -80.99999999999996,
-        -10.770430957276467,
-        108.74081794512989
+        -10.770017813387492,
+        109.30172100644683
       ],
       "solids": 1
     },
@@ -2161,10 +2196,10 @@
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
-        "sku": "CB5-14",
+        "sku": "CB5-12",
         "quantity": 4
       },
-      "volume_mm3": 2234.4577748657402,
+      "volume_mm3": 2077.3781421862504,
       "bounds_mm": [
         [
           -92.25,
@@ -2175,14 +2210,14 @@
           9.25
         ],
         [
-          106.0,
+          108.0,
           125.0
         ]
       ],
       "center_mm": [
-        -81.00000000000001,
-        -10.0,
-        117.82513181019333
+        -81.0,
+        -10.000000000000004,
+        118.64366729678638
       ],
       "solids": 4
     },
@@ -2206,14 +2241,14 @@
           9.0
         ],
         [
-          108.5,
-          112.5
+          110.0,
+          114.0
         ]
       ],
       "center_mm": [
         -81.00000000000004,
         -10.000000000000002,
-        110.50000000000004
+        112.0
       ],
       "solids": 4
     },
@@ -2365,10 +2400,10 @@
         "wheel": "LEFT",
         "moving_wheel": "LEFT",
         "sku": "M8 stud",
-        "length_mm": 70.0,
-        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
+        "length_mm": 67.0,
+        "fit": "Tapped M8 in the 3t floor + threadlocker; droop load below 100 N"
       },
-      "volume_mm3": 3520.180532710146,
+      "volume_mm3": 3369.384085337835,
       "bounds_mm": [
         [
           -159.0,
@@ -2379,14 +2414,14 @@
           -21.0
         ],
         [
-          66.0,
+          69.0,
           136.03176654458514
         ]
       ],
       "center_mm": [
         -155.0,
         -25.0,
-        101.01588327229257
+        102.51588327229257
       ],
       "solids": 1
     },
@@ -2431,7 +2466,7 @@
         "sku": "C-USLH10",
         "source": "C-USLH10.stp.gz",
         "tip_z": 89.0,
-        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+        "fit": "M5x0.8 thread 7: 3t floor + M5 nut 4 underneath; urethane Shore A90 tip"
       },
       "volume_mm3": 1408.8911552645213,
       "bounds_mm": [
@@ -2454,6 +2489,37 @@
         79.60853281087698
       ],
       "solids": 2
+    },
+    {
+      "name": "80_drive_bump_stopper_nut_M5_LEFT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "quantity": 1
+      },
+      "volume_mm3": 143.16268702907155,
+      "bounds_mm": [
+        [
+          -134.618802153517,
+          -125.38119784648299
+        ],
+        [
+          -29.0,
+          -21.0
+        ],
+        [
+          65.0,
+          69.0
+        ]
+      ],
+      "center_mm": [
+        -130.00000000000006,
+        -25.00000000000001,
+        67.00000000000001
+      ],
+      "solids": 1
     },
     {
       "name": "80_drive_bump_stop_bolt_M6_LEFT",
@@ -2507,8 +2573,8 @@
           92.0000001
         ],
         [
-          -44.5000001,
-          23.0000001
+          -46.0000001,
+          24.5000001
         ],
         [
           83.9999999,
@@ -2516,41 +2582,136 @@
         ]
       ],
       "center_mm": [
-        81.0,
-        -10.750000000000002,
-        94.99999999999999
+        81.00000000000001,
+        -10.749999999999993,
+        95.00000000000004
       ],
       "solids": 2
     },
     {
-      "name": "80_drive_swing_arm_6t_RIGHT",
+      "name": "80_drive_swing_arm_3t_RIGHT",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": "RIGHT",
-        "material": "S355 6t laser-cut floor, 2 pivot tabs + axle wall (3 bends); AF10.2 trial slot; M8 tapped seat",
+        "material": "S355 3t laser-cut, floor + 2 full-length side walls + end wall (3 bends); AF10.2 slot; M8 tapped seat",
         "arm_length_mm": 130.0
       },
-      "volume_mm3": 61176.19231162919,
+      "volume_mm3": 48013.615715271284,
       "bounds_mm": [
         [
           69.0,
           173.0
         ],
         [
-          -42.5,
-          21.000000000000004
+          -44.0,
+          22.500000000000004
         ],
         [
-          66.0,
+          69.0,
           108.0
         ]
       ],
       "center_mm": [
-        119.56188235979637,
-        -9.27357341395778,
-        76.39030834046659
+        128.20333559198622,
+        -10.77663664462854,
+        81.54145120608415
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_drive_pivot_bosses_8t_RIGHT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "material": "S355 8t flat laser-cut, bush bore 14 H7, 2x M4 tapped each",
+        "quantity": 2
+      },
+      "volume_mm3": 8868.053349704058,
+      "bounds_mm": [
+        [
+          69.0,
+          106.0
+        ],
+        [
+          -41.0,
+          19.5
+        ],
+        [
+          85.0,
+          105.0
+        ]
+      ],
+      "center_mm": [
+        88.64532114868194,
+        -10.750000000000004,
+        94.99999999999999
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_drive_boss_screws_CB4-10_RIGHT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "sku": "CB4-10",
+        "quantity": 4
+      },
+      "volume_mm3": 1118.4069846779662,
+      "bounds_mm": [
+        [
+          95.5,
+          102.5
+        ],
+        [
+          -48.0,
+          26.5
+        ],
+        [
+          85.5,
+          104.5
+        ]
+      ],
+      "center_mm": [
+        99.00000000000003,
+        -10.750000000000004,
+        94.99999999999999
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_drive_axle_torque_plate_3t_RIGHT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "material": "S355 3t flat laser-cut, AF10.2 slot; clamped by the axle nut against the end wall"
+      },
+      "volume_mm3": 6137.054392434801,
+      "bounds_mm": [
+        [
+          167.0,
+          170.0
+        ],
+        [
+          -41.0,
+          19.5
+        ],
+        [
+          72.0,
+          108.0
+        ]
+      ],
+      "center_mm": [
+        168.49999999999997,
+        -11.44531162809736,
+        89.99999999999999
       ],
       "solids": 1
     },
@@ -2653,9 +2814,9 @@
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
-        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+        "material": "S355 3t sheet, 2 bends (bend limit 3t); ream both ear holes together"
       },
-      "volume_mm3": 15698.577929419924,
+      "volume_mm3": 10681.71861961328,
       "bounds_mm": [
         [
           66.0,
@@ -2671,9 +2832,9 @@
         ]
       ],
       "center_mm": [
-        80.99999999999994,
-        -10.770430957276467,
-        108.74081794512989
+        81.00000000000004,
+        -10.770017813387492,
+        109.30172100644683
       ],
       "solids": 1
     },
@@ -2684,10 +2845,10 @@
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
-        "sku": "CB5-14",
+        "sku": "CB5-12",
         "quantity": 4
       },
-      "volume_mm3": 2234.4577748657402,
+      "volume_mm3": 2077.3781421862504,
       "bounds_mm": [
         [
           69.75,
@@ -2698,14 +2859,14 @@
           9.25
         ],
         [
-          106.0,
+          108.0,
           125.0
         ]
       ],
       "center_mm": [
-        81.0,
-        -10.0,
-        117.82513181019333
+        80.99999999999999,
+        -10.000000000000004,
+        118.64366729678638
       ],
       "solids": 4
     },
@@ -2729,14 +2890,14 @@
           9.0
         ],
         [
-          108.5,
-          112.5
+          110.0,
+          114.0
         ]
       ],
       "center_mm": [
         81.0,
         -10.000000000000002,
-        110.50000000000004
+        112.0
       ],
       "solids": 4
     },
@@ -2888,10 +3049,10 @@
         "wheel": "RIGHT",
         "moving_wheel": "RIGHT",
         "sku": "M8 stud",
-        "length_mm": 70.0,
-        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
+        "length_mm": 67.0,
+        "fit": "Tapped M8 in the 3t floor + threadlocker; droop load below 100 N"
       },
-      "volume_mm3": 3520.180532710146,
+      "volume_mm3": 3369.384085337835,
       "bounds_mm": [
         [
           151.0,
@@ -2902,14 +3063,14 @@
           -21.0
         ],
         [
-          66.0,
+          69.0,
           136.03176654458514
         ]
       ],
       "center_mm": [
         155.0,
         -25.0,
-        101.01588327229257
+        102.51588327229257
       ],
       "solids": 1
     },
@@ -2954,7 +3115,7 @@
         "sku": "C-USLH10",
         "source": "C-USLH10.stp.gz",
         "tip_z": 89.0,
-        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+        "fit": "M5x0.8 thread 7: 3t floor + M5 nut 4 underneath; urethane Shore A90 tip"
       },
       "volume_mm3": 1408.8911552645213,
       "bounds_mm": [
@@ -2977,6 +3138,37 @@
         79.60853281087697
       ],
       "solids": 2
+    },
+    {
+      "name": "80_drive_bump_stopper_nut_M5_RIGHT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "quantity": 1
+      },
+      "volume_mm3": 143.1626870290714,
+      "bounds_mm": [
+        [
+          125.38119784648299,
+          134.618802153517
+        ],
+        [
+          -29.0,
+          -21.0
+        ],
+        [
+          65.0,
+          69.0
+        ]
+      ],
+      "center_mm": [
+        129.99999999999997,
+        -24.99999999999999,
+        67.0
+      ],
+      "solids": 1
     },
     {
       "name": "80_drive_bump_stop_bolt_M6_RIGHT",
@@ -3030,8 +3222,8 @@
           -36.9999999
         ],
         [
-          182.9999999,
-          247.0000001
+          181.4999999,
+          248.5000001
         ],
         [
           88.4999999,
@@ -3039,31 +3231,31 @@
         ]
       ],
       "center_mm": [
-        -48.0,
-        214.99999999999997,
+        -47.999999999999986,
+        214.99999999999991,
         99.49999999999999
       ],
       "solids": 2
     },
     {
-      "name": "80_caster_swing_arm_6t_LF",
+      "name": "80_caster_swing_arm_3t_LF",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LF",
         "moving_wheel": "LF",
-        "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
+        "material": "S355 3t laser-cut, narrow floor + 2 side walls (2 bends) + flat caster pad; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 55558.319540550525,
+      "volume_mm3": 36639.01799486541,
       "bounds_mm": [
         [
           -173.0,
           -36.0
         ],
         [
-          184.99999999999991,
-          245.0
+          177.5,
+          252.5
         ],
         [
           83.0,
@@ -3071,11 +3263,75 @@
         ]
       ],
       "center_mm": [
-        -97.50062091232142,
-        214.99999999999955,
-        87.81402288270485
+        -98.84018096793831,
+        215.00000000000003,
+        87.80625508314472
       ],
       "solids": 1
+    },
+    {
+      "name": "80_caster_pivot_bosses_8t_LF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": "LF",
+        "material": "S355 8t flat laser-cut, bush bore 14 H7, 2x M4 tapped each",
+        "quantity": 2
+      },
+      "volume_mm3": 8868.053349704056,
+      "bounds_mm": [
+        [
+          -73.0,
+          -36.0
+        ],
+        [
+          186.5,
+          243.5
+        ],
+        [
+          89.5,
+          109.5
+        ]
+      ],
+      "center_mm": [
+        -55.645321148681944,
+        214.99999999999997,
+        99.50000000000001
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_boss_screws_CB4-10_LF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": "LF",
+        "sku": "CB4-10",
+        "quantity": 4
+      },
+      "volume_mm3": 1118.4069846779662,
+      "bounds_mm": [
+        [
+          -69.5,
+          -62.5
+        ],
+        [
+          179.5,
+          250.5
+        ],
+        [
+          90.0,
+          109.0
+        ]
+      ],
+      "center_mm": [
+        -66.0,
+        214.99999999999997,
+        99.49999999999997
+      ],
+      "solids": 4
     },
     {
       "name": "80_caster_plate_bolts_LF",
@@ -3084,11 +3340,11 @@
       "metadata": {
         "wheel": "LF",
         "moving_wheel": "LF",
-        "sku": "CB6-16",
+        "sku": "CB6-12",
         "quantity": 4,
         "plate_thickness_mm": 2.0
       },
-      "volume_mm3": 3694.512960621596,
+      "volume_mm3": 3242.1236185046664,
       "bounds_mm": [
         [
           -155.0,
@@ -3100,13 +3356,13 @@
         ],
         [
           75.0,
-          97.0
+          93.0
         ]
       ],
       "center_mm": [
-        -138.0,
-        215.00000000000003,
-        83.38775510204084
+        -138.00000000000003,
+        215.00000000000009,
+        81.76744186046511
       ],
       "solids": 4
     },
@@ -3130,14 +3386,14 @@
           247.0
         ],
         [
-          89.0,
-          94.0
+          86.0,
+          91.0
         ]
       ],
       "center_mm": [
         -137.9999999999999,
         214.9999999999999,
-        91.49999999999999
+        88.49999999999996
       ],
       "solids": 4
     },
@@ -3148,9 +3404,9 @@
       "metadata": {
         "wheel": "LF",
         "moving_wheel": null,
-        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+        "material": "S355 3t sheet, 2 bends (bend limit 3t); ream both ear holes together"
       },
-      "volume_mm3": 14359.902579404881,
+      "volume_mm3": 9789.268386269927,
       "bounds_mm": [
         [
           -63.0,
@@ -3166,9 +3422,9 @@
         ]
       ],
       "center_mm": [
-        -48.00000000000001,
-        215.0,
-        110.15854543520685
+        -47.99999999999998,
+        215.0000000000001,
+        110.72608957045541
       ],
       "solids": 1
     },
@@ -3179,10 +3435,10 @@
       "metadata": {
         "wheel": "LF",
         "moving_wheel": null,
-        "sku": "CB5-14",
+        "sku": "CB5-12",
         "quantity": 2
       },
-      "volume_mm3": 1117.2288874328704,
+      "volume_mm3": 1038.6890710931254,
       "bounds_mm": [
         [
           -52.25,
@@ -3193,14 +3449,14 @@
           234.25
         ],
         [
-          106.0,
+          108.0,
           125.0
         ]
       ],
       "center_mm": [
-        -47.99999999999999,
+        -48.0,
         215.00000000000003,
-        117.82513181019333
+        118.64366729678639
       ],
       "solids": 2
     },
@@ -3224,14 +3480,14 @@
           234.0
         ],
         [
-          108.5,
-          112.5
+          110.0,
+          114.0
         ]
       ],
       "center_mm": [
         -48.0,
         214.99999999999986,
-        110.5
+        111.99999999999996
       ],
       "solids": 2
     },
@@ -3299,6 +3555,37 @@
         -48.0,
         254.8947637770957,
         99.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_seat_spacer_LF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": "LF",
+        "material": "3t flat washer/plate (fixed)"
+      },
+      "volume_mm3": 597.1539315943476,
+      "bounds_mm": [
+        [
+          -122.0,
+          -104.0
+        ],
+        [
+          206.0,
+          224.0
+        ],
+        [
+          86.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        -113.00000000000001,
+        215.00000000000006,
+        87.50000000000001
       ],
       "solids": 1
     },
@@ -3384,7 +3671,7 @@
         "moving_wheel": "LF",
         "sku": "M8 stud",
         "length_mm": 50.7,
-        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
+        "fit": "Tapped M8 in the 3t floor + threadlocker; droop load below 100 N"
       },
       "volume_mm3": 2550.33063104116,
       "bounds_mm": [
@@ -3448,8 +3735,8 @@
         "moving_wheel": "LF",
         "sku": "C-USLH10",
         "source": "C-USLH10.stp.gz",
-        "tip_z": 106.0,
-        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+        "tip_z": 103.0,
+        "fit": "M5x0.8 thread 7: 3t floor + M5 nut 4 underneath; urethane Shore A90 tip"
       },
       "volume_mm3": 1408.8911552645213,
       "bounds_mm": [
@@ -3462,16 +3749,47 @@
           220.0000001
         ],
         [
-          81.9999999,
-          106.0000001
+          78.9999999,
+          103.0000001
         ]
       ],
       "center_mm": [
         -87.99999999999999,
         214.99999999999994,
-        96.60853281087698
+        93.60853281087697
       ],
       "solids": 2
+    },
+    {
+      "name": "80_caster_bump_stopper_nut_M5_LF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LF",
+        "moving_wheel": "LF",
+        "quantity": 1
+      },
+      "volume_mm3": 143.1626870290717,
+      "bounds_mm": [
+        [
+          -92.61880215351701,
+          -83.38119784648299
+        ],
+        [
+          211.0,
+          219.0
+        ],
+        [
+          79.0,
+          83.0
+        ]
+      ],
+      "center_mm": [
+        -87.99999999999999,
+        214.99999999999997,
+        81.00000000000003
+      ],
+      "solids": 1
     },
     {
       "name": "80_caster_bump_stop_bolt_M6_LF",
@@ -3481,10 +3799,10 @@
         "wheel": "LF",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 108.54,
+        "tip_z": 105.545,
         "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 1086.9048858298354,
+      "volume_mm3": 1171.59688662384,
       "bounds_mm": [
         [
           -93.77350269189625,
@@ -3495,14 +3813,14 @@
           220.0
         ],
         [
-          108.53996148381634,
+          105.54459469121444,
           126.0
         ]
       ],
       "center_mm": [
-        -87.99999999999997,
+        -88.00000000000001,
         215.0,
-        118.11669057224074
+        117.31614717573835
       ],
       "solids": 1
     },
@@ -3525,8 +3843,8 @@
           -36.9999999
         ],
         [
-          -247.0000001,
-          -182.9999999
+          -248.5000001,
+          -181.4999999
         ],
         [
           88.4999999,
@@ -3534,31 +3852,31 @@
         ]
       ],
       "center_mm": [
-        -48.0,
-        -215.0,
-        99.50000000000001
+        -48.000000000000014,
+        -215.00000000000006,
+        99.5
       ],
       "solids": 2
     },
     {
-      "name": "80_caster_swing_arm_6t_LB",
+      "name": "80_caster_swing_arm_3t_LB",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": "LB",
-        "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
+        "material": "S355 3t laser-cut, narrow floor + 2 side walls (2 bends) + flat caster pad; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 55558.319540550496,
+      "volume_mm3": 36639.017994865426,
       "bounds_mm": [
         [
           -173.0,
           -36.0
         ],
         [
-          -245.0,
-          -184.99999999999991
+          -252.5,
+          -177.5
         ],
         [
           83.0,
@@ -3566,11 +3884,75 @@
         ]
       ],
       "center_mm": [
-        -97.50062091232144,
-        -214.99999999999957,
-        87.81402288270489
+        -98.84018096793828,
+        -214.99999999999997,
+        87.80625508314472
       ],
       "solids": 1
+    },
+    {
+      "name": "80_caster_pivot_bosses_8t_LB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": "LB",
+        "material": "S355 8t flat laser-cut, bush bore 14 H7, 2x M4 tapped each",
+        "quantity": 2
+      },
+      "volume_mm3": 8868.053349704056,
+      "bounds_mm": [
+        [
+          -73.0,
+          -36.0
+        ],
+        [
+          -243.5,
+          -186.5
+        ],
+        [
+          89.5,
+          109.5
+        ]
+      ],
+      "center_mm": [
+        -55.645321148681944,
+        -214.99999999999997,
+        99.50000000000001
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_boss_screws_CB4-10_LB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": "LB",
+        "sku": "CB4-10",
+        "quantity": 4
+      },
+      "volume_mm3": 1118.4069846779662,
+      "bounds_mm": [
+        [
+          -69.5,
+          -62.5
+        ],
+        [
+          -250.5,
+          -179.5
+        ],
+        [
+          90.0,
+          109.0
+        ]
+      ],
+      "center_mm": [
+        -66.0,
+        -215.00000000000003,
+        99.49999999999997
+      ],
+      "solids": 4
     },
     {
       "name": "80_caster_plate_bolts_LB",
@@ -3579,11 +3961,11 @@
       "metadata": {
         "wheel": "LB",
         "moving_wheel": "LB",
-        "sku": "CB6-16",
+        "sku": "CB6-12",
         "quantity": 4,
         "plate_thickness_mm": 2.0
       },
-      "volume_mm3": 3694.512960621596,
+      "volume_mm3": 3242.1236185046664,
       "bounds_mm": [
         [
           -155.0,
@@ -3595,13 +3977,13 @@
         ],
         [
           75.0,
-          97.0
+          93.0
         ]
       ],
       "center_mm": [
-        -138.0,
-        -215.0,
-        83.38775510204084
+        -138.00000000000003,
+        -215.00000000000003,
+        81.76744186046511
       ],
       "solids": 4
     },
@@ -3625,14 +4007,14 @@
           -183.0
         ],
         [
-          89.0,
-          94.0
+          86.0,
+          91.0
         ]
       ],
       "center_mm": [
         -137.9999999999999,
         -214.99999999999991,
-        91.49999999999999
+        88.49999999999996
       ],
       "solids": 4
     },
@@ -3643,9 +4025,9 @@
       "metadata": {
         "wheel": "LB",
         "moving_wheel": null,
-        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+        "material": "S355 3t sheet, 2 bends (bend limit 3t); ream both ear holes together"
       },
-      "volume_mm3": 14359.902579404881,
+      "volume_mm3": 9789.268386269927,
       "bounds_mm": [
         [
           -63.0,
@@ -3661,9 +4043,9 @@
         ]
       ],
       "center_mm": [
-        -48.00000000000001,
-        -214.99999999999994,
-        110.15854543520685
+        -47.99999999999998,
+        -215.0000000000001,
+        110.72608957045541
       ],
       "solids": 1
     },
@@ -3674,10 +4056,10 @@
       "metadata": {
         "wheel": "LB",
         "moving_wheel": null,
-        "sku": "CB5-14",
+        "sku": "CB5-12",
         "quantity": 2
       },
-      "volume_mm3": 1117.2288874328704,
+      "volume_mm3": 1038.6890710931254,
       "bounds_mm": [
         [
           -52.25,
@@ -3688,14 +4070,14 @@
           -195.75
         ],
         [
-          106.0,
+          108.0,
           125.0
         ]
       ],
       "center_mm": [
-        -47.99999999999999,
-        -215.0,
-        117.82513181019333
+        -48.0,
+        -214.99999999999994,
+        118.64366729678639
       ],
       "solids": 2
     },
@@ -3719,14 +4101,14 @@
           -196.0
         ],
         [
-          108.5,
-          112.5
+          110.0,
+          114.0
         ]
       ],
       "center_mm": [
         -48.0,
         -214.99999999999997,
-        110.5
+        111.99999999999996
       ],
       "solids": 2
     },
@@ -3794,6 +4176,37 @@
         -48.0,
         -175.10523622290432,
         99.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_seat_spacer_LB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": "LB",
+        "material": "3t flat washer/plate (fixed)"
+      },
+      "volume_mm3": 597.1539315943476,
+      "bounds_mm": [
+        [
+          -122.0,
+          -104.0
+        ],
+        [
+          -224.0,
+          -206.0
+        ],
+        [
+          86.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        -113.00000000000001,
+        -215.00000000000006,
+        87.50000000000001
       ],
       "solids": 1
     },
@@ -3879,7 +4292,7 @@
         "moving_wheel": "LB",
         "sku": "M8 stud",
         "length_mm": 50.7,
-        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
+        "fit": "Tapped M8 in the 3t floor + threadlocker; droop load below 100 N"
       },
       "volume_mm3": 2550.33063104116,
       "bounds_mm": [
@@ -3943,8 +4356,8 @@
         "moving_wheel": "LB",
         "sku": "C-USLH10",
         "source": "C-USLH10.stp.gz",
-        "tip_z": 106.0,
-        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+        "tip_z": 103.0,
+        "fit": "M5x0.8 thread 7: 3t floor + M5 nut 4 underneath; urethane Shore A90 tip"
       },
       "volume_mm3": 1408.8911552645213,
       "bounds_mm": [
@@ -3957,16 +4370,47 @@
           -209.9999999
         ],
         [
-          81.9999999,
-          106.0000001
+          78.9999999,
+          103.0000001
         ]
       ],
       "center_mm": [
         -87.99999999999999,
         -214.99999999999994,
-        96.60853281087698
+        93.60853281087697
       ],
       "solids": 2
+    },
+    {
+      "name": "80_caster_bump_stopper_nut_M5_LB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LB",
+        "moving_wheel": "LB",
+        "quantity": 1
+      },
+      "volume_mm3": 143.1626870290717,
+      "bounds_mm": [
+        [
+          -92.61880215351701,
+          -83.38119784648299
+        ],
+        [
+          -219.0,
+          -211.0
+        ],
+        [
+          79.0,
+          83.0
+        ]
+      ],
+      "center_mm": [
+        -87.99999999999999,
+        -214.99999999999997,
+        81.00000000000003
+      ],
+      "solids": 1
     },
     {
       "name": "80_caster_bump_stop_bolt_M6_LB",
@@ -3976,10 +4420,10 @@
         "wheel": "LB",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 108.54,
+        "tip_z": 105.545,
         "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 1086.9048858298354,
+      "volume_mm3": 1171.59688662384,
       "bounds_mm": [
         [
           -93.77350269189625,
@@ -3990,14 +4434,14 @@
           -210.0
         ],
         [
-          108.53996148381634,
+          105.54459469121444,
           126.0
         ]
       ],
       "center_mm": [
-        -87.99999999999997,
+        -88.00000000000001,
         -215.0,
-        118.11669057224074
+        117.31614717573835
       ],
       "solids": 1
     },
@@ -4020,8 +4464,8 @@
           59.0000001
         ],
         [
-          182.9999999,
-          247.0000001
+          181.4999999,
+          248.5000001
         ],
         [
           88.4999999,
@@ -4029,31 +4473,31 @@
         ]
       ],
       "center_mm": [
-        48.0,
-        214.99999999999997,
+        47.999999999999986,
+        214.99999999999991,
         99.49999999999999
       ],
       "solids": 2
     },
     {
-      "name": "80_caster_swing_arm_6t_RF",
+      "name": "80_caster_swing_arm_3t_RF",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RF",
         "moving_wheel": "RF",
-        "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
+        "material": "S355 3t laser-cut, narrow floor + 2 side walls (2 bends) + flat caster pad; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 55558.31954055053,
+      "volume_mm3": 36639.01799486541,
       "bounds_mm": [
         [
           36.0,
           173.0
         ],
         [
-          184.99999999999991,
-          245.0
+          177.5,
+          252.5
         ],
         [
           83.0,
@@ -4061,11 +4505,75 @@
         ]
       ],
       "center_mm": [
-        97.50062091232144,
-        214.99999999999955,
-        87.81402288270485
+        98.84018096793834,
+        215.0,
+        87.80625508314479
       ],
       "solids": 1
+    },
+    {
+      "name": "80_caster_pivot_bosses_8t_RF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": "RF",
+        "material": "S355 8t flat laser-cut, bush bore 14 H7, 2x M4 tapped each",
+        "quantity": 2
+      },
+      "volume_mm3": 8868.053349704056,
+      "bounds_mm": [
+        [
+          36.0,
+          73.0
+        ],
+        [
+          186.5,
+          243.5
+        ],
+        [
+          89.5,
+          109.5
+        ]
+      ],
+      "center_mm": [
+        55.64532114868192,
+        214.99999999999991,
+        99.49999999999994
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_boss_screws_CB4-10_RF",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": "RF",
+        "sku": "CB4-10",
+        "quantity": 4
+      },
+      "volume_mm3": 1118.4069846779662,
+      "bounds_mm": [
+        [
+          62.5,
+          69.5
+        ],
+        [
+          179.5,
+          250.5
+        ],
+        [
+          90.0,
+          109.0
+        ]
+      ],
+      "center_mm": [
+        66.0,
+        214.99999999999997,
+        99.49999999999997
+      ],
+      "solids": 4
     },
     {
       "name": "80_caster_plate_bolts_RF",
@@ -4074,11 +4582,11 @@
       "metadata": {
         "wheel": "RF",
         "moving_wheel": "RF",
-        "sku": "CB6-16",
+        "sku": "CB6-12",
         "quantity": 4,
         "plate_thickness_mm": 2.0
       },
-      "volume_mm3": 3694.512960621596,
+      "volume_mm3": 3242.1236185046664,
       "bounds_mm": [
         [
           121.0,
@@ -4090,13 +4598,13 @@
         ],
         [
           75.0,
-          97.0
+          93.0
         ]
       ],
       "center_mm": [
         138.0,
-        215.00000000000003,
-        83.38775510204084
+        215.0,
+        81.76744186046511
       ],
       "solids": 4
     },
@@ -4120,14 +4628,14 @@
           247.0
         ],
         [
-          89.0,
-          94.0
+          86.0,
+          91.0
         ]
       ],
       "center_mm": [
         138.00000000000003,
         214.99999999999991,
-        91.50000000000001
+        88.50000000000004
       ],
       "solids": 4
     },
@@ -4138,9 +4646,9 @@
       "metadata": {
         "wheel": "RF",
         "moving_wheel": null,
-        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+        "material": "S355 3t sheet, 2 bends (bend limit 3t); ream both ear holes together"
       },
-      "volume_mm3": 14359.902579404881,
+      "volume_mm3": 9789.268386269927,
       "bounds_mm": [
         [
           33.0,
@@ -4156,9 +4664,9 @@
         ]
       ],
       "center_mm": [
-        47.99999999999998,
-        215.0,
-        110.15854543520685
+        48.000000000000014,
+        215.0000000000001,
+        110.72608957045541
       ],
       "solids": 1
     },
@@ -4169,10 +4677,10 @@
       "metadata": {
         "wheel": "RF",
         "moving_wheel": null,
-        "sku": "CB5-14",
+        "sku": "CB5-12",
         "quantity": 2
       },
-      "volume_mm3": 1117.2288874328704,
+      "volume_mm3": 1038.6890710931254,
       "bounds_mm": [
         [
           43.75,
@@ -4183,14 +4691,14 @@
           234.25
         ],
         [
-          106.0,
+          108.0,
           125.0
         ]
       ],
       "center_mm": [
-        47.99999999999999,
+        48.0,
         215.00000000000003,
-        117.82513181019333
+        118.64366729678639
       ],
       "solids": 2
     },
@@ -4214,14 +4722,14 @@
           234.0
         ],
         [
-          108.5,
-          112.5
+          110.0,
+          114.0
         ]
       ],
       "center_mm": [
         48.0,
         214.99999999999991,
-        110.49999999999997
+        112.00000000000001
       ],
       "solids": 2
     },
@@ -4289,6 +4797,37 @@
         48.0,
         254.8947637770957,
         99.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_seat_spacer_RF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": "RF",
+        "material": "3t flat washer/plate (fixed)"
+      },
+      "volume_mm3": 597.1539315943476,
+      "bounds_mm": [
+        [
+          104.0,
+          122.0
+        ],
+        [
+          206.0,
+          224.0
+        ],
+        [
+          86.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        113.00000000000001,
+        215.00000000000003,
+        87.50000000000001
       ],
       "solids": 1
     },
@@ -4374,7 +4913,7 @@
         "moving_wheel": "RF",
         "sku": "M8 stud",
         "length_mm": 50.7,
-        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
+        "fit": "Tapped M8 in the 3t floor + threadlocker; droop load below 100 N"
       },
       "volume_mm3": 2550.33063104116,
       "bounds_mm": [
@@ -4438,8 +4977,8 @@
         "moving_wheel": "RF",
         "sku": "C-USLH10",
         "source": "C-USLH10.stp.gz",
-        "tip_z": 106.0,
-        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+        "tip_z": 103.0,
+        "fit": "M5x0.8 thread 7: 3t floor + M5 nut 4 underneath; urethane Shore A90 tip"
       },
       "volume_mm3": 1408.8911552645213,
       "bounds_mm": [
@@ -4452,16 +4991,47 @@
           220.0000001
         ],
         [
-          81.9999999,
-          106.0000001
+          78.9999999,
+          103.0000001
         ]
       ],
       "center_mm": [
         87.99999999999997,
         214.99999999999994,
-        96.60853281087698
+        93.60853281087697
       ],
       "solids": 2
+    },
+    {
+      "name": "80_caster_bump_stopper_nut_M5_RF",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RF",
+        "moving_wheel": "RF",
+        "quantity": 1
+      },
+      "volume_mm3": 143.1626870290717,
+      "bounds_mm": [
+        [
+          83.38119784648299,
+          92.61880215351701
+        ],
+        [
+          211.0,
+          219.0
+        ],
+        [
+          79.0,
+          83.0
+        ]
+      ],
+      "center_mm": [
+        87.99999999999999,
+        214.99999999999997,
+        81.00000000000003
+      ],
+      "solids": 1
     },
     {
       "name": "80_caster_bump_stop_bolt_M6_RF",
@@ -4471,10 +5041,10 @@
         "wheel": "RF",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 108.54,
+        "tip_z": 105.545,
         "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 1086.9048858298354,
+      "volume_mm3": 1171.59688662384,
       "bounds_mm": [
         [
           82.22649730810375,
@@ -4485,14 +5055,14 @@
           220.0
         ],
         [
-          108.53996148381634,
+          105.54459469121444,
           126.0
         ]
       ],
       "center_mm": [
         88.00000000000001,
         215.0,
-        118.11669057224074
+        117.31614717573835
       ],
       "solids": 1
     },
@@ -4515,8 +5085,8 @@
           59.0000001
         ],
         [
-          -247.0000001,
-          -182.9999999
+          -248.5000001,
+          -181.4999999
         ],
         [
           88.4999999,
@@ -4524,31 +5094,31 @@
         ]
       ],
       "center_mm": [
-        48.0,
-        -215.0,
-        99.50000000000001
+        48.000000000000014,
+        -215.00000000000006,
+        99.5
       ],
       "solids": 2
     },
     {
-      "name": "80_caster_swing_arm_6t_RB",
+      "name": "80_caster_swing_arm_3t_RB",
       "group": "suspension",
       "status": "suspension_fabrication_design",
       "metadata": {
         "wheel": "RB",
         "moving_wheel": "RB",
-        "material": "S355 6t laser-cut, 2 bent tabs; M8 tapped seat",
+        "material": "S355 3t laser-cut, narrow floor + 2 side walls (2 bends) + flat caster pad; M8 tapped seat",
         "arm_length_mm": 90
       },
-      "volume_mm3": 55558.31954055052,
+      "volume_mm3": 36639.017994865426,
       "bounds_mm": [
         [
           36.0,
           173.0
         ],
         [
-          -245.0,
-          -184.99999999999991
+          -252.5,
+          -177.5
         ],
         [
           83.0,
@@ -4556,11 +5126,75 @@
         ]
       ],
       "center_mm": [
-        97.50062091232142,
-        -214.99999999999952,
-        87.81402288270479
+        98.84018096793837,
+        -215.0,
+        87.80625508314478
       ],
       "solids": 1
+    },
+    {
+      "name": "80_caster_pivot_bosses_8t_RB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": "RB",
+        "material": "S355 8t flat laser-cut, bush bore 14 H7, 2x M4 tapped each",
+        "quantity": 2
+      },
+      "volume_mm3": 8868.053349704056,
+      "bounds_mm": [
+        [
+          36.0,
+          73.0
+        ],
+        [
+          -243.5,
+          -186.5
+        ],
+        [
+          89.5,
+          109.5
+        ]
+      ],
+      "center_mm": [
+        55.64532114868192,
+        -214.99999999999991,
+        99.49999999999994
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_caster_boss_screws_CB4-10_RB",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": "RB",
+        "sku": "CB4-10",
+        "quantity": 4
+      },
+      "volume_mm3": 1118.4069846779662,
+      "bounds_mm": [
+        [
+          62.5,
+          69.5
+        ],
+        [
+          -250.5,
+          -179.5
+        ],
+        [
+          90.0,
+          109.0
+        ]
+      ],
+      "center_mm": [
+        66.0,
+        -215.00000000000003,
+        99.49999999999997
+      ],
+      "solids": 4
     },
     {
       "name": "80_caster_plate_bolts_RB",
@@ -4569,11 +5203,11 @@
       "metadata": {
         "wheel": "RB",
         "moving_wheel": "RB",
-        "sku": "CB6-16",
+        "sku": "CB6-12",
         "quantity": 4,
         "plate_thickness_mm": 2.0
       },
-      "volume_mm3": 3694.512960621596,
+      "volume_mm3": 3242.1236185046664,
       "bounds_mm": [
         [
           121.0,
@@ -4585,13 +5219,13 @@
         ],
         [
           75.0,
-          97.0
+          93.0
         ]
       ],
       "center_mm": [
         138.0,
-        -215.0,
-        83.38775510204084
+        -214.99999999999997,
+        81.76744186046511
       ],
       "solids": 4
     },
@@ -4615,14 +5249,14 @@
           -183.0
         ],
         [
-          89.0,
-          94.0
+          86.0,
+          91.0
         ]
       ],
       "center_mm": [
         138.00000000000003,
         -214.99999999999991,
-        91.50000000000001
+        88.50000000000004
       ],
       "solids": 4
     },
@@ -4633,9 +5267,9 @@
       "metadata": {
         "wheel": "RB",
         "moving_wheel": null,
-        "material": "4.5t sheet, 2 bends; ream both ear holes together"
+        "material": "S355 3t sheet, 2 bends (bend limit 3t); ream both ear holes together"
       },
-      "volume_mm3": 14359.902579404881,
+      "volume_mm3": 9789.268386269927,
       "bounds_mm": [
         [
           33.0,
@@ -4651,9 +5285,9 @@
         ]
       ],
       "center_mm": [
-        47.99999999999998,
-        -214.99999999999994,
-        110.15854543520685
+        48.000000000000014,
+        -215.0000000000001,
+        110.72608957045541
       ],
       "solids": 1
     },
@@ -4664,10 +5298,10 @@
       "metadata": {
         "wheel": "RB",
         "moving_wheel": null,
-        "sku": "CB5-14",
+        "sku": "CB5-12",
         "quantity": 2
       },
-      "volume_mm3": 1117.2288874328704,
+      "volume_mm3": 1038.6890710931254,
       "bounds_mm": [
         [
           43.75,
@@ -4678,14 +5312,14 @@
           -195.75
         ],
         [
-          106.0,
+          108.0,
           125.0
         ]
       ],
       "center_mm": [
-        47.99999999999999,
-        -215.0,
-        117.82513181019333
+        48.0,
+        -214.99999999999994,
+        118.64366729678639
       ],
       "solids": 2
     },
@@ -4709,14 +5343,14 @@
           -196.0
         ],
         [
-          108.5,
-          112.5
+          110.0,
+          114.0
         ]
       ],
       "center_mm": [
         48.0,
         -215.0,
-        110.49999999999997
+        112.00000000000001
       ],
       "solids": 2
     },
@@ -4784,6 +5418,37 @@
         48.0,
         -175.10523622290432,
         99.49999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_caster_seat_spacer_RB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": "RB",
+        "material": "3t flat washer/plate (fixed)"
+      },
+      "volume_mm3": 597.1539315943476,
+      "bounds_mm": [
+        [
+          104.0,
+          122.0
+        ],
+        [
+          -224.0,
+          -206.0
+        ],
+        [
+          86.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        113.00000000000001,
+        -215.00000000000003,
+        87.50000000000001
       ],
       "solids": 1
     },
@@ -4869,7 +5534,7 @@
         "moving_wheel": "RB",
         "sku": "M8 stud",
         "length_mm": 50.7,
-        "fit": "Threaded into the arm (tapped M8) and locked with a nut"
+        "fit": "Tapped M8 in the 3t floor + threadlocker; droop load below 100 N"
       },
       "volume_mm3": 2550.33063104116,
       "bounds_mm": [
@@ -4933,8 +5598,8 @@
         "moving_wheel": "RB",
         "sku": "C-USLH10",
         "source": "C-USLH10.stp.gz",
-        "tip_z": 106.0,
-        "fit": "M5x0.8 thread 7 into the tapped 6t arm; urethane Shore A90 tip"
+        "tip_z": 103.0,
+        "fit": "M5x0.8 thread 7: 3t floor + M5 nut 4 underneath; urethane Shore A90 tip"
       },
       "volume_mm3": 1408.8911552645213,
       "bounds_mm": [
@@ -4947,16 +5612,47 @@
           -209.9999999
         ],
         [
-          81.9999999,
-          106.0000001
+          78.9999999,
+          103.0000001
         ]
       ],
       "center_mm": [
         87.99999999999997,
         -214.99999999999994,
-        96.60853281087698
+        93.60853281087697
       ],
       "solids": 2
+    },
+    {
+      "name": "80_caster_bump_stopper_nut_M5_RB",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RB",
+        "moving_wheel": "RB",
+        "quantity": 1
+      },
+      "volume_mm3": 143.1626870290717,
+      "bounds_mm": [
+        [
+          83.38119784648299,
+          92.61880215351701
+        ],
+        [
+          -219.0,
+          -211.0
+        ],
+        [
+          79.0,
+          83.0
+        ]
+      ],
+      "center_mm": [
+        87.99999999999999,
+        -214.99999999999997,
+        81.00000000000003
+      ],
+      "solids": 1
     },
     {
       "name": "80_caster_bump_stop_bolt_M6_RB",
@@ -4966,10 +5662,10 @@
         "wheel": "RB",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 108.54,
+        "tip_z": 105.545,
         "adjust": "Striker on the stopper tip; set the bump limit with the jam nut or washers"
       },
-      "volume_mm3": 1086.9048858298354,
+      "volume_mm3": 1171.59688662384,
       "bounds_mm": [
         [
           82.22649730810375,
@@ -4980,14 +5676,14 @@
           -210.0
         ],
         [
-          108.53996148381634,
+          105.54459469121444,
           126.0
         ]
       ],
       "center_mm": [
         88.00000000000001,
         -215.0,
-        118.11669057224074
+        117.31614717573835
       ],
       "solids": 1
     }
