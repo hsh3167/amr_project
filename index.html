@@ -45,6 +45,19 @@
     .list{margin:0;padding:0 0 0 16px;color:#a8bad0;font-size:11px;line-height:1.9}.list strong{color:#d7e7fc}
     .footer{position:absolute;top:75px;right:20px;color:#6e84a5;font-size:10px;pointer-events:none}.small-btn{border:1px solid #334b66;background:#17283d;color:#c6d8ef;padding:8px 10px;border-radius:7px;font-size:11px}
     #partName{min-height:20px}a{color:#8dc2ff}
+    #bomDialog{width:min(1180px,calc(100vw - 32px));max-height:calc(100vh - 48px);padding:0;border:1px solid #33506f;border-radius:14px;background:#0d1626;color:#eaf2ff;box-shadow:0 24px 70px #000a}
+    #bomDialog::backdrop{background:rgba(3,8,16,.72);backdrop-filter:blur(3px)}
+    .bom-head{position:sticky;top:0;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;background:#0f1b2d;border-bottom:1px solid var(--line)}
+    .bom-head h2{margin:0;font-size:15px}.bom-head .tabs{display:flex;gap:6px}.bom-body{padding:16px 18px 20px}
+    .bom-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:14px}
+    .bom-card{border:1px solid #2b4767;background:#122239;border-radius:10px;padding:11px 13px}.bom-card span{display:block;font-size:11px;color:#9fb6d3}.bom-card b{display:block;font-size:19px;margin:4px 0 2px;font-variant-numeric:tabular-nums}.bom-card small{font-size:10px;color:#7f94b0}
+    .bom-card.est{border-color:#5a4c2f;background:#211d14}.bom-card.est b{color:#ffd58a}.bom-card.total{border-color:#3b7fe2;background:#152c4b}.bom-card.total b{color:#9fd0ff}
+    .bom-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+    .bom-table{width:100%;min-width:880px;border-collapse:collapse;font-size:11.5px}.bom-table th{position:sticky;top:0;background:#132137;color:#9fb6d3;font-weight:600;text-align:left;padding:8px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+    .bom-table td{padding:8px 9px;border-bottom:1px solid #1b2a3e;vertical-align:top;color:#d7e5f8}.bom-table tr.est td{background:#15130f}.bom-table .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+    .bom-table .spec-cell{min-width:260px;max-width:420px;line-height:1.55}.bom-table tfoot td{background:#122239;font-weight:600;border-bottom:0}.bom-sub{font-size:10px;color:#7f94b0;margin-top:3px;line-height:1.5}
+    .bom-tag{display:inline-block;font-size:10px;padding:2px 6px;border-radius:4px;border:1px solid #2f6d5c;color:#7cf0db;white-space:nowrap}.bom-tag.est{border-color:#6a5732;color:#ffd58a}
+    .bom-note{font-size:11px;color:#8ea3bf;line-height:1.7;margin-top:12px}
     @media(max-width:1190px){.workspace{grid-template-columns:244px minmax(0,1fr) 255px}aside{padding:19px 15px}.stats{gap:9px}.stat b{font-size:13px}}
     @media(max-width:930px){.workspace{grid-template-columns:228px minmax(0,1fr)}.right{display:none}.status{flex-direction:column;align-items:flex-start}.motion{align-self:flex-end}}
     @media(max-width:650px){.app{height:auto;min-height:100vh;overflow:visible}.workspace{display:flex;flex-direction:column}.left{order:2;border-right:none;border-top:1px solid var(--line)}.scene-wrap{order:1;height:62vh;min-height:440px}.right{display:block;order:3;border-left:0;border-top:1px solid var(--line)}.brand strong{font-size:12px}.header-right .chip{display:none}.header-link{font-size:11px}.scene-top{top:12px;left:13px}.scene-top h2{font-size:13px}.top-actions{right:10px;top:10px}.status{left:10px;right:10px;bottom:10px;gap:6px}.stats{padding:9px;gap:8px}.stat b{font-size:12px}.motion button{padding:7px;font-size:10px}}
@@ -117,7 +130,7 @@
       <div id="loading">3D 모델 불러오는 중…<br>인터넷 연결이 필요합니다 (Three.js CDN).</div>
       <div id="labels"></div>
       <div class="scene-top"><h2>LOW-COST AMR / GENERAL ARRANGEMENT</h2><p>선정 부품 기반 배치 · 제작 검증 전 [mm]</p></div>
-      <div class="top-actions"><button class="icon-btn" id="resetCamera">⟳ 시점 초기화</button><button class="icon-btn" id="saveImage">↓ PNG</button></div>
+      <div class="top-actions"><button class="icon-btn" id="resetCamera">⟳ 시점 초기화</button><button class="icon-btn" id="saveImage">↓ PNG</button><button class="icon-btn" id="openBom">☰ BOM·예상 가격</button></div>
       <div class="footer">개념 모델 · 강도·하중 검증 전</div>
       <div class="status">
         <div class="stats">
@@ -167,9 +180,15 @@
     </aside>
   </main>
 </div>
+<dialog id="bomDialog" aria-labelledby="bomTitle">
+  <div class="bom-head"><h2 id="bomTitle">BOM · 예상 가격 (VAT 별도)</h2>
+    <div class="tabs"><button class="control active" data-bom="suspension">서스펜션 6모듈</button><button class="control" data-bom="concept">전체 개념 BOM</button><button class="control" id="closeBom" aria-label="닫기">✕ 닫기</button></div></div>
+  <div class="bom-body" id="bomContent"></div>
+</dialog>
+<script type="module">import {setupBOM} from './web/bom.js?rev=1';setupBOM();</script>
 <script type="module">
 import * as THREE from 'three';
-import {loadNativeCAD} from './web/native-cad.js?rev=10';
+import {loadNativeCAD} from './web/native-cad.js?rev=11';
 import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 

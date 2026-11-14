@@ -47,7 +47,8 @@ def validate_parameters(d):
             if q['shim_mm']<0 or q['spring_od_mm']<=q['spring_id_mm']:raise ValueError('Spring fit is invalid: '+kind)
             if q['spring_id_mm']<=8.4:raise ValueError('Spring must pass the M8 stud: '+kind)
             if q['ear_gap_mm']<q['bush_flange_t_mm']+.3:raise ValueError('No room for the bush flange: '+kind)
-            if not q['pin_d_mm']<q['bush_bore_mm']<q['bush_od_mm']<q['bush_flange_d_mm']:raise ValueError('Hinge bush fit is invalid: '+kind)
+            # Rev12b: bush bore is the STEP nominal 10.0 (F7 after press-fit), equal to the g6 pin nominal.
+            if not q['pin_d_mm']<=q['bush_bore_mm']<q['bush_od_mm']<q['bush_flange_d_mm']:raise ValueError('Hinge bush fit is invalid: '+kind)
             walls=((q['arm_wall_y_mm']+q['arm_thickness_mm'],q['arm_wall_y_pos_mm']+q['arm_thickness_mm']) if kind=='drive'
                    else (q['arm_half_width_mm'],)*2)
             pin=round(sum(walls)+2*(q['ear_gap_mm']+q['bracket_thickness_mm'])+1,1)
@@ -73,6 +74,10 @@ def validate_parameters(d):
                 if q['arm_length_mm']<=q['travel_mm']:raise ValueError('Caster arm too short')
             if abs(d.p['base_bottom_z']-seat-q['loaded_length_mm'])>1e-6:
                 raise ValueError('Spring gap does not match the base plate: '+kind)
+            # Urethane stopper on the arm + M6 striker below the base plate (5mm jam nut).
+            # The stopper sits between pivot and wheel, so its rise is below half the wheel travel.
+            if seat+q['bump_stopper_height_mm']+q['travel_mm']/2>=d.p['base_bottom_z']-5:
+                raise ValueError('Bump stopper leaves no room for the striker bolt: '+kind)
             installed=q['loaded_length_mm']-q['shim_mm']
             half=q['travel_mm']/2*ratio
             if (installed+half>q['free_length_mm'] or installed-half<=q['solid_length_mm']

@@ -1,5 +1,5 @@
 {
-  "revision": "1.2a",
+  "revision": "1.2b",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
     "base_width": 390,
@@ -107,7 +107,7 @@
     "status": "Envelope reservations only; rear power bay/central low battery/front logic/side drives, hardware and harness routes TBD."
   },
   "suspension": {
-    "status": "Rev12a: six independent hinge + spring modules (pivot axis +Y). Each: bent bracket, bent arm, catalog hinge pin, one X-SWU spring under the base plate on a stud (top nut = droop stop, M6 bolt through the base = bump stop). Drive arm: floor + short pivot tabs + narrow axle wall, asymmetric about Y0 with the bump stop on the spring line. No welding, rails or hangers. Screening calculations only.",
+    "status": "Rev12b (2026-11-14): MISUMI STEP pins, bushes and C-USLH10 urethane bump stoppers placed in the assembly; springs use the STEP wire section. Rev12a: six independent hinge + spring modules (pivot axis +Y). Each: bent bracket, bent arm, catalog hinge pin, one X-SWU spring under the base plate on a stud (top nut = droop stop, C-USLH10 on the arm meets an M6 striker bolt through the base = bump stop). Drive arm: floor + short pivot tabs + narrow axle wall, asymmetric about Y0 with the bump stop on the spring line. No welding, rails or hangers. Screening calculations only.",
     "design_mass_kg": 55,
     "design_mass_without_arm_kg": 35,
     "drive": {
@@ -115,7 +115,8 @@
       "spring_sku": "X-SWU21-70",
       "spring_od_mm": 21,
       "spring_id_mm": 13.5,
-      "display_turns": 6,
+      "spring_wire_axial_mm": 1.875,
+      "display_turns": 8.75,
       "loaded_length_mm": 45,
       "free_length_mm": 70,
       "solid_length_mm": 21,
@@ -141,23 +142,33 @@
       "bracket_thickness_mm": 4.5,
       "ear_gap_mm": 2.5,
       "pin_sku": "CLBKHM10-78.5",
+      "pin_step": "CLBKHM10-78.5.stp",
       "pin_d_mm": 10,
       "pin_head_d_mm": 16,
       "pin_head_thickness_mm": 1.5,
+      "pin_tap_minor_d_mm": 4.917,
       "stud": "M8",
       "bush_sku": "MPFZ10-10",
-      "bush_bore_mm": 10.02,
+      "bush_step": "MPFZ10-10.stp",
+      "bush_bore_mm": 10.0,
       "bush_od_mm": 14,
       "bush_length_mm": 10,
       "bush_flange_d_mm": 22,
-      "bush_flange_t_mm": 2
+      "bush_flange_t_mm": 2,
+      "bump_stopper_sku": "C-USLH10",
+      "bump_stopper_step": "C-USLH10.stp",
+      "bump_stopper_children": ["BODY_C-USLH10", "CUP_C-USLH10"],
+      "bump_stopper_d_mm": 10,
+      "bump_stopper_height_mm": 17,
+      "bump_stopper_thread_d_mm": 5
     },
     "caster": {
       "travel_mm": 10,
       "spring_sku": "X-SWU17-35",
       "spring_od_mm": 17,
       "spring_id_mm": 10.5,
-      "display_turns": 4,
+      "spring_wire_axial_mm": 1.625,
+      "display_turns": 4.75,
       "loaded_length_mm": 28,
       "free_length_mm": 35,
       "solid_length_mm": 10.5,
@@ -173,18 +184,27 @@
       "bracket_thickness_mm": 4.5,
       "ear_gap_mm": 2.5,
       "pin_sku": "CLBKHM10-75",
+      "pin_step": "CLBKHM10-75.stp",
       "pin_d_mm": 10,
       "pin_head_d_mm": 16,
       "pin_head_thickness_mm": 1.5,
+      "pin_tap_minor_d_mm": 4.917,
       "stud": "M8",
       "spring_offset_mm": 25,
       "bump_stop_offset_mm": 50,
       "bush_sku": "MPFZ10-10",
-      "bush_bore_mm": 10.02,
+      "bush_step": "MPFZ10-10.stp",
+      "bush_bore_mm": 10.0,
       "bush_od_mm": 14,
       "bush_length_mm": 10,
       "bush_flange_d_mm": 22,
-      "bush_flange_t_mm": 2
+      "bush_flange_t_mm": 2,
+      "bump_stopper_sku": "C-USLH10",
+      "bump_stopper_step": "C-USLH10.stp",
+      "bump_stopper_children": ["BODY_C-USLH10", "CUP_C-USLH10"],
+      "bump_stopper_d_mm": 10,
+      "bump_stopper_height_mm": 17,
+      "bump_stopper_thread_d_mm": 5
     }
   }
 }

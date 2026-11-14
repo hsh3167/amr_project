@@ -77,6 +77,54 @@ def catalog_suspension_report(d):
             'scope':'Centered CG, flat floor, catalog spring rate (load +-10%), small-angle lever ratio. Caster load also varies with swivel direction (contact 68-112 mm from the hinge). Remove preload shims without the arm. Measure on prototype.'}
 
 
+# Overlaps inside supplied manufacturer CAD that this project does not edit.
+KNOWN_OEM_OVERLAPS=((('43_GL65_OEM_fork_','44_GL65_OEM_wheel_'),30.0,
+                     'GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle'),)
+
+def _known(a,b,volume):
+    for (pa,pb),limit,reason in KNOWN_OEM_OVERLAPS:
+        if ((a.startswith(pa) and b.startswith(pb)) or (a.startswith(pb) and b.startswith(pa))) and a[len(pa):]==b[len(pb):] and volume<=limit:
+            return reason
+    return None
+
+def _all_pairs(records,wanted=None):
+    boxes=[(tuple(b.min),tuple(b.max)) for b in (r.shape.bounding_box() for r in records)]
+    hits=[];known=[];tested=0
+    for i,a in enumerate(records):
+        for j in range(i+1,len(records)):
+            b=records[j]
+            if wanted and not (wanted(a) or wanted(b)):continue
+            if not bounds_overlap(boxes[i],boxes[j]):continue
+            tested+=1;cut=a.shape&b.shape;volume=0 if cut is None else cut.volume
+            if volume<=.01:continue
+            item={'a':a.name,'b':b.name,'volume_mm3':round(volume,3)}
+            reason=_known(a.name,b.name,volume)
+            (known if reason else hits).append({**item,'reason':reason} if reason else item)
+    return tested,hits,known
+
+def static_interference(records):
+    """Every bounding-box-overlapping pair of the nominal assembly (Rev12b)."""
+    tested,hits,known=_all_pairs(records)
+    return {'boolean_pairs':tested,'hits':hits,'known_manufacturer_overlaps':known,
+            'scope':'All parts, nominal pose, BRep common volume > 0.01 mm3; contact without overlap is allowed'}
+
+def suspension_pose_interference(d):
+    """Each wheel at both stroke ends with its module rebuilt (springs at their posed length) against all parts except cameras."""
+    from .assembly import GROUPS,build_records
+    from .parameters import load_design
+    hits=[];known=[];tested=0;poses=0
+    for key in MOTION_KEYS:
+        for sign in (-1,1):
+            posed=load_design(d.variant);posed.motion[key]=sign*half_travel(posed,key)
+            records=build_records(posed,[g for g in GROUPS if g!='cameras'])
+            mine=lambda r,key=key:key in (r.metadata.get('moving_wheel'),r.metadata.get('wheel'),r.metadata.get('caster'))
+            n,h,k=_all_pairs(records,mine);tested+=n;poses+=1
+            hits+=[{**x,'wheel':key,'displacement_mm':posed.motion[key]} for x in h]
+            known+=[{**x,'wheel':key,'displacement_mm':posed.motion[key]} for x in k]
+    return {'sampled_poses':poses,'boolean_pairs':tested,'hits':hits,'known_manufacturer_overlaps':known,
+            'scope':'One wheel at a time at full droop and full bump; springs, stoppers and fasteners included; cameras excluded; not a swept-volume proof'}
+
+
 def caster_swivel_clearance(records,d):
     """Screen each OEM moving fork and wheel against its mounting hardware."""
     hits=[];pairs=0;poses=0
@@ -203,6 +251,11 @@ def validate(records,d,full=False,collisions=False):
             if travel['hits']:errors.append('Suspension sampled collision')
             swivel=caster_swivel_clearance(records,d);report['caster_swivel_sampling']=swivel
             if swivel['hits']:errors.append('Caster swivel sampled collision')
+            if full:
+                static=static_interference(records);report['static_interference']=static
+                if static['hits']:errors.append('Static interference')
+                posed=suspension_pose_interference(d);report['suspension_pose_interference']=posed
+                if posed['hits']:errors.append('Suspension pose interference')
     report['valid']=not errors
     return report
 

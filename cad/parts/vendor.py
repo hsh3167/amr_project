@@ -10,7 +10,7 @@ from ..parameters import ROOT
 from ..caster_motion import caster_motion_key, pose_shape
 from .common import *
 
-@lru_cache(maxsize=2)
+@lru_cache(maxsize=16)
 def source(name):
     path=ROOT/'cad/vendor'/name
     if path.exists():return import_step(path)
@@ -19,6 +19,20 @@ def source(name):
     with tempfile.TemporaryDirectory() as folder:
         tmp=Path(folder)/name;tmp.write_bytes(gzip.decompress(compressed.read_bytes()))
         return import_step(tmp)
+
+@lru_cache(maxsize=16)
+def misumi_solid(name,child=None):
+    """One MISUMI STEP solid as supplied (mm, no scaling, no repair).
+
+    Local frame of the supplied files: axis +X, mounting/flange face at X0.
+    child selects a labelled sub-solid of a multi-body file (e.g. C-USLH10 BODY/CUP).
+    """
+    s=source(name)
+    if child is not None:
+        s=next(c for c in s.children if c.label==child)
+    solid=s.solids()[0]
+    if not solid.is_valid:raise ValueError('Invalid MISUMI STEP solid: '+name)
+    return solid
 
 def caster_records(d,x,y,n,group):
     original=source('GL-65-ASF-EUS.stp');r=[];key=caster_motion_key(n)

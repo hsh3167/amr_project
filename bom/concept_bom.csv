@@ -1,9 +1,9 @@
 Category,Item,Qty,Unit,Supply,Specification,Status,Cost_KRW,Notes
 Mechanical,ZLLG65ASM250-N V2.02 NBR wheel motor,2,ea,Company reuse,OD180+-2 / W42.5+-1 / axial89.8+-1 / 24V 18-30V / 4Nm 500rpm 10A / stall11.7Nm 30A / encoder1024,Datasheet-guided,0,PDF pp3-8; shaft D14 AF10 M14x1.5 thread23.5; casing OD140 assumed; conflicts documented
 Mechanical,GL-65-ASF swivel caster,4,ea,Company reuse,OD64 / catalogue H82 / official CAD H83 / offset22 / plate48X65Y / holes24X54Y,Manufacturer EUS STEP reference,0,Confirm actual EUS/TUN; CAD wheel/hub width30.4 vs tread23; independent spring stage each
-Mechanical,Lower aluminum plate,1,ea,Buy or scrap,390x530x4 assumed,Concept,TBD,Wheel wells / machining and safety margins pending
-Mechanical,Upper aluminum plate,1,ea,Buy or scrap,420x550x4 assumed,Concept,TBD,Reserved for optional robot arm
-Mechanical,2020 aluminum extrusion,12,ea,Buy or scrap,183mm x4 main +40mm x4 sensor +40mm x4 suspension; generic20x20,Material confirmed; section assumed,TBD,All vertical columns aluminum; brand/section/end taps/stiffness pending
+Mechanical,Lower steel plate,1,ea,Laser cut,390x530x3 steel at Z117-120; wheel wells inner X+-175; suspension holes,Concept (Rev12b),TBD,Strength without profile stiffening insufficient (docs/plate-suspension-review.md)
+Mechanical,Upper steel plate,1,ea,Laser cut,420x550x3 steel at Z283-286,Concept (Rev12b),TBD,Reserved for optional robot arm; 2040 frame pending
+Mechanical,2020 aluminum extrusion,8,ea,Buy or scrap,163mm x4 main + LiDAR supports x2 + camera hangers 28mm x2; generic 20x20,Material confirmed; section assumed,TBD,Brand/section/end taps/stiffness pending; 4t collar plates at column feet and deck
 Mechanical,Sensor adapter plates and cantilever bridges,4,set,Make,LiDAR80x70x3 plus bridge; camera40x50x3 assumed,Concept,TBD,M3 SICK /M2 camera actual patterns and connections pending
 Mechanical,Motor mount brackets,2,set,Machine or 3D print test,Single-axle AF10 / M14x1.5 torque reaction; bracket6t slot10.2 assumed,Concept,TBD,Nut20Nm with243 per PDF p8; stack and strength TBD
 Mechanical,Caster mounts or shims,4,set,Make,Height adjustment and spacing,Concept,TBD,Contact loading control
@@ -21,4 +21,4 @@ Electrical,Compatible battery charger,1,ea,Company reuse if approved,Match exact
 Software,ROS2/Linux,1,set,Open source,Nav2 SLAM Toolbox and teleop,Proposed,0,Depends on compute and drivers
 Software,Interactive 3D viewer,1,set,Open source,Three.js GitHub Pages,Done,0,Illustrative not dynamic simulation
 CAD,Parametric STEP generator,1,set,Open source,build123d Python source,Done,0,Common layout.json/parts.json with Rev05 CadQuery baseline preserved
-Mechanical,Independent guided spring stages,6,set,MISUMI plus fabricated brackets,30kg design target; 2 drive +/-10mm; 4 caster +/-5mm,Prototype validation pending,TBD,See suspension_misumi.csv for stock hardware and quantities
+Mechanical,Independent hinge + spring suspension modules,6,set,MISUMI plus fabricated sheet metal,"Rev12b: CLBKHM10 pins, MPFZ10-10 bushes, X-SWU springs, C-USLH10 urethane bump stoppers; 55kg design mass",Prototype validation pending,505740,"See suspension_misumi.csv: MISUMI price 212,580 + estimate 293,160 KRW ex VAT (2026-11-14)"

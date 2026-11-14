@@ -10,10 +10,17 @@ def lidars(d):
         sensorplate=place(box(mount['plate_width'],mount['plate_depth'],pt,0,0,z0-pt/2))
         sx=pose['support_x'];sy=pose['support_y'];length=math.hypot(x-sx,y-sy)+25
         bridge=rz(box(length,25,pt,0,0,z0-pt/2),math.degrees(math.atan2(y-sy,x-sx))).translate(((x+sx)/2,(y+sy)/2,0))
-        r.append(PartRecord('60_diagonal_lidar_mount_CONCEPT_'+n,'lidars',sensorplate+bridge,(.28,.43,.54)))
+        bracket=sensorplate+bridge
+        if d.variant!='baseline':
+            # Rev12b: notch the bridge around the main 20x20 column it crossed (0.2 clearance).
+            for cx,cy in d.profile['main_columns_xy']:
+                bracket=bracket-box(20.4,20.4,pt+2,cx,cy,z0-pt/2)
+        r.append(PartRecord('60_diagonal_lidar_mount_CONCEPT_'+n,'lidars',bracket,(.28,.43,.54)))
         r.append(column(d,sx,sy,d.p['base_bottom_z']+d.p['base_thickness'],z0-pt,'64_2020_Al_lidar_column_'+n,'lidars'))
         r.append(PartRecord('61_SICK_TiM571_envelope_base_'+n,'lidars',place(box(lidar['width'],lidar['depth'],36,0,0,z0+18)),(.85,.88,.90),'drawing_envelope'))
-        r.append(PartRecord('62_SICK_TiM571_optical_envelope_'+n,'lidars',place(box(61,60,lidar['height']-36,0,0,z0+36+(lidar['height']-36)/2)),(.09,.16,.21),'drawing_envelope'))
+        # Rev12b: the optical envelope stops under the 3mm scanner-top disc instead of overlapping it.
+        top=3 if d.variant!='baseline' else 0
+        r.append(PartRecord('62_SICK_TiM571_optical_envelope_'+n,'lidars',place(box(61,60,lidar['height']-36-top,0,0,z0+36+(lidar['height']-36-top)/2)),(.09,.16,.21),'drawing_envelope'))
         r.append(PartRecord('63_SICK_scanner_top_'+n,'lidars',cylz(22,3,x,y,z0+lidar['height']-3),(.20,.80,.79),'drawing_envelope'))
     return r
 

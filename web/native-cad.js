@@ -53,7 +53,7 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     loadFile('manifest.json').then(r=>r.json()),
     loadLidarVisual(),
   ]);
-  const suspension=part('suspension','Rev12a 6륜 독립 경첩 서스펜션','6개 바퀴마다 절곡 브래킷 1개, 절곡 암 1개, MISUMI 힌지 핀 1개(구동 CLBKHM10-78.5, 캐스터 CLBKHM10-75), 스프링 1개(구동 X-SWU21-70, 캐스터 X-SWU17-35)를 씁니다. 핀 축은 진행 방향과 나란해 전후진 거동이 같습니다. 스프링은 하판 밑에 바로 있고, M8 스터드 위 너트가 처짐 스토퍼, M6 볼트가 범프 스토퍼입니다. 레일·용접·행거가 없습니다. Rev12a: 구동 암은 옆벽 없이 바닥+핀 날개+축 끝벽만 남겨 0.87→0.48kg, 폭 87mm(비대칭)이고 범프 볼트는 스프링과 같은 줄(Y−25)에 있습니다.');
+  const suspension=part('suspension','Rev12b 6륜 독립 경첩 서스펜션','6개 바퀴마다 절곡 브래킷 1개, 절곡 암 1개, MISUMI 힌지 핀 1개(구동 CLBKHM10-78.5, 캐스터 CLBKHM10-75), MPFZ10-10 부시 2개, 스프링 1개(구동 X-SWU21-70, 캐스터 X-SWU17-35)를 씁니다. Rev12b: 핀·부시·우레탄 스토퍼(C-USLH10)는 MISUMI 제공 STEP 형상 그대로 넣었고, 스프링은 STEP의 사각 선재 단면과 피치를 따릅니다. 범프 스토퍼는 암에 나사로 고정한 C-USLH10 우레탄 끝을 하판에서 내려온 M6 볼트가 받는 구조이고, M8 스터드 위 너트가 처짐 스토퍼입니다. 핀 축은 진행 방향과 나란해 전후진 거동이 같습니다. 레일·용접·행거가 없습니다. 가격은 상단 ☰ BOM·예상 가격에서 확인합니다.');
   const wrapper=new THREE.Group();wrapper.scale.set(1000,1000,-1000);wrapper.add(gltf.scene);robot.add(wrapper);
   const S=layout.suspension,LP=layout.parameters;
   const rolling={},swivels={},springs={},pivots={},holders={},arms={},lengths={};

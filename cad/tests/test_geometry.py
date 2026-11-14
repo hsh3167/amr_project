@@ -88,7 +88,10 @@ def test_rev12_hinge_modules_meet_both_stops():
         arm=parts['80_'+kind+'_swing_arm_6t_'+wheel].shape
         nut=parts['80_'+kind+'_droop_stop_washer_nut_'+wheel].shape
         stop=parts['80_'+kind+'_bump_stop_bolt_M6_'+wheel].shape
-        for shape,other,limit in ((nut,base,-half),(arm,stop,half)):
+        # Rev12b: the C-USLH10 urethane tip on the arm meets the M6 striker bolt.
+        stopper=parts['80_'+kind+'_bump_stopper_C-USLH10_'+wheel].shape
+        assert arm&stop is None or (arm&stop).volume<.01
+        for shape,other,limit in ((nut,base,-half),(stopper,stop,half)):
             at=pose_shape(d,shape,wheel,limit)&other
             assert at is None or at.volume<.01
             beyond=pose_shape(d,shape,wheel,limit*1.2)&other
@@ -108,3 +111,22 @@ def test_rev12a_compact_drive_arm():
         assert pin.metadata['sku']=='CLBKHM10-'+format(pin.metadata['length_mm'],'g') and pin.metadata['length_mm']<100
         stop=parts['80_drive_bump_stop_bolt_M6_'+wheel].shape.bounding_box().center()
         assert stop.Y==pytest.approx(d.layout['suspension']['drive']['bump_stop_y_mm'])
+
+
+def test_rev12b_misumi_step_parts_and_static_clearance():
+    """Pins, bushes and C-USLH10 stoppers are the supplied MISUMI STEP; nothing near the suspension overlaps."""
+    from cad.validation import static_interference
+
+    d=load_design()
+    records=build_records(d,['chassis','structure','lidars','suspension'])
+    parts={r.name:r for r in records}
+    for wheel in ('LEFT','RIGHT','LF','LB','RF','RB'):
+        kind='drive' if wheel in ('LEFT','RIGHT') else 'caster'
+        for name in ('hinge_pin','hinge_bushes','bump_stopper_C-USLH10'):
+            part=parts['80_'+kind+'_'+name+'_'+wheel]
+            assert part.status=='misumi_step_exact' and part.shape.is_valid
+        stopper=parts['80_'+kind+'_bump_stopper_C-USLH10_'+wheel].shape.bounding_box()
+        assert stopper.size.Z==pytest.approx(24) and stopper.size.X==pytest.approx(10)
+        assert parts['80_'+kind+'_spring_coil_'+wheel].shape.is_valid
+    report=static_interference(records)
+    assert report['hits']==[],report['hits']
