@@ -35,12 +35,14 @@ def misumi_solid(name,child=None):
     return solid
 
 def caster_records(d,x,y,n,group):
-    original=source('GL-65-ASF-EUS.stp');r=[];key=caster_motion_key(n)
+    original=source('GL-65-ASF-EUS.stp');r=[];key=caster_motion_key(n,d)
     # Source top-plate center -> origin XY, wheel tangent -> ground; axle -> X.
     for index,prefix in ((0,'43_GL65_OEM_fork_'),(1,'41_GL65_OEM_plate_head_'),(2,'44_GL65_OEM_wheel_')):
-        s=rz(original.solids()[index].translate((-19.251901528418,23.9893391369419,51.7488089481697)),-90)
-        r.append(PartRecord(prefix+n,group,pose_shape(d,s.translate((x,y,0)),key,d.motion.get(key,0)),(.55,.64,.72),
-                            'manufacturer_step_EUS_reference',{'source':'GL-65-ASF-EUS.stp','moving_wheel':key,'caster':n,'cad_height_mm':83}))
+        s=rz(original.solids()[index].translate((-19.251901528418,23.9893391369419,51.7488089481697)),-90).translate((x,y,0))
+        c=s.bounding_box().center()
+        r.append(PartRecord(prefix+n,group,pose_shape(d,s,key,d.motion.get(key,0)),(.55,.64,.72),
+                            'manufacturer_step_EUS_reference',{'source':'GL-65-ASF-EUS.stp','moving_wheel':key,'caster':n,'cad_height_mm':83,
+                                                               'nominal_center_yz':[round(c.Y,6),round(c.Z,6)]}))
     return r
 
 @lru_cache(maxsize=8)

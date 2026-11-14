@@ -1,7 +1,8 @@
 """Geometric checks only. Strength, tire compliance and safety remain separate."""
 import math
 from build123d import Axis, CenterOf, import_step
-from .caster_motion import CASTER_WHEELS, DRIVE_WHEELS, MOTION_KEYS, caster_xy, half_travel, motion_angle, pose_shape, rotate_point
+from .caster_motion import (CASTER_WHEELS, DRIVE_WHEELS, MOTION_KEYS, caster_motion_key, caster_xy, half_travel, is_bogie,
+                            is_bogie_key, motion_angle, motion_keys, pose_shape, rotate_point, rotate_yz)
 from .parameters import ROOT
 from .validate_layout import coverage
 
@@ -18,7 +19,7 @@ def bounds_overlap(a,b,tol=1e-6):
     return all(min(x,y)-max(u,v)>tol for x,y,u,v in zip(a[1],b[1],a[0],b[0]))
 
 def suspension_collisions(records,d):
-    """Five sampled poses per wheel (LEFT, RIGHT, LF, LB, RF, RB) from the nominal assembly."""
+    """Five sampled poses per motion key (hinge: six wheels; bogie: two bogies + two rear casters) from the nominal assembly."""
     hits=[];tested=0
     fixed=[r for r in records if not r.metadata.get('moving_wheel') and 'spring_length_mm' not in r.metadata]
     moving=[r for r in records if r.metadata.get('moving_wheel')]
@@ -26,7 +27,7 @@ def suspension_collisions(records,d):
     for r in fixed+moving:
         box=r.shape.bounding_box();boxes[id(r)]=(tuple(box.min),tuple(box.max))
     poses=0
-    for key in MOTION_KEYS:
+    for key in motion_keys(d):
         half=half_travel(d,key)
         own=[r for r in moving if r.metadata['moving_wheel']==key and 'spring_length_mm' not in r.metadata]
         obstacles=fixed+[r for r in moving if r.metadata['moving_wheel']!=key and 'spring_length_mm' not in r.metadata]
@@ -40,11 +41,52 @@ def suspension_collisions(records,d):
                     tested+=1;cut=shape&b.shape;volume=0 if cut is None else cut.volume
                     if volume>.01:hits.append({'wheel':key,'displacement_mm':dz,'a':a.name,'b':b.name,'volume_mm3':volume})
     return {'sampled_poses':poses,'boolean_pairs':tested,'hits':hits,
-            'scope':'One wheel at a time (six hinge modules), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof'}
+            'scope':'One motion key at a time (bogie or hinge module), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof'}
+
+
+def bogie_report(d):
+    """Rev15 statics: two pure bogies (pivot line Y=pivot_y) + two sprung rear casters, centred CG, flat floor."""
+    from .parts.suspension import spring_state
+
+    g=9.80665;s=d.layout['suspension'];q=s['bogie'];c=s['caster']
+    yp=q['pivot_y_mm'];yc=d.p['caster_y'];yr=-d.p['caster_y']
+    def case(mass,cg_y=0.0):
+        side=mass*g/2
+        rear=side*(yp-cg_y)/(yp-yr);pivot=side-rear
+        caster=pivot*yp/yc;drive=pivot-caster
+        return {'mass_kg':mass,'cg_y_mm':cg_y,'pivot_each_N':round(pivot,2),'drive_each_N':round(drive,2),
+                'front_caster_each_N':round(caster,2),'rear_caster_each_N':round(rear,2),
+                'drive_load_fraction':round(2*drive/(mass*g),4)}
+    rear=spring_state(d,'caster');ratio=rear['lever_ratio'];unsprung=c['unsprung_mass_kg_estimate']*g
+    nominal=case(s['design_mass_kg'])
+    needed=(nominal['rear_caster_each_N']-unsprung)/ratio
+    length=c['free_length_mm']-needed/c['rate_N_mm']
+    rear_rate=c['rate_N_mm']*ratio*ratio
+    def rear_sink(mass):
+        r=case(mass)['rear_caster_each_N'];have=rear['forces_N'][1]*ratio+unsprung
+        return round((r-have)/rear_rate,3)
+    pitch=[case(s['design_mass_kg'],y) for y in (-30,0,30)]
+    tip_g=round(yp/q.get('cg_height_mm_estimate',200),3)
+    return {'concept':'Rev15 bogie (front caster + drive wheel) + rear hinge casters','design_mass_kg':s['design_mass_kg'],
+            'bogie':{'pivot_y_mm':yp,'pivot_z_mm':q['pivot_z_mm'],'front_arm_mm':yc-yp,'rear_arm_mm':yp,
+                     'travel_front_caster_mm':q['travel_mm'],'drive_travel_mm':round(q['travel_mm']*yp/(yc-yp),2),
+                     'step_rise_ratio':round(yp/yc,3),'pivot':q['bush_sku']},
+            'static_cases':{'with_arm':nominal,'cg_sensitivity':pitch,'without_arm':case(s['design_mass_without_arm_kg'])},
+            'rear_caster_spring':{**rear,'needed_spring_force_N':round(needed,2),'needed_length_mm':round(length,3),
+                                  'level_shim_mm':round(c['loaded_length_mm']-length,3),'configured_shim_mm':c['shim_mm'],
+                                  'rear_sink_with_arm_mm':rear_sink(s['design_mass_kg']),
+                                  'rear_sink_without_arm_mm':rear_sink(s['design_mass_without_arm_kg']),
+                                  'wheel_rate_N_mm':round(rear_rate,3)},
+            'forward_pitch_onset_g':tip_g,
+            'scope':('Centred CG unless stated, flat floor, rigid bogie, catalog rear spring rate (+-10%). Pitch: the chassis can '
+                     'rotate forward about the pivot line once deceleration x CG height > g x pivot_y (CG height 200 mm assumed); '
+                     'the front stopper then hands the load to the front caster. Measure on prototype.')}
 
 
 def catalog_suspension_report(d):
     from .parts.suspension import spring_state
+    if is_bogie(d):
+        return bogie_report(d)
 
     g=9.80665
     s=d.layout['suspension']
@@ -145,7 +187,7 @@ def suspension_pose_interference(d):
     from .assembly import GROUPS,build_records
     from .parameters import load_design
     hits=[];known=[];tested=0;poses=0
-    for key in MOTION_KEYS:
+    for key in motion_keys(d):
         for sign in (-1,1):
             posed=load_design(d.variant);posed.motion[key]=sign*half_travel(posed,key)
             records=build_records(posed,[g for g in GROUPS if g!='cameras'])
@@ -167,7 +209,7 @@ def caster_swivel_clearance(records,d):
         rotating=[r for r in records if r.metadata.get('caster')==wheel and r.name.startswith(('43_','44_'))]
         if not rotating:
             continue
-        key=wheel;half=half_travel(d,key)
+        key=caster_motion_key(wheel,d);half=half_travel(d,key)
         x,y=caster_xy(d,wheel)
         axis=Axis((x,y,0),(0,0,1))
         nearby=[r for r in records if r.group=='chassis' or
@@ -198,9 +240,16 @@ def caster_swivel_clearance(records,d):
 
 
 def expected_contact(d,item):
-    """Lowest Z of a wheel tilted by its hinge arm (rotation about +Y)."""
+    """Lowest Z of a wheel tilted by its hinge arm (rotation about +Y) or carried by its bogie (rotation about +X)."""
     key=item.metadata.get('moving_wheel');value=d.motion.get(key,0) if key else 0
     if not value:return 0.0
+    if is_bogie_key(d,key):
+        # The bogie turns each wheel in its own rolling plane: contact = posed wheel centre - radius.
+        if item.name.startswith('30_'):
+            radius=d.parts['drive_motor']['tire_dia']/2;centre=(0.0,radius)
+        else:
+            radius=d.parts['caster']['wheel_dia']/2;centre=tuple(item.metadata['nominal_center_yz'])
+        return rotate_yz(d,key,value,centre)[1]-radius
     if item.name.startswith('30_'):
         side=-1 if key=='LEFT' else 1
         radius=d.parts['drive_motor']['tire_dia']/2;half=d.parts['drive_motor']['tread_width']/2
@@ -252,7 +301,7 @@ def validate(records,d,full=False,collisions=False):
         if any(row['missed'] for row in scan['perimeters']):errors.append('Scan sample miss')
         report.update(counts=counts,lidar_sampling=scan)
         scan_z=d.layout['lidars'][0]['scan_z']
-        below=('30_','31_','32_','50_','51_','52_','53_','54_','64_','80_','81_')
+        below=('30_','31_','32_','50_','51_','52_','53_','54_','55_','56_','57_','64_','80_','81_')
         above=('20_','70_','71_','72_')
         if any(x.shape.bounding_box().max.Z>=scan_z for x in records if x.name.startswith(below)):
             errors.append('Below-scan component crosses scan plane')

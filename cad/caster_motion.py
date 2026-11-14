@@ -1,9 +1,13 @@
-"""Rev12 suspension kinematics: six independent hinge (swing-arm) modules.
+"""Suspension kinematics.
 
-Every pivot axis is parallel to +Y (direction of travel), so forward and reverse
-behave the same. Motion keys: LEFT / RIGHT drive wheels (value = vertical travel
-of the wheel centre, +-10 mm) and LF / LB / RF / RB casters (value = vertical
-travel of the caster mounting centre, +-5 mm). Positive raises the wheel.
+Rev12-14 concept 'hinge': six independent hinge (swing-arm) modules, pivot axes parallel to +Y.
+Motion keys: LEFT / RIGHT drive wheels (vertical travel of the wheel centre, +-10 mm) and
+LF / LB / RF / RB casters (vertical travel of the caster mounting centre, +-5 mm).
+
+Rev15 concept 'bogie': on each side the drive wheel and the front caster hang on one bogie link
+that turns about an axis parallel to +X. Motion keys LEFT / RIGHT are the bogie poses (value =
+vertical travel of the front caster mounting centre relative to the chassis, +-10 mm; the drive
+wheel moves the other way by the lever ratio). LB / RB stay hinge modules. Positive raises the wheel.
 """
 from math import asin, cos, degrees, sin
 
@@ -14,12 +18,31 @@ DRIVE_WHEELS = ('LEFT', 'RIGHT')
 MOTION_KEYS = DRIVE_WHEELS + CASTER_WHEELS
 
 
+def is_bogie(d):
+    return d.layout.get('suspension', {}).get('concept') == 'bogie'
+
+
+def motion_keys(d):
+    return DRIVE_WHEELS + ('LB', 'RB') if is_bogie(d) else MOTION_KEYS
+
+
+def hinge_wheels(d):
+    """Wheels that sit on their own Rev12-14 hinge module."""
+    return ('LB', 'RB') if is_bogie(d) else MOTION_KEYS
+
+
+def is_bogie_key(d, key):
+    return is_bogie(d) and key in DRIVE_WHEELS
+
+
 def caster_xy(d, wheel):
     return (d.p['caster_x'] * (-1 if wheel[0] == 'L' else 1),
             d.p['caster_y'] * (1 if wheel[1] == 'F' else -1))
 
 
-def caster_motion_key(wheel):
+def caster_motion_key(wheel, d=None):
+    if d is not None and is_bogie(d) and wheel[1] == 'F':
+        return 'LEFT' if wheel[0] == 'L' else 'RIGHT'
     return wheel
 
 
@@ -30,13 +53,26 @@ def side_of(d, key):
 
 
 def half_travel(d, key):
+    if is_bogie_key(d, key):
+        return d.layout['suspension']['bogie']['travel_mm'] / 2
     kind = 'drive' if key in DRIVE_WHEELS else 'caster'
     return d.layout['suspension'][kind]['travel_mm'] / 2
 
 
+def bogie_lengths(d):
+    """(pivot to front caster, pivot to drive axle) along Y."""
+    q = d.layout['suspension']['bogie']
+    return d.p['caster_y'] - q['pivot_y_mm'], q['pivot_y_mm']
+
+
 def pivot_of(d, key):
-    """(x, y, z) of the hinge axis and the horizontal arm length to the wheel/caster centre."""
+    """(x, y, z) of the pivot axis and the horizontal arm length to the reference wheel.
+
+    Hinge keys: axis +Y. Bogie keys: axis +X through (y, z); x is the bush centre (reference only)."""
     side = side_of(d, key)
+    if is_bogie_key(d, key):
+        q = d.layout['suspension']['bogie']
+        return (side * q['bush_center_x_mm'], q['pivot_y_mm'], q['pivot_z_mm']), bogie_lengths(d)[0]
     if key in DRIVE_WHEELS:
         q = d.layout['suspension']['drive']
         px = side * q['pivot_x_mm']
@@ -47,18 +83,29 @@ def pivot_of(d, key):
 
 
 def motion_angle(d, key, value):
-    """Rotation (radians) about +Y through the pivot; positive value raises the wheel."""
-    side = side_of(d, key)
+    """Rotation (radians); positive value raises the reference wheel.
+
+    Hinge: about +Y through the pivot. Bogie: about +X through the pivot (front caster up = +angle)."""
     _, length = pivot_of(d, key)
-    return -side * asin(value / length)
+    if is_bogie_key(d, key):
+        return asin(value / length)
+    return -side_of(d, key) * asin(value / length)
 
 
 def rotate_point(d, key, value, point):
-    """(x, z) of a point on the moving arm after the pose; Y is unchanged."""
+    """Hinge keys: (x, z) of a point on the moving arm after the pose; Y is unchanged."""
     (px, _, pz), _ = pivot_of(d, key)
     a = motion_angle(d, key, value)
     rx, rz = point[0] - px, point[1] - pz
     return px + rx * cos(a) + rz * sin(a), pz - rx * sin(a) + rz * cos(a)
+
+
+def rotate_yz(d, key, value, point):
+    """Bogie keys: (y, z) of a point on the bogie after the pose; X is unchanged."""
+    (_, py, pz), _ = pivot_of(d, key)
+    a = motion_angle(d, key, value)
+    ry, rz = point[0] - py, point[1] - pz
+    return py + ry * cos(a) - rz * sin(a), pz + ry * sin(a) + rz * cos(a)
 
 
 def seat_travel(d, key, value, x, z):
@@ -69,4 +116,6 @@ def pose_shape(d, shape, key, value):
     if not value or key is None:
         return shape
     pivot, _ = pivot_of(d, key)
+    if is_bogie_key(d, key):
+        return shape.rotate(Axis((0, pivot[1], pivot[2]), (1, 0, 0)), degrees(motion_angle(d, key, value)))
     return shape.rotate(Axis(pivot, (0, 1, 0)), degrees(motion_angle(d, key, value)))

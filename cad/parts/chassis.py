@@ -8,7 +8,8 @@ def make(d):
     base=polygon_plate(outline,p['base_thickness'],p['base_bottom_z'])
     if d.variant!='baseline':
         from .suspension import chassis_mount_holes
-        for x,y,diameter in chassis_mount_holes(d):
+        from .electronics import mount_holes
+        for x,y,diameter in chassis_mount_holes(d)+mount_holes(d):
             base=drilled(base,[(x,y)],diameter,p['base_bottom_z'],p['base_thickness'])
         # Rev13/14: CB5-12 holes for the main column end bolts (Rev14: LiDAR brackets hang on the main columns).
         columns=[tuple(c) for c in d.profile['main_columns_xy']]

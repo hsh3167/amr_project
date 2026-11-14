@@ -5,7 +5,7 @@ from .parameters import ROOT,load_design,set_parameter
 from .assembly import GROUPS,build_records
 from .export import write
 from .validation import validate,compare_baseline
-from .caster_motion import MOTION_KEYS,half_travel
+from .caster_motion import motion_keys,half_travel
 
 def main():
     parser=argparse.ArgumentParser(description='AMR CAD: build only requested groups; exports are explicit')
@@ -16,7 +16,7 @@ def main():
         p=sub.add_parser(command);p.add_argument('--variant',choices=['baseline','current'],default='baseline' if command=='compare' else 'current')
         p.add_argument('--part',action='append',choices=GROUPS)
         p.add_argument('--output',type=Path,default=ROOT/'output/cad')
-        p.add_argument('--pose',action='append',default=[],help='Vertical travel mm: LEFT/RIGHT drive (+-10) or LF/LB/RF/RB caster (+-5)')
+        p.add_argument('--pose',action='append',default=[],help='Vertical travel mm. Bogie concept: LEFT/RIGHT = front caster on its bogie (+-10), LB/RB rear caster (+-5). Hinge concept: LEFT/RIGHT drive (+-10), LF/LB/RF/RB caster (+-5)')
         if command!='compare':p.add_argument('--collisions',action='store_true')
         if command=='build':
             p.add_argument('--format',default='step',help='step,stl or none')
@@ -28,7 +28,7 @@ def main():
     d=load_design(args.variant)
     for entry in args.pose:
         wheel,value=entry.split('=');value=float(value)
-        if d.variant=='baseline' or wheel not in MOTION_KEYS:parser.error('Pose requires current variant and LEFT, RIGHT, LF, LB, RF or RB')
+        if d.variant=="baseline" or wheel not in motion_keys(d):parser.error("Pose requires current variant and one of "+", ".join(motion_keys(d)))
         half=half_travel(d,wheel)
         if not -half<=value<=half:parser.error('Pose exceeds designed stroke')
         d.motion[wheel]=value

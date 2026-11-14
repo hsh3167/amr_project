@@ -7,3 +7,5 @@ output/
 cad/vendor/*.stp
 cad/vendor/*.step
 cad/vendor/download_zips/
+# Rev15: the raw assembly STEP is >100 MB; CI commits amr_current.step.gz
+cad-output/amr_current.step

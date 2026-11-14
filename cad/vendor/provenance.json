@@ -117,6 +117,38 @@
         "site": "kr.misumi-ec.com"
       },
       "note": "MISUMI CAD file supplied by the user on 2026-11-14 (C:/AI_Work/part cad), SKU C-USLH10 economy urethane stopper, male thread: D10 L17 M5x0.8 thread 7, Shore A90. Catalog table and price checked on the product page 2026-11-14. Placed in the assembly as the bump stopper x6 (Rev12b), exact purchased-part CAD."
+    },
+    {
+      "file": "BATTERY.STEP.gz",
+      "sha256_original": "caa8975fdea3ac30f5eb5147a672d0f94410f4b67f071a80394e888b8bf8c913",
+      "original_bytes": 12650582,
+      "source": "User-supplied company file (C:/AI_Work/part cad/BATTERY.STEP)",
+      "retrieved": "2026-11-15",
+      "note": "Company 7S9P battery pack (company stock). Supplied by the user 2026-11-15 from C:/AI_Work/part cad. Case 274.79x153.83x88.70 mm + terminal block 26.1 mm above the case. Placed unscaled (translation only) from Rev15."
+    },
+    {
+      "file": "LCD.STEP.gz",
+      "sha256_original": "ecc6bbd8b23b8efc919b4df5d44962e1c843d93011043873feff6f2da2d4ca6d",
+      "original_bytes": 786248,
+      "source": "User-supplied company file (C:/AI_Work/part cad/LCD.STEP)",
+      "retrieved": "2026-11-15",
+      "note": "Company 7-inch LCD module (company stock). Supplied by the user 2026-11-15. 179.8x114.8x13.4 mm, screen +Y. Placed unscaled, rotated 15 deg about X (screen tilted up) from Rev15. Mounting holes not in the model."
+    },
+    {
+      "file": "SPEAKER.STEP.gz",
+      "sha256_original": "1b860950fdb98636eee86a9fa6bae6f13c18bb4c56c89fc2ed25729595d0eea5",
+      "original_bytes": 13338634,
+      "source": "User-supplied company file (C:/AI_Work/part cad/SPEAKER.STEP)",
+      "retrieved": "2026-11-15",
+      "note": "Company speaker box assembly (labels 420-04039 frame, 810-02820 speaker box, 300-02661 x4; company stock). Supplied by the user 2026-11-15. Placed unscaled (translation only) from Rev15; the free-hanging lead wire/connector outside the frame/box envelope is trimmed in the assembly."
+    },
+    {
+      "file": "SHOULDER BOLT.STEP.gz",
+      "sha256_original": "9b3d138cc9f69e9ee480e421af37ad2a64e53f4c827d88770d616becac90402b",
+      "original_bytes": 82354,
+      "source": "User-supplied company file (C:/AI_Work/part cad/SHOULDER BOLT.STEP)",
+      "retrieved": "2026-11-15",
+      "note": "BOSSARD BN 1359 (ISO 7379) shoulder screw from the company stock list (listed as 12x35, article 2106345). Supplied by the user 2026-11-15. Measured: shoulder D12 length 30.0 (head face to step), head D18.27x9, M10 thread to 46.4. Stock list says 35: measure the actual bolt. Not placed in Rev15 (pivot uses EA-MFCNW20; see docs/bogie-link.md)."
     }
   ]
 }

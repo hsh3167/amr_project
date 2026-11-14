@@ -75,7 +75,7 @@
     <aside class="left">
       <div class="eyebrow">MECHANICAL CONCEPT</div>
       <h1>6-Wheel Differential AMR</h1>
-      <p class="intro">선정 부품 기반 6륜 AMR. ZLLG65ASM250-N V2.02 Ø180 고무타이어 2개, GL-65-ASF 캐스터 4개, SICK TiM571 2개, Orbbec Astra Mini Pro 2개, 판재+프로파일 구조.</p>
+      <p class="intro">선정 부품 기반 6륜 AMR. ZLLG65ASM250-N V2.02 Ø180 고무타이어 2개, GL-65-ASF 캐스터 4개(앞 2개는 구동륜과 보기 링크), SICK TiM571 2개, Orbbec Astra Mini Pro 2개, 회사 7S9P 배터리·7인치 LCD·스피커, 판재+프로파일 구조.</p>
       <div class="section">
         <h2>카메라 시점</h2>
         <div class="tabs"><button class="control active" data-view="iso">3D</button><button class="control" data-view="top">상부</button><button class="control" data-view="front">전면</button><button class="control" data-view="bottom">하부</button></div>
@@ -93,22 +93,20 @@
         <label class="toggle"><span><i class="swatch" style="background:#adbdcc"></i>알루미늄 주기둥 ×4</span><input type="checkbox" id="showProfiles" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#5687ef"></i>Ø180 휠모터 2개</span><input type="checkbox" id="showMotors" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#96acbe"></i>GL-65-ASF ×4</span><input type="checkbox" id="showCasters" checked></label>
-        <label class="toggle"><span><i class="swatch" style="background:#e5ab62"></i>배터리(가설계)</span><input type="checkbox" id="showBattery" checked></label>
-        <label class="toggle"><span><i class="swatch" style="background:#77d0a5"></i>전장부</span><input type="checkbox" id="showElectronics" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#e5ab62"></i>배터리 7S9P (회사 STEP)</span><input type="checkbox" id="showBattery" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#77d0a5"></i>전장부·LCD·스피커</span><input type="checkbox" id="showElectronics" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#46d6d6"></i>SICK TiM571 ×2</span><input type="checkbox" id="showLidar" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#d3a5fa"></i>Astra Mini Pro ×2</span><input type="checkbox" id="showCameras" checked></label>
         <label class="toggle"><span><i class="swatch" style="background:#ffcc73"></i>로봇암 장착 영역</span><input type="checkbox" id="showArm"></label>
         <label class="toggle"><span><i class="swatch" style="background:#8ebcff"></i>부품 라벨</span><input type="checkbox" id="showLabels" checked></label>
       </div>
       <div class="section">
-        <h2>6륜 독립 경첩 서스펜션 (Rev12a)</h2>
+        <h2>보기 링크 서스펜션 (Rev15)</h2>
         <label class="toggle"><span>서스펜션 구조 표시</span><input type="checkbox" id="showSuspension" checked></label>
-        <p class="hint">6개 바퀴가 각각 진행 방향과 나란한 핀을 축으로 도는 짧은 암에 달려 독립적으로 움직입니다. 값은 구동륜 중심·캐스터 장착 중심의 상하 이동이며 +는 올라감입니다. 스프링 변형은 표시용입니다.</p>
-<label class="mini-label" for="poseLEFT">왼쪽 구동륜 <output id="valueLEFT">0 mm</output></label><input id="poseLEFT" data-wheel="LEFT" type="range" min="-10" max="10" value="0" step="1">
-<label class="mini-label" for="poseRIGHT">오른쪽 구동륜 <output id="valueRIGHT">0 mm</output></label><input id="poseRIGHT" data-wheel="RIGHT" type="range" min="-10" max="10" value="0" step="1">
-<label class="mini-label" for="poseLF">전방 좌측 캐스터 <output id="valueLF">0 mm</output></label><input id="poseLF" data-wheel="LF" type="range" min="-5" max="5" value="0" step="1">
+        <p class="hint">좌우 각각 구동륜과 앞 캐스터가 보기 링크 하나에 달려 좌우 방향 축(Y=+60mm)을 중심으로 시소처럼 돕니다. 보기 값은 앞 캐스터 장착 중심의 상하 이동(+는 올라감)이고, 구동륜은 반대로 약 0.39배 움직입니다. 뒤 캐스터 2개는 경첩+스프링 모듈이며 스프링 변형은 표시용입니다.</p>
+<label class="mini-label" for="poseLEFT">왼쪽 보기 (앞 캐스터 기준) <output id="valueLEFT">0 mm</output></label><input id="poseLEFT" data-wheel="LEFT" type="range" min="-10" max="10" value="0" step="1">
+<label class="mini-label" for="poseRIGHT">오른쪽 보기 (앞 캐스터 기준) <output id="valueRIGHT">0 mm</output></label><input id="poseRIGHT" data-wheel="RIGHT" type="range" min="-10" max="10" value="0" step="1">
 <label class="mini-label" for="poseLB">후방 좌측 캐스터 <output id="valueLB">0 mm</output></label><input id="poseLB" data-wheel="LB" type="range" min="-5" max="5" value="0" step="1">
-<label class="mini-label" for="poseRF">전방 우측 캐스터 <output id="valueRF">0 mm</output></label><input id="poseRF" data-wheel="RF" type="range" min="-5" max="5" value="0" step="1">
 <label class="mini-label" for="poseRB">후방 우측 캐스터 <output id="valueRB">0 mm</output></label><input id="poseRB" data-wheel="RB" type="range" min="-5" max="5" value="0" step="1">
 <button class="control" id="resetSuspension">공칭 위치로 복귀</button></div>
 <div class="section">
@@ -153,9 +151,9 @@
         <div class="spec"><span>상판 / 하판</span><b>420×550 / 390×530</b></div>
         <div class="spec"><span>드라이브 축 간격</span><b>422 (가설계)</b></div>
         <div class="spec"><span>캐스터</span><b>GL-65-ASF · Ø64 ×4</b></div>
-        <div class="spec"><span>프레임</span><b>강판3t + Al 20×20 · 기둥6개</b></div>
+        <div class="spec"><span>프레임</span><b>강판3t + Al 20×20 · 기둥6개 · 보기 링크 3t</b></div>
         <div class="spec"><span>상판 윗면 높이</span><b id="deckHeight">—</b></div>
-        <div class="spec"><span>배터리 공간</span><b>235×155×95 (가정)</b></div>
+        <div class="spec"><span>배터리 (회사 STEP)</span><b>274.8×153.8×88.7 + 단자 26</b></div>
         <div class="spec"><span>LiDAR</span><b>SICK TiM571 ×2</b></div>
         <div class="spec"><span>카메라</span><b>Orbbec Astra Mini Pro ×2</b></div>
         <div class="spec"><span>휠 지름 / 축 중심높이</span><b>Ø180 / 90</b></div>
@@ -176,7 +174,7 @@
         <ul class="list"><li>Ø14 / AF10 / M14×1.5 <strong>축 고정 및 토크반력 브라켓</strong></li><li>구동륜·캐스터 <strong>접지하중 / 높이</strong> 확인</li><li>배터리·드라이버 간 <strong>케이블/방열 공간</strong></li><li>급정지 시 <strong>전도 / 제동 / 전원 차단</strong></li><li>차후 로봇암의 <strong>하중 및 작동반력</strong></li></ul>
         <div class="callout" style="margin-top:13px">이 화면의 주행 애니메이션은 <b>개념적 운동 표현</b>입니다. 실제 동역학/전도/마찰/주행제어/SLAM 시뮬레이션은 아닙니다.</div>
       </div>
-      <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_current.step">STEP 다운로드 ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
+      <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_current.step.gz">STEP 다운로드 (gzip) ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
     </aside>
   </main>
 </div>
@@ -188,7 +186,7 @@
 <script type="module">import {setupBOM} from './web/bom.js?rev=1';setupBOM();</script>
 <script type="module">
 import * as THREE from 'three';
-import {loadNativeCAD} from './web/native-cad.js?rev=13';
+import {loadNativeCAD} from './web/native-cad.js?rev=15';
 import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
@@ -216,8 +214,8 @@ function tag(obj,id){obj.traverse(o=>{if(o.isMesh)o.userData.partId=id});}
 part('base','하부 강판 3t','390×530mm, 강판 3t. 양 측면에 휠 웰이 있습니다. 프로파일 종방향 보강 레일은 아직 미반영이며, 3t 단독은 강도 부족으로 계산됩니다.');
 part('profiles','알루미늄 프로파일 주기둥 ×4',`모든 수직 기둥은 알루미늄 프로파일. 주기둥 4개는 ${LP.top_bottom_z-LAYOUT.profile.main_bottom_z}mm입니다. 단면 20×20과 슬롯은 범용 가정이며 구매품과 접합 강도를 확인해야 합니다.`,[0,70,0]);
 part('deck','탈착식 상부 강판 3t','420×550mm, 강판 3t. 하부 프로파일 프레임 미반영(3t 단독은 암 전도 모멘트에 부족). LiDAR/카메라 설치 및 향후 로봇암 체결용. 장착 예상 영역은 중앙 150×150mm이며 실제 암 정격하중/볼트 패턴은 미정입니다.',[0,170,0]);
-part('battery','7S9P 배터리 가설계','회사에서 확보 가능한 7S9P 팩을 우선 검토합니다. 화면상 235×155×95mm는 공간예약용 임시 크기입니다. 실제 팩 치수, 셀 타입, 전류, BMS, 충전기 확인 전 장착 확정 금지.',[0,45,-170]);
-part('electronics','전장부 / 전방 제어기·후방 전원부','전방은 제어기와 통신, 후방은 퓨즈·차단·DC/DC 공간, 측면은 모터 드라이버로 구분합니다. 배터리는 낮게 유지하고 신호/동력 배선 분리를 계획합니다. 실제 하드웨어 치수와 방열은 미확정입니다.',[160,75,40]);
+part('battery','회사 7S9P 배터리 (STEP)','회사에서 제공한 7S9P 배터리 STEP을 그대로 배치했습니다. 케이스 274.8×153.8×88.7mm, 위쪽 단자부 26mm. 하판 위 3mm 고무 패드 4개 위에 올리고, 고정 스트랩/클램프는 아직 정하지 않았습니다. 셀 종류, 무게, BMS, 충전기는 모델에 없습니다.',[0,45,-170]);
+part('electronics','전장부 / LCD·스피커 / 제어기·전원부','회사 7인치 LCD는 전면 중앙에 15° 위로 기울여 3t 절곡 브래킷과 출력 클램프 2개로 고정합니다(스캔면 아래). 회사 스피커 박스는 후방 좌측에서 뒤를 향하게 3t 절곡 브래킷에 M3 3개로 답니다(늘어진 전선은 모델에서 잘라냄). DC/DC(DDR-240B-24)는 후방 우측 DIN 레일 위 크기 예약입니다. 제어기·컴퓨터·드라이버·전원 분배는 크기 예약이며 실제 치수와 방열은 미확정입니다.',[160,75,40]);
 for(const sign of [-1,1]){
  const id=sign<0?'motorL':'motorR';
  part(id,(sign<0?'좌측 ':'우측 ')+MOTOR.model,
@@ -261,7 +259,7 @@ const annotations=[
  {id:'lidarFrontLeft',text:'TiM571 FRONT LEFT · 270°',pos:[-220,278,250]},
  {id:'lidarRearRight',text:'TiM571 REAR RIGHT · 270°',pos:[220,278,-250]},
  {id:'cameraRight',text:'ASTRA MINI PRO ×2',pos:[LP.camera_x,LP.camera_z+25,LP.camera_y]},
- {id:'battery',text:'7S9P BATTERY',pos:[0,238,-52]},
+ {id:'battery',text:'7S9P BATTERY',pos:[0,245,-35]},
  {id:'deck',text:'TOP PLATE',pos:[-30,deckTop+14,-192]},
  {id:'electronics',text:'CONTROLLERS',pos:[0,204,180]}
 ].map(a=>{const node=document.createElement('div');node.className='annotation';node.textContent=a.text;$('labels').append(node);return {...a,node}});

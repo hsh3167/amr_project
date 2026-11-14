@@ -1,5 +1,5 @@
 {
-  "revision": "1.4",
+  "revision": "1.5",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
     "base_width": 390,
@@ -105,12 +105,30 @@
     "driver_x": 124,
     "driver_y": 125,
     "driver_center_z": 156,
-    "power_bay_y": -200,
+    "power_bay_y": -162.5,
     "power_bay_center_z": 149,
-    "status": "Envelope reservations only; rear power bay/central low battery/front logic/side drives, hardware and harness routes TBD."
+    "status": "Rev15: company 7S9P battery, 7-inch LCD and speaker placed from the supplied STEP files; controller, computer, drivers, power distribution are envelope reservations; DC/DC DDR-240B-24 is a size reservation (datasheet dimensions to confirm).",
+    "battery_y": -35,
+    "battery_bottom_z": 123,
+    "battery_pad_mm": 3,
+    "lcd_tilt_deg": 15,
+    "lcd_front_y": 262,
+    "lcd_bottom_z": 124,
+    "speaker_x": -75,
+    "speaker_front_y": -264.5,
+    "speaker_bottom_z": 139,
+    "power_bay_x": -95,
+    "dcdc_x": 50,
+    "dcdc_y": -196.75,
+    "dcdc_bottom_z": 140,
+    "dcdc_size": [
+      125.2,
+      128.5,
+      63
+    ]
   },
   "suspension": {
-    "status": "Rev12b (2026-11-14): MISUMI STEP pins, bushes and C-USLH10 urethane bump stoppers placed in the assembly; springs use the STEP wire section. Rev12a: six independent hinge + spring modules (pivot axis +Y). Each: bent bracket, bent arm, catalog hinge pin, one X-SWU spring under the base plate on a stud (top nut = droop stop, C-USLH10 on the arm meets an M6 striker bolt through the base = bump stop). Drive arm: floor + short pivot tabs + narrow axle wall, asymmetric about Y0 with the bump stop on the spring line. No welding, rails or hangers. Screening calculations only.",
+    "status": "Rev15 (2026-11-15): front caster + drive wheel joined by a 3t bent bogie link on each side (pivot axis +X); rear casters keep the Rev14 hinge + spring modules. The 'drive' block below is the Rev14 hinge concept, kept for history and used only when concept='hinge'. Screening calculations only.",
     "design_mass_kg": 55,
     "design_mass_without_arm_kg": 35,
     "drive": {
@@ -138,7 +156,10 @@
       "end_wall_half_width_mm": 20,
       "bump_stop_x_mm": 130,
       "bump_stop_y_mm": -25,
-      "bracket_hole_y_mm": [-25, 5],
+      "bracket_hole_y_mm": [
+        -25,
+        5
+      ],
       "arm_top_z_mm": 108,
       "arm_bottom_z_mm": 69,
       "end_wall_x_mm": 170,
@@ -162,7 +183,10 @@
       "bush_flange_t_mm": 2,
       "bump_stopper_sku": "C-USLH10",
       "bump_stopper_step": "C-USLH10.stp",
-      "bump_stopper_children": ["BODY_C-USLH10", "CUP_C-USLH10"],
+      "bump_stopper_children": [
+        "BODY_C-USLH10",
+        "CUP_C-USLH10"
+      ],
       "bump_stopper_d_mm": 10,
       "bump_stopper_height_mm": 17,
       "bump_stopper_thread_d_mm": 5
@@ -179,7 +203,7 @@
       "solid_length_mm": 10.5,
       "max_deflection_mm": 19.25,
       "rate_N_mm": 6.96,
-      "shim_mm": 5,
+      "shim_mm": 3,
       "unsprung_mass_kg_estimate": 0.85,
       "arm_length_mm": 90,
       "pivot_z_mm": 99.5,
@@ -212,10 +236,119 @@
       "bush_flange_t_mm": 2,
       "bump_stopper_sku": "C-USLH10",
       "bump_stopper_step": "C-USLH10.stp",
-      "bump_stopper_children": ["BODY_C-USLH10", "CUP_C-USLH10"],
+      "bump_stopper_children": [
+        "BODY_C-USLH10",
+        "CUP_C-USLH10"
+      ],
       "bump_stopper_d_mm": 10,
       "bump_stopper_height_mm": 17,
       "bump_stopper_thread_d_mm": 5
+    },
+    "concept": "bogie",
+    "bogie": {
+      "status": "Rev15: pure (unsprung) bogie. Pivot = company-stock MISUMI EA-MFCNW20 oil-free bush unit (d20, L77, centre 2-face flange) bolted to the inner wall, on a purchased D20 shaft clamped in a 3t U bracket under the base plate. Rotation limited by two company-stock C-USLH10 stoppers on the bogie floor against M6 striker bolts.",
+      "travel_mm": 20,
+      "pivot_y_mm": 60,
+      "pivot_z_mm": 90,
+      "sheet_t_mm": 3,
+      "outer_wall_x_mm": 170,
+      "inner_wall_x_mm": 108,
+      "rear_y_mm": -40,
+      "front_y_mm": 252.5,
+      "rear_floor_top_z_mm": 66,
+      "rear_floor_end_y_mm": 150,
+      "outer_wall_step_end_y_mm": 160,
+      "pad_start_y_mm": 160,
+      "front_inner_wall_top_z_mm": 100,
+      "wall_top_profile_yz": [
+        [
+          -40,
+          105
+        ],
+        [
+          20,
+          110
+        ],
+        [
+          100,
+          110
+        ],
+        [
+          150,
+          101
+        ],
+        [
+          252.5,
+          100
+        ]
+      ],
+      "torque_plate_t_mm": 6,
+      "torque_plate_half_y_mm": 20,
+      "bush_sku": "EA-MFCNW20",
+      "bush_center_x_mm": 115,
+      "bush_bore_mm": 20,
+      "bush_od_mm": 32,
+      "bush_length_mm": 77,
+      "bush_flange_t_mm": 8,
+      "bush_flange_d_mm": 54,
+      "bush_flange_flats_mm": 36,
+      "bush_bolt_pcd_mm": 43,
+      "bush_bolt_hole_mm": 5.5,
+      "bush_cbore_d_mm": 9,
+      "bush_cbore_depth_mm": 5.1,
+      "bush_source": "MISUMI catalogue table (economy centre-flange housing unit, image 110311282859.jpg, read 2026-11-15): d20 D32 L77 T8 H54 A36 PCD43 d1 5.5 d2 9 t5.1. No STEP supplied; modelled from the table.",
+      "thrust_washer_t_mm": 1,
+      "shaft_d_mm": 20,
+      "shaft_status": "Purchase: D20 linear shaft, both ends M8 tapped, length = ear outer faces (catalogue part, cut and tapped by the supplier)",
+      "bracket_t_mm": 3,
+      "bracket_half_width_y_mm": 15,
+      "bracket_ear_bottom_z_mm": 72,
+      "bracket_bolt_x_mm": [
+        88,
+        135
+      ],
+      "bracket_bolt_dy_mm": 8,
+      "bump_stopper_sku": "C-USLH10",
+      "bump_stopper_step": "C-USLH10.stp",
+      "bump_stopper_children": [
+        "BODY_C-USLH10",
+        "CUP_C-USLH10"
+      ],
+      "bump_stopper_d_mm": 10,
+      "unsprung_mass_kg_estimate": 5.2,
+      "stopper_front_xy_mm": [
+        135,
+        100
+      ],
+      "stopper_rear_xy_mm": [
+        150,
+        -25
+      ],
+      "splice_y_mm": [
+        125,
+        185
+      ],
+      "splice_z_mm": [
+        85,
+        99
+      ],
+      "splice_bolt_y_mm": [
+        132,
+        143,
+        167,
+        178
+      ],
+      "doubler_t_mm": 8,
+      "doubler_half_y_mm": 50,
+      "doubler_z_mm": [
+        68,
+        106
+      ],
+      "doubler_bolt_dy_mm": 40,
+      "doubler_bolt_z_mm": [
+        73,
+        103
+      ]
     }
   }
 }

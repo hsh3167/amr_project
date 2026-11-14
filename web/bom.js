@@ -42,10 +42,10 @@ function suspensionView(rows){
   const cards=`<div class="bom-cards">
     <div class="bom-card"><span>MISUMI 가격 합계</span><b>${won(confirmed)}</b><small>사이트 조회가 ${esc(checked)} · VAT 별도</small></div>
     <div class="bom-card est"><span>예상 가격 합계</span><b>${won(estimate)}</b><small>표준품·판금 가공 추정 · 견적 필요</small></div>
-    <div class="bom-card total"><span>서스펜션 6모듈 예상 총액</span><b>${won(total)}</b><small>VAT 포함 약 ${won(Math.round(total*1.1))}</small></div>
+    <div class="bom-card total"><span>서스펜션 예상 총액 (보기 2 + 뒤 캐스터 2)</span><b>${won(total)}</b><small>VAT 포함 약 ${won(Math.round(total*1.1))}</small></div>
   </div>`;
   const body=items.map(r=>{
-    const est=r['Price basis']!=='MISUMI price';
+    const stock=r['Price basis']==='Company stock',est=r['Price basis']!=='MISUMI price'&&!stock;
     const src=/^https?:/.test(r.Source)?` <a href="${esc(r.Source)}" target="_blank" rel="noopener noreferrer" title="출처">↗</a>`:'';
     return `<tr class="${est?'est':''}">
       <td>${esc(r.Module)}</td>
@@ -56,14 +56,14 @@ function suspensionView(rows){
       <td class="num">${esc(r['Order qty'])}</td>
       <td class="num"><b>${won(Number(r['Line total KRW ex VAT']||0))}</b></td>
       <td>${esc(r['Lead time'])}</td>
-      <td><span class="bom-tag ${est?'est':''}">${est?'추정':'MISUMI 가격'}</span><div class="bom-sub">${esc(r['Price checked'])}</div></td>
+      <td><span class="bom-tag ${est?'est':''}">${stock?'회사 재고 (0원)':est?'추정':'MISUMI 가격'}</span><div class="bom-sub">${esc(r['Price checked'])}</div></td>
     </tr>`}).join('');
   return cards+`<div class="bom-table-wrap"><table class="bom-table">
     <thead><tr><th>모듈</th><th>형번 / 품목</th><th class="num">수량</th><th>사양 · 역할 / 상태</th><th class="num">단가</th><th class="num">주문</th><th class="num">금액</th><th>납기</th><th>가격 근거</th></tr></thead>
     <tbody>${body}</tbody>
     <tfoot><tr><td colspan="6">합계 (VAT 별도)</td><td class="num"><b>${won(total)}</b></td><td colspan="2">MISUMI ${won(confirmed)} + 추정 ${won(estimate)}</td></tr></tfoot>
   </table></div>
-  <p class="bom-note">X-SWU21-70은 최소 주문 10개 기준입니다. 가격·납기는 수시로 바뀌므로 주문 전에 다시 확인하세요. 추정 행은 견적을 받지 않은 대략값입니다. 원본: <a href="https://github.com/hsh3167/amr_project/blob/main/bom/suspension_misumi.csv" target="_blank" rel="noopener noreferrer">bom/suspension_misumi.csv ↗</a></p>`;
+  <p class="bom-note">회사 재고 부품(EA-MFCNW20 2개, C-USLH10 6개)은 0원으로 넣었습니다. 가격·납기는 수시로 바뀌므로 주문 전에 다시 확인하세요. 추정 행은 견적을 받지 않은 대략값입니다. 원본: <a href="https://github.com/hsh3167/amr_project/blob/main/bom/suspension_misumi.csv" target="_blank" rel="noopener noreferrer">bom/suspension_misumi.csv ↗</a></p>`;
 }
 
 function conceptView(rows){

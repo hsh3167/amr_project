@@ -1,4 +1,7 @@
-"""Rev12a/12b suspension: six independent hinge + spring modules (pivot axis +Y).
+"""Suspension. Rev15 (concept 'bogie'): front caster + drive wheel on one 3t bent bogie link per side
+(pivot axis +X, EA-MFCNW20 oil-free bush on a D20 shaft); rear casters keep the hinge modules below.
+
+Rev12a/12b/14 (concept 'hinge'): six independent hinge + spring modules (pivot axis +Y).
 
 Per wheel: one bent-sheet bracket under the base plate, one bent arm, one catalog
 hinge pin, one X-SWU spring between the arm and the base plate underside on an
@@ -8,8 +11,8 @@ plate is the bump stop. No welding, rails, hangers or bearings. Earlier concepts
 Dimensions in mm.
 """
 from math import cos, pi, sin
-from build123d import Axis, Circle, Compound, Helix, Plane, Rectangle, Solid, sweep
-from ..caster_motion import CASTER_WHEELS, caster_xy, pivot_of, pose_shape, rotate_point, seat_travel
+from build123d import Axis, Circle, Compound, Face, Helix, Plane, Rectangle, Solid, Vector, Wire, sweep
+from ..caster_motion import CASTER_WHEELS, caster_xy, hinge_wheels, is_bogie, pivot_of, pose_shape, rotate_point, rotate_yz, seat_travel
 from .common import PartRecord, cylx, cyly, cylz, drilled, polygon_plate, span
 from .vendor import misumi_solid
 
@@ -71,7 +74,7 @@ def spring_point(d, key):
 
 def lever_ratio(d, kind):
     """Spring travel / wheel travel (also wheel force / spring force)."""
-    key = 'RIGHT' if kind == 'drive' else 'RF'
+    key = 'RIGHT' if kind == 'drive' else 'RB'
     (px, _, _), length = pivot_of(d, key)
     x, _, _ = spring_point(d, key)
     return abs(x-px)/length
@@ -116,12 +119,186 @@ def stud_hole(d, key):
 
 def chassis_mount_holes(d):
     holes = []
-    for key in ('LEFT', 'RIGHT', *CASTER_WHEELS):
+    for key in hinge_wheels(d):
         holes.extend((a, b, 5.5) for a, b in bracket_holes(d, key))
         x, y, _ = spring_point(d, key)
         holes.append((x, y, stud_hole(d, key)))
         holes.append((*bump_stop_xy(d, key), 6.5))
+    if is_bogie(d):
+        q = d.layout['suspension']['bogie']
+        for s in (-1, 1):
+            holes.extend((s*x, q['pivot_y_mm']+dy, 5.5) for x in q['bracket_bolt_x_mm']
+                         for dy in (-q['bracket_bolt_dy_mm'], q['bracket_bolt_dy_mm']))
+            holes.extend((s*q[k][0], q[k][1], 6.5) for k in ('stopper_front_xy_mm', 'stopper_rear_xy_mm'))
     return holes
+
+
+def yz_prism(points, x0, x1):
+    """Plate in the YZ plane from a (y, z) outline, extruded from x0 to x1."""
+    face = Face(Wire.make_polygon([Vector(x0, y, z) for y, z in points], close=True))
+    return Solid.extrude(face, Vector(x1-x0, 0, 0))
+
+
+def nut_x(x0, y, z, across_flats, height, diameter):
+    """Hex nut on an X axis, from x0 to x0+height."""
+    return nut(0, 0, 0, across_flats, height, diameter).rotate(Axis.Y, 90).translate((x0, y, z))
+
+
+def ring_x(x0, length, y, z, od, bore):
+    return cylx(od/2, length, x0+length/2, y, z)-cylx(bore/2, length+2, x0+length/2, y, z)
+
+
+def top_z(profile, y):
+    for (y0, z0), (y1, z1) in zip(profile, profile[1:]):
+        if y0 <= y <= y1:
+            return z0+(z1-z0)*(y-y0)/(y1-y0)
+    raise ValueError('Outside the bogie wall profile')
+
+
+def bogie_records(d, add, base_bottom, base_top):
+    """Rev15: one bogie per side, built for the right side (+X) and mirrored for the left.
+
+    Pure bogie: drive wheel at Y0 and front caster at Y caster_y on one 3t bent link (outer wall = axle wall,
+    rear floor + rear inner wall, front caster pad + front inner wall; 4 bends, no welding). The company-stock
+    EA-MFCNW20 centre-flange bush is bolted to the inner wall and turns on a D20 shaft clamped in a 3t U bracket
+    under the base plate. Two company-stock C-USLH10 stoppers on the floor meet M6 strikers and limit the rotation.
+    """
+    q = d.layout['suspension']['bogie']
+    t = q['sheet_t_mm']
+    yp, zp = q['pivot_y_mm'], q['pivot_z_mm']
+    xo, xi = q['outer_wall_x_mm'], q['inner_wall_x_mm']
+    yr, yf = q['rear_y_mm'], q['front_y_mm']
+    fz = q['rear_floor_top_z_mm']
+    fe = q['rear_floor_end_y_mm']
+    ps = q['pad_start_y_mm']
+    pad = d.parts['caster']['cad_height']  # pad underside on the GL-65 plate
+    prof = [tuple(v) for v in q['wall_top_profile_yz']]
+    xb, L, D = q['bush_center_x_mm'], q['bush_length_mm'], q['bush_od_mm']
+    cy = d.p['caster_y']
+    half = q['travel_mm']/2
+
+    def right():
+        out = []
+        # ---- bogie link (one bent part)
+        outer = yz_prism([(yr, fz-t), (fe, fz-t), (q['outer_wall_step_end_y_mm'], pad), (yf, pad)]+prof[::-1], xo, xo+t)
+        inner_top = top_z(prof, fe)
+        inner = yz_prism([(yr, fz-t), (fe, fz-t), (fe, inner_top)]+[v for v in prof[::-1] if v[0] < fe], xi, xi+t)
+        link = outer+inner+span(xi, xo+t, yr, fe, fz-t, fz)
+        link += span(xi, xo+t, ps, yf, pad, pad+t)+span(xi, xi+t, ps, yf, pad+t, q['front_inner_wall_top_z_mm'])
+        slot = cylx(7.15, 30, xo, 0, 90) & span(xo-12, xo+t+5, -5.1, 5.1, 80, 100)
+        link -= slot
+        link -= cylx(D/2+.25, 2*t, xi+t/2, yp, zp)
+        flange_holes = [(yp+s*q['bush_bolt_pcd_mm']/2, zp) for s in (-1, 1)]
+        for y, z in flange_holes:
+            link -= cylx(q['bush_bolt_hole_mm']/2, 2*t, xi+t/2, y, z)
+        stoppers = [tuple(q['stopper_front_xy_mm']), tuple(q['stopper_rear_xy_mm'])]
+        for x, y in stoppers:
+            link -= cylz(2.5, t+2, x, y, fz-t-1)
+        bolts = [(d.p['caster_x']+dx, cy+dy) for dx in (-12, 12) for dy in (-27, 27)]
+        link = drilled(link, bolts, 6.6, pad, t)
+        out.append(('bogie_link_3t', link, True, {'material': 'S355 3t laser-cut, 4 bends (outer wall + rear floor + rear inner wall, '
+                    'front caster pad + front inner wall); AF10.2 axle slot; D32.5 bush hole', 'length_mm': yf-yr}))
+        # Flat 3t splice plate bolted across the rear and front inner walls (they come off different flaps).
+        sy0, sy1 = q['splice_y_mm']; sz0, sz1 = q['splice_z_mm']; zb = (sz0+sz1)/2
+        splice = span(xi-t, xi, sy0, sy1, sz0, sz1)
+        for y in q['splice_bolt_y_mm']:
+            splice -= cylx(2.75, 2*t, xi-t/2, y, zb)
+            link -= cylx(2.75, 2*t, xi+t/2, y, zb)
+        out.append(('bogie_inner_splice_3t', splice, True, {'material': 'S355 3t flat laser-cut; joins the rear and front inner walls (4x CB5-12)'}))
+        sb = Compound([cylx(4.25, 5, xi-t-2.5, y, zb)+cylx(2.5, 12, xi-t+6, y, zb) for y in q['splice_bolt_y_mm']])
+        out.append(('bogie_splice_bolts_CB5-12', sb, True, {'sku': 'CB5-12', 'quantity': 4}))
+        out.append(('bogie_splice_nuts_M5', Compound([nut_x(xi+t, y, zb, 8, 4, 5) for y in q['splice_bolt_y_mm']]), True, {'quantity': 4}))
+        tp = q['torque_plate_t_mm']
+        plate = span(xo-tp, xo, -q['torque_plate_half_y_mm'], q['torque_plate_half_y_mm'], fz, top_z(prof, 0)-4)-slot
+        out.append(('bogie_axle_torque_plate', plate, True,
+                    {'material': f'S355 {tp}t flat laser-cut, AF10.2 slot; clamped by the axle nut against the outer wall'}))
+        # Axle stack (Rev14 trial dimensions; the nut moves in by the thicker torque plate).
+        out.append(('bogie_axial_spacer_trial', ring_x(xo+t, 4.9, 0, 90, 18, 14.3), True,
+                    {'fit': 'Confirm stationary shoulder and bearing-face diameters on motor'}))
+        out.append(('bogie_axle_washer', ring_x(xo-tp-1, 1, 0, 90, 20, 14.3), True, {}))
+        out.append(('bogie_axle_M14x1p5_nut_envelope', nut_x(xo-tp-9, 0, 90, 22, 8, 14.3), True,
+                    {'fit': 'OEM nut thickness and wrench envelope assumed'}))
+        # ---- pivot: EA-MFCNW20 (catalogue-table model), centre flange on the inner wall's outer face
+        ft, fd, flat = q['bush_flange_t_mm'], q['bush_flange_d_mm'], q['bush_flange_flats_mm']
+        bush = cylx(D/2, L, xb, yp, zp)+(cylx(fd/2, ft, xb, yp, zp) & span(xb-ft, xb+ft, yp-fd, yp+fd, zp-flat/2, zp+flat/2))
+        bush -= cylx(q['bush_bore_mm']/2, L+2, xb, yp, zp)
+        for y, z in flange_holes:
+            bush -= cylx(q['bush_bolt_hole_mm']/2, ft+2, xb, y, z)
+            bush -= cylx(q['bush_cbore_d_mm']/2, q['bush_cbore_depth_mm']+.01, xb+ft/2-q['bush_cbore_depth_mm']/2+.005, y, z)
+        out.append(('bogie_pivot_bush_'+q['bush_sku'], bush, True, {'sku': q['bush_sku'], 'supply': 'company stock',
+                    'status': 'catalog_table_model', 'source': q['bush_source'],
+                    'fit': 'Oil-free (solid lubricant) bush d20 on the D20 g6 shaft; flange 2x CB5-12 through the inner wall'}))
+        # 8t flat doubler on the inner wall's outside face: carries the bush moment into the wall (3t alone bends out of plane).
+        dt = q['doubler_t_mm']; dz0, dz1 = q['doubler_z_mm']; dhy = q['doubler_half_y_mm']
+        doubler = span(xi-dt, xi, yp-dhy, yp+dhy, dz0, dz1)-cylx(D/2+.25, 2*dt, xi-dt/2, yp, zp)
+        extra = [(yp+s*q['doubler_bolt_dy_mm'], z) for s in (-1, 1) for z in q['doubler_bolt_z_mm']]
+        for y, z in flange_holes+extra:
+            doubler -= cylx(2.75, 2*dt, xi-dt/2, y, z)
+        for y, z in extra:
+            link -= cylx(2.75, 2*t, xi+t/2, y, z)
+        out[0] = (out[0][0], link, *out[0][2:])
+        out.append(('bogie_pivot_doubler_8t', doubler, True, {'material': 'S355 8t flat laser-cut, D32.5 hole; clamped by the flange bolts + 4x CB5-16'}))
+        head = xb+ft/2-q['bush_cbore_depth_mm']
+        length = round(head-(xi-dt-4)+2)  # flange rest + wall + doubler + nut + 2 mm
+        flange_bolts = Compound([cylx(4.25, 5, head+2.5, y, z)+cylx(2.5, length, head-length/2, y, z) for y, z in flange_holes])
+        out.append((f'bogie_flange_bolts_CB5-{length}', flange_bolts, True, {'sku': f'CB5-{length}', 'quantity': 2}))
+        out.append(('bogie_flange_nuts_M5', Compound([nut_x(xi-dt-4, y, z, 8, 4, 5) for y, z in flange_holes]), True, {'quantity': 2}))
+        db = Compound([cylx(4.25, 5, xi+t+2.5, y, z)+cylx(2.5, 16, xi+t-8, y, z) for y, z in extra])
+        out.append(('bogie_doubler_bolts_CB5-16', db, True, {'sku': 'CB5-16', 'quantity': 4}))
+        out.append(('bogie_doubler_nuts_M5', Compound([nut_x(xi-dt-4, y, z, 8, 4, 5) for y, z in extra]), True, {'quantity': 4}))
+        # ---- caster pad hardware (as Rev14: head under the 2 mm OEM plate, nut on the pad)
+        under = pad-d.parts['caster']['plate_thickness_mm']
+        out.append(('bogie_caster_plate_bolts', Compound([screw(a, b, under, 6, 12, True) for a, b in bolts]), True,
+                    {'sku': 'CB6-12', 'quantity': 4, 'plate_thickness_mm': d.parts['caster']['plate_thickness_mm']}))
+        out.append(('bogie_caster_plate_nuts', Compound([nut(a, b, pad+t, 10, 5, 6) for a, b in bolts]), True, {'quantity': 4}))
+        # ---- fixed side: shaft, U bracket, thrust washers, end clamps
+        tw, bt, hw = q['thrust_washer_t_mm'], q['bracket_t_mm'], q['bracket_half_width_y_mm']
+        e0, e1 = xb-L/2-tw-bt, xb+L/2+tw+bt  # ear outer faces = shaft ends
+        shaft = cylx(q['shaft_d_mm']/2, e1-e0, (e0+e1)/2, yp, zp)
+        for x0, inward in ((e0, 1), (e1, -1)):
+            shaft -= cylx(3.4, 16, x0+inward*8, yp, zp)  # M8 tapped end (minor diameter)
+        out.append(('bogie_pivot_shaft_D20', shaft, False, {'length_mm': round(e1-e0, 2), 'status': 'catalog_envelope',
+                    'supply': q['shaft_status'], 'fit': 'g6 shaft, both ends M8 x16 tapped; clamped through both ears by the end bolts'}))
+        bracket = span(e0, e1, yp-hw, yp+hw, base_bottom-bt, base_bottom)
+        for x0 in (e0, e1-bt):
+            bracket += span(x0, x0+bt, yp-hw, yp+hw, q['bracket_ear_bottom_z_mm'], base_bottom-bt)
+        bracket -= cylx(q['shaft_d_mm']/2+.1, e1-e0+2, (e0+e1)/2, yp, zp)
+        bb = [(x, yp+dy) for x in q['bracket_bolt_x_mm'] for dy in (-q['bracket_bolt_dy_mm'], q['bracket_bolt_dy_mm'])]
+        bracket = drilled(bracket, bb, 5.5, base_bottom-bt, bt)
+        out.append(('bogie_pivot_bracket_U_3t', bracket, False,
+                    {'material': 'S355 3t laser-cut, 2 bends; D20.2 ear holes (laser, ream only if loose)'}))
+        out.append(('bogie_bracket_bolts', Compound([screw(a, b, base_top, 5, 12) for a, b in bb]), False, {'sku': 'CB5-12', 'quantity': 4}))
+        out.append(('bogie_bracket_nuts', Compound([nut(a, b, base_bottom-bt-4, 8, 4, 5) for a, b in bb]), False, {'quantity': 4}))
+        washers = Compound([ring_x(xb-L/2-tw, tw, yp, zp, 30, 20.2), ring_x(xb+L/2, tw, yp, zp, 30, 20.2)])
+        out.append(('bogie_thrust_washers', washers, False,
+                    {'quantity': 2, 'material': 'oil-free thrust washer d20.2 x D30 x t1 (or brass shim)'}))
+        ends = [ring_x(e0-2, 2, yp, zp, 24, 8.4), ring_x(e1, 2, yp, zp, 24, 8.4),
+                cylx(6.5, 8, e0-6, yp, zp)+cylx(3.4, 14, e0+5, yp, zp), cylx(6.5, 8, e1+6, yp, zp)+cylx(3.4, 14, e1-5, yp, zp)]
+        out.append(('bogie_shaft_end_bolts_CB8-16', Compound([s for c in ends for s in c.solids()]), False,
+                    {'sku': 'CB8-16 + washer M8 D24 t2', 'quantity': 2, 'thread': 'engaged length 14 shown at the tap minor diameter'}))
+        # ---- rotation limits: stopper on the floor, M6 striker from the base plate (contact exactly at the limit)
+        for (x, y), limit, tag in ((stoppers[0], half, 'front'), (stoppers[1], -half, 'rear')):
+            parts = [misumi_solid(q['bump_stopper_step'], c).rotate(Axis.Y, 90).translate((x, y, fz))
+                     for c in q['bump_stopper_children']]
+            top = max(s.bounding_box().max.Z for s in parts)
+            out.append((f"bogie_{tag}_stopper_{q['bump_stopper_sku']}", Compound(parts), True,
+                        {'sku': q['bump_stopper_sku'], 'supply': 'company stock', 'status': 'misumi_step_exact',
+                         'source': q['bump_stopper_step']+'.gz', 'color': (.35, .78, .45), 'tip_z': round(top, 3),
+                         'fit': 'M5x0.8 thread 7: 3t floor + M5 nut 4 underneath'}))
+            out.append((f'bogie_{tag}_stopper_nut_M5', nut(x, y, fz-t-4, 8, 4, 5), True, {'quantity': 1}))
+            r = q['bump_stopper_d_mm']/2
+            tip = max(rotate_yz(d, 'RIGHT', limit, (y+dy, top))[1] for dy in (-r, r))+.05
+            out.append((f'bogie_{tag}_striker_M6', screw(x, y, base_top, 6, base_top-tip)+nut(x, y, base_bottom-5, 10, 5, 6), False,
+                        {'sku': 'M6 hex bolt + jam nut', 'tip_z': round(tip, 3), 'limit_mm': limit,
+                         'adjust': 'Set the bogie rotation limit with the jam nut or washers'}))
+        return out
+
+    for side in (1, -1):
+        key = 'RIGHT' if side > 0 else 'LEFT'
+        for name, shape, moving, meta in right():
+            if side < 0:
+                shape = shape.mirror(Plane.YZ)
+            add(name, shape, key, moving, **meta)
 
 
 def boss_plates(xs, pz, ys):
@@ -262,10 +439,12 @@ def make(d):
         add(kind+'_bump_stop_bolt_M6', stop, key, sku='M6 hex bolt + jam nut', tip_z=round(tip, 3),
             adjust='Striker on the stopper tip; set the bump limit with the jam nut or washers')
 
-    # ---------------------------------------------------------------- drive
+    if is_bogie(d):
+        bogie_records(d, add, base_bottom, base_top)
+    # ---------------------------------------------------------------- drive (hinge concept)
     q = d.layout['suspension']['drive']
     t = q['arm_thickness_mm']
-    for side in (-1, 1):
+    for side in (() if is_bogie(d) else (-1, 1)):
         key = 'LEFT' if side < 0 else 'RIGHT'
         (px, _, pz), _ = pivot_of(d, key)
 
@@ -321,7 +500,7 @@ def make(d):
     q = d.layout['suspension']['caster']
     t = q['arm_thickness_mm']
     plate_top = d.parts['caster']['cad_height']
-    for wheel in CASTER_WHEELS:
+    for wheel in (w for w in CASTER_WHEELS if w in hinge_wheels(d)):
         x, y = caster_xy(d, wheel)
         side = -1 if x < 0 else 1
         (px, _, pz), _ = pivot_of(d, wheel)

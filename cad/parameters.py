@@ -36,6 +36,7 @@ def validate_parameters(d):
         raise ValueError("Upper deck must be above the camera hanger seat")
     if d.variant!='baseline':
         s=d.layout['suspension']
+        if s.get('concept')=='bogie':validate_bogie(d)
         for kind,maximum in (('drive',20),('caster',10)):
             q=s[kind]
             for key in ('travel_mm','spring_od_mm','spring_id_mm','display_turns','loaded_length_mm','free_length_mm',
@@ -83,6 +84,32 @@ def validate_parameters(d):
             if (installed+half>q['free_length_mm'] or installed-half<=q['solid_length_mm']
                     or q['free_length_mm']-(installed-half)>q['max_deflection_mm']):
                 raise ValueError('Catalog spring travel is exceeded: '+kind)
+
+def validate_bogie(d):
+    """Rev15 bogie: geometric limits that the CAD builder relies on."""
+    from math import asin, cos, sin
+    q=d.layout['suspension']['bogie'];bb=d.p['base_bottom_z']
+    for key in ('travel_mm','pivot_y_mm','pivot_z_mm','sheet_t_mm','bush_length_mm','shaft_d_mm','bracket_t_mm'):
+        if not isinstance(q[key],(int,float)) or not math.isfinite(q[key]) or q[key]<=0:raise ValueError('Invalid bogie parameter: '+key)
+    if q['sheet_t_mm']>3 or q['bracket_t_mm']>3:raise ValueError('Bent sheet parts are limited to 3t')
+    yp,zp=q['pivot_y_mm'],q['pivot_z_mm'];front=d.p['caster_y']-yp
+    if not 0<yp<d.p['caster_y']:raise ValueError('Bogie pivot must sit between the drive axle and the front caster')
+    if q['bush_bore_mm']!=q['shaft_d_mm'] or q['bush_od_mm']<=q['bush_bore_mm']:raise ValueError('Bogie bush and shaft do not match')
+    a=asin(q['travel_mm']/2/front);r=q['bush_flange_d_mm']/2
+    # Two-face flange, flats horizontal: its corners (radius r) turn with the bogie.
+    if zp+r*sin(min(math.pi/2,asin(q['bush_flange_flats_mm']/2/r)+a))>=d.p['base_bottom_z']-q['bracket_t_mm']-2:
+        raise ValueError('Bogie bush flange reaches the pivot bracket at full travel')
+    if q['bracket_ear_bottom_z_mm']>=zp-q['shaft_d_mm']/2-3:raise ValueError('Bogie bracket ear too short for the shaft hole')
+    x0=q['bush_center_x_mm']-q['bush_length_mm']/2-q['thrust_washer_t_mm']-q['bracket_t_mm']
+    x1=q['bush_center_x_mm']+q['bush_length_mm']/2+q['thrust_washer_t_mm']+q['bracket_t_mm']
+    if not q['inner_wall_x_mm']+q['sheet_t_mm']<=q['bush_center_x_mm']-q['bush_flange_t_mm']/2:raise ValueError('Bush flange must sit on the inner wall')
+    if not (x0<q['inner_wall_x_mm'] and x1<q['outer_wall_x_mm']-q['torque_plate_t_mm']):raise ValueError('Bogie bracket ears must straddle the inner wall')
+    if x1+2+8>=q['outer_wall_x_mm']:raise ValueError('Shaft end bolt reaches the outer wall')
+    if x1>=d.p.get('base_well_inner_x',d.p['base_width']/2-50):raise ValueError('Bogie bracket must sit under the base plate')
+    for y,z in q['wall_top_profile_yz']:
+        for s in (-1,1):
+            if zp+(y-yp)*sin(s*a)+(z-zp)*cos(a)>=bb-2:raise ValueError('Bogie wall reaches the base plate at full travel')
+
 
 def set_parameter(key, value):
     path=ROOT/"cad/layout.json"

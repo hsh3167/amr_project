@@ -2,7 +2,7 @@
 
 2WD 차동구동 + 캐스터 4개입니다. **Rev12 서스펜션**은 6개 바퀴가 각각 짧은 경첩 암과 MISUMI 힌지 핀·스프링으로 독립적으로 움직이는 단순한 구조이며 용접·레일이 없습니다. 판재는 강판 3t, 상판 윗면은 지면에서 286mm입니다. 설계 원본은 build123d Python과 JSON이며, FreeCAD에서 측정·단면·조립을 검토합니다. [서스펜션 상세](docs/suspension-misumi.md) · [미스미 구매 BOM](bom/suspension_misumi.csv)
 
-- [3D 뷰어](https://hsh3167.github.io/amr_project/) · [최신 STEP](cad-output/amr_current.step) · [검증 결과](cad-output/build_report.json)
+- [3D 뷰어](https://hsh3167.github.io/amr_project/) · [최신 STEP (gzip, 압축 해제 후 사용)](cad-output/amr_current.step.gz) · [검증 결과](cad-output/build_report.json)
 - [최신 설계 상태](design_state.md) · [생성/수정/FreeCAD 실행 방법](docs/build123d-workflow.md)
 - [제조사 CAD와 버전 차이](docs/vendor-cad.md) · [기구·전원 검토](docs/engineering-decisions.md) · [BOM](bom/concept_bom.csv)
 - [원본 Rev05/변환 비교](cad/baseline/rev05/comparison_build123d.json) · [Rev05 설계 이력](docs/README-rev05.md)

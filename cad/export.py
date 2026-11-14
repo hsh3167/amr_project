@@ -10,10 +10,13 @@ from .assembly import assemble
 from .validation import metrics
 from OCP.ShapeFix import ShapeFix_ShapeTolerance
 from OCP.BRepTools import BRepTools
+from OCP.BRepMesh import BRepMesh_IncrementalMesh
 from OCP.Message import Message_ProgressRange
 from OCP.RWGltf import RWGltf_CafWriter
 from OCP.TCollection import TCollection_AsciiString
 from OCP.TColStd import TColStd_IndexedDataMapOfStringString
+
+COARSE_DISPLAY=('57_company_speaker','50_company_7S9P_battery')
 
 def display_glb(root,path):
     """Tessellate the CAD assembly and merge faces by material within each part."""
@@ -22,6 +25,15 @@ def display_glb(root,path):
         # Same Y-up and millimetre-to-metre convention as build123d export_gltf.
         root.location *= Location((0,0,0),(1,0,0),-90)
         BRepTools.Clean_s(root.wrapped)
+        # Display mesh only (STEP keeps the exact BRep): the company speaker/battery files carry fine grilles
+        # and vents, so they get a coarser tessellation; everything else uses the project default.
+        coarse=[]
+        def walk(node):
+            if node.label.startswith(COARSE_DISPLAY):coarse.append(node);return
+            for child in node.children:walk(child)
+        walk(root)
+        for node in coarse:
+            BRepMesh_IncrementalMesh(node.wrapped,2.0,False,1.2,True)
         root.mesh(.4,.35)
         # Reuse build123d's named, colored assembly writer (pinned version).
         document=_create_xde(root,Unit.MM,auto_naming=False)
