@@ -10,7 +10,7 @@ Drive and caster,Standard,M8 stud + 2 M8 nuts + washer OD16,6,Threaded into arm;
 Drive and caster,Standard,M6 hex bolt + M6 jam nut,6,Striker through the base plate; tip meets the C-USLH10 urethane tip = bump stop,,"Drive ~27 under head (M6x30 cut or x25 + washers), caster ~12 (M6x12); set with jam nut",400,6,2400,,"standard part, local hardware price",Estimate (not quoted)
 Drive and caster,Fabricate or washer,Preload shim 5mm,6,Remove when the robot arm is not mounted,,Standard washers,500,6,3000,,"standard part, local hardware price",Estimate (not quoted)
 Drive and caster,MISUMI,CB5-14,16,Hinge brackets to base plate (drive 4 each / caster 2 each),https://kr.misumi-ec.com/vona2/detail/110100141750/,Catalog candidate,211,16,3376,ref ship 2026-11-17,2026-11-14 kr.misumi-ec.com,MISUMI price
-Caster,MISUMI,CB6-16,16,GL-65 caster plate to arm,https://kr.misumi-ec.com/vona2/detail/110100141750/,Check real caster plate stack,260,16,4160,ref ship 2026-11-17,2026-11-14 kr.misumi-ec.com,MISUMI price
+Caster,MISUMI,CB6-16,16,GL-65 caster plate (2mm; OEM STEP) to the 6t arm: head under the plate + M6 nut on the arm,https://kr.misumi-ec.com/vona2/detail/110100141750/,Rev13 stack: plate 2 + arm 6 + nut 5 + 3 thread out,260,16,4160,ref ship 2026-11-17,2026-11-14 kr.misumi-ec.com,MISUMI price
 Drive and caster,Standard,M5 hex nut,16,Chassis joints,,Envelope and quantity,50,16,800,,"standard part, local hardware price",Estimate (not quoted)
 Caster,Standard,M6 hex nut,16,OEM caster plate joints,,Envelope and quantity,60,16,960,,"standard part, local hardware price",Estimate (not quoted)
 Drive,Motor supplier,M14x1.5 axle nut,2,Check included nut AF and actual thickness,,Trial fit required,0,2,0,,included with motor (assumed),Estimate (not quoted)

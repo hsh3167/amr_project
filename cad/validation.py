@@ -102,6 +102,38 @@ def _all_pairs(records,wanted=None):
             (known if reason else hits).append({**item,'reason':reason} if reason else item)
     return tested,hits,known
 
+def support_connectivity(records,tolerance=.2):
+    """Rev13: every part must reach the base plate through touching parts (gap <= tolerance, i.e. clearance fits).
+
+    Catches floating envelopes and fastener stacks that bear on nothing. Contact is geometric only:
+    it does not prove that a joint is clamped or strong enough.
+    """
+    from OCP.BRepExtrema import BRepExtrema_DistShapeShape
+    boxes=[(tuple(b.min),tuple(b.max)) for b in (r.shape.bounding_box() for r in records)]
+    near=lambda a,b:all(min(x1,y1)-max(x0,y0)>-tolerance for x0,x1,y0,y1 in zip(a[0],a[1],b[0],b[1]))
+    links={r.name:set() for r in records}
+    for i,a in enumerate(records):
+        for j in range(i+1,len(records)):
+            b=records[j]
+            if not near(boxes[i],boxes[j]):continue
+            dist=BRepExtrema_DistShapeShape(a.shape.wrapped,b.shape.wrapped)
+            if dist.IsDone() and dist.Value()<=tolerance:
+                links[a.name].add(b.name);links[b.name].add(a.name)
+    # Manufacturer CAD without the swivel bearing balls: the fork hangs 0.87 mm under the plate head.
+    for r in records:
+        if r.name.startswith('43_GL65_OEM_fork_'):
+            head='41_GL65_OEM_plate_head_'+r.name[len('43_GL65_OEM_fork_'):]
+            if head in links:links[r.name].add(head);links[head].add(r.name)
+    root=next(r.name for r in records if r.name.startswith('01_'))
+    seen={root};todo=[root]
+    while todo:
+        for other in links[todo.pop()]-seen:
+            seen.add(other);todo.append(other)
+    unsupported=sorted(set(links)-seen)
+    return {'root':root,'tolerance_mm':tolerance,'contacts':sum(map(len,links.values()))//2,
+            'unsupported':unsupported,'isolated':[n for n in unsupported if not links[n]],
+            'scope':'Contact graph from the base plate at the nominal pose; geometric support only, not joint strength'}
+
 def static_interference(records):
     """Every bounding-box-overlapping pair of the nominal assembly (Rev12b)."""
     tested,hits,known=_all_pairs(records)
@@ -256,6 +288,8 @@ def validate(records,d,full=False,collisions=False):
                 if static['hits']:errors.append('Static interference')
                 posed=suspension_pose_interference(d);report['suspension_pose_interference']=posed
                 if posed['hits']:errors.append('Suspension pose interference')
+                support=support_connectivity(records);report['support_connectivity']=support
+                if support['unsupported']:errors.append('Unsupported parts: '+', '.join(support['unsupported']))
     report['valid']=not errors
     return report
 

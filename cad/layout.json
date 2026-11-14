@@ -1,5 +1,5 @@
 {
-  "revision": "1.2b",
+  "revision": "1.3",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
     "base_width": 390,
@@ -63,8 +63,8 @@
       "heading_deg": -45,
       "bbox_bottom_z": 163,
       "scan_z": 240.83,
-      "support_x": -170,
-      "support_y": 215
+      "support_x": -176,
+      "support_y": 220
     },
     {
       "id": "lidarRearRight",
@@ -74,8 +74,8 @@
       "heading_deg": 135,
       "bbox_bottom_z": 163,
       "scan_z": 240.83,
-      "support_x": 170,
-      "support_y": -215
+      "support_x": 176,
+      "support_y": -220
     }
   ],
   "lidar_mount": {
@@ -89,16 +89,17 @@
   "camera_mount": {
     "profile_y": 235,
     "profile_bottom_z": 255,
-    "plate_y": 256,
+    "plate_y": 259,
     "plate_center_z": 253.5,
-    "plate_width": 40,
-    "plate_depth": 50,
+    "plate_width": 90,
+    "plate_depth": 74,
+    "wedge_status": "Rev13: printed wedge between the adapter plate and the camera underside (10 deg pitch, 15 deg yaw); M2 camera screws pitch 80 not drawn",
     "plate_thickness": 3
   },
   "electronics": {
     "logic_y": 180,
     "pcb_center_z": 146,
-    "computer_center_z": 161,
+    "computer_center_z": 171,
     "driver_x": 124,
     "driver_y": 125,
     "driver_center_z": 156,

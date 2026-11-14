@@ -302,8 +302,10 @@ def make(d):
         bushes('caster', wheel, hw, hw, q)
         add('caster_swing_arm_6t', arm, wheel, True, material='S355 6t laser-cut, 2 bent tabs; M8 tapped seat',
             arm_length_mm=q['arm_length_mm'])
-        add('caster_plate_bolts', Compound([screw(a, b, plate_top-5, 6, 16, True) for a, b in bolts]),
-            wheel, True, sku='CB6-16', quantity=4, plate_thickness_reference_mm=5)
+        # Rev13: heads bear on the underside of the 2 mm OEM caster plate (measured from the GL-65 STEP).
+        under = plate_top-d.parts['caster']['plate_thickness_mm']
+        add('caster_plate_bolts', Compound([screw(a, b, under, 6, 16, True) for a, b in bolts]),
+            wheel, True, sku='CB6-16', quantity=4, plate_thickness_mm=d.parts['caster']['plate_thickness_mm'])
         add('caster_plate_nuts', Compound([nut(a, b, plate_top+t, 10, 5, 6) for a, b in bolts]), wheel, True, quantity=4)
         hinge('caster', wheel, px-15, px+15, hw+q['ear_gap_mm'], hw+q['ear_gap_mm'], 88, q)
         spring_stack('caster', wheel, 16)

@@ -1,4 +1,5 @@
 from .common import *
+from build123d import Compound
 
 def profile_shape(d,x,y,bottom,top):
     q=d.profile;w=q['nominal_section'];h=top-bottom
@@ -13,6 +14,21 @@ def column(d,x,y,bottom,top,name,group):
     return PartRecord(name,group,profile_shape(d,x,y,bottom,top),(.67,.77,.84),'generic_profile',
                       {'material':'Aluminum extrusion','length_mm':top-bottom,'section_mm':d.profile['nominal_section']})
 
+def end_bolt(x,y,face,plate,up,core=4.2,engage=9):
+    """CB5-12 socket head cap screw through a plate into the M5-tapped core of a 20x20 profile end.
+
+    up=True: head under the plate (face = plate underside), screw points +Z.
+    up=False: head on the plate (face = plate top), screw points -Z.
+    The engaged thread is drawn at the tapped core diameter, the shank at M5 in a 5.5 hole.
+    """
+    if up:
+        return cylz(4.25,5,x,y,face-5)+cylz(2.5,plate,x,y,face)+cylz(core/2,engage,x,y,face+plate)
+    return cylz(4.25,5,x,y,face)+cylz(2.5,plate,x,y,face-plate)+cylz(core/2,engage,x,y,face-plate-engage)
+
+def bolts_record(name,group,shapes,quantity):
+    return PartRecord(name,group,Compound([s for c in shapes for s in c.solids()]),(.20,.22,.25),'catalog_envelope',
+                      {'sku':'CB5-12','quantity':quantity,'fit':'M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter'})
+
 def make(d):
     result=[]
     for x,y in d.profile['main_columns_xy']:
@@ -23,10 +39,8 @@ def make(d):
             for prefix,z in (('11_corner_lower_',121),('12_corner_upper_',deck_bottom-2)):
                 result.append(PartRecord(prefix+n,'structure',box(32,32,4,x,y,z),(.33,.49,.63)))
             continue
-        # Rev12b: collar plates sit on the 3t base top / under the deck and clear the column
-        # (20.4 square hole) and the adjacent LiDAR column (27 square, 0.5 gap).
-        base_top=d.p['base_bottom_z']+d.p['base_thickness']
-        for prefix,z in (('11_corner_lower_',base_top+2),('12_corner_upper_',deck_bottom-2)):
-            plate=box(27,27,4,x,y,z)-box(20.4,20.4,6,x,y,z)
-            result.append(PartRecord(prefix+n,'structure',plate,(.33,.49,.63),metadata={'material':'4t collar plate around the 20x20 column'}))
+        # Rev13: no loose collar plates. Each column end is bolted through the plate into its tapped core.
+        shapes=[end_bolt(x,y,d.p['base_bottom_z'],d.p['base_thickness'],True),
+                end_bolt(x,y,deck_bottom+d.p['top_thickness'],d.p['top_thickness'],False)]
+        result.append(bolts_record('13_column_end_bolts_CB5-12_'+n,'structure',shapes,2))
     return result

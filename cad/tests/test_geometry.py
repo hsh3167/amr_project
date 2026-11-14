@@ -150,3 +150,20 @@ def test_bom_csv_columns_and_totals():
     for r in items:
         if r[col['Unit price KRW ex VAT']]:
             assert line(r)==int(r[col['Unit price KRW ex VAT']])*int(r[col['Order qty']]),r[2]
+
+
+def test_rev13_every_part_is_supported_and_caster_bolts_bear_on_the_plate():
+    """No floating envelopes or fastener stacks: each part reaches the base plate through contacts."""
+    from cad.validation import support_connectivity
+    from cad.assembly import GROUPS
+
+    d=load_design()
+    records=build_records(d,[g for g in GROUPS if g!='cameras'])
+    report=support_connectivity(records)
+    assert report['unsupported']==[],report['unsupported']
+    parts={r.name:r for r in records}
+    assert not any(n.startswith(('11_corner_lower_','12_corner_upper_')) for n in parts)
+    plate=d.parts['caster']['cad_height']-d.parts['caster']['plate_thickness_mm']
+    for wheel in ('LF','LB','RF','RB'):
+        bolts=parts['80_caster_plate_bolts_'+wheel].shape.bounding_box()
+        assert bolts.min.Z==pytest.approx(plate-6) and bolts.max.Z==pytest.approx(plate+16)

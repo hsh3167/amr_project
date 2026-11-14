@@ -67,6 +67,7 @@
     "capacity_each_kg": 50.0,
     "status": "Manufacturer STEP EUS reference imported unscaled; CAD height83 vs catalogue82; tread23 vs modeled wheel/hub overall30.4. Actual EUS/TUN unit and contact height require verification.",
     "cad_height": 83,
+    "plate_thickness_mm": 2.0,
     "model_reference": "GL-65-ASF-EUS",
     "cad_wheel_assembly_width": 30.4
   },
