@@ -130,3 +130,23 @@ def test_rev12b_misumi_step_parts_and_static_clearance():
         assert parts['80_'+kind+'_spring_coil_'+wheel].shape.is_valid
     report=static_interference(records)
     assert report['hits']==[],report['hits']
+
+
+def test_bom_csv_columns_and_totals():
+    """Every BOM row parses to the header width and the total rows match the line sums (viewer reads these files)."""
+    import csv
+    from cad.parameters import ROOT
+
+    for name in ('suspension_misumi.csv','concept_bom.csv'):
+        rows=list(csv.reader((ROOT/'bom'/name).open(newline='',encoding='utf-8')))
+        assert all(len(r)==len(rows[0]) for r in rows),name
+    head,*rows=list(csv.reader((ROOT/'bom/suspension_misumi.csv').open(newline='',encoding='utf-8')))
+    col={h:i for i,h in enumerate(head)}
+    items=[r for r in rows if r[0]!='Total'];totals={r[2]:int(r[col['Line total KRW ex VAT']]) for r in rows if r[0]=='Total'}
+    line=lambda r:int(r[col['Line total KRW ex VAT']])
+    assert totals['MISUMI priced items']==sum(line(r) for r in items if r[col['Price basis']]=='MISUMI price')
+    assert totals['Estimated items']==sum(line(r) for r in items if r[col['Price basis']].startswith('Estimate'))
+    assert totals['Suspension total (6 modules)']==totals['MISUMI priced items']+totals['Estimated items']
+    for r in items:
+        if r[col['Unit price KRW ex VAT']]:
+            assert line(r)==int(r[col['Unit price KRW ex VAT']])*int(r[col['Order qty']]),r[2]
