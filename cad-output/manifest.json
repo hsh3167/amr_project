@@ -31,7 +31,7 @@
       "group": "chassis",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 593638.6230169939,
+      "volume_mm3": 589944.1100563724,
       "bounds_mm": [
         [
           -195.0,
@@ -47,9 +47,9 @@
         ]
       ],
       "center_mm": [
-        0.018009664608606955,
-        0.33678271271688875,
-        118.50000000000004
+        0.018122449766011316,
+        0.30757940953551294,
+        118.50000000000006
       ],
       "solids": 1
     },
@@ -1084,8 +1084,8 @@
           -89.0
         ],
         [
-          76.0,
-          174.0
+          96.0,
+          194.0
         ],
         [
           134.0,
@@ -1094,7 +1094,7 @@
       ],
       "center_mm": [
         -124.0,
-        125.0,
+        145.0,
         156.0
       ],
       "solids": 1
@@ -1111,8 +1111,8 @@
           159.0
         ],
         [
-          76.0,
-          174.0
+          96.0,
+          194.0
         ],
         [
           134.0,
@@ -1121,7 +1121,7 @@
       ],
       "center_mm": [
         124.0,
-        125.0,
+        145.0,
         156.0
       ],
       "solids": 1
@@ -1235,8 +1235,8 @@
           -93.5
         ],
         [
-          80.5,
-          169.5
+          100.5,
+          189.5
         ],
         [
           120.0,
@@ -1245,7 +1245,7 @@
       ],
       "center_mm": [
         -124.00000000000001,
-        125.00000000000001,
+        145.0,
         127.00000000000001
       ],
       "solids": 4
@@ -1266,8 +1266,8 @@
           154.5
         ],
         [
-          80.5,
-          169.5
+          100.5,
+          189.5
         ],
         [
           120.0,
@@ -1276,7 +1276,7 @@
       ],
       "center_mm": [
         123.99999999999999,
-        124.99999999999999,
+        144.99999999999997,
         126.99999999999999
       ],
       "solids": 4
@@ -1290,7 +1290,7 @@
         "placement": {
           "translate_mm": [
             10.48,
-            -37.343,
+            -51.343,
             218.55
           ],
           "case_mm": [
@@ -1302,15 +1302,15 @@
         },
         "limits": "Company-supplied STEP (case + terminal block); cell type, mass, BMS and charger not in the model. Hold-down strap TBD."
       },
-      "volume_mm3": 421957.9898842168,
+      "volume_mm3": 421957.98988421616,
       "bounds_mm": [
         [
           -137.3930497977077,
           137.3930497977082
         ],
         [
-          -111.91423986690756,
-          41.914239866908275
+          -125.91423986690756,
+          27.91423986690828
         ],
         [
           122.99999999999997,
@@ -1318,9 +1318,9 @@
         ]
       ],
       "center_mm": [
-        2.005197009332077,
-        -34.49650774685073,
-        166.53293981381566
+        2.0051970093320537,
+        -48.4965077468504,
+        166.5329398138149
       ],
       "solids": 6
     },
@@ -1340,8 +1340,8 @@
           129.8930497977077
         ],
         [
-          -104.41423986690828,
-          34.41423986690827
+          -118.41423986690828,
+          20.414239866908268
         ],
         [
           120.0,
@@ -1350,7 +1350,7 @@
       ],
       "center_mm": [
         1.544006160032541e-14,
-        -35.000000000000014,
+        -49.000000000000014,
         121.50000000000004
       ],
       "solids": 4
@@ -1510,8 +1510,8 @@
         ]
       ],
       "center_mm": [
-        -75.25128011655309,
-        -236.00064630472963,
+        -75.25128011655308,
+        -236.00064630472943,
         186.80313168215096
       ],
       "solids": 21
@@ -2320,10 +2320,10 @@
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": "RIGHT",
-        "material": "S355 3t laser-cut, 4 bends (outer wall + rear floor + rear inner wall, front caster pad + front inner wall); AF10.2 axle slot; D32.5 bush hole",
+        "material": "S355 3t laser-cut, 4 bends (outer wall + rear floor + rear inner wall, front caster pad + front inner wall); AF10.2 axle slot; D22/D30 pivot access holes",
         "length_mm": 292.5
       },
-      "volume_mm3": 107604.47207640528,
+      "volume_mm3": 106974.77909890124,
       "bounds_mm": [
         [
           108.0,
@@ -2339,9 +2339,9 @@
         ]
       ],
       "center_mm": [
-        141.59296137917846,
-        91.06363721929388,
-        79.24835240212244
+        141.03430907636505,
+        91.24648923710122,
+        79.33914503239457
       ],
       "solids": 1
     },
@@ -2563,197 +2563,6 @@
       "solids": 1
     },
     {
-      "name": "80_bogie_pivot_bush_EA-MFCNW20_RIGHT",
-      "group": "suspension",
-      "status": "catalog_table_model",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": "RIGHT",
-        "sku": "EA-MFCNW20",
-        "supply": "company stock",
-        "source": "MISUMI catalogue table (economy centre-flange housing unit, image 110311282859.jpg, read 2026-11-15): d20 D32 L77 T8 H54 A36 PCD43 d1 5.5 d2 9 t5.1. No STEP supplied; modelled from the table.",
-        "fit": "Oil-free (solid lubricant) bush d20 on the D20 g6 shaft; flange 2x CB5-12 through the inner wall"
-      },
-      "volume_mm3": 44823.56670991243,
-      "bounds_mm": [
-        [
-          76.5,
-          153.5
-        ],
-        [
-          33.0,
-          87.0
-        ],
-        [
-          72.0,
-          108.0
-        ]
-      ],
-      "center_mm": [
-        114.9868481244526,
-        59.99999999999999,
-        89.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_bogie_pivot_doubler_8t_RIGHT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": "RIGHT",
-        "material": "S355 8t flat laser-cut, D32.5 hole; clamped by the flange bolts + 4x CB5-16"
-      },
-      "volume_mm3": 22630.57099021138,
-      "bounds_mm": [
-        [
-          100.0,
-          108.0
-        ],
-        [
-          10.0,
-          110.0
-        ],
-        [
-          68.0,
-          106.0
-        ]
-      ],
-      "center_mm": [
-        103.99999999999999,
-        59.999999999999964,
-        86.04263751608542
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_bogie_flange_bolts_CB5-20_RIGHT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": "RIGHT",
-        "sku": "CB5-20",
-        "quantity": 2
-      },
-      "volume_mm3": 1352.8483364521044,
-      "bounds_mm": [
-        [
-          93.9,
-          118.9
-        ],
-        [
-          34.25,
-          85.75
-        ],
-        [
-          85.75,
-          94.25
-        ]
-      ],
-      "center_mm": [
-        109.14310595065312,
-        60.00000000000001,
-        90.00000000000001
-      ],
-      "solids": 2
-    },
-    {
-      "name": "80_bogie_flange_nuts_M5_RIGHT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": "RIGHT",
-        "quantity": 2
-      },
-      "volume_mm3": 286.32537405814287,
-      "bounds_mm": [
-        [
-          96.0,
-          100.0
-        ],
-        [
-          34.5,
-          85.5
-        ],
-        [
-          85.38119784648299,
-          94.61880215351701
-        ]
-      ],
-      "center_mm": [
-        98.00000000000001,
-        59.999999999999986,
-        90.00000000000004
-      ],
-      "solids": 2
-    },
-    {
-      "name": "80_bogie_doubler_bolts_CB5-16_RIGHT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": "RIGHT",
-        "sku": "CB5-16",
-        "quantity": 4
-      },
-      "volume_mm3": 2391.53740754523,
-      "bounds_mm": [
-        [
-          95.0,
-          116.0
-        ],
-        [
-          15.75,
-          104.25
-        ],
-        [
-          68.75,
-          107.25
-        ]
-      ],
-      "center_mm": [
-        107.98275862068962,
-        60.000000000000014,
-        88.0
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_bogie_doubler_nuts_M5_RIGHT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": "RIGHT",
-        "quantity": 4
-      },
-      "volume_mm3": 572.6507481162857,
-      "bounds_mm": [
-        [
-          96.0,
-          100.0
-        ],
-        [
-          16.0,
-          104.0
-        ],
-        [
-          68.38119784648299,
-          107.61880215351701
-        ]
-      ],
-      "center_mm": [
-        98.00000000000003,
-        60.00000000000001,
-        87.99999999999999
-      ],
-      "solids": 4
-    },
-    {
       "name": "80_bogie_caster_plate_bolts_RIGHT",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
@@ -2818,196 +2627,433 @@
       "solids": 4
     },
     {
-      "name": "80_bogie_pivot_shaft_D20_RIGHT",
+      "name": "80_bogie_pivot_U_bracket_3t_RIGHT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "material": "S355 3t laser-cut, 2 bends; window under the bearing holders; D12.2 / D10.5 ear holes; 4x CB5-12 to the floor"
+      },
+      "volume_mm3": 14883.609289320386,
+      "bounds_mm": [
+        [
+          122.69999999999999,
+          161.0
+        ],
+        [
+          26.0,
+          94.0
+        ],
+        [
+          66.0,
+          99.0
+        ]
+      ],
+      "center_mm": [
+        141.72693861393992,
+        59.99999999999994,
+        80.25581872318986
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bogie_U_bracket_bolts_CB5-12_RIGHT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "sku": "CB5-12",
+        "quantity": 4
+      },
+      "volume_mm3": 2077.378142186251,
+      "bounds_mm": [
+        [
+          126.75,
+          157.25
+        ],
+        [
+          27.75,
+          92.25
+        ],
+        [
+          57.0,
+          74.0
+        ]
+      ],
+      "center_mm": [
+        142.0,
+        59.99999999999999,
+        67.64366729678642
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_bogie_U_bracket_nuts_M5_RIGHT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "quantity": 4
+      },
+      "volume_mm3": 572.6507481162854,
+      "bounds_mm": [
+        [
+          126.38119784648299,
+          157.618802153517
+        ],
+        [
+          28.0,
+          92.0
+        ],
+        [
+          59.0,
+          63.0
+        ]
+      ],
+      "center_mm": [
+        142.00000000000006,
+        59.99999999999998,
+        61.00000000000003
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_bogie_pivot_shoulder_bolt_12x35_RIGHT",
+      "group": "suspension",
+      "status": "catalog_envelope",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "sku": "Bossard BN1359 12x35 (ISO 7379)",
+        "supply": "company stock",
+        "source": "ISO 7379 12x35: head D18 x 8, shoulder D12 f9 x 35, M10 x 16",
+        "note": "Company list: 12x35. The supplied SHOULDER BOLT.STEP measures a 30.0 mm shoulder; the stack needs 35 (confirm the real bolt). Modelled from ISO 7379 catalogue dimensions, not from the STEP.",
+        "fit": "Pivot axle: inner rings and collars clamped between the outboard ear and the inboard ear"
+      },
+      "volume_mm3": 7067.966147620605,
+      "bounds_mm": [
+        [
+          110.0,
+          169.0
+        ],
+        [
+          51.0,
+          69.0
+        ],
+        [
+          78.0,
+          96.0
+        ]
+      ],
+      "center_mm": [
+        144.6187643720885,
+        60.0,
+        87.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bogie_pivot_collars_RIGHT",
+      "group": "suspension",
+      "status": "catalog_envelope",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "quantity": 3,
+        "lengths_mm": [
+          2.5,
+          11.3,
+          2.5
+        ],
+        "note": "Bearing collars d12.1 x D16, length-specified catalogue collars (SKU to pick); the stack is 0.3 mm longer than the shoulder so the nut clamps the inner rings."
+      },
+      "volume_mm3": 1402.9700910456397,
+      "bounds_mm": [
+        [
+          125.69999999999999,
+          158.0
+        ],
+        [
+          52.0,
+          68.0
+        ],
+        [
+          79.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        141.85,
+        59.99999999999999,
+        87.0
+      ],
+      "solids": 3
+    },
+    {
+      "name": "80_bogie_pivot_nut_E-GLNUTS10_RIGHT",
+      "group": "suspension",
+      "status": "catalog_table_model",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": "RIGHT",
+        "sku": "E-GLNUTS10",
+        "supply": "company stock",
+        "fit": "M10 lock nut (spring-ring type), 31 N m catalogue torque; hold the bolt with a 6 mm hex key"
+      },
+      "volume_mm3": 1425.4546604378504,
+      "bounds_mm": [
+        [
+          114.39999999999999,
+          122.69999999999999
+        ],
+        [
+          51.5,
+          68.5
+        ],
+        [
+          77.18504542377636,
+          96.81495457622364
+        ]
+      ],
+      "center_mm": [
+        118.55,
+        60.0,
+        87.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bogie_pivot_holders_BGHK6001DD-30_RIGHT",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "sku": "BGHK6001DD-30",
+        "supply": "company stock",
+        "source": "BGHK6001DD-30.stp.gz",
+        "quantity": 2,
+        "fit": "Hung flange-up under the base plate, 2x M5 each; 2 mm lips face outward"
+      },
+      "volume_mm3": 40100.14528081911,
+      "bounds_mm": [
+        [
+          126.1999999,
+          157.5000001
+        ],
+        [
+          30.0,
+          90.0
+        ],
+        [
+          69.0,
+          117.00000010000001
+        ]
+      ],
+      "center_mm": [
+        141.85000000000005,
+        59.99999999999997,
+        98.6528681451121
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_bogie_pivot_bearings_6001DD_RIGHT",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "sku": "BGHK6001DD-30",
+        "supply": "company stock",
+        "source": "BGHK6001DD-30.stp.gz",
+        "quantity": 2,
+        "note": "Bearing solid of the BGHK STEP (inner-ring land D16.3)"
+      },
+      "volume_mm3": 7531.8607357631345,
+      "bounds_mm": [
+        [
+          128.1999999,
+          155.5000001
+        ],
+        [
+          45.9999999,
+          74.0000001
+        ],
+        [
+          72.9999999,
+          101.0000001
+        ]
+      ],
+      "center_mm": [
+        141.8499999999999,
+        59.999999999999986,
+        86.99999999999997
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_bogie_pivot_snap_rings_RIGHT",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "sku": "BGHK6001DD-30",
+        "supply": "company stock",
+        "source": "BGHK6001DD-30.stp.gz",
+        "quantity": 2
+      },
+      "volume_mm3": 448.2693378766572,
+      "bounds_mm": [
+        [
+          136.1999999,
+          147.5000001
+        ],
+        [
+          45.3,
+          74.7
+        ],
+        [
+          72.3,
+          101.24170176232846
+        ]
+      ],
+      "center_mm": [
+        141.84999999999997,
+        59.99999999999999,
+        85.07722386996805
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_bogie_pivot_backing_plate_3t_RIGHT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "material": "S355 3t flat laser-cut; spreads the bearing-pair couple into the 3t base plate"
+      },
+      "volume_mm3": 10604.900466686726,
+      "bounds_mm": [
+        [
+          112.0,
+          172.0
+        ],
+        [
+          30.0,
+          90.5
+        ],
+        [
+          120.0,
+          123.0
+        ]
+      ],
+      "center_mm": [
+        142.0040325630713,
+        60.256720938452204,
+        121.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bogie_holder_bolts_CB5-22_RIGHT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "sku": "CB5-22",
+        "quantity": 4
+      },
+      "volume_mm3": 2862.776305583699,
+      "bounds_mm": [
+        [
+          129.45,
+          154.25
+        ],
+        [
+          31.75,
+          88.25
+        ],
+        [
+          101.0,
+          128.0
+        ]
+      ],
+      "center_mm": [
+        141.85,
+        60.00000000000002,
+        117.35185185185186
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_bogie_holder_nuts_M5_RIGHT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "RIGHT",
+        "moving_wheel": null,
+        "quantity": 4
+      },
+      "volume_mm3": 572.6507481162854,
+      "bounds_mm": [
+        [
+          129.08119784648298,
+          154.618802153517
+        ],
+        [
+          32.0,
+          88.0
+        ],
+        [
+          103.0,
+          107.0
+        ]
+      ],
+      "center_mm": [
+        141.84999999999997,
+        60.00000000000001,
+        105.00000000000001
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_motor_cable_grommet_D28_RIGHT",
       "group": "suspension",
       "status": "catalog_envelope",
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
-        "length_mm": 85.0,
-        "supply": "Purchase: D20 linear shaft, both ends M8 tapped, length = ear outer faces (catalogue part, cut and tapped by the supplier)",
-        "fit": "g6 shaft, both ends M8 x16 tapped; clamped through both ears by the end bolts"
+        "note": "Hub-motor lead leaves the inboard axle end inside the bogie, rises through a 28 mm base-plate hole with a rubber grommet to the motor driver; leave slack for +-3.9 mm drive travel.",
+        "fit": "Rubber grommet for a 28 mm hole in 3t plate, 20 mm bore"
       },
-      "volume_mm3": 25541.3996010973,
+      "volume_mm3": 2686.061718819273,
       "bounds_mm": [
         [
-          72.5,
-          157.5
+          137.0,
+          171.0
         ],
         [
-          50.0,
-          70.0
+          -12.0,
+          22.0
         ],
         [
-          80.0,
-          100.0
+          115.5,
+          121.5
         ]
       ],
       "center_mm": [
-        115.0,
-        60.000000000000014,
-        90.00000000000001
+        154.00000000000003,
+        5.0,
+        118.50000000000001
       ],
       "solids": 1
-    },
-    {
-      "name": "80_bogie_pivot_bracket_U_3t_RIGHT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": null,
-        "material": "S355 3t laser-cut, 2 bends; D20.2 ear holes (laser, ream only if loose)"
-      },
-      "volume_mm3": 13002.057267130549,
-      "bounds_mm": [
-        [
-          72.5,
-          157.5
-        ],
-        [
-          45.0,
-          75.0
-        ],
-        [
-          72.0,
-          117.0
-        ]
-      ],
-      "center_mm": [
-        115.07674542159724,
-        60.00000000000002,
-        106.18858904987461
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_bogie_bracket_bolts_RIGHT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": null,
-        "sku": "CB5-12",
-        "quantity": 4
-      },
-      "volume_mm3": 2077.3781421862504,
-      "bounds_mm": [
-        [
-          83.75,
-          139.25
-        ],
-        [
-          47.75,
-          72.25
-        ],
-        [
-          108.0,
-          125.0
-        ]
-      ],
-      "center_mm": [
-        111.49999999999997,
-        60.0,
-        118.64366729678639
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_bogie_bracket_nuts_RIGHT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": null,
-        "quantity": 4
-      },
-      "volume_mm3": 572.650748116286,
-      "bounds_mm": [
-        [
-          83.38119784648299,
-          139.618802153517
-        ],
-        [
-          48.0,
-          72.0
-        ],
-        [
-          110.0,
-          114.0
-        ]
-      ],
-      "center_mm": [
-        111.5,
-        59.999999999999986,
-        112.00000000000001
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_bogie_thrust_washers_RIGHT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": null,
-        "quantity": 2,
-        "material": "oil-free thrust washer d20.2 x D30 x t1 (or brass shim)"
-      },
-      "volume_mm3": 772.7689609300177,
-      "bounds_mm": [
-        [
-          75.5,
-          154.5
-        ],
-        [
-          45.0,
-          75.0
-        ],
-        [
-          75.0,
-          105.0
-        ]
-      ],
-      "center_mm": [
-        114.99999999999999,
-        60.000000000000085,
-        89.99999999999999
-      ],
-      "solids": 2
-    },
-    {
-      "name": "80_bogie_shaft_end_bolts_CB8-16_RIGHT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "RIGHT",
-        "moving_wheel": null,
-        "sku": "CB8-16 + washer M8 D24 t2",
-        "quantity": 2,
-        "thread": "engaged length 14 shown at the tap minor diameter"
-      },
-      "volume_mm3": 4728.473934771068,
-      "bounds_mm": [
-        [
-          62.5,
-          167.5
-        ],
-        [
-          48.0,
-          72.0
-        ],
-        [
-          78.0,
-          102.0
-        ]
-      ],
-      "center_mm": [
-        115.00000000000003,
-        60.0,
-        89.99999999999999
-      ],
-      "solids": 4
     },
     {
       "name": "80_bogie_front_stopper_C-USLH10_RIGHT",
@@ -3083,11 +3129,11 @@
         "wheel": "RIGHT",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 85.968,
+        "tip_z": 85.962,
         "limit_mm": 10.0,
         "adjust": "Set the bogie rotation limit with the jam nut or washers"
       },
-      "volume_mm3": 1725.117454377883,
+      "volume_mm3": 1725.2941691565945,
       "bounds_mm": [
         [
           129.22649730810375,
@@ -3098,14 +3144,14 @@
           105.0
         ],
         [
-          85.96780925541707,
+          85.9615592486283,
           126.0
         ]
       ],
       "center_mm": [
-        134.99999999999997,
+        135.0,
         99.99999999999997,
-        110.39843088986684
+        110.39592824179248
       ],
       "solids": 1
     },
@@ -3183,11 +3229,11 @@
         "wheel": "RIGHT",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 88.871,
+        "tip_z": 88.865,
         "limit_mm": -10.0,
         "adjust": "Set the bogie rotation limit with the jam nut or washers"
       },
-      "volume_mm3": 1643.0306785905366,
+      "volume_mm3": 1643.2073933692484,
       "bounds_mm": [
         [
           144.22649730810375,
@@ -3198,14 +3244,14 @@
           -20.0
         ],
         [
-          88.87103506186868,
+          88.86478505507992,
           126.0
         ]
       ],
       "center_mm": [
-        149.99999999999997,
+        150.0,
         -24.999999999999993,
-        111.54647563553988
+        111.54403672386408
       ],
       "solids": 1
     },
@@ -3216,10 +3262,10 @@
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": "LEFT",
-        "material": "S355 3t laser-cut, 4 bends (outer wall + rear floor + rear inner wall, front caster pad + front inner wall); AF10.2 axle slot; D32.5 bush hole",
+        "material": "S355 3t laser-cut, 4 bends (outer wall + rear floor + rear inner wall, front caster pad + front inner wall); AF10.2 axle slot; D22/D30 pivot access holes",
         "length_mm": 292.5
       },
-      "volume_mm3": 107604.47207640528,
+      "volume_mm3": 106974.77909890124,
       "bounds_mm": [
         [
           -173.0,
@@ -3235,9 +3281,9 @@
         ]
       ],
       "center_mm": [
-        -141.59296137917846,
-        91.06363721929388,
-        79.24835240212244
+        -141.03430907636505,
+        91.24648923710122,
+        79.33914503239457
       ],
       "solids": 1
     },
@@ -3459,197 +3505,6 @@
       "solids": 1
     },
     {
-      "name": "80_bogie_pivot_bush_EA-MFCNW20_LEFT",
-      "group": "suspension",
-      "status": "catalog_table_model",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": "LEFT",
-        "sku": "EA-MFCNW20",
-        "supply": "company stock",
-        "source": "MISUMI catalogue table (economy centre-flange housing unit, image 110311282859.jpg, read 2026-11-15): d20 D32 L77 T8 H54 A36 PCD43 d1 5.5 d2 9 t5.1. No STEP supplied; modelled from the table.",
-        "fit": "Oil-free (solid lubricant) bush d20 on the D20 g6 shaft; flange 2x CB5-12 through the inner wall"
-      },
-      "volume_mm3": 44823.56670991243,
-      "bounds_mm": [
-        [
-          -153.5,
-          -76.5
-        ],
-        [
-          33.0,
-          87.0
-        ],
-        [
-          72.0,
-          108.0
-        ]
-      ],
-      "center_mm": [
-        -114.9868481244526,
-        59.99999999999999,
-        89.99999999999999
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_bogie_pivot_doubler_8t_LEFT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": "LEFT",
-        "material": "S355 8t flat laser-cut, D32.5 hole; clamped by the flange bolts + 4x CB5-16"
-      },
-      "volume_mm3": 22630.57099021138,
-      "bounds_mm": [
-        [
-          -108.0,
-          -100.0
-        ],
-        [
-          10.0,
-          110.0
-        ],
-        [
-          68.0,
-          106.0
-        ]
-      ],
-      "center_mm": [
-        -103.99999999999999,
-        59.999999999999964,
-        86.04263751608542
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_bogie_flange_bolts_CB5-20_LEFT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": "LEFT",
-        "sku": "CB5-20",
-        "quantity": 2
-      },
-      "volume_mm3": 1352.8483364521044,
-      "bounds_mm": [
-        [
-          -118.9,
-          -93.9
-        ],
-        [
-          34.25,
-          85.75
-        ],
-        [
-          85.75,
-          94.25
-        ]
-      ],
-      "center_mm": [
-        -109.14310595065312,
-        60.00000000000001,
-        90.00000000000001
-      ],
-      "solids": 2
-    },
-    {
-      "name": "80_bogie_flange_nuts_M5_LEFT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": "LEFT",
-        "quantity": 2
-      },
-      "volume_mm3": 286.325374058143,
-      "bounds_mm": [
-        [
-          -100.0,
-          -96.0
-        ],
-        [
-          34.5,
-          85.5
-        ],
-        [
-          85.381197846483,
-          94.61880215351701
-        ]
-      ],
-      "center_mm": [
-        -98.0,
-        60.00000000000002,
-        90.00000000000004
-      ],
-      "solids": 2
-    },
-    {
-      "name": "80_bogie_doubler_bolts_CB5-16_LEFT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": "LEFT",
-        "sku": "CB5-16",
-        "quantity": 4
-      },
-      "volume_mm3": 2391.53740754523,
-      "bounds_mm": [
-        [
-          -116.0,
-          -95.0
-        ],
-        [
-          15.75,
-          104.25
-        ],
-        [
-          68.75,
-          107.25
-        ]
-      ],
-      "center_mm": [
-        -107.98275862068962,
-        60.000000000000014,
-        88.0
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_bogie_doubler_nuts_M5_LEFT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": "LEFT",
-        "quantity": 4
-      },
-      "volume_mm3": 572.6507481162861,
-      "bounds_mm": [
-        [
-          -100.0,
-          -96.0
-        ],
-        [
-          16.0,
-          104.0
-        ],
-        [
-          68.381197846483,
-          107.61880215351701
-        ]
-      ],
-      "center_mm": [
-        -97.99999999999999,
-        60.0,
-        87.99999999999999
-      ],
-      "solids": 4
-    },
-    {
       "name": "80_bogie_caster_plate_bolts_LEFT",
       "group": "suspension",
       "status": "misumi_catalog_envelope",
@@ -3714,196 +3569,433 @@
       "solids": 4
     },
     {
-      "name": "80_bogie_pivot_shaft_D20_LEFT",
+      "name": "80_bogie_pivot_U_bracket_3t_LEFT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "material": "S355 3t laser-cut, 2 bends; window under the bearing holders; D12.2 / D10.5 ear holes; 4x CB5-12 to the floor"
+      },
+      "volume_mm3": 14883.609289320386,
+      "bounds_mm": [
+        [
+          -161.0,
+          -122.69999999999999
+        ],
+        [
+          26.0,
+          94.0
+        ],
+        [
+          66.0,
+          99.0
+        ]
+      ],
+      "center_mm": [
+        -141.72693861393992,
+        59.99999999999994,
+        80.25581872318986
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bogie_U_bracket_bolts_CB5-12_LEFT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "sku": "CB5-12",
+        "quantity": 4
+      },
+      "volume_mm3": 2077.3781421862523,
+      "bounds_mm": [
+        [
+          -157.25,
+          -126.75
+        ],
+        [
+          27.75,
+          92.25
+        ],
+        [
+          57.0,
+          74.0
+        ]
+      ],
+      "center_mm": [
+        -142.00000000000003,
+        59.99999999999999,
+        67.64366729678639
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_bogie_U_bracket_nuts_M5_LEFT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "quantity": 4
+      },
+      "volume_mm3": 572.650748116285,
+      "bounds_mm": [
+        [
+          -157.618802153517,
+          -126.38119784648299
+        ],
+        [
+          28.0,
+          92.0
+        ],
+        [
+          59.0,
+          63.0
+        ]
+      ],
+      "center_mm": [
+        -141.99999999999997,
+        59.999999999999964,
+        61.00000000000003
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_bogie_pivot_shoulder_bolt_12x35_LEFT",
+      "group": "suspension",
+      "status": "catalog_envelope",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "sku": "Bossard BN1359 12x35 (ISO 7379)",
+        "supply": "company stock",
+        "source": "ISO 7379 12x35: head D18 x 8, shoulder D12 f9 x 35, M10 x 16",
+        "note": "Company list: 12x35. The supplied SHOULDER BOLT.STEP measures a 30.0 mm shoulder; the stack needs 35 (confirm the real bolt). Modelled from ISO 7379 catalogue dimensions, not from the STEP.",
+        "fit": "Pivot axle: inner rings and collars clamped between the outboard ear and the inboard ear"
+      },
+      "volume_mm3": 7067.966147620604,
+      "bounds_mm": [
+        [
+          -169.0,
+          -110.0
+        ],
+        [
+          51.0,
+          69.0
+        ],
+        [
+          78.0,
+          96.0
+        ]
+      ],
+      "center_mm": [
+        -144.61876437208852,
+        59.999999999999986,
+        87.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bogie_pivot_collars_LEFT",
+      "group": "suspension",
+      "status": "catalog_envelope",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "quantity": 3,
+        "lengths_mm": [
+          2.5,
+          11.3,
+          2.5
+        ],
+        "note": "Bearing collars d12.1 x D16, length-specified catalogue collars (SKU to pick); the stack is 0.3 mm longer than the shoulder so the nut clamps the inner rings."
+      },
+      "volume_mm3": 1402.9700910456402,
+      "bounds_mm": [
+        [
+          -158.0,
+          -125.69999999999999
+        ],
+        [
+          52.0,
+          68.0
+        ],
+        [
+          79.0,
+          95.0
+        ]
+      ],
+      "center_mm": [
+        -141.85000000000002,
+        60.00000000000001,
+        87.00000000000003
+      ],
+      "solids": 3
+    },
+    {
+      "name": "80_bogie_pivot_nut_E-GLNUTS10_LEFT",
+      "group": "suspension",
+      "status": "catalog_table_model",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": "LEFT",
+        "sku": "E-GLNUTS10",
+        "supply": "company stock",
+        "fit": "M10 lock nut (spring-ring type), 31 N m catalogue torque; hold the bolt with a 6 mm hex key"
+      },
+      "volume_mm3": 1425.4546604378509,
+      "bounds_mm": [
+        [
+          -122.7,
+          -114.39999999999999
+        ],
+        [
+          51.5,
+          68.5
+        ],
+        [
+          77.18504542377636,
+          96.81495457622364
+        ]
+      ],
+      "center_mm": [
+        -118.54999999999997,
+        60.0,
+        87.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bogie_pivot_holders_BGHK6001DD-30_LEFT",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null,
+        "sku": "BGHK6001DD-30",
+        "supply": "company stock",
+        "source": "BGHK6001DD-30.stp.gz",
+        "quantity": 2,
+        "fit": "Hung flange-up under the base plate, 2x M5 each; 2 mm lips face outward"
+      },
+      "volume_mm3": 40100.145280819095,
+      "bounds_mm": [
+        [
+          -157.5000001,
+          -126.1999999
+        ],
+        [
+          29.999999999999996,
+          90.0
+        ],
+        [
+          69.0,
+          117.00000010000001
+        ]
+      ],
+      "center_mm": [
+        -141.85000000000005,
+        60.00000000000001,
+        98.65286814511211
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_bogie_pivot_bearings_6001DD_LEFT",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null,
+        "sku": "BGHK6001DD-30",
+        "supply": "company stock",
+        "source": "BGHK6001DD-30.stp.gz",
+        "quantity": 2,
+        "note": "Bearing solid of the BGHK STEP (inner-ring land D16.3)"
+      },
+      "volume_mm3": 7531.860735763132,
+      "bounds_mm": [
+        [
+          -155.5000001,
+          -128.1999999
+        ],
+        [
+          45.9999999,
+          74.0000001
+        ],
+        [
+          72.9999999,
+          101.0000001
+        ]
+      ],
+      "center_mm": [
+        -141.84999999999997,
+        59.999999999999986,
+        86.99999999999997
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_bogie_pivot_snap_rings_LEFT",
+      "group": "suspension",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null,
+        "sku": "BGHK6001DD-30",
+        "supply": "company stock",
+        "source": "BGHK6001DD-30.stp.gz",
+        "quantity": 2
+      },
+      "volume_mm3": 448.2693378766573,
+      "bounds_mm": [
+        [
+          -147.5000001,
+          -136.1999999
+        ],
+        [
+          45.3,
+          74.7
+        ],
+        [
+          72.3,
+          101.24170176232847
+        ]
+      ],
+      "center_mm": [
+        -141.84999999999994,
+        59.99999999999999,
+        85.07722386996805
+      ],
+      "solids": 2
+    },
+    {
+      "name": "80_bogie_pivot_backing_plate_3t_LEFT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null,
+        "material": "S355 3t flat laser-cut; spreads the bearing-pair couple into the 3t base plate"
+      },
+      "volume_mm3": 10604.900466686726,
+      "bounds_mm": [
+        [
+          -172.0,
+          -112.0
+        ],
+        [
+          30.0,
+          90.5
+        ],
+        [
+          120.0,
+          123.0
+        ]
+      ],
+      "center_mm": [
+        -142.0040325630713,
+        60.256720938452204,
+        121.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "80_bogie_holder_bolts_CB5-22_LEFT",
+      "group": "suspension",
+      "status": "misumi_catalog_envelope",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null,
+        "sku": "CB5-22",
+        "quantity": 4
+      },
+      "volume_mm3": 2862.776305583702,
+      "bounds_mm": [
+        [
+          -154.25,
+          -129.45
+        ],
+        [
+          31.75,
+          88.25
+        ],
+        [
+          101.0,
+          128.0
+        ]
+      ],
+      "center_mm": [
+        -141.84999999999997,
+        60.00000000000001,
+        117.35185185185186
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_bogie_holder_nuts_M5_LEFT",
+      "group": "suspension",
+      "status": "suspension_fabrication_design",
+      "metadata": {
+        "wheel": "LEFT",
+        "moving_wheel": null,
+        "quantity": 4
+      },
+      "volume_mm3": 572.6507481162851,
+      "bounds_mm": [
+        [
+          -154.618802153517,
+          -129.08119784648298
+        ],
+        [
+          32.0,
+          88.0
+        ],
+        [
+          103.0,
+          107.0
+        ]
+      ],
+      "center_mm": [
+        -141.85,
+        59.99999999999998,
+        105.00000000000003
+      ],
+      "solids": 4
+    },
+    {
+      "name": "80_motor_cable_grommet_D28_LEFT",
       "group": "suspension",
       "status": "catalog_envelope",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
-        "length_mm": 85.0,
-        "supply": "Purchase: D20 linear shaft, both ends M8 tapped, length = ear outer faces (catalogue part, cut and tapped by the supplier)",
-        "fit": "g6 shaft, both ends M8 x16 tapped; clamped through both ears by the end bolts"
+        "note": "Hub-motor lead leaves the inboard axle end inside the bogie, rises through a 28 mm base-plate hole with a rubber grommet to the motor driver; leave slack for +-3.9 mm drive travel.",
+        "fit": "Rubber grommet for a 28 mm hole in 3t plate, 20 mm bore"
       },
-      "volume_mm3": 25541.3996010973,
+      "volume_mm3": 2686.061718819274,
       "bounds_mm": [
         [
-          -157.5,
-          -72.5
+          -171.0,
+          -137.0
         ],
         [
-          50.0,
-          70.0
+          -12.0,
+          22.0
         ],
         [
-          80.0,
-          100.0
+          115.5,
+          121.5
         ]
       ],
       "center_mm": [
-        -115.0,
-        60.000000000000014,
-        90.00000000000001
+        -153.99999999999997,
+        5.000000000000002,
+        118.49999999999999
       ],
       "solids": 1
-    },
-    {
-      "name": "80_bogie_pivot_bracket_U_3t_LEFT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": null,
-        "material": "S355 3t laser-cut, 2 bends; D20.2 ear holes (laser, ream only if loose)"
-      },
-      "volume_mm3": 13002.057267130564,
-      "bounds_mm": [
-        [
-          -157.5,
-          -72.5
-        ],
-        [
-          45.0,
-          75.0
-        ],
-        [
-          72.0,
-          117.0
-        ]
-      ],
-      "center_mm": [
-        -115.07674542159715,
-        60.000000000000014,
-        106.18858904987457
-      ],
-      "solids": 1
-    },
-    {
-      "name": "80_bogie_bracket_bolts_LEFT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": null,
-        "sku": "CB5-12",
-        "quantity": 4
-      },
-      "volume_mm3": 2077.3781421862514,
-      "bounds_mm": [
-        [
-          -139.25,
-          -83.75
-        ],
-        [
-          47.75,
-          72.25
-        ],
-        [
-          108.0,
-          125.0
-        ]
-      ],
-      "center_mm": [
-        -111.50000000000003,
-        60.000000000000014,
-        118.6436672967864
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_bogie_bracket_nuts_LEFT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": null,
-        "quantity": 4
-      },
-      "volume_mm3": 572.6507481162857,
-      "bounds_mm": [
-        [
-          -139.618802153517,
-          -83.38119784648299
-        ],
-        [
-          48.0,
-          72.0
-        ],
-        [
-          110.0,
-          114.0
-        ]
-      ],
-      "center_mm": [
-        -111.50000000000001,
-        60.00000000000002,
-        112.00000000000009
-      ],
-      "solids": 4
-    },
-    {
-      "name": "80_bogie_thrust_washers_LEFT",
-      "group": "suspension",
-      "status": "suspension_fabrication_design",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": null,
-        "quantity": 2,
-        "material": "oil-free thrust washer d20.2 x D30 x t1 (or brass shim)"
-      },
-      "volume_mm3": 772.7689609300177,
-      "bounds_mm": [
-        [
-          -154.5,
-          -75.5
-        ],
-        [
-          45.0,
-          75.0
-        ],
-        [
-          75.0,
-          105.0
-        ]
-      ],
-      "center_mm": [
-        -114.99999999999966,
-        59.99999999999993,
-        89.99999999999983
-      ],
-      "solids": 2
-    },
-    {
-      "name": "80_bogie_shaft_end_bolts_CB8-16_LEFT",
-      "group": "suspension",
-      "status": "misumi_catalog_envelope",
-      "metadata": {
-        "wheel": "LEFT",
-        "moving_wheel": null,
-        "sku": "CB8-16 + washer M8 D24 t2",
-        "quantity": 2,
-        "thread": "engaged length 14 shown at the tap minor diameter"
-      },
-      "volume_mm3": 4728.473934771069,
-      "bounds_mm": [
-        [
-          -167.5,
-          -62.5
-        ],
-        [
-          48.0,
-          72.0
-        ],
-        [
-          78.0,
-          102.0
-        ]
-      ],
-      "center_mm": [
-        -115.0,
-        60.000000000000014,
-        90.00000000000001
-      ],
-      "solids": 4
     },
     {
       "name": "80_bogie_front_stopper_C-USLH10_LEFT",
@@ -3979,11 +4071,11 @@
         "wheel": "LEFT",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 85.968,
+        "tip_z": 85.962,
         "limit_mm": 10.0,
         "adjust": "Set the bogie rotation limit with the jam nut or washers"
       },
-      "volume_mm3": 1725.1174543778825,
+      "volume_mm3": 1725.294169156594,
       "bounds_mm": [
         [
           -140.77350269189625,
@@ -3994,14 +4086,14 @@
           105.0
         ],
         [
-          85.96780925541707,
+          85.9615592486283,
           126.0
         ]
       ],
       "center_mm": [
-        -134.99999999999997,
-        99.99999999999997,
-        110.39843088986687
+        -135.0,
+        100.0,
+        110.39592824179249
       ],
       "solids": 1
     },
@@ -4079,11 +4171,11 @@
         "wheel": "LEFT",
         "moving_wheel": null,
         "sku": "M6 hex bolt + jam nut",
-        "tip_z": 88.871,
+        "tip_z": 88.865,
         "limit_mm": -10.0,
         "adjust": "Set the bogie rotation limit with the jam nut or washers"
       },
-      "volume_mm3": 1643.0306785905361,
+      "volume_mm3": 1643.207393369248,
       "bounds_mm": [
         [
           -155.77350269189625,
@@ -4094,14 +4186,14 @@
           -20.0
         ],
         [
-          88.87103506186868,
+          88.86478505507992,
           126.0
         ]
       ],
       "center_mm": [
-        -149.99999999999997,
-        -24.999999999999996,
-        111.5464756355399
+        -150.0,
+        -25.0,
+        111.5440367238641
       ],
       "solids": 1
     },
