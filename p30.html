@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P30 Profile Chassis</title>
+<style>
+:root{--bg:#f4f6f8;--panel:#ffffff;--ink:#17202a;--muted:#5b6876;--line:#d9dfe5;--accent:#2563eb;--ok:#15803d;--warn:#b45309;--bad:#b91c1c;--canvas:#e9eef3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e141b;--panel:#151d26;--ink:#e6edf3;--muted:#93a1b0;--line:#26323f;--accent:#60a5fa;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;--canvas:#0b1118}}
+:root[data-theme="dark"]{--bg:#0e141b;--panel:#151d26;--ink:#e6edf3;--muted:#93a1b0;--line:#26323f;--accent:#60a5fa;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;--canvas:#0b1118}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif}
+header{display:flex;align-items:baseline;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+header h1{font-size:18px;margin:0}
+header small{color:var(--muted)}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:0;min-height:calc(100vh - 56px)}
+.scene{position:relative;background:var(--canvas);min-height:420px}
+canvas{display:block;width:100%;height:100%}
+#status{position:absolute;left:12px;top:10px;color:var(--muted);font-size:12px}
+aside{background:var(--panel);border-left:1px solid var(--line);padding:14px 16px;overflow:auto;max-height:calc(100vh - 56px)}
+h2{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px}
+h2:first-child{margin-top:0}
+.row{display:flex;align-items:center;gap:8px;margin:4px 0}
+.row label{flex:1}
+input[type=range]{width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:transparent;color:var(--ink);cursor:pointer;font:inherit;font-size:12px}
+.chip[aria-pressed="false"]{opacity:.45}
+table{width:100%;border-collapse:collapse;font-size:12px}
+td,th{padding:4px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+.tab{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;padding:4px 10px;cursor:pointer;font:inherit}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.hidden{display:none}
+.note{color:var(--muted);font-size:12px}
+@media (max-width:860px){.wrap{grid-template-columns:1fr}.scene{height:62vh}aside{border-left:0;border-top:1px solid var(--line);max-height:none}}
+</style>
+<script>if(new URLSearchParams(location.search).has('embed')){document.documentElement.dataset.theme='dark';document.documentElement.classList.add('embed')}</script>
+<style>.embed header{display:none}.embed .wrap{min-height:100vh;height:100vh}.embed aside{max-height:100vh}@media (max-width:860px){.embed .wrap{height:auto}}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"}}</script>
+</head>
+<body>
+<header><h1>P30 프로파일 샤시</h1><small>30×30 알루미늄 프로파일 · 구동륜 수직 슬라이드 서스펜션 · 캐스터 4개 고정 · build123d</small></header>
+<div class="wrap">
+  <div class="scene"><canvas id="c"></canvas><div id="status">GLB 불러오는 중…</div></div>
+  <aside>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-tab="view">보기</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="check">검증</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="bom">BOM</button>
+    </div>
+    <section id="tab-view">
+      <h2>구동륜 스트로크</h2>
+      <div class="row"><label for="sl">왼쪽 <b id="slv">0</b> mm</label></div>
+      <input id="sl" type="range" min="-10" max="10" step="0.5" value="0">
+      <div class="row"><label for="sr">오른쪽 <b id="srv">0</b> mm</label></div>
+      <input id="sr" type="range" min="-10" max="10" step="0.5" value="0">
+      <div class="row"><label>스프링 힘 (X-SWU21-70)</label><span id="force" class="n"></span></div>
+      <h2>표시</h2>
+      <div class="chips" id="groups"></div>
+      <p class="note">드래그 회전 · 휠 확대 · 우클릭 이동. 스트로크는 표시용 이동이며 간섭은 CAD 검증(±5/±10mm)에서 확인했습니다.</p>
+    </section>
+    <section id="tab-check" class="hidden"><div id="check">검증 보고서 불러오는 중…</div></section>
+    <section id="tab-bom" class="hidden"><div id="bom">BOM 불러오는 중…</div></section>
+  </aside>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+const $=id=>document.getElementById(id);
+const canvas=$('c'),host=canvas.parentElement;
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(35,1,.01,20);cam.position.set(-.95,.7,-1.05);
+const ctl=new OrbitControls(cam,canvas);ctl.target.set(0,.15,0);ctl.enableDamping=true;
+scene.add(new THREE.HemisphereLight(0xffffff,0x8899aa,1.2));
+const sun=new THREE.DirectionalLight(0xffffff,1.6);sun.position.set(1,2,1.5);scene.add(sun);const fill=new THREE.DirectionalLight(0xffffff,1.2);fill.position.set(-1,1.5,-1.5);scene.add(fill);
+const grid=new THREE.GridHelper(1.6,32,0x8899aa,0xaab5c0);grid.material.opacity=.35;grid.material.transparent=true;scene.add(grid);
+function size(){const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+new ResizeObserver(size).observe(host);size();
+let dirty=true;ctl.addEventListener('change',()=>dirty=true);
+(function loop(){requestAnimationFrame(loop);ctl.update();if(dirty){renderer.render(scene,cam);dirty=false}})();
+
+const GROUP_KO={frame:'프레임',plates:'판재',drive_left:'구동 좌',drive_right:'구동 우',casters:'캐스터',caster_lf:'캐스터 LF',caster_lb:'캐스터 LB',caster_rf:'캐스터 RF',caster_rb:'캐스터 RB',electronics:'전장',lidars:'LiDAR',cameras:'카메라'};
+const MOVER=/^(3\d|4[0-6])_.*_(LEFT|RIGHT)$/, SPRING=/^47_spring_.*_(LEFT|RIGHT)$/;
+const movers={LEFT:[],RIGHT:[]},springs={LEFT:[],RIGHT:[]};
+const SPRING_TOP=.245,SPRING_NOM=.04774,RATE=5.39,FREE=70;
+try{
+  const gltf=await new GLTFLoader().loadAsync('cad-output/p30/amr_p30.glb?v='+Date.now());
+  const root=gltf.scene;scene.add(root);root.updateMatrixWorld(true);
+  const chips=$('groups');
+  const groups=root.children.length===1?root.children[0].children:root.children;
+  for(const g of groups){
+    const b=document.createElement('button');b.className='chip';b.textContent=GROUP_KO[g.name]||g.name;b.setAttribute('aria-pressed','true');
+    b.onclick=()=>{g.visible=!g.visible;b.setAttribute('aria-pressed',String(g.visible));dirty=true};chips.append(b);
+    if(g.name==='plates'){/* deck toggle handled by group */}
+  }
+  root.traverse(o=>{
+    const m=o.name.match(MOVER),s=o.name.match(SPRING);
+    if(m)movers[m[2]].push({o,p:o.position.clone()});
+    if(s){const box=new THREE.Box3().setFromObject(o);springs[s[1]].push({o,p:o.position.clone(),sc:o.scale.clone(),top:box.max.y});}
+  });
+  $('status').textContent='부품 '+Object.values(movers).flat().length+'개 이동 가능 · GLB 표시';
+  dirty=true;
+}catch(e){$('status').textContent='GLB를 불러오지 못했습니다: cad-output/p30/amr_p30.glb ('+e.message+')'}
+
+function worldDeltaToLocal(o,dy){
+  const p=o.parent;const a=p.worldToLocal(new THREE.Vector3(0,0,0)),b=p.worldToLocal(new THREE.Vector3(0,dy,0));return b.sub(a);
+}
+function pose(side,mm){
+  const dy=mm/1000;
+  for(const {o,p} of movers[side]){o.position.copy(p).add(worldDeltaToLocal(o,dy))}
+  for(const {o,p,sc} of springs[side]){
+    const s=(SPRING_NOM-dy)/SPRING_NOM;const axis=worldDeltaToLocal(o,1).normalize();
+    o.scale.copy(sc);const k=['x','y','z'].reduce((best,c)=>Math.abs(axis[c])>Math.abs(axis[best])?c:best,'x');o.scale[k]=sc[k]*s;
+    const top=o.parent.worldToLocal(new THREE.Vector3(0,SPRING_TOP,0))[k];o.position.copy(p);o.position[k]=p[k]*s+top*(1-s);
+  }
+  dirty=true;
+}
+function forces(){const f=v=>((FREE-(SPRING_NOM*1000-v))*RATE).toFixed(0);$('force').textContent=`좌 ${f(+$('sl').value)} N · 우 ${f(+$('sr').value)} N`}
+for(const [id,side] of [['sl','LEFT'],['sr','RIGHT']]){$(id).oninput=e=>{$(id+'v').textContent=e.target.value;pose(side,+e.target.value);forces()}}
+forces();
+
+for(const t of document.querySelectorAll('.tab'))t.onclick=()=>{for(const u of document.querySelectorAll('.tab')){u.setAttribute('aria-selected',String(u===t));$('tab-'+u.dataset.tab).classList.toggle('hidden',u!==t)}};
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+fetch('cad-output/p30/build_report.json',{cache:'no-cache'}).then(r=>r.json()).then(r=>{
+  const st=r.statics,sp=r.springs.per_wheel,row=(k,v,c='')=>`<tr><td>${k}</td><td class="n ${c}">${v}</td></tr>`;
+  let h=`<p class="${r.valid?'ok':'bad'}"><b>${r.valid?'통과':'실패'}</b> · 부품 ${r.components} · 솔리드 ${r.solids}</p><table>`;
+  if(r.static_interference)h+=row('정지 자세 간섭',`${r.static_interference.hits.length}건 / ${r.static_interference.boolean_pairs}쌍`,r.static_interference.hits.length?'bad':'ok');
+  if(r.stroke_interference)h+=row('스트로크 ±5/±10 간섭',`${r.stroke_interference.hits.length}건 / ${r.stroke_interference.poses}자세`,r.stroke_interference.hits.length?'bad':'ok');
+  if(r.caster_swivel)h+=row('캐스터 선회 간섭',`${r.caster_swivel.hits.length}건 / ${r.caster_swivel.samples}표본`,r.caster_swivel.hits.length?'bad':'ok');
+  if(r.support)h+=row('미지지 부품',`${r.support.unsupported.length}개 (접촉 ${r.support.contacts})`,r.support.unsupported.length?'bad':'ok');
+  h+=row('접지 (구동/캐스터)',r.ground.pass?'Z0 확인':'불일치',r.ground.pass?'ok':'bad');
+  h+=`</table><h2>스프링 · 하중 (55kg)</h2><table>`;
+  for(const k of ['-10','+0','+10'])h+=row(`스트로크 ${k} mm`,`${sp[k].length_mm} mm · ${sp[k].force_N} N`);
+  h+=row('캐스터 1개 (암 포함/제외)',`${st.caster_each_N} / ${st.caster_each_no_arm_N} N`);
+  h+=row('구동륜 하중 비율',`${st.drive_share_pct} %`);
+  h+=row('미끄럼 한계 가속',`${st.traction_accel_m_s2} m/s²`);
+  h+=row('리니어 부시 반력 / 마찰',`${st.bush_radial_each_N} N (동정격의 ${Math.round(st.bush_load_ratio_dynamic*100)}%) · ${st.slide_friction_N} N (스프링의 ${st.slide_friction_vs_spring_pct}%)`);
+  h+=row('전도 가속 (좌우/전후)',`${st.tip_over_accel_g.lateral} / ${st.tip_over_accel_g.longitudinal} g`);
+  h+=`</table>`;
+  if(r.camera_fov){const cf=r.camera_fov;h+='<h2>카메라 FOV (깊이 '+cf.pyramids[0].fov_deg.join('° × ')+'°)</h2>';
+    h+=`<p class="note ${cf.profile_hits.length?'bad':'ok'}">알루미늄 프로파일: ${cf.profile_hits.length?cf.profile_hits.map(esc).join(', '):'시야에 없음'}</p>`;
+    for(const p of cf.pyramids){const t=p.hits.filter(x=>x.image_pct>=.01);h+=`<p class="note"><b>${p.camera}</b> 광학부 x${p.optic_local_x}: `+(t.length?t.map(x=>`${esc(x.part)} ${x.image_pct}% (${x.nearest_mm} mm)`).join(', '):'가림 없음')+'</p>'}}
+  if(r.lidar_shadows){h+='<h2>LiDAR 가림 (근사)</h2>';for(const l of r.lidar_shadows){h+=`<p class="note"><b>${esc(l.lidar)}</b> 스캔면 Z${l.scan_z}: `+(l.blocked.length?l.blocked.map(b=>`${esc(b.part)} ${b.from_deg}~${b.to_deg}°`).join(', '):'가림 없음')+'</p>'}}
+  if(r.fabricated_mass_kg){h+='<h2>가공·프로파일 질량</h2><table>';for(const [k,v] of Object.entries(r.fabricated_mass_kg))h+=row(esc(k),v+' kg');h+='</table>'}
+  $('check').innerHTML=h;
+}).catch(()=>$('check').textContent='검증 보고서가 없습니다 (python -m cad.p30 build).');
+
+function csv(t){const out=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'&&t[i+1]=='"'){f+='"';i++}else if(c=='"')q=false;else f+=c}else if(c=='"')q=true;else if(c==','){row.push(f);f=''}else if(c=='\n'){row.push(f);out.push(row);row=[];f=''}else if(c!='\r')f+=c}if(f||row.length){row.push(f);out.push(row)}return out}
+fetch('bom/p30_bom.csv',{cache:'no-cache'}).then(r=>r.text()).then(t=>{
+  const [head,...rows]=csv(t.trim());const i=k=>head.indexOf(k);
+  let total=0,h='<table><tr><th>부품</th><th>수량</th><th>출처</th><th class="n">금액</th></tr>';
+  for(const r of rows){const amt=+r[i('amount_krw')]||0;total+=amt;h+=`<tr><td>${esc(r[i('item')])}<br><span class="note">${esc(r[i('spec')])}</span></td><td class="n">${esc(r[i('qty')])}</td><td>${esc(r[i('source')])}</td><td class="n">${amt?amt.toLocaleString():'0'}</td></tr>`}
+  h+=`<tr><td colspan="3"><b>합계 (추정, VAT 별도)</b></td><td class="n"><b>${total.toLocaleString()}</b></td></tr></table><p class="note">회사 재고 품목은 0원. 금액은 견적 전 추정값입니다.</p>`;
+  $('bom').innerHTML=h;
+}).catch(()=>$('bom').textContent='BOM 파일이 없습니다.');
+</script>
+</body>
+</html>

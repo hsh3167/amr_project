@@ -9,3 +9,5 @@ cad/vendor/*.step
 cad/vendor/download_zips/
 # Rev15: the raw assembly STEP is >100 MB; CI commits amr_current.step.gz
 cad-output/amr_current.step
+# P30: the raw STEP is >100 MB; the web viewer needs only the GLB and reports
+cad-output/p30/*.step

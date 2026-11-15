@@ -1,0 +1,3922 @@
+{
+  "engine": "build123d",
+  "root": "amr_p30",
+  "files": [
+    "amr_p30.step",
+    "amr_p30.glb"
+  ],
+  "step_roundtrip": [
+    {
+      "file": "amr_p30.step",
+      "raw_import_valid": false,
+      "valid_after_explicit_normalization": true,
+      "normalized_components": [
+        {
+          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
+          "minimum_topology_tolerance_mm": 1e-05,
+          "volume_change_mm3": 0.0
+        },
+        {
+          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
+          "minimum_topology_tolerance_mm": 1e-05,
+          "volume_change_mm3": 0.0
+        }
+      ],
+      "solids": 550
+    }
+  ],
+  "components": [
+    {
+      "name": "01_P30_lower_front_rail",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 440,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 187476.60312678086,
+      "bounds_mm": [
+        [
+          -220.0,
+          220.0
+        ],
+        [
+          270.0,
+          300.0
+        ],
+        [
+          89.0,
+          119.00000000000006
+        ]
+      ],
+      "center_mm": [
+        -1.1368683772161603e-13,
+        285.0,
+        104.00000000000003
+      ],
+      "solids": 5
+    },
+    {
+      "name": "02_P30_lower_rear_rail",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 440,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 187476.60312678086,
+      "bounds_mm": [
+        [
+          -220.0,
+          220.0
+        ],
+        [
+          -300.0,
+          -270.0
+        ],
+        [
+          89.0,
+          119.00000000000006
+        ]
+      ],
+      "center_mm": [
+        -1.1368683772161603e-13,
+        -285.0,
+        104.00000000000003
+      ],
+      "solids": 5
+    },
+    {
+      "name": "03_P30_lower_inner_rail_L",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 540,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 230084.92201923107,
+      "bounds_mm": [
+        [
+          -125.0,
+          -95.0
+        ],
+        [
+          -270.0,
+          270.0
+        ],
+        [
+          89.0,
+          119.00000000000006
+        ]
+      ],
+      "center_mm": [
+        -110.0,
+        -1.1368683772161603e-13,
+        104.00000000000003
+      ],
+      "solids": 5
+    },
+    {
+      "name": "04_P30_lower_side_stub_LB",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 170,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 72434.14211716535,
+      "bounds_mm": [
+        [
+          -220.0,
+          -190.0
+        ],
+        [
+          -270.0,
+          -100.0
+        ],
+        [
+          89.0,
+          119.00000000000001
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        -184.99999999999994,
+        104.00000000000001
+      ],
+      "solids": 5
+    },
+    {
+      "name": "04_P30_lower_side_stub_LF",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 170,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 72434.14211716535,
+      "bounds_mm": [
+        [
+          -220.0,
+          -190.0
+        ],
+        [
+          100.0,
+          270.0
+        ],
+        [
+          89.0,
+          119.00000000000001
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        185.00000000000006,
+        104.00000000000001
+      ],
+      "solids": 5
+    },
+    {
+      "name": "03_P30_lower_inner_rail_R",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 540,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 230084.92201923107,
+      "bounds_mm": [
+        [
+          95.0,
+          125.0
+        ],
+        [
+          -270.0,
+          270.0
+        ],
+        [
+          89.0,
+          119.00000000000006
+        ]
+      ],
+      "center_mm": [
+        110.0,
+        -1.1368683772161603e-13,
+        104.00000000000003
+      ],
+      "solids": 5
+    },
+    {
+      "name": "04_P30_lower_side_stub_RB",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 170,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 72434.14211716535,
+      "bounds_mm": [
+        [
+          190.0,
+          220.0
+        ],
+        [
+          -270.0,
+          -100.0
+        ],
+        [
+          89.0,
+          119.00000000000001
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        -184.99999999999994,
+        104.00000000000001
+      ],
+      "solids": 5
+    },
+    {
+      "name": "04_P30_lower_side_stub_RF",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 170,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 72434.14211716535,
+      "bounds_mm": [
+        [
+          190.0,
+          220.0
+        ],
+        [
+          100.0,
+          270.0
+        ],
+        [
+          89.0,
+          119.00000000000001
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        185.00000000000006,
+        104.00000000000001
+      ],
+      "solids": 5
+    },
+    {
+      "name": "05_P30_corner_post_LB",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 134,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 57095.14731588325,
+      "bounds_mm": [
+        [
+          -220.0,
+          -190.0
+        ],
+        [
+          -300.0,
+          -270.0
+        ],
+        [
+          121.0,
+          255.0
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        -285.0,
+        188.0
+      ],
+      "solids": 5
+    },
+    {
+      "name": "06_P30_bay_post_LB",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 124,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 52834.31542663823,
+      "bounds_mm": [
+        [
+          -220.0,
+          -190.0
+        ],
+        [
+          -175.0,
+          -145.0
+        ],
+        [
+          125.0,
+          249.0
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        -160.0,
+        186.99999999999994
+      ],
+      "solids": 5
+    },
+    {
+      "name": "06_P30_bay_post_LF",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 124,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 52834.31542663823,
+      "bounds_mm": [
+        [
+          -220.0,
+          -190.0
+        ],
+        [
+          145.0,
+          175.0
+        ],
+        [
+          125.0,
+          249.0
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        160.0,
+        186.99999999999994
+      ],
+      "solids": 5
+    },
+    {
+      "name": "06_P30_bay_post_RB",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 124,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 52834.31542663823,
+      "bounds_mm": [
+        [
+          190.0,
+          220.0
+        ],
+        [
+          -175.0,
+          -145.0
+        ],
+        [
+          125.0,
+          249.0
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        -160.0,
+        186.99999999999994
+      ],
+      "solids": 5
+    },
+    {
+      "name": "05_P30_corner_post_RF",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 134,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 57095.14731588325,
+      "bounds_mm": [
+        [
+          190.0,
+          220.0
+        ],
+        [
+          270.0,
+          300.0
+        ],
+        [
+          121.0,
+          255.0
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        285.0,
+        188.0
+      ],
+      "solids": 5
+    },
+    {
+      "name": "06_P30_bay_post_RF",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 124,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 52834.31542663823,
+      "bounds_mm": [
+        [
+          190.0,
+          220.0
+        ],
+        [
+          145.0,
+          175.0
+        ],
+        [
+          125.0,
+          249.0
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        160.0,
+        186.99999999999994
+      ],
+      "solids": 5
+    },
+    {
+      "name": "07_P30_top_front_rail",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 440,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 187476.60312678086,
+      "bounds_mm": [
+        [
+          -220.0,
+          220.0
+        ],
+        [
+          270.0,
+          300.0
+        ],
+        [
+          255.0,
+          285.00000000000006
+        ]
+      ],
+      "center_mm": [
+        -5.684341886080802e-14,
+        285.0,
+        270.0
+      ],
+      "solids": 5
+    },
+    {
+      "name": "07_P30_top_rear_rail",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 440,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 187476.60312678086,
+      "bounds_mm": [
+        [
+          -220.0,
+          220.0
+        ],
+        [
+          -300.0,
+          -270.0
+        ],
+        [
+          255.0,
+          285.00000000000006
+        ]
+      ],
+      "center_mm": [
+        -5.684341886080802e-14,
+        -285.0,
+        270.0
+      ],
+      "solids": 5
+    },
+    {
+      "name": "08_P30_top_side_rail_L",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 540,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 230084.92201923105,
+      "bounds_mm": [
+        [
+          -220.0,
+          -190.0
+        ],
+        [
+          -270.0,
+          270.0
+        ],
+        [
+          255.0,
+          285.0000000000001
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        0.0,
+        270.00000000000006
+      ],
+      "solids": 5
+    },
+    {
+      "name": "08_P30_top_side_rail_R",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 540,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 230084.92201923107,
+      "bounds_mm": [
+        [
+          190.0,
+          220.0
+        ],
+        [
+          -270.0,
+          270.0
+        ],
+        [
+          255.0,
+          285.0000000000001
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        0.0,
+        270.00000000000006
+      ],
+      "solids": 5
+    },
+    {
+      "name": "09_P30_top_arm_member_B",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 380,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 161911.61179131077,
+      "bounds_mm": [
+        [
+          -190.0,
+          190.0
+        ],
+        [
+          -77.0,
+          -47.0
+        ],
+        [
+          255.0,
+          285.00000000000006
+        ]
+      ],
+      "center_mm": [
+        1.1368683772161603e-13,
+        -62.0,
+        270.0
+      ],
+      "solids": 5
+    },
+    {
+      "name": "09_P30_top_arm_member_F",
+      "group": "frame",
+      "status": "generic_profile",
+      "metadata": {
+        "material": "Al 3030 slot-8 profile (company stock)",
+        "length_mm": 380,
+        "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
+      },
+      "volume_mm3": 161911.61179131074,
+      "bounds_mm": [
+        [
+          -190.0,
+          190.0
+        ],
+        [
+          47.0,
+          77.0
+        ],
+        [
+          255.0,
+          285.00000000000006
+        ]
+      ],
+      "center_mm": [
+        1.1368683772161603e-13,
+        62.0,
+        270.0
+      ],
+      "solids": 5
+    },
+    {
+      "name": "10_P30_post_angle_brackets_LB",
+      "group": "frame",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "3030 cast angle bracket 28x28 + 2x M6 T-nut bolts each (bolts not drawn)",
+        "quantity": 8
+      },
+      "volume_mm3": 23296.000000000004,
+      "bounds_mm": [
+        [
+          -212.0,
+          -162.0
+        ],
+        [
+          -292.0,
+          -153.0
+        ],
+        [
+          121.0,
+          255.0
+        ]
+      ],
+      "center_mm": [
+        -193.2692307692307,
+        -222.49999999999994,
+        187.4999999999999
+      ],
+      "solids": 8
+    },
+    {
+      "name": "10_P30_post_angle_brackets_LF",
+      "group": "frame",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "3030 cast angle bracket 28x28 + 2x M6 T-nut bolts each (bolts not drawn)",
+        "quantity": 4
+      },
+      "volume_mm3": 11648.000000000004,
+      "bounds_mm": [
+        [
+          -212.0,
+          -162.0
+        ],
+        [
+          153.0,
+          203.0
+        ],
+        [
+          125.0,
+          249.0
+        ]
+      ],
+      "center_mm": [
+        -193.26923076923066,
+        171.73076923076917,
+        186.99999999999994
+      ],
+      "solids": 4
+    },
+    {
+      "name": "10_P30_post_angle_brackets_RB",
+      "group": "frame",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "3030 cast angle bracket 28x28 + 2x M6 T-nut bolts each (bolts not drawn)",
+        "quantity": 4
+      },
+      "volume_mm3": 11648.000000000004,
+      "bounds_mm": [
+        [
+          162.0,
+          212.0
+        ],
+        [
+          -203.0,
+          -153.0
+        ],
+        [
+          125.0,
+          249.0
+        ]
+      ],
+      "center_mm": [
+        193.26923076923075,
+        -171.73076923076914,
+        186.99999999999997
+      ],
+      "solids": 4
+    },
+    {
+      "name": "10_P30_post_angle_brackets_RF",
+      "group": "frame",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "3030 cast angle bracket 28x28 + 2x M6 T-nut bolts each (bolts not drawn)",
+        "quantity": 8
+      },
+      "volume_mm3": 23296.000000000004,
+      "bounds_mm": [
+        [
+          162.0,
+          212.0
+        ],
+        [
+          153.0,
+          292.0
+        ],
+        [
+          121.0,
+          255.0
+        ]
+      ],
+      "center_mm": [
+        193.2692307692308,
+        222.50000000000014,
+        187.5
+      ],
+      "solids": 8
+    },
+    {
+      "name": "11_P30_caster_corner_plate_6t_LB",
+      "group": "plates",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SS400 6t laser cut, M6 tapped for the caster, 3x M6 into T-nuts of the lower rails"
+      },
+      "volume_mm3": 42131.465798697755,
+      "bounds_mm": [
+        [
+          -220.0,
+          -140.0
+        ],
+        [
+          -300.0,
+          -210.0
+        ],
+        [
+          83.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        -180.14414621431615,
+        -254.97008022321677,
+        86.00000000000003
+      ],
+      "solids": 1
+    },
+    {
+      "name": "11_P30_caster_corner_plate_6t_LF",
+      "group": "plates",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SS400 6t laser cut, M6 tapped for the caster, 3x M6 into T-nuts of the lower rails"
+      },
+      "volume_mm3": 42131.465798697755,
+      "bounds_mm": [
+        [
+          -220.0,
+          -140.0
+        ],
+        [
+          210.0,
+          300.0
+        ],
+        [
+          83.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        -180.14414621431615,
+        254.97008022321677,
+        86.00000000000003
+      ],
+      "solids": 1
+    },
+    {
+      "name": "11_P30_caster_corner_plate_6t_RB",
+      "group": "plates",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SS400 6t laser cut, M6 tapped for the caster, 3x M6 into T-nuts of the lower rails"
+      },
+      "volume_mm3": 42131.465798697755,
+      "bounds_mm": [
+        [
+          140.0,
+          220.0
+        ],
+        [
+          -300.0,
+          -210.0
+        ],
+        [
+          83.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        180.14414621431615,
+        -254.97008022321677,
+        86.00000000000006
+      ],
+      "solids": 1
+    },
+    {
+      "name": "11_P30_caster_corner_plate_6t_RF",
+      "group": "plates",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SS400 6t laser cut, M6 tapped for the caster, 3x M6 into T-nuts of the lower rails"
+      },
+      "volume_mm3": 42131.465798697755,
+      "bounds_mm": [
+        [
+          140.0,
+          220.0
+        ],
+        [
+          210.0,
+          300.0
+        ],
+        [
+          83.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        180.14414621431612,
+        254.97008022321677,
+        86.00000000000006
+      ],
+      "solids": 1
+    },
+    {
+      "name": "12_P30_floor_plate_2t",
+      "group": "plates",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SS400 2t laser cut, notched at the wheel bays"
+      },
+      "volume_mm3": 389289.6682222889,
+      "bounds_mm": [
+        [
+          -220.0,
+          220.0
+        ],
+        [
+          -300.0,
+          300.0
+        ],
+        [
+          119.0,
+          121.0
+        ]
+      ],
+      "center_mm": [
+        0.00976477780209355,
+        5.653828904171438e-16,
+        120.0000000000002
+      ],
+      "solids": 1
+    },
+    {
+      "name": "13_P30_deck_2p3t",
+      "group": "plates",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SS400 2.3t laser cut; 4x D9 arm holes pitch 124 (arm pattern TBD) into T-nuts of the arm members; D24 droop-nut access holes"
+      },
+      "volume_mm3": 603465.2353835063,
+      "bounds_mm": [
+        [
+          -220.0,
+          220.0
+        ],
+        [
+          -300.0,
+          300.0
+        ],
+        [
+          285.0,
+          287.3
+        ]
+      ],
+      "center_mm": [
+        -5.546202674620307e-16,
+        1.0492571473018092e-14,
+        286.1500000000005
+      ],
+      "solids": 1
+    },
+    {
+      "name": "14_P30_corner_plate_bolts_M6_Tnut",
+      "group": "plates",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M6x16 + 3030 T-nut M6",
+        "quantity": 12
+      },
+      "volume_mm3": 15122.621622464543,
+      "bounds_mm": [
+        [
+          -210.0,
+          210.0
+        ],
+        [
+          -290.0,
+          290.0
+        ],
+        [
+          77.0,
+          95.5
+        ]
+      ],
+      "center_mm": [
+        -5.941964216156924e-14,
+        -9.333935691776868e-14,
+        87.19840808931552
+      ],
+      "solids": 24
+    },
+    {
+      "name": "15_P30_deck_bolts_M6_Tnut",
+      "group": "plates",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M6x12 + 3030 T-nut M6 (deck to top frame)",
+        "quantity": 14
+      },
+      "volume_mm3": 16188.195860955828,
+      "bounds_mm": [
+        [
+          -210.0,
+          210.0
+        ],
+        [
+          -290.0,
+          290.0
+        ],
+        [
+          278.5,
+          293.3
+        ]
+      ],
+      "center_mm": [
+        -2.8091292865023054e-14,
+        -1.1708450866141608e-13,
+        285.08263653804124
+      ],
+      "solids": 28
+    },
+    {
+      "name": "16_P30_floor_bolts_M5_Tnut",
+      "group": "plates",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M5x8 + 3030 T-nut M5",
+        "quantity": 12
+      },
+      "volume_mm3": 11060.998480626255,
+      "bounds_mm": [
+        [
+          -147.25,
+          147.25
+        ],
+        [
+          -289.75,
+          289.75
+        ],
+        [
+          112.5,
+          126.0
+        ]
+      ],
+      "center_mm": [
+        9.999999999999988,
+        -3.979707947967948e-14,
+        117.77696076765282
+      ],
+      "solids": 24
+    },
+    {
+      "name": "30_NBR_OD180_W42p5_LEFT",
+      "group": "drive_left",
+      "status": "datasheet_dimension",
+      "metadata": {
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 427256.6008882119,
+      "bounds_mm": [
+        [
+          -211.25,
+          -168.75
+        ],
+        [
+          -90.0,
+          90.0
+        ],
+        [
+          0.0,
+          180.0
+        ]
+      ],
+      "center_mm": [
+        -190.0,
+        5.695670363809649e-16,
+        90.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "31_casing_OD140_ASSUMED_LEFT",
+      "group": "drive_left",
+      "status": "assumed_casing",
+      "metadata": {
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 988282.2169662768,
+      "bounds_mm": [
+        [
+          -221.1,
+          -156.9
+        ],
+        [
+          -70.0,
+          70.0
+        ],
+        [
+          20.0,
+          160.0
+        ]
+      ],
+      "center_mm": [
+        -189.0,
+        1.5738831422361906e-15,
+        90.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "32_D14_AF10_M14x1p5_axle_LEFT",
+      "group": "drive_left",
+      "status": "datasheet_dimension",
+      "metadata": {
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 3250.147438006989,
+      "bounds_mm": [
+        [
+          -156.90000000000003,
+          -131.30000000000004
+        ],
+        [
+          -5.0,
+          5.000000000000001
+        ],
+        [
+          83.0,
+          97.0
+        ]
+      ],
+      "center_mm": [
+        -144.10000000000005,
+        7.391369745589288e-16,
+        89.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "33_axle_spacer_4p9_trial_LEFT",
+      "group": "drive_left",
+      "status": "concept_fabrication",
+      "metadata": {
+        "moving_wheel": "LEFT",
+        "fit": "Confirm the motor shoulder stack (Rev15 trial value)"
+      },
+      "volume_mm3": 459.9283790873826,
+      "bounds_mm": [
+        [
+          -156.89999999999998,
+          -151.99999999999997
+        ],
+        [
+          -9.0,
+          9.0
+        ],
+        [
+          81.0,
+          99.0
+        ]
+      ],
+      "center_mm": [
+        -154.44999999999993,
+        8.754475450605899e-16,
+        89.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "34_axle_washer_LEFT",
+      "group": "drive_left",
+      "status": "concept_fabrication",
+      "metadata": {
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 466.85323469405597,
+      "bounds_mm": [
+        [
+          -146.0,
+          -144.4
+        ],
+        [
+          -12.0,
+          12.0
+        ],
+        [
+          78.0,
+          102.0
+        ]
+      ],
+      "center_mm": [
+        -145.20000000000002,
+        1.0864816599297347e-15,
+        89.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "35_axle_nut_M14x1p5_LEFT",
+      "group": "drive_left",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "LEFT"
+      },
+      "volume_mm3": 2068.401799988192,
+      "bounds_mm": [
+        [
+          -144.4,
+          -136.4
+        ],
+        [
+          -10.999999999999998,
+          11.0
+        ],
+        [
+          77.29829407782823,
+          102.70170592217177
+        ]
+      ],
+      "center_mm": [
+        -140.4,
+        3.888332601679172e-17,
+        90.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "36_carriage_axle_bracket_SS400_6t_LEFT",
+      "group": "drive_left",
+      "status": "concept_fabrication",
+      "metadata": {
+        "moving_wheel": "LEFT",
+        "material": "SS400 6t laser cut, 1 bend (inner R6 drawn, bend relief at the wall ends); D-hole AF10.2; 2x D32.5 bush bore, 8x M5 + M8 + 2x M5 taps",
+        "note": "Wall width +-80 vs carriage +-140: the bend runs only over the wall width"
+      },
+      "volume_mm3": 226115.35875491166,
+      "bounds_mm": [
+        [
+          -204.0,
+          -146.0
+        ],
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          45.0,
+          201.2634508348794
+        ]
+      ],
+      "center_mm": [
+        -158.86344106828406,
+        1.372596132739568e-15,
+        148.76780951651904
+      ],
+      "solids": 1
+    },
+    {
+      "name": "39_linear_bush_C-LHFR20_LEFT",
+      "group": "drive_left",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "moving_wheel": "LEFT",
+        "sku": "C-LHFR20",
+        "quantity": 2,
+        "supply": "Purchase MISUMI economy linear bushing, round flange single (LMF20 equivalent)",
+        "unit_price_krw": 6464,
+        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-15 + catalogue table dr20 D32 L42 H54 T8 PCD43 d5.5 d1 9 t5.1",
+        "fit": "Insert both shafts, then tighten the 8 flange screws (D5.5 holes and D32.5 bore give +-0.25 float, no over-constraint)"
+      },
+      "volume_mm3": 61560.53404819125,
+      "bounds_mm": [
+        [
+          -204.0000001,
+          -149.9999999
+        ],
+        [
+          -139.0000001,
+          139.0000001
+        ],
+        [
+          167.2634507348794,
+          209.2634509348794
+        ]
+      ],
+      "center_mm": [
+        -177.00000000000003,
+        -6.145979754518629e-15,
+        193.90679816975074
+      ],
+      "solids": 2
+    },
+    {
+      "name": "40_bush_flange_bolts_M5x8_LEFT",
+      "group": "drive_left",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "LEFT",
+        "quantity": 8,
+        "note": "Head sits in the D9 x 5.1 counterbore; 5.1 mm thread in the 6t steel plate"
+      },
+      "volume_mm3": 3281.5845355078773,
+      "bounds_mm": [
+        [
+          -196.45279579551078,
+          -157.54720420448922
+        ],
+        [
+          -131.45279579551078,
+          131.45279579551078
+        ],
+        [
+          196.1634508348794,
+          209.1634508348794
+        ]
+      ],
+      "center_mm": [
+        -177.0,
+        -6.887204365606697e-14,
+        204.76311714439444
+      ],
+      "solids": 8
+    },
+    {
+      "name": "44_spring_stud_M8_LEFT",
+      "group": "drive_left",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "LEFT",
+        "length_mm": 80.8,
+        "fit": "M8 threaded rod in the tapped carriage + threadlocker; guides the spring through the D10 holder hole"
+      },
+      "volume_mm3": 3978.3162308403853,
+      "bounds_mm": [
+        [
+          -181.0,
+          -173.0
+        ],
+        [
+          -4.0,
+          4.0
+        ],
+        [
+          195.2634508348794,
+          276.1
+        ]
+      ],
+      "center_mm": [
+        -177.0,
+        -5.943887904736334e-17,
+        236.4809334725917
+      ],
+      "solids": 1
+    },
+    {
+      "name": "45_droop_stop_washer_nylock_M8_LEFT",
+      "group": "drive_left",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "LEFT",
+        "adjust": "Nut sets the droop limit (-10 mm); reachable through the deck hole"
+      },
+      "volume_mm3": 960.555567314644,
+      "bounds_mm": [
+        [
+          -185.0,
+          -169.0
+        ],
+        [
+          -8.0,
+          8.0
+        ],
+        [
+          265.0,
+          274.6
+        ]
+      ],
+      "center_mm": [
+        -176.99999999999997,
+        5.053283351694786e-16,
+        269.4355200197778
+      ],
+      "solids": 1
+    },
+    {
+      "name": "46_bump_stopper_C-USLH10_LEFT",
+      "group": "drive_left",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "moving_wheel": "LEFT",
+        "sku": "C-USLH10",
+        "supply": "company stock (10)",
+        "quantity": 2,
+        "tip_z": 218.263
+      },
+      "volume_mm3": 2817.7823105290427,
+      "bounds_mm": [
+        [
+          -182.0000001,
+          -171.9999999
+        ],
+        [
+          -35.0000001,
+          35.0000001
+        ],
+        [
+          194.2634507348794,
+          218.2634509348794
+        ]
+      ],
+      "center_mm": [
+        -177.0,
+        -2.259387777622603e-15,
+        208.87198364575644
+      ],
+      "solids": 4
+    },
+    {
+      "name": "47_spring_X-SWU21-70_LEFT",
+      "group": "drive_left",
+      "status": "catalog_envelope",
+      "metadata": {
+        "spring_length_mm": 47.737,
+        "sku": "X-SWU21-70",
+        "rate_N_mm": 5.39,
+        "force_N": 120.0,
+        "pose_dependent": "LEFT"
+      },
+      "volume_mm3": 3349.6598530236515,
+      "bounds_mm": [
+        [
+          -187.50043838981793,
+          -166.49959469845805
+        ],
+        [
+          -10.500405300897766,
+          10.500438390471357
+        ],
+        [
+          201.26780495943092,
+          248.99564587665205
+        ]
+      ],
+      "center_mm": [
+        -177.1593288349462,
+        0.15932883494829247,
+        225.1317254174719
+      ],
+      "solids": 1
+    },
+    {
+      "name": "50_guide_shaft_SFJW20-124-M8-N8_LEFT",
+      "group": "drive_left",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "fixed_drive_side": "LEFT",
+        "sku": "SFJW20-124-M8-N8",
+        "length_mm": 124,
+        "quantity": 2,
+        "unit_price_krw": 10868,
+        "source": "MISUMI STEP AP214 downloaded 2026-11-15 (L124, 1-4 pcs 10,868 KRW ex VAT)",
+        "supply": "Purchase MISUMI (D20 g6, both ends M8 x 16 effective)"
+      },
+      "volume_mm3": 74703.94065615039,
+      "bounds_mm": [
+        [
+          -187.0000001,
+          -166.9999999
+        ],
+        [
+          -122.0000001,
+          122.0000001
+        ],
+        [
+          124.9999999,
+          249.0000001
+        ]
+      ],
+      "center_mm": [
+        -177.00000000000003,
+        -2.2206570650262515e-14,
+        187.00000000000003
+      ],
+      "solids": 2
+    },
+    {
+      "name": "51_lower_shaft_holder_6t_F_LEFT",
+      "group": "drive_left",
+      "status": "concept_fabrication",
+      "metadata": {
+        "fixed_drive_side": "LEFT",
+        "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
+      },
+      "volume_mm3": 40054.430362853935,
+      "bounds_mm": [
+        [
+          -220.0,
+          -160.0
+        ],
+        [
+          97.0,
+          210.0
+        ],
+        [
+          119.0,
+          125.0
+        ]
+      ],
+      "center_mm": [
+        -190.00373537580666,
+        154.09120410552677,
+        121.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "51_lower_shaft_holder_6t_B_LEFT",
+      "group": "drive_left",
+      "status": "concept_fabrication",
+      "metadata": {
+        "fixed_drive_side": "LEFT",
+        "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
+      },
+      "volume_mm3": 40054.430362853935,
+      "bounds_mm": [
+        [
+          -220.0,
+          -160.0
+        ],
+        [
+          -210.0,
+          -97.0
+        ],
+        [
+          119.0,
+          125.0
+        ]
+      ],
+      "center_mm": [
+        -190.00373537580666,
+        -154.0912041055268,
+        121.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "52_upper_shaft_holder_6t_LEFT",
+      "group": "drive_left",
+      "status": "concept_fabrication",
+      "metadata": {
+        "fixed_drive_side": "LEFT",
+        "material": "SS400 6t laser cut, under the top side rail; spring seat; M6 tapped strikers; 4x M6 T-nut"
+      },
+      "volume_mm3": 145312.13515002327,
+      "bounds_mm": [
+        [
+          -220.0,
+          -160.0
+        ],
+        [
+          -205.0,
+          205.0
+        ],
+        [
+          249.0,
+          255.0
+        ]
+      ],
+      "center_mm": [
+        -190.05122227669986,
+        -2.703846521560399e-15,
+        252.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "53_shaft_end_bolts_M8x20_LEFT",
+      "group": "drive_left",
+      "status": "catalog_envelope",
+      "metadata": {
+        "fixed_drive_side": "LEFT",
+        "quantity": 4
+      },
+      "volume_mm3": 7356.688930006744,
+      "bounds_mm": [
+        [
+          -183.5,
+          -170.5
+        ],
+        [
+          -118.5,
+          118.5
+        ],
+        [
+          111.0,
+          263.0
+        ]
+      ],
+      "center_mm": [
+        -177.0,
+        -2.571467949353618e-14,
+        186.99999999999994
+      ],
+      "solids": 4
+    },
+    {
+      "name": "54_bump_striker_M6_jam_nut_LEFT",
+      "group": "drive_left",
+      "status": "catalog_envelope",
+      "metadata": {
+        "fixed_drive_side": "LEFT",
+        "quantity": 2,
+        "tip_z": 228.313,
+        "adjust": "Striker meets the C-USLH10 tip at +10 mm; set with the jam nut"
+      },
+      "volume_mm3": 3305.666358403694,
+      "bounds_mm": [
+        [
+          -182.77350269189625,
+          -171.22649730810375
+        ],
+        [
+          -35.0,
+          35.0
+        ],
+        [
+          228.3134509348794,
+          266.0
+        ]
+      ],
+      "center_mm": [
+        -176.99999999999994,
+        -1.293120549648265e-14,
+        251.88353688931375
+      ],
+      "solids": 2
+    },
+    {
+      "name": "55_holder_bolts_Tnut_LEFT",
+      "group": "drive_left",
+      "status": "catalog_envelope",
+      "metadata": {
+        "fixed_drive_side": "LEFT",
+        "quantity": 8
+      },
+      "volume_mm3": 9039.524385481287,
+      "bounds_mm": [
+        [
+          -210.0,
+          -200.0
+        ],
+        [
+          -142.25,
+          142.25
+        ],
+        [
+          112.5,
+          261.5
+        ]
+      ],
+      "center_mm": [
+        -204.99999999999986,
+        -3.823298349953083e-14,
+        193.9767444407248
+      ],
+      "solids": 16
+    },
+    {
+      "name": "30_NBR_OD180_W42p5_RIGHT",
+      "group": "drive_right",
+      "status": "datasheet_dimension",
+      "metadata": {
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 427256.6008882119,
+      "bounds_mm": [
+        [
+          168.75,
+          211.25
+        ],
+        [
+          -90.0,
+          90.0
+        ],
+        [
+          0.0,
+          180.0
+        ]
+      ],
+      "center_mm": [
+        190.0,
+        5.695670363809649e-16,
+        90.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "31_casing_OD140_ASSUMED_RIGHT",
+      "group": "drive_right",
+      "status": "assumed_casing",
+      "metadata": {
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 988282.2169662768,
+      "bounds_mm": [
+        [
+          156.9,
+          221.1
+        ],
+        [
+          -70.0,
+          70.0
+        ],
+        [
+          20.0,
+          160.0
+        ]
+      ],
+      "center_mm": [
+        189.0,
+        1.5738831422361906e-15,
+        90.00000000000001
+      ],
+      "solids": 1
+    },
+    {
+      "name": "32_D14_AF10_M14x1p5_axle_RIGHT",
+      "group": "drive_right",
+      "status": "datasheet_dimension",
+      "metadata": {
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 3250.147438006989,
+      "bounds_mm": [
+        [
+          131.3,
+          156.9
+        ],
+        [
+          -5.0,
+          5.000000000000001
+        ],
+        [
+          83.0,
+          97.0
+        ]
+      ],
+      "center_mm": [
+        144.10000000000002,
+        7.391369745589288e-16,
+        89.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "33_axle_spacer_4p9_trial_RIGHT",
+      "group": "drive_right",
+      "status": "concept_fabrication",
+      "metadata": {
+        "moving_wheel": "RIGHT",
+        "fit": "Confirm the motor shoulder stack (Rev15 trial value)"
+      },
+      "volume_mm3": 459.9283790873826,
+      "bounds_mm": [
+        [
+          152.0,
+          156.9
+        ],
+        [
+          -9.0,
+          9.0
+        ],
+        [
+          81.0,
+          99.0
+        ]
+      ],
+      "center_mm": [
+        154.45000000000005,
+        8.754475450605899e-16,
+        89.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "34_axle_washer_RIGHT",
+      "group": "drive_right",
+      "status": "concept_fabrication",
+      "metadata": {
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 466.85323469405597,
+      "bounds_mm": [
+        [
+          144.39999999999998,
+          145.99999999999997
+        ],
+        [
+          -12.0,
+          12.0
+        ],
+        [
+          78.0,
+          102.0
+        ]
+      ],
+      "center_mm": [
+        145.19999999999996,
+        1.0946997787360098e-15,
+        89.99999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "35_axle_nut_M14x1p5_RIGHT",
+      "group": "drive_right",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "RIGHT"
+      },
+      "volume_mm3": 2068.401799988192,
+      "bounds_mm": [
+        [
+          136.4,
+          144.4
+        ],
+        [
+          -10.999999999999998,
+          11.0
+        ],
+        [
+          77.29829407782823,
+          102.70170592217177
+        ]
+      ],
+      "center_mm": [
+        140.4,
+        4.785922364316444e-16,
+        90.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "36_carriage_axle_bracket_SS400_6t_RIGHT",
+      "group": "drive_right",
+      "status": "concept_fabrication",
+      "metadata": {
+        "moving_wheel": "RIGHT",
+        "material": "SS400 6t laser cut, 1 bend (inner R6 drawn, bend relief at the wall ends); D-hole AF10.2; 2x D32.5 bush bore, 8x M5 + M8 + 2x M5 taps",
+        "note": "Wall width +-80 vs carriage +-140: the bend runs only over the wall width"
+      },
+      "volume_mm3": 226115.35875491166,
+      "bounds_mm": [
+        [
+          146.0,
+          204.0
+        ],
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          45.0,
+          201.2634508348794
+        ]
+      ],
+      "center_mm": [
+        158.86344106828403,
+        5.877527029936098e-16,
+        148.76780951651904
+      ],
+      "solids": 1
+    },
+    {
+      "name": "39_linear_bush_C-LHFR20_RIGHT",
+      "group": "drive_right",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "moving_wheel": "RIGHT",
+        "sku": "C-LHFR20",
+        "quantity": 2,
+        "supply": "Purchase MISUMI economy linear bushing, round flange single (LMF20 equivalent)",
+        "unit_price_krw": 6464,
+        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-15 + catalogue table dr20 D32 L42 H54 T8 PCD43 d5.5 d1 9 t5.1",
+        "fit": "Insert both shafts, then tighten the 8 flange screws (D5.5 holes and D32.5 bore give +-0.25 float, no over-constraint)"
+      },
+      "volume_mm3": 61560.53404819124,
+      "bounds_mm": [
+        [
+          149.9999999,
+          204.0000001
+        ],
+        [
+          -139.0000001,
+          139.0000001
+        ],
+        [
+          167.2634507348794,
+          209.2634509348794
+        ]
+      ],
+      "center_mm": [
+        176.99999999999997,
+        -5.318636326025737e-16,
+        193.90679816975074
+      ],
+      "solids": 2
+    },
+    {
+      "name": "40_bush_flange_bolts_M5x8_RIGHT",
+      "group": "drive_right",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "RIGHT",
+        "quantity": 8,
+        "note": "Head sits in the D9 x 5.1 counterbore; 5.1 mm thread in the 6t steel plate"
+      },
+      "volume_mm3": 3281.584535507877,
+      "bounds_mm": [
+        [
+          157.54720420448922,
+          196.45279579551078
+        ],
+        [
+          -131.45279579551078,
+          131.45279579551078
+        ],
+        [
+          196.1634508348794,
+          209.1634508348794
+        ]
+      ],
+      "center_mm": [
+        177.00000000000014,
+        -4.725425932941416e-14,
+        204.76311714439444
+      ],
+      "solids": 8
+    },
+    {
+      "name": "44_spring_stud_M8_RIGHT",
+      "group": "drive_right",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "RIGHT",
+        "length_mm": 80.8,
+        "fit": "M8 threaded rod in the tapped carriage + threadlocker; guides the spring through the D10 holder hole"
+      },
+      "volume_mm3": 3978.316230840385,
+      "bounds_mm": [
+        [
+          173.0,
+          181.0
+        ],
+        [
+          -4.0,
+          4.0
+        ],
+        [
+          195.2634508348794,
+          276.1
+        ]
+      ],
+      "center_mm": [
+        177.0,
+        -5.462448028232544e-17,
+        236.4809334725917
+      ],
+      "solids": 1
+    },
+    {
+      "name": "45_droop_stop_washer_nylock_M8_RIGHT",
+      "group": "drive_right",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "RIGHT",
+        "adjust": "Nut sets the droop limit (-10 mm); reachable through the deck hole"
+      },
+      "volume_mm3": 960.555567314644,
+      "bounds_mm": [
+        [
+          169.0,
+          185.0
+        ],
+        [
+          -8.0,
+          8.0
+        ],
+        [
+          265.0,
+          274.6
+        ]
+      ],
+      "center_mm": [
+        176.99999999999997,
+        5.053283351694786e-16,
+        269.4355200197778
+      ],
+      "solids": 1
+    },
+    {
+      "name": "46_bump_stopper_C-USLH10_RIGHT",
+      "group": "drive_right",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "moving_wheel": "RIGHT",
+        "sku": "C-USLH10",
+        "supply": "company stock (10)",
+        "quantity": 2,
+        "tip_z": 218.263
+      },
+      "volume_mm3": 2817.7823105290427,
+      "bounds_mm": [
+        [
+          171.9999999,
+          182.0000001
+        ],
+        [
+          -35.0000001,
+          35.0000001
+        ],
+        [
+          194.2634507348794,
+          218.2634509348794
+        ]
+      ],
+      "center_mm": [
+        177.0,
+        -2.259387777622603e-15,
+        208.87198364575644
+      ],
+      "solids": 4
+    },
+    {
+      "name": "47_spring_X-SWU21-70_RIGHT",
+      "group": "drive_right",
+      "status": "catalog_envelope",
+      "metadata": {
+        "spring_length_mm": 47.737,
+        "sku": "X-SWU21-70",
+        "rate_N_mm": 5.39,
+        "force_N": 120.0,
+        "pose_dependent": "RIGHT"
+      },
+      "volume_mm3": 3349.6598530236515,
+      "bounds_mm": [
+        [
+          166.49956161018207,
+          187.50040530154195
+        ],
+        [
+          -10.500405300897766,
+          10.500438390471357
+        ],
+        [
+          201.26780495943092,
+          248.99564587665205
+        ]
+      ],
+      "center_mm": [
+        176.8406711650538,
+        0.15932883494829247,
+        225.1317254174719
+      ],
+      "solids": 1
+    },
+    {
+      "name": "50_guide_shaft_SFJW20-124-M8-N8_RIGHT",
+      "group": "drive_right",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "fixed_drive_side": "RIGHT",
+        "sku": "SFJW20-124-M8-N8",
+        "length_mm": 124,
+        "quantity": 2,
+        "unit_price_krw": 10868,
+        "source": "MISUMI STEP AP214 downloaded 2026-11-15 (L124, 1-4 pcs 10,868 KRW ex VAT)",
+        "supply": "Purchase MISUMI (D20 g6, both ends M8 x 16 effective)"
+      },
+      "volume_mm3": 74703.94065615039,
+      "bounds_mm": [
+        [
+          166.9999999,
+          187.0000001
+        ],
+        [
+          -122.0000001,
+          122.0000001
+        ],
+        [
+          124.9999999,
+          249.0000001
+        ]
+      ],
+      "center_mm": [
+        177.00000000000009,
+        -2.8439993990687085e-14,
+        187.00000000000006
+      ],
+      "solids": 2
+    },
+    {
+      "name": "51_lower_shaft_holder_6t_F_RIGHT",
+      "group": "drive_right",
+      "status": "concept_fabrication",
+      "metadata": {
+        "fixed_drive_side": "RIGHT",
+        "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
+      },
+      "volume_mm3": 40054.430362853935,
+      "bounds_mm": [
+        [
+          160.0,
+          220.0
+        ],
+        [
+          97.0,
+          210.0
+        ],
+        [
+          119.0,
+          125.0
+        ]
+      ],
+      "center_mm": [
+        190.00373537580657,
+        154.09120410552677,
+        121.99999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "51_lower_shaft_holder_6t_B_RIGHT",
+      "group": "drive_right",
+      "status": "concept_fabrication",
+      "metadata": {
+        "fixed_drive_side": "RIGHT",
+        "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
+      },
+      "volume_mm3": 40054.430362853935,
+      "bounds_mm": [
+        [
+          160.0,
+          220.0
+        ],
+        [
+          -210.0,
+          -97.0
+        ],
+        [
+          119.0,
+          125.0
+        ]
+      ],
+      "center_mm": [
+        190.00373537580663,
+        -154.09120410552677,
+        121.99999999999997
+      ],
+      "solids": 1
+    },
+    {
+      "name": "52_upper_shaft_holder_6t_RIGHT",
+      "group": "drive_right",
+      "status": "concept_fabrication",
+      "metadata": {
+        "fixed_drive_side": "RIGHT",
+        "material": "SS400 6t laser cut, under the top side rail; spring seat; M6 tapped strikers; 4x M6 T-nut"
+      },
+      "volume_mm3": 145312.13515002327,
+      "bounds_mm": [
+        [
+          160.0,
+          220.0
+        ],
+        [
+          -205.0,
+          205.0
+        ],
+        [
+          249.0,
+          255.0
+        ]
+      ],
+      "center_mm": [
+        190.05122227670006,
+        -1.2517807970187032e-15,
+        252.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "53_shaft_end_bolts_M8x20_RIGHT",
+      "group": "drive_right",
+      "status": "catalog_envelope",
+      "metadata": {
+        "fixed_drive_side": "RIGHT",
+        "quantity": 4
+      },
+      "volume_mm3": 7356.688930006744,
+      "bounds_mm": [
+        [
+          170.5,
+          183.5
+        ],
+        [
+          -118.5,
+          118.5
+        ],
+        [
+          111.0,
+          263.0
+        ]
+      ],
+      "center_mm": [
+        176.99999999999997,
+        -1.285733974676809e-14,
+        186.99999999999997
+      ],
+      "solids": 4
+    },
+    {
+      "name": "54_bump_striker_M6_jam_nut_RIGHT",
+      "group": "drive_right",
+      "status": "catalog_envelope",
+      "metadata": {
+        "fixed_drive_side": "RIGHT",
+        "quantity": 2,
+        "tip_z": 228.313,
+        "adjust": "Striker meets the C-USLH10 tip at +10 mm; set with the jam nut"
+      },
+      "volume_mm3": 3305.666358403694,
+      "bounds_mm": [
+        [
+          171.22649730810375,
+          182.77350269189625
+        ],
+        [
+          -35.0,
+          35.0
+        ],
+        [
+          228.3134509348794,
+          266.0
+        ]
+      ],
+      "center_mm": [
+        177.0,
+        -1.1555545337282367e-14,
+        251.8835368893137
+      ],
+      "solids": 2
+    },
+    {
+      "name": "55_holder_bolts_Tnut_RIGHT",
+      "group": "drive_right",
+      "status": "catalog_envelope",
+      "metadata": {
+        "fixed_drive_side": "RIGHT",
+        "quantity": 8
+      },
+      "volume_mm3": 9039.524385481287,
+      "bounds_mm": [
+        [
+          200.0,
+          210.0
+        ],
+        [
+          -142.25,
+          142.25
+        ],
+        [
+          112.5,
+          261.5
+        ]
+      ],
+      "center_mm": [
+        204.99999999999994,
+        -3.823298349953083e-14,
+        193.9767444407248
+      ],
+      "solids": 16
+    },
+    {
+      "name": "43_GL65_OEM_fork_LB",
+      "group": "caster_lb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "LB",
+        "swivel_xy": [
+          -165,
+          -245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 10760.880677689102,
+      "bounds_mm": [
+        [
+          -188.5,
+          -143.49999999999977
+        ],
+        [
+          -273.00000010000065,
+          -223.49999999999977
+        ],
+        [
+          25.999999999999403,
+          77.49761779634
+        ]
+      ],
+      "center_mm": [
+        -165.07354507666764,
+        -254.1112064694332,
+        57.94177205412499
+      ],
+      "solids": 1
+    },
+    {
+      "name": "41_GL65_OEM_plate_head_LB",
+      "group": "caster_lb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "LB",
+        "swivel_xy": [
+          -165,
+          -245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 9827.34603486373,
+      "bounds_mm": [
+        [
+          -189.0000001,
+          -140.99999989999992
+        ],
+        [
+          -277.5000001,
+          -212.4999999
+        ],
+        [
+          68.79761769634251,
+          83.00000019999919
+        ]
+      ],
+      "center_mm": [
+        -164.999991030028,
+        -245.0015037326258,
+        78.72768320789984
+      ],
+      "solids": 1
+    },
+    {
+      "name": "44_GL65_OEM_wheel_LB",
+      "group": "caster_lb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "LB",
+        "swivel_xy": [
+          -165,
+          -245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 63283.89226011394,
+      "bounds_mm": [
+        [
+          -180.19999999999973,
+          -149.79999999999967
+        ],
+        [
+          -299.00000009999957,
+          -234.99999990000094
+        ],
+        [
+          1.1686097468332243e-15,
+          64.00000019999862
+        ]
+      ],
+      "center_mm": [
+        -164.99838556729586,
+        -266.9999884445427,
+        32.00003267417703
+      ],
+      "solids": 1
+    },
+    {
+      "name": "45_caster_bolts_M6x8_LB",
+      "group": "caster_lb",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M6x8 hex socket into the 8t corner plate",
+        "quantity": 4
+      },
+      "volume_mm3": 2577.1213386892696,
+      "bounds_mm": [
+        [
+          -182.0,
+          -148.0
+        ],
+        [
+          -277.0,
+          -213.0
+        ],
+        [
+          75.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        -165.00000000000006,
+        -245.00000000000003,
+        79.79990325764285
+      ],
+      "solids": 4
+    },
+    {
+      "name": "43_GL65_OEM_fork_LF",
+      "group": "caster_lf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "LF",
+        "swivel_xy": [
+          -165,
+          245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 10760.880677689083,
+      "bounds_mm": [
+        [
+          -188.5,
+          -143.4999998999998
+        ],
+        [
+          216.99999989999938,
+          266.5000000000002
+        ],
+        [
+          25.999999999999403,
+          77.49761779634
+        ]
+      ],
+      "center_mm": [
+        -165.07354507666764,
+        235.8887935305669,
+        57.94177205412502
+      ],
+      "solids": 1
+    },
+    {
+      "name": "41_GL65_OEM_plate_head_LF",
+      "group": "caster_lf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "LF",
+        "swivel_xy": [
+          -165,
+          245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 9827.34603486373,
+      "bounds_mm": [
+        [
+          -189.0000001,
+          -140.99999989999992
+        ],
+        [
+          212.49999989999998,
+          277.5000001
+        ],
+        [
+          68.79761779634251,
+          83.00000019999919
+        ]
+      ],
+      "center_mm": [
+        -164.999991030028,
+        244.99849626737418,
+        78.72768320789984
+      ],
+      "solids": 1
+    },
+    {
+      "name": "44_GL65_OEM_wheel_LF",
+      "group": "caster_lf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "LF",
+        "swivel_xy": [
+          -165,
+          245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 63283.89226011394,
+      "bounds_mm": [
+        [
+          -180.19999999999973,
+          -149.79999999999967
+        ],
+        [
+          190.9999999000005,
+          255.00000009999908
+        ],
+        [
+          1.1686097468332243e-15,
+          64.00000019999862
+        ]
+      ],
+      "center_mm": [
+        -164.99838556729586,
+        223.00001155545735,
+        32.00003267417703
+      ],
+      "solids": 1
+    },
+    {
+      "name": "45_caster_bolts_M6x8_LF",
+      "group": "caster_lf",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M6x8 hex socket into the 8t corner plate",
+        "quantity": 4
+      },
+      "volume_mm3": 2577.1213386892696,
+      "bounds_mm": [
+        [
+          -182.0,
+          -148.0
+        ],
+        [
+          213.0,
+          277.0
+        ],
+        [
+          75.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        -164.99999999999997,
+        245.00000000000003,
+        79.79990325764285
+      ],
+      "solids": 4
+    },
+    {
+      "name": "43_GL65_OEM_fork_RB",
+      "group": "caster_rb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "RB",
+        "swivel_xy": [
+          165,
+          -245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 10760.880677689105,
+      "bounds_mm": [
+        [
+          141.5,
+          186.50000000000023
+        ],
+        [
+          -273.00000010000065,
+          -223.49999999999977
+        ],
+        [
+          25.999999999999403,
+          77.49761779634
+        ]
+      ],
+      "center_mm": [
+        164.92645492333236,
+        -254.11120646943314,
+        57.941772054124996
+      ],
+      "solids": 1
+    },
+    {
+      "name": "41_GL65_OEM_plate_head_RB",
+      "group": "caster_rb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "RB",
+        "swivel_xy": [
+          165,
+          -245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 9827.34603486373,
+      "bounds_mm": [
+        [
+          140.9999999,
+          189.00000010000008
+        ],
+        [
+          -277.5000001,
+          -212.4999999
+        ],
+        [
+          68.79761769634251,
+          83.00000019999919
+        ]
+      ],
+      "center_mm": [
+        165.000008969972,
+        -245.0015037326258,
+        78.72768320789984
+      ],
+      "solids": 1
+    },
+    {
+      "name": "44_GL65_OEM_wheel_RB",
+      "group": "caster_rb",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "RB",
+        "swivel_xy": [
+          165,
+          -245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 63283.89226011394,
+      "bounds_mm": [
+        [
+          149.80000000000027,
+          180.20000000000033
+        ],
+        [
+          -299.00000009999957,
+          -234.99999990000094
+        ],
+        [
+          1.1686097468332243e-15,
+          64.00000019999862
+        ]
+      ],
+      "center_mm": [
+        165.00161443270414,
+        -266.9999884445427,
+        32.00003267417703
+      ],
+      "solids": 1
+    },
+    {
+      "name": "45_caster_bolts_M6x8_RB",
+      "group": "caster_rb",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M6x8 hex socket into the 8t corner plate",
+        "quantity": 4
+      },
+      "volume_mm3": 2577.1213386892696,
+      "bounds_mm": [
+        [
+          148.0,
+          182.0
+        ],
+        [
+          -277.0,
+          -213.0
+        ],
+        [
+          75.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        164.99999999999997,
+        -245.00000000000006,
+        79.79990325764287
+      ],
+      "solids": 4
+    },
+    {
+      "name": "43_GL65_OEM_fork_RF",
+      "group": "caster_rf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "RF",
+        "swivel_xy": [
+          165,
+          245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 10760.880677689116,
+      "bounds_mm": [
+        [
+          141.5,
+          186.5000001000002
+        ],
+        [
+          216.99999989999938,
+          266.5000000000002
+        ],
+        [
+          25.999999999999403,
+          77.49761779634
+        ]
+      ],
+      "center_mm": [
+        164.92645492333236,
+        235.8887935305668,
+        57.941772054124996
+      ],
+      "solids": 1
+    },
+    {
+      "name": "41_GL65_OEM_plate_head_RF",
+      "group": "caster_rf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "RF",
+        "swivel_xy": [
+          165,
+          245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 9827.346034863729,
+      "bounds_mm": [
+        [
+          140.9999999,
+          189.00000010000008
+        ],
+        [
+          212.49999989999998,
+          277.5000001
+        ],
+        [
+          68.79761779634251,
+          83.00000019999919
+        ]
+      ],
+      "center_mm": [
+        165.000008969972,
+        244.99849626737418,
+        78.72768320789984
+      ],
+      "solids": 1
+    },
+    {
+      "name": "44_GL65_OEM_wheel_RF",
+      "group": "caster_rf",
+      "status": "manufacturer_step_EUS_reference",
+      "metadata": {
+        "source": "GL-65-ASF-EUS.stp",
+        "caster": "RF",
+        "swivel_xy": [
+          165,
+          245
+        ],
+        "cad_height_mm": 83
+      },
+      "volume_mm3": 63283.89226011394,
+      "bounds_mm": [
+        [
+          149.80000000000027,
+          180.20000000000033
+        ],
+        [
+          190.9999999000005,
+          255.00000009999908
+        ],
+        [
+          1.1686097468332243e-15,
+          64.00000019999862
+        ]
+      ],
+      "center_mm": [
+        165.00161443270414,
+        223.00001155545735,
+        32.00003267417703
+      ],
+      "solids": 1
+    },
+    {
+      "name": "45_caster_bolts_M6x8_RF",
+      "group": "caster_rf",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M6x8 hex socket into the 8t corner plate",
+        "quantity": 4
+      },
+      "volume_mm3": 2577.1213386892696,
+      "bounds_mm": [
+        [
+          148.0,
+          182.0
+        ],
+        [
+          213.0,
+          277.0
+        ],
+        [
+          75.0,
+          89.0
+        ]
+      ],
+      "center_mm": [
+        164.99999999999997,
+        245.00000000000003,
+        79.79990325764284
+      ],
+      "solids": 4
+    },
+    {
+      "name": "60_company_7S9P_battery_STEP",
+      "group": "electronics",
+      "status": "company_supplied_step",
+      "metadata": {
+        "source": "BATTERY.STEP.gz",
+        "placement": {
+          "yaw_deg": 90,
+          "translate_mm": [
+            2.343,
+            10.48,
+            219.55
+          ]
+        },
+        "limits": "Hold-down strap (2x 25 mm strap through the floor slots) not drawn"
+      },
+      "volume_mm3": 421957.98988421535,
+      "bounds_mm": [
+        [
+          -76.91423986690826,
+          76.91423986690758
+        ],
+        [
+          -137.39304979770694,
+          137.39304979770696
+        ],
+        [
+          123.99999999999997,
+          238.84094013990008
+        ]
+      ],
+      "center_mm": [
+        -0.503492253149609,
+        2.0051970093329996,
+        167.5329398138172
+      ],
+      "solids": 6
+    },
+    {
+      "name": "60_battery_pads",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "quantity": 4
+      },
+      "volume_mm3": 2120.57504117311,
+      "bounds_mm": [
+        [
+          -69.41423986690826,
+          69.41423986690826
+        ],
+        [
+          -129.89304979770694,
+          129.89304979770694
+        ],
+        [
+          121.0,
+          124.0
+        ]
+      ],
+      "center_mm": [
+        -1.5440061600325408e-14,
+        -2.830677960059658e-14,
+        122.49999999999999
+      ],
+      "solids": 4
+    },
+    {
+      "name": "61_motor_driver_ENVELOPE_L",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {
+        "mount": "on edge, 3t angle bracket to the floor (not drawn)"
+      },
+      "volume_mm3": 301840.0,
+      "bounds_mm": [
+        [
+          -128.0,
+          -84.0
+        ],
+        [
+          -49.0,
+          49.0
+        ],
+        [
+          121.0,
+          191.0
+        ]
+      ],
+      "center_mm": [
+        -106.0,
+        0.0,
+        156.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "61_motor_driver_ENVELOPE_R",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {
+        "mount": "on edge, 3t angle bracket to the floor (not drawn)"
+      },
+      "volume_mm3": 301840.0,
+      "bounds_mm": [
+        [
+          84.0,
+          128.0
+        ],
+        [
+          -49.0,
+          49.0
+        ],
+        [
+          121.0,
+          191.0
+        ]
+      ],
+      "center_mm": [
+        106.0,
+        0.0,
+        156.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "62_controller_PCB_ENVELOPE",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {},
+      "volume_mm3": 120120.0,
+      "bounds_mm": [
+        [
+          -87.5,
+          77.5
+        ],
+        [
+          148.0,
+          252.0
+        ],
+        [
+          131.0,
+          138.0
+        ]
+      ],
+      "center_mm": [
+        -5.0,
+        200.0,
+        134.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "63_control_computer_ENVELOPE",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {},
+      "volume_mm3": 275356.0,
+      "bounds_mm": [
+        [
+          -78.0,
+          68.0
+        ],
+        [
+          159.0,
+          241.0
+        ],
+        [
+          148.0,
+          171.0
+        ]
+      ],
+      "center_mm": [
+        -5.0,
+        200.0,
+        159.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "64_electronics_standoffs_M4",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "quantity": 8
+      },
+      "volume_mm3": 3078.7608005179977,
+      "bounds_mm": [
+        [
+          -83.0,
+          73.0
+        ],
+        [
+          152.5,
+          247.5
+        ],
+        [
+          121.0,
+          148.0
+        ]
+      ],
+      "center_mm": [
+        -5.000000000000049,
+        200.0,
+        134.50000000000003
+      ],
+      "solids": 8
+    },
+    {
+      "name": "65_power_distribution_ENVELOPE",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {},
+      "volume_mm3": 111999.99999999997,
+      "bounds_mm": [
+        [
+          80.0,
+          136.0
+        ],
+        [
+          197.0,
+          247.0
+        ],
+        [
+          121.0,
+          161.0
+        ]
+      ],
+      "center_mm": [
+        108.0,
+        222.0,
+        141.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "66_DCDC_DDR-240B-24_ENVELOPE",
+      "group": "electronics",
+      "status": "envelope_only",
+      "metadata": {
+        "model": "MEAN WELL DDR-240B-24 (company stock)",
+        "size_mm": [
+          125.2,
+          128.5,
+          63
+        ],
+        "limits": "Size reservation from the remembered datasheet size 63x125.2x128.5 (lying on its side); confirm the datasheet, input range vs 7S 21-29.4 V and derating before fixing the layout"
+      },
+      "volume_mm3": 1013556.5999999999,
+      "bounds_mm": [
+        [
+          -42.599999999999994,
+          82.6
+        ],
+        [
+          -298.25,
+          -169.75
+        ],
+        [
+          133.0,
+          196.0
+        ]
+      ],
+      "center_mm": [
+        20.0,
+        -234.0,
+        164.5
+      ],
+      "solids": 1
+    },
+    {
+      "name": "66_DIN_rail_TS35",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "length_mm": 120
+      },
+      "volume_mm3": 31500.0,
+      "bounds_mm": [
+        [
+          -40.0,
+          80.0
+        ],
+        [
+          -224.75,
+          -189.75
+        ],
+        [
+          125.5,
+          133.0
+        ]
+      ],
+      "center_mm": [
+        20.0,
+        -207.25,
+        129.25
+      ],
+      "solids": 1
+    },
+    {
+      "name": "66_DIN_rail_standoffs_M4",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "quantity": 2,
+        "height_mm": 4.5
+      },
+      "volume_mm3": 346.36059005827474,
+      "bounds_mm": [
+        [
+          -33.5,
+          73.5
+        ],
+        [
+          -210.75,
+          -203.75
+        ],
+        [
+          121.0,
+          125.5
+        ]
+      ],
+      "center_mm": [
+        19.99999999999998,
+        -207.24999999999997,
+        123.25
+      ],
+      "solids": 2
+    },
+    {
+      "name": "67_company_LCD_7in_STEP",
+      "group": "electronics",
+      "status": "company_supplied_step",
+      "metadata": {
+        "source": "LCD.STEP.gz",
+        "tilt_deg": 15
+      },
+      "volume_mm3": 76425.49568904802,
+      "bounds_mm": [
+        [
+          -89.89999999999999,
+          89.8999999999982
+        ],
+        [
+          260.2282562365433,
+          296.0
+        ],
+        [
+          125.0,
+          236.17298580759922
+        ]
+      ],
+      "center_mm": [
+        3.323774244038532,
+        278.56002039682943,
+        178.60370761861734
+      ],
+      "solids": 11
+    },
+    {
+      "name": "67_LCD_bracket_3t",
+      "group": "electronics",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SPCC 3t, 1 bend; foot bolted through the floor into the front rail"
+      },
+      "volume_mm3": 72011.71863972514,
+      "bounds_mm": [
+        [
+          -110.0,
+          110.0
+        ],
+        [
+          251.72389457778266,
+          300.0
+        ],
+        [
+          121.0,
+          220.20969226703573
+        ]
+      ],
+      "center_mm": [
+        3.73211040439801e-15,
+        270.6988686742265,
+        161.6660067795845
+      ],
+      "solids": 1
+    },
+    {
+      "name": "67_LCD_side_clamps_PRINTED",
+      "group": "electronics",
+      "status": "concept_support",
+      "metadata": {
+        "quantity": 2
+      },
+      "volume_mm3": 16824.0,
+      "bounds_mm": [
+        [
+          -95.9,
+          95.9
+        ],
+        [
+          255.9157672821625,
+          292.9454373546494
+        ],
+        [
+          138.10599703246493,
+          219.75410499782302
+        ]
+      ],
+      "center_mm": [
+        -4.497738896071543e-14,
+        274.6958529911032,
+        179.00112471868505
+      ],
+      "solids": 2
+    },
+    {
+      "name": "67_LCD_bolts_M5_Tnut",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2
+      },
+      "volume_mm3": 1960.3688784401747,
+      "bounds_mm": [
+        [
+          -107.25,
+          107.25
+        ],
+        [
+          280.25,
+          289.75
+        ],
+        [
+          112.5,
+          129.0
+        ]
+      ],
+      "center_mm": [
+        4.639405939236265e-15,
+        285.0000000000001,
+        118.92691169672567
+      ],
+      "solids": 4
+    },
+    {
+      "name": "68_company_speaker_STEP",
+      "group": "electronics",
+      "status": "company_supplied_step",
+      "metadata": {
+        "source": "SPEAKER.STEP.gz",
+        "trimmed_solids": 2,
+        "limits": "Lead wire outside the frame/box envelope trimmed (as Rev15)"
+      },
+      "volume_mm3": 119029.48554556597,
+      "bounds_mm": [
+        [
+          -152.50000010000008,
+          -47.49999989795147
+        ],
+        [
+          -297.0000001000001,
+          -240.6999998996083
+        ],
+        [
+          135.99999989999998,
+          232.0000001
+        ]
+      ],
+      "center_mm": [
+        -100.25128011655225,
+        -268.50064630472775,
+        183.80313168214755
+      ],
+      "solids": 21
+    },
+    {
+      "name": "68_speaker_bracket_3t",
+      "group": "electronics",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SPCC 3t, 1 bend; grille faces rear (-Y)"
+      },
+      "volume_mm3": 34018.9374084235,
+      "bounds_mm": [
+        [
+          -157.0,
+          -43.0
+        ],
+        [
+          -297.0,
+          -257.20000000000005
+        ],
+        [
+          121.0,
+          235.29999999999998
+        ]
+      ],
+      "center_mm": [
+        -99.9999999999999,
+        -265.95197198769176,
+        155.81631783498398
+      ],
+      "solids": 1
+    },
+    {
+      "name": "68_speaker_screws_M3",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 3
+      },
+      "volume_mm3": 584.9252821902492,
+      "bounds_mm": [
+        [
+          -144.75,
+          -55.25
+        ],
+        [
+          -274.70000000000005,
+          -254.20000000000005
+        ],
+        [
+          138.79,
+          229.29000000000002
+        ]
+      ],
+      "center_mm": [
+        -99.99999999999999,
+        -262.20302114803627,
+        169.8733333333333
+      ],
+      "solids": 3
+    },
+    {
+      "name": "68_speaker_bolts_M5_Tnut",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2
+      },
+      "volume_mm3": 1960.3688784401752,
+      "bounds_mm": [
+        [
+          -147.25,
+          -52.75
+        ],
+        [
+          -289.75,
+          -280.25
+        ],
+        [
+          112.5,
+          129.0
+        ]
+      ],
+      "center_mm": [
+        -100.00000000000001,
+        -285.0000000000001,
+        118.92691169672568
+      ],
+      "solids": 4
+    },
+    {
+      "name": "74_lidar_plate_3t_FRONT_LEFT",
+      "group": "lidars",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SS400 3t on the floor corner; M3 to the scanner, 2x M5 T-nut"
+      },
+      "volume_mm3": 16657.450233343367,
+      "bounds_mm": [
+        [
+          -258.03300858899104,
+          -151.96699141100893
+        ],
+        [
+          231.96699141100893,
+          338.0330085889911
+        ],
+        [
+          121.0,
+          124.0
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        284.9999999999999,
+        122.49999999999996
+      ],
+      "solids": 1
+    },
+    {
+      "name": "74_lidar_plate_bolts_M5_Tnut_FRONT_LEFT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2
+      },
+      "volume_mm3": 1392.918705385519,
+      "bounds_mm": [
+        [
+          -224.25,
+          -185.75
+        ],
+        [
+          280.25,
+          289.75
+        ],
+        [
+          112.5,
+          124.0
+        ]
+      ],
+      "center_mm": [
+        -204.9999999999999,
+        285.0,
+        115.84177094038705
+      ],
+      "solids": 4
+    },
+    {
+      "name": "75_SICK_TiM571_envelope_base_FRONT_LEFT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 204200.55000000005,
+      "bounds_mm": [
+        [
+          -258.25928275897076,
+          -151.74071724102924
+        ],
+        [
+          231.74071724102924,
+          338.25928275897076
+        ],
+        [
+          124.0,
+          160.0
+        ]
+      ],
+      "center_mm": [
+        -205.00000000000003,
+        285.0,
+        142.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "76_SICK_TiM571_optical_envelope_FRONT_LEFT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {
+        "scan_z": 201.82999999999998,
+        "heading_deg": -45.0
+      },
+      "volume_mm3": 227359.2,
+      "bounds_mm": [
+        [
+          -247.77996026178613,
+          -162.22003973821387
+        ],
+        [
+          242.22003973821387,
+          327.77996026178613
+        ],
+        [
+          160.0,
+          222.12
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        285.0,
+        191.06
+      ],
+      "solids": 1
+    },
+    {
+      "name": "77_SICK_scanner_top_FRONT_LEFT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 4561.59253301238,
+      "bounds_mm": [
+        [
+          -227.0,
+          -183.0
+        ],
+        [
+          263.0,
+          307.0
+        ],
+        [
+          222.12,
+          225.12
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        285.0,
+        223.62
+      ],
+      "solids": 1
+    },
+    {
+      "name": "74_lidar_plate_3t_REAR_RIGHT",
+      "group": "lidars",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SS400 3t on the floor corner; M3 to the scanner, 2x M5 T-nut"
+      },
+      "volume_mm3": 16657.45023334336,
+      "bounds_mm": [
+        [
+          151.96699141100893,
+          258.03300858899104
+        ],
+        [
+          -338.0330085889911,
+          -231.96699141100893
+        ],
+        [
+          121.0,
+          124.0
+        ]
+      ],
+      "center_mm": [
+        205.00000000000003,
+        -285.0,
+        122.49999999999999
+      ],
+      "solids": 1
+    },
+    {
+      "name": "74_lidar_plate_bolts_M5_Tnut_REAR_RIGHT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2
+      },
+      "volume_mm3": 1392.918705385519,
+      "bounds_mm": [
+        [
+          185.75,
+          224.25
+        ],
+        [
+          -289.75,
+          -280.25
+        ],
+        [
+          112.5,
+          124.0
+        ]
+      ],
+      "center_mm": [
+        204.99999999999997,
+        -285.0,
+        115.84177094038708
+      ],
+      "solids": 4
+    },
+    {
+      "name": "75_SICK_TiM571_envelope_base_REAR_RIGHT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 204200.55,
+      "bounds_mm": [
+        [
+          151.74071724102924,
+          258.25928275897076
+        ],
+        [
+          -338.25928275897076,
+          -231.74071724102924
+        ],
+        [
+          124.0,
+          160.0
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        -285.0,
+        142.0
+      ],
+      "solids": 1
+    },
+    {
+      "name": "76_SICK_TiM571_optical_envelope_REAR_RIGHT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {
+        "scan_z": 201.82999999999998,
+        "heading_deg": 135.0
+      },
+      "volume_mm3": 227359.19999999998,
+      "bounds_mm": [
+        [
+          162.22003973821387,
+          247.77996026178613
+        ],
+        [
+          -327.77996026178613,
+          -242.22003973821387
+        ],
+        [
+          160.0,
+          222.12
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        -285.0,
+        191.06
+      ],
+      "solids": 1
+    },
+    {
+      "name": "77_SICK_scanner_top_REAR_RIGHT",
+      "group": "lidars",
+      "status": "drawing_envelope",
+      "metadata": {},
+      "volume_mm3": 4561.59253301238,
+      "bounds_mm": [
+        [
+          183.0,
+          227.0
+        ],
+        [
+          -307.0,
+          -263.0
+        ],
+        [
+          222.12,
+          225.12
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        -285.0,
+        223.62
+      ],
+      "solids": 1
+    },
+    {
+      "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
+      "group": "cameras",
+      "status": "manufacturer_step_family_revision_reference",
+      "metadata": {
+        "source": "AstraMiniPro_3D_V0.1_20221012.stp",
+        "placement_repair": {
+          "cache_key": "c93ba35c7c80c09a2994",
+          "repairs": [],
+          "source_preserved": true,
+          "pose": [
+            -1,
+            140,
+            282,
+            239,
+            10,
+            5
+          ],
+          "source_solid_volume_mm3": 13831.147608597721,
+          "placed_solid_volume_mm3": 13831.147608597723,
+          "minimum_topology_tolerance_mm": 1e-05,
+          "open_reference_shells_excluded": 3
+        }
+      },
+      "volume_mm3": 13831.147608597723,
+      "bounds_mm": [
+        [
+          -181.39871953303197,
+          -96.7418235835546
+        ],
+        [
+          265.2863611291553,
+          292.9868830680913
+        ],
+        [
+          228.5715021691329,
+          250.67554934756683
+        ]
+      ],
+      "center_mm": [
+        -140.64035268926406,
+        277.64843851912474,
+        239.41376053382575
+      ],
+      "solids": 58
+    },
+    {
+      "name": "78_camera_bracket_3t_LEFT",
+      "group": "cameras",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SPCC 3t, 2 bends, 1x M5 T-nut into the top front rail"
+      },
+      "volume_mm3": 20052.725116671685,
+      "bounds_mm": [
+        [
+          -160.0,
+          -108.0
+        ],
+        [
+          250.0,
+          300.0
+        ],
+        [
+          220.0,
+          255.0
+        ]
+      ],
+      "center_mm": [
+        -134.00000000000003,
+        269.66273295970626,
+        237.44313001716134
+      ],
+      "solids": 1
+    },
+    {
+      "name": "79_camera_wedge_PRINTED_LEFT",
+      "group": "cameras",
+      "status": "concept_support",
+      "metadata": {
+        "material": "3D-printed wedge; M2 camera screws not drawn"
+      },
+      "volume_mm3": 5510.004620053339,
+      "bounds_mm": [
+        [
+          -160.0,
+          -108.0
+        ],
+        [
+          267.0906162649357,
+          288.7806081835982
+        ],
+        [
+          223.0,
+          230.91132571617953
+        ]
+      ],
+      "center_mm": [
+        -134.00000000000003,
+        277.4938448588021,
+        226.31323104651182
+      ],
+      "solids": 1
+    },
+    {
+      "name": "79_camera_bracket_bolt_M5_Tnut_LEFT",
+      "group": "cameras",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 1,
+        "sku": "M5 countersunk + T-nut"
+      },
+      "volume_mm3": 657.5029754697152,
+      "bounds_mm": [
+        [
+          -141.25,
+          -126.75
+        ],
+        [
+          280.25,
+          289.75
+        ],
+        [
+          252.0,
+          261.5
+        ]
+      ],
+      "center_mm": [
+        -134.0,
+        285.0,
+        258.5823467927624
+      ],
+      "solids": 2
+    },
+    {
+      "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
+      "group": "cameras",
+      "status": "manufacturer_step_family_revision_reference",
+      "metadata": {
+        "source": "AstraMiniPro_3D_V0.1_20221012.stp",
+        "placement_repair": {
+          "cache_key": "657e9c250bc112650379",
+          "repairs": [],
+          "source_preserved": true,
+          "pose": [
+            1,
+            140,
+            282,
+            239,
+            10,
+            5
+          ],
+          "source_solid_volume_mm3": 13831.147608597721,
+          "placed_solid_volume_mm3": 13831.147608597721,
+          "minimum_topology_tolerance_mm": 1e-05,
+          "open_reference_shells_excluded": 3
+        }
+      },
+      "volume_mm3": 13831.147608597721,
+      "bounds_mm": [
+        [
+          96.74182358419264,
+          181.39871953321136
+        ],
+        [
+          265.28636112915876,
+          293.2617951714871
+        ],
+        [
+          228.5715021691329,
+          250.67554934756683
+        ]
+      ],
+      "center_mm": [
+        138.61373498579246,
+        277.8257445934792,
+        239.41376053382615
+      ],
+      "solids": 58
+    },
+    {
+      "name": "78_camera_bracket_3t_RIGHT",
+      "group": "cameras",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SPCC 3t, 2 bends, 1x M5 T-nut into the top front rail"
+      },
+      "volume_mm3": 20052.725116671685,
+      "bounds_mm": [
+        [
+          108.0,
+          160.0
+        ],
+        [
+          250.0,
+          300.0
+        ],
+        [
+          220.0,
+          255.0
+        ]
+      ],
+      "center_mm": [
+        133.99999999999991,
+        269.66273295970626,
+        237.44313001716134
+      ],
+      "solids": 1
+    },
+    {
+      "name": "79_camera_wedge_PRINTED_RIGHT",
+      "group": "cameras",
+      "status": "concept_support",
+      "metadata": {
+        "material": "3D-printed wedge; M2 camera screws not drawn"
+      },
+      "volume_mm3": 5510.004620053334,
+      "bounds_mm": [
+        [
+          108.0,
+          160.0
+        ],
+        [
+          267.0906162649357,
+          288.78060818359813
+        ],
+        [
+          223.0,
+          230.91132571617953
+        ]
+      ],
+      "center_mm": [
+        133.99999999999997,
+        277.49384485880205,
+        226.3132310465118
+      ],
+      "solids": 1
+    },
+    {
+      "name": "79_camera_bracket_bolt_M5_Tnut_RIGHT",
+      "group": "cameras",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 1,
+        "sku": "M5 countersunk + T-nut"
+      },
+      "volume_mm3": 657.5029754697152,
+      "bounds_mm": [
+        [
+          126.75,
+          141.25
+        ],
+        [
+          280.25,
+          289.75
+        ],
+        [
+          252.0,
+          261.5
+        ]
+      ],
+      "center_mm": [
+        133.99999999999997,
+        285.0,
+        258.5823467927624
+      ],
+      "solids": 2
+    }
+  ]
+}

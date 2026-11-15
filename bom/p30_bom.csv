@@ -1,0 +1,22 @@
+category,item,spec,qty,unit,source,unit_krw,amount_krw,note
+Frame,Al profile 3030 slot-8,"6.08 m total: 440x4, 540x4, 380x2, 170x4 (stubs), 131x2 + 114x4 (posts); cut to length",1,set,Company stock,0,0,Cutting in house; end taps M8 where hidden connectors are used
+Frame,3030 cast angle bracket 28x28,Post ends (8 posts x 2 ends x 2; LiDAR corners have no post),24,ea,Purchase (generic),1200,28800,Estimate
+Frame,3030 hidden/anchor connector,Rail-to-rail joints of the lower and top frames,20,ea,Purchase (generic),1500,30000,Estimate; needs an access hole per connector
+Frame,T-nut M5/M6 + socket bolts,"Floor, deck, holders, brackets (about 70 joints)",1,set,Purchase (generic),30000,30000,Estimate
+Plate,Deck SS400 2.3t,440x600 laser cut; arm holes pitch 124 (arm TBD); 2x D24 access holes,1,ea,Laser cut (steel),15000,15000,Estimate (not quoted): material ~4.8 kg + cutting
+Plate,Floor SS400 2t,440x600 notched at the wheel bays; laser cut,1,ea,Laser cut (steel),12000,12000,Estimate (not quoted): material ~3.6 kg + cutting
+Plate,Caster corner plate SS400 6t,80x90; 4x M6 tap for GL-65 + 3x D6.5,4,ea,Laser cut + tap,5000,20000,"Estimate (not quoted); same unit basis as Rev15 suspension_misumi.csv (S355 6t flat 4000, 8t flat 5000, 3t 2-bend 12000)"
+Drive,"Carriage + axle wall SS400 6t (one part, 1 bend)",Carriage 58x280 + wall 160 wide; D-hole AF10.2; 2x D32.5 bush bore; 8x M5 + M8 + 2x M5 taps,2,ea,Laser cut + bend + tap,16000,32000,Estimate (not quoted): laser 6000 + 6t bend 5000 + 11 taps 5000; replaces the bolted A5052 10t axle + carriage plates
+Drive,Upper shaft holder SS400 6t,60x410; spring seat; 2x M6 striker tap,2,ea,Laser cut + tap,5000,10000,"Estimate (not quoted); same unit basis as Rev15 suspension_misumi.csv (S355 6t flat 4000, 8t flat 5000, 3t 2-bend 12000)"
+Drive,Lower shaft holder SS400 6t,60x113,4,ea,Laser cut,2500,10000,"Estimate (not quoted); same unit basis as Rev15 suspension_misumi.csv (S355 6t flat 4000, 8t flat 5000, 3t 2-bend 12000)"
+Drive,Linear bushing C-LHFR20,MISUMI economy round-flange single (LMF20 eq.) dr20 D32 L42; STEP placed,4,ea,Purchase MISUMI,6464,25856,"Price seen 2026-11-15 (1-19 pcs, ships day 1-2)"
+Drive,Guide shaft SFJW20-124-M8-N8,D20 g6 SUJ2 induction hardened; both ends M8; L124 (= holder gap); STEP placed,4,ea,Purchase MISUMI,10868,43472,"Price seen 2026-11-15 (1-4 pcs, ships day 2)"
+Drive,Spring X-SWU21-70,"OD21 ID13.5 L70, 5.39 N/mm; 66-174 N over +-10 mm",2,ea,MISUMI (MOQ 10),3834,38340,MOQ 10 pcs = 38340
+Drive,Bump stopper C-USLH10,Urethane M5; 2 per side,4,ea,Company stock,0,0,MISUMI STEP placed
+Drive,M8 stud + washer + nylock / M6 strikers + jam nuts / M8 shaft bolts,Per side: 1 stud set + 2 strikers + 4 shaft bolts M8x20; 8x M5x8 bush flange screws,1,set,Purchase (generic),8000,8000,Estimate
+Drive,Axle spacer 4.9 + washer + M14x1.5 nut,As Rev15 trial stack,2,set,Purchase/turned,5000,10000,Confirm motor shoulder
+Bracket,Small SPCC/SS400 3t brackets,"LCD (1 bend), speaker (1 bend), camera x2 (2 bends), LiDAR plate x2 (flat)",6,ea,Laser + bend,8833,53000,Estimate (not quoted): 2-bend 12000 x2 + 1-bend 12000 x2 + flat 2500 x2 = 53000 (Rev15 bracket basis)
+Bracket,3D-printed parts,LCD clamps x2 + camera wedges x2,1,set,In house,0,0,
+Electronics,DC/DC DDR-240B-24,On TS35 DIN rail (rail 120 mm),1,ea,Company stock,0,0,Confirm datasheet size and 21-29.4 V input
+Electronics,Battery 7S9P / 7in LCD / speaker,Company STEP parts,1,set,Company stock,0,0,Battery strap TBD
+Existing,ZLLG65ASM250-N V2 / GL-65-ASF / TiM571 / Astra Mini Pro,"Already selected parts (2 / 4 / 2 / 2), same as Rev15",1,set,Existing purchase,0,0,Not part of the chassis cost

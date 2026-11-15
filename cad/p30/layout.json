@@ -1,0 +1,205 @@
+{
+  "revision": "P30-3",
+  "status": "P30 concept (2026-11-15): low-cost 30x30 aluminium profile chassis with SS400 laser-cut steel plates. Two drive wheels on vertical slide suspension (MISUMI D20 shafts + ball bushings + one spring each), four GL-65 casters bolted rigid. Separate variant; the Rev15 model in cad/layout.json is unchanged.",
+  "coordinates": "mm; X right, Y forward, Z up, ground Z0. Heading clockwise from +Y (CAD Z rotation = -heading).",
+  "frame": {
+    "section": 30,
+    "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification.",
+    "outer_x": 220,
+    "outer_y": 300,
+    "lower_bottom_z": 89,
+    "inner_rail_x": 110,
+    "stub_start_y": 100,
+    "top_bottom_z": 255,
+    "arm_member_y": 62,
+    "corner_post_xy": [
+      205,
+      285
+    ],
+    "bay_post_y": 160,
+    "lidar_corners": [
+      "LF",
+      "RB"
+    ]
+  },
+  "plates": {
+    "corner_plate_t": 6,
+    "corner_plate_x": [
+      140,
+      220
+    ],
+    "corner_plate_y": [
+      210,
+      300
+    ],
+    "floor_t": 2,
+    "floor_notch_x": 138,
+    "floor_notch_y": 210,
+    "deck_t": 2.3,
+    "arm_bolt_pitch": 124,
+    "material_note": "P30-3: SS400 laser-cut steel, flat (no bending, no welding); thinner than the P30-2 A5052 plates (8/3/5 t) for cost"
+  },
+  "caster": {
+    "x": 165,
+    "y": 245,
+    "bolt": "M6x8 into M6 tapped corner plate (SS400 6t, 6 mm thread)"
+  },
+  "drive": {
+    "wheel_x": 190,
+    "travel_mm": 20,
+    "axle_spacer_t": 4.9,
+    "axle_plate_t": 6,
+    "axle_plate_half_y": 80,
+    "axle_plate_bottom_z": 45,
+    "carriage_t": 6,
+    "carriage_x": [
+      146,
+      204
+    ],
+    "carriage_half_y": 140,
+    "guide_x": 177,
+    "guide_y": 112,
+    "shaft_d": 20,
+    "holder_t": 6,
+    "holder_x": [
+      160,
+      220
+    ],
+    "lower_holder_y": [
+      97,
+      210
+    ],
+    "upper_holder_half_y": 205,
+    "bush": {
+      "sku": "C-LHFR20",
+      "step": "C-LHFR20.stp",
+      "quantity_per_wheel": 2,
+      "supply": "Purchase MISUMI economy linear bushing, round flange single (LMF20 equivalent)",
+      "unit_price_krw": 6464,
+      "price_seen": "2026-11-15 kr.misumi-ec.com, 1-19 pcs, VAT excl.",
+      "bore": 20,
+      "od": 32,
+      "length": 42,
+      "flange_t": 8,
+      "flange_d": 54,
+      "bolt_pcd": 43,
+      "bolt_hole": 5.5,
+      "cbore_d": 9,
+      "cbore_depth": 5.1,
+      "bolt_angle_deg": 45,
+      "dynamic_load_N": 882,
+      "static_load_N": 1370,
+      "rolling_mu": 0.003,
+      "mount": "Flange on top of the carriage plate, body down through a D32.5 bore; 4x M5 from the counterbored flange into the tapped plate",
+      "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-15 + catalogue table dr20 D32 L42 H54 T8 PCD43 d5.5 d1 9 t5.1"
+    },
+    "spring": {
+      "sku": "X-SWU21-70",
+      "od": 21,
+      "id": 13.5,
+      "free": 70,
+      "solid": 21,
+      "max_deflection": 38.5,
+      "rate": 5.39,
+      "wire_axial": 1.875,
+      "turns": 8.75,
+      "step": "X-SWU21-70.step",
+      "target_force_N": 120,
+      "source": "MISUMI CK68 catalogue values as used in Rev12-14 (layout.json suspension.drive)"
+    },
+    "stud": "M8",
+    "bump_stopper": {
+      "sku": "C-USLH10",
+      "step": "C-USLH10.stp",
+      "children": [
+        "BODY_C-USLH10",
+        "CUP_C-USLH10"
+      ],
+      "y": 30,
+      "height": 17
+    },
+    "unsprung_mass_kg_estimate": 4.6,
+    "shaft": {
+      "sku": "SFJW20-124-M8-N8",
+      "step": "SFJW20-124-M8-N8.stp",
+      "length": 124,
+      "tap_depth": 22.3,
+      "unit_price_krw": 10868,
+      "price_seen": "2026-11-15 kr.misumi-ec.com, 1-4 pcs, VAT excl., ships day 2",
+      "source": "MISUMI STEP AP214 downloaded 2026-11-15 (L124, 1-4 pcs 10,868 KRW ex VAT)"
+    },
+    "bend_inner_r": 6
+  },
+  "electronics": {
+    "battery_center_y": 0,
+    "battery_pad_mm": 3,
+    "battery_yaw_deg": 90,
+    "driver_x": 106,
+    "driver_size": [
+      44,
+      98,
+      70
+    ],
+    "pcb_xy": [
+      -5,
+      200
+    ],
+    "computer_above_pcb": 10,
+    "lcd_tilt_deg": 15,
+    "lcd_front_y": 296,
+    "speaker_x": -100,
+    "speaker_front_y": -297,
+    "speaker_bottom_z": 136,
+    "dcdc_xy": [
+      20,
+      -234
+    ],
+    "dcdc_size": [
+      125.2,
+      128.5,
+      63
+    ],
+    "power_bay_xy": [
+      108,
+      222
+    ],
+    "power_bay_size": [
+      56,
+      50,
+      40
+    ],
+    "status": "Battery, LCD and speaker from company STEP files. Controller, computer, drivers, power distribution are envelopes; DC/DC DDR-240B-24 is a size reservation."
+  },
+  "sensors": {
+    "lidar_plate": [
+      80,
+      70,
+      3
+    ],
+    "scan_offset_above_envelope_min": 77.83,
+    "camera_x": 140,
+    "camera_y": 282,
+    "camera_z": 239,
+    "camera_yaw_deg": 5,
+    "camera_pitch_down_deg": 10,
+    "camera_shelf_z": 220,
+    "camera_fov_deg": [
+      58.4,
+      45.5
+    ],
+    "camera_optics_local_x": [
+      -28.0,
+      -3.0,
+      27.0
+    ],
+    "camera_fov_note": "Depth FOV H58.4 x V45.5 (cad/parts.json + Rev15 viewer). Optics x = the three front openings of the Astra STEP (lens barrel D13.3, centre lens D17, window 21.8x14.5) in the camera frame; which one is the depth camera is not identified, so all three are checked",
+    "camera_yaw_note": "P30-3: outward yaw 15 -> 5 deg. At 15 deg the outer optic of the left camera saw the front-left TiM571 (7.9% of the image, nearest 29 mm); clear from 6 deg down. Combined horizontal view +-34.2 deg (was +-44.2); the LiDARs cover the sides"
+  },
+  "load_case": {
+    "mass_kg": 55,
+    "mass_no_arm_kg": 35,
+    "cg_height_mm": 250,
+    "friction_mu": 0.6,
+    "note": "Same design mass as Rev15 (20 kg arm included). Simple static estimates only."
+  }
+}

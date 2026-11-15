@@ -1,0 +1,302 @@
+{
+  "variant": "P30",
+  "revision": "P30-3",
+  "components": 126,
+  "solids": 550,
+  "ground": {
+    "drive_tire_min_z": [
+      0.0,
+      0.0
+    ],
+    "caster_wheel_min_z": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pass": true
+  },
+  "springs": {
+    "sku": "X-SWU21-70",
+    "rate_N_mm": 5.39,
+    "per_wheel": {
+      "-10": {
+        "length_mm": 57.74,
+        "deflection_mm": 12.26,
+        "force_N": 66.1
+      },
+      "+0": {
+        "length_mm": 47.74,
+        "deflection_mm": 22.26,
+        "force_N": 120.0
+      },
+      "+10": {
+        "length_mm": 37.74,
+        "deflection_mm": 32.26,
+        "force_N": 173.9
+      }
+    },
+    "max_deflection_mm": 38.5,
+    "solid_mm": 21,
+    "pass": true
+  },
+  "statics": {
+    "weight_N": 539.6,
+    "drive_spring_each_N": 120,
+    "drive_share_pct": 44.5,
+    "caster_each_N": 74.9,
+    "caster_each_no_arm_N": 25.8,
+    "caster_capacity_N": 490.5,
+    "traction_limit_N": 144.0,
+    "traction_accel_m_s2": 2.62,
+    "traction_at_full_droop_each_N": 39.7,
+    "rated_torque_force_each_N": 44.4,
+    "tip_over_accel_g": {
+      "lateral": 0.66,
+      "longitudinal": 0.98,
+      "note": "support polygon = rigid casters; CG height assumed"
+    },
+    "bush_tilt_couple_Nm": 14.49,
+    "bush_radial_each_N": 172.5,
+    "bush_load_ratio_dynamic": 0.196,
+    "bush_life_km_at_full_traction": 6682,
+    "slide_friction_N": 1.04,
+    "slide_friction_mu": 0.003,
+    "slide_friction_vs_spring_pct": 0.86,
+    "bush_note": "Ball bushing rolling friction from the catalogue order of magnitude; seal drag not included (measure). MISUMI advises against single bushings under large moment load: here two singles share the pitch moment; the double type C-LHFRW20 is the upgrade if wear shows",
+    "arm_member_3g": {
+      "force_each_N": 294.3,
+      "span_mm": 380,
+      "sigma_MPa": 15.5,
+      "deflection_mm": 0.172
+    },
+    "scope": "Hand calculations with assumed CG (centre) and generic profile section; no FEM, no fatigue, no dynamic loads"
+  },
+  "fabricated_mass_kg": {
+    "frame": 7.05,
+    "plates": 9.12,
+    "brackets_and_drive_fab": 9.77
+  },
+  "static_interference": {
+    "boolean_pairs": 277,
+    "hits": [],
+    "known_manufacturer_overlaps": [
+      {
+        "a": "43_GL65_OEM_fork_LB",
+        "b": "44_GL65_OEM_wheel_LB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      },
+      {
+        "a": "43_GL65_OEM_fork_LF",
+        "b": "44_GL65_OEM_wheel_LF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      },
+      {
+        "a": "43_GL65_OEM_fork_RB",
+        "b": "44_GL65_OEM_wheel_RB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      },
+      {
+        "a": "43_GL65_OEM_fork_RF",
+        "b": "44_GL65_OEM_wheel_RF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      }
+    ]
+  },
+  "stroke_interference": {
+    "poses": 8,
+    "hits": [],
+    "pairs_checked": 11752
+  },
+  "stroke_end_contacts_mm": {
+    "LEFT-10:45-52": 0.0,
+    "LEFT+10:46-54": 0.05,
+    "RIGHT-10:45-52": 0.0,
+    "RIGHT+10:46-54": 0.05
+  },
+  "caster_swivel": {
+    "samples": 88,
+    "step_deg": 30,
+    "hits": []
+  },
+  "support": {
+    "root": "01_P30_lower_front_rail",
+    "tolerance_mm": 0.2,
+    "contacts": 238,
+    "unsupported": [],
+    "isolated": [],
+    "scope": "Contact graph from the base plate at the nominal pose; geometric support only, not joint strength"
+  },
+  "lidar_shadows": [
+    {
+      "lidar": "FRONT_LEFT",
+      "scan_z": 201.83,
+      "heading_deg": -45.0,
+      "fov_deg": [
+        -135,
+        135
+      ],
+      "blocked": [
+        {
+          "part": "05_P30_corner_post_LB",
+          "from_deg": -135,
+          "to_deg": -133.5,
+          "nearest_mm": 555.0
+        },
+        {
+          "part": "06_P30_bay_post_LB",
+          "from_deg": -135,
+          "to_deg": -133.0,
+          "nearest_mm": 430.0
+        },
+        {
+          "part": "06_P30_bay_post_LF",
+          "from_deg": -135,
+          "to_deg": -127.2,
+          "nearest_mm": 110.1
+        },
+        {
+          "part": "05_P30_corner_post_RF",
+          "from_deg": 132.8,
+          "to_deg": 135,
+          "nearest_mm": 395.0
+        }
+      ],
+      "method": "BRep section vertices in a 1 mm slab; angles relative to heading; approximate, not a safety analysis"
+    },
+    {
+      "lidar": "REAR_RIGHT",
+      "scan_z": 201.83,
+      "heading_deg": 135.0,
+      "fov_deg": [
+        -135,
+        135
+      ],
+      "blocked": [
+        {
+          "part": "06_P30_bay_post_RB",
+          "from_deg": -135,
+          "to_deg": -127.2,
+          "nearest_mm": 110.1
+        },
+        {
+          "part": "05_P30_corner_post_RF",
+          "from_deg": -135,
+          "to_deg": -133.5,
+          "nearest_mm": 555.0
+        },
+        {
+          "part": "06_P30_bay_post_RF",
+          "from_deg": -135,
+          "to_deg": -133.0,
+          "nearest_mm": 430.0
+        },
+        {
+          "part": "05_P30_corner_post_LB",
+          "from_deg": 132.8,
+          "to_deg": 135,
+          "nearest_mm": 395.0
+        },
+        {
+          "part": "68_company_speaker_STEP",
+          "from_deg": 133.7,
+          "to_deg": 135,
+          "nearest_mm": 257.2
+        }
+      ],
+      "method": "BRep section vertices in a 1 mm slab; angles relative to heading; approximate, not a safety analysis"
+    }
+  ],
+  "camera_fov": {
+    "pyramids": [
+      {
+        "camera": "LEFT",
+        "optic_local_x": -28.0,
+        "fov_deg": [
+          58.4,
+          45.5
+        ],
+        "hits": []
+      },
+      {
+        "camera": "LEFT",
+        "optic_local_x": -3.0,
+        "fov_deg": [
+          58.4,
+          45.5
+        ],
+        "hits": []
+      },
+      {
+        "camera": "LEFT",
+        "optic_local_x": 27.0,
+        "fov_deg": [
+          58.4,
+          45.5
+        ],
+        "hits": []
+      },
+      {
+        "camera": "RIGHT",
+        "optic_local_x": -28.0,
+        "fov_deg": [
+          58.4,
+          45.5
+        ],
+        "hits": []
+      },
+      {
+        "camera": "RIGHT",
+        "optic_local_x": -3.0,
+        "fov_deg": [
+          58.4,
+          45.5
+        ],
+        "hits": []
+      },
+      {
+        "camera": "RIGHT",
+        "optic_local_x": 27.0,
+        "fov_deg": [
+          58.4,
+          45.5
+        ],
+        "hits": []
+      }
+    ],
+    "profile_hits": [],
+    "method": "Pyramid from the front plane of each optic opening (STEP), 1.5 m deep, boolean vs every part; image share from the convex hull of the projected intersection; not an optical simulation"
+  },
+  "errors": [],
+  "valid": true,
+  "export": {
+    "files": [
+      "amr_p30.step",
+      "amr_p30.glb"
+    ],
+    "step_roundtrip": [
+      {
+        "file": "amr_p30.step",
+        "raw_import_valid": false,
+        "valid_after_explicit_normalization": true,
+        "normalized_components": [
+          {
+            "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
+            "minimum_topology_tolerance_mm": 1e-05,
+            "volume_change_mm3": 0.0
+          },
+          {
+            "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
+            "minimum_topology_tolerance_mm": 1e-05,
+            "volume_change_mm3": 0.0
+          }
+        ],
+        "solids": 550
+      }
+    ]
+  }
+}
