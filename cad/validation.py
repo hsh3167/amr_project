@@ -67,10 +67,27 @@ def bogie_report(d):
         return round((r-have)/rear_rate,3)
     pitch=[case(s['design_mass_kg'],y) for y in (-30,0,30)]
     tip_g=round(yp/q.get('cg_height_mm_estimate',200),3)
-    return {'concept':'Rev15 bogie (front caster + drive wheel) + rear hinge casters','design_mass_kg':s['design_mass_kg'],
+    from .caster_motion import bogie_stack
+    st=bogie_stack(d);xo_b,xi_b=st['bearing_x'];span_b=xo_b-xi_b;xw=d.p['drive_track']/2;xc=d.p['caster_x']
+    def bearings(cs):
+        # Vertical wheel loads at their X; the bearing pair (spacing span_b) reacts force and roll moment.
+        fw,fc=cs['drive_each_N'],cs['front_caster_each_N'];F=fw+fc
+        m=fw*(xw-xi_b)+fc*(xc-xi_b)
+        out=m/span_b;inn=F-out
+        worst=max(abs(out),abs(inn))
+        return {'cg_y_mm':cs['cg_y_mm'],'outer_bearing_N':round(out,1),'inner_bearing_N':round(inn,1),
+                'roll_moment_about_centre_Nm':round((fw*(xw-st['center_x'])+fc*(xc-st['center_x']))/1000,2),
+                's0_at_1g':round(q['bearing_C0r_kN']*1000/worst,2),'s0_at_2g':round(q['bearing_C0r_kN']*1000/(2*worst),2),
+                's0_at_3g':round(q['bearing_C0r_kN']*1000/(3*worst),2)}
+    pivot_report={'holder':q['holder_sku'],'bearing':q['bearing'],'C0r_kN':q['bearing_C0r_kN'],
+                  'bearing_x_mm':[round(v,2) for v in st['bearing_x']],'bearing_spacing_mm':round(span_b,2),
+                  'cases':[bearings(cs) for cs in [nominal]+pitch[::2]],
+                  'scope':'Vertical wheel loads only (no side force); static load rating check, no fatigue or fretting'}
+    return {'concept':'Rev16 bogie (front caster + drive wheel, BGHK bearing pivot) + rear hinge casters','design_mass_kg':s['design_mass_kg'],
             'bogie':{'pivot_y_mm':yp,'pivot_z_mm':q['pivot_z_mm'],'front_arm_mm':yc-yp,'rear_arm_mm':yp,
                      'travel_front_caster_mm':q['travel_mm'],'drive_travel_mm':round(q['travel_mm']*yp/(yc-yp),2),
-                     'step_rise_ratio':round(yp/yc,3),'pivot':q['bush_sku']},
+                     'step_rise_ratio':round(yp/yc,3),'pivot':q['holder_sku']},
+            'pivot_bearings':pivot_report,
             'static_cases':{'with_arm':nominal,'cg_sensitivity':pitch,'without_arm':case(s['design_mass_without_arm_kg'])},
             'rear_caster_spring':{**rear,'needed_spring_force_N':round(needed,2),'needed_length_mm':round(length,3),
                                   'level_shim_mm':round(c['loaded_length_mm']-length,3),'configured_shim_mm':c['shim_mm'],

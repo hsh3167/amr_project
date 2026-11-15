@@ -1,5 +1,5 @@
 {
-  "revision": "1.5",
+  "revision": "1.6",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
     "base_width": 390,
@@ -103,12 +103,12 @@
     "pcb_center_z": 146,
     "computer_center_z": 171,
     "driver_x": 124,
-    "driver_y": 125,
+    "driver_y": 145,
     "driver_center_z": 156,
     "power_bay_y": -162.5,
     "power_bay_center_z": 149,
     "status": "Rev15: company 7S9P battery, 7-inch LCD and speaker placed from the supplied STEP files; controller, computer, drivers, power distribution are envelope reservations; DC/DC DDR-240B-24 is a size reservation (datasheet dimensions to confirm).",
-    "battery_y": -35,
+    "battery_y": -49,
     "battery_bottom_z": 123,
     "battery_pad_mm": 3,
     "lcd_tilt_deg": 15,
@@ -246,10 +246,10 @@
     },
     "concept": "bogie",
     "bogie": {
-      "status": "Rev15: pure (unsprung) bogie. Pivot = company-stock MISUMI EA-MFCNW20 oil-free bush unit (d20, L77, centre 2-face flange) bolted to the inner wall, on a purchased D20 shaft clamped in a 3t U bracket under the base plate. Rotation limited by two company-stock C-USLH10 stoppers on the bogie floor against M6 striker bolts.",
+      "status": "Rev16: pure (unsprung) bogie. Pivot = two company-stock MISUMI BGHK6001DD-30 bearing holders hung from the base plate on one company-stock BN1359 12x35 shoulder bolt; the bolt is clamped (company-stock E-GLNUTS10 lock nut) through both ears of a 3t U bracket bolted on the bogie floor. Rotation limited by two company-stock C-USLH10 stoppers on the bogie floor against M6 striker bolts.",
       "travel_mm": 20,
       "pivot_y_mm": 60,
-      "pivot_z_mm": 90,
+      "pivot_z_mm": 87,
       "sheet_t_mm": 3,
       "outer_wall_x_mm": 170,
       "inner_wall_x_mm": 108,
@@ -284,30 +284,6 @@
       ],
       "torque_plate_t_mm": 6,
       "torque_plate_half_y_mm": 20,
-      "bush_sku": "EA-MFCNW20",
-      "bush_center_x_mm": 115,
-      "bush_bore_mm": 20,
-      "bush_od_mm": 32,
-      "bush_length_mm": 77,
-      "bush_flange_t_mm": 8,
-      "bush_flange_d_mm": 54,
-      "bush_flange_flats_mm": 36,
-      "bush_bolt_pcd_mm": 43,
-      "bush_bolt_hole_mm": 5.5,
-      "bush_cbore_d_mm": 9,
-      "bush_cbore_depth_mm": 5.1,
-      "bush_source": "MISUMI catalogue table (economy centre-flange housing unit, image 110311282859.jpg, read 2026-11-15): d20 D32 L77 T8 H54 A36 PCD43 d1 5.5 d2 9 t5.1. No STEP supplied; modelled from the table.",
-      "thrust_washer_t_mm": 1,
-      "shaft_d_mm": 20,
-      "shaft_status": "Purchase: D20 linear shaft, both ends M8 tapped, length = ear outer faces (catalogue part, cut and tapped by the supplier)",
-      "bracket_t_mm": 3,
-      "bracket_half_width_y_mm": 15,
-      "bracket_ear_bottom_z_mm": 72,
-      "bracket_bolt_x_mm": [
-        88,
-        135
-      ],
-      "bracket_bolt_dy_mm": 8,
       "bump_stopper_sku": "C-USLH10",
       "bump_stopper_step": "C-USLH10.stp",
       "bump_stopper_children": [
@@ -338,17 +314,71 @@
         167,
         178
       ],
-      "doubler_t_mm": 8,
-      "doubler_half_y_mm": 50,
-      "doubler_z_mm": [
-        68,
-        106
+      "holder_sku": "BGHK6001DD-30",
+      "holder_step": "BGHK6001DD-30.stp",
+      "holder_source": "Supplied MISUMI STEP (user, 2026-11-15) placed unscaled; matches the catalogue table (d12 D28 B8, h30, H48, L60, L1 48, L2 36, T15, d1 5.5). Measured from the STEP: flange S10, lip D24 x 2, snap-ring mouth D28 x 5 on the other face, inner-ring land D16.3.",
+      "holder_h_mm": 30,
+      "holder_H_mm": 48,
+      "holder_L_mm": 60,
+      "holder_L1_mm": 48,
+      "holder_L2_mm": 36,
+      "holder_T_mm": 15,
+      "holder_S_mm": 10,
+      "holder_d1_mm": 5.5,
+      "holder_dh_mm": 24,
+      "bearing": "6001DD",
+      "bearing_d_mm": 12,
+      "bearing_D_mm": 28,
+      "bearing_B_mm": 8,
+      "bearing_inner_land_mm": 16.3,
+      "bearing_inset_mm": 2,
+      "bearing_Cr_kN": 5.1,
+      "bearing_C0r_kN": 2.39,
+      "bolt_sku": "Bossard BN1359 12x35 (ISO 7379)",
+      "bolt_shoulder_d_mm": 11.98,
+      "bolt_shoulder_l_mm": 35,
+      "bolt_thread": "M10",
+      "bolt_thread_l_mm": 16,
+      "bolt_head_d_mm": 18,
+      "bolt_head_t_mm": 8,
+      "bolt_step_shoulder_l_mm": 30.0,
+      "bolt_note": "Company list: 12x35. The supplied SHOULDER BOLT.STEP measures a 30.0 mm shoulder; the stack needs 35 (confirm the real bolt). Modelled from ISO 7379 catalogue dimensions, not from the STEP.",
+      "nut_sku": "E-GLNUTS10",
+      "nut_af_mm": 17,
+      "nut_h_mm": 8.3,
+      "head_gap_mm": 1,
+      "spacer_od_mm": 16,
+      "spacer_id_mm": 12.1,
+      "spacer_outer_mm": 2.5,
+      "spacer_mid_mm": 11.3,
+      "spacer_inner_mm": 2.5,
+      "spacer_note": "Bearing collars d12.1 x D16, length-specified catalogue collars (SKU to pick); the stack is 0.3 mm longer than the shoulder so the nut clamps the inner rings.",
+      "bracket_t_mm": 3,
+      "bracket_half_y_mm": 34,
+      "bracket_window_half_y_mm": 22,
+      "bracket_ear_top_z_mm": 99,
+      "bracket_bolt_x_mm": [
+        131,
+        153
       ],
-      "doubler_bolt_dy_mm": 40,
-      "doubler_bolt_z_mm": [
-        73,
-        103
-      ]
+      "bracket_bolt_dy_mm": 28,
+      "backing_t_mm": 3,
+      "backing_x_mm": [
+        112,
+        172
+      ],
+      "backing_y_mm": [
+        30,
+        90.5
+      ],
+      "outer_wall_access_hole_d_mm": 22,
+      "inner_wall_access_hole_d_mm": 30,
+      "motor_cable_hole_xy_mm": [
+        154,
+        5
+      ],
+      "motor_cable_hole_d_mm": 28,
+      "motor_cable_note": "Hub-motor lead leaves the inboard axle end inside the bogie, rises through a 28 mm base-plate hole with a rubber grommet to the motor driver; leave slack for +-3.9 mm drive travel."
     }
   }
 }

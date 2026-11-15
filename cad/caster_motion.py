@@ -65,14 +65,38 @@ def bogie_lengths(d):
     return d.p['caster_y'] - q['pivot_y_mm'], q['pivot_y_mm']
 
 
+def bogie_stack(d):
+    """Rev16 pivot stack along +X for the right bogie (mirror for the left), outboard to inboard.
+
+    Shoulder-bolt head next to the outer wall, outboard U-bracket ear, collar, bearing holder 1 (pocket
+    outboard), mid collar, holder 2 (pocket inboard), collar, inboard ear (past the shoulder end), lock nut.
+    The collar stack is spacer_* longer than the shoulder, so the nut clamps ears, collars and inner rings."""
+    q = d.layout['suspension']['bogie']
+    bt, B, inset, T = q['bracket_t_mm'], q['bearing_B_mm'], q['bearing_inset_mm'], q['holder_T_mm']
+    s = {'head': (q['outer_wall_x_mm'] - q['head_gap_mm'] - q['bolt_head_t_mm'], q['outer_wall_x_mm'] - q['head_gap_mm'])}
+    x = s['head'][0]
+    for name, length in (('ear_out', bt), ('spacer_out', q['spacer_outer_mm']), ('race_out', B),
+                         ('spacer_mid', q['spacer_mid_mm']), ('race_in', B), ('spacer_in', q['spacer_inner_mm']),
+                         ('ear_in', bt), ('nut', q['nut_h_mm'])):
+        s[name] = (x - length, x)
+        x -= length
+    s['holder_out'] = (s['race_out'][1] + inset - T, s['race_out'][1] + inset)
+    s['holder_in'] = (s['race_in'][0] - inset, s['race_in'][0] - inset + T)
+    s['shoulder_end'] = s['head'][0] - q['bolt_shoulder_l_mm']
+    s['thread_tip'] = s['shoulder_end'] - q['bolt_thread_l_mm']
+    s['bearing_x'] = tuple(sum(s[k]) / 2 for k in ('race_out', 'race_in'))
+    s['center_x'] = sum(s['bearing_x']) / 2
+    return s
+
+
 def pivot_of(d, key):
     """(x, y, z) of the pivot axis and the horizontal arm length to the reference wheel.
 
-    Hinge keys: axis +Y. Bogie keys: axis +X through (y, z); x is the bush centre (reference only)."""
+    Hinge keys: axis +Y. Bogie keys: axis +X through (y, z); x is the bearing-pair centre (reference only)."""
     side = side_of(d, key)
     if is_bogie_key(d, key):
         q = d.layout['suspension']['bogie']
-        return (side * q['bush_center_x_mm'], q['pivot_y_mm'], q['pivot_z_mm']), bogie_lengths(d)[0]
+        return (side * bogie_stack(d)['center_x'], q['pivot_y_mm'], q['pivot_z_mm']), bogie_lengths(d)[0]
     if key in DRIVE_WHEELS:
         q = d.layout['suspension']['drive']
         px = side * q['pivot_x_mm']

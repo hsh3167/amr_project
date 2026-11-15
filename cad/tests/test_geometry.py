@@ -28,8 +28,8 @@ def test_official_caster_height_and_bogie_motion_contract():
     r=build_records(d,['caster_lf','caster_lb','motor_left','motor_right'])
     assert validate(r,d)['valid']
     contacts={x.name:x.shape.bounding_box().min.Z for x in r if x.name.startswith(('30_','44_'))}
-    # Drive wheel centre (0, 90) about the pivot (60, 90): contact = -60 sin(a).
-    assert contacts['30_NBR_OD180_W42p5_LEFT']==pytest.approx(-yp*sin(a),abs=1e-4)
+    # Drive wheel centre (0, 90) turned about the pivot (yp, zp); the tyre bottom moves with the centre.
+    assert contacts['30_NBR_OD180_W42p5_LEFT']==pytest.approx(zp+(0-yp)*sin(a)+(90-zp)*cos(a)-90,abs=1e-4)
     assert contacts['30_NBR_OD180_W42p5_RIGHT']==pytest.approx(0,abs=1e-6)
     lf=next(x for x in r if x.name=='44_GL65_OEM_wheel_LF')
     y,z=lf.metadata['nominal_center_yz']
@@ -67,7 +67,7 @@ def test_bogie_statics_and_rear_spring_within_catalog():
     from cad.validation import catalog_suspension_report
 
     report=catalog_suspension_report(load_design())
-    assert report['concept'].startswith('Rev15 bogie')
+    assert report['concept'].startswith('Rev16 bogie')
     nominal=report['static_cases']['with_arm']
     assert nominal['drive_load_fraction']>0.5
     total=2*(nominal['drive_each_N']+nominal['front_caster_each_N']+nominal['rear_caster_each_N'])
@@ -109,26 +109,41 @@ def test_rev12_hinge_modules_meet_both_stops():
     assert not any(n.startswith(('80_drive_','80_caster_swing_arm_3t_LF','80_caster_swing_arm_3t_RF')) for n in parts)
 
 
-def test_rev15_bogie_link_pivot_and_rotation_limits():
-    """One 3t bent link per side on an EA-MFCNW20 bush and D20 shaft; the stoppers meet the strikers at +-10 mm."""
+def test_rev16_bogie_bearing_pivot_and_rotation_limits():
+    """One 3t bent link per side; two BGHK6001DD-30 hung from the base plate carry a 12x35 shoulder bolt clamped in a
+    3t U bracket on the bogie floor; the stoppers meet the strikers at +-10 mm; motor cable holes in the base plate."""
     from build123d import CenterOf
-    from cad.caster_motion import pose_shape
+    from cad.caster_motion import bogie_stack, pose_shape
 
-    d=load_design();q=d.layout['suspension']['bogie'];half=q['travel_mm']/2
+    d=load_design();q=d.layout['suspension']['bogie'];half=q['travel_mm']/2;st=bogie_stack(d)
     parts={r.name:r for r in build_records(d,['suspension','chassis'])}
+    assert not any('MFCNW' in n or 'shaft_D20' in n or 'doubler' in n for n in parts)
+    plate=parts['01_lower_steel_plate_3t'].shape
     for key,s in (('LEFT',-1),('RIGHT',1)):
         link=parts['80_bogie_link_3t_'+key]
         assert link.shape.is_valid and len(link.shape.solids())==1 and link.metadata['moving_wheel']==key
         b=link.shape.bounding_box()
         assert (b.min.Y,b.max.Y)==pytest.approx((q['rear_y_mm'],q['front_y_mm']))
         assert b.max.Z<d.p['base_bottom_z']-4
-        shaft=parts['80_bogie_pivot_shaft_D20_'+key]
-        c=shaft.shape.center(CenterOf.MASS)
-        assert (c.Y,c.Z)==pytest.approx((q['pivot_y_mm'],q['pivot_z_mm']),abs=1e-3) and shaft.metadata['moving_wheel'] is None
-        bush=parts['80_bogie_pivot_bush_EA-MFCNW20_'+key]
-        assert bush.metadata['moving_wheel']==key and bush.metadata['supply']=='company stock'
-        bb=bush.shape.bounding_box();assert bb.size.X==pytest.approx(77)
-        assert bush.shape&shaft.shape is None or (bush.shape&shaft.shape).volume<1e-6
+        holders=parts['80_bogie_pivot_holders_BGHK6001DD-30_'+key]
+        assert holders.metadata['moving_wheel'] is None and holders.metadata['supply']=='company stock'
+        assert len(holders.shape.solids())==2 and holders.shape.bounding_box().max.Z==pytest.approx(d.p['base_bottom_z'])
+        bolt=parts['80_bogie_pivot_shoulder_bolt_12x35_'+key]
+        assert bolt.metadata['moving_wheel']==key and bolt.metadata['supply']=='company stock'
+        c=bolt.shape.center(CenterOf.BOUNDING_BOX)
+        assert (c.Y,c.Z)==pytest.approx((q['pivot_y_mm'],q['pivot_z_mm']),abs=1e-3)
+        bearings=parts['80_bogie_pivot_bearings_6001DD_'+key].shape
+        for x in st['bearing_x']:
+            assert any(abs(abs(sol.center().X)-x)<1e-3 for sol in bearings.solids())
+        ear=parts['80_bogie_pivot_U_bracket_3t_'+key].shape
+        stack=[bolt.shape,parts['80_bogie_pivot_collars_'+key].shape,parts['80_bogie_pivot_nut_E-GLNUTS10_'+key].shape,ear]
+        for x in stack:
+            for y in [holders.shape,bearings,link.shape]:
+                cut=x&y;assert cut is None or cut.volume<.01
+        # The moving stack keeps clear of the fixed holders across the bogie travel.
+        for dz in (-half,half):
+            for x in stack:
+                cut=pose_shape(d,x,key,dz)&holders.shape;assert cut is None or cut.volume<.01
         for tag,limit in (('front',half),('rear',-half)):
             stopper=parts[f'80_bogie_{tag}_stopper_C-USLH10_'+key].shape
             striker=parts[f'80_bogie_{tag}_striker_M6_'+key].shape
@@ -136,11 +151,19 @@ def test_rev15_bogie_link_pivot_and_rotation_limits():
             assert at is None or at.volume<.01
             beyond=pose_shape(d,stopper,key,limit*1.2)&striker
             assert beyond is not None and beyond.volume>.1
-        # CB5-12 stacks end about 2 mm past their nuts.
-        for bolts,nuts,axis in (('bogie_bracket_bolts','bogie_bracket_nuts','Z'),('bogie_flange_bolts_CB5-20','bogie_flange_nuts_M5','X'),('bogie_splice_bolts_CB5-12','bogie_splice_nuts_M5','X')):
+        # M5 stacks end about 2 mm past their nuts.
+        for bolts,nuts,axis in (('bogie_U_bracket_bolts_CB5-12','bogie_U_bracket_nuts_M5','Z'),('bogie_holder_bolts_CB5-22','bogie_holder_nuts_M5','Z'),('bogie_splice_bolts_CB5-12','bogie_splice_nuts_M5','X')):
             bo=parts['80_'+bolts+'_'+key].shape.bounding_box();nu=parts['80_'+nuts+'_'+key].shape.bounding_box()
             past=min(getattr(nu.min,axis)-getattr(bo.min,axis),getattr(bo.max,axis)-getattr(nu.max,axis))
             assert 0<past<=2.5,(bolts,key,past)
+        # Motor cable hole through the base plate, clear of the bogie and the battery footprint.
+        cx,cy=q['motor_cable_hole_xy_mm'];r=q['motor_cable_hole_d_mm']/2
+        from build123d import Solid
+        probe=Solid.make_cylinder(r-.5,10).translate((s*cx,cy,d.p['base_bottom_z']-3))
+        cut=probe&plate;assert cut is None or cut.volume<.01
+    report=__import__('cad.validation',fromlist=['bogie_report']).bogie_report(d)['pivot_bearings']
+    nominal=report['cases'][0]
+    assert report['bearing_spacing_mm']==pytest.approx(19.3) and nominal['s0_at_1g']>3 and nominal['s0_at_2g']>1.5
 
 
 def test_rev12b_misumi_step_parts_and_static_clearance():

@@ -104,7 +104,7 @@
         <label class="toggle"><span><i class="swatch" style="background:#8ebcff"></i>부품 라벨</span><input type="checkbox" id="showLabels" checked></label>
       </div>
       <div class="section">
-        <h2>보기 링크 서스펜션 (Rev15)</h2>
+        <h2>보기 링크 서스펜션 (Rev16)</h2>
         <label class="toggle"><span>서스펜션 구조 표시</span><input type="checkbox" id="showSuspension" checked></label>
         <p class="hint">좌우 각각 구동륜과 앞 캐스터가 보기 링크 하나에 달려 좌우 방향 축(Y=+60mm)을 중심으로 시소처럼 돕니다. 보기 값은 앞 캐스터 장착 중심의 상하 이동(+는 올라감)이고, 구동륜은 반대로 약 0.39배 움직입니다. 뒤 캐스터 2개는 경첩+스프링 모듈이며 스프링 변형은 표시용입니다.</p>
 <label class="mini-label" for="poseLEFT">왼쪽 보기 (앞 캐스터 기준) <output id="valueLEFT">0 mm</output></label><input id="poseLEFT" data-wheel="LEFT" type="range" min="-10" max="10" value="0" step="1">
@@ -196,7 +196,7 @@ show(location.hash==='#p30'?'p30':'rev15');})();
 <script type="module">import {setupBOM} from './web/bom.js?rev=1';setupBOM();</script>
 <script type="module">
 import * as THREE from 'three';
-import {loadNativeCAD} from './web/native-cad.js?rev=15';
+import {loadNativeCAD} from './web/native-cad.js?rev=16';
 import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
@@ -269,7 +269,7 @@ const annotations=[
  {id:'lidarFrontLeft',text:'TiM571 FRONT LEFT · 270°',pos:[-220,278,250]},
  {id:'lidarRearRight',text:'TiM571 REAR RIGHT · 270°',pos:[220,278,-250]},
  {id:'cameraRight',text:'ASTRA MINI PRO ×2',pos:[LP.camera_x,LP.camera_z+25,LP.camera_y]},
- {id:'battery',text:'7S9P BATTERY',pos:[0,245,-35]},
+ {id:'battery',text:'7S9P BATTERY',pos:[0,245,-49]},
  {id:'deck',text:'TOP PLATE',pos:[-30,deckTop+14,-192]},
  {id:'electronics',text:'CONTROLLERS',pos:[0,204,180]}
 ].map(a=>{const node=document.createElement('div');node.className='annotation';node.textContent=a.text;$('labels').append(node);return {...a,node}});

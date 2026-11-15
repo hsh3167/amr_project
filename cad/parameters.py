@@ -86,26 +86,37 @@ def validate_parameters(d):
                 raise ValueError('Catalog spring travel is exceeded: '+kind)
 
 def validate_bogie(d):
-    """Rev15 bogie: geometric limits that the CAD builder relies on."""
+    """Rev16 bogie: geometric limits that the CAD builder relies on."""
     from math import asin, cos, sin
+    from .caster_motion import bogie_stack
     q=d.layout['suspension']['bogie'];bb=d.p['base_bottom_z']
-    for key in ('travel_mm','pivot_y_mm','pivot_z_mm','sheet_t_mm','bush_length_mm','shaft_d_mm','bracket_t_mm'):
+    for key in ('travel_mm','pivot_y_mm','pivot_z_mm','sheet_t_mm','bracket_t_mm','holder_h_mm','holder_T_mm','bolt_shoulder_l_mm'):
         if not isinstance(q[key],(int,float)) or not math.isfinite(q[key]) or q[key]<=0:raise ValueError('Invalid bogie parameter: '+key)
     if q['sheet_t_mm']>3 or q['bracket_t_mm']>3:raise ValueError('Bent sheet parts are limited to 3t')
     yp,zp=q['pivot_y_mm'],q['pivot_z_mm'];front=d.p['caster_y']-yp
     if not 0<yp<d.p['caster_y']:raise ValueError('Bogie pivot must sit between the drive axle and the front caster')
-    if q['bush_bore_mm']!=q['shaft_d_mm'] or q['bush_od_mm']<=q['bush_bore_mm']:raise ValueError('Bogie bush and shaft do not match')
-    a=asin(q['travel_mm']/2/front);r=q['bush_flange_d_mm']/2
-    # Two-face flange, flats horizontal: its corners (radius r) turn with the bogie.
-    if zp+r*sin(min(math.pi/2,asin(q['bush_flange_flats_mm']/2/r)+a))>=d.p['base_bottom_z']-q['bracket_t_mm']-2:
-        raise ValueError('Bogie bush flange reaches the pivot bracket at full travel')
-    if q['bracket_ear_bottom_z_mm']>=zp-q['shaft_d_mm']/2-3:raise ValueError('Bogie bracket ear too short for the shaft hole')
-    x0=q['bush_center_x_mm']-q['bush_length_mm']/2-q['thrust_washer_t_mm']-q['bracket_t_mm']
-    x1=q['bush_center_x_mm']+q['bush_length_mm']/2+q['thrust_washer_t_mm']+q['bracket_t_mm']
-    if not q['inner_wall_x_mm']+q['sheet_t_mm']<=q['bush_center_x_mm']-q['bush_flange_t_mm']/2:raise ValueError('Bush flange must sit on the inner wall')
-    if not (x0<q['inner_wall_x_mm'] and x1<q['outer_wall_x_mm']-q['torque_plate_t_mm']):raise ValueError('Bogie bracket ears must straddle the inner wall')
-    if x1+2+8>=q['outer_wall_x_mm']:raise ValueError('Shaft end bolt reaches the outer wall')
-    if x1>=d.p.get('base_well_inner_x',d.p['base_width']/2-50):raise ValueError('Bogie bracket must sit under the base plate')
+    if abs(bb-q['holder_h_mm']-zp)>1e-6:raise ValueError('Hung BGHK holders put the bore at base_bottom - h: pivot_z must match')
+    if not q['bolt_shoulder_d_mm']<=q['bearing_d_mm']<q['spacer_id_mm']<q['spacer_od_mm']<=q['bearing_inner_land_mm']<q['holder_dh_mm']:
+        raise ValueError('Shoulder bolt, collars and bearing holder do not fit')
+    st=bogie_stack(d);a=asin(q['travel_mm']/2/front)
+    stack=st['head'][0]-st['spacer_in'][0]
+    if not q['bolt_shoulder_l_mm']<stack<=q['bolt_shoulder_l_mm']+.5:raise ValueError('Collar stack must be just longer than the shoulder')
+    if st['thread_tip']>st['nut'][0]:raise ValueError('Shoulder-bolt thread does not reach through the lock nut')
+    if st['ear_in'][0]-st['thread_tip']>q['bolt_thread_l_mm']:raise ValueError('Not enough thread past the inboard ear')
+    if st['holder_out'][1]>st['ear_out'][0]-.4 or st['holder_in'][0]<st['ear_in'][1]+.4:raise ValueError('Holders touch the U-bracket ears')
+    if st['holder_in'][1]>st['holder_out'][0]-.4:raise ValueError('The two bearing holders overlap')
+    if st['nut'][0]<=q['inner_wall_x_mm']+q['sheet_t_mm']+1:raise ValueError('Lock nut reaches the inner wall')
+    r=q['inner_wall_access_hole_d_mm']/2
+    if r<=q['nut_af_mm']/(2*cos(math.pi/6))+1:raise ValueError('Inner-wall socket hole too small for the lock nut')
+    # Hung holder body bottom vs the bogie floor and the U-bracket web strips, at full travel.
+    bottom=zp-(q['holder_H_mm']-q['holder_h_mm']);half=q['holder_L2_mm']/2
+    if bottom-q['rear_floor_top_z_mm']-half*sin(a)<1:raise ValueError('Bogie floor reaches the bearing holders at full travel')
+    if q['bracket_window_half_y_mm']<half+2:raise ValueError('U-bracket window must clear the holder body')
+    flange=bb-q['holder_S_mm'];top=q['bracket_ear_top_z_mm'];hy=q['bracket_half_y_mm']
+    if zp+(top-zp)*cos(a)+hy*sin(a)>=flange-2:raise ValueError('U-bracket ears reach the holder flanges at full travel')
+    if top<zp+q['nut_af_mm']/(2*cos(math.pi/6))+1:raise ValueError('U-bracket ears too short for the nut and bolt head')
+    if st['head'][1]>q['outer_wall_x_mm']:raise ValueError('Shoulder-bolt head reaches the outer wall')
+    if st['ear_out'][1]>=d.p.get('base_well_inner_x',d.p['base_width']/2-50):raise ValueError('Bogie pivot must sit under the base plate')
     for y,z in q['wall_top_profile_yz']:
         for s in (-1,1):
             if zp+(y-yp)*sin(s*a)+(z-zp)*cos(a)>=bb-2:raise ValueError('Bogie wall reaches the base plate at full travel')

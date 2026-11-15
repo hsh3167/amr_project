@@ -148,7 +148,15 @@
       "original_bytes": 82354,
       "source": "User-supplied company file (C:/AI_Work/part cad/SHOULDER BOLT.STEP)",
       "retrieved": "2026-11-15",
-      "note": "BOSSARD BN 1359 (ISO 7379) shoulder screw from the company stock list (listed as 12x35, article 2106345). Supplied by the user 2026-11-15. Measured: shoulder D12 length 30.0 (head face to step), head D18.27x9, M10 thread to 46.4. Stock list says 35: measure the actual bolt. Not placed in Rev15 (pivot uses EA-MFCNW20; see docs/bogie-link.md)."
+      "note": "BOSSARD BN 1359 (ISO 7379) shoulder screw from the company stock list (listed as 12x35, article 2106345). Supplied by the user 2026-11-15. Measured: shoulder D12 length 30.0 (head face to step), head D18.27x9, M10 thread to 46.4. Stock list says 35: measure the actual bolt. Rev16 uses this bolt type as the bogie pivot axle but models it from ISO 7379 12x35 catalogue dimensions, because the stack needs a 35 mm shoulder (see docs/bogie-link.md)."
+    },
+    {
+      "file": "BGHK6001DD-30.stp.gz",
+      "sha256_original": "4dc5b62fb2b9e575b4287dd2838f427fd2f5334afe3cb38de4ba20577580fa98",
+      "original_bytes": 114348,
+      "source": "User-supplied file (C:/AI_Work/part cad/BGHK6001DD-30.stp), MISUMI BGHK6001DD-30 STEP AP203",
+      "retrieved": "2026-11-15",
+      "note": "MISUMI T-type bearing holder set, company stock x4. Three labelled solids: Housing_, Bearing_, CHTMW_ (snap ring). Frame: X = width L (+-30), Y = height from the flange underside (bore centre Y30, flange top Y10, body top Y48), Z = thickness (-15..0). Measured: flange S10, holes D5.5 at X+-24, lip D24 Z-15..-13, bearing D28 Z-13..-5, snap-ring groove D29.4 Z-5..-3.65, mouth D28 to Z0; bearing inner-ring land D16.3. Placed in Rev16 as the bogie pivot."
     }
   ]
 }

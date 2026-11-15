@@ -63,7 +63,7 @@ function suspensionView(rows){
     <tbody>${body}</tbody>
     <tfoot><tr><td colspan="6">합계 (VAT 별도)</td><td class="num"><b>${won(total)}</b></td><td colspan="2">MISUMI ${won(confirmed)} + 추정 ${won(estimate)}</td></tr></tfoot>
   </table></div>
-  <p class="bom-note">회사 재고 부품(EA-MFCNW20 2개, C-USLH10 6개)은 0원으로 넣었습니다. 가격·납기는 수시로 바뀌므로 주문 전에 다시 확인하세요. 추정 행은 견적을 받지 않은 대략값입니다. 원본: <a href="https://github.com/hsh3167/amr_project/blob/main/bom/suspension_misumi.csv" target="_blank" rel="noopener noreferrer">bom/suspension_misumi.csv ↗</a></p>`;
+  <p class="bom-note">회사 재고 부품(BGHK6001DD-30 4개, 숄더 볼트 12×35 2개, E-GLNUTS10 2개, C-USLH10 6개)은 0원으로 넣었습니다. 가격·납기는 수시로 바뀌므로 주문 전에 다시 확인하세요. 추정 행은 견적을 받지 않은 대략값입니다. 원본: <a href="https://github.com/hsh3167/amr_project/blob/main/bom/suspension_misumi.csv" target="_blank" rel="noopener noreferrer">bom/suspension_misumi.csv ↗</a></p>`;
 }
 
 function conceptView(rows){
