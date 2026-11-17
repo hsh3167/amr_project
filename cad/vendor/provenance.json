@@ -148,7 +148,7 @@
       "original_bytes": 82354,
       "source": "User-supplied company file (C:/AI_Work/part cad/SHOULDER BOLT.STEP)",
       "retrieved": "2026-11-15",
-      "note": "BOSSARD BN 1359 (ISO 7379) shoulder screw from the company stock list (listed as 12x35, article 2106345). Supplied by the user 2026-11-15. Measured: shoulder D12 length 30.0 (head face to step), head D18.27x9, M10 thread to 46.4. Stock list says 35: measure the actual bolt. Rev16 uses this bolt type as the bogie pivot axle but models it from ISO 7379 12x35 catalogue dimensions, because the stack needs a 35 mm shoulder (see docs/bogie-link.md)."
+      "note": "BOSSARD BN 1359 (ISO 7379) shoulder screw. Supplied by the user 2026-11-15. Measured: shoulder D12 length 30.0 (head face to step), head D18.27x9, M10 thread to 46.4. The user confirmed on 2026-11-18 that the company holds 2x 12x30 (this file) and 2x 12x35. Rev16 uses the 12x35 as the bogie pivot axle, modelled from ISO 7379 catalogue dimensions (see docs/bogie-link.md)."
     },
     {
       "file": "BGHK6001DD-30.stp.gz",

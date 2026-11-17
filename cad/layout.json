@@ -342,7 +342,7 @@
       "bolt_head_d_mm": 18,
       "bolt_head_t_mm": 8,
       "bolt_step_shoulder_l_mm": 30.0,
-      "bolt_note": "Company list: 12x35. The supplied SHOULDER BOLT.STEP measures a 30.0 mm shoulder; the stack needs 35 (confirm the real bolt). Modelled from ISO 7379 catalogue dimensions, not from the STEP.",
+      "bolt_note": "Company stock (user, 2026-11-18): 2x 12x35 and 2x 12x30. The pivot uses the two 12x35; the collar stack (35.3) does not fit a 30 mm shoulder. The supplied SHOULDER BOLT.STEP (30.0 mm shoulder) is the 12x30 variant, so the 12x35 is modelled from ISO 7379 catalogue dimensions.",
       "nut_sku": "E-GLNUTS10",
       "nut_af_mm": 17,
       "nut_h_mm": 8.3,
