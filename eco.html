@@ -5,23 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a111d">
 <title>AMR PROJECT · Eco 저가형 Layout Lab</title>
-<link rel="stylesheet" href="web/lab.css">
-<style>
-.app{height:100vh}
-.eco-head{height:52px;flex:none;background:#0d1524;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px}
-.eco-head strong{letter-spacing:.11em;font-size:14px}.eco-head small{color:var(--muted);margin-left:10px;font-size:11px}.eco-head a{font-size:12px;text-decoration:none;color:#c3d8ff}
-.embed .eco-head{display:none}
-.tabs.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.move-row{display:grid;grid-template-columns:54px 1fr 48px;align-items:center;gap:6px;font-size:11px;color:#a9bbd2}
-.move-row output{text-align:right;font-variant-numeric:tabular-nums;color:#7fc2ff}
-.btn-row{display:flex;gap:6px;margin-top:8px}.btn-row .control{flex:1}
-.sel-name{font-size:12px;color:#7fc2ff;margin-bottom:8px;min-height:16px}
-.offsets{font:11px/1.6 ui-monospace,Consolas,monospace;color:#9fb6d3;white-space:pre-wrap;margin-top:8px}
-.check-ok{color:#4ade80}.check-bad{color:#f87171}
-.scene-top h2{text-transform:none}
-.workspace{min-height:0}
-@media(max-width:650px){.app{height:auto}.embed .scene-wrap{height:62vh}}
-</style>
+<link rel="stylesheet" href="web/lab.css?v=4">
+<script type="module" src="web/ui.js"></script>
 <script>if(new URLSearchParams(location.search).has('embed'))document.documentElement.classList.add('embed')</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"}}</script>
 </head>
@@ -155,12 +140,12 @@ const CAM_FOV=SENS.camera_fov_deg,SCAN_DEG=SPEC.lidar?.scan_deg||270;
 const canvas=$('viewport'),wrap=document.querySelector('.scene-wrap');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;
-const scene=new THREE.Scene();scene.fog=new THREE.FogExp2('#0b1726',.00055);
+const scene=new THREE.Scene();scene.fog=new THREE.FogExp2('#0b1726',.0003);
 const camera=new THREE.PerspectiveCamera(40,1,1,6000);camera.position.set(860,740,980);
 const orbit=new OrbitControls(camera,canvas);orbit.target.set(0,150,0);orbit.enableDamping=true;orbit.dampingFactor=.07;orbit.minDistance=300;orbit.maxDistance=2300;orbit.maxPolarAngle=Math.PI/2-.015;orbit.update();
-scene.add(new THREE.HemisphereLight(0xb9d8ff,0x31435d,2.0));
-const key=new THREE.DirectionalLight(0xf3f9ff,3);key.position.set(-430,820,390);scene.add(key);
-const fill=new THREE.DirectionalLight(0x549ce8,1.2);fill.position.set(470,300,-600);scene.add(fill);
+scene.add(new THREE.HemisphereLight(0xe6f0ff,0x7f90a8,3.6));scene.add(new THREE.AmbientLight(0xffffff,1.1));renderer.toneMappingExposure=1.25;
+const key=new THREE.DirectionalLight(0xffffff,4.5);key.position.set(-430,820,390);scene.add(key);
+const fill=new THREE.DirectionalLight(0xcfe3ff,3);fill.position.set(470,300,-600);scene.add(fill);const front=new THREE.DirectionalLight(0xffffff,2.5);front.position.set(300,500,900);scene.add(front);
 const under=new THREE.DirectionalLight(0xe6efff,2.5);under.position.set(-240,-560,400);under.visible=false;scene.add(under);
 const floor=new THREE.Mesh(new THREE.PlaneGeometry(6000,6000),new THREE.MeshStandardMaterial({color:0x0d1a29,roughness:1,transparent:true,opacity:.5}));floor.rotation.x=-Math.PI/2;floor.position.y=-3;scene.add(floor);
 const grid=new THREE.GridHelper(2600,52,0x3f6486,0x22364e);grid.position.y=-1;grid.material.transparent=true;grid.material.opacity=.34;scene.add(grid);
