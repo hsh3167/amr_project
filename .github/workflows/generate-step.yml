@@ -54,5 +54,11 @@ jobs:
           git add cad-output/amr_current.step.gz cad-output/amr_current.glb cad-output/manifest.json cad-output/build_report.json
           if ! git diff --cached --quiet; then
             git commit -m "build(cad): generate verified build123d STEP and viewer meshes"
-            git push
+            # main may have moved while this run was building (another push). Replay the bot commit on top;
+            # it only touches cad-output/, and a newer cad/ push queues its own run (concurrency group above).
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then exit 0; fi
+              git pull --rebase -X theirs origin main
+            done
+            exit 1
           fi
