@@ -1,5 +1,5 @@
 {
-  "revision": "P30-3",
+  "revision": "P30-4",
   "status": "P30 concept (2026-11-15): low-cost 30x30 aluminium profile chassis with SS400 laser-cut steel plates. Two drive wheels on vertical slide suspension (MISUMI D20 shafts + ball bushings + one spring each), four GL-65 casters bolted rigid. Separate variant; the Rev15 model in cad/layout.json is unchanged.",
   "coordinates": "mm; X right, Y forward, Z up, ground Z0. Heading clockwise from +Y (CAD Z rotation = -heading).",
   "frame": {
@@ -48,17 +48,10 @@
     "wheel_x": 190,
     "travel_mm": 20,
     "axle_spacer_t": 4.9,
-    "axle_plate_t": 6,
-    "axle_plate_half_y": 80,
+    "axle_plate_t": 10,
     "axle_plate_bottom_z": 45,
-    "carriage_t": 6,
-    "carriage_x": [
-      146,
-      204
-    ],
-    "carriage_half_y": 140,
-    "guide_x": 177,
-    "guide_y": 112,
+    "guide_x": 183,
+    "guide_y": 118,
     "shaft_d": 20,
     "holder_t": 6,
     "holder_x": [
@@ -71,27 +64,23 @@
     ],
     "upper_holder_half_y": 205,
     "bush": {
-      "sku": "C-LHFR20",
-      "step": "C-LHFR20.stp",
+      "sku": "LHSS20",
+      "step": "LHSS20.stp",
       "quantity_per_wheel": 2,
-      "supply": "Purchase MISUMI economy linear bushing, round flange single (LMF20 equivalent)",
-      "unit_price_krw": 6464,
-      "price_seen": "2026-11-15 kr.misumi-ec.com, 1-19 pcs, VAT excl.",
+      "supply": "Purchase MISUMI long-block linear bushing housing unit, single (LMU20 inside)",
+      "unit_price_krw": 24206,
+      "price_seen": "2026-11-17 kr.misumi-ec.com, 1 pc, VAT excl., same-day ship",
       "bore": 20,
-      "od": 32,
-      "length": 42,
-      "flange_t": 8,
-      "flange_d": 54,
-      "bolt_pcd": 43,
-      "bolt_hole": 5.5,
-      "cbore_d": 9,
-      "cbore_depth": 5.1,
-      "bolt_angle_deg": 45,
+      "length": 52,
+      "shaft_height": 31,
+      "width": 42,
+      "height": 54,
+      "mount_tap": "2x M8 depth 15 on the mounting face, pitch 36 along the shaft",
+      "mount_pitch": 36,
       "dynamic_load_N": 882,
       "static_load_N": 1370,
       "rolling_mu": 0.003,
-      "mount": "Flange on top of the carriage plate, body down through a D32.5 bore; 4x M5 from the counterbored flange into the tapped plate",
-      "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-15 + catalogue table dr20 D32 L42 H54 T8 PCD43 d5.5 d1 9 t5.1"
+      "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-18 + catalogue: dr20 D32 L52, h31, C 882 N, C0 1370 N, 272 g"
     },
     "spring": {
       "sku": "X-SWU21-70",
@@ -128,7 +117,14 @@
       "price_seen": "2026-11-15 kr.misumi-ec.com, 1-4 pcs, VAT excl., ships day 2",
       "source": "MISUMI STEP AP214 downloaded 2026-11-15 (L124, 1-4 pcs 10,868 KRW ex VAT)"
     },
-    "bend_inner_r": 6
+    "axle_plate_half_y": 142,
+    "seat_t": 6,
+    "seat_x_out": 200,
+    "seat_half_y": 85,
+    "housing_center_z": 167,
+    "wheel_mount": "P30-4 (2026-11-18, user choice A): one flat SS400 10t axle plate per wheel, vertical (YZ), no bend and no plate-to-plate joint in the load path. Motor axle clamped on its face (D-hole AF10.2, spacer + washer + M14 nut). Two MISUMI LHSS20 housed ball bushings bolted to its outer face (2x M8 each from the inner face) ride the guide shafts, so the plate (and the wheel axle normal to it) is set parallel to the shafts by the machined housing faces. A flat 6t spring seat sits on the plate top edge (2x M6).",
+    "spring_x": 178,
+    "spring_x_note": "Spring stud inboard of the shafts (x183) so the droop washer and nut clear the top side rail (x190)"
   },
   "electronics": {
     "battery_center_y": 0,

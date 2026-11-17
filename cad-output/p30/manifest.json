@@ -22,7 +22,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 550
+      "solids": 548
     }
   ],
   "components": [
@@ -934,7 +934,7 @@
         ]
       ],
       "center_mm": [
-        -5.546202674620307e-16,
+        -6.028481168065551e-16,
         1.0492571473018092e-14,
         286.1500000000005
       ],
@@ -1157,8 +1157,8 @@
       "volume_mm3": 466.85323469405597,
       "bounds_mm": [
         [
-          -146.0,
-          -144.4
+          -142.0,
+          -140.4
         ],
         [
           -12.0,
@@ -1170,7 +1170,7 @@
         ]
       ],
       "center_mm": [
-        -145.20000000000002,
+        -141.2,
         1.0864816599297347e-15,
         89.99999999999999
       ],
@@ -1186,8 +1186,8 @@
       "volume_mm3": 2068.401799988192,
       "bounds_mm": [
         [
-          -144.4,
-          -136.4
+          -140.4,
+          -132.4
         ],
         [
           -10.999999999999998,
@@ -1199,108 +1199,168 @@
         ]
       ],
       "center_mm": [
-        -140.4,
+        -136.4,
         3.888332601679172e-17,
         90.0
       ],
       "solids": 1
     },
     {
-      "name": "36_carriage_axle_bracket_SS400_6t_LEFT",
+      "name": "36_axle_plate_SS400_10t_LEFT",
       "group": "drive_left",
       "status": "concept_fabrication",
       "metadata": {
         "moving_wheel": "LEFT",
-        "material": "SS400 6t laser cut, 1 bend (inner R6 drawn, bend relief at the wall ends); D-hole AF10.2; 2x D32.5 bush bore, 8x M5 + M8 + 2x M5 taps",
-        "note": "Wall width +-80 vs carriage +-140: the bend runs only over the wall width"
+        "material": "SS400 10t laser cut, flat (no bend); D-hole AF10.2; 4x D9 for the housing bolts; 2x M6 tapped top edge",
+        "fit": "Camber set by the plate face and the LHSS20 mounting faces; check plate flatness (laser-cut hot-rolled plate)"
       },
-      "volume_mm3": 226115.35875491166,
+      "volume_mm3": 422409.119398394,
       "bounds_mm": [
         [
-          -204.0,
-          -146.0
+          -152.0,
+          -142.0
         ],
         [
-          -140.0,
-          140.0
+          -142.0,
+          142.0
         ],
         [
           45.0,
-          201.2634508348794
+          195.2634508348794
         ]
       ],
       "center_mm": [
-        -158.86344106828406,
-        1.372596132739568e-15,
-        148.76780951651904
+        -146.99999999999997,
+        -2.2349316269138502e-15,
+        119.86664132853917
       ],
       "solids": 1
     },
     {
-      "name": "39_linear_bush_C-LHFR20_LEFT",
+      "name": "39_linear_bush_LHSS20_LEFT",
       "group": "drive_left",
       "status": "misumi_step_exact",
       "metadata": {
         "moving_wheel": "LEFT",
-        "sku": "C-LHFR20",
+        "sku": "LHSS20",
         "quantity": 2,
-        "supply": "Purchase MISUMI economy linear bushing, round flange single (LMF20 equivalent)",
-        "unit_price_krw": 6464,
-        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-15 + catalogue table dr20 D32 L42 H54 T8 PCD43 d5.5 d1 9 t5.1",
-        "fit": "Insert both shafts, then tighten the 8 flange screws (D5.5 holes and D32.5 bore give +-0.25 float, no over-constraint)"
+        "supply": "Purchase MISUMI long-block linear bushing housing unit, single (LMU20 inside)",
+        "unit_price_krw": 24206,
+        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-18 + catalogue: dr20 D32 L52, h31, C 882 N, C0 1370 N, 272 g",
+        "fit": "Hang both housings on the shafts, then tighten the 4 M8 bolts (D9 holes give +-0.5 float, no over-constraint)"
       },
-      "volume_mm3": 61560.53404819125,
+      "volume_mm3": 183640.6243632859,
       "bounds_mm": [
         [
-          -204.0000001,
-          -149.9999999
+          -206.0,
+          -151.9999999
         ],
         [
           -139.0000001,
           139.0000001
         ],
         [
-          167.2634507348794,
-          209.2634509348794
+          140.9999999,
+          193.0000001
         ]
       ],
       "center_mm": [
-        -177.00000000000003,
-        -6.145979754518629e-15,
-        193.90679816975074
+        -179.0957034086274,
+        -0.17923983118374498,
+        166.99999990483357
       ],
       "solids": 2
     },
     {
-      "name": "40_bush_flange_bolts_M5x8_LEFT",
+      "name": "40_housing_bolts_M8x20_LEFT",
       "group": "drive_left",
       "status": "catalog_envelope",
       "metadata": {
         "moving_wheel": "LEFT",
-        "quantity": 8,
-        "note": "Head sits in the D9 x 5.1 counterbore; 5.1 mm thread in the 6t steel plate"
+        "quantity": 4,
+        "note": "From the inner face: 10 mm plate + 10 mm thread in the housing (tap depth 15)"
       },
-      "volume_mm3": 3281.5845355078773,
+      "volume_mm3": 7618.97906808871,
       "bounds_mm": [
         [
-          -196.45279579551078,
-          -157.54720420448922
+          -162.0,
+          -134.0
         ],
         [
-          -131.45279579551078,
-          131.45279579551078
+          -124.5,
+          124.5
         ],
         [
-          196.1634508348794,
-          209.1634508348794
+          142.5,
+          191.5
         ]
       ],
       "center_mm": [
-        -177.0,
-        -6.887204365606697e-14,
-        204.76311714439444
+        -143.78208472983198,
+        4.488396736761312e-14,
+        166.99999999999997
       ],
-      "solids": 8
+      "solids": 4
+    },
+    {
+      "name": "37_spring_seat_SS400_6t_LEFT",
+      "group": "drive_left",
+      "status": "concept_fabrication",
+      "metadata": {
+        "moving_wheel": "LEFT",
+        "material": "SS400 6t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 2x D6.5"
+      },
+      "volume_mm3": 58306.39409018194,
+      "bounds_mm": [
+        [
+          -200.0,
+          -142.0
+        ],
+        [
+          -85.0,
+          85.0
+        ],
+        [
+          195.2634508348794,
+          201.2634508348794
+        ]
+      ],
+      "center_mm": [
+        -171.08886367908065,
+        6.863358213528648e-16,
+        198.26345083487936
+      ],
+      "solids": 1
+    },
+    {
+      "name": "38_seat_bolts_M6x16_LEFT",
+      "group": "drive_left",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "LEFT",
+        "quantity": 2
+      },
+      "volume_mm3": 1669.0753980956765,
+      "bounds_mm": [
+        [
+          -152.0,
+          -142.0
+        ],
+        [
+          -60.0,
+          60.0
+        ],
+        [
+          185.2634508348794,
+          207.2634508348794
+        ]
+      ],
+      "center_mm": [
+        -147.00000000000003,
+        -1.444009636981122e-14,
+        199.78426685164783
+      ],
+      "solids": 2
     },
     {
       "name": "44_spring_stud_M8_LEFT",
@@ -1309,13 +1369,13 @@
       "metadata": {
         "moving_wheel": "LEFT",
         "length_mm": 80.8,
-        "fit": "M8 threaded rod in the tapped carriage + threadlocker; guides the spring through the D10 holder hole"
+        "fit": "M8 threaded rod in the tapped spring seat + threadlocker; guides the spring through the D10 holder hole"
       },
       "volume_mm3": 3978.3162308403853,
       "bounds_mm": [
         [
-          -181.0,
-          -173.0
+          -182.0,
+          -174.0
         ],
         [
           -4.0,
@@ -1327,7 +1387,7 @@
         ]
       ],
       "center_mm": [
-        -177.0,
+        -177.99999999999997,
         -5.943887904736334e-17,
         236.4809334725917
       ],
@@ -1344,8 +1404,8 @@
       "volume_mm3": 960.555567314644,
       "bounds_mm": [
         [
-          -185.0,
-          -169.0
+          -186.0,
+          -170.0
         ],
         [
           -8.0,
@@ -1357,7 +1417,7 @@
         ]
       ],
       "center_mm": [
-        -176.99999999999997,
+        -178.00000000000003,
         5.053283351694786e-16,
         269.4355200197778
       ],
@@ -1377,8 +1437,8 @@
       "volume_mm3": 2817.7823105290427,
       "bounds_mm": [
         [
-          -182.0000001,
-          -171.9999999
+          -188.0000001,
+          -177.9999999
         ],
         [
           -35.0000001,
@@ -1390,7 +1450,7 @@
         ]
       ],
       "center_mm": [
-        -177.0,
+        -182.99999999999997,
         -2.259387777622603e-15,
         208.87198364575644
       ],
@@ -1410,8 +1470,8 @@
       "volume_mm3": 3349.6598530236515,
       "bounds_mm": [
         [
-          -187.50043838981793,
-          -166.49959469845805
+          -188.50043838981793,
+          -167.49959469845805
         ],
         [
           -10.500405300897766,
@@ -1423,7 +1483,7 @@
         ]
       ],
       "center_mm": [
-        -177.1593288349462,
+        -178.1593288349462,
         0.15932883494829247,
         225.1317254174719
       ],
@@ -1445,12 +1505,12 @@
       "volume_mm3": 74703.94065615039,
       "bounds_mm": [
         [
-          -187.0000001,
-          -166.9999999
+          -193.0000001,
+          -172.9999999
         ],
         [
-          -122.0000001,
-          122.0000001
+          -128.0000001,
+          128.0000001
         ],
         [
           124.9999999,
@@ -1458,8 +1518,8 @@
         ]
       ],
       "center_mm": [
-        -177.00000000000003,
-        -2.2206570650262515e-14,
+        -183.00000000000003,
+        -1.4025202515955272e-14,
         187.00000000000003
       ],
       "solids": 2
@@ -1472,7 +1532,7 @@
         "fixed_drive_side": "LEFT",
         "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
       },
-      "volume_mm3": 40054.430362853935,
+      "volume_mm3": 40054.43036285393,
       "bounds_mm": [
         [
           -220.0,
@@ -1488,9 +1548,9 @@
         ]
       ],
       "center_mm": [
-        -190.00373537580666,
-        154.09120410552677,
-        121.99999999999999
+        -189.95273426046214,
+        154.04020299018222,
+        122.00000000000001
       ],
       "solids": 1
     },
@@ -1502,7 +1562,7 @@
         "fixed_drive_side": "LEFT",
         "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
       },
-      "volume_mm3": 40054.430362853935,
+      "volume_mm3": 40054.43036285393,
       "bounds_mm": [
         [
           -220.0,
@@ -1518,8 +1578,8 @@
         ]
       ],
       "center_mm": [
-        -190.00373537580666,
-        -154.0912041055268,
+        -189.95273426046214,
+        -154.0402029901822,
         121.99999999999999
       ],
       "solids": 1
@@ -1532,7 +1592,7 @@
         "fixed_drive_side": "LEFT",
         "material": "SS400 6t laser cut, under the top side rail; spring seat; M6 tapped strikers; 4x M6 T-nut"
       },
-      "volume_mm3": 145312.13515002327,
+      "volume_mm3": 145312.13515002324,
       "bounds_mm": [
         [
           -220.0,
@@ -1548,9 +1608,9 @@
         ]
       ],
       "center_mm": [
-        -190.05122227669986,
-        -2.703846521560399e-15,
-        252.0
+        -190.00585351120253,
+        1.7274574998858107e-15,
+        252.00000000000006
       ],
       "solids": 1
     },
@@ -1565,12 +1625,12 @@
       "volume_mm3": 7356.688930006744,
       "bounds_mm": [
         [
-          -183.5,
-          -170.5
+          -189.5,
+          -176.5
         ],
         [
-          -118.5,
-          118.5
+          -124.5,
+          124.5
         ],
         [
           111.0,
@@ -1578,9 +1638,9 @@
         ]
       ],
       "center_mm": [
-        -177.0,
-        -2.571467949353618e-14,
-        186.99999999999994
+        -183.00000000000009,
+        -2.07695488217023e-14,
+        186.99999999999997
       ],
       "solids": 4
     },
@@ -1597,8 +1657,8 @@
       "volume_mm3": 3305.666358403694,
       "bounds_mm": [
         [
-          -182.77350269189625,
-          -171.22649730810375
+          -188.77350269189625,
+          -177.22649730810375
         ],
         [
           -35.0,
@@ -1610,9 +1670,9 @@
         ]
       ],
       "center_mm": [
-        -176.99999999999994,
-        -1.293120549648265e-14,
-        251.88353688931375
+        -183.0,
+        -1.1555545337282367e-14,
+        251.8835368893137
       ],
       "solids": 2
     },
@@ -1773,8 +1833,8 @@
       "volume_mm3": 466.85323469405597,
       "bounds_mm": [
         [
-          144.39999999999998,
-          145.99999999999997
+          140.39999999999998,
+          141.99999999999997
         ],
         [
           -12.0,
@@ -1786,7 +1846,7 @@
         ]
       ],
       "center_mm": [
-        145.19999999999996,
+        141.19999999999993,
         1.0946997787360098e-15,
         89.99999999999999
       ],
@@ -1802,8 +1862,8 @@
       "volume_mm3": 2068.401799988192,
       "bounds_mm": [
         [
-          136.4,
-          144.4
+          132.4,
+          140.4
         ],
         [
           -10.999999999999998,
@@ -1815,108 +1875,168 @@
         ]
       ],
       "center_mm": [
-        140.4,
+        136.4,
         4.785922364316444e-16,
         90.0
       ],
       "solids": 1
     },
     {
-      "name": "36_carriage_axle_bracket_SS400_6t_RIGHT",
+      "name": "36_axle_plate_SS400_10t_RIGHT",
       "group": "drive_right",
       "status": "concept_fabrication",
       "metadata": {
         "moving_wheel": "RIGHT",
-        "material": "SS400 6t laser cut, 1 bend (inner R6 drawn, bend relief at the wall ends); D-hole AF10.2; 2x D32.5 bush bore, 8x M5 + M8 + 2x M5 taps",
-        "note": "Wall width +-80 vs carriage +-140: the bend runs only over the wall width"
+        "material": "SS400 10t laser cut, flat (no bend); D-hole AF10.2; 4x D9 for the housing bolts; 2x M6 tapped top edge",
+        "fit": "Camber set by the plate face and the LHSS20 mounting faces; check plate flatness (laser-cut hot-rolled plate)"
       },
-      "volume_mm3": 226115.35875491166,
+      "volume_mm3": 422409.119398394,
       "bounds_mm": [
         [
-          146.0,
-          204.0
+          142.0,
+          152.0
         ],
         [
-          -140.0,
-          140.0
+          -142.0,
+          142.0
         ],
         [
           45.0,
-          201.2634508348794
+          195.2634508348794
         ]
       ],
       "center_mm": [
-        158.86344106828403,
-        5.877527029936098e-16,
-        148.76780951651904
+        147.0,
+        -2.2349316269138502e-15,
+        119.86664132853917
       ],
       "solids": 1
     },
     {
-      "name": "39_linear_bush_C-LHFR20_RIGHT",
+      "name": "39_linear_bush_LHSS20_RIGHT",
       "group": "drive_right",
       "status": "misumi_step_exact",
       "metadata": {
         "moving_wheel": "RIGHT",
-        "sku": "C-LHFR20",
+        "sku": "LHSS20",
         "quantity": 2,
-        "supply": "Purchase MISUMI economy linear bushing, round flange single (LMF20 equivalent)",
-        "unit_price_krw": 6464,
-        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-15 + catalogue table dr20 D32 L42 H54 T8 PCD43 d5.5 d1 9 t5.1",
-        "fit": "Insert both shafts, then tighten the 8 flange screws (D5.5 holes and D32.5 bore give +-0.25 float, no over-constraint)"
+        "supply": "Purchase MISUMI long-block linear bushing housing unit, single (LMU20 inside)",
+        "unit_price_krw": 24206,
+        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-18 + catalogue: dr20 D32 L52, h31, C 882 N, C0 1370 N, 272 g",
+        "fit": "Hang both housings on the shafts, then tighten the 4 M8 bolts (D9 holes give +-0.5 float, no over-constraint)"
       },
-      "volume_mm3": 61560.53404819124,
+      "volume_mm3": 183640.6243632859,
       "bounds_mm": [
         [
-          149.9999999,
-          204.0000001
+          151.9999999,
+          206.0
         ],
         [
           -139.0000001,
           139.0000001
         ],
         [
-          167.2634507348794,
-          209.2634509348794
+          140.9999999,
+          193.0000001
         ]
       ],
       "center_mm": [
-        176.99999999999997,
-        -5.318636326025737e-16,
-        193.90679816975074
+        179.09570340862734,
+        0.1792398311837083,
+        166.9999999048334
       ],
       "solids": 2
     },
     {
-      "name": "40_bush_flange_bolts_M5x8_RIGHT",
+      "name": "40_housing_bolts_M8x20_RIGHT",
       "group": "drive_right",
       "status": "catalog_envelope",
       "metadata": {
         "moving_wheel": "RIGHT",
-        "quantity": 8,
-        "note": "Head sits in the D9 x 5.1 counterbore; 5.1 mm thread in the 6t steel plate"
+        "quantity": 4,
+        "note": "From the inner face: 10 mm plate + 10 mm thread in the housing (tap depth 15)"
       },
-      "volume_mm3": 3281.584535507877,
+      "volume_mm3": 7618.97906808871,
       "bounds_mm": [
         [
-          157.54720420448922,
-          196.45279579551078
+          134.0,
+          162.0
         ],
         [
-          -131.45279579551078,
-          131.45279579551078
+          -124.5,
+          124.5
         ],
         [
-          196.1634508348794,
-          209.1634508348794
+          142.5,
+          191.5
         ]
       ],
       "center_mm": [
-        177.00000000000014,
-        -4.725425932941416e-14,
-        204.76311714439444
+        143.78208472983198,
+        2.2441983683806556e-14,
+        166.99999999999994
       ],
-      "solids": 8
+      "solids": 4
+    },
+    {
+      "name": "37_spring_seat_SS400_6t_RIGHT",
+      "group": "drive_right",
+      "status": "concept_fabrication",
+      "metadata": {
+        "moving_wheel": "RIGHT",
+        "material": "SS400 6t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 2x D6.5"
+      },
+      "volume_mm3": 58306.39409018192,
+      "bounds_mm": [
+        [
+          142.0,
+          200.0
+        ],
+        [
+          -85.0,
+          85.0
+        ],
+        [
+          195.2634508348794,
+          201.2634508348794
+        ]
+      ],
+      "center_mm": [
+        171.08886367908067,
+        5.927445729865652e-16,
+        198.26345083487942
+      ],
+      "solids": 1
+    },
+    {
+      "name": "38_seat_bolts_M6x16_RIGHT",
+      "group": "drive_right",
+      "status": "catalog_envelope",
+      "metadata": {
+        "moving_wheel": "RIGHT",
+        "quantity": 2
+      },
+      "volume_mm3": 1669.0753980956765,
+      "bounds_mm": [
+        [
+          142.0,
+          152.0
+        ],
+        [
+          -60.0,
+          60.0
+        ],
+        [
+          185.2634508348794,
+          207.2634508348794
+        ]
+      ],
+      "center_mm": [
+        147.0,
+        -1.444009636981122e-14,
+        199.78426685164783
+      ],
+      "solids": 2
     },
     {
       "name": "44_spring_stud_M8_RIGHT",
@@ -1925,13 +2045,13 @@
       "metadata": {
         "moving_wheel": "RIGHT",
         "length_mm": 80.8,
-        "fit": "M8 threaded rod in the tapped carriage + threadlocker; guides the spring through the D10 holder hole"
+        "fit": "M8 threaded rod in the tapped spring seat + threadlocker; guides the spring through the D10 holder hole"
       },
       "volume_mm3": 3978.316230840385,
       "bounds_mm": [
         [
-          173.0,
-          181.0
+          174.0,
+          182.0
         ],
         [
           -4.0,
@@ -1943,7 +2063,7 @@
         ]
       ],
       "center_mm": [
-        177.0,
+        178.0,
         -5.462448028232544e-17,
         236.4809334725917
       ],
@@ -1960,8 +2080,8 @@
       "volume_mm3": 960.555567314644,
       "bounds_mm": [
         [
-          169.0,
-          185.0
+          170.0,
+          186.0
         ],
         [
           -8.0,
@@ -1973,7 +2093,7 @@
         ]
       ],
       "center_mm": [
-        176.99999999999997,
+        177.99999999999994,
         5.053283351694786e-16,
         269.4355200197778
       ],
@@ -1993,8 +2113,8 @@
       "volume_mm3": 2817.7823105290427,
       "bounds_mm": [
         [
-          171.9999999,
-          182.0000001
+          177.9999999,
+          188.0000001
         ],
         [
           -35.0000001,
@@ -2006,7 +2126,7 @@
         ]
       ],
       "center_mm": [
-        177.0,
+        183.0,
         -2.259387777622603e-15,
         208.87198364575644
       ],
@@ -2026,8 +2146,8 @@
       "volume_mm3": 3349.6598530236515,
       "bounds_mm": [
         [
-          166.49956161018207,
-          187.50040530154195
+          167.49956161018207,
+          188.50040530154195
         ],
         [
           -10.500405300897766,
@@ -2039,7 +2159,7 @@
         ]
       ],
       "center_mm": [
-        176.8406711650538,
+        177.8406711650538,
         0.15932883494829247,
         225.1317254174719
       ],
@@ -2061,12 +2181,12 @@
       "volume_mm3": 74703.94065615039,
       "bounds_mm": [
         [
-          166.9999999,
-          187.0000001
+          172.9999999,
+          193.0000001
         ],
         [
-          -122.0000001,
-          122.0000001
+          -128.0000001,
+          128.0000001
         ],
         [
           124.9999999,
@@ -2074,9 +2194,9 @@
         ]
       ],
       "center_mm": [
-        177.00000000000009,
-        -2.8439993990687085e-14,
-        187.00000000000006
+        183.00000000000003,
+        -1.4025202515955272e-14,
+        187.00000000000003
       ],
       "solids": 2
     },
@@ -2104,9 +2224,9 @@
         ]
       ],
       "center_mm": [
-        190.00373537580657,
-        154.09120410552677,
-        121.99999999999997
+        189.95273426046202,
+        154.0402029901822,
+        121.99999999999999
       ],
       "solids": 1
     },
@@ -2134,8 +2254,8 @@
         ]
       ],
       "center_mm": [
-        190.00373537580663,
-        -154.09120410552677,
+        189.95273426046208,
+        -154.0402029901822,
         121.99999999999997
       ],
       "solids": 1
@@ -2164,8 +2284,8 @@
         ]
       ],
       "center_mm": [
-        190.05122227670006,
-        -1.2517807970187032e-15,
+        190.0058535112024,
+        1.7274574998858103e-15,
         252.0
       ],
       "solids": 1
@@ -2178,15 +2298,15 @@
         "fixed_drive_side": "RIGHT",
         "quantity": 4
       },
-      "volume_mm3": 7356.688930006744,
+      "volume_mm3": 7356.688930006745,
       "bounds_mm": [
         [
-          170.5,
-          183.5
+          176.5,
+          189.5
         ],
         [
-          -118.5,
-          118.5
+          -124.5,
+          124.5
         ],
         [
           111.0,
@@ -2194,9 +2314,9 @@
         ]
       ],
       "center_mm": [
-        176.99999999999997,
-        -1.285733974676809e-14,
-        186.99999999999997
+        183.00000000000006,
+        -6.6264751002574e-14,
+        186.99999999999994
       ],
       "solids": 4
     },
@@ -2213,8 +2333,8 @@
       "volume_mm3": 3305.666358403694,
       "bounds_mm": [
         [
-          171.22649730810375,
-          182.77350269189625
+          177.22649730810375,
+          188.77350269189625
         ],
         [
           -35.0,
@@ -2226,7 +2346,7 @@
         ]
       ],
       "center_mm": [
-        177.0,
+        183.00000000000003,
         -1.1555545337282367e-14,
         251.8835368893137
       ],
@@ -3273,9 +3393,9 @@
         ]
       ],
       "center_mm": [
-        -100.25128011655225,
-        -268.50064630472775,
-        183.80313168214755
+        -100.2512801165522,
+        -268.5006463047283,
+        183.8031316821477
       ],
       "solids": 21
     },
@@ -3674,7 +3794,7 @@
           "open_reference_shells_excluded": 3
         }
       },
-      "volume_mm3": 13831.147608597723,
+      "volume_mm3": 13831.14760866472,
       "bounds_mm": [
         [
           -181.39871953303197,
@@ -3690,9 +3810,9 @@
         ]
       ],
       "center_mm": [
-        -140.64035268926406,
-        277.64843851912474,
-        239.41376053382575
+        -140.64035268955473,
+        277.6484385191855,
+        239.4137605338364
       ],
       "solids": 58
     },
@@ -3732,7 +3852,7 @@
       "metadata": {
         "material": "3D-printed wedge; M2 camera screws not drawn"
       },
-      "volume_mm3": 5510.004620053339,
+      "volume_mm3": 5510.004620053342,
       "bounds_mm": [
         [
           -160.0,
@@ -3748,9 +3868,9 @@
         ]
       ],
       "center_mm": [
-        -134.00000000000003,
-        277.4938448588021,
-        226.31323104651182
+        -134.0,
+        277.493844858802,
+        226.31323104651173
       ],
       "solids": 1
     },
@@ -3808,7 +3928,7 @@
           "open_reference_shells_excluded": 3
         }
       },
-      "volume_mm3": 13831.147608597721,
+      "volume_mm3": 13831.147608664729,
       "bounds_mm": [
         [
           96.74182358419264,
@@ -3824,9 +3944,9 @@
         ]
       ],
       "center_mm": [
-        138.61373498579246,
-        277.8257445934792,
-        239.41376053382615
+        138.6137349855167,
+        277.82574459359085,
+        239.41376053383726
       ],
       "solids": 58
     },
@@ -3882,7 +4002,7 @@
         ]
       ],
       "center_mm": [
-        133.99999999999997,
+        134.0,
         277.49384485880205,
         226.3132310465118
       ],

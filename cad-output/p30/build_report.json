@@ -1,8 +1,8 @@
 {
   "variant": "P30",
-  "revision": "P30-3",
-  "components": 126,
-  "solids": 550,
+  "revision": "P30-4",
+  "components": 130,
+  "solids": 548,
   "ground": {
     "drive_tire_min_z": [
       0.0,
@@ -56,14 +56,14 @@
       "longitudinal": 0.98,
       "note": "support polygon = rigid casters; CG height assumed"
     },
-    "bush_tilt_couple_Nm": 14.49,
-    "bush_radial_each_N": 172.5,
-    "bush_load_ratio_dynamic": 0.196,
-    "bush_life_km_at_full_traction": 6682,
-    "slide_friction_N": 1.04,
+    "bush_tilt_couple_Nm": 12.02,
+    "bush_radial_each_N": 115.6,
+    "bush_load_ratio_dynamic": 0.131,
+    "bush_life_km_at_full_traction": 22199,
+    "slide_friction_N": 0.69,
     "slide_friction_mu": 0.003,
-    "slide_friction_vs_spring_pct": 0.86,
-    "bush_note": "Ball bushing rolling friction from the catalogue order of magnitude; seal drag not included (measure). MISUMI advises against single bushings under large moment load: here two singles share the pitch moment; the double type C-LHFRW20 is the upgrade if wear shows",
+    "slide_friction_vs_spring_pct": 0.58,
+    "bush_note": "Ball bushing rolling friction from the catalogue order of magnitude; seal drag not included (measure). MISUMI advises against single bushings under large moment load: here two singles share the pitch moment; a double-length housing (LHSW20 class) is the upgrade if wear shows",
     "arm_member_3g": {
       "force_each_N": 294.3,
       "span_mm": 380,
@@ -75,10 +75,10 @@
   "fabricated_mass_kg": {
     "frame": 7.05,
     "plates": 9.12,
-    "brackets_and_drive_fab": 9.77
+    "brackets_and_drive_fab": 13.77
   },
   "static_interference": {
-    "boolean_pairs": 277,
+    "boolean_pairs": 253,
     "hits": [],
     "known_manufacturer_overlaps": [
       {
@@ -110,7 +110,7 @@
   "stroke_interference": {
     "poses": 8,
     "hits": [],
-    "pairs_checked": 11752
+    "pairs_checked": 13800
   },
   "stroke_end_contacts_mm": {
     "LEFT-10:45-52": 0.0,
@@ -126,7 +126,7 @@
   "support": {
     "root": "01_P30_lower_front_rail",
     "tolerance_mm": 0.2,
-    "contacts": 238,
+    "contacts": 244,
     "unsupported": [],
     "isolated": [],
     "scope": "Contact graph from the base plate at the nominal pose; geometric support only, not joint strength"
@@ -295,7 +295,7 @@
             "volume_change_mm3": 0.0
           }
         ],
-        "solids": 550
+        "solids": 548
       }
     ]
   }

@@ -251,7 +251,7 @@ def statics(P, records):
     trac = 2*mu*F
     # bush tilt couple from the traction force at the contact patch (lever = bush flange height above ground).
     # The carriage pitches about X; each single bushing resists it over its own length, the two bushings share it.
-    bu = q['bush']; zc = P.z_carr1
+    bu = q['bush']; zc = q['housing_center_z']        # P30-4: lever = contact patch to the LHSS20 housing centre
     couple = mu*F*zc/1000
     radial = couple/(bu['length']/1000)/2
     fric = bu['rolling_mu']*2*radial
@@ -273,7 +273,7 @@ def statics(P, records):
         'slide_friction_vs_spring_pct': round(100*fric/F, 2),
         'bush_note': 'Ball bushing rolling friction from the catalogue order of magnitude; seal drag not included (measure). '
                      'MISUMI advises against single bushings under large moment load: here two singles share the pitch moment; '
-                     'the double type C-LHFRW20 is the upgrade if wear shows',
+                     'a double-length housing (LHSW20 class) is the upgrade if wear shows',
         'arm_member_3g': {'force_each_N': round(Fm, 1), 'span_mm': Lm, 'sigma_MPa': round(Fm*Lm/4/1.8e3, 1),
                           'deflection_mm': round(Fm*Lm**3/(48*7e4*2.8e4), 3)},
         'scope': 'Hand calculations with assumed CG (centre) and generic profile section; no FEM, no fatigue, no dynamic loads'}
@@ -285,7 +285,7 @@ def mass(records):
         mat = None
         if r.status in ('generic_profile',):
             mat = 'al'
-        elif r.name.startswith(('11_', '12_', '13_', '36_', '51_', '52_', '74_', '78_', '67_LCD_bracket', '68_speaker_bracket',
+        elif r.name.startswith(('11_', '12_', '13_', '36_', '37_', '51_', '52_', '74_', '78_', '67_LCD_bracket', '68_speaker_bracket',
                                 '50_', '44_spring_stud', '33_', '34_')):
             mat = 'steel'          # P30-3: all plates and brackets SS400 / SPCC
         if mat:

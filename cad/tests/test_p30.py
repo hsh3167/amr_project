@@ -51,8 +51,20 @@ def test_p30_guide_parts_are_misumi_steps(light):
 def test_p30_plates_are_thin_steel(light):
     P, records = light
     pl = P.L['plates']; q = P.L['drive']
-    assert pl['corner_plate_t'] <= 6 and pl['floor_t'] <= 2 and pl['deck_t'] <= 2.3 and q['holder_t'] <= 6 and q['carriage_t'] <= 6
-    fab = [r for r in records if r.name[:3] in ('11_', '12_', '13_', '36_', '51_', '52_')]
+    assert pl['corner_plate_t'] <= 6 and pl['floor_t'] <= 2 and pl['deck_t'] <= 2.3 and q['holder_t'] <= 6 and q['seat_t'] <= 6
+    fab = [r for r in records if r.name[:3] in ('11_', '12_', '13_', '36_', '37_', '51_', '52_')]
     assert fab and all(r.metadata['material'].startswith('SS400') for r in fab)
-    # carriage and axle wall are one bent part; the old bolted pair is gone
-    assert not any(r.name.startswith(('37_', '38_')) for r in records)
+
+
+def test_p30_wheel_mount_is_flat_plate_on_housings(light):
+    """P30-4: the axle plate is one flat plate (no bend) and the housings sit on its outer face, shaft axis at guide_x."""
+    P, records = light
+    q = P.L['drive']; names = {r.name: r for r in records}
+    for n, side in (('LEFT', -1), ('RIGHT', 1)):
+        ap = names[f"36_axle_plate_SS400_{q['axle_plate_t']:g}t_"+n]
+        b = ap.shape.bounding_box()
+        assert abs(b.size.X-q['axle_plate_t']) < 1e-6 and 'no bend' in ap.metadata['material']
+        hb = names['39_linear_bush_'+q['bush']['sku']+'_'+n].shape.bounding_box()
+        face = b.max.X if side > 0 else b.min.X
+        assert abs((hb.min.X if side > 0 else hb.max.X)-face) < 1e-6        # housings seated on the plate face
+        assert abs(abs((hb.min.X+hb.max.X)/2)-(abs(face)+q['bush']['height']/2)) < 1e-6

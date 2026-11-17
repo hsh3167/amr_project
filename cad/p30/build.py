@@ -36,7 +36,7 @@ class P30:
         sp = q['spring']
         self.spring_nominal = sp['free']-sp['target_force_N']/sp['rate']
         self.z_carr1 = self.z_hold_up0-self.spring_nominal                       # carriage top (nominal)
-        self.z_carr0 = self.z_carr1-q['carriage_t']
+        self.z_carr0 = self.z_carr1-q['seat_t']                                  # spring seat bottom = axle plate top
         if abs(self.parts['caster']['cad_height']+pl['corner_plate_t']-self.z_lo0) > 1e-9:
             raise ValueError('Corner plate must fill the gap between the caster plate and the lower frame')
 
@@ -214,7 +214,7 @@ def plates(P):
     deck = span(-X, X, -Y, Y, P.z_top1, P.z_deck1)
     q = L['drive']
     for sx in (-1, 1):
-        deck -= cylz(12, 20, sx*q['guide_x'], 0, P.z_top1-5)       # droop-nut access
+        deck -= cylz(12, 20, sx*q['spring_x'], 0, P.z_top1-5)       # droop-nut access
     for x, y, dd in deck_holes(P):
         deck -= cylz(dd/2+.25, 20, x, y, P.z_top1-5)
     a = pl['arm_bolt_pitch']/2
@@ -277,7 +277,7 @@ def drive(P, side):
     dz = P.motion.get(n, 0.0)
     S = lambda a, b: (side*a, side*b)
     xc = side*q['wheel_x']; zc = w['tire_dia']/2
-    gx = side*q['guide_x']; gy = q['guide_y']
+    gx = side*q['guide_x']; gy = q['guide_y']; kx = side*q['spring_x']     # shafts / spring stud
     r = []
 
     def mv(name, shape, color=AL, status='concept_fabrication', **meta):
@@ -296,67 +296,65 @@ def drive(P, side):
     mv('32_D14_AF10_M14x1p5_axle', axle, (.16, .27, .35), 'datasheet_dimension')
     body_x = q['wheel_x']-body                                   # |x| of the motor body face
     a1 = body_x-q['axle_spacer_t']; a0 = a1-q['axle_plate_t']    # axle plate |x| range
-    if abs(a0-q['carriage_x'][0]) > 1e-6:
-        raise ValueError('Axle plate inner face must align with the carriage inner edge')
+    if abs(a1+q['bush']['shaft_height']-q['guide_x']) > 1e-6:
+        raise ValueError('guide_x must equal the axle plate outer face + housing shaft height')
     mv('33_axle_spacer_4p9_trial', ring_x(side*body_x, -side*q['axle_spacer_t'], 0, zc, 18, 14.3), STEEL, fit='Confirm the motor shoulder stack (Rev15 trial value)')
     mv('34_axle_washer', ring_x(side*a0, -side*1.6, 0, zc, 24, 14.3), STEEL)
     mv('35_axle_nut_M14x1p5', nut_x(side*(a0-1.6), -side*8, 0, zc, 22, 14.3), DARK, 'catalog_envelope')
     thread_end = q['wheel_x']-end
     if not thread_end < a0-1.6-8:
         raise ValueError('Axle thread does not pass the nut')
-    # carriage + axle wall: ONE SS400 plate, laser cut and bent once (P30-3; replaces the bolted A5052 10t pair).
-    # Built for the right side and mirrored. Horizontal carriage on top, vertical axle wall down the inner edge.
-    t = q['carriage_t']; R = q['bend_inner_r']
-    if abs(q['axle_plate_t']-t) > 1e-9:
-        raise ValueError('Carriage and axle wall are one bent plate: equal thickness')
-    cx0, cx1 = q['carriage_x']; ch = q['carriage_half_y']; hy = q['axle_plate_half_y']
-    xr, zr = a1+R, P.z_carr0-R                                   # bend centre (inner radius R, outer R+t)
-    car = (span(a0, a1, -hy, hy, q['axle_plate_bottom_z'], P.z_carr0)+span(cx0, cx1, -ch, ch, P.z_carr0, P.z_carr1)
-           + (span(a1, xr, -hy, hy, zr, P.z_carr0)-cyly(R, 2*hy+2, xr, 0, zr))
-           - (span(a0-1, xr, -hy, hy, zr, P.z_carr1+1)-cyly(R+t, 2*hy+4, xr, 0, zr)))
-    if side < 0:
-        car = car.mirror(Plane.YZ)
-    car -= cylx(7.15, 30, side*(a0+a1)/2, 0, zc) & span(*S(a0-5, a1+5), -5.1, 5.1, zc-10, zc+10)   # D-hole AF10.2
-    bu = q['bush']
-    flange_holes = []
-    for y0 in (-gy, gy):
-        car -= cylz(bu['od']/2+.25, 20, gx, y0, P.z_carr0-5)                      # D32.5 bore: +-0.25 float with the D5.5 flange holes
-        for k in range(4):
-            a = math.radians(bu['bolt_angle_deg']+90*k)
-            flange_holes.append((gx+bu['bolt_pcd']/2*math.cos(a), y0+bu['bolt_pcd']/2*math.sin(a)))
-    for x, y in flange_holes:
-        car -= cylz(2.1, 20, x, y, P.z_carr0-5)                                     # M5 tap
-    car -= cylz(3.4, 20, gx, 0, P.z_carr0-5)                                     # M8 stud tap
-    for y in (-q['bump_stopper']['y'], q['bump_stopper']['y']):
-        car -= cylz(2.51, 20, gx, y, P.z_carr0-5)                                  # M5 tap for C-USLH10 (thread drawn at major)
-    mv(f'36_carriage_axle_bracket_SS400_{tname(t)}', car, PLATE,
-       material=f'SS400 {t:g}t laser cut, 1 bend (inner R{R:g} drawn, bend relief at the wall ends); D-hole AF10.2; '
-                f'2x D32.5 bush bore, 8x M5 + M8 + 2x M5 taps',
-       note='Wall width +-{0:g} vs carriage +-{1:g}: the bend runs only over the wall width'.format(hy, ch))
-    # linear bushings C-LHFR20 (MISUMI STEP as supplied): flange on top of the carriage plate, body down through the bore.
-    # STEP frame: axis +X, flange X-8..0, body X0..34 -> rotate so +X points down, holes on the 45 deg diagonals.
+    # P30-4 wheel mount (plan A): ONE flat SS400 axle plate, vertical (YZ), no bend, no plate-to-plate joint in the load path.
+    # The motor axle is clamped on its faces; two MISUMI LHSS20 housings on its outer face ride the guide shafts, so the
+    # plate (and the axle normal to it) is held parallel to the shafts by the machined housing mounting faces.
+    bu = q['bush']; hy = q['axle_plate_half_y']; hcz = q['housing_center_z']; t = q['axle_plate_t']
+    ap = span(*S(a0, a1), -hy, hy, q['axle_plate_bottom_z'], P.z_carr0)
+    ap -= cylx(7.15, 30, side*(a0+a1)/2, 0, zc) & span(*S(a0-5, a1+5), -5.1, 5.1, zc-10, zc+10)   # D-hole AF10.2
+    hz0 = hcz-bu['length']/2+8                                   # first mounting tap: 8 mm from the housing end (STEP)
+    taps = [(y0, hz0+k*bu['mount_pitch']) for y0 in (-gy, gy) for k in (0, 1)]
+    for y, z in taps:
+        ap -= cylx(4.5, 30, side*(a0+a1)/2, y, z)                 # D9 clearance (+-0.5 float to align on the shafts)
+    seat_bolts = [(side*(a0+a1)/2, y) for y in (-55, 55)]
+    for x, y in seat_bolts:
+        ap -= cylz(2.5, 13, x, y, P.z_carr0-12)                   # M6 tapped top edge (tap drill D5)
+    mv(f'36_axle_plate_SS400_{tname(t)}', ap, PLATE,
+       material=f'SS400 {t:g}t laser cut, flat (no bend); D-hole AF10.2; 4x D9 for the housing bolts; 2x M6 tapped top edge',
+       fit='Camber set by the plate face and the LHSS20 mounting faces; check plate flatness (laser-cut hot-rolled plate)')
+    # housings (MISUMI STEP as supplied). STEP frame: shaft axis +X (x -8..44, centre y-31 z0), mounting face y=0 (+Y out),
+    # 2x M8 taps at x 0 and 36 on that face. Rotate: axis -> +Z, mounting face normal -> towards the plate.
     from ..parts.vendor import misumi_solid
-    bush = [misumi_solid(bu['step']).rotate(Axis.Y, 90).rotate(Axis.Z, bu['bolt_angle_deg']).translate((gx, y0, P.z_carr1)) for y0 in (-gy, gy)]
-    mv('39_linear_bush_'+bu['sku'], Compound(bush), (.72, .74, .78), 'misumi_step_exact', sku=bu['sku'], quantity=2, supply=bu['supply'],
+    hs = [misumi_solid(bu['step']).rotate(Axis.Y, -90).rotate(Axis.Z, 90*side).translate((side*a1, y0, hz0)) for y0 in (-gy, gy)]
+    mv('39_linear_bush_'+bu['sku'], Compound(hs), (.80, .82, .86), 'misumi_step_exact', sku=bu['sku'], quantity=2, supply=bu['supply'],
        unit_price_krw=bu['unit_price_krw'], source=bu['source'],
-       fit='Insert both shafts, then tighten the 8 flange screws (D5.5 holes and D32.5 bore give +-0.25 float, no over-constraint)')
-    cb = P.z_carr1+bu['flange_t']-bu['cbore_depth']
-    fbolts = [tapped_bolt(x, y, cb, cb-P.z_carr1, 8-(cb-P.z_carr1), 5) for x, y in flange_holes]
-    if 8-(cb-P.z_carr1) > q['carriage_t']+1e-9:
-        raise ValueError('Bush flange screw longer than the tapped plate')
-    mv('40_bush_flange_bolts_M5x8', Compound([s for b in fbolts for s in b.solids()]), DARK, 'catalog_envelope', quantity=len(fbolts),
-       note=f"Head sits in the D9 x 5.1 counterbore; {8-(cb-P.z_carr1):.1f} mm thread in the {q['carriage_t']:g}t steel plate")
+       fit='Hang both housings on the shafts, then tighten the 4 M8 bolts (D9 holes give +-0.5 float, no over-constraint)')
+    hb = []
+    tap = 2*3.323-.04                                            # STEP draws the M8 tap at D6.646
+    for y, z in taps:
+        x_in = side*a0
+        hb.append(cylx(6.5, 8, x_in-side*4, y, z)+cylx(3.99, t, side*(a0+a1)/2, y, z)+cylx(tap/2, 10, side*(a1+5), y, z))
+    mv('40_housing_bolts_M8x20', Compound([s_ for b in hb for s_ in b.solids()]), DARK, 'catalog_envelope', quantity=len(hb),
+       note=f'From the inner face: {t:g} mm plate + 10 mm thread in the housing (tap depth 15)')
+    # spring seat: flat 6t plate on the axle plate top edge (spring force presses it onto the edge; 2x M6 locate it)
+    st = q['seat_t']; sy = q['seat_half_y']
+    seat = span(*S(a0, q['seat_x_out']), -sy, sy, P.z_carr0, P.z_carr1)
+    for x, y in seat_bolts:
+        seat -= cylz(3.25, 20, x, y, P.z_carr0-5)
+    seat -= cylz(3.4, 20, kx, 0, P.z_carr0-5)                                     # M8 stud tap
+    for y in (-q['bump_stopper']['y'], q['bump_stopper']['y']):
+        seat -= cylz(2.51, 20, gx, y, P.z_carr0-5)                                  # M5 tap for C-USLH10 (thread drawn at major)
+    mv(f'37_spring_seat_SS400_{tname(st)}', seat, PLATE, material=f'SS400 {st:g}t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 2x D6.5')
+    sb = [tapped_bolt(x, y, P.z_carr1, st, 10, 6) for x, y in seat_bolts]
+    mv('38_seat_bolts_M6x16', Compound([s_ for b in sb for s_ in b.solids()]), DARK, 'catalog_envelope', quantity=2)
     # stud + droop stop (washer + nylon nut on top of the upper holder at full droop)
     half = q['travel_mm']/2
     washer0 = P.z_top0+half                         # nominal washer bottom: lands on the holder top at -half
     stud_top = washer0+1.6+8+1.5
-    stud = cylz(3.39, q['carriage_t'], gx, 0, P.z_carr0)+cylz(4, stud_top-P.z_carr1, gx, 0, P.z_carr1)
+    stud = cylz(3.39, q['seat_t'], kx, 0, P.z_carr0)+cylz(4, stud_top-P.z_carr1, kx, 0, P.z_carr1)
     mv('44_spring_stud_M8', stud, STEEL, 'catalog_envelope', length_mm=round(stud_top-P.z_carr0, 1),
-       fit='M8 threaded rod in the tapped carriage + threadlocker; guides the spring through the D10 holder hole')
-    mv('45_droop_stop_washer_nylock_M8', cylz(8, 1.6, gx, 0, washer0)-cylz(4.2, 4, gx, 0, washer0-1)+nut(gx, 0, washer0+1.6, 13, 8, 8.4),
+       fit='M8 threaded rod in the tapped spring seat + threadlocker; guides the spring through the D10 holder hole')
+    mv('45_droop_stop_washer_nylock_M8', cylz(8, 1.6, kx, 0, washer0)-cylz(4.2, 4, kx, 0, washer0-1)+nut(kx, 0, washer0+1.6, 13, 8, 8.4),
        DARK, 'catalog_envelope', adjust='Nut sets the droop limit (-10 mm); reachable through the deck hole')
-    # bump stoppers (company stock C-USLH10) on the carriage
-    from ..parts.vendor import misumi_solid
+    # bump stoppers (company stock C-USLH10) on the spring seat
     bs = q['bump_stopper']
     stops = [misumi_solid(bs['step'], c).rotate(Axis.Y, 90).translate((gx, y, P.z_carr1)) for y in (-bs['y'], bs['y']) for c in bs['children']]
     tip = max(s.bounding_box().max.Z for s in stops)
@@ -365,7 +363,7 @@ def drive(P, side):
     # spring (length follows the pose)
     sp = q['spring']; sq = {'spring_od_mm': sp['od'], 'spring_id_mm': sp['id'], 'spring_wire_axial_mm': sp['wire_axial'], 'display_turns': sp['turns']}
     length = P.z_hold_up0-(P.z_carr1+dz)
-    r.append(PartRecord('47_spring_'+sp['sku']+'_'+n, group, coil(gx, 0, P.z_carr1+dz, length, sq), (.86, .30, .25), 'catalog_envelope',
+    r.append(PartRecord('47_spring_'+sp['sku']+'_'+n, group, coil(kx, 0, P.z_carr1+dz, length, sq), (.86, .30, .25), 'catalog_envelope',
                         {'spring_length_mm': round(length, 3), 'sku': sp['sku'], 'rate_N_mm': sp['rate'], 'force_N': round((sp['free']-length)*sp['rate'], 1),
                          'pose_dependent': n}))
     # ---- fixed: shafts, holders, bay posts are in frame(); strikers
@@ -388,7 +386,7 @@ def drive(P, side):
     up = span(*S(*q['holder_x']), -q['upper_holder_half_y'], q['upper_holder_half_y'], P.z_hold_up0, P.z_top0)
     for y in ys:
         up -= cylz(4.25, 20, gx, y, P.z_hold_up0-5)
-    up -= cylz(5, 20, gx, 0, P.z_hold_up0-5)
+    up -= cylz(5, 20, kx, 0, P.z_hold_up0-5)
     for y in (-bs['y'], bs['y']):
         up -= cylz(3.0, 20, gx, y, P.z_hold_up0-5)
     for y in upper_holder_bolts(P):

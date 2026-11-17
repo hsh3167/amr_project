@@ -120,6 +120,23 @@
         "site": "kr.misumi-ec.com"
       },
       "note": "MISUMI Korea CAD download (ego-lite, logged in), P30-3 guide shaft: L124 = holder gap with 6t steel holders; 1-4 pcs 10,868 KRW, ref ship 2026-11-18"
+    },
+    {
+      "file": "LHSS20.stp.gz",
+      "sha256_original": "57a8ed321b44c4266b658a339b1d2a43fad6ab69d12eed96882a14119b042bfc",
+      "original_bytes": 156938,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110300028370/?HissuCode=LHSS20",
+      "retrieved": "2026-11-18",
+      "cad_format": "STEP AP214 (3D, mm, single solid)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0)",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 24206,
+        "min_order_qty": 1,
+        "seen": "2026-11-17",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "Housing + bush merged in one solid. STEP frame: shaft axis +X (x -8..44, centre y-31 z0), mounting face y=0 with 2x M8 taps (D6.646 x 15.3) at x 0 and 36; side holes M8 through at x 9/27. Eco P30-4 axle-plate housings"
     }
   ]
 }
