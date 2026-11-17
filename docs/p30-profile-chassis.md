@@ -4,7 +4,7 @@
 
 - 설계 원본: [`cad/p30/layout.json`](../cad/p30/layout.json), [`cad/p30/build.py`](../cad/p30/build.py), 검사 [`cad/p30/check.py`](../cad/p30/check.py)
 - 실행: `.venv\Scripts\python.exe -m cad.p30 build` (STEP+GLB+검증 보고서 → `cad-output/p30/`), 검사만 `-m cad.p30 validate`
-- 뷰어: [`p30.html`](../p30.html) (스트로크 슬라이더, 검증 요약, BOM) · BOM: [`bom/p30_bom.csv`](../bom/p30_bom.csv)
+- 뷰어: [`eco.html`](../eco.html) (스트로크 슬라이더, 검증 요약, BOM) · BOM: [`bom/p30_bom.csv`](../bom/p30_bom.csv)
 
 ## 컨셉
 

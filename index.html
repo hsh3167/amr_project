@@ -62,8 +62,8 @@
     @media(max-width:930px){.workspace{grid-template-columns:228px minmax(0,1fr)}.right{display:none}.status{flex-direction:column;align-items:flex-start}.motion{align-self:flex-end}}
     @media(max-width:650px){.app{height:auto;min-height:100vh;overflow:visible}.workspace{display:flex;flex-direction:column}.left{order:2;border-right:none;border-top:1px solid var(--line)}.scene-wrap{order:1;height:62vh;min-height:440px}.right{display:block;order:3;border-left:0;border-top:1px solid var(--line)}.brand strong{font-size:12px}.header-right .chip{display:none}.header-link{font-size:11px}.scene-top{top:12px;left:13px}.scene-top h2{font-size:13px}.top-actions{right:10px;top:10px}.status{left:10px;right:10px;bottom:10px;gap:6px}.stats{padding:9px;gap:8px}.stat b{font-size:12px}.motion button{padding:7px;font-size:10px}}
     .model-switch{display:flex;border:1px solid #2f4761;border-radius:9px;overflow:hidden}.model-switch button{border:0;background:transparent;color:#b8c8df;padding:7px 12px;font-size:12px;font-weight:600}.model-switch button[aria-selected="true"]{background:#1f4e8f;color:#fff}
-    .p30-view{flex:1;min-height:0;border:0;width:100%;display:block;background:#0b1118}.app.show-p30 .workspace{display:none}.app:not(.show-p30) .p30-view{display:none}
-    @media(max-width:650px){.model-switch button{padding:6px 8px;font-size:11px}.p30-view{height:calc(100vh - 64px);flex:none}}
+    .eco-view{flex:1;min-height:0;border:0;width:100%;display:block;background:#0b1118}.app.show-eco .workspace{display:none}.app:not(.show-eco) .eco-view{display:none}
+    @media(max-width:650px){.model-switch button{padding:6px 8px;font-size:11px}.eco-view{height:calc(100vh - 64px);flex:none}}
   </style>
   <script>addEventListener("error",e=>{const el=document.getElementById("loading");if(el)el.textContent="3D 로딩 실패: 새로고침하거나 네트워크 연결을 확인하세요.";});addEventListener("unhandledrejection",()=>{const el=document.getElementById("loading");if(el)el.textContent="3D 부품 데이터 로딩 실패: 새로고침해 주세요.";});</script>
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"}}</script>
@@ -72,7 +72,7 @@
 <div class="app">
   <header>
     <div class="brand"><div class="mark">A</div><div><strong>AMR PROJECT</strong><small>UNIVERSITY ROBOTICS · LAYOUT LAB</small></div></div>
-    <div class="header-right"><span class="chip"><b>●</b> REV <span id="layoutRevision">0.9</span> · BUILD123D</span><div class="model-switch" role="tablist" aria-label="모델 선택"><button type="button" role="tab" data-model="rev15" aria-selected="true">Rev15 6륜</button><button type="button" role="tab" data-model="p30" aria-selected="false">P30 프로파일</button></div><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    <div class="header-right"><span class="chip"><b>●</b> REV <span id="layoutRevision">0.9</span> · BUILD123D</span><div class="model-switch" role="tablist" aria-label="모델 선택"><button type="button" role="tab" data-model="rev15" aria-selected="true">Rev15 6륜</button><button type="button" role="tab" data-model="eco" aria-selected="false">Eco 저가형</button></div><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </header>
   <main class="workspace">
     <aside class="left">
@@ -180,12 +180,12 @@
       <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_current.step.gz">STEP 다운로드 (gzip) ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
     </aside>
   </main>
-  <iframe class="p30-view" id="p30View" title="P30 프로파일 샤시 3D 뷰어"></iframe>
+  <iframe class="eco-view" id="ecoView" title="Eco 프로파일 샤시 3D 뷰어"></iframe>
 <script>
-(()=>{const app=document.querySelector('.app'),frame=document.getElementById('p30View'),btns=[...document.querySelectorAll('.model-switch button')];
-function show(m){const p=m==='p30';if(p&&!frame.getAttribute('src'))frame.src='p30.html?embed=1';app.classList.toggle('show-p30',p);for(const b of btns)b.setAttribute('aria-selected',String(b.dataset.model===m));document.title=p?'AMR PROJECT · P30 Profile Chassis':'AMR PROJECT · Layout Lab';if(!p)dispatchEvent(new Event('resize'))}
-for(const b of btns)b.onclick=()=>{history.replaceState(null,'',b.dataset.model==='p30'?'#p30':location.pathname+location.search);show(b.dataset.model)};
-show(location.hash==='#p30'?'p30':'rev15');})();
+(()=>{const app=document.querySelector('.app'),frame=document.getElementById('ecoView'),btns=[...document.querySelectorAll('.model-switch button')];
+function show(m){const p=m==='eco';if(p&&!frame.getAttribute('src'))frame.src='eco.html?embed=1';app.classList.toggle('show-eco',p);for(const b of btns)b.setAttribute('aria-selected',String(b.dataset.model===m));document.title=p?'AMR PROJECT · Eco Profile Chassis':'AMR PROJECT · Layout Lab';if(!p)dispatchEvent(new Event('resize'))}
+for(const b of btns)b.onclick=()=>{history.replaceState(null,'',b.dataset.model==='eco'?'#eco':location.pathname+location.search);show(b.dataset.model)};
+show(location.hash==='#eco'?'eco':'rev15');})();
 </script>
 </div>
 <dialog id="bomDialog" aria-labelledby="bomTitle">

@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a111d">
+<title>AMR PROJECT · Eco 저가형 Layout Lab</title>
+<link rel="stylesheet" href="web/lab.css">
+<style>
+.app{height:100vh}
+.eco-head{height:52px;flex:none;background:#0d1524;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.eco-head strong{letter-spacing:.11em;font-size:14px}.eco-head small{color:var(--muted);margin-left:10px;font-size:11px}.eco-head a{font-size:12px;text-decoration:none;color:#c3d8ff}
+.embed .eco-head{display:none}
+.tabs.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.move-row{display:grid;grid-template-columns:54px 1fr 48px;align-items:center;gap:6px;font-size:11px;color:#a9bbd2}
+.move-row output{text-align:right;font-variant-numeric:tabular-nums;color:#7fc2ff}
+.btn-row{display:flex;gap:6px;margin-top:8px}.btn-row .control{flex:1}
+.sel-name{font-size:12px;color:#7fc2ff;margin-bottom:8px;min-height:16px}
+.offsets{font:11px/1.6 ui-monospace,Consolas,monospace;color:#9fb6d3;white-space:pre-wrap;margin-top:8px}
+.check-ok{color:#4ade80}.check-bad{color:#f87171}
+.scene-top h2{text-transform:none}
+.workspace{min-height:0}
+@media(max-width:650px){.app{height:auto}.embed .scene-wrap{height:62vh}}
+</style>
+<script>if(new URLSearchParams(location.search).has('embed'))document.documentElement.classList.add('embed')</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"}}</script>
+</head>
+<body>
+<div class="app">
+  <div class="eco-head"><div><strong>AMR PROJECT</strong><small>ECO 저가형 · 30×30 프로파일 샤시</small></div><a href="index.html">← Rev15 Layout Lab</a></div>
+  <main class="workspace">
+    <aside class="left">
+      <div class="eyebrow">LOW-COST VARIANT</div>
+      <h1>Eco 저가형 AMR</h1>
+      <p class="intro">회사 재고 3030 알루미늄 프로파일 프레임과 SS400 레이저 강판으로 원가를 낮춘 버전입니다. 캐스터 4개는 고정하고, 구동륜 2개는 MISUMI 축 + 볼 리니어 부시 + 스프링으로 수직 슬라이드합니다.</p>
+      <div class="section">
+        <h2>카메라 시점</h2>
+        <div class="tabs"><button class="control active" data-view="iso">3D</button><button class="control" data-view="top">상부</button><button class="control" data-view="front">전면</button><button class="control" data-view="bottom">하부</button></div>
+        <p class="hint" style="margin-top:10px">마우스 드래그: 회전 · 휠: 확대 · 우클릭: 이동</p>
+      </div>
+      <div class="section">
+        <h2>센서 시야 (FOV)</h2>
+        <label class="toggle"><span><i class="swatch" style="background:#43e1d3"></i>LiDAR 수평 270°</span><input type="checkbox" id="showFov"></label>
+        <label class="toggle"><span><i class="swatch" style="background:#daa9ff"></i>카메라 깊이 58.4° × 45.5°</span><input type="checkbox" id="showCameraFov"></label>
+        <p class="hint">점선은 LiDAR의 90° 사각입니다. 부채꼴과 피라미드의 길이는 표시용입니다. 아래 센서 배치 조정을 바꾸면 시야가 같이 움직입니다.</p>
+      </div>
+      <div class="section">
+        <h2>구성품 표시</h2>
+        <label class="toggle"><span><i class="swatch" style="background:#adbdcc"></i>프로파일 프레임</span><input type="checkbox" id="showFrame" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#c9a77a"></i>강판 (덱·바닥·코너판)</span><input type="checkbox" id="showPlates" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#5687ef"></i>Ø180 구동륜 + 슬라이드</span><input type="checkbox" id="showDrive" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#96acbe"></i>GL-65-ASF 캐스터 ×4</span><input type="checkbox" id="showCasters" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#e5ab62"></i>배터리 7S9P (회사 STEP)</span><input type="checkbox" id="showBattery" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#77d0a5"></i>전장부·LCD·스피커</span><input type="checkbox" id="showElectronics" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#46d6d6"></i>SICK TiM571 ×2</span><input type="checkbox" id="showLidar" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#d3a5fa"></i>Astra Mini Pro ×2</span><input type="checkbox" id="showCameras" checked></label>
+        <label class="toggle"><span><i class="swatch" style="background:#ffcc73"></i>로봇암 장착 영역</span><input type="checkbox" id="showArm"></label>
+        <label class="toggle"><span><i class="swatch" style="background:#8ebcff"></i>부품 라벨</span><input type="checkbox" id="showLabels" checked></label>
+      </div>
+      <div class="section">
+        <h2>구동륜 수직 슬라이드</h2>
+        <p class="hint">구동륜 2개가 축 2개를 따라 위아래(±10 mm)로 움직이고 스프링 1개가 받칩니다. +는 올라감(스프링 압축)입니다. 간섭은 CAD 검증(±5/±10mm)에서 확인했고, 여기서는 표시용 이동입니다.</p>
+        <label class="mini-label" for="poseLEFT" style="margin-top:12px">왼쪽 구동륜 <output id="valueLEFT">0 mm</output></label><input id="poseLEFT" data-wheel="LEFT" type="range" min="-10" max="10" value="0" step="0.5">
+        <label class="mini-label" for="poseRIGHT">오른쪽 구동륜 <output id="valueRIGHT">0 mm</output></label><input id="poseRIGHT" data-wheel="RIGHT" type="range" min="-10" max="10" value="0" step="0.5">
+        <div class="spec"><span>스프링 힘 (X-SWU21-70)</span><b id="force">—</b></div>
+        <button class="control" id="resetSuspension" style="width:100%;margin-top:8px">공칭 위치로 복귀</button>
+      </div>
+      <div class="section">
+        <h2>센서 배치 조정</h2>
+        <p class="hint">카메라 각도를 바꾸면 모델과 FOV 피라미드가 함께 회전합니다. 좌우 카메라는 대칭으로 움직입니다.</p>
+        <div class="range-row" style="margin-top:12px"><span>카메라 바깥쪽 각 (yaw)</span><strong id="yawVal">5°</strong></div>
+        <input id="camYaw" type="range" min="-10" max="35" step="1" value="5" aria-label="카메라 yaw">
+        <div class="range-row"><span>카메라 하향각 (pitch)</span><strong id="pitchVal">10°</strong></div>
+        <input id="camPitch" type="range" min="-10" max="35" step="1" value="10" aria-label="카메라 pitch">
+        <div class="range-row"><span>LiDAR 스캔 반경 표시</span><strong id="radiusVal">240 mm</strong></div>
+        <input id="lidarRadius" type="range" min="100" max="600" step="10" value="240" aria-label="LiDAR 표시 반경">
+      </div>
+      <div class="section">
+        <h2>부품 위치 조정 (표시용)</h2>
+        <p class="hint">모델에서 부품을 클릭해 선택한 뒤 이동합니다. 선택 부품의 LiDAR/카메라 FOV도 같이 이동합니다. CAD 원본은 바뀌지 않습니다.</p>
+        <div class="sel-name" id="selName" style="margin-top:10px">선택 없음 — 모델을 클릭하세요</div>
+        <div class="move-row"><span>좌우 X</span><input id="mvX" type="range" min="-150" max="150" step="1" value="0"><output id="mvXv">0</output></div>
+        <div class="move-row"><span>전후 Y</span><input id="mvY" type="range" min="-150" max="150" step="1" value="0"><output id="mvYv">0</output></div>
+        <div class="move-row"><span>상하 Z</span><input id="mvZ" type="range" min="-150" max="150" step="1" value="0"><output id="mvZv">0</output></div>
+        <div class="btn-row"><button class="control" id="resetPart">선택 부품 복귀</button><button class="control" id="resetAll">전체 복귀</button></div>
+        <div class="btn-row"><button class="control" id="copyOffsets">조정값 복사</button></div>
+        <div class="offsets" id="offsets"></div>
+      </div>
+      <div class="section">
+        <div class="range-row"><span>분해 뷰 (Explode)</span><strong id="explodeVal">0%</strong></div>
+        <input id="explode" type="range" min="0" max="100" step="1" value="0" aria-label="분해 뷰">
+        <div class="hint">간섭과 조립 구조 설명용 시각화입니다.</div>
+      </div>
+    </aside>
+    <section class="scene-wrap" aria-label="Eco 3D 모델">
+      <canvas id="viewport"></canvas>
+      <div id="loading">3D 모델 불러오는 중… (GLB 약 18 MB)<br>인터넷 연결이 필요합니다 (Three.js CDN).</div>
+      <div id="labels"></div>
+      <div class="scene-top"><h2>ECO LOW-COST AMR / GENERAL ARRANGEMENT</h2><p>build123d 조립 모델 · 제작 검증 전 [mm]</p></div>
+      <div class="top-actions"><button class="icon-btn" id="resetCamera">⟳ 시점 초기화</button><button class="icon-btn" id="saveImage">↓ PNG</button><button class="icon-btn" id="openBom">☰ BOM·예상 가격</button></div>
+      <div class="status">
+        <div class="stats">
+          <div class="stat"><b id="statW">—</b><span>모델 폭</span></div>
+          <div class="stat"><b id="statL">—</b><span>모델 길이</span></div>
+          <div class="stat"><b id="statH">—</b><span>모델 높이</span></div>
+          <div class="stat"><b>Ø180 mm</b><span>구동륜</span></div>
+        </div>
+        <div class="motion"><button class="active" data-motion="stop">■ 정지</button><button data-motion="forward">↑ 직진</button><button data-motion="turn">↻ 제자리 회전</button></div>
+      </div>
+    </section>
+    <aside class="right">
+      <div class="eyebrow">COMPONENT INSPECTOR</div>
+      <div class="legend">부품을 클릭하면 설명 표시</div>
+      <h2 id="partName" class="detail-title">Eco 조립 모델</h2>
+      <p id="partDescription" class="detail-text">프레임·판재·구동 슬라이드·캐스터·전장·센서를 그룹별로 켜고 끌 수 있습니다. 구동륜 슬라이더와 센서 각도, 부품 위치를 조정해 보세요.</p>
+      <div class="section" style="margin-top:18px">
+        <h2>기본 사양</h2>
+        <div class="spec"><span>프레임</span><b>3030 프로파일 440×600</b></div>
+        <div class="spec"><span>덱 / 바닥 / 코너판</span><b>SS400 2.3t / 2t / 6t</b></div>
+        <div class="spec"><span>구동륜</span><b>Ø180 × 2 · 수직 슬라이드 ±10</b></div>
+        <div class="spec"><span>슬라이드 구성</span><b>Ø20 축 2 + 볼 부시 2 / 바퀴</b></div>
+        <div class="spec"><span>스프링</span><b>X-SWU21-70 (120 N 공칭)</b></div>
+        <div class="spec"><span>캐스터</span><b>GL-65-ASF · Ø64 ×4 고정</b></div>
+        <div class="spec"><span>LiDAR</span><b>TiM571 ×2 (앞 왼쪽·뒤 오른쪽)</b></div>
+        <div class="spec"><span>카메라</span><b>Astra Mini Pro ×2</b></div>
+        <div class="spec"><span>설계 질량 (암 포함)</span><b>55 kg</b></div>
+      </div>
+      <div class="section">
+        <h2>CAD 검증 요약</h2>
+        <div id="check" class="hint">검증 보고서 불러오는 중…</div>
+      </div>
+      <div class="section"><p class="hint">개념 모델 · 강도·마찰은 손계산만이며 실물 검증 전입니다. 6t 강판 탭과 1회 절곡은 가공 업체 확인이 필요합니다. 주행 애니메이션은 개념적 표현입니다.</p></div>
+    </aside>
+  </main>
+</div>
+<dialog id="bomDialog" aria-labelledby="bomTitle">
+  <div class="bom-head"><h2 id="bomTitle">Eco BOM · 예상 가격 (VAT 별도)</h2><div class="tabs"><button class="control" id="closeBom" aria-label="닫기">✕ 닫기</button></div></div>
+  <div class="bom-body" id="bomContent">BOM 불러오는 중…</div>
+</dialog>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
+
+const $=id=>document.getElementById(id);
+const getJSON=(u,fallback)=>fetch(u,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(u);return r.json()}).catch(e=>{if(fallback!==undefined)return fallback;throw e});
+const [LAYOUT,MANIFEST,REPORT,SPEC]=await Promise.all([
+  getJSON('./cad/p30/layout.json'),getJSON('./cad-output/p30/manifest.json'),
+  getJSON('./cad-output/p30/build_report.json',null),getJSON('./cad/parts.json',{})]);
+const SENS=LAYOUT.sensors,FR=LAYOUT.frame,DR=LAYOUT.drive,CA=LAYOUT.caster;
+const CAM_FOV=SENS.camera_fov_deg,SCAN_DEG=SPEC.lidar?.scan_deg||270;
+
+// ---- scene -------------------------------------------------------------
+const canvas=$('viewport'),wrap=document.querySelector('.scene-wrap');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene();scene.fog=new THREE.FogExp2('#0b1726',.00055);
+const camera=new THREE.PerspectiveCamera(40,1,1,6000);camera.position.set(860,740,980);
+const orbit=new OrbitControls(camera,canvas);orbit.target.set(0,150,0);orbit.enableDamping=true;orbit.dampingFactor=.07;orbit.minDistance=300;orbit.maxDistance=2300;orbit.maxPolarAngle=Math.PI/2-.015;orbit.update();
+scene.add(new THREE.HemisphereLight(0xb9d8ff,0x31435d,2.0));
+const key=new THREE.DirectionalLight(0xf3f9ff,3);key.position.set(-430,820,390);scene.add(key);
+const fill=new THREE.DirectionalLight(0x549ce8,1.2);fill.position.set(470,300,-600);scene.add(fill);
+const under=new THREE.DirectionalLight(0xe6efff,2.5);under.position.set(-240,-560,400);under.visible=false;scene.add(under);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(6000,6000),new THREE.MeshStandardMaterial({color:0x0d1a29,roughness:1,transparent:true,opacity:.5}));floor.rotation.x=-Math.PI/2;floor.position.y=-3;scene.add(floor);
+const grid=new THREE.GridHelper(2600,52,0x3f6486,0x22364e);grid.position.y=-1;grid.material.transparent=true;grid.material.opacity=.34;scene.add(grid);
+const robot=new THREE.Group();scene.add(robot);
+
+// ---- part groups (viewer axes: X=CAD X, Y=CAD Z up, Z=CAD Y forward, mm) ----
+const groups={},parts={};
+function part(id,name,description,explode=[0,0,0]){const g=new THREE.Group();g.userData={id,explode:new THREE.Vector3(...explode),offset:new THREE.Vector3()};groups[id]=g;parts[id]={name,description};robot.add(g);return g}
+const tag=(obj,id)=>obj.traverse(o=>{if(o.isMesh)o.userData.partId=id});
+part('frame','3030 알루미늄 프로파일 프레임','회사 재고 3030(슬롯 8) 프로파일 약 6.1 m. 하부·상부 사각 프레임과 코너/베이 기둥 6개를 각진 브래킷으로 체결합니다. 표시 단면은 범용 가정이며 실제 공급 단면·합금·단면 탭은 확인이 필요합니다.');
+part('plates','SS400 레이저 강판 (덱 2.3t · 바닥 2t · 코너판 6t)','판재를 전부 SS400 레이저 평판으로 얇게 만들어 원가를 낮췄습니다. 용접 없이 M5/M6 T너트로 프로파일에 체결합니다. 코너판 6t에 캐스터를 M6 탭으로 직접 고정하며, 6t 탭은 업체 확인이 필요합니다.',[0,110,0]);
+part('battery','회사 7S9P 배터리 (STEP)','회사에서 제공한 7S9P 배터리 STEP을 그대로 배치했습니다. 세로 중앙, 하판 위 패드에 올립니다. 셀 종류·BMS·충전기는 모델에 없습니다.',[0,70,0]);
+part('electronics','전장부 · LCD · 스피커','LCD는 앞쪽에 15° 위로 기울여 고정하고 스피커·DC/DC는 뒤쪽에 둡니다. 모터 드라이버·컨트롤러·컴퓨터·전원 분배는 크기 예약(envelope)이며 실제 치수와 방열은 미확정입니다.',[150,70,40]);
+part('driveL','왼쪽 구동륜 + 수직 슬라이드','Ø180 NBR 휠 + MISUMI SFJW20 축 2개, C-LHFR20 볼 리니어 부시 2개, X-SWU21-70 스프링 1개, C-USLH10 범프 스토퍼. 구동륜은 위아래 ±10 mm 이동하며 캐리지 6t 강판 한 장이 휠 축과 부시를 잡습니다.',[-130,0,0]);
+part('driveR','오른쪽 구동륜 + 수직 슬라이드','왼쪽과 좌우 대칭입니다. 슬라이더로 위치를 바꾸면 스프링이 압축·신장합니다.',[130,0,0]);
+for(const s of 'LR')for(const f of 'FB'){const x=s==='L'?-1:1,z=f==='F'?1:-1;
+  part('caster'+s+f,'GL-65-ASF 캐스터','Ø64 휠, 장착높이 83 mm. 코너 6t 강판에 M6 4개로 직접 고정하며 선회 간섭은 CAD 검증에서 88표본 확인했습니다.',[x*90,0,z*90])}
+const POSES=[{id:'lidarFL',name:'FRONT_LEFT',x:-FR.corner_post_xy[0],y:FR.corner_post_xy[1],heading_deg:-45},{id:'lidarRR',name:'REAR_RIGHT',x:FR.corner_post_xy[0],y:-FR.corner_post_xy[1],heading_deg:135}];
+const scanZ=REPORT?.lidar_shadows?.[0]?.scan_z??201.83;
+for(const p of POSES){p.scan_z=scanZ;part(p.id,p.name==='FRONT_LEFT'?'앞 왼쪽 SICK TiM571':'뒤 오른쪽 SICK TiM571','모서리 기둥 자리에 대각 배치: 270°는 바깥쪽, 사각 90°는 차체 안쪽입니다. 스캔면 약 Z'+scanZ+' mm. 광학 원점과 케이블·커버에 의한 가림은 실물 확인이 필요합니다.',[Math.sign(p.x)*110,70,Math.sign(p.y)*100])}
+for(const s of [-1,1])part(s<0?'cameraLeft':'cameraRight',(s<0?'왼쪽':'오른쪽')+' Orbbec Astra Mini Pro','상부 앞 레일 밑 선반에 바깥 '+SENS.camera_yaw_deg+'°·하향 '+SENS.camera_pitch_down_deg+'°로 장착합니다. 프로파일과 앞 LiDAR가 시야에 들어오지 않도록 각도를 정했습니다.',[s*80,70,120]);
+const arm=part('arm','향후 로봇암 설치 영역','로봇암은 현재 포함하지 않습니다. 덱 중앙의 가상 영역이며 하중·작업반경·전도 검토가 선행되어야 합니다.',[0,150,0]);
+const deckTop=287.3;
+{const mat=new THREE.MeshStandardMaterial({color:0xffd276,metalness:.2,roughness:.45,transparent:true,opacity:.19,depthWrite:false,side:THREE.DoubleSide});
+ for(const [h,y] of [[6,deckTop+5],[120,deckTop+68]]){const m=new THREE.Mesh(new THREE.CylinderGeometry(62,62,h,32),mat);m.position.y=y;arm.add(m)}tag(arm,'arm')}
+
+// ---- FOV helpers -------------------------------------------------------
+const lidarFov={},cameraFov={},lidarFovRoot=new THREE.Group(),cameraFovRoot=new THREE.Group();robot.add(lidarFovRoot,cameraFovRoot);
+let lidarRadius=240,camYaw=SENS.camera_yaw_deg,camPitch=SENS.camera_pitch_down_deg;
+const off=id=>groups[id].userData.offset;
+function rebuildFov(){
+  for(const p of POSES){
+    lidarFov[p.id]?.removeFromParent();
+    const s=lidarSector(p,SCAN_DEG,lidarRadius);s.position.copy(off(p.id));lidarFovRoot.add(s);lidarFov[p.id]=s;
+  }
+  for(const [id,side] of [['cameraLeft',-1],['cameraRight',1]]){
+    cameraFov[id]?.removeFromParent();
+    const o=off(id),P={camera_x:SENS.camera_x,camera_y:SENS.camera_y,camera_z:SENS.camera_z,camera_yaw_deg:camYaw,camera_pitch_down_deg:camPitch};
+    const f=cameraFrustum(P,side,CAM_FOV[0],CAM_FOV[1],280);f.position.copy(o);cameraFovRoot.add(f);cameraFov[id]=f;
+  }
+}
+
+// ---- load GLB, split into viewer groups --------------------------------
+const movers={LEFT:[],RIGHT:[]},springs={LEFT:[],RIGHT:[]},wheels=[],casters=[],camPivots={};
+const SPRING_TOP=245,SPRING_NOM=47.74,RATE=5.39,FREE=70;
+let bounds=null;
+function groupFor(r){
+  if(r.group==='frame')return 'frame';if(r.group==='plates')return 'plates';
+  if(r.group==='drive_left')return 'driveL';if(r.group==='drive_right')return 'driveR';
+  if(r.group.startsWith('caster_'))return 'caster'+r.group.slice(7).toUpperCase();
+  if(r.group==='electronics')return r.name.startsWith('60_')?'battery':'electronics';
+  if(r.group==='lidars')return r.name.endsWith('FRONT_LEFT')?'lidarFL':'lidarRR';
+  if(r.group==='cameras')return r.name.endsWith('LEFT')?'cameraLeft':'cameraRight';
+  return 'frame';
+}
+const worldDeltaToLocal=(o,dy)=>{const p=o.parent,a=p.worldToLocal(new THREE.Vector3(0,0,0)),b=p.worldToLocal(new THREE.Vector3(0,dy,0));return b.sub(a)};
+try{
+  const buf=await fetch('./cad-output/p30/amr_p30.glb?v='+encodeURIComponent(LAYOUT.revision),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('amr_p30.glb');return r.arrayBuffer()});
+  const gltf=await new GLTFLoader().parseAsync(buf,'./cad-output/p30/');
+  const wrapper=new THREE.Group();wrapper.scale.set(1000,1000,-1000);wrapper.add(gltf.scene);robot.add(wrapper);wrapper.updateMatrixWorld(true);
+  bounds=new THREE.Box3().setFromObject(wrapper);
+  const nodes=new Map();gltf.scene.traverse(n=>{if(n.name&&!nodes.has(n.name))nodes.set(n.name,n)});
+  // spin groups (wheel rotation about axle) and caster swivels
+  const spin={},swivel={};
+  for(const [n,id,s] of [['LEFT','driveL',-1],['RIGHT','driveR',1]]){
+    const g=new THREE.Group();g.position.set(s*DR.wheel_x,90,0);groups[id].add(g);g.updateMatrixWorld(true);spin[n]=g;
+    movers[n].push({o:g,p:g.position.clone()});wheels.push({group:g,sign:s});
+  }
+  for(const s of 'LR')for(const f of 'FB'){
+    const g=new THREE.Group();g.position.set((s==='L'?-1:1)*CA.x,0,(f==='F'?1:-1)*CA.y);groups['caster'+s+f].add(g);g.updateMatrixWorld(true);swivel['caster'+s+f]=g;casters.push(g);
+  }
+  const missing=[];
+  for(const r of MANIFEST.components){
+    const node=nodes.get(r.name)||nodes.get(r.name.replace(/[\[\].: /]/g,'_'));
+    if(!node){missing.push(r.name);continue}
+    const id=groupFor(r),m=r.name.match(/^(\d+)_.*_(LEFT|RIGHT)$/);
+    let parent=groups[id];const num=m?+m[1]:-1;
+    if(id.startsWith('drive')&&m){
+      if(num===30||num===31)parent=spin[m[2]];
+      else if(num>=32&&num<=46){movers[m[2]].push({o:node,p:null})}
+    }
+    if(id.startsWith('caster')&&(r.name.startsWith('43_')||r.name.startsWith('44_')))parent=swivel[id];
+    if(id==='cameraLeft'||id==='cameraRight'){
+      let pv=camPivots[id];
+      if(!pv){const s=id==='cameraLeft'?-1:1;pv=new THREE.Group();pv.position.set(s*SENS.camera_x,SENS.camera_z,SENS.camera_y);groups[id].add(pv);pv.updateMatrixWorld(true);camPivots[id]=pv}
+      parent=pv;
+    }
+    parent.updateWorldMatrix(true,false);parent.attach(node);tag(node,id);
+    if(m&&m[2]&&id.startsWith('drive')&&num>=32&&num<=46){const e=movers[m[2]].find(x=>x.o===node);e.p=node.position.clone()}
+    if(num===47&&m){const o=node;springs[m[2]].push({o,p:o.position.clone(),sc:o.scale.clone()})}
+    if(r.metadata?.sku)node.traverse(mn=>{if(mn.isMesh)mn.userData.sku=r.metadata.sku});
+  }
+  robot.remove(wrapper);
+  if(missing.length)throw new Error('CAD 노드 누락: '+missing.join(', '));
+}catch(e){$('loading').textContent='CAD 불러오기 실패: '+e.message;console.error(e);throw e}
+
+// ---- annotations -------------------------------------------------------
+const annotations=[
+ {id:'driveL',text:'Ø180 구동륜 · 수직 슬라이드',pos:[-250,150,0]},
+ {id:'casterLF',text:'GL-65-ASF ×4',pos:[-165,110,245]},
+ {id:'lidarFL',text:'TiM571 FRONT LEFT · 270°',pos:[-225,262,285]},
+ {id:'lidarRR',text:'TiM571 REAR RIGHT · 270°',pos:[225,262,-285]},
+ {id:'cameraRight',text:'ASTRA MINI PRO ×2',pos:[SENS.camera_x,SENS.camera_z+25,SENS.camera_y]},
+ {id:'battery',text:'7S9P BATTERY',pos:[0,215,0]},
+ {id:'plates',text:'SS400 DECK',pos:[-60,deckTop+14,-120]},
+ {id:'electronics',text:'CONTROLLERS',pos:[0,190,150]}
+].map(a=>{const node=document.createElement('div');node.className='annotation';node.textContent=a.text;$('labels').append(node);return {...a,node}});
+
+// ---- state & controls --------------------------------------------------
+let explode=0,motion='stop',selected=null,frame=0,lastFrame=0,distance=0,ready=false;
+const optionMap={showFrame:['frame'],showPlates:['plates'],showDrive:['driveL','driveR'],showCasters:Object.keys(groups).filter(k=>k.startsWith('caster')),showBattery:['battery'],showElectronics:['electronics'],showLidar:POSES.map(p=>p.id),showCameras:['cameraLeft','cameraRight'],showArm:['arm']};
+function applyVisibility(){
+  for(const [c,ids] of Object.entries(optionMap))for(const id of ids)groups[id].visible=$(c).checked;
+  lidarFovRoot.visible=$('showLidar').checked&&$('showFov').checked&&explode===0;
+  cameraFovRoot.visible=$('showCameras').checked&&$('showCameraFov').checked&&explode===0;
+  requestRender();
+}
+for(const k of [...Object.keys(optionMap),'showFov','showCameraFov'])$(k).addEventListener('change',applyVisibility);
+$('showLabels').addEventListener('change',()=>requestRender());
+function placeGroups(){for(const g of Object.values(groups))g.position.copy(g.userData.explode).multiplyScalar(explode).add(g.userData.offset);rebuildFov();requestRender()}
+$('explode').addEventListener('input',e=>{explode=+e.target.value/100;$('explodeVal').textContent=e.target.value+'%';placeGroups();applyVisibility()});
+
+// suspension
+function pose(side,mm){
+  const dy=mm;
+  for(const {o,p} of movers[side])o.position.copy(p).add(worldDeltaToLocal(o,dy));
+  for(const {o,p,sc} of springs[side]){
+    const s=(SPRING_NOM-dy)/SPRING_NOM,axis=worldDeltaToLocal(o,1).normalize();
+    o.scale.copy(sc);const k=['x','y','z'].reduce((b,c)=>Math.abs(axis[c])>Math.abs(axis[b])?c:b,'x');o.scale[k]=sc[k]*s;
+    const top=o.parent.worldToLocal(new THREE.Vector3(0,SPRING_TOP,0))[k];o.position.copy(p);o.position[k]=p[k]*s+top*(1-s);
+  }
+}
+const fmt=v=>(+v).toFixed(1).replace(/\.0$/,'');
+function forces(){const f=v=>((FREE-(SPRING_NOM-v))*RATE).toFixed(0);$('force').textContent=`좌 ${f(+$('poseLEFT').value)} N · 우 ${f(+$('poseRIGHT').value)} N`}
+for(const input of document.querySelectorAll('[data-wheel]'))input.addEventListener('input',()=>{setMotion('stop');pose(input.dataset.wheel,+input.value);$('value'+input.dataset.wheel).textContent=fmt(input.value)+' mm';forces();requestRender()});
+$('resetSuspension').addEventListener('click',()=>{for(const input of document.querySelectorAll('[data-wheel]')){input.value=0;pose(input.dataset.wheel,0);$('value'+input.dataset.wheel).textContent='0 mm'}forces();requestRender()});
+forces();
+
+// sensor adjustments
+const baseQ=(side,y,p)=>new THREE.Quaternion().setFromEuler(new THREE.Euler(THREE.MathUtils.degToRad(p),side*THREE.MathUtils.degToRad(y),0,'YXZ'));
+function applyCamera(){
+  for(const [id,side] of [['cameraLeft',-1],['cameraRight',1]]){
+    const q0=baseQ(side,SENS.camera_yaw_deg,SENS.camera_pitch_down_deg),q1=baseQ(side,camYaw,camPitch);
+    camPivots[id].quaternion.copy(q1).multiply(q0.invert());
+  }
+  $('yawVal').textContent=camYaw+'°';$('pitchVal').textContent=camPitch+'°';rebuildFov();requestRender();
+}
+$('camYaw').addEventListener('input',e=>{camYaw=+e.target.value;applyCamera()});
+$('camPitch').addEventListener('input',e=>{camPitch=+e.target.value;applyCamera()});
+$('lidarRadius').addEventListener('input',e=>{lidarRadius=+e.target.value;$('radiusVal').textContent=lidarRadius+' mm';rebuildFov();requestRender()});
+
+// part move (display-only)
+const AX={X:'x',Y:'z',Z:'y'};   // CAD axis -> viewer axis
+function syncMoveUI(){
+  const g=selected&&groups[selected];
+  $('selName').textContent=g?parts[selected].name:'선택 없음 — 모델을 클릭하세요';
+  for(const [k,v] of Object.entries(AX)){const val=g?g.userData.offset[v]:0;$('mv'+k).value=val;$('mv'+k+'v').textContent=fmt(val)}
+  const lines=Object.entries(groups).filter(([,g])=>g.userData.offset.lengthSq()>0).map(([id,g])=>`${parts[id].name}: X${fmt(g.userData.offset.x)} Y${fmt(g.userData.offset.z)} Z${fmt(g.userData.offset.y)} mm`);
+  $('offsets').textContent=lines.length?'조정값 (CAD 기준 mm)\n'+lines.join('\n'):'';
+}
+for(const k of Object.keys(AX))$('mv'+k).addEventListener('input',e=>{if(!selected)return;groups[selected].userData.offset[AX[k]]=+e.target.value;$('mv'+k+'v').textContent=fmt(e.target.value);placeGroups();syncMoveUI()});
+$('resetPart').addEventListener('click',()=>{if(selected){groups[selected].userData.offset.set(0,0,0);placeGroups();syncMoveUI()}});
+$('resetAll').addEventListener('click',()=>{for(const g of Object.values(groups))g.userData.offset.set(0,0,0);placeGroups();syncMoveUI()});
+$('copyOffsets').addEventListener('click',async()=>{const o={};for(const [id,g] of Object.entries(groups))if(g.userData.offset.lengthSq())o[id]={x_mm:g.userData.offset.x,y_mm:g.userData.offset.z,z_mm:g.userData.offset.y};
+  const txt=JSON.stringify({camera_yaw_deg:camYaw,camera_pitch_down_deg:camPitch,part_offsets_mm:o},null,2);
+  try{await navigator.clipboard.writeText(txt);$('copyOffsets').textContent='복사됨 ✓'}catch{$('offsets').textContent=txt}setTimeout(()=>$('copyOffsets').textContent='조정값 복사',1500)});
+
+// views, motion, picking
+function setView(view){
+  const views={iso:[860,740,980],top:[0,1600,1],front:[0,260,1250],bottom:[440,-445,620]},below=view==='bottom';
+  floor.visible=grid.visible=!below;under.visible=below;orbit.maxPolarAngle=below?Math.PI-.05:Math.PI/2-.015;
+  camera.position.set(...views[view]);orbit.target.set(0,below?80:155,0);orbit.update();
+  document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));requestRender();
+}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+function setMotion(v){motion=v;document.querySelectorAll('[data-motion]').forEach(b=>b.classList.toggle('active',b.dataset.motion===v));requestRender()}
+document.querySelectorAll('[data-motion]').forEach(b=>b.addEventListener('click',()=>setMotion(b.dataset.motion)));
+$('resetCamera').addEventListener('click',()=>{setMotion('stop');robot.rotation.y=0;robot.position.set(0,0,0);setView('iso')});
+$('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-eco-layout.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
+const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();
+canvas.addEventListener('click',e=>{
+  const r=canvas.getBoundingClientRect();ptr.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ptr,camera);
+  const hit=ray.intersectObjects(Object.values(groups).filter(g=>g.visible),true).find(h=>h.object.userData.partId);
+  if(hit){const id=hit.object.userData.partId,sku=hit.object.userData.sku;selected=id;$('partName').textContent=sku?parts[id].name+' · '+sku:parts[id].name;$('partDescription').textContent=parts[id].description;syncMoveUI()}
+});
+
+// rendering
+function updateLabels(){
+  const show=$('showLabels').checked;
+  for(const a of annotations){const g=groups[a.id];a.node.style.display='none';if(!show||!g.visible)continue;
+    const v=new THREE.Vector3(...a.pos).add(g.position).applyMatrix4(robot.matrixWorld).project(camera);
+    const x=(v.x*.5+.5)*wrap.clientWidth,y=(-v.y*.5+.5)*wrap.clientHeight;
+    if(v.z<1&&v.z>-1&&x>5&&x<wrap.clientWidth-5&&y>5&&y<wrap.clientHeight-5){a.node.style.display='block';a.node.style.left=x+'px';a.node.style.top=y+'px'}}
+}
+function requestRender(){if(ready&&!frame&&!document.hidden)frame=requestAnimationFrame(render)}
+function render(now){
+  frame=0;const dt=lastFrame?Math.min(.05,(now-lastFrame)/1000):1/60;lastFrame=now;orbit.update();
+  const driving=motion!=='stop'&&explode===0;let settling=false;
+  if(driving){
+    const speed=motion==='forward'?1.9:1.5;
+    wheels.forEach(w=>{w.group.rotation.x+=dt*speed*(motion==='forward'?1:w.sign)});
+    const steer=motion==='forward'?0:Math.PI/2;
+    casters.forEach(c=>{const d=Math.atan2(Math.sin(steer-c.rotation.y),Math.cos(steer-c.rotation.y));c.rotation.y+=d*Math.min(1,dt*3)});
+    if(motion==='turn')robot.rotation.y+=dt*.27;
+    else{distance+=dt*13;robot.position.x=Math.sin(robot.rotation.y)*distance*.15;robot.position.z=Math.cos(robot.rotation.y)*distance*.15;if(distance>90){distance=0;robot.position.set(0,0,0)}}
+  }else if(motion==='stop'){
+    for(const c of casters){if(Math.abs(c.rotation.y)>.002){c.rotation.y*=1-Math.min(1,dt*8);settling=true}else c.rotation.y=0}
+  }
+  robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera);
+  if(driving||settling)requestRender();
+}
+orbit.addEventListener('change',requestRender);
+document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;lastFrame=0}else requestRender()});
+const resize=()=>{const w=wrap.clientWidth,h=wrap.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();requestRender()};
+new ResizeObserver(resize).observe(wrap);resize();
+
+// stats, verification, BOM
+if(bounds){const s=bounds.getSize(new THREE.Vector3());$('statW').textContent=s.x.toFixed(0)+' mm';$('statL').textContent=s.z.toFixed(0)+' mm';$('statH').textContent=s.y.toFixed(0)+' mm'}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+(function(){
+  const r=REPORT;if(!r){$('check').textContent='검증 보고서가 없습니다 (python -m cad.p30 build).';return}
+  const st=r.statics||{},row=(k,v,c='')=>`<div class="spec"><span>${k}</span><b class="${c}">${v}</b></div>`;
+  let h=`<p class="${r.valid?'check-ok':'check-bad'}" style="margin-bottom:6px"><b>${r.valid?'통과':'실패'}</b> · 부품 ${r.components} · 솔리드 ${r.solids}</p>`;
+  const hit=(x,unit)=>x?`${x.hits.length}건 / ${x[unit]}`:null;
+  if(r.static_interference)h+=row('정지 자세 간섭',`${r.static_interference.hits.length}건 / ${r.static_interference.boolean_pairs}쌍`,r.static_interference.hits.length?'check-bad':'check-ok');
+  if(r.stroke_interference)h+=row('스트로크 간섭',`${r.stroke_interference.hits.length}건 / ${r.stroke_interference.poses}자세`,r.stroke_interference.hits.length?'check-bad':'check-ok');
+  if(r.caster_swivel)h+=row('캐스터 선회 간섭',`${r.caster_swivel.hits.length}건 / ${r.caster_swivel.samples}표본`,r.caster_swivel.hits.length?'check-bad':'check-ok');
+  if(r.support)h+=row('미지지 부품',`${r.support.unsupported.length}개`,r.support.unsupported.length?'check-bad':'check-ok');
+  if(r.ground)h+=row('접지',r.ground.pass?'Z0 확인':'불일치',r.ground.pass?'check-ok':'check-bad');
+  if(st.drive_share_pct!=null)h+=row('구동륜 하중 비율',st.drive_share_pct+' %');
+  if(st.traction_accel_m_s2!=null)h+=row('미끄럼 한계 가속',st.traction_accel_m_s2+' m/s²');
+  if(st.tip_over_accel_g)h+=row('전도 가속 (좌우/전후)',st.tip_over_accel_g.lateral+' / '+st.tip_over_accel_g.longitudinal+' g');
+  if(st.bush_radial_each_N!=null)h+=row('부시 반력',st.bush_radial_each_N+' N (동정격 '+Math.round(st.bush_load_ratio_dynamic*100)+'%)');
+  if(r.camera_fov){const cf=r.camera_fov;h+=`<p class="hint" style="margin-top:8px">카메라 FOV: 프로파일 ${cf.profile_hits.length?cf.profile_hits.map(esc).join(', '):'시야에 없음'}</p>`}
+  if(r.lidar_shadows)for(const l of r.lidar_shadows)h+=`<p class="hint">LiDAR ${esc(l.lidar)} Z${l.scan_z}: ${l.blocked.length?l.blocked.map(b=>esc(b.part)+' '+b.from_deg+'~'+b.to_deg+'°').join(', '):'가림 없음'}</p>`;
+  $('check').innerHTML=h;
+})();
+function csv(t){const out=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'&&t[i+1]=='"'){f+='"';i++}else if(c=='"')q=false;else f+=c}else if(c=='"')q=true;else if(c==','){row.push(f);f=''}else if(c=='\n'){row.push(f);out.push(row);row=[];f=''}else if(c!='\r')f+=c}if(f||row.length){row.push(f);out.push(row)}return out}
+let bomLoaded=false;
+async function loadBom(){
+  if(bomLoaded)return;
+  try{
+    const t=await fetch('bom/p30_bom.csv',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.text()});
+    const [head,...rows]=csv(t.trim());const i=k=>head.indexOf(k);let total=0;
+    let h='<div class="bom-table-wrap"><table class="bom-table"><thead><tr><th>분류</th><th>부품</th><th>사양</th><th class="num">수량</th><th>출처</th><th class="num">금액(원)</th></tr></thead><tbody>';
+    for(const r of rows){const amt=+r[i('amount_krw')]||0;total+=amt;h+=`<tr><td>${esc(r[i('category')])}</td><td>${esc(r[i('item')])}</td><td class="spec-cell">${esc(r[i('spec')])}</td><td class="num">${esc(r[i('qty')])} ${esc(r[i('unit')]||'')}</td><td>${esc(r[i('source')])}</td><td class="num">${amt?amt.toLocaleString():'0'}</td></tr>`}
+    h+=`</tbody><tfoot><tr><td colspan="5">합계 (추정, VAT 별도)</td><td class="num">${total.toLocaleString()}</td></tr></tfoot></table></div><p class="bom-note">회사 재고 품목은 0원입니다. 금액은 견적 전 추정값이며, 가공품은 업체 견적이 필요합니다.</p>`;
+    $('bomContent').innerHTML=h;bomLoaded=true;
+  }catch{$('bomContent').textContent='BOM 파일을 불러오지 못했습니다.'}
+}
+$('openBom').addEventListener('click',()=>{loadBom();$('bomDialog').showModal()});
+$('closeBom').addEventListener('click',()=>$('bomDialog').close());
+
+rebuildFov();ready=true;placeGroups();applyVisibility();syncMoveUI();$('loading').remove();requestRender();
+window.ecoReview={groups,parts,movers,springs,camPivots,pose,applyCamera,state:()=>({explode,motion,selected,camYaw,camPitch,lidarFov:lidarFovRoot.visible,cameraFov:cameraFovRoot.visible})};
+</script>
+</body>
+</html>
