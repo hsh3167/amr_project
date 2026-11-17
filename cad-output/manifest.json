@@ -1510,8 +1510,8 @@
         ]
       ],
       "center_mm": [
-        -75.25128011655308,
-        -236.00064630472943,
+        -75.25128011655309,
+        -236.00064630472963,
         186.80313168215096
       ],
       "solids": 21
@@ -2730,7 +2730,7 @@
         "sku": "Bossard BN1359 12x35 (ISO 7379)",
         "supply": "company stock",
         "source": "ISO 7379 12x35: head D18 x 8, shoulder D12 f9 x 35, M10 x 16",
-        "note": "Company list: 12x35. The supplied SHOULDER BOLT.STEP measures a 30.0 mm shoulder; the stack needs 35 (confirm the real bolt). Modelled from ISO 7379 catalogue dimensions, not from the STEP.",
+        "note": "Company stock (user, 2026-11-18): 2x 12x35 and 2x 12x30. The pivot uses the two 12x35; the collar stack (35.3) does not fit a 30 mm shoulder. The supplied SHOULDER BOLT.STEP (30.0 mm shoulder) is the 12x30 variant, so the 12x35 is modelled from ISO 7379 catalogue dimensions.",
         "fit": "Pivot axle: inner rings and collars clamped between the outboard ear and the inboard ear"
       },
       "volume_mm3": 7067.966147620605,
@@ -3672,7 +3672,7 @@
         "sku": "Bossard BN1359 12x35 (ISO 7379)",
         "supply": "company stock",
         "source": "ISO 7379 12x35: head D18 x 8, shoulder D12 f9 x 35, M10 x 16",
-        "note": "Company list: 12x35. The supplied SHOULDER BOLT.STEP measures a 30.0 mm shoulder; the stack needs 35 (confirm the real bolt). Modelled from ISO 7379 catalogue dimensions, not from the STEP.",
+        "note": "Company stock (user, 2026-11-18): 2x 12x35 and 2x 12x30. The pivot uses the two 12x35; the collar stack (35.3) does not fit a 30 mm shoulder. The supplied SHOULDER BOLT.STEP (30.0 mm shoulder) is the 12x30 variant, so the 12x35 is modelled from ISO 7379 catalogue dimensions.",
         "fit": "Pivot axle: inner rings and collars clamped between the outboard ear and the inboard ear"
       },
       "volume_mm3": 7067.966147620604,
