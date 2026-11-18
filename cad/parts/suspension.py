@@ -11,9 +11,10 @@ plate is the bump stop. No welding, rails, hangers or bearings. Earlier concepts
 (Rev09 shafts/rockers, Rev10 swing arm + seesaw, Rev11 rails) are in git history.
 Dimensions in mm.
 """
+import math
 from math import cos, pi, sin
 from build123d import Axis, Circle, Compound, Face, Helix, Plane, Rectangle, Solid, Vector, Wire, sweep
-from ..caster_motion import bogie_stack, CASTER_WHEELS, caster_xy, hinge_wheels, is_bogie, pivot_of, pose_shape, rotate_point, rotate_yz, seat_travel
+from ..caster_motion import bogie_stack, CASTER_WHEELS, caster_xy, hinge_wheels, is_bogie, motion_angle, pivot_of, pose_shape, rotate_point, rotate_yz, seat_travel
 from .common import PartRecord, cylx, cyly, cylz, drilled, polygon_plate, span
 from .vendor import misumi_solid
 
@@ -323,14 +324,22 @@ def bogie_records(d, add, base_bottom, base_top):
             # Rev17 bogie spring: coaxial with the rear stopper, from the (posed) rear floor up to the base plate underside.
             x, y = q[sp['location']]
             ys, zs = rotate_yz(d, key, d.motion.get(key, 0), (y, fz))
-            length = base_bottom-zs
+            # Top end stays centred on the fixed striker (x, y); the bottom end follows the posed floor (ys, zs),
+            # so the coil leans by a small angle (about 1.6 deg at the stroke ends) instead of shifting sideways.
+            length = math.hypot(base_bottom-zs, ys-y)
             sst = bogie_spring_state(d)
-            shape = coil(x, ys, zs, length, {'spring_od_mm': sp['od_mm'], 'spring_id_mm': sp['id_mm'],
-                                             'spring_wire_axial_mm': sp['wire_axial_mm'], 'display_turns': sp['display_turns']})
+            lean = math.degrees(math.asin((ys-y)/length))
+            floor_tilt = math.degrees(motion_angle(d, key, d.motion.get(key, 0)))
+            # Ground end coils seat flat; the drawn rings are shortened so a tilted end ring edge does not cut the plate/floor.
+            e = sp['od_mm']/2*math.sin(math.radians(max(abs(lean), abs(floor_tilt-lean))))+.05 if lean else 0
+            shape = coil(x, y, base_bottom-length+e, length-2*e, {'spring_od_mm': sp['od_mm'], 'spring_id_mm': sp['id_mm'],
+                                                                  'spring_wire_axial_mm': sp['wire_axial_mm'], 'display_turns': sp['display_turns']})
+            if abs(lean) > 1e-9:
+                shape = shape.rotate(Axis((0, y, base_bottom), (1, 0, 0)), lean)
             if side < 0:
                 shape = shape.mirror(Plane.YZ)
             add('bogie_spring_'+sp['sku'], shape, key, False, sku=sp['sku'], status='catalog_envelope', color=(.86, .30, .25),
-                spring_top_z=base_bottom, spring_length_mm=round(length, 3), spring_xy=[side*x, ys],
+                spring_top_z=base_bottom, spring_length_mm=round(length, 3), spring_xy=[side*x, y], lean_deg=round(lean, 3),
                 rate_N_mm=sp['rate_N_mm'], free_length_mm=sp['free_length_mm'],
                 force_N=round(sp['rate_N_mm']*(sp['free_length_mm']-length), 2), nominal_force_N=sst['forces_N'][1],
                 geometry='Coil drawn at the posed length (SWU wire section, display turns); rate and allowable deflection from the catalogue',
