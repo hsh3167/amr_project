@@ -50,11 +50,19 @@ def bogie_report(d):
 
     g=9.80665;s=d.layout['suspension'];q=s['bogie'];c=s['caster']
     yp=q['pivot_y_mm'];yc=d.p['caster_y'];yr=-d.p['caster_y']
-    def case(mass,cg_y=0.0):
-        side=mass*g/2
-        rear=side*(yp-cg_y)/(yp-yr);pivot=side-rear
-        caster=pivot*yp/yc;drive=pivot-caster
-        return {'mass_kg':mass,'cg_y_mm':cg_y,'pivot_each_N':round(pivot,2),'drive_each_N':round(drive,2),
+    from .parts.suspension import bogie_spring_state
+    spring=bogie_spring_state(d) if q.get('spring') else None
+    Fs=spring['forces_N'][1] if spring else 0.0;ys=spring['xy_mm'][1] if spring else yp
+    def case(mass,cg_y=0.0,fs=None):
+        """Per side: drive (y=0), front caster (yc), rear caster (yr). Vertical sum, pitch moment about y=0 and the
+        bogie moment about its pivot; Rev17: the spring (between chassis and bogie, at ys) adds Fs*(yp-ys) to the bogie."""
+        side=mass*g/2;fs=Fs if fs is None else fs;ms=fs*(yp-ys)
+        # N_c*yc + N_r*yr = side*cg ; N_d*yp - N_c*(yc-yp) = ms ; N_d + N_c + N_r = side
+        # -> N_d = side - N_c - N_r, N_r = (side*cg - N_c*yc)/yr
+        a=-yp-(yc-yp)+yp*yc/yr; b=ms-side*yp+yp*side*cg_y/yr
+        caster=b/a;rear=(side*cg_y-caster*yc)/yr;drive=side-caster-rear
+        pivot=drive+caster-fs
+        return {'mass_kg':mass,'cg_y_mm':cg_y,'bogie_spring_N':round(fs,2),'pivot_each_N':round(pivot,2),'drive_each_N':round(drive,2),
                 'front_caster_each_N':round(caster,2),'rear_caster_each_N':round(rear,2),
                 'drive_load_fraction':round(2*drive/(mass*g),4)}
     rear=spring_state(d,'caster');ratio=rear['lever_ratio'];unsprung=c['unsprung_mass_kg_estimate']*g
@@ -71,8 +79,9 @@ def bogie_report(d):
     st=bogie_stack(d);xo_b,xi_b=st['bearing_x'];span_b=xo_b-xi_b;xw=d.p['drive_track']/2;xc=d.p['caster_x']
     def bearings(cs):
         # Vertical wheel loads at their X; the bearing pair (spacing span_b) reacts force and roll moment.
-        fw,fc=cs['drive_each_N'],cs['front_caster_each_N'];F=fw+fc
-        m=fw*(xw-xi_b)+fc*(xc-xi_b)
+        fw,fc=cs['drive_each_N'],cs['front_caster_each_N'];fs=cs.get('bogie_spring_N',0);F=fw+fc-fs
+        xs=spring['xy_mm'][0] if spring else xi_b
+        m=fw*(xw-xi_b)+fc*(xc-xi_b)-fs*(xs-xi_b)
         out=m/span_b;inn=F-out
         worst=max(abs(out),abs(inn))
         return {'cg_y_mm':cs['cg_y_mm'],'outer_bearing_N':round(out,1),'inner_bearing_N':round(inn,1),
@@ -83,7 +92,19 @@ def bogie_report(d):
                   'bearing_x_mm':[round(v,2) for v in st['bearing_x']],'bearing_spacing_mm':round(span_b,2),
                   'cases':[bearings(cs) for cs in [nominal]+pitch[::2]],
                   'scope':'Vertical wheel loads only (no side force); static load rating check, no fatigue or fretting'}
-    return {'concept':'Rev16 bogie (front caster + drive wheel, BGHK bearing pivot) + rear hinge casters','design_mass_kg':s['design_mass_kg'],
+    spring_report=None
+    if spring:
+        half=q['travel_mm']/2
+        spring_report={**spring,
+            'drive_each_N_at_front_caster_poses':[case(s['design_mass_kg'],0,f)['drive_each_N'] for f in spring['forces_N']],
+            'drive_each_without_spring_N':case(s['design_mass_kg'],0,0)['drive_each_N'],
+            'drive_each_without_arm_N':case(s['design_mass_without_arm_kg'])['drive_each_N'],
+            'drive_each_without_arm_without_spring_N':case(s['design_mass_without_arm_kg'],0,0)['drive_each_N'],
+            'bogie_angular_rate_Nm_per_deg':round(spring["rate_N_mm"]*spring["arm_behind_pivot_mm"]**2*math.pi/180/1000,3),
+            'scope':'Spring force at the poses = rate x posed length (front caster +-%g mm); the pose loads are quasi-static (chassis level)'%half}
+    return {'concept':'Rev17 bogie (front caster + drive wheel, BGHK bearing pivot, coaxial bogie spring) + rear hinge casters'
+            if spring else 'Rev16 bogie (front caster + drive wheel, BGHK bearing pivot) + rear hinge casters','design_mass_kg':s['design_mass_kg'],
+            'bogie_spring':spring_report,
             'bogie':{'pivot_y_mm':yp,'pivot_z_mm':q['pivot_z_mm'],'front_arm_mm':yc-yp,'rear_arm_mm':yp,
                      'travel_front_caster_mm':q['travel_mm'],'drive_travel_mm':round(q['travel_mm']*yp/(yc-yp),2),
                      'step_rise_ratio':round(yp/yc,3),'pivot':q['holder_sku']},

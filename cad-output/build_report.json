@@ -1,11 +1,48 @@
 {
   "valid": true,
-  "components": 169,
-  "solids": 455,
+  "components": 167,
+  "solids": 450,
   "errors": [],
   "suspension_catalog": {
-    "concept": "Rev16 bogie (front caster + drive wheel, BGHK bearing pivot) + rear hinge casters",
+    "concept": "Rev17 bogie (front caster + drive wheel, BGHK bearing pivot, coaxial bogie spring) + rear hinge casters",
     "design_mass_kg": 55,
+    "bogie_spring": {
+      "sku": "SWU21-60",
+      "xy_mm": [
+        150,
+        -25
+      ],
+      "arm_behind_pivot_mm": 85,
+      "rate_N_mm": 6.27,
+      "free_length_mm": 60,
+      "poses_mm": [
+        10.0,
+        0,
+        -10.0
+      ],
+      "lengths_mm": [
+        56.44,
+        51.0,
+        45.472
+      ],
+      "forces_N": [
+        22.32,
+        56.43,
+        91.09
+      ],
+      "min_length_margin_to_allowable_mm": 21.472,
+      "preload_at_full_rebound_N": 22.32,
+      "drive_each_N_at_front_caster_poses": [
+        165.8,
+        186.89,
+        208.31
+      ],
+      "drive_each_without_spring_N": 152.0,
+      "drive_each_without_arm_N": 131.61,
+      "drive_each_without_arm_without_spring_N": 96.73,
+      "bogie_angular_rate_Nm_per_deg": 0.791,
+      "scope": "Spring force at the poses = rate x posed length (front caster +-10 mm); the pose loads are quasi-static (chassis level)"
+    },
     "bogie": {
       "pivot_y_mm": 60,
       "pivot_z_mm": 87,
@@ -28,30 +65,30 @@
       "cases": [
         {
           "cg_y_mm": 0.0,
-          "outer_bearing_N": 638.3,
-          "inner_bearing_N": -427.4,
-          "roll_moment_about_centre_Nm": 10.28,
-          "s0_at_1g": 3.74,
-          "s0_at_2g": 1.87,
-          "s0_at_3g": 1.25
+          "outer_bearing_N": 723.5,
+          "inner_bearing_N": -551.6,
+          "roll_moment_about_centre_Nm": 12.76,
+          "s0_at_1g": 3.3,
+          "s0_at_2g": 1.65,
+          "s0_at_3g": 1.1
         },
         {
           "cg_y_mm": -30,
-          "outer_bearing_N": 549.2,
-          "inner_bearing_N": -367.8,
-          "roll_moment_about_centre_Nm": 8.85,
-          "s0_at_1g": 4.35,
-          "s0_at_2g": 2.18,
-          "s0_at_3g": 1.45
+          "outer_bearing_N": 634.4,
+          "inner_bearing_N": -491.9,
+          "roll_moment_about_centre_Nm": 11.33,
+          "s0_at_1g": 3.77,
+          "s0_at_2g": 1.88,
+          "s0_at_3g": 1.26
         },
         {
           "cg_y_mm": 30,
-          "outer_bearing_N": 727.3,
-          "inner_bearing_N": -487.1,
-          "roll_moment_about_centre_Nm": 11.72,
-          "s0_at_1g": 3.29,
-          "s0_at_2g": 1.64,
-          "s0_at_3g": 1.1
+          "outer_bearing_N": 812.5,
+          "inner_bearing_N": -611.2,
+          "roll_moment_about_centre_Nm": 14.2,
+          "s0_at_1g": 2.94,
+          "s0_at_2g": 1.47,
+          "s0_at_3g": 0.98
         }
       ],
       "scope": "Vertical wheel loads only (no side force); static load rating check, no fatigue or fretting"
@@ -60,49 +97,54 @@
       "with_arm": {
         "mass_kg": 55,
         "cg_y_mm": 0.0,
-        "pivot_each_N": 210.84,
-        "drive_each_N": 152.0,
-        "front_caster_each_N": 58.84,
-        "rear_caster_each_N": 58.84,
-        "drive_load_fraction": 0.5636
+        "bogie_spring_N": 56.43,
+        "pivot_each_N": 171.85,
+        "drive_each_N": 186.89,
+        "front_caster_each_N": 41.4,
+        "rear_caster_each_N": 41.4,
+        "drive_load_fraction": 0.693
       },
       "cg_sensitivity": [
         {
           "mass_kg": 55,
           "cg_y_mm": -30,
-          "pivot_each_N": 181.42,
-          "drive_each_N": 130.79,
-          "front_caster_each_N": 50.63,
-          "rear_caster_each_N": 88.26,
-          "drive_load_fraction": 0.485
+          "bogie_spring_N": 56.43,
+          "pivot_each_N": 142.44,
+          "drive_each_N": 165.68,
+          "front_caster_each_N": 33.19,
+          "rear_caster_each_N": 70.82,
+          "drive_load_fraction": 0.6143
         },
         {
           "mass_kg": 55,
           "cg_y_mm": 0,
-          "pivot_each_N": 210.84,
-          "drive_each_N": 152.0,
-          "front_caster_each_N": 58.84,
-          "rear_caster_each_N": 58.84,
-          "drive_load_fraction": 0.5636
+          "bogie_spring_N": 56.43,
+          "pivot_each_N": 171.85,
+          "drive_each_N": 186.89,
+          "front_caster_each_N": 41.4,
+          "rear_caster_each_N": 41.4,
+          "drive_load_fraction": 0.693
         },
         {
           "mass_kg": 55,
           "cg_y_mm": 30,
-          "pivot_each_N": 240.26,
-          "drive_each_N": 173.21,
-          "front_caster_each_N": 67.05,
-          "rear_caster_each_N": 29.42,
-          "drive_load_fraction": 0.6423
+          "bogie_spring_N": 56.43,
+          "pivot_each_N": 201.27,
+          "drive_each_N": 208.1,
+          "front_caster_each_N": 49.61,
+          "rear_caster_each_N": 11.98,
+          "drive_load_fraction": 0.7716
         }
       ],
       "without_arm": {
         "mass_kg": 35,
         "cg_y_mm": 0.0,
-        "pivot_each_N": 134.17,
-        "drive_each_N": 96.73,
-        "front_caster_each_N": 37.44,
-        "rear_caster_each_N": 37.44,
-        "drive_load_fraction": 0.5636
+        "bogie_spring_N": 56.43,
+        "pivot_each_N": 95.18,
+        "drive_each_N": 131.61,
+        "front_caster_each_N": 20.0,
+        "rear_caster_each_N": 20.0,
+        "drive_load_fraction": 0.7669
       }
     },
     "rear_caster_spring": {
@@ -111,25 +153,25 @@
       "lever_ratio": 0.7222,
       "spring_travel_mm": 7.222,
       "spring_lengths_mm": [
-        28.611,
-        25,
-        21.389
+        31.611,
+        28,
+        24.389
       ],
       "forces_N": [
-        44.467,
-        69.6,
-        94.733
+        23.587,
+        48.72,
+        73.853
       ],
-      "min_solid_margin_mm": 10.889,
-      "max_working_deflection_margin_mm": 5.639,
-      "installed_length_mm": 25,
+      "min_solid_margin_mm": 13.889,
+      "max_working_deflection_margin_mm": 8.639,
+      "installed_length_mm": 28,
       "shim_removed_force_N": 48.72,
-      "needed_spring_force_N": 69.93,
-      "needed_length_mm": 24.952,
-      "level_shim_mm": 3.048,
-      "configured_shim_mm": 3,
-      "rear_sink_with_arm_mm": 0.066,
-      "rear_sink_without_arm_mm": -5.829,
+      "needed_spring_force_N": 45.78,
+      "needed_length_mm": 28.422,
+      "level_shim_mm": -0.422,
+      "configured_shim_mm": 0,
+      "rear_sink_with_arm_mm": -0.584,
+      "rear_sink_without_arm_mm": -6.479,
       "wheel_rate_N_mm": 3.63
     },
     "forward_pitch_onset_g": 0.3,
@@ -181,148 +223,5 @@
     "deck_underside_above_camera_top": 4.324,
     "lowest_camera_mount_above_scan": 11.17
   },
-  "selected_sensor_collisions": [],
-  "suspension_collision_sampling": {
-    "sampled_poses": 20,
-    "boolean_pairs": 388,
-    "hits": [],
-    "scope": "One motion key at a time (bogie or hinge module), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
-  },
-  "caster_swivel_sampling": {
-    "sampled_poses": 96,
-    "boolean_pairs": 192,
-    "hits": [],
-    "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump of its hinge arm; local hardware and chassis"
-  },
-  "static_interference": {
-    "boolean_pairs": 296,
-    "hits": [],
-    "known_manufacturer_overlaps": [
-      {
-        "a": "43_GL65_OEM_fork_LB",
-        "b": "44_GL65_OEM_wheel_LB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
-      },
-      {
-        "a": "43_GL65_OEM_fork_LF",
-        "b": "44_GL65_OEM_wheel_LF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
-      },
-      {
-        "a": "43_GL65_OEM_fork_RB",
-        "b": "44_GL65_OEM_wheel_RB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
-      },
-      {
-        "a": "43_GL65_OEM_fork_RF",
-        "b": "44_GL65_OEM_wheel_RF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
-      }
-    ],
-    "scope": "All parts, nominal pose, BRep common volume > 0.01 mm3; contact without overlap is allowed"
-  },
-  "suspension_pose_interference": {
-    "sampled_poses": 8,
-    "boolean_pairs": 557,
-    "hits": [],
-    "known_manufacturer_overlaps": [
-      {
-        "a": "43_GL65_OEM_fork_LF",
-        "b": "44_GL65_OEM_wheel_LF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "LEFT",
-        "displacement_mm": -10.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_LF",
-        "b": "44_GL65_OEM_wheel_LF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "LEFT",
-        "displacement_mm": 10.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_RF",
-        "b": "44_GL65_OEM_wheel_RF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "RIGHT",
-        "displacement_mm": -10.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_RF",
-        "b": "44_GL65_OEM_wheel_RF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "RIGHT",
-        "displacement_mm": 10.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_LB",
-        "b": "44_GL65_OEM_wheel_LB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "LB",
-        "displacement_mm": -5.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_LB",
-        "b": "44_GL65_OEM_wheel_LB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "LB",
-        "displacement_mm": 5.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_RB",
-        "b": "44_GL65_OEM_wheel_RB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "RB",
-        "displacement_mm": -5.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_RB",
-        "b": "44_GL65_OEM_wheel_RB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "RB",
-        "displacement_mm": 5.0
-      }
-    ],
-    "scope": "One wheel at a time at full droop and full bump; springs, stoppers and fasteners included; cameras excluded; not a swept-volume proof"
-  },
-  "support_connectivity": {
-    "root": "01_lower_steel_plate_3t",
-    "tolerance_mm": 0.2,
-    "contacts": 235,
-    "unsupported": [],
-    "isolated": [],
-    "scope": "Contact graph from the base plate at the nominal pose; geometric support only, not joint strength"
-  },
-  "step_roundtrip": [
-    {
-      "file": "amr_current.step",
-      "raw_import_valid": false,
-      "valid_after_explicit_normalization": true,
-      "normalized_components": [
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        },
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        }
-      ],
-      "solids": 455
-    }
-  ]
+  "step_roundtrip": []
 }

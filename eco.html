@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="app">
-  <div class="eco-head"><div><strong>AMR PROJECT</strong><small>ECO 저가형 · 30×30 프로파일 샤시</small></div><a href="index.html">← Rev15 Layout Lab</a></div>
+  <div class="eco-head"><div><strong>AMR PROJECT</strong><small>ECO 저가형 · 30×30 프로파일 샤시</small></div><a href="index.html">← 6륜 메인 모델 Layout Lab</a></div>
   <main class="workspace">
     <aside class="left">
       <div class="eyebrow">LOW-COST VARIANT</div>
@@ -47,7 +47,7 @@
         <p class="hint">구동륜 2개가 축 2개를 따라 위아래(±10 mm)로 움직이고 스프링 1개가 받칩니다. +는 올라감(스프링 압축)입니다. 간섭은 CAD 검증(±5/±10mm)에서 확인했고, 여기서는 표시용 이동입니다.</p>
         <label class="mini-label" for="poseLEFT" style="margin-top:12px">왼쪽 구동륜 <output id="valueLEFT">0 mm</output></label><input id="poseLEFT" data-wheel="LEFT" type="range" min="-10" max="10" value="0" step="0.5">
         <label class="mini-label" for="poseRIGHT">오른쪽 구동륜 <output id="valueRIGHT">0 mm</output></label><input id="poseRIGHT" data-wheel="RIGHT" type="range" min="-10" max="10" value="0" step="0.5">
-        <div class="spec"><span>스프링 힘 (X-SWU21-70)</span><b id="force">—</b></div>
+        <div class="spec"><span>스프링 힘 (SWU21-70)</span><b id="force">—</b></div>
         <button class="control" id="resetSuspension" style="width:100%;margin-top:8px">공칭 위치로 복귀</button>
       </div>
       <div class="section">
@@ -103,8 +103,8 @@
         <div class="spec"><span>프레임</span><b>3030 프로파일 440×600</b></div>
         <div class="spec"><span>덱 / 바닥 / 코너판</span><b>SS400 2.3t / 2t / 6t</b></div>
         <div class="spec"><span>구동륜</span><b>Ø180 × 2 · 수직 슬라이드 ±10</b></div>
-        <div class="spec"><span>슬라이드 구성</span><b>Ø20 축 2 + 볼 부시 2 / 바퀴</b></div>
-        <div class="spec"><span>스프링</span><b>X-SWU21-70 (120 N 공칭)</b></div>
+        <div class="spec"><span>슬라이드 구성</span><b>Ø16 축 2 + 볼 부시 2 / 바퀴</b></div>
+        <div class="spec"><span>스프링</span><b>SWU21-70 (120 N 공칭)</b></div>
         <div class="spec"><span>캐스터</span><b>GL-65-ASF · Ø64 ×4 고정</b></div>
         <div class="spec"><span>LiDAR</span><b>TiM571 ×2 (앞 왼쪽·뒤 오른쪽)</b></div>
         <div class="spec"><span>카메라</span><b>Astra Mini Pro ×2</b></div>
@@ -125,6 +125,7 @@
 <script type="module">
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {STLLoader} from 'three/addons/loaders/STLLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
 
@@ -159,13 +160,13 @@ part('frame','3030 알루미늄 프로파일 프레임','회사 재고 3030(슬�
 part('plates','SS400 레이저 강판 (덱 2.3t · 바닥 2t · 코너판 6t)','판재를 전부 SS400 레이저 평판으로 얇게 만들어 원가를 낮췄습니다. 용접 없이 M5/M6 T너트로 프로파일에 체결합니다. 코너판 6t에 캐스터를 M6 탭으로 직접 고정하며, 6t 탭은 업체 확인이 필요합니다.',[0,110,0]);
 part('battery','회사 7S9P 배터리 (STEP)','회사에서 제공한 7S9P 배터리 STEP을 그대로 배치했습니다. 세로 중앙, 하판 위 패드에 올립니다. 셀 종류·BMS·충전기는 모델에 없습니다.',[0,70,0]);
 part('electronics','전장부 · LCD · 스피커','LCD는 앞쪽에 15° 위로 기울여 고정하고 스피커·DC/DC는 뒤쪽에 둡니다. 모터 드라이버·컨트롤러·컴퓨터·전원 분배는 크기 예약(envelope)이며 실제 치수와 방열은 미확정입니다.',[150,70,40]);
-part('driveL','왼쪽 구동륜 + 수직 슬라이드','Ø180 NBR 휠 + MISUMI SFJW20 축 2개, LHSS20 하우징형 볼 리니어 부시 2개, X-SWU21-70 스프링 1개, C-USLH10 범프 스토퍼. 구동륜은 위아래 ±10 mm 이동하며 10t 액슬판이 휠 축과 부시 하우징을 잡고 스프링 시트(6t)가 스프링을 받칩니다.',[-130,0,0]);
+part('driveL','왼쪽 구동륜 + 수직 슬라이드','Ø180 NBR 휠 + MISUMI SFJW16 축 2개, LHSS16 하우징형 볼 리니어 부시 2개, SWU21-70 스프링 1개, 녹색 C-USLH10 스토퍼(위 방향 2개: 스프링 시트 위 + M6 스트라이커, 아래 방향 2개: 아래 홀더 위에서 하우징 바닥을 받음). 구동륜은 위아래 ±10 mm 이동하며 10t 액슬판이 휠 축과 부시 하우징을 잡고 스프링 시트(6t)가 스프링을 받칩니다.',[-130,0,0]);
 part('driveR','오른쪽 구동륜 + 수직 슬라이드','왼쪽과 좌우 대칭입니다. 슬라이더로 위치를 바꾸면 스프링이 압축·신장합니다.',[130,0,0]);
 for(const s of 'LR')for(const f of 'FB'){const x=s==='L'?-1:1,z=f==='F'?1:-1;
   part('caster'+s+f,'GL-65-ASF 캐스터','Ø64 휠, 장착높이 83 mm. 코너 6t 강판에 M6 4개로 직접 고정하며 선회 간섭은 CAD 검증에서 88표본 확인했습니다.',[x*90,0,z*90])}
 const POSES=[{id:'lidarFL',name:'FRONT_LEFT',x:-FR.corner_post_xy[0],y:FR.corner_post_xy[1],heading_deg:-45},{id:'lidarRR',name:'REAR_RIGHT',x:FR.corner_post_xy[0],y:-FR.corner_post_xy[1],heading_deg:135}];
 const scanZ=REPORT?.lidar_shadows?.[0]?.scan_z??201.83;
-for(const p of POSES){p.scan_z=scanZ;part(p.id,p.name==='FRONT_LEFT'?'앞 왼쪽 SICK TiM571':'뒤 오른쪽 SICK TiM571','모서리 기둥 자리에 대각 배치: 270°는 바깥쪽, 사각 90°는 차체 안쪽입니다. 스캔면 약 Z'+scanZ+' mm. 광학 원점과 케이블·커버에 의한 가림은 실물 확인이 필요합니다.',[Math.sign(p.x)*110,70,Math.sign(p.y)*100])}
+for(const p of POSES){p.scan_z=scanZ;p.bbox_bottom_z=scanZ-SENS.scan_offset_above_envelope_min;part(p.id,p.name==='FRONT_LEFT'?'앞 왼쪽 SICK TiM571':'뒤 오른쪽 SICK TiM571','모서리 기둥 자리에 대각 배치: 270°는 바깥쪽, 사각 90°는 차체 안쪽입니다. 스캔면 약 Z'+scanZ+' mm. 광학 원점과 케이블·커버에 의한 가림은 실물 확인이 필요합니다.',[Math.sign(p.x)*110,70,Math.sign(p.y)*100])}
 for(const s of [-1,1])part(s<0?'cameraLeft':'cameraRight',(s<0?'왼쪽':'오른쪽')+' Orbbec Astra Mini Pro','상부 앞 레일 밑 선반에 바깥 '+SENS.camera_yaw_deg+'°·하향 '+SENS.camera_pitch_down_deg+'°로 장착합니다. 프로파일과 앞 LiDAR가 시야에 들어오지 않도록 각도를 정했습니다.',[s*80,70,120]);
 const arm=part('arm','향후 로봇암 설치 영역','로봇암은 현재 포함하지 않습니다. 덱 중앙의 가상 영역이며 하중·작업반경·전도 검토가 선행되어야 합니다.',[0,150,0]);
 const deckTop=287.3;
@@ -190,7 +191,7 @@ function rebuildFov(){
 
 // ---- load GLB, split into viewer groups --------------------------------
 const movers={LEFT:[],RIGHT:[]},springs={LEFT:[],RIGHT:[]},wheels=[],casters=[],camPivots={};
-const SPRING_TOP=245,SPRING_NOM=47.74,RATE=5.39,FREE=70;
+const SPRING_TOP=245,SPRING_NOM=47.65,RATE=5.37,FREE=70;
 let bounds=null;
 function groupFor(r){
   if(r.group==='frame')return 'frame';if(r.group==='plates')return 'plates';
@@ -202,6 +203,31 @@ function groupFor(r){
   return 'frame';
 }
 const worldDeltaToLocal=(o,dy)=>{const p=o.parent,a=p.worldToLocal(new THREE.Vector3(0,0,0)),b=p.worldToLocal(new THREE.Vector3(0,dy,0));return b.sub(a)};
+// Same LiDAR visual as the main model (web/native-cad.js): SICK TiM5xx family STL (ROS metres: X forward, Y left, Z up) instead of the CAD envelopes.
+async function loadLidarVisual(){
+  try{
+    const geometry=await new STLLoader().loadAsync('web/vendor/sick/sick_tim_5xx.stl');
+    geometry.computeBoundingBox();
+    if(geometry.getAttribute('position').count===0||!Number.isFinite(geometry.boundingBox.min.z)||geometry.boundingBox.isEmpty())throw new Error('Empty SICK TiM5xx mesh');
+    return geometry;
+  }catch(error){console.warn('SICK TiM5xx visual unavailable; showing CAD envelopes.',error);return null}
+}
+function addLidarVisuals(geometry){
+  const material=new THREE.MeshStandardMaterial({color:0x657988,roughness:.72});
+  const rosToViewer=new THREE.Matrix4().set(0,-1000,0,0, 0,0,1000,0, 1000,0,0,0, 0,0,0,1);
+  for(const pose of POSES){
+    const mount=new THREE.Group();
+    mount.position.set(pose.x,pose.bbox_bottom_z,pose.y);
+    mount.rotation.y=THREE.MathUtils.degToRad(pose.heading_deg);
+    const mesh=new THREE.Mesh(geometry,material);
+    mesh.name='SICK TiM5xx family STL';
+    mesh.applyMatrix4(rosToViewer);
+    mesh.position.y=-geometry.boundingBox.min.z*1000;   // lowest point of the family mesh on the 3t LiDAR plate
+    mount.add(mesh);groups[pose.id].add(mount);tag(mesh,pose.id);
+    parts[pose.id].description+=' 외형은 SICK 공식 TiM5xx 공용 STL입니다. FOV는 설계 스캔면을 사용합니다.';
+  }
+}
+const lidarVisual=await loadLidarVisual();
 try{
   const buf=await fetch('./cad-output/p30/amr_p30.glb?v='+encodeURIComponent(LAYOUT.revision),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('amr_p30.glb');return r.arrayBuffer()});
   const gltf=await new GLTFLoader().parseAsync(buf,'./cad-output/p30/');
@@ -221,6 +247,7 @@ try{
   for(const r of MANIFEST.components){
     const node=nodes.get(r.name)||nodes.get(r.name.replace(/[\[\].: /]/g,'_'));
     if(!node){missing.push(r.name);continue}
+    if(lidarVisual&&r.group==='lidars'&&r.status==='drawing_envelope')continue;
     const id=groupFor(r),m=r.name.match(/^(\d+)_.*_(LEFT|RIGHT)$/);
     let parent=groups[id];const num=m?+m[1]:-1;
     if(id.startsWith('drive')&&m){
@@ -240,6 +267,7 @@ try{
   }
   robot.remove(wrapper);
   if(missing.length)throw new Error('CAD 노드 누락: '+missing.join(', '));
+  if(lidarVisual)addLidarVisuals(lidarVisual);
 }catch(e){$('loading').textContent='CAD 불러오기 실패: '+e.message;console.error(e);throw e}
 
 // ---- annotations -------------------------------------------------------

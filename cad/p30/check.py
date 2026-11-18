@@ -98,11 +98,11 @@ def stroke_interference(P, records):
 
 
 def stroke_contacts(P):
-    """The droop washer must land on the upper holder at -10 and the striker must meet the stopper tip at +10 (gap <= 0.1)."""
+    """P30-5: the housing bottoms must land on the droop stoppers (lower holder) at -10 and the striker must meet the bump stopper tip at +10 (gap <= 0.1)."""
     from OCP.BRepExtrema import BRepExtrema_DistShapeShape
     half = P.L['drive']['travel_mm']/2; res = {}
     for n, side in (('LEFT', -1), ('RIGHT', 1)):
-        for dz, a, b in ((-half, '45_droop_stop_washer_nylock_M8', '52_upper_shaft_holder_'+tname(P.L['drive']['holder_t'])),
+        for dz, a, b in ((-half, '48_droop_stopper_C-USLH10', '39_linear_bush_'+P.L['drive']['bush']['sku']),
                          (half, '46_bump_stopper_C-USLH10', '54_bump_striker_M6_jam_nut')):
             rr = {r.name: r for r in drive(P30({n: dz}), side)}
             d = BRepExtrema_DistShapeShape(rr[a+'_'+n].shape.wrapped, rr[b+'_'+n].shape.wrapped)

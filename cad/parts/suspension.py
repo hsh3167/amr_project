@@ -312,12 +312,41 @@ def bogie_records(d, add, base_bottom, base_top):
                          'adjust': 'Set the bogie rotation limit with the jam nut or washers'}))
         return out
 
+    sp = q.get('spring')
     for side in (1, -1):
         key = 'RIGHT' if side > 0 else 'LEFT'
         for name, shape, moving, meta in right():
             if side < 0:
                 shape = shape.mirror(Plane.YZ)
             add(name, shape, key, moving, **meta)
+        if sp:
+            # Rev17 bogie spring: coaxial with the rear stopper, from the (posed) rear floor up to the base plate underside.
+            x, y = q[sp['location']]
+            ys, zs = rotate_yz(d, key, d.motion.get(key, 0), (y, fz))
+            length = base_bottom-zs
+            sst = bogie_spring_state(d)
+            shape = coil(x, ys, zs, length, {'spring_od_mm': sp['od_mm'], 'spring_id_mm': sp['id_mm'],
+                                             'spring_wire_axial_mm': sp['wire_axial_mm'], 'display_turns': sp['display_turns']})
+            if side < 0:
+                shape = shape.mirror(Plane.YZ)
+            add('bogie_spring_'+sp['sku'], shape, key, False, sku=sp['sku'], status='catalog_envelope', color=(.86, .30, .25),
+                spring_top_z=base_bottom, spring_length_mm=round(length, 3), spring_xy=[side*x, ys],
+                rate_N_mm=sp['rate_N_mm'], free_length_mm=sp['free_length_mm'],
+                force_N=round(sp['rate_N_mm']*(sp['free_length_mm']-length), 2), nominal_force_N=sst['forces_N'][1],
+                geometry='Coil drawn at the posed length (SWU wire section, display turns); rate and allowable deflection from the catalogue',
+                fit='Sits on the rear bogie floor around the C-USLH10; top end around the M6 striker jam nut under the base plate')
+
+
+def bogie_spring_state(d):
+    """Rev17 bogie spring between the rear bogie floor and the base plate underside, at the front-caster stroke ends and nominal."""
+    q = d.layout['suspension']['bogie']; sp = q['spring']; half = q['travel_mm']/2
+    base_bottom = d.p['base_bottom_z']; x, y = q[sp['location']]
+    lengths = [round(base_bottom-rotate_yz(d, 'RIGHT', v, (y, q['rear_floor_top_z_mm']))[1], 3) for v in (half, 0, -half)]
+    forces = [round(sp['rate_N_mm']*max(0, sp['free_length_mm']-L), 2) for L in lengths]
+    return {'sku': sp['sku'], 'xy_mm': [x, y], 'arm_behind_pivot_mm': q['pivot_y_mm']-y, 'rate_N_mm': sp['rate_N_mm'],
+            'free_length_mm': sp['free_length_mm'], 'poses_mm': [half, 0, -half], 'lengths_mm': lengths, 'forces_N': forces,
+            'min_length_margin_to_allowable_mm': round(min(lengths)-(sp['free_length_mm']-sp['max_deflection_mm']), 3),
+            'preload_at_full_rebound_N': forces[0]}
 
 
 def boss_plates(xs, pz, ys):
@@ -416,8 +445,9 @@ def make(d):
         if spacer:
             add(kind+'_seat_spacer', ring(x, y, seat-spacer, spacer, q['spring_od_mm']+1, 8.4), key, True,
                 material=f'{spacer}t flat washer/plate (fixed)')
-        add(kind+'_preload_shim', ring(x, y, seat, q['shim_mm'], q['spring_od_mm']+1, 8.4), key, True,
-            remove_without_arm=True)
+        if q['shim_mm'] > 0:   # Rev17: the rear caster shim is 0 (bogie springs unload the rear casters)
+            add(kind+'_preload_shim', ring(x, y, seat, q['shim_mm'], q['spring_od_mm']+1, 8.4), key, True,
+                remove_without_arm=True)
         length = state['installed_length_mm']
         r = q['spring_od_mm']/2
         dz = max(seat_travel(d, key, value, x+dx, bottom) for dx in (-r, r))  # tilted seat: lift to its high edge

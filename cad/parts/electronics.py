@@ -14,8 +14,16 @@ def make(d):
     items+=[('51_controller_PCB_DUMMY',box(165,104,7,0,e['logic_y'],e['pcb_center_z']),(.12,.46,.37)),
             ('52_control_computer_DUMMY',box(146,82,23,0,e['logic_y'],e['computer_center_z']),(.13,.19,.28)),
             ('54_REAR_power_distribution_DUMMY',box(160,65,40,e.get('power_bay_x',0),e['power_bay_y'],e['power_bay_center_z']),(.65,.39,.24))]
-    for x in (-e['driver_x'],e['driver_x']):items.append(('53_motor_driver_DUMMY_'+str(x),box(70,98,44,x,e['driver_y'],e['driver_center_z']),(.28,.38,.52)))
-    records=[PartRecord(n,'electronics',s,c,'envelope_only') for n,s,c in items]
+    md=e.get('motor_driver') if d.variant!='baseline' else None
+    if md:
+        # Rev17: one ZLTECH ZLAC8015D dual-channel hub-servo driver (manual Fig.1 envelope incl. the mounting ears), wide side down.
+        L,W,H=md['envelope_mm'];z0=p['base_bottom_z']+p['base_thickness']+md['standoff_mm']
+        items.append(('53_motor_driver_'+md['sku']+'_DUMMY',box(L,W,H,md['x'],md['y'],z0+H/2),(.20,.22,.26)))
+    else:
+        for x in (-e['driver_x'],e['driver_x']):items.append(('53_motor_driver_DUMMY_'+str(x),box(70,98,44,x,e['driver_y'],e['driver_center_z']),(.28,.38,.52)))
+    records=[PartRecord(n,'electronics',s,c,'drawing_envelope' if md and n.startswith('53_') else 'envelope_only',
+                        {'sku':md['sku'],'maker':md['maker'],'channels':md['channels'],'electrical':md['electrical'],'source':md['source'],
+                         'mount':md['mount'],'fit_to_motor':md['fit_to_motor']} if md and n.startswith('53_') else {}) for n,s,c in items]
     if d.variant=='baseline':return records
     # Rev13: every envelope stands on something. M4 hex standoffs (AF7 drawn as D7) at the corners,
     # inset 8 mm; the computer stands on the controller PCB.

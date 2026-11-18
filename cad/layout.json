@@ -1,5 +1,5 @@
 {
-  "revision": "1.6",
+  "revision": "1.7",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
     "base_width": 390,
@@ -105,6 +105,21 @@
     "driver_x": 124,
     "driver_y": 145,
     "driver_center_z": 156,
+    "driver_note": "driver_x/y/center_z are the Rev05-Rev16 twin-driver dummies (baseline only). Rev17 uses motor_driver",
+    "motor_driver": {
+      "sku": "ZLAC8015D",
+      "maker": "ZLTECH (Shenzhen ZhongLing Technology)",
+      "channels": 2,
+      "x": 0,
+      "y": 78,
+      "standoff_mm": 10,
+      "envelope_mm": [168, 89, 29.7],
+      "body_length_mm": 158,
+      "mount": "Wide side down on 4 M3 standoffs through the corner ears (manual 2.4 allows wide-side mounting with M3 through the four corner holes; narrow-side mounting is recommended for heat - check temperature on the prototype)",
+      "electrical": "Input 20-48 VDC (typ. 36), output current 15 A typical / 30 A peak per channel, over-voltage 60 V, under-voltage 16 V; hall U/V/W + incremental encoder A/B inputs, 5 V supply to encoder and hall; CANopen (CiA301/402, 25-1000 kbps) and RS485 Modbus-RTU; 2 programmable opto inputs; 0-50 C",
+      "source": "ZLAC8015D Servo Driver Manual (Special for Hub Servo Motor) V1.0, ZLTECH (www.zlingkj.com): 2.1 electrical index, 2.2 environment, Fig.1 installation dimension 168 x 89 x 29.7 (body 158, side hole pitch 42). Corner-hole pitch not dimensioned in the figure (envelope only)",
+      "fit_to_motor": "ZLLG65ASM250-N V2: 24 V, 10 A rated / 30 A stall, 1024-line magnetic A/B encoder + hall. ZLTECH lists ZLAC8015/ZLAC8015D as the driver for its 6.5-inch hub servo motors; 7S pack 21-29.4 V is inside 20-48 V. Confirm the encoder connector (motor single-ended A/B vs driver iA+/iA-) with ZLTECH before ordering"
+    },
     "power_bay_y": -162.5,
     "power_bay_center_z": 149,
     "status": "Rev15: company 7S9P battery, 7-inch LCD and speaker placed from the supplied STEP files; controller, computer, drivers, power distribution are envelope reservations; DC/DC DDR-240B-24 is a size reservation (datasheet dimensions to confirm).",
@@ -203,7 +218,8 @@
       "solid_length_mm": 10.5,
       "max_deflection_mm": 19.25,
       "rate_N_mm": 6.96,
-      "shim_mm": 3,
+      "shim_mm": 0,
+      "shim_note": "Rev17: the bogie springs move load from the rear casters to the drive wheels (rear caster 59 -> 41 N), so the 3 mm preload shim is removed; the needed level shim would be -0.4 mm, the rear then sits about 0.6 mm high (see bogie_report rear_caster_spring)",
       "unsprung_mass_kg_estimate": 0.85,
       "arm_length_mm": 90,
       "pivot_z_mm": 99.5,
@@ -292,6 +308,23 @@
       ],
       "bump_stopper_d_mm": 10,
       "unsprung_mass_kg_estimate": 5.2,
+      "spring": {
+        "sku": "SWU21-60",
+        "maker": "MISUMI",
+        "od_mm": 21,
+        "id_mm": 13.5,
+        "free_length_mm": 60,
+        "rate_N_mm": 6.27,
+        "max_deflection_mm": 36,
+        "catalog_load_N": 225.6,
+        "wire_axial_mm": 1.875,
+        "display_turns": 8.25,
+        "unit_price_krw": 6789,
+        "price_seen": "2026-11-18 kr.misumi-ec.com, 1-9 pcs, VAT excl., stock 350, MOQ 1",
+        "location": "stopper_rear_xy_mm",
+        "source": "MISUMI SWU21-60 catalogue page 2026-11-18 (OD21 ID13.5 L60, 6.27 N/mm, allowable deflection 36). Wire section and display turns follow the SWU21-70 STEP of the same family (drawing only)",
+        "note": "Rev17: one compression spring per bogie, coaxial with the rear rotation stopper (C-USLH10 D10 inside, M6 striker jam nut AF10 at the top), sitting on the rear floor and pushing up on the base plate underside. 85 mm behind the pivot it pushes the drive-wheel side of the link down: more drive-wheel load (traction) and a sprung bogie (suspension)"
+      },
       "stopper_front_xy_mm": [
         135,
         100

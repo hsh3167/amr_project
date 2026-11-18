@@ -54,7 +54,7 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
     loadLidarVisual(),
   ]);
   const BOGIE=layout.suspension.concept==='bogie';
-  const suspension=BOGIE?part('suspension','Rev16 보기 링크 서스펜션 (앞 캐스터+구동륜)','좌우 각각 구동륜과 앞 캐스터를 3t 절곡 보기 링크 1개로 묶었습니다(바깥벽=구동축 벽, 뒤 바닥+안쪽벽, 앞 캐스터 패드+안쪽벽, 절곡 4회, 용접 없음). 피벗은 회사 재고 MISUMI BGHK6001DD-30 베어링 홀더 2개를 하판 밑에 거꾸로 달고, 회사 재고 숄더 볼트(12×35)를 두 베어링에 통과시켜 링크 바닥의 3t U 브래킷 두 귀에 E-GLNUTS10 록너트로 조입니다(칼라 3개로 내륜 고정). 하판에는 모터 케이블용 Ø28 구멍(그로밋)이 있습니다. 피벗 축은 좌우(X) 방향, Y=+60mm·Z87에 있어 구동륜이 정적 하중의 약 56%를 받습니다(무게중심 중앙 가정). 회전은 바닥의 회사 재고 C-USLH10 스토퍼 2개와 하판의 M6 스트라이커로 앞 캐스터 ±10mm에서 멈춥니다. 뒤 캐스터 2개는 Rev14 경첩+스프링 모듈 그대로입니다. 가격은 상단 ☰ BOM·예상 가격에서 확인합니다.'):part('suspension','Rev14 6륜 독립 경첩 서스펜션','6개 바퀴마다 절곡 브래킷 1개, 절곡 암 1개, MISUMI 힌지 핀 1개(구동 CLBKHM10-78.5, 캐스터 CLBKHM10-75), MPFZ10-10 부시 2개, 스프링 1개(구동 X-SWU21-70, 캐스터 X-SWU17-35)를 씁니다. Rev14: 절곡 3t 제한에 맞춰 암·브래킷은 3t 절곡, 부시 자리는 8t 평판 보스, 구동축은 3t 토크판으로 보강합니다. Rev12b: 핀·부시·우레탄 스토퍼(C-USLH10)는 MISUMI 제공 STEP 형상 그대로 넣었고, 스프링은 STEP의 사각 선재 단면과 피치를 따릅니다. 범프 스토퍼는 암에 나사로 고정한 C-USLH10 우레탄 끝을 하판에서 내려온 M6 볼트가 받는 구조이고, M8 스터드 위 너트가 처짐 스토퍼입니다. 핀 축은 진행 방향과 나란해 전후진 거동이 같습니다. 레일·용접·행거가 없습니다. 가격은 상단 ☰ BOM·예상 가격에서 확인합니다.');
+  const suspension=BOGIE?part('suspension','Rev17 보기 링크 서스펜션 (앞 캐스터+구동륜, 스프링)','좌우 각각 구동륜과 앞 캐스터를 3t 절곡 보기 링크 1개로 묶었습니다(바깥벽=구동축 벽, 뒤 바닥+안쪽벽, 앞 캐스터 패드+안쪽벽, 절곡 4회, 용접 없음). 피벗은 회사 재고 MISUMI BGHK6001DD-30 베어링 홀더 2개를 하판 밑에 거꾸로 달고, 회사 재고 숄더 볼트(12×35)를 두 베어링에 통과시켜 링크 바닥의 3t U 브래킷 두 귀에 E-GLNUTS10 록너트로 조입니다(칼라 3개로 내륜 고정). 하판에는 모터 케이블용 Ø28 구멍(그로밋)이 있습니다. 피벗 축은 좌우(X) 방향, Y=+60mm·Z87입니다. Rev17: 피벗 뒤 85mm의 뒤 회전 스토퍼(C-USLH10)에 MISUMI SWU21-60 스프링(6.27N/mm, 설치 51mm에서 약 56N)을 동축으로 넣어 링크의 구동륜 쪽을 눌러 줍니다. 구동륜 하중이 약 152N→187N(정적 하중의 약 69%, 무게중심 중앙 가정)으로 늘고, 링크 회전에 스프링 강성이 생겨 서스펜션 역할도 합니다. 회전은 바닥의 회사 재고 C-USLH10 스토퍼 2개와 하판의 M6 스트라이커로 앞 캐스터 ±10mm에서 멈춥니다. 뒤 캐스터 2개는 Rev14 경첩+스프링 모듈 그대로입니다. 가격은 상단 ☰ BOM·예상 가격에서 확인합니다.'):part('suspension','Rev14 6륜 독립 경첩 서스펜션','6개 바퀴마다 절곡 브래킷 1개, 절곡 암 1개, MISUMI 힌지 핀 1개(구동 CLBKHM10-78.5, 캐스터 CLBKHM10-75), MPFZ10-10 부시 2개, 스프링 1개(구동 X-SWU21-70, 캐스터 X-SWU17-35)를 씁니다. Rev14: 절곡 3t 제한에 맞춰 암·브래킷은 3t 절곡, 부시 자리는 8t 평판 보스, 구동축은 3t 토크판으로 보강합니다. Rev12b: 핀·부시·우레탄 스토퍼(C-USLH10)는 MISUMI 제공 STEP 형상 그대로 넣었고, 스프링은 STEP의 사각 선재 단면과 피치를 따릅니다. 범프 스토퍼는 암에 나사로 고정한 C-USLH10 우레탄 끝을 하판에서 내려온 M6 볼트가 받는 구조이고, M8 스터드 위 너트가 처짐 스토퍼입니다. 핀 축은 진행 방향과 나란해 전후진 거동이 같습니다. 레일·용접·행거가 없습니다. 가격은 상단 ☰ BOM·예상 가격에서 확인합니다.');
   const wrapper=new THREE.Group();wrapper.scale.set(1000,1000,-1000);wrapper.add(gltf.scene);robot.add(wrapper);
   const S=layout.suspension,LP=layout.parameters;
   const rolling={},swivels={},springs={},pivots={},holders={},arms={},lengths={},axes={};
@@ -119,7 +119,7 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
       const pivot=new THREE.Group();
       pivot.position.set(x,top,y);
       suspension.add(pivot);pivot.updateWorldMatrix(true,false);pivot.attach(node);
-      springs[n]={pivot,length,x,seat:top-length};
+      springs[n]={pivot,length,x,y,seat:top-length};
     }
   }
   robot.remove(wrapper);
@@ -139,6 +139,13 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
       // Bogie: +mm raises the front caster, rotation about CAD +X through the pivot.
       const a=Math.asin(mm/lengths[wheel]);
       for(const g of pivots[wheel])g.rotation.x=-a;
+      const bs=springs[wheel];
+      if(bs){
+        // Rev17 bogie spring: its seat on the rear floor turns with the bogie; the top stays on the base plate.
+        const p=pivots[wheel][0].position,ry=bs.y-p.z,rz=bs.seat-p.y;
+        const dz=ry*Math.sin(a)+rz*Math.cos(a)-rz;
+        bs.pivot.scale.y=(bs.length-dz)/bs.length;
+      }
       poses[wheel]=mm;return;
     }
     const a=-side*Math.asin(mm/lengths[wheel]);

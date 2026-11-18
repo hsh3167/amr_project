@@ -1,5 +1,5 @@
 {
-  "revision": "P30-4",
+  "revision": "P30-5",
   "status": "P30 concept (2026-11-15): low-cost 30x30 aluminium profile chassis with SS400 laser-cut steel plates. Two drive wheels on vertical slide suspension (MISUMI D20 shafts + ball bushings + one spring each), four GL-65 casters bolted rigid. Separate variant; the Rev15 model in cad/layout.json is unchanged.",
   "coordinates": "mm; X right, Y forward, Z up, ground Z0. Heading clockwise from +Y (CAD Z rotation = -heading).",
   "frame": {
@@ -50,9 +50,9 @@
     "axle_spacer_t": 4.9,
     "axle_plate_t": 10,
     "axle_plate_bottom_z": 45,
-    "guide_x": 183,
+    "guide_x": 179,
     "guide_y": 118,
-    "shaft_d": 20,
+    "shaft_d": 16,
     "holder_t": 6,
     "holder_x": [
       160,
@@ -64,37 +64,41 @@
     ],
     "upper_holder_half_y": 205,
     "bush": {
-      "sku": "LHSS20",
-      "step": "LHSS20.stp",
+      "sku": "LHSS16",
+      "step": "LHSS16.stp",
       "quantity_per_wheel": 2,
-      "supply": "Purchase MISUMI long-block linear bushing housing unit, single (LMU20 inside)",
-      "unit_price_krw": 24206,
-      "price_seen": "2026-11-17 kr.misumi-ec.com, 1 pc, VAT excl., same-day ship",
-      "bore": 20,
-      "length": 52,
-      "shaft_height": 31,
-      "width": 42,
-      "height": 54,
-      "mount_tap": "2x M8 depth 15 on the mounting face, pitch 36 along the shaft",
-      "mount_pitch": 36,
-      "dynamic_load_N": 882,
-      "static_load_N": 1370,
+      "supply": "Purchase MISUMI long-block linear bushing housing unit, single, standard type (LMU16 inside)",
+      "unit_price_krw": 20486,
+      "price_seen": "2026-11-18 kr.misumi-ec.com, 1-4 pcs, VAT excl., same-day ship (5+ pcs same price, 14,340 at 1006+)",
+      "bore": 16,
+      "length": 47,
+      "shaft_height": 27,
+      "width": 36,
+      "height": 49,
+      "mount_tap": "2x M6 depth 13 (STEP void D4.8) on the mounting face, pitch 32 along the shaft, first tap 7.5 mm from the housing end",
+      "mount_pitch": 32,
+      "mount_tap_from_end": 7.5,
+      "mount_tap_minor_d": 4.8,
+      "bolt_d": 6,
+      "clearance_hole_d": 7.5,
+      "dynamic_load_N": 775,
+      "static_load_N": 1180,
       "rolling_mu": 0.003,
-      "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-18 + catalogue: dr20 D32 L52, h31, C 882 N, C0 1370 N, 272 g"
+      "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-18 + catalogue p.249: dr16 D28 L47 L1 32 h27 W36 H49 M6(13), C 775 N, C0 1180 N, 204 g"
     },
     "spring": {
-      "sku": "X-SWU21-70",
+      "sku": "SWU21-70",
       "od": 21,
       "id": 13.5,
       "free": 70,
-      "solid": 21,
-      "max_deflection": 38.5,
-      "rate": 5.39,
+      "solid": 28,
+      "max_deflection": 42,
+      "rate": 5.37,
       "wire_axial": 1.875,
-      "turns": 8.75,
-      "step": "X-SWU21-70.step",
+      "turns": 9.75,
+      "step": "SWU21-70.step",
       "target_force_N": 120,
-      "source": "MISUMI CK68 catalogue values as used in Rev12-14 (layout.json suspension.drive)"
+      "source": "MISUMI SWU21-70 catalogue 2026-11-18 (non-economy SWU, MOQ 1, 7,290 KRW ex VAT, stock 137): OD21 ID13.5 L70 5.37 N/mm, allowable deflection 42, load 225.6 N. Wire section 3.75x1.875 measured on the supplied STEP; solid height assumed 28 (= L - allowable deflection); display turns estimated from the STEP volume (drawing only)"
     },
     "stud": "M8",
     "bump_stopper": {
@@ -109,22 +113,36 @@
     },
     "unsprung_mass_kg_estimate": 4.6,
     "shaft": {
-      "sku": "SFJW20-124-M8-N8",
-      "step": "SFJW20-124-M8-N8.stp",
+      "sku": "SFJW16-124-M6-N6",
+      "step": "SFJW16-124-M6-N6.stp",
       "length": 124,
-      "tap_depth": 22.3,
-      "unit_price_krw": 10868,
-      "price_seen": "2026-11-15 kr.misumi-ec.com, 1-4 pcs, VAT excl., ships day 2",
-      "source": "MISUMI STEP AP214 downloaded 2026-11-15 (L124, 1-4 pcs 10,868 KRW ex VAT)"
+      "tap_depth": 18,
+      "tap_minor_d": 4.9,
+      "bolt_d": 6,
+      "clearance_hole_d": 6.6,
+      "unit_price_krw": 9207,
+      "price_seen": "2026-11-18 kr.misumi-ec.com, 1-4 pcs, VAT excl. (5-19 pcs 8,316), ships day 2-5",
+      "source": "MISUMI STEP AP214 downloaded 2026-11-18 (L124, M6 both ends, g6, induction hardened 58HRC)"
     },
     "axle_plate_half_y": 142,
     "seat_t": 6,
     "seat_x_out": 200,
     "seat_half_y": 85,
-    "housing_center_z": 167,
-    "wheel_mount": "P30-4 (2026-11-18, user choice A): one flat SS400 10t axle plate per wheel, vertical (YZ), no bend and no plate-to-plate joint in the load path. Motor axle clamped on its face (D-hole AF10.2, spacer + washer + M14 nut). Two MISUMI LHSS20 housed ball bushings bolted to its outer face (2x M8 each from the inner face) ride the guide shafts, so the plate (and the wheel axle normal to it) is set parallel to the shafts by the machined housing faces. A flat 6t spring seat sits on the plate top edge (2x M6).",
+    "housing_center_z": 175.55,
+    "housing_center_z_note": "P30-5 (2026-11-18): the LHSS16 housing bottom (centre + 23.5) sits 10.05 mm above the tip of the droop stoppers on the lower holder (holder top 125 + C-USLH10 17 = 142); contact at -10 with 0.05 mm gap",
+    "droop_stopper": {
+      "sku": "C-USLH10",
+      "x": 161,
+      "note": "2 per wheel on the lower holders (one under each housing, y = +-guide_y), tip up; x161 keeps the tip on the solid part of the LHSS16 bottom (checked in build); M5 tap through the 6t holder, thread end hangs free over the stub-side gap (holder inner part is cantilevered, x<190)"
+    },
+    "lower_holder_x": [
+      153.5,
+      220
+    ],
+    "stud_top_above_holder_mm": 4,
+    "wheel_mount": "P30-4 (2026-11-18, user choice A): one flat SS400 10t axle plate per wheel, vertical (YZ), no bend and no plate-to-plate joint in the load path. Motor axle clamped on its face (D-hole AF10.2, spacer + washer + M14 nut). Two MISUMI LHSS16 housed ball bushings bolted to its outer face (2x M6 each from the inner face) ride the guide shafts, so the plate (and the wheel axle normal to it) is set parallel to the shafts by the machined housing faces. A flat 6t spring seat sits on the plate top edge (2x M6).",
     "spring_x": 178,
-    "spring_x_note": "Spring stud inboard of the shafts (x183) so the droop washer and nut clear the top side rail (x190)"
+    "spring_x_note": "Spring stud between the shafts (x179) and the motor side; P30-5: no washer or nut above the upper holder any more"
   },
   "electronics": {
     "battery_center_y": 0,
@@ -164,7 +182,25 @@
       50,
       40
     ],
-    "status": "Battery, LCD and speaker from company STEP files. Controller, computer, drivers, power distribution are envelopes; DC/DC DDR-240B-24 is a size reservation."
+    "status": "Battery, LCD and speaker from company STEP files. Controller, computer, drivers, power distribution are envelopes; DC/DC DDR-240B-24 is a size reservation.",
+    "motor_driver": {
+      "sku": "ZLAC8015D",
+      "maker": "ZLTECH (Shenzhen ZhongLing Technology)",
+      "channels": 2,
+      "envelope_mm": [
+        168,
+        89,
+        29.7
+      ],
+      "body_length_mm": 158,
+      "electrical": "Input 20-48 VDC (typ. 36), output current 15 A typical / 30 A peak per channel, over-voltage 60 V, under-voltage 16 V; hall U/V/W + incremental encoder A/B inputs, 5 V supply to encoder and hall; CANopen (CiA301/402, 25-1000 kbps) and RS485 Modbus-RTU; 2 programmable opto inputs; 0-50 C",
+      "source": "ZLAC8015D Servo Driver Manual (Special for Hub Servo Motor) V1.0, ZLTECH (www.zlingkj.com): 2.1 electrical index, 2.2 environment, Fig.1 installation dimension 168 x 89 x 29.7 (body 158, side hole pitch 42). Corner-hole pitch not dimensioned in the figure (envelope only)",
+      "fit_to_motor": "ZLLG65ASM250-N V2: 24 V, 10 A rated / 30 A stall, 1024-line magnetic A/B encoder + hall. ZLTECH lists ZLAC8015/ZLAC8015D as the driver for its 6.5-inch hub servo motors; 7S pack 21-29.4 V is inside 20-48 V. Confirm the encoder connector (motor single-ended A/B vs driver iA+/iA-) with ZLTECH before ordering",
+      "x": 106,
+      "y": 0,
+      "mount": "On edge (narrow side down, long side along Y) beside the battery on a 3t angle bracket to the floor (not drawn): the manual recommends the narrow side for heat dissipation; M3 through the side holes"
+    },
+    "driver_note": "driver_x/driver_size were the P30-1..5 twin-driver envelopes; P30-5b uses one ZLAC8015D (motor_driver)"
   },
   "sensors": {
     "lidar_plate": [

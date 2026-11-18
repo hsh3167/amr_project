@@ -2,29 +2,9 @@
   "engine": "build123d",
   "root": "amr_p30",
   "files": [
-    "amr_p30.step",
     "amr_p30.glb"
   ],
-  "step_roundtrip": [
-    {
-      "file": "amr_p30.step",
-      "raw_import_valid": false,
-      "valid_after_explicit_normalization": true,
-      "normalized_components": [
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        },
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        }
-      ],
-      "solids": 548
-    }
-  ],
+  "step_roundtrip": [],
   "components": [
     {
       "name": "01_P30_lower_front_rail",
@@ -916,9 +896,9 @@
       "group": "plates",
       "status": "concept_fabrication",
       "metadata": {
-        "material": "SS400 2.3t laser cut; 4x D9 arm holes pitch 124 (arm pattern TBD) into T-nuts of the arm members; D24 droop-nut access holes"
+        "material": "SS400 2.3t laser cut; 4x D9 arm holes pitch 124 (arm pattern TBD) into T-nuts of the arm members"
       },
-      "volume_mm3": 603465.2353835063,
+      "volume_mm3": 605546.2263572443,
       "bounds_mm": [
         [
           -220.0,
@@ -934,8 +914,8 @@
         ]
       ],
       "center_mm": [
-        -6.028481168065551e-16,
-        1.0492571473018092e-14,
+        1.308490994900733e-14,
+        4.7070830785340876e-15,
         286.1500000000005
       ],
       "solids": 1
@@ -1211,10 +1191,10 @@
       "status": "concept_fabrication",
       "metadata": {
         "moving_wheel": "LEFT",
-        "material": "SS400 10t laser cut, flat (no bend); D-hole AF10.2; 4x D9 for the housing bolts; 2x M6 tapped top edge",
-        "fit": "Camber set by the plate face and the LHSS20 mounting faces; check plate flatness (laser-cut hot-rolled plate)"
+        "material": "SS400 10t laser cut, flat (no bend); D-hole AF10.2; 4x D7.5 for the M6 housing bolts; 2x M6 tapped top edge",
+        "fit": "Camber set by the plate face and the LHSS16 mounting faces; check plate flatness (laser-cut hot-rolled plate)"
       },
-      "volume_mm3": 422409.119398394,
+      "volume_mm3": 429680.41851636244,
       "bounds_mm": [
         [
           -152.0,
@@ -1226,79 +1206,79 @@
         ],
         [
           45.0,
-          195.2634508348794
+          202.29999999999998
         ]
       ],
       "center_mm": [
-        -146.99999999999997,
-        -2.2349316269138502e-15,
-        119.86664132853917
+        -146.99999999999991,
+        -3.1750156485370333e-16,
+        121.10801982382483
       ],
       "solids": 1
     },
     {
-      "name": "39_linear_bush_LHSS20_LEFT",
+      "name": "39_linear_bush_LHSS16_LEFT",
       "group": "drive_left",
       "status": "misumi_step_exact",
       "metadata": {
         "moving_wheel": "LEFT",
-        "sku": "LHSS20",
+        "sku": "LHSS16",
         "quantity": 2,
-        "supply": "Purchase MISUMI long-block linear bushing housing unit, single (LMU20 inside)",
-        "unit_price_krw": 24206,
-        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-18 + catalogue: dr20 D32 L52, h31, C 882 N, C0 1370 N, 272 g",
-        "fit": "Hang both housings on the shafts, then tighten the 4 M8 bolts (D9 holes give +-0.5 float, no over-constraint)"
+        "supply": "Purchase MISUMI long-block linear bushing housing unit, single, standard type (LMU16 inside)",
+        "unit_price_krw": 20486,
+        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-18 + catalogue p.249: dr16 D28 L47 L1 32 h27 W36 H49 M6(13), C 775 N, C0 1180 N, 204 g",
+        "fit": "Hang both housings on the shafts, then tighten the 4 M6 bolts (D7.5 holes give +-0.45 float, no over-constraint)"
       },
-      "volume_mm3": 183640.6243632859,
+      "volume_mm3": 133686.82111464225,
       "bounds_mm": [
         [
-          -206.0,
+          -201.00000000000003,
           -151.9999999
         ],
         [
-          -139.0000001,
-          139.0000001
+          -136.0000001,
+          136.0000001
         ],
         [
-          140.9999999,
-          193.0000001
+          152.04999990000002,
+          199.0500001
         ]
       ],
       "center_mm": [
-        -179.0957034086274,
-        -0.17923983118374498,
-        166.99999990483357
+        -176.64179203516565,
+        -0.13517838363473708,
+        175.5499980241331
       ],
       "solids": 2
     },
     {
-      "name": "40_housing_bolts_M8x20_LEFT",
+      "name": "40_housing_bolts_M6x20_LEFT",
       "group": "drive_left",
       "status": "catalog_envelope",
       "metadata": {
         "moving_wheel": "LEFT",
         "quantity": 4,
-        "note": "From the inner face: 10 mm plate + 10 mm thread in the housing (tap depth 15)"
+        "note": "From the inner face: 10 mm plate + 10 mm thread in the housing (tap depth 13)"
       },
-      "volume_mm3": 7618.97906808871,
+      "volume_mm3": 3720.2111885279605,
       "bounds_mm": [
         [
           -162.0,
-          -134.0
+          -136.0
         ],
         [
-          -124.5,
-          124.5
+          -123.0,
+          123.0
         ],
         [
-          142.5,
-          191.5
+          154.55,
+          196.55
         ]
       ],
       "center_mm": [
-        -143.78208472983198,
-        4.488396736761312e-14,
-        166.99999999999997
+        -144.859919944603,
+        2.7136607784017016e-14,
+        175.55000000000004
       ],
       "solids": 4
     },
@@ -1321,14 +1301,14 @@
           85.0
         ],
         [
-          195.2634508348794,
-          201.2634508348794
+          195.3463687150838,
+          201.3463687150838
         ]
       ],
       "center_mm": [
-        -171.08886367908065,
-        6.863358213528648e-16,
-        198.26345083487936
+        -171.1051574786358,
+        5.615474901977985e-16,
+        198.3463687150837
       ],
       "solids": 1
     },
@@ -1340,7 +1320,7 @@
         "moving_wheel": "LEFT",
         "quantity": 2
       },
-      "volume_mm3": 1669.0753980956765,
+      "volume_mm3": 1669.0753980956767,
       "bounds_mm": [
         [
           -152.0,
@@ -1351,14 +1331,14 @@
           60.0
         ],
         [
-          185.2634508348794,
-          207.2634508348794
+          185.3463687150838,
+          207.3463687150838
         ]
       ],
       "center_mm": [
         -147.00000000000003,
-        -1.444009636981122e-14,
-        199.78426685164783
+        -1.3895187072837214e-14,
+        199.86718473185232
       ],
       "solids": 2
     },
@@ -1368,10 +1348,10 @@
       "status": "catalog_envelope",
       "metadata": {
         "moving_wheel": "LEFT",
-        "length_mm": 80.8,
-        "fit": "M8 threaded rod in the tapped spring seat + threadlocker; guides the spring through the D10 holder hole"
+        "length_mm": 67.7,
+        "fit": "M8 threaded rod in the tapped spring seat + threadlocker; guides the spring through the D10 holder hole (stays 4 mm inside at -10, 14 mm below the top frame at +10)"
       },
-      "volume_mm3": 3978.3162308403853,
+      "volume_mm3": 3315.670503395141,
       "bounds_mm": [
         [
           -182.0,
@@ -1382,44 +1362,14 @@
           4.0
         ],
         [
-          195.2634508348794,
-          276.1
+          195.3463687150838,
+          263.0
         ]
       ],
       "center_mm": [
         -177.99999999999997,
-        -5.943887904736334e-17,
-        236.4809334725917
-      ],
-      "solids": 1
-    },
-    {
-      "name": "45_droop_stop_washer_nylock_M8_LEFT",
-      "group": "drive_left",
-      "status": "catalog_envelope",
-      "metadata": {
-        "moving_wheel": "LEFT",
-        "adjust": "Nut sets the droop limit (-10 mm); reachable through the deck hole"
-      },
-      "volume_mm3": 960.555567314644,
-      "bounds_mm": [
-        [
-          -186.0,
-          -170.0
-        ],
-        [
-          -8.0,
-          8.0
-        ],
-        [
-          265.0,
-          274.6
-        ]
-      ],
-      "center_mm": [
-        -178.00000000000003,
-        5.053283351694786e-16,
-        269.4355200197778
+        -2.665095098875454e-17,
+        229.96319455259342
       ],
       "solids": 1
     },
@@ -1432,85 +1382,85 @@
         "sku": "C-USLH10",
         "supply": "company stock (10)",
         "quantity": 2,
-        "tip_z": 218.263
+        "tip_z": 218.346
       },
       "volume_mm3": 2817.7823105290427,
       "bounds_mm": [
         [
-          -188.0000001,
-          -177.9999999
+          -184.0000001,
+          -173.9999999
         ],
         [
           -35.0000001,
           35.0000001
         ],
         [
-          194.2634507348794,
-          218.2634509348794
+          194.3463686150838,
+          218.3463688150838
         ]
       ],
       "center_mm": [
-        -182.99999999999997,
-        -2.259387777622603e-15,
-        208.87198364575644
+        -179.00000000000003,
+        -6.77816333286781e-15,
+        208.9549015259608
       ],
       "solids": 4
     },
     {
-      "name": "47_spring_X-SWU21-70_LEFT",
+      "name": "47_spring_SWU21-70_LEFT",
       "group": "drive_left",
       "status": "catalog_envelope",
       "metadata": {
-        "spring_length_mm": 47.737,
-        "sku": "X-SWU21-70",
-        "rate_N_mm": 5.39,
+        "spring_length_mm": 47.654,
+        "sku": "SWU21-70",
+        "rate_N_mm": 5.37,
         "force_N": 120.0,
         "pose_dependent": "LEFT"
       },
-      "volume_mm3": 3349.6598530236515,
+      "volume_mm3": 3729.0588924025565,
       "bounds_mm": [
         [
-          -188.50043838981793,
-          -167.49959469845805
+          -188.50033847988348,
+          -167.4996835616069
         ],
         [
-          -10.500405300897766,
-          10.500438390471357
+          -10.500316435852021,
+          10.500338482415705
         ],
         [
-          201.26780495943092,
-          248.99564587665205
+          201.34986760794004,
+          248.99650111236753
         ]
       ],
       "center_mm": [
-        -178.1593288349462,
-        0.15932883494829247,
-        225.1317254174719
+        -178.14298214318927,
+        0.14298214318593416,
+        225.17318435740364
       ],
       "solids": 1
     },
     {
-      "name": "50_guide_shaft_SFJW20-124-M8-N8_LEFT",
+      "name": "50_guide_shaft_SFJW16-124-M6-N6_LEFT",
       "group": "drive_left",
       "status": "misumi_step_exact",
       "metadata": {
         "fixed_drive_side": "LEFT",
-        "sku": "SFJW20-124-M8-N8",
+        "sku": "SFJW16-124-M6-N6",
         "length_mm": 124,
         "quantity": 2,
-        "unit_price_krw": 10868,
-        "source": "MISUMI STEP AP214 downloaded 2026-11-15 (L124, 1-4 pcs 10,868 KRW ex VAT)",
-        "supply": "Purchase MISUMI (D20 g6, both ends M8 x 16 effective)"
+        "unit_price_krw": 9207,
+        "source": "MISUMI STEP AP214 downloaded 2026-11-18 (L124, M6 both ends, g6, induction hardened 58HRC)",
+        "supply": "Purchase MISUMI (D16 g6, both ends M6 tapped)"
       },
-      "volume_mm3": 74703.94065615039,
+      "volume_mm3": 48518.92467984445,
       "bounds_mm": [
         [
-          -193.0000001,
-          -172.9999999
+          -187.0000001,
+          -170.9999999
         ],
         [
-          -128.0000001,
-          128.0000001
+          -126.0000001,
+          126.0000001
         ],
         [
           124.9999999,
@@ -1518,9 +1468,9 @@
         ]
       ],
       "center_mm": [
-        -183.00000000000003,
-        -1.4025202515955272e-14,
-        187.00000000000003
+        -178.99999999999997,
+        5.39860427326031e-15,
+        187.00000000000009
       ],
       "solids": 2
     },
@@ -1530,13 +1480,13 @@
       "status": "concept_fabrication",
       "metadata": {
         "fixed_drive_side": "LEFT",
-        "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
+        "material": "SS400 6t laser cut, on the side stub; D6.6 for the M6 shaft bolt; M5 tap for the droop stopper; 2x M5 T-nut"
       },
-      "volume_mm3": 40054.43036285393,
+      "volume_mm3": 44477.87471543989,
       "bounds_mm": [
         [
           -220.0,
-          -160.0
+          -153.5
         ],
         [
           97.0,
@@ -1548,9 +1498,9 @@
         ]
       ],
       "center_mm": [
-        -189.95273426046214,
-        154.04020299018222,
-        122.00000000000001
+        -186.7375377736987,
+        153.97335329464264,
+        121.99999999999994
       ],
       "solids": 1
     },
@@ -1560,13 +1510,13 @@
       "status": "concept_fabrication",
       "metadata": {
         "fixed_drive_side": "LEFT",
-        "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
+        "material": "SS400 6t laser cut, on the side stub; D6.6 for the M6 shaft bolt; M5 tap for the droop stopper; 2x M5 T-nut"
       },
-      "volume_mm3": 40054.43036285393,
+      "volume_mm3": 44477.87471543989,
       "bounds_mm": [
         [
           -220.0,
-          -160.0
+          -153.5
         ],
         [
           -210.0,
@@ -1578,11 +1528,45 @@
         ]
       ],
       "center_mm": [
-        -189.95273426046214,
-        -154.0402029901822,
-        121.99999999999999
+        -186.7375377736987,
+        -153.97335329464266,
+        121.99999999999994
       ],
       "solids": 1
+    },
+    {
+      "name": "48_droop_stopper_C-USLH10_LEFT",
+      "group": "drive_left",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "fixed_drive_side": "LEFT",
+        "sku": "C-USLH10",
+        "supply": "company stock (10: 4 bump + 4 droop)",
+        "quantity": 2,
+        "tip_z": 142.0,
+        "fit": "M5x0.8 thread 7 into the 6t lower holder (1 mm of thread free below it); meets the housing bottom at -10 mm"
+      },
+      "volume_mm3": 2817.7823105290427,
+      "bounds_mm": [
+        [
+          -166.0000001,
+          -155.9999999
+        ],
+        [
+          -123.0000001,
+          123.0000001
+        ],
+        [
+          117.9999999,
+          142.0000001
+        ]
+      ],
+      "center_mm": [
+        -161.00000000000003,
+        -4.002344063217184e-14,
+        132.60853281087697
+      ],
+      "solids": 4
     },
     {
       "name": "52_upper_shaft_holder_6t_LEFT",
@@ -1592,7 +1576,7 @@
         "fixed_drive_side": "LEFT",
         "material": "SS400 6t laser cut, under the top side rail; spring seat; M6 tapped strikers; 4x M6 T-nut"
       },
-      "volume_mm3": 145312.13515002324,
+      "volume_mm3": 145582.53202971775,
       "bounds_mm": [
         [
           -220.0,
@@ -1608,39 +1592,39 @@
         ]
       ],
       "center_mm": [
-        -190.00585351120253,
-        1.7274574998858107e-15,
-        252.00000000000006
+        -190.01344357296188,
+        7.396778390139082e-15,
+        251.99999999999994
       ],
       "solids": 1
     },
     {
-      "name": "53_shaft_end_bolts_M8x20_LEFT",
+      "name": "53_shaft_end_bolts_M6x16_LEFT",
       "group": "drive_left",
       "status": "catalog_envelope",
       "metadata": {
         "fixed_drive_side": "LEFT",
         "quantity": 4
       },
-      "volume_mm3": 7356.688930006744,
+      "volume_mm3": 3294.960180389801,
       "bounds_mm": [
         [
-          -189.5,
-          -176.5
+          -184.0,
+          -174.0
         ],
         [
-          -124.5,
-          124.5
+          -123.0,
+          123.0
         ],
         [
-          111.0,
-          263.0
+          113.0,
+          261.0
         ]
       ],
       "center_mm": [
-        -183.00000000000009,
-        -2.07695488217023e-14,
-        186.99999999999997
+        -179.0,
+        -5.189288931348563e-14,
+        187.00000000000003
       ],
       "solids": 4
     },
@@ -1651,28 +1635,28 @@
       "metadata": {
         "fixed_drive_side": "LEFT",
         "quantity": 2,
-        "tip_z": 228.313,
+        "tip_z": 228.396,
         "adjust": "Striker meets the C-USLH10 tip at +10 mm; set with the jam nut"
       },
-      "volume_mm3": 3305.666358403694,
+      "volume_mm3": 3301.0086699498243,
       "bounds_mm": [
         [
-          -188.77350269189625,
-          -177.22649730810375
+          -184.77350269189625,
+          -173.22649730810375
         ],
         [
           -35.0,
           35.0
         ],
         [
-          228.3134509348794,
+          228.3963688150838,
           266.0
         ]
       ],
       "center_mm": [
-        -183.0,
-        -1.1555545337282367e-14,
-        251.8835368893137
+        -179.0000000000001,
+        -1.7908815615482447e-14,
+        251.9167355341334
       ],
       "solids": 2
     },
@@ -1887,10 +1871,10 @@
       "status": "concept_fabrication",
       "metadata": {
         "moving_wheel": "RIGHT",
-        "material": "SS400 10t laser cut, flat (no bend); D-hole AF10.2; 4x D9 for the housing bolts; 2x M6 tapped top edge",
-        "fit": "Camber set by the plate face and the LHSS20 mounting faces; check plate flatness (laser-cut hot-rolled plate)"
+        "material": "SS400 10t laser cut, flat (no bend); D-hole AF10.2; 4x D7.5 for the M6 housing bolts; 2x M6 tapped top edge",
+        "fit": "Camber set by the plate face and the LHSS16 mounting faces; check plate flatness (laser-cut hot-rolled plate)"
       },
-      "volume_mm3": 422409.119398394,
+      "volume_mm3": 429680.41851636244,
       "bounds_mm": [
         [
           142.0,
@@ -1902,79 +1886,79 @@
         ],
         [
           45.0,
-          195.2634508348794
+          202.29999999999998
         ]
       ],
       "center_mm": [
-        147.0,
-        -2.2349316269138502e-15,
-        119.86664132853917
+        147.00000000000003,
+        -3.1750156485370333e-16,
+        121.10801982382483
       ],
       "solids": 1
     },
     {
-      "name": "39_linear_bush_LHSS20_RIGHT",
+      "name": "39_linear_bush_LHSS16_RIGHT",
       "group": "drive_right",
       "status": "misumi_step_exact",
       "metadata": {
         "moving_wheel": "RIGHT",
-        "sku": "LHSS20",
+        "sku": "LHSS16",
         "quantity": 2,
-        "supply": "Purchase MISUMI long-block linear bushing housing unit, single (LMU20 inside)",
-        "unit_price_krw": 24206,
-        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-18 + catalogue: dr20 D32 L52, h31, C 882 N, C0 1370 N, 272 g",
-        "fit": "Hang both housings on the shafts, then tighten the 4 M8 bolts (D9 holes give +-0.5 float, no over-constraint)"
+        "supply": "Purchase MISUMI long-block linear bushing housing unit, single, standard type (LMU16 inside)",
+        "unit_price_krw": 20486,
+        "source": "MISUMI STEP AP214 (SolidWorks 2016) downloaded 2026-11-18 + catalogue p.249: dr16 D28 L47 L1 32 h27 W36 H49 M6(13), C 775 N, C0 1180 N, 204 g",
+        "fit": "Hang both housings on the shafts, then tighten the 4 M6 bolts (D7.5 holes give +-0.45 float, no over-constraint)"
       },
-      "volume_mm3": 183640.6243632859,
+      "volume_mm3": 133686.82111464225,
       "bounds_mm": [
         [
           151.9999999,
-          206.0
+          201.00000000000003
         ],
         [
-          -139.0000001,
-          139.0000001
+          -136.0000001,
+          136.0000001
         ],
         [
-          140.9999999,
-          193.0000001
+          152.04999990000002,
+          199.0500001
         ]
       ],
       "center_mm": [
-        179.09570340862734,
-        0.1792398311837083,
-        166.9999999048334
+        176.641792035166,
+        0.13517838363476134,
+        175.54999802413312
       ],
       "solids": 2
     },
     {
-      "name": "40_housing_bolts_M8x20_RIGHT",
+      "name": "40_housing_bolts_M6x20_RIGHT",
       "group": "drive_right",
       "status": "catalog_envelope",
       "metadata": {
         "moving_wheel": "RIGHT",
         "quantity": 4,
-        "note": "From the inner face: 10 mm plate + 10 mm thread in the housing (tap depth 15)"
+        "note": "From the inner face: 10 mm plate + 10 mm thread in the housing (tap depth 13)"
       },
-      "volume_mm3": 7618.97906808871,
+      "volume_mm3": 3720.2111885279605,
       "bounds_mm": [
         [
-          134.0,
+          136.0,
           162.0
         ],
         [
-          -124.5,
-          124.5
+          -123.0,
+          123.0
         ],
         [
-          142.5,
-          191.5
+          154.55,
+          196.55
         ]
       ],
       "center_mm": [
-        143.78208472983198,
-        2.2441983683806556e-14,
-        166.99999999999994
+        144.85991994460306,
+        3.862688315202422e-14,
+        175.5500000000001
       ],
       "solids": 4
     },
@@ -1986,7 +1970,7 @@
         "moving_wheel": "RIGHT",
         "material": "SS400 6t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 2x D6.5"
       },
-      "volume_mm3": 58306.39409018192,
+      "volume_mm3": 58306.39409018193,
       "bounds_mm": [
         [
           142.0,
@@ -1997,14 +1981,14 @@
           85.0
         ],
         [
-          195.2634508348794,
-          201.2634508348794
+          195.3463687150838,
+          201.3463687150838
         ]
       ],
       "center_mm": [
-        171.08886367908067,
-        5.927445729865652e-16,
-        198.26345083487942
+        171.1051574786358,
+        1.0217044613321056e-15,
+        198.34636871508374
       ],
       "solids": 1
     },
@@ -2016,7 +2000,7 @@
         "moving_wheel": "RIGHT",
         "quantity": 2
       },
-      "volume_mm3": 1669.0753980956765,
+      "volume_mm3": 1669.0753980956767,
       "bounds_mm": [
         [
           142.0,
@@ -2027,14 +2011,14 @@
           60.0
         ],
         [
-          185.2634508348794,
-          207.2634508348794
+          185.3463687150838,
+          207.3463687150838
         ]
       ],
       "center_mm": [
-        147.0,
-        -1.444009636981122e-14,
-        199.78426685164783
+        147.00000000000003,
+        -1.3895187072837214e-14,
+        199.86718473185232
       ],
       "solids": 2
     },
@@ -2044,10 +2028,10 @@
       "status": "catalog_envelope",
       "metadata": {
         "moving_wheel": "RIGHT",
-        "length_mm": 80.8,
-        "fit": "M8 threaded rod in the tapped spring seat + threadlocker; guides the spring through the D10 holder hole"
+        "length_mm": 67.7,
+        "fit": "M8 threaded rod in the tapped spring seat + threadlocker; guides the spring through the D10 holder hole (stays 4 mm inside at -10, 14 mm below the top frame at +10)"
       },
-      "volume_mm3": 3978.316230840385,
+      "volume_mm3": 3315.6705033951407,
       "bounds_mm": [
         [
           174.0,
@@ -2058,44 +2042,14 @@
           4.0
         ],
         [
-          195.2634508348794,
-          276.1
+          195.3463687150838,
+          263.0
         ]
       ],
       "center_mm": [
-        178.0,
-        -5.462448028232544e-17,
-        236.4809334725917
-      ],
-      "solids": 1
-    },
-    {
-      "name": "45_droop_stop_washer_nylock_M8_RIGHT",
-      "group": "drive_right",
-      "status": "catalog_envelope",
-      "metadata": {
-        "moving_wheel": "RIGHT",
-        "adjust": "Nut sets the droop limit (-10 mm); reachable through the deck hole"
-      },
-      "volume_mm3": 960.555567314644,
-      "bounds_mm": [
-        [
-          170.0,
-          186.0
-        ],
-        [
-          -8.0,
-          8.0
-        ],
-        [
-          265.0,
-          274.6
-        ]
-      ],
-      "center_mm": [
-        177.99999999999994,
-        5.053283351694786e-16,
-        269.4355200197778
+        177.99999999999997,
+        -2.1871112997931042e-17,
+        229.96319455259345
       ],
       "solids": 1
     },
@@ -2108,85 +2062,85 @@
         "sku": "C-USLH10",
         "supply": "company stock (10)",
         "quantity": 2,
-        "tip_z": 218.263
+        "tip_z": 218.346
       },
       "volume_mm3": 2817.7823105290427,
       "bounds_mm": [
         [
-          177.9999999,
-          188.0000001
+          173.9999999,
+          184.0000001
         ],
         [
           -35.0000001,
           35.0000001
         ],
         [
-          194.2634507348794,
-          218.2634509348794
+          194.3463686150838,
+          218.3463688150838
         ]
       ],
       "center_mm": [
-        183.0,
-        -2.259387777622603e-15,
-        208.87198364575644
+        179.0,
+        -6.77816333286781e-15,
+        208.9549015259608
       ],
       "solids": 4
     },
     {
-      "name": "47_spring_X-SWU21-70_RIGHT",
+      "name": "47_spring_SWU21-70_RIGHT",
       "group": "drive_right",
       "status": "catalog_envelope",
       "metadata": {
-        "spring_length_mm": 47.737,
-        "sku": "X-SWU21-70",
-        "rate_N_mm": 5.39,
+        "spring_length_mm": 47.654,
+        "sku": "SWU21-70",
+        "rate_N_mm": 5.37,
         "force_N": 120.0,
         "pose_dependent": "RIGHT"
       },
-      "volume_mm3": 3349.6598530236515,
+      "volume_mm3": 3729.0588924025565,
       "bounds_mm": [
         [
-          167.49956161018207,
-          188.50040530154195
+          167.49966152011652,
+          188.5003164383931
         ],
         [
-          -10.500405300897766,
-          10.500438390471357
+          -10.500316435852021,
+          10.500338482415705
         ],
         [
-          201.26780495943092,
-          248.99564587665205
+          201.34986760794004,
+          248.99650111236753
         ]
       ],
       "center_mm": [
-        177.8406711650538,
-        0.15932883494829247,
-        225.1317254174719
+        177.85701785681073,
+        0.14298214318593416,
+        225.17318435740364
       ],
       "solids": 1
     },
     {
-      "name": "50_guide_shaft_SFJW20-124-M8-N8_RIGHT",
+      "name": "50_guide_shaft_SFJW16-124-M6-N6_RIGHT",
       "group": "drive_right",
       "status": "misumi_step_exact",
       "metadata": {
         "fixed_drive_side": "RIGHT",
-        "sku": "SFJW20-124-M8-N8",
+        "sku": "SFJW16-124-M6-N6",
         "length_mm": 124,
         "quantity": 2,
-        "unit_price_krw": 10868,
-        "source": "MISUMI STEP AP214 downloaded 2026-11-15 (L124, 1-4 pcs 10,868 KRW ex VAT)",
-        "supply": "Purchase MISUMI (D20 g6, both ends M8 x 16 effective)"
+        "unit_price_krw": 9207,
+        "source": "MISUMI STEP AP214 downloaded 2026-11-18 (L124, M6 both ends, g6, induction hardened 58HRC)",
+        "supply": "Purchase MISUMI (D16 g6, both ends M6 tapped)"
       },
-      "volume_mm3": 74703.94065615039,
+      "volume_mm3": 48518.92467984445,
       "bounds_mm": [
         [
-          172.9999999,
-          193.0000001
+          170.9999999,
+          187.0000001
         ],
         [
-          -128.0000001,
-          128.0000001
+          -126.0000001,
+          126.0000001
         ],
         [
           124.9999999,
@@ -2194,9 +2148,9 @@
         ]
       ],
       "center_mm": [
-        183.00000000000003,
-        -1.4025202515955272e-14,
-        187.00000000000003
+        178.99999999999997,
+        5.39860427326031e-15,
+        187.00000000000009
       ],
       "solids": 2
     },
@@ -2206,12 +2160,12 @@
       "status": "concept_fabrication",
       "metadata": {
         "fixed_drive_side": "RIGHT",
-        "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
+        "material": "SS400 6t laser cut, on the side stub; D6.6 for the M6 shaft bolt; M5 tap for the droop stopper; 2x M5 T-nut"
       },
-      "volume_mm3": 40054.430362853935,
+      "volume_mm3": 44477.87471543989,
       "bounds_mm": [
         [
-          160.0,
+          153.5,
           220.0
         ],
         [
@@ -2224,9 +2178,9 @@
         ]
       ],
       "center_mm": [
-        189.95273426046202,
-        154.0402029901822,
-        121.99999999999999
+        186.7375377736987,
+        153.97335329464264,
+        121.99999999999994
       ],
       "solids": 1
     },
@@ -2236,12 +2190,12 @@
       "status": "concept_fabrication",
       "metadata": {
         "fixed_drive_side": "RIGHT",
-        "material": "SS400 6t laser cut, on the side stub; D8.5 for the shaft bolt; 2x M5 T-nut"
+        "material": "SS400 6t laser cut, on the side stub; D6.6 for the M6 shaft bolt; M5 tap for the droop stopper; 2x M5 T-nut"
       },
-      "volume_mm3": 40054.430362853935,
+      "volume_mm3": 44477.87471543989,
       "bounds_mm": [
         [
-          160.0,
+          153.5,
           220.0
         ],
         [
@@ -2254,11 +2208,45 @@
         ]
       ],
       "center_mm": [
-        189.95273426046208,
-        -154.0402029901822,
-        121.99999999999997
+        186.7375377736987,
+        -153.97335329464264,
+        121.99999999999994
       ],
       "solids": 1
+    },
+    {
+      "name": "48_droop_stopper_C-USLH10_RIGHT",
+      "group": "drive_right",
+      "status": "misumi_step_exact",
+      "metadata": {
+        "fixed_drive_side": "RIGHT",
+        "sku": "C-USLH10",
+        "supply": "company stock (10: 4 bump + 4 droop)",
+        "quantity": 2,
+        "tip_z": 142.0,
+        "fit": "M5x0.8 thread 7 into the 6t lower holder (1 mm of thread free below it); meets the housing bottom at -10 mm"
+      },
+      "volume_mm3": 2817.7823105290427,
+      "bounds_mm": [
+        [
+          155.9999999,
+          166.0000001
+        ],
+        [
+          -123.0000001,
+          123.0000001
+        ],
+        [
+          117.9999999,
+          142.0000001
+        ]
+      ],
+      "center_mm": [
+        160.99999999999997,
+        -4.002344063217184e-14,
+        132.60853281087697
+      ],
+      "solids": 4
     },
     {
       "name": "52_upper_shaft_holder_6t_RIGHT",
@@ -2268,7 +2256,7 @@
         "fixed_drive_side": "RIGHT",
         "material": "SS400 6t laser cut, under the top side rail; spring seat; M6 tapped strikers; 4x M6 T-nut"
       },
-      "volume_mm3": 145312.13515002327,
+      "volume_mm3": 145582.53202971775,
       "bounds_mm": [
         [
           160.0,
@@ -2284,39 +2272,39 @@
         ]
       ],
       "center_mm": [
-        190.0058535112024,
-        1.7274574998858103e-15,
-        252.0
+        190.0134435729619,
+        1.2994340415109198e-15,
+        251.99999999999994
       ],
       "solids": 1
     },
     {
-      "name": "53_shaft_end_bolts_M8x20_RIGHT",
+      "name": "53_shaft_end_bolts_M6x16_RIGHT",
       "group": "drive_right",
       "status": "catalog_envelope",
       "metadata": {
         "fixed_drive_side": "RIGHT",
         "quantity": 4
       },
-      "volume_mm3": 7356.688930006745,
+      "volume_mm3": 3294.960180389801,
       "bounds_mm": [
         [
-          176.5,
-          189.5
+          174.0,
+          184.0
         ],
         [
-          -124.5,
-          124.5
+          -123.0,
+          123.0
         ],
         [
-          111.0,
-          263.0
+          113.0,
+          261.0
         ]
       ],
       "center_mm": [
-        183.00000000000006,
-        -6.6264751002574e-14,
-        186.99999999999994
+        178.99999999999994,
+        -5.851751348116464e-14,
+        186.99999999999997
       ],
       "solids": 4
     },
@@ -2327,28 +2315,28 @@
       "metadata": {
         "fixed_drive_side": "RIGHT",
         "quantity": 2,
-        "tip_z": 228.313,
+        "tip_z": 228.396,
         "adjust": "Striker meets the C-USLH10 tip at +10 mm; set with the jam nut"
       },
-      "volume_mm3": 3305.666358403694,
+      "volume_mm3": 3301.0086699498243,
       "bounds_mm": [
         [
-          177.22649730810375,
-          188.77350269189625
+          173.22649730810375,
+          184.77350269189625
         ],
         [
           -35.0,
           35.0
         ],
         [
-          228.3134509348794,
+          228.3963688150838,
           266.0
         ]
       ],
       "center_mm": [
-        183.00000000000003,
-        -1.1555545337282367e-14,
-        251.8835368893137
+        179.00000000000014,
+        -1.7908815615482447e-14,
+        251.9167355341334
       ],
       "solids": 2
     },
@@ -2990,60 +2978,37 @@
       "solids": 4
     },
     {
-      "name": "61_motor_driver_ENVELOPE_L",
+      "name": "61_motor_driver_ZLAC8015D_ENVELOPE",
       "group": "electronics",
-      "status": "envelope_only",
+      "status": "drawing_envelope",
       "metadata": {
-        "mount": "on edge, 3t angle bracket to the floor (not drawn)"
+        "sku": "ZLAC8015D",
+        "maker": "ZLTECH (Shenzhen ZhongLing Technology)",
+        "channels": 2,
+        "electrical": "Input 20-48 VDC (typ. 36), output current 15 A typical / 30 A peak per channel, over-voltage 60 V, under-voltage 16 V; hall U/V/W + incremental encoder A/B inputs, 5 V supply to encoder and hall; CANopen (CiA301/402, 25-1000 kbps) and RS485 Modbus-RTU; 2 programmable opto inputs; 0-50 C",
+        "source": "ZLAC8015D Servo Driver Manual (Special for Hub Servo Motor) V1.0, ZLTECH (www.zlingkj.com): 2.1 electrical index, 2.2 environment, Fig.1 installation dimension 168 x 89 x 29.7 (body 158, side hole pitch 42). Corner-hole pitch not dimensioned in the figure (envelope only)",
+        "mount": "On edge (narrow side down, long side along Y) beside the battery on a 3t angle bracket to the floor (not drawn): the manual recommends the narrow side for heat dissipation; M3 through the side holes",
+        "fit_to_motor": "ZLLG65ASM250-N V2: 24 V, 10 A rated / 30 A stall, 1024-line magnetic A/B encoder + hall. ZLTECH lists ZLAC8015/ZLAC8015D as the driver for its 6.5-inch hub servo motors; 7S pack 21-29.4 V is inside 20-48 V. Confirm the encoder connector (motor single-ended A/B vs driver iA+/iA-) with ZLTECH before ordering"
       },
-      "volume_mm3": 301840.0,
+      "volume_mm3": 444074.3999999998,
       "bounds_mm": [
         [
-          -128.0,
-          -84.0
+          91.15,
+          120.85
         ],
         [
-          -49.0,
-          49.0
+          -84.0,
+          84.0
         ],
         [
           121.0,
-          191.0
-        ]
-      ],
-      "center_mm": [
-        -106.0,
-        0.0,
-        156.0
-      ],
-      "solids": 1
-    },
-    {
-      "name": "61_motor_driver_ENVELOPE_R",
-      "group": "electronics",
-      "status": "envelope_only",
-      "metadata": {
-        "mount": "on edge, 3t angle bracket to the floor (not drawn)"
-      },
-      "volume_mm3": 301840.0,
-      "bounds_mm": [
-        [
-          84.0,
-          128.0
-        ],
-        [
-          -49.0,
-          49.0
-        ],
-        [
-          121.0,
-          191.0
+          210.0
         ]
       ],
       "center_mm": [
         106.0,
-        0.0,
-        156.0
+        1.4210854715202004e-14,
+        165.5
       ],
       "solids": 1
     },

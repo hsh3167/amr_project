@@ -137,6 +137,57 @@
         "site": "kr.misumi-ec.com"
       },
       "note": "Housing + bush merged in one solid. STEP frame: shaft axis +X (x -8..44, centre y-31 z0), mounting face y=0 with 2x M8 taps (D6.646 x 15.3) at x 0 and 36; side holes M8 through at x 9/27. Eco P30-4 axle-plate housings"
+    },
+    {
+      "file": "LHSS16.stp.gz",
+      "sha256_original": "a6309afb4fced874b3275747345bcf000fdf38e48ed9f8f2a1c9e03374f8f03c",
+      "original_bytes": 149527,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110300028370/?HissuCode=LHSS16",
+      "retrieved": "2026-11-18",
+      "cad_format": "STEP AP214 (3D, mm, single solid)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0)",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 20486,
+        "min_order_qty": 1,
+        "seen": "2026-11-18",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download (user-approved, logged-in browser). Frame: axis +X (x -7.5..39.5), mounting face y=0, axis at y-27; 2x M6 taps at x0/x32 (void D4.8, depth ~13)"
+    },
+    {
+      "file": "SFJW16-124-M6-N6.stp.gz",
+      "sha256_original": "26085fbe1952e33b620f5be3b1a678252fbe0ffa2d6595702d6157f2fd7fd22e",
+      "original_bytes": 16329,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110302634470/?HissuCode=SFJW16-124-M6-N6",
+      "retrieved": "2026-11-18",
+      "cad_format": "STEP AP214 (3D, mm, single solid)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0)",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 9207,
+        "min_order_qty": 1,
+        "seen": "2026-11-18",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download (user-approved). Axis +X, x 0..124, D16; tap void D4.9 at both ends"
+    },
+    {
+      "file": "SWU21-70.step.gz",
+      "sha256_original": "17992c6a952b78b4bb6c3b335bc27d489e52ad801fb87d4fb32c4b2c6fce9966",
+      "original_bytes": 318574,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110200141760/?HissuCode=SWU21-70",
+      "retrieved": "2026-11-18",
+      "cad_format": "STEP (MISUMI 'STEP' option, version not stated)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0)",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 7290,
+        "min_order_qty": 1,
+        "seen": "2026-11-18",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download (user-approved). Axis +Z, z 0..70, OD21; used for wire section 3.75x1.875 only (the coil is redrawn per pose)"
     }
   ]
 }

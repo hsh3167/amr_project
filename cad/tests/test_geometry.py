@@ -67,14 +67,23 @@ def test_bogie_statics_and_rear_spring_within_catalog():
     from cad.validation import catalog_suspension_report
 
     report=catalog_suspension_report(load_design())
-    assert report['concept'].startswith('Rev16 bogie')
+    assert report['concept'].startswith('Rev17 bogie')
     nominal=report['static_cases']['with_arm']
     assert nominal['drive_load_fraction']>0.5
     total=2*(nominal['drive_each_N']+nominal['front_caster_each_N']+nominal['rear_caster_each_N'])
     assert total==pytest.approx(55*9.80665,abs=.05)
     rear=report['rear_caster_spring']
     assert rear['sku']=='X-SWU17-35' and rear['forces_N'][0]>0 and rear['min_solid_margin_mm']>0 and rear['max_working_deflection_margin_mm']>0
-    assert abs(rear['level_shim_mm']-rear['configured_shim_mm'])<.25 and abs(rear['rear_sink_with_arm_mm'])<1
+    # Rev17: the bogie springs unload the rear casters; a negative level shim cannot be fitted, so the shim is 0
+    # and the rear may sit a little high (< 1 mm with the arm).
+    if rear['level_shim_mm']<0:
+        assert rear['configured_shim_mm']==0
+    else:
+        assert abs(rear['level_shim_mm']-rear['configured_shim_mm'])<.25
+    assert abs(rear['rear_sink_with_arm_mm'])<1
+    sp=report['bogie_spring']
+    assert sp['sku']=='SWU21-60' and min(sp['forces_N'])>0 and sp['min_length_margin_to_allowable_mm']>0
+    assert nominal['drive_each_N']>sp['drive_each_without_spring_N']+30
     for case in report['static_cases']['cg_sensitivity']:
         assert case['rear_caster_each_N']>0
 
