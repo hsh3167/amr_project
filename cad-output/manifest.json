@@ -1427,7 +1427,7 @@
         "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
         "design": "5 mm plate on the frame rear bosses with a box window + 6 mm foot + 2 ribs; grille faces rear (-Y)"
       },
-      "volume_mm3": 71792.92513856293,
+      "volume_mm3": 70952.51588617287,
       "bounds_mm": [
         [
           -140.0,
@@ -1443,9 +1443,9 @@
         ]
       ],
       "center_mm": [
-        -76.11006111943216,
-        -232.10329508078286,
-        151.66032948274326
+        -76.22195658436314,
+        -232.18376741485218,
+        151.85218954268237
       ],
       "solids": 1
     },

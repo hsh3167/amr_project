@@ -228,7 +228,7 @@ def speaker(d):
     # Clear the heads of the rear caster hardware that comes up through the base plate here.
     from .suspension import chassis_mount_holes
     for x,y,dia in chassis_mount_holes(d):
-        bracket-=cylz(dia/2+3.5,7,x,y,base_top-.5)
+        bracket-=cylz(dia/2+3.5,25,x,y,base_top-.5)   # Rev17b: tall enough for the rising droop-stop nut at bump
     screws=Compound([T(cyly(2.75,3,x,b0+pt+1.5,z)+cyly(1.5,b0+pt-293.9,x,(b0+pt+293.9)/2,z)) for x,z in SPEAKER_SCREWS])
     return [PartRecord('57_company_speaker_STEP','electronics',unit,(.18,.18,.2),COMPANY,
                        {'source':'SPEAKER.STEP.gz','translate_mm':[round(v,3) for v in move],'trimmed_solids':trimmed,
