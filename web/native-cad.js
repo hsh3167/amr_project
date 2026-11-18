@@ -127,7 +127,7 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
   if(lidarVisual)addLidarVisuals(lidarVisual,layout,groups,parts,tag);
     for(const n of ['LF','LB','RF','RB'])parts['caster'+n].description='공식 GL-65-ASF-EUS STEP 기준(장착높이 83mm, 판 48×65mm, 홀 24×54mm). '+(BOGIE&&n[1]==='F'?'보기 링크 앞쪽 패드에 CB6-12 4개로 고정되어 구동륜과 함께 피벗(Y=+60) 둘레를 돕니다(±10mm).':'90mm 경첩 암에 달려 ±5mm 움직이고, 바로 위 X-SWU17-35 스프링이 받칩니다.');
   for(const id of ['cameraLeft','cameraRight'])parts[id].description='Orbbec 공식 Astra Mini Pro 3D V0.1의 58솔리드. 2D V1.2는 M2 피치80/깊이19.92, 3D 깊이24.264. 실물 버전·어댑터 확인 필요.';
-  parts.profiles.description='주기둥 4개와 카메라 행거 2개는 알루미늄 프로파일입니다. 각 기둥 양끝을 CB5-12 볼트로 판을 관통해 프로파일 중심 탭(M5)에 체결합니다. Rev14: LiDAR는 주기둥 두 면을 감싼 3t 절곡 브래킷에 T너트 M5 4개로 고정합니다. 공칭 20×20 단면과 슬롯은 제조사 미지정 범용 형상입니다.';
+  parts.profiles.description='주기둥 4개와 카메라 행거 2개는 알루미늄 프로파일입니다. 각 기둥 양끝을 CB5-12 볼트로 판을 관통해 프로파일 중심 탭(M5)에 체결합니다. Rev17: LiDAR는 주기둥 두 면을 감싼 3t 절곡 브래킷(기둥 위로 55mm 플랜지, T너트 M5 6개, 센서 판 15mm 보강 립)에 고정하고 스캐너는 M3 2개로 판에 체결합니다. 공칭 20×20 단면과 슬롯은 제조사 미지정 범용 형상입니다.';
   const poses=BOGIE?{LEFT:0,RIGHT:0,LB:0,RB:0}:{LEFT:0,RIGHT:0,LF:0,LB:0,RF:0,RB:0};
   function setPose(wheel,mm){
     if(!(wheel in poses)||!Number.isFinite(mm))throw new Error('Invalid wheel pose');

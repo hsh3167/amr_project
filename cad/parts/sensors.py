@@ -13,12 +13,29 @@ def lidar_bracket(d,n,x,y,z0,pt,sensorplate):
     q=d.layout['lidar_mount'];sx=1 if x>0 else -1;sy=1 if y>0 else -1
     cx,cy=next((a,b) for a,b in d.profile['main_columns_xy'] if a*sx>0 and b*sy>0)
     h=d.profile['nominal_section']/2;fx=cx+sx*h;fy=cy+sy*h;top=z0-pt;drop=q['flange_drop_mm'];reach=q['deck_reach_mm']
+    up=q.get('flange_up_mm',0);lip=q.get('stiffening_lip_mm',0)
     def S(x0,x1,y0,y1,z0_,z1):return span(min(x0,x1),max(x0,x1),min(y0,y1),max(y0,y1),z0_,z1)
     deck=S(fx,fx+sx*reach,cy-sy*h,cy+sy*reach,top,z0)+S(cx-sx*h,fx,fy,cy+sy*reach,top,z0)
     plate=sensorplate+deck
-    flange_x=S(fx,fx+sx*pt,cy-sy*h,fy,top-drop,top);flange_y=S(cx-sx*h,fx,fy,fy+sy*pt,top-drop,top)
+    # Rev17: flanges go UP the column faces (deck to deck+up, 3 bolts each) instead of 32 mm down (2 bolts): the bolt
+    # pattern spans 39 mm instead of 16 mm. Flanges stay below the scan plane.
+    f0,f1=(top,z0+up) if up else (top-drop,top)
+    flange_x=S(fx,fx+sx*pt,cy-sy*h,fy,f0,f1);flange_y=S(cx-sx*h,fx,fy,fy+sy*pt,f0,f1)
     bracket=plate+flange_x+flange_y
-    bolts=[];zs=[top-drop+8,top-8]
+    if lip:
+        # Rev17: downturned stiffening lips on the sensor plate edges (2 more bends), trimmed clear of the column.
+        yaw=-next(p_['heading_deg'] for p_ in d.layout['lidars'] if p_['x']==x and p_['y']==y)
+        pw,pd=q['plate_width'],q['plate_depth']
+        lips=None
+        for ly in (-1,1):
+            b_=rz(box(pw,pt,lip,0,ly*(pd/2-pt/2),top-lip/2),yaw).translate((x,y,0))
+            lips=b_ if lips is None else lips+b_
+        for lx in (-1,1):
+            b_=rz(box(pt,pd,lip,lx*(pw/2-pt/2),0,top-lip/2),yaw).translate((x,y,0))
+            lips=lips+b_
+        lips=lips-span(cx-h-4,cx+h+4,cy-h-4,cy+h+4,top-lip-1,z0+1)
+        bracket=bracket+lips
+    bolts=[];zs=[z0+8,z0+up/2+pt/2,z0+up-8] if up else [top-drop+8,top-8]
     for z in zs:
         bracket=bracket-cylx(2.75,pt+2,fx+sx*pt/2,cy,z)-cyly(2.75,pt+2,cx,fy+sy*pt/2,z)
         # Head outside the flange, shank through the slot mouth, T-nut in the slot channel (depth 2.1-4.4).
@@ -27,9 +44,20 @@ def lidar_bracket(d,n,x,y,z0,pt,sensorplate):
         nuts=[box(2.3,9.6,10,fx-sx*3.25,cy,z)-cylx(2.5,4,fx-sx*3.25,cy,z),box(9.6,2.3,10,cx,fy-sy*3.25,z)-cyly(2.5,4,cx,fy-sy*3.25,z)]
         bolts+=nuts
     return [PartRecord('60_lidar_bracket_3t_'+n,'lidars',bracket,(.28,.43,.54),'concept_fabrication',
-                       {'material':'S355 3t laser-cut, 2 bends (bend limit 3t); wraps two faces of the main column'}),
+                       {'material':'S355 3t laser-cut; wraps two faces of the main column'+
+                        (f'; Rev17: {up:g} mm up-flanges with 3 bolts each + {lip:g} mm stiffening lips on the sensor plate (6 bends)' if up else ', 2 bends')}),
             PartRecord('65_lidar_bracket_bolts_M5_Tnut_'+n,'lidars',Compound(bolts),(.20,.22,.25),'catalog_envelope',
-                       {'sku':'M5x10 hex socket + M5 T-nut for 2020 slot 6','quantity':4})]
+                       {'sku':'M5x10 hex socket + M5 T-nut for 2020 slot 6','quantity':len(zs)*2})]
+
+
+def scanner_screws(x,y,yaw,plate_top,pt,holes):
+    """TiM571 to its plate: M3 from below into the scanner's 2.8 mm deep bottom threads (SICK datasheet, max 0.8 N m).
+    Hole positions are assumed (the SICK drawing spacing was not readable); the shank is drawn up to the scanner face."""
+    from .suspension import screw
+    pts=[]
+    for lx,ly in holes:
+        v=rz(box(1,1,1,lx,ly,0),yaw).translate((x,y,0)).bounding_box().center();pts.append((v.X,v.Y))
+    return pts,Compound([s for px,py in pts for s in screw(px,py,plate_top-pt,3,pt,True).solids()])
 
 def lidars(d):
     r=[];lidar=d.parts['lidar'];mount=d.layout['lidar_mount']
@@ -43,7 +71,13 @@ def lidars(d):
             r.append(PartRecord('60_diagonal_lidar_mount_CONCEPT_'+n,'lidars',sensorplate+bridge,(.28,.43,.54)))
             r.append(column(d,sx,sy,d.p['base_bottom_z']+d.p['base_thickness'],z0-pt,'64_2020_Al_lidar_column_'+n,'lidars'))
         else:
+            pts,_=scanner_screws(x,y,yaw,z0,pt,mount.get('scanner_holes_local',[]))
+            for px,py in pts:sensorplate=sensorplate-cylz(1.7,pt+2,px,py,z0-pt-1)
             r.extend(lidar_bracket(d,n,x,y,z0,pt,sensorplate))
+            if pts:
+                r.append(PartRecord('66_lidar_scanner_screws_M3_'+n,'lidars',scanner_screws(x,y,yaw,z0,pt,mount['scanner_holes_local'])[1],(.20,.22,.25),
+                                    'catalog_envelope',{'sku':'M3x5 + spring washer, 0.8 N m max (SICK)','quantity':len(pts),
+                                                        'note':'Hole spacing assumed; confirm on the SICK TiM5xx dimensional drawing'}))
         r.append(PartRecord('61_SICK_TiM571_envelope_base_'+n,'lidars',place(box(lidar['width'],lidar['depth'],36,0,0,z0+18)),(.85,.88,.90),'drawing_envelope'))
         # Rev12b: the optical envelope stops under the 3mm scanner-top disc instead of overlapping it.
         top=3 if d.variant!='baseline' else 0

@@ -256,8 +256,11 @@ def test_rev14_bend_limit_fastener_length_and_lidar_bracket():
         assert arm.size.Y>=2*(27+3.3+5)
     assert not any(n.startswith('64_') for n in parts)
     for n in ('FRONT_LEFT','REAR_RIGHT'):
-        assert parts['65_lidar_bracket_bolts_M5_Tnut_'+n].metadata['quantity']==4
-        assert parts['60_lidar_bracket_3t_'+n].shape.is_valid
+        # Rev17: 55 mm up-flanges with 3 bolts each (was 32 mm down, 2 each); the flanges stay below the scan plane.
+        assert parts['65_lidar_bracket_bolts_M5_Tnut_'+n].metadata['quantity']==6
+        bracket=parts['60_lidar_bracket_3t_'+n].shape
+        assert bracket.is_valid and bracket.bounding_box().max.Z<d.layout['lidars'][0]['scan_z']-10
+        assert parts['66_lidar_scanner_screws_M3_'+n].metadata['quantity']==2
 
 
 def test_rev15_company_parts_placed_below_the_scan_plane():

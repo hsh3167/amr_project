@@ -1,7 +1,7 @@
 {
   "valid": true,
-  "components": 167,
-  "solids": 450,
+  "components": 171,
+  "solids": 471,
   "errors": [],
   "suspension_catalog": {
     "concept": "Rev17 bogie (front caster + drive wheel, BGHK bearing pivot, coaxial bogie spring) + rear hinge casters",

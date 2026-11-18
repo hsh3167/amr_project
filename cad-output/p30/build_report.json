@@ -1,8 +1,8 @@
 {
   "variant": "P30",
-  "revision": "P30-5",
-  "components": 129,
-  "solids": 553,
+  "revision": "P30-5b",
+  "components": 136,
+  "solids": 583,
   "ground": {
     "drive_tire_min_z": [
       0.0,
@@ -75,7 +75,7 @@
   "fabricated_mass_kg": {
     "frame": 7.05,
     "plates": 9.13,
-    "brackets_and_drive_fab": 13.6
+    "brackets_and_drive_fab": 13.18
   },
   "errors": [],
   "valid": true,

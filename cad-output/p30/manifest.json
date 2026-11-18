@@ -869,7 +869,7 @@
       "metadata": {
         "material": "SS400 2t laser cut, notched at the wheel bays"
       },
-      "volume_mm3": 389289.6682222889,
+      "volume_mm3": 388527.793241129,
       "bounds_mm": [
         [
           -220.0,
@@ -885,9 +885,9 @@
         ]
       ],
       "center_mm": [
-        0.00976477780209355,
-        5.653828904171438e-16,
-        120.0000000000002
+        -0.01159703485036045,
+        -0.012280444090810232,
+        120.00000000000024
       ],
       "solids": 1
     },
@@ -1194,7 +1194,7 @@
         "material": "SS400 10t laser cut, flat (no bend); D-hole AF10.2; 4x D7.5 for the M6 housing bolts; 2x M6 tapped top edge",
         "fit": "Camber set by the plate face and the LHSS16 mounting faces; check plate flatness (laser-cut hot-rolled plate)"
       },
-      "volume_mm3": 429680.41851636244,
+      "volume_mm3": 429946.38575041527,
       "bounds_mm": [
         [
           -152.0,
@@ -1210,9 +1210,9 @@
         ]
       ],
       "center_mm": [
-        -146.99999999999991,
-        -3.1750156485370333e-16,
-        121.10801982382483
+        -147.00000000000009,
+        -2.9826684721668e-16,
+        121.14927757635147
       ],
       "solids": 1
     },
@@ -1288,9 +1288,9 @@
       "status": "concept_fabrication",
       "metadata": {
         "moving_wheel": "LEFT",
-        "material": "SS400 6t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 2x D6.5"
+        "material": "SS400 6t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 3x D4.5"
       },
-      "volume_mm3": 58306.39409018194,
+      "volume_mm3": 58418.31332846608,
       "bounds_mm": [
         [
           -200.0,
@@ -1306,41 +1306,42 @@
         ]
       ],
       "center_mm": [
-        -171.1051574786358,
-        5.615474901977985e-16,
-        198.3463687150837
+        -171.0589762263877,
+        5.9160897838744145e-16,
+        198.34636871508377
       ],
       "solids": 1
     },
     {
-      "name": "38_seat_bolts_M6x16_LEFT",
+      "name": "38_seat_bolts_M4x12_LEFT",
       "group": "drive_left",
       "status": "catalog_envelope",
       "metadata": {
         "moving_wheel": "LEFT",
-        "quantity": 2
+        "quantity": 3,
+        "fit": "Locate only (the spring force presses the seat on the plate edge): M4 x 6 engaged in the 10t edge"
       },
-      "volume_mm3": 1669.0753980956767,
+      "volume_mm3": 837.8457961120683,
       "bounds_mm": [
         [
-          -152.0,
-          -142.0
+          -150.5,
+          -143.5
         ],
         [
-          -60.0,
-          60.0
+          -58.5,
+          58.5
         ],
         [
-          185.3463687150838,
-          207.3463687150838
+          189.3463687150838,
+          205.3463687150838
         ]
       ],
       "center_mm": [
-        -147.00000000000003,
-        -1.3895187072837214e-14,
-        199.86718473185232
+        -147.0,
+        1.3568945293891473e-16,
+        200.01315611910326
       ],
-      "solids": 2
+      "solids": 3
     },
     {
       "name": "44_spring_stud_M8_LEFT",
@@ -1874,7 +1875,7 @@
         "material": "SS400 10t laser cut, flat (no bend); D-hole AF10.2; 4x D7.5 for the M6 housing bolts; 2x M6 tapped top edge",
         "fit": "Camber set by the plate face and the LHSS16 mounting faces; check plate flatness (laser-cut hot-rolled plate)"
       },
-      "volume_mm3": 429680.41851636244,
+      "volume_mm3": 429946.38575041527,
       "bounds_mm": [
         [
           142.0,
@@ -1890,9 +1891,9 @@
         ]
       ],
       "center_mm": [
-        147.00000000000003,
-        -3.1750156485370333e-16,
-        121.10801982382483
+        146.99999999999997,
+        -2.9826684721668e-16,
+        121.14927757635147
       ],
       "solids": 1
     },
@@ -1968,9 +1969,9 @@
       "status": "concept_fabrication",
       "metadata": {
         "moving_wheel": "RIGHT",
-        "material": "SS400 6t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 2x D6.5"
+        "material": "SS400 6t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 3x D4.5"
       },
-      "volume_mm3": 58306.39409018193,
+      "volume_mm3": 58418.31332846608,
       "bounds_mm": [
         [
           142.0,
@@ -1986,41 +1987,42 @@
         ]
       ],
       "center_mm": [
-        171.1051574786358,
-        1.0217044613321056e-15,
-        198.34636871508374
+        171.0589762263876,
+        7.005895796693386e-16,
+        198.3463687150837
       ],
       "solids": 1
     },
     {
-      "name": "38_seat_bolts_M6x16_RIGHT",
+      "name": "38_seat_bolts_M4x12_RIGHT",
       "group": "drive_right",
       "status": "catalog_envelope",
       "metadata": {
         "moving_wheel": "RIGHT",
-        "quantity": 2
+        "quantity": 3,
+        "fit": "Locate only (the spring force presses the seat on the plate edge): M4 x 6 engaged in the 10t edge"
       },
-      "volume_mm3": 1669.0753980956767,
+      "volume_mm3": 837.8457961120683,
       "bounds_mm": [
         [
-          142.0,
-          152.0
+          143.5,
+          150.5
         ],
         [
-          -60.0,
-          60.0
+          -58.5,
+          58.5
         ],
         [
-          185.3463687150838,
-          207.3463687150838
+          189.3463687150838,
+          205.3463687150838
         ]
       ],
       "center_mm": [
-        147.00000000000003,
-        -1.3895187072837214e-14,
-        199.86718473185232
+        147.0,
+        1.3568945293891473e-16,
+        200.01315611910326
       ],
-      "solids": 2
+      "solids": 3
     },
     {
       "name": "44_spring_stud_M8_RIGHT",
@@ -2924,7 +2926,7 @@
             219.55
           ]
         },
-        "limits": "Hold-down strap (2x 25 mm strap through the floor slots) not drawn"
+        "limits": "P30-5b: held by 2x 25 mm straps through floor slots (60_battery_hold_down_straps)"
       },
       "volume_mm3": 421957.98988421535,
       "bounds_mm": [
@@ -2978,7 +2980,67 @@
       "solids": 4
     },
     {
-      "name": "61_motor_driver_ZLAC8015D_ENVELOPE",
+      "name": "60_battery_hold_down_straps",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2,
+        "sku": "25 mm polyester strap + cam buckle",
+        "fit": "Around the case through two floor slots each, closed under the floor; clear of the terminal block"
+      },
+      "volume_mm3": 37579.27106026438,
+      "bounds_mm": [
+        [
+          -78.41423986690826,
+          78.41423986690826
+        ],
+        [
+          -106.5,
+          106.5
+        ],
+        [
+          117.49999999999999,
+          214.19999400127904
+        ]
+      ],
+      "center_mm": [
+        4.95657605024828e-14,
+        0.0,
+        165.84999700063972
+      ],
+      "solids": 2
+    },
+    {
+      "name": "60_battery_strap_buckles",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2
+      },
+      "volume_mm3": 20880.0,
+      "bounds_mm": [
+        [
+          -20.0,
+          20.0
+        ],
+        [
+          -108.5,
+          108.5
+        ],
+        [
+          214.19999400127907,
+          223.19999400127907
+        ]
+      ],
+      "center_mm": [
+        7.234315317931049e-16,
+        0.0,
+        218.69999400127904
+      ],
+      "solids": 2
+    },
+    {
+      "name": "61_motor_driver_ZLAC8015D",
       "group": "electronics",
       "status": "drawing_envelope",
       "metadata": {
@@ -2987,10 +3049,11 @@
         "channels": 2,
         "electrical": "Input 20-48 VDC (typ. 36), output current 15 A typical / 30 A peak per channel, over-voltage 60 V, under-voltage 16 V; hall U/V/W + incremental encoder A/B inputs, 5 V supply to encoder and hall; CANopen (CiA301/402, 25-1000 kbps) and RS485 Modbus-RTU; 2 programmable opto inputs; 0-50 C",
         "source": "ZLAC8015D Servo Driver Manual (Special for Hub Servo Motor) V1.0, ZLTECH (www.zlingkj.com): 2.1 electrical index, 2.2 environment, Fig.1 installation dimension 168 x 89 x 29.7 (body 158, side hole pitch 42). Corner-hole pitch not dimensioned in the figure (envelope only)",
-        "mount": "On edge (narrow side down, long side along Y) beside the battery on a 3t angle bracket to the floor (not drawn): the manual recommends the narrow side for heat dissipation; M3 through the side holes",
-        "fit_to_motor": "ZLLG65ASM250-N V2: 24 V, 10 A rated / 30 A stall, 1024-line magnetic A/B encoder + hall. ZLTECH lists ZLAC8015/ZLAC8015D as the driver for its 6.5-inch hub servo motors; 7S pack 21-29.4 V is inside 20-48 V. Confirm the encoder connector (motor single-ended A/B vs driver iA+/iA-) with ZLTECH before ordering"
+        "mount": "On edge (narrow side down, manual-recommended for heat) beside the battery; heatsink face on a 3t SPCC L-bracket (4x M3x10 through the ears, thermal pad), bracket foot 2x M5 through the floor with nuts underneath",
+        "fit_to_motor": "ZLLG65ASM250-N V2: 24 V, 10 A rated / 30 A stall, 1024-line magnetic A/B encoder + hall. ZLTECH lists ZLAC8015/ZLAC8015D as the driver for its 6.5-inch hub servo motors; 7S pack 21-29.4 V is inside 20-48 V. Confirm the encoder connector (motor single-ended A/B vs driver iA+/iA-) with ZLTECH before ordering",
+        "model": "Manual Fig.1 outline 168x89x29.7, ear-hole pitch 158; hole Y position, base, cover and terminals estimated"
       },
-      "volume_mm3": 444074.3999999998,
+      "volume_mm3": 320788.5464699806,
       "bounds_mm": [
         [
           91.15,
@@ -3006,11 +3069,131 @@
         ]
       ],
       "center_mm": [
-        106.0,
-        1.4210854715202004e-14,
-        165.5
+        108.31172310712043,
+        -5.443554162453347e-16,
+        165.49999999999997
       ],
       "solids": 1
+    },
+    {
+      "name": "61_motor_driver_bracket_3t",
+      "group": "electronics",
+      "status": "concept_fabrication",
+      "metadata": {
+        "material": "SPCC 3t laser cut, 1 bend (web + foot); 4x D3.5 for the driver ears, 2x D5.5 to the floor",
+        "fit": "Heatsink face against the web (thermal pad); foot clear of the drive axle plate (x142)"
+      },
+      "volume_mm3": 52859.99670332396,
+      "bounds_mm": [
+        [
+          120.85,
+          138.0
+        ],
+        [
+          -87.0,
+          87.0
+        ],
+        [
+          121.0,
+          213.0
+        ]
+      ],
+      "center_mm": [
+        123.15322906543508,
+        -3.1388512329756526e-17,
+        162.83491545933242
+      ],
+      "solids": 1
+    },
+    {
+      "name": "61_motor_driver_screws_M3x10",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 4,
+        "sku": "M3x10 + washer + M3 nylock"
+      },
+      "volume_mm3": 706.239313866124,
+      "bounds_mm": [
+        [
+          114.85,
+          126.25
+        ],
+        [
+          -81.75,
+          81.75
+        ],
+        [
+          124.82457351945706,
+          206.17542648054297
+        ]
+      ],
+      "center_mm": [
+        120.52904075718881,
+        5.666318214280927e-14,
+        165.49999999999994
+      ],
+      "solids": 8
+    },
+    {
+      "name": "61_motor_driver_bracket_bolts_M5",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2,
+        "sku": "CB5-12 + M5 nut under the floor"
+      },
+      "volume_mm3": 1285.7445369813959,
+      "bounds_mm": [
+        [
+          126.306197846483,
+          135.54380215351702
+        ],
+        [
+          -49.25,
+          49.25
+        ],
+        [
+          113.0,
+          129.0
+        ]
+      ],
+      "center_mm": [
+        130.925,
+        -4.244208747290622e-15,
+        121.69667959313256
+      ],
+      "solids": 2
+    },
+    {
+      "name": "69_ground_stud_M4",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M4x16 + ring terminal + M4 nut + star washer",
+        "role": "Chassis ground point; the 3D-printed LCD and speaker holders do not ground, so a cable runs from here to the LCD frame (and the battery negative)"
+      },
+      "volume_mm3": 370.161878456506,
+      "bounds_mm": [
+        [
+          -134.0414518843274,
+          -125.95854811567261
+        ],
+        [
+          146.0,
+          154.0
+        ],
+        [
+          116.2,
+          130.0
+        ]
+      ],
+      "center_mm": [
+        -130.00000000000006,
+        149.99999999999997,
+        121.9678565471197
+      ],
+      "solids": 3
     },
     {
       "name": "62_controller_PCB_ENVELOPE",
@@ -3107,8 +3290,8 @@
           136.0
         ],
         [
-          197.0,
-          247.0
+          175.0,
+          225.0
         ],
         [
           121.0,
@@ -3117,7 +3300,7 @@
       ],
       "center_mm": [
         108.0,
-        222.0,
+        200.0,
         141.0
       ],
       "solids": 1
@@ -3224,7 +3407,7 @@
         "source": "LCD.STEP.gz",
         "tilt_deg": 15
       },
-      "volume_mm3": 76425.49568904802,
+      "volume_mm3": 76425.49568904801,
       "bounds_mm": [
         [
           -89.89999999999999,
@@ -3235,103 +3418,77 @@
           296.0
         ],
         [
-          125.0,
-          236.17298580759922
+          128.0,
+          239.17298580759922
         ]
       ],
       "center_mm": [
-        3.323774244038532,
-        278.56002039682943,
-        178.60370761861734
+        3.323774244038517,
+        278.5600203968291,
+        181.60370761861725
       ],
       "solids": 11
     },
     {
-      "name": "67_LCD_bracket_3t",
+      "name": "67_LCD_holder_PRINTED",
       "group": "electronics",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "SPCC 3t, 1 bend; foot bolted through the floor into the front rail"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "5 mm back plate + 6 mm foot + side clamps + 2 ribs, one print; foot bolted through the floor into the front rail",
+        "ground": "Plastic holder: the LCD frame is grounded by a cable to 69_ground_stud_M4"
       },
-      "volume_mm3": 72011.71863972514,
+      "volume_mm3": 154640.1960343119,
       "bounds_mm": [
         [
-          -110.0,
-          110.0
+          -116.0,
+          116.0
         ],
         [
-          251.72389457778266,
+          245.09062590538292,
           300.0
         ],
         [
           121.0,
-          220.20969226703573
+          223.20969226703573
         ]
       ],
       "center_mm": [
-        3.73211040439801e-15,
-        270.6988686742265,
-        161.6660067795845
+        -9.59837992551484e-15,
+        270.85986643618537,
+        162.25255374102989
       ],
       "solids": 1
-    },
-    {
-      "name": "67_LCD_side_clamps_PRINTED",
-      "group": "electronics",
-      "status": "concept_support",
-      "metadata": {
-        "quantity": 2
-      },
-      "volume_mm3": 16824.0,
-      "bounds_mm": [
-        [
-          -95.9,
-          95.9
-        ],
-        [
-          255.9157672821625,
-          292.9454373546494
-        ],
-        [
-          138.10599703246493,
-          219.75410499782302
-        ]
-      ],
-      "center_mm": [
-        -4.497738896071543e-14,
-        274.6958529911032,
-        179.00112471868505
-      ],
-      "solids": 2
     },
     {
       "name": "67_LCD_bolts_M5_Tnut",
       "group": "electronics",
       "status": "catalog_envelope",
       "metadata": {
-        "quantity": 2
+        "quantity": 2,
+        "sku": "M5 + fender washer OD15 + T-nut"
       },
-      "volume_mm3": 1960.3688784401747,
+      "volume_mm3": 2491.0807643489266,
       "bounds_mm": [
         [
-          -107.25,
-          107.25
+          -111.5,
+          111.5
         ],
         [
-          280.25,
-          289.75
+          277.5,
+          292.5
         ],
         [
           112.5,
-          129.0
+          133.2
         ]
       ],
       "center_mm": [
-        4.639405939236265e-15,
-        285.0000000000001,
-        118.92691169672567
+        -2.1175825953847335e-14,
+        285.0,
+        121.63287639159986
       ],
-      "solids": 4
+      "solids": 6
     },
     {
       "name": "68_company_speaker_STEP",
@@ -3358,38 +3515,39 @@
         ]
       ],
       "center_mm": [
-        -100.2512801165522,
-        -268.5006463047283,
-        183.8031316821477
+        -100.25128011655225,
+        -268.50064630472775,
+        183.80313168214755
       ],
       "solids": 21
     },
     {
-      "name": "68_speaker_bracket_3t",
+      "name": "68_speaker_holder_PRINTED",
       "group": "electronics",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "SPCC 3t, 1 bend; grille faces rear (-Y)"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "5 mm plate on the frame rear bosses with a box window + 6 mm foot + 2 ribs; grille faces rear (-Y)"
       },
-      "volume_mm3": 34018.9374084235,
+      "volume_mm3": 67333.20427313534,
       "bounds_mm": [
         [
-          -157.0,
-          -43.0
+          -157.0000001,
+          -42.9999999
         ],
         [
           -297.0,
-          -257.20000000000005
+          -230.19999990000005
         ],
         [
-          121.0,
-          235.29999999999998
+          120.9999999,
+          235.30000009999998
         ]
       ],
       "center_mm": [
-        -99.9999999999999,
-        -265.95197198769176,
-        155.81631783498398
+        -100.24497973708846,
+        -264.2593697363887,
+        152.4581288820507
       ],
       "solids": 1
     },
@@ -3398,9 +3556,10 @@
       "group": "electronics",
       "status": "catalog_envelope",
       "metadata": {
-        "quantity": 3
+        "quantity": 3,
+        "sku": "M3x22 + washer + nut"
       },
-      "volume_mm3": 584.9252821902492,
+      "volume_mm3": 627.3367830137113,
       "bounds_mm": [
         [
           -144.75,
@@ -3408,7 +3567,7 @@
         ],
         [
           -274.70000000000005,
-          -254.20000000000005
+          -252.20000000000005
         ],
         [
           138.79,
@@ -3417,8 +3576,8 @@
       ],
       "center_mm": [
         -99.99999999999999,
-        -262.20302114803627,
-        169.8733333333333
+        -261.1154929577464,
+        169.87333333333328
       ],
       "solids": 3
     },
@@ -3427,38 +3586,40 @@
       "group": "electronics",
       "status": "catalog_envelope",
       "metadata": {
-        "quantity": 2
+        "quantity": 2,
+        "sku": "M5 + fender washer OD15 + T-nut"
       },
-      "volume_mm3": 1960.3688784401752,
+      "volume_mm3": 2491.080764348927,
       "bounds_mm": [
         [
-          -147.25,
-          -52.75
+          -147.5,
+          -52.5
         ],
         [
-          -289.75,
-          -280.25
+          -292.5,
+          -277.5
         ],
         [
           112.5,
-          129.0
+          133.2
         ]
       ],
       "center_mm": [
-        -100.00000000000001,
-        -285.0000000000001,
-        118.92691169672568
+        -100.00000000000006,
+        -285.00000000000006,
+        121.63287639159991
       ],
-      "solids": 4
+      "solids": 6
     },
     {
       "name": "74_lidar_plate_3t_FRONT_LEFT",
       "group": "lidars",
       "status": "concept_fabrication",
       "metadata": {
-        "material": "SS400 3t on the floor corner; M3 to the scanner, 2x M5 T-nut"
+        "material": "SS400 3t laser cut, flat; 3x D5.5 countersunk (2 front/rear rail + 1 side rail), 2x D3.4 for the scanner",
+        "fit": "Sits on the 2t floor corner; the three bolts go through plate + floor into T-nuts of two rails, so the plate cannot turn"
       },
-      "volume_mm3": 16657.450233343367,
+      "volume_mm3": 16499.299841167776,
       "bounds_mm": [
         [
           -258.03300858899104,
@@ -3474,9 +3635,9 @@
         ]
       ],
       "center_mm": [
-        -205.0,
-        284.9999999999999,
-        122.49999999999996
+        -204.99999999999991,
+        285.112316703398,
+        122.50189274074377
       ],
       "solids": 1
     },
@@ -3485,16 +3646,17 @@
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
-        "quantity": 2
+        "quantity": 3,
+        "sku": "M5x12 countersunk + 3030 slot-8 T-nut"
       },
-      "volume_mm3": 1392.918705385519,
+      "volume_mm3": 2089.378058078278,
       "bounds_mm": [
         [
           -224.25,
           -185.75
         ],
         [
-          280.25,
+          251.75,
           289.75
         ],
         [
@@ -3503,11 +3665,42 @@
         ]
       ],
       "center_mm": [
-        -204.9999999999999,
-        285.0,
-        115.84177094038705
+        -204.99999999999997,
+        276.33333333333337,
+        115.84177094038711
       ],
-      "solids": 4
+      "solids": 6
+    },
+    {
+      "name": "74_lidar_scanner_screws_M3_FRONT_LEFT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2,
+        "sku": "M3x6 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker",
+        "note": "TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing"
+      },
+      "volume_mm3": 71.15707360380875,
+      "bounds_mm": [
+        [
+          -222.14213562373095,
+          -187.85786437626905
+        ],
+        [
+          267.85786437626905,
+          302.14213562373095
+        ],
+        [
+          121.05,
+          123.95
+        ]
+      ],
+      "center_mm": [
+        -205.0,
+        285.00000000000006,
+        122.09735099337746
+      ],
+      "solids": 2
     },
     {
       "name": "75_SICK_TiM571_envelope_base_FRONT_LEFT",
@@ -3598,9 +3791,10 @@
       "group": "lidars",
       "status": "concept_fabrication",
       "metadata": {
-        "material": "SS400 3t on the floor corner; M3 to the scanner, 2x M5 T-nut"
+        "material": "SS400 3t laser cut, flat; 3x D5.5 countersunk (2 front/rear rail + 1 side rail), 2x D3.4 for the scanner",
+        "fit": "Sits on the 2t floor corner; the three bolts go through plate + floor into T-nuts of two rails, so the plate cannot turn"
       },
-      "volume_mm3": 16657.45023334336,
+      "volume_mm3": 16499.299841167776,
       "bounds_mm": [
         [
           151.96699141100893,
@@ -3616,9 +3810,9 @@
         ]
       ],
       "center_mm": [
-        205.00000000000003,
-        -285.0,
-        122.49999999999999
+        204.99999999999991,
+        -285.112316703398,
+        122.50189274074377
       ],
       "solids": 1
     },
@@ -3627,9 +3821,10 @@
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
-        "quantity": 2
+        "quantity": 3,
+        "sku": "M5x12 countersunk + 3030 slot-8 T-nut"
       },
-      "volume_mm3": 1392.918705385519,
+      "volume_mm3": 2089.378058078278,
       "bounds_mm": [
         [
           185.75,
@@ -3637,7 +3832,7 @@
         ],
         [
           -289.75,
-          -280.25
+          -251.75
         ],
         [
           112.5,
@@ -3645,11 +3840,42 @@
         ]
       ],
       "center_mm": [
-        204.99999999999997,
-        -285.0,
-        115.84177094038708
+        204.99999999999991,
+        -276.3333333333333,
+        115.8417709403871
       ],
-      "solids": 4
+      "solids": 6
+    },
+    {
+      "name": "74_lidar_scanner_screws_M3_REAR_RIGHT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2,
+        "sku": "M3x6 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker",
+        "note": "TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing"
+      },
+      "volume_mm3": 71.15707360380875,
+      "bounds_mm": [
+        [
+          187.85786437626905,
+          222.14213562373095
+        ],
+        [
+          -302.14213562373095,
+          -267.85786437626905
+        ],
+        [
+          121.05,
+          123.95
+        ]
+      ],
+      "center_mm": [
+        205.0,
+        -285.0,
+        122.09735099337747
+      ],
+      "solids": 2
     },
     {
       "name": "75_SICK_TiM571_envelope_base_REAR_RIGHT",

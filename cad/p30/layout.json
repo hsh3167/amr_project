@@ -1,5 +1,5 @@
 {
-  "revision": "P30-5",
+  "revision": "P30-5b",
   "status": "P30 concept (2026-11-15): low-cost 30x30 aluminium profile chassis with SS400 laser-cut steel plates. Two drive wheels on vertical slide suspension (MISUMI D20 shafts + ball bushings + one spring each), four GL-65 casters bolted rigid. Separate variant; the Rev15 model in cad/layout.json is unchanged.",
   "coordinates": "mm; X right, Y forward, Z up, ground Z0. Heading clockwise from +Y (CAD Z rotation = -heading).",
   "frame": {
@@ -142,7 +142,12 @@
     "stud_top_above_holder_mm": 4,
     "wheel_mount": "P30-4 (2026-11-18, user choice A): one flat SS400 10t axle plate per wheel, vertical (YZ), no bend and no plate-to-plate joint in the load path. Motor axle clamped on its face (D-hole AF10.2, spacer + washer + M14 nut). Two MISUMI LHSS16 housed ball bushings bolted to its outer face (2x M6 each from the inner face) ride the guide shafts, so the plate (and the wheel axle normal to it) is set parallel to the shafts by the machined housing faces. A flat 6t spring seat sits on the plate top edge (2x M6).",
     "spring_x": 178,
-    "spring_x_note": "Spring stud between the shafts (x179) and the motor side; P30-5: no washer or nut above the upper holder any more"
+    "spring_x_note": "Spring stud between the shafts (x179) and the motor side; P30-5: no washer or nut above the upper holder any more",
+    "seat_bolt_y": [
+      -55,
+      0,
+      55
+    ]
   },
   "electronics": {
     "battery_center_y": 0,
@@ -175,7 +180,7 @@
     ],
     "power_bay_xy": [
       108,
-      222
+      200
     ],
     "power_bay_size": [
       56,
@@ -198,9 +203,27 @@
       "fit_to_motor": "ZLLG65ASM250-N V2: 24 V, 10 A rated / 30 A stall, 1024-line magnetic A/B encoder + hall. ZLTECH lists ZLAC8015/ZLAC8015D as the driver for its 6.5-inch hub servo motors; 7S pack 21-29.4 V is inside 20-48 V. Confirm the encoder connector (motor single-ended A/B vs driver iA+/iA-) with ZLTECH before ordering",
       "x": 106,
       "y": 0,
-      "mount": "On edge (narrow side down, long side along Y) beside the battery on a 3t angle bracket to the floor (not drawn): the manual recommends the narrow side for heat dissipation; M3 through the side holes"
+      "mount": "On edge (narrow side down, manual-recommended for heat) beside the battery; heatsink face on a 3t SPCC L-bracket (4x M3x10 through the ears, thermal pad), bracket foot 2x M5 through the floor with nuts underneath",
+      "bracket_foot_x": 138
     },
-    "driver_note": "driver_x/driver_size were the P30-1..5 twin-driver envelopes; P30-5b uses one ZLAC8015D (motor_driver)"
+    "driver_note": "driver_x/driver_size were the P30-1..5 twin-driver envelopes; P30-5b uses one ZLAC8015D (motor_driver)",
+    "lcd_holder_foot_mm": 6,
+    "lcd_holder_plate_mm": 5,
+    "speaker_holder_foot_mm": 6,
+    "speaker_holder_plate_mm": 5,
+    "speaker_rib_local_x": [
+      66,
+      170
+    ],
+    "battery_strap_y": [
+      -94,
+      94
+    ],
+    "ground_stud_xy": [
+      -130,
+      150
+    ],
+    "print_note": "P30-5b: LCD and speaker holders 3D-printed (PETG/ASA, 5 mm plate, 6 mm foot, ribs); grounding by cable to an M4 ground stud"
   },
   "sensors": {
     "lidar_plate": [
@@ -225,7 +248,19 @@
       27.0
     ],
     "camera_fov_note": "Depth FOV H58.4 x V45.5 (cad/parts.json + Rev15 viewer). Optics x = the three front openings of the Astra STEP (lens barrel D13.3, centre lens D17, window 21.8x14.5) in the camera frame; which one is the depth camera is not identified, so all three are checked",
-    "camera_yaw_note": "P30-3: outward yaw 15 -> 5 deg. At 15 deg the outer optic of the left camera saw the front-left TiM571 (7.9% of the image, nearest 29 mm); clear from 6 deg down. Combined horizontal view +-34.2 deg (was +-44.2); the LiDARs cover the sides"
+    "camera_yaw_note": "P30-3: outward yaw 15 -> 5 deg. At 15 deg the outer optic of the left camera saw the front-left TiM571 (7.9% of the image, nearest 29 mm); clear from 6 deg down. Combined horizontal view +-34.2 deg (was +-44.2); the LiDARs cover the sides",
+    "scanner_holes_local": [
+      [
+        -20,
+        0
+      ],
+      [
+        20,
+        0
+      ]
+    ],
+    "lidar_side_bolt_dy": 26,
+    "lidar_mount_note": "P30-5b: TiM571 on a 3t SS400 plate with 2x M3x5 (bottom threads M3 x 2.8, 0.8 N m max; spacing assumed). Plate on the 2t floor corner, 3x M5 countersunk through plate + floor into T-nuts: 2 in the front/rear rail, 1 in the side rail (no rotation)"
   },
   "load_case": {
     "mass_kg": 55,

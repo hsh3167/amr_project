@@ -11,6 +11,9 @@ def make(d):
         from .electronics import mount_holes
         for x,y,diameter in chassis_mount_holes(d)+mount_holes(d):
             base=drilled(base,[(x,y)],diameter,p['base_bottom_z'],p['base_thickness'])
+        from .electronics import mount_slots
+        for x0,x1,y0,y1 in mount_slots(d):   # Rev17 battery strap slots
+            base=base-span(x0,x1,y0,y1,p['base_bottom_z']-1,p['base_bottom_z']+p['base_thickness']+1)
         # Rev13/14: CB5-12 holes for the main column end bolts (Rev14: LiDAR brackets hang on the main columns).
         columns=[tuple(c) for c in d.profile['main_columns_xy']]
         base=drilled(base,columns,5.5,p['base_bottom_z'],p['base_thickness'])

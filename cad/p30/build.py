@@ -94,7 +94,7 @@ def tapped_bolt(x, y, head_face, clear_t, engage, d, down=True, minor=None):
     """Socket screw: head on head_face, shank through clear_t of clearance hole, then `engage` mm in a tapped hole.
     The engaged length is drawn at the tap-drill diameter so the tapped part can be drilled at the same size;
     pass `minor` to match a vendor STEP that draws its thread at another diameter."""
-    minor = minor or {5: 4.2, 6: 5.0, 8: 6.8}[d]
+    minor = minor or {4: 3.3, 5: 4.2, 6: 5.0, 8: 6.8}[d]
     sg = -1 if down else 1
     head = cylz(SCREW_HEAD[d]/2, d, x, y, head_face if down else head_face-d)
     a = sorted((head_face, head_face+sg*clear_t))
@@ -209,6 +209,8 @@ def plates(P):
     floor = polygon_plate(pts, pl['floor_t'], P.z_lo1)
     for x, y, dd in floor_holes(P):
         floor -= cylz(dd/2+.25, 10, x, y, P.z_lo1-3)
+    for x0, x1, y0, y1 in floor_slots(P):                                     # P30-5b battery strap slots
+        floor -= span(x0, x1, y0, y1, P.z_lo1-1, P.z_lo1+pl['floor_t']+1)
     r.append(rec('12_P30_floor_plate_'+tname(pl['floor_t']), 'plates', floor, PLATE, material=f"SS400 {pl['floor_t']:g}t laser cut, notched at the wheel bays"))
     # deck
     deck = span(-X, X, -Y, Y, P.z_top1, P.z_deck1)
@@ -317,9 +319,9 @@ def drive(P, side):
             ap += span(*S(a0, a1), min(sg*(gy-bu['width']/2-3), sg*hy), max(sg*(gy-bu['width']/2-3), sg*hy), P.z_carr0, ear_top)
     for y, z in taps:
         ap -= cylx(hole_r, 30, side*(a0+a1)/2, y, z)              # D7.5 for M6 (+-0.45 float to align on the shafts)
-    seat_bolts = [(side*(a0+a1)/2, y) for y in (-55, 55)]
+    seat_bolts = [(side*(a0+a1)/2, y) for y in q['seat_bolt_y']]
     for x, y in seat_bolts:
-        ap -= cylz(2.5, 13, x, y, P.z_carr0-12)                   # M6 tapped top edge (tap drill D5)
+        ap -= cylz(1.65, 9, x, y, P.z_carr0-8)                    # P30-5b: M4 tapped top edge (tap drill D3.3, 3.35 mm walls)
     mv(f'36_axle_plate_SS400_{tname(t)}', ap, PLATE,
        material=f'SS400 {t:g}t laser cut, flat (no bend); D-hole AF10.2; 4x D7.5 for the M6 housing bolts; 2x M6 tapped top edge',
        fit='Camber set by the plate face and the LHSS16 mounting faces; check plate flatness (laser-cut hot-rolled plate)')
@@ -341,13 +343,14 @@ def drive(P, side):
     st = q['seat_t']; sy = q['seat_half_y']
     seat = span(*S(a0, q['seat_x_out']), -sy, sy, P.z_carr0, P.z_carr1)
     for x, y in seat_bolts:
-        seat -= cylz(3.25, 20, x, y, P.z_carr0-5)
+        seat -= cylz(2.25, 20, x, y, P.z_carr0-5)                                   # D4.5 for M4
     seat -= cylz(3.4, 20, kx, 0, P.z_carr0-5)                                     # M8 stud tap
     for y in (-q['bump_stopper']['y'], q['bump_stopper']['y']):
         seat -= cylz(2.51, 20, gx, y, P.z_carr0-5)                                  # M5 tap for C-USLH10 (thread drawn at major)
-    mv(f'37_spring_seat_SS400_{tname(st)}', seat, PLATE, material=f'SS400 {st:g}t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 2x D6.5')
-    sb = [tapped_bolt(x, y, P.z_carr1, st, 10, 6) for x, y in seat_bolts]
-    mv('38_seat_bolts_M6x16', Compound([s_ for b in sb for s_ in b.solids()]), DARK, 'catalog_envelope', quantity=2)
+    mv(f'37_spring_seat_SS400_{tname(st)}', seat, PLATE, material=f'SS400 {st:g}t laser cut, flat; M8 stud tap + 2x M5 stopper taps; 3x D4.5')
+    sb = [tapped_bolt(x, y, P.z_carr1, st, 6, 4) for x, y in seat_bolts]
+    mv('38_seat_bolts_M4x12', Compound([s_ for b in sb for s_ in b.solids()]), DARK, 'catalog_envelope', quantity=len(sb),
+       fit='Locate only (the spring force presses the seat on the plate edge): M4 x 6 engaged in the 10t edge')
     # stud = spring guide only (P30-5: no washer/nut; the droop limit is the two green C-USLH10 stoppers on the lower holders)
     half = q['travel_mm']/2
     stud_top = P.z_hold_up0+half+q['stud_top_above_holder_mm']   # still 4 mm inside the D10 holder hole at full droop
@@ -429,11 +432,41 @@ def floor_holes(P):
     L = P.L; f = L['frame']; Y = f['outer_y']; h = P.s/2; e = L['electronics']
     pts = [(x, y, 5) for y in (Y-h,) for x in (-140, 140)]+[(x, -(Y-h), 5) for x in (0, 120)]
     pts += [(sx*f['inner_rail_x'], y, 5) for sx in (-1, 1) for y in (-160, -90, 90, 160)]
-    pts += [(x, Y-h, 5) for x in (-100, 100)]                                  # LCD bracket
+    pts += [(x, Y-h, 5) for x in (-104, 104)]                                  # LCD holder
     pts += [(e['speaker_x']+dx, -(Y-h), 5) for dx in (-40, 40)]                # speaker bracket
     for pose in lidar_poses(P):
-        pts += [(pose['x']+dx, pose['y'], 5) for dx in (-12, 12)]
+        pts += [(px, py, 5) for px, py, _ in lidar_plate_bolts(P, pose)]
+    pts += [(x, y, 5) for x, y in driver_floor_bolts(P)]                      # driver bracket
+    gx, gy = e['ground_stud_xy']; pts.append((gx, gy, 4))                       # ground stud
     return pts
+
+
+def floor_slots(P):
+    return battery_strap_p30(P)[1]
+
+
+def battery_case_p30(P):
+    from ..parts.vendor import source
+    e = P.L['electronics']; top = P.z_floor1
+    src = source('BATTERY.STEP'); case = max(src.solids(), key=lambda s: s.volume).rotate(Axis.Z, e['battery_yaw_deg']).bounding_box()
+    hx, hy = case.size.X/2, case.size.Y/2; z0 = top+e['battery_pad_mm']
+    return (-hx, hx, e['battery_center_y']-hy, e['battery_center_y']+hy, z0, z0+case.size.Z)
+
+
+def battery_strap_p30(P):
+    from ..parts.electronics import battery_strap
+    return battery_strap(battery_case_p30(P), 'y', P.L['electronics']['battery_strap_y'], P.z_lo1, P.L['plates']['floor_t'])
+
+
+def driver_floor_bolts(P):
+    md = P.L['electronics']['motor_driver']; xf = md['x']+md['envelope_mm'][2]/2
+    return [((xf+3+md['bracket_foot_x'])/2, md['y']+dy) for dy in (-45, 45)]
+
+
+def lidar_plate_bolts(P, pose):
+    """P30-5b: 3x M5 countersunk T-nut bolts: 2 into the front/rear rail + 1 into the side rail (anti-rotation)."""
+    f = P.L['frame']; x, y = pose['x'], pose['y']; sy = 1 if y > 0 else -1
+    return [(x-12, y, 'x'), (x+12, y, 'x'), (x, y-sy*P.L['sensors']['lidar_side_bolt_dy'], 'y')]
 
 
 def deck_holes(P):
@@ -461,16 +494,46 @@ def electronics(P):
     batt = Compound([s.translate(mvb) for s in solids])
     r.append(rec('60_company_7S9P_battery_STEP', 'electronics', batt, (.86, .63, .36), 'company_supplied_step', source='BATTERY.STEP.gz',
                  placement={'yaw_deg': e['battery_yaw_deg'], 'translate_mm': [round(v, 3) for v in mvb]},
-                 limits='Hold-down strap (2x 25 mm strap through the floor slots) not drawn'))
+                 limits='P30-5b: held by 2x 25 mm straps through floor slots (60_battery_hold_down_straps)'))
     bb = batt.bounding_box(); cb = case
     pads = [cylz(7.5, e['battery_pad_mm'], x, y, top) for x in (cb.min.X+mvb[0]+15, cb.max.X+mvb[0]-15) for y in (cb.min.Y+mvb[1]+15, cb.max.Y+mvb[1]-15)]
     r.append(rec('60_battery_pads', 'electronics', Compound(pads), (.30, .30, .32), 'concept_support', quantity=4))
-    # one ZLTECH ZLAC8015D dual-channel hub-servo driver, on edge beside the battery (manual Fig.1 envelope incl. ears)
-    md = e['motor_driver']; L_, W_, H_ = md['envelope_mm']
-    x = md['x']; y = md['y']
-    r.append(rec('61_motor_driver_'+md['sku']+'_ENVELOPE', 'electronics', span(x-H_/2, x+H_/2, y-L_/2, y+L_/2, top, top+W_), (.20, .22, .26),
-                 'drawing_envelope', sku=md['sku'], maker=md['maker'], channels=md['channels'], electrical=md['electrical'],
-                 source=md['source'], mount=md['mount'], fit_to_motor=md['fit_to_motor']))
+    strap, _, buckle = battery_strap_p30(P)
+    r.append(rec('60_battery_hold_down_straps', 'electronics', strap, (.15, .15, .17), 'catalog_envelope', quantity=2,
+                 sku='25 mm polyester strap + cam buckle', fit='Around the case through two floor slots each, closed under the floor; clear of the terminal block'))
+    r.append(rec('60_battery_strap_buckles', 'electronics', buckle, (.30, .30, .33), 'catalog_envelope', quantity=2))
+    # ZLTECH ZLAC8015D on edge (narrow side down, manual-recommended for heat), heatsink face on a 3t SPCC L-bracket
+    md = e['motor_driver']; L_, W_, H_ = md['envelope_mm']; y = md['y']
+    xf = md['x']+H_/2; zc = top+W_/2                                           # heatsink mounting face (outboard), centre height
+    to_span = lambda x0, x1, y0, y1, z0, z1: span(xf-z1, xf-z0, y+x0, y+x1, zc+y0, zc+y1)
+    hole = lambda lx, ly, rr: cylx(rr, 40, xf, y+lx, zc+ly)
+    r.append(rec('61_motor_driver_'+md['sku'], 'electronics', ev.zlac_driver(to_span, hole), (.20, .22, .26), 'drawing_envelope',
+                 sku=md['sku'], maker=md['maker'], channels=md['channels'], electrical=md['electrical'], source=md['source'],
+                 mount=md['mount'], fit_to_motor=md['fit_to_motor'],
+                 model='Manual Fig.1 outline 168x89x29.7, ear-hole pitch 158; hole Y position, base, cover and terminals estimated'))
+    bt = 3; fx1 = md['bracket_foot_x']
+    web = span(xf, xf+bt, y-87, y+87, top, top+W_+3)
+    foot = span(xf, fx1, y-60, y+60, top, top+bt)
+    brk = web+foot
+    ears = [(y+lx, zc+ly) for lx, ly in ev.ZLAC_EAR_HOLES]
+    for yy, zz in ears:
+        brk -= cylx(1.75, 10, xf+bt/2, yy, zz)
+    fb = driver_floor_bolts(P)
+    for x_, y_ in fb:
+        brk -= cylz(2.75, 10, x_, y_, top-1)
+    r.append(rec('61_motor_driver_bracket_3t', 'electronics', brk, PLATE, material='SPCC 3t laser cut, 1 bend (web + foot); 4x D3.5 for the driver ears, 2x D5.5 to the floor',
+                 fit='Heatsink face against the web (thermal pad); foot clear of the drive axle plate (x142)'))
+    from ..parts.suspension import nut, screw
+    m3 = []
+    for yy, zz in ears:
+        m3 += (cylx(2.75, 3, xf-ev.ZLAC_FLANGE_T-1.5, yy, zz)+cylx(1.5, ev.ZLAC_FLANGE_T+bt+2.4, xf+(bt+2.4-ev.ZLAC_FLANGE_T)/2, yy, zz)).solids()
+        m3 += nut_x(xf+bt, 2.4, yy, zz, 5.5, 3).solids()
+    r.append(rec('61_motor_driver_screws_M3x10', 'electronics', Compound(m3), DARK, 'catalog_envelope', quantity=4, sku='M3x10 + washer + M3 nylock'))
+    m5 = [s_ for x_, y_ in fb for s_ in (screw(x_, y_, top+bt, 5, bt+2+4+2)+nut(x_, y_, P.z_lo1-4, 8, 4, 5)).solids()]
+    r.append(rec('61_motor_driver_bracket_bolts_M5', 'electronics', Compound(m5), DARK, 'catalog_envelope', quantity=2, sku='CB5-12 + M5 nut under the floor'))
+    gx, gy = e['ground_stud_xy']
+    g = ev.ground_stud(top, P.z_lo1, gx, gy, '69_ground_stud_M4')
+    r.append(rec(g.name, 'electronics', g.shape, g.color, g.status, **g.metadata))
     # controller PCB + computer on M4 standoffs
     px, py = e['pcb_xy']; pcb0 = top+10
     pcb = box(165, 104, 7, px, py, pcb0+3.5); comp0 = pcb0+7+e['computer_above_pcb']
@@ -495,24 +558,32 @@ def lcd(P):
     from ..parts.vendor import source
     from ..parts.electronics import _lcd_frame, _place
     e = P.L['electronics']; top = P.z_floor1; Y = P.L['frame']['outer_y']; h = P.s/2
-    shim = _Shim(P, {'lcd_tilt_deg': e['lcd_tilt_deg'], 'lcd_front_y': e['lcd_front_y'], 'lcd_bottom_z': top+3+1})
+    from ..parts.electronics import lcd_rib, PRINT_NOTE
+    ft, pt = e['lcd_holder_foot_mm'], e['lcd_holder_plate_mm']
+    shim = _Shim(P, {'lcd_tilt_deg': e['lcd_tilt_deg'], 'lcd_front_y': e['lcd_front_y'], 'lcd_bottom_z': top+ft+1})
     tilt, move = _lcd_frame(shim)
     screen = Compound([_place(s, tilt, move) for s in source('LCD.STEP').solids()])
-    plate = _place(span(-95.9, 95.9, -15.3, -12.3, -90, 45), tilt, move) & span(-120, 120, 0, 400, top+3, 400)
-    bottom = (plate & span(-120, 120, 0, 400, top+3, top+3.5)).bounding_box()
-    foot = span(-110, 110, bottom.min.Y, Y, top, top+3)
-    bolts = [(x, Y-h) for x in (-100, 100)]
-    for x, y in bolts:
-        foot -= cylz(2.75, 10, x, y, top-1)
-    clamps = []
+    plate = _place(span(-95.9, 95.9, -12.3-pt, -12.3, -90, 45), tilt, move) & span(-120, 120, 0, 400, top+ft, 400)
+    bottom = (plate & span(-120, 120, 0, 400, top+ft, top+ft+.5)).bounding_box()
+    foot = span(-116, 116, bottom.min.Y, Y, top, top+ft)
+    for s in (-1, 1):
+        foot = foot+span(*sorted((s*90, s*95)), bottom.min.Y-30, bottom.min.Y+1, top, top+ft)   # pads under the ribs
+    bolts = [(x, Y-h) for x in (-104, 104)]
+    holder = plate+foot
     for s in (-1, 1):
         block = span(*sorted((s*89.9, s*95.9)), -12.3, 4.6, -40, 40)+span(*sorted((s*87.4, s*89.9)), 3.1, 4.6, -40, 40)
-        clamps.append(_place(block, tilt, move))
-    tb = [tnut_bolt(x, y, P.z_lo1, 3+P.L['plates']['floor_t'], 5, 'x') for x, y in bolts]
+        holder = holder+_place(block, tilt, move)
+        holder = holder+lcd_rib(tilt, move, -12.3-pt, top+ft, *sorted((s*90, s*95)))
+    for x, y in bolts:
+        holder -= cylz(2.75, 20, x, y, top-1)
+    tb = [tnut_bolt(x, y, P.z_lo1, ft+1.2+P.L['plates']['floor_t'], 5, 'x') for x, y in bolts]
+    washers = [cylz(7.5, 1.2, x, y, top+ft)-cylz(2.75, 3, x, y, top+ft-1) for x, y in bolts]
     return [rec('67_company_LCD_7in_STEP', 'electronics', screen, (.10, .12, .16), 'company_supplied_step', source='LCD.STEP.gz', tilt_deg=tilt),
-            rec('67_LCD_bracket_3t', 'electronics', plate+foot, PLATE, material='SPCC 3t, 1 bend; foot bolted through the floor into the front rail'),
-            rec('67_LCD_side_clamps_PRINTED', 'electronics', Compound(clamps), PRINT, 'concept_support', quantity=2),
-            rec('67_LCD_bolts_M5_Tnut', 'electronics', Compound([s for c in tb for s in c.solids()]), DARK, 'catalog_envelope', quantity=2)]
+            rec('67_LCD_holder_PRINTED', 'electronics', holder, PRINT, 'concept_support', material=PRINT_NOTE,
+                design=f'{pt:g} mm back plate + {ft:g} mm foot + side clamps + 2 ribs, one print; foot bolted through the floor into the front rail',
+                ground='Plastic holder: the LCD frame is grounded by a cable to 69_ground_stud_M4'),
+            rec('67_LCD_bolts_M5_Tnut', 'electronics', Compound([s for c in tb for s in c.solids()]+[s for w in washers for s in w.solids()]), DARK,
+                'catalog_envelope', quantity=2, sku='M5 + fender washer OD15 + T-nut')]
 
 
 def speaker(P):
@@ -522,22 +593,33 @@ def speaker(P):
     move = (e['speaker_x']-(x0+x1)/2, e['speaker_front_y']-y0, e['speaker_bottom_z']-z0)
     unit, trimmed = _speaker_shape(move)
     T = lambda s: s.translate(move)
-    b0 = SPEAKER_BACK
-    plate = T(span(66, 180, b0, b0+3, top+3-move[2], 192))-T(span(84, 162, b0-5, b0+5, 101.5, 176))
+    from ..parts.electronics import PRINT_NOTE
+    from ..parts.suspension import yz_prism
+    b0 = SPEAKER_BACK; ft, pt = e['speaker_holder_foot_mm'], e['speaker_holder_plate_mm']
+    plate = T(span(66, 180, b0, b0+pt, top+ft-move[2], 192))-T(span(84, 162, b0-5, b0+pt+2, 101.5, 176))
     for x, z in SPEAKER_SCREWS:
-        plate -= T(cyly(1.7, 10, x, b0+1.5, z))
+        plate -= T(cyly(1.7, pt+4, x, b0+pt/2, z))
     y_plate = b0+move[1]
-    foot = span(move[0]+66, move[0]+180, e['speaker_front_y'], y_plate+3, top, top+3)
+    foot = span(move[0]+66, move[0]+180, e['speaker_front_y'], y_plate+pt, top, top+ft)
+    for x0 in e['speaker_rib_local_x']:
+        foot = foot+span(move[0]+x0, move[0]+x0+5, y_plate+pt-1, y_plate+pt+25, top, top+ft)
+    holder = plate+foot
+    for x0 in e['speaker_rib_local_x']:
+        holder = holder+yz_prism([(y_plate+pt, top+ft), (y_plate+pt+25, top+ft), (y_plate+pt, top+ft+40)], move[0]+x0, move[0]+x0+5)
     bolts = [(e['speaker_x']+dx, -(Y-h)) for dx in (-40, 40)]
     for x, y in bolts:
-        foot -= cylz(2.75, 10, x, y, top-1)
-    screws = Compound([T(cyly(2.75, 3, x, b0+4.5, z)+cyly(1.5, b0+3-293.9, x, (b0+3+293.9)/2, z)) for x, z in SPEAKER_SCREWS])
-    tb = [tnut_bolt(x, y, P.z_lo1, 3+P.L['plates']['floor_t'], 5, 'x') for x, y in bolts]
+        holder -= cylz(2.75, 20, x, y, top-1)
+    holder = holder-unit   # seat the print on the speaker's own shape
+    screws = Compound([T(cyly(2.75, 3, x, b0+pt+1.5, z)+cyly(1.5, b0+pt-293.9, x, (b0+pt+293.9)/2, z)) for x, z in SPEAKER_SCREWS])
+    tb = [tnut_bolt(x, y, P.z_lo1, ft+1.2+P.L['plates']['floor_t'], 5, 'x') for x, y in bolts]
+    washers = [cylz(7.5, 1.2, x, y, top+ft)-cylz(2.75, 3, x, y, top+ft-1) for x, y in bolts]
     return [rec('68_company_speaker_STEP', 'electronics', unit, (.18, .18, .2), 'company_supplied_step', source='SPEAKER.STEP.gz', trimmed_solids=trimmed,
                 limits='Lead wire outside the frame/box envelope trimmed (as Rev15)'),
-            rec('68_speaker_bracket_3t', 'electronics', plate+foot, PLATE, material='SPCC 3t, 1 bend; grille faces rear (-Y)'),
-            rec('68_speaker_screws_M3', 'electronics', screws, DARK, 'catalog_envelope', quantity=3),
-            rec('68_speaker_bolts_M5_Tnut', 'electronics', Compound([s for c in tb for s in c.solids()]), DARK, 'catalog_envelope', quantity=2)]
+            rec('68_speaker_holder_PRINTED', 'electronics', holder, PRINT, 'concept_support', material=PRINT_NOTE,
+                design=f'{pt:g} mm plate on the frame rear bosses with a box window + {ft:g} mm foot + 2 ribs; grille faces rear (-Y)'),
+            rec('68_speaker_screws_M3', 'electronics', screws, DARK, 'catalog_envelope', quantity=3, sku='M3x22 + washer + nut'),
+            rec('68_speaker_bolts_M5_Tnut', 'electronics', Compound([s for c in tb for s in c.solids()]+[s for w in washers for s in w.solids()]), DARK,
+                'catalog_envelope', quantity=2, sku='M5 + fender washer OD15 + T-nut')]
 
 
 # ---------------------------------------------------------------- sensors
@@ -562,12 +644,26 @@ def lidars(P):
     for pose in lidar_poses(P):
         n = pose['name']; x, y = pose['x'], pose['y']; yaw = -pose['heading_deg']
         place = lambda o: rz(o, yaw).translate((x, y, 0))
+        from ..parts.sensors import scanner_screws
         plate = place(box(pw, pd, pt, 0, 0, z0-pt/2))
-        for dx in (-12, 12):
-            plate -= cylz(2.75, 10, x+dx, y, z0-pt-1)   # countersunk M5 (flush, under the scanner)
-        r.append(rec('74_lidar_plate_3t_'+n, 'lidars', plate, PLATE, material='SS400 3t on the floor corner; M3 to the scanner, 2x M5 T-nut'))
-        tb = [tnut_bolt(x+dx, y, P.z_lo1, pt+P.L['plates']['floor_t'], 5, 'x', flush=True) for dx in (-12, 12)]
-        r.append(rec('74_lidar_plate_bolts_M5_Tnut_'+n, 'lidars', Compound([s for c in tb for s in c.solids()]), DARK, 'catalog_envelope', quantity=2))
+        bolts = lidar_plate_bolts(P, pose)
+        for bx, by, _ in bolts:
+            plate -= cylz(2.75, 10, bx, by, z0-pt-1)   # countersunk M5 (flush, under the scanner)
+        pts, _ = scanner_screws(x, y, yaw, z0, pt, sn['scanner_holes_local'])
+        m3 = []
+        for px, py in pts:
+            cs = Solid.make_cone(3.1, 1.7, 1.7, Plane((px, py, z0-pt)))       # 90 deg countersink, flush with the plate bottom
+            plate -= cs+cylz(1.7, pt+2, px, py, z0-pt-1)
+            m3 += (Solid.make_cone(3.0, 1.5, 1.6, Plane((px, py, z0-pt+.05)))+cylz(1.5, pt-1.7, px, py, z0-pt+1.65)).solids()
+        m3 = Compound(m3)
+        r.append(rec('74_lidar_plate_3t_'+n, 'lidars', plate, PLATE,
+                     material='SS400 3t laser cut, flat; 3x D5.5 countersunk (2 front/rear rail + 1 side rail), 2x D3.4 for the scanner',
+                     fit='Sits on the 2t floor corner; the three bolts go through plate + floor into T-nuts of two rails, so the plate cannot turn'))
+        tb = [tnut_bolt(bx, by, P.z_lo1, pt+P.L['plates']['floor_t'], 5, sd, flush=True) for bx, by, sd in bolts]
+        r.append(rec('74_lidar_plate_bolts_M5_Tnut_'+n, 'lidars', Compound([s for c in tb for s in c.solids()]), DARK, 'catalog_envelope',
+                     quantity=len(tb), sku='M5x12 countersunk + 3030 slot-8 T-nut'))
+        r.append(rec('74_lidar_scanner_screws_M3_'+n, 'lidars', m3, DARK, 'catalog_envelope', quantity=len(pts),
+                     sku='M3x6 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker', note='TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing'))
         r.append(rec('75_SICK_TiM571_envelope_base_'+n, 'lidars', place(box(lid['width'], lid['depth'], 36, 0, 0, z0+18)), (.85, .88, .90), 'drawing_envelope'))
         r.append(rec('76_SICK_TiM571_optical_envelope_'+n, 'lidars', place(box(61, 60, lid['height']-39, 0, 0, z0+36+(lid['height']-39)/2)), (.09, .16, .21),
                      'drawing_envelope', scan_z=pose['scan_z'], heading_deg=pose['heading_deg']))

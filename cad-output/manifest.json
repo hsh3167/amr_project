@@ -2,36 +2,16 @@
   "engine": "build123d",
   "root": "amr_current",
   "files": [
-    "amr_current.step",
     "amr_current.glb"
   ],
-  "step_roundtrip": [
-    {
-      "file": "amr_current.step",
-      "raw_import_valid": false,
-      "valid_after_explicit_normalization": true,
-      "normalized_components": [
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        },
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        }
-      ],
-      "solids": 450
-    }
-  ],
+  "step_roundtrip": [],
   "components": [
     {
       "name": "01_lower_steel_plate_3t",
       "group": "chassis",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 589944.1100563724,
+      "volume_mm3": 588977.4466847194,
       "bounds_mm": [
         [
           -195.0,
@@ -47,9 +27,9 @@
         ]
       ],
       "center_mm": [
-        0.018122449766011316,
-        0.30757940953551294,
-        118.50000000000006
+        0.01005121450733666,
+        0.34889211400389486,
+        118.50000000000007
       ],
       "solids": 1
     },
@@ -74,8 +54,8 @@
         ]
       ],
       "center_mm": [
-        1.0808925585799522e-14,
-        -0.04841572463066489,
+        1.0804982161652933e-14,
+        -0.048415724630664826,
         284.5
       ],
       "solids": 1
@@ -101,8 +81,8 @@
         ]
       ],
       "center_mm": [
-        -3.576336036472139e-15,
-        -2.4453579736561635e-16,
+        -3.59161952380749e-15,
+        -2.292523100302653e-16,
         280.5
       ],
       "solids": 1
@@ -409,7 +389,7 @@
       ],
       "center_mm": [
         -210.99999999999997,
-        5.874350963537429e-16,
+        5.695670363809649e-16,
         90.0
       ],
       "solids": 1
@@ -438,7 +418,7 @@
       ],
       "center_mm": [
         -210.00000000000003,
-        1.2606462339927814e-15,
+        1.5738831422361906e-15,
         90.00000000000001
       ],
       "solids": 1
@@ -467,7 +447,7 @@
       ],
       "center_mm": [
         -165.10000000000002,
-        6.552005468566091e-16,
+        7.391369745589288e-16,
         89.99999999999999
       ],
       "solids": 1
@@ -496,7 +476,7 @@
       ],
       "center_mm": [
         210.99999999999997,
-        5.874350963537429e-16,
+        5.695670363809649e-16,
         90.0
       ],
       "solids": 1
@@ -525,7 +505,7 @@
       ],
       "center_mm": [
         210.00000000000003,
-        1.2606462339927814e-15,
+        1.5738831422361906e-15,
         90.00000000000001
       ],
       "solids": 1
@@ -554,8 +534,8 @@
       ],
       "center_mm": [
         165.10000000000002,
-        5.586064566975899e-16,
-        90.0
+        7.8998601391854e-16,
+        89.99999999999999
       ],
       "solids": 1
     },
@@ -589,7 +569,7 @@
         ]
       ],
       "center_mm": [
-        -138.07354507666767,
+        -138.07354507666764,
         -224.1112064694331,
         57.94177205412502
       ],
@@ -698,7 +678,7 @@
       ],
       "center_mm": [
         -138.07354507666764,
-        205.8887935305669,
+        205.88879353056686,
         57.94177205412502
       ],
       "solids": 1
@@ -734,7 +714,7 @@
       ],
       "center_mm": [
         -137.99999103002804,
-        214.9984962673742,
+        214.99849626737418,
         78.72768320789984
       ],
       "solids": 1
@@ -805,8 +785,8 @@
         ]
       ],
       "center_mm": [
-        137.9264549233324,
-        -224.1112064694332,
+        137.92645492333236,
+        -224.11120646943317,
         57.941772054124996
       ],
       "solids": 1
@@ -836,7 +816,7 @@
           -182.4999999
         ],
         [
-          68.79761779634251,
+          68.79761769634251,
           83.00000019999919
         ]
       ],
@@ -915,7 +895,7 @@
       "center_mm": [
         137.9264549233324,
         205.8887935305669,
-        57.94177205412501
+        57.941772054125
       ],
       "solids": 1
     },
@@ -944,7 +924,7 @@
           247.5000001
         ],
         [
-          68.79761779634251,
+          68.79761769634251,
           83.00000019999919
         ]
       ],
@@ -1073,7 +1053,7 @@
       "solids": 1
     },
     {
-      "name": "53_motor_driver_ZLAC8015D_DUMMY",
+      "name": "53_motor_driver_ZLAC8015D",
       "group": "electronics",
       "status": "drawing_envelope",
       "metadata": {
@@ -1082,10 +1062,11 @@
         "channels": 2,
         "electrical": "Input 20-48 VDC (typ. 36), output current 15 A typical / 30 A peak per channel, over-voltage 60 V, under-voltage 16 V; hall U/V/W + incremental encoder A/B inputs, 5 V supply to encoder and hall; CANopen (CiA301/402, 25-1000 kbps) and RS485 Modbus-RTU; 2 programmable opto inputs; 0-50 C",
         "source": "ZLAC8015D Servo Driver Manual (Special for Hub Servo Motor) V1.0, ZLTECH (www.zlingkj.com): 2.1 electrical index, 2.2 environment, Fig.1 installation dimension 168 x 89 x 29.7 (body 158, side hole pitch 42). Corner-hole pitch not dimensioned in the figure (envelope only)",
-        "mount": "Wide side down on 4 M3 standoffs through the corner ears (manual 2.4 allows wide-side mounting with M3 through the four corner holes; narrow-side mounting is recommended for heat - check temperature on the prototype)",
-        "fit_to_motor": "ZLLG65ASM250-N V2: 24 V, 10 A rated / 30 A stall, 1024-line magnetic A/B encoder + hall. ZLTECH lists ZLAC8015/ZLAC8015D as the driver for its 6.5-inch hub servo motors; 7S pack 21-29.4 V is inside 20-48 V. Confirm the encoder connector (motor single-ended A/B vs driver iA+/iA-) with ZLTECH before ordering"
+        "mount": "Rev17: wide side down directly on the 3t steel base plate (heat spreader, thermal pad), 4x M3x10 through the corner ears + nylock under the plate (manual 2.4: wide-side mounting uses M3 through the four corner holes; narrow side is recommended for heat - check the temperature on the prototype)",
+        "fit_to_motor": "ZLLG65ASM250-N V2: 24 V, 10 A rated / 30 A stall, 1024-line magnetic A/B encoder + hall. ZLTECH lists ZLAC8015/ZLAC8015D as the driver for its 6.5-inch hub servo motors; 7S pack 21-29.4 V is inside 20-48 V. Confirm the encoder connector (motor single-ended A/B vs driver iA+/iA-) with ZLTECH before ordering",
+        "model": "Manual Fig.1 outline 168x89x29.7, ear-hole pitch 158; hole Y position, 3 mm base, cover and terminal blocks estimated"
       },
-      "volume_mm3": 444074.3999999999,
+      "volume_mm3": 320788.54646998056,
       "bounds_mm": [
         [
           -84.0,
@@ -1096,16 +1077,47 @@
           122.5
         ],
         [
-          130.0,
-          159.7
+          120.0,
+          149.7
         ]
       ],
       "center_mm": [
-        0.0,
-        78.0,
-        144.85
+        1.6330662487360046e-15,
+        77.99999999999994,
+        132.53827689287962
       ],
       "solids": 1
+    },
+    {
+      "name": "53_motor_driver_bolts_M3x10",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M3x10 hex socket + washer + M3 nylock under the base plate",
+        "quantity": 4,
+        "note": "Thermal pad or paste between the heatsink base and the steel plate"
+      },
+      "volume_mm3": 751.4782480778164,
+      "bounds_mm": [
+        [
+          -82.17542648054294,
+          82.17542648054294
+        ],
+        [
+          37.75,
+          118.25
+        ],
+        [
+          113.0,
+          126.0
+        ]
+      ],
+      "center_mm": [
+        -2.6323462873555842e-14,
+        77.99999999999997,
+        119.92839798513366
+      ],
+      "solids": 4
     },
     {
       "name": "51_controller_PCB_standoffs_M4",
@@ -1132,7 +1144,7 @@
         ]
       ],
       "center_mm": [
-        -2.494567775562778e-14,
+        -2.940964114347696e-14,
         180.0,
         131.25000000000003
       ],
@@ -1195,39 +1207,8 @@
       ],
       "center_mm": [
         -95.00000000000003,
-        -162.5,
+        -162.50000000000003,
         124.50000000000001
-      ],
-      "solids": 4
-    },
-    {
-      "name": "53_motor_driver_ZLAC8015D_standoffs_M4",
-      "group": "electronics",
-      "status": "concept_support",
-      "metadata": {
-        "height_mm": 10.0,
-        "quantity": 4,
-        "supports": "53_motor_driver_ZLAC8015D_DUMMY"
-      },
-      "volume_mm3": 1539.3804002589986,
-      "bounds_mm": [
-        [
-          -79.5,
-          79.5
-        ],
-        [
-          38.0,
-          118.0
-        ],
-        [
-          120.0,
-          130.0
-        ]
-      ],
-      "center_mm": [
-        -1.831537919426356e-14,
-        78.00000000000001,
-        125.00000000000004
       ],
       "solids": 4
     },
@@ -1299,9 +1280,9 @@
         ]
       ],
       "center_mm": [
-        1.544006160032541e-14,
-        -49.000000000000014,
-        121.50000000000004
+        1.2008936800253096e-14,
+        -48.99999999999999,
+        121.50000000000001
       ],
       "solids": 4
     },
@@ -1315,7 +1296,7 @@
         "translate_mm": [
           0,
           244.149,
-          178.927
+          181.927
         ],
         "limits": "Company-supplied STEP; panel mounting holes not in the model, so the frame edges are clamped"
       },
@@ -1330,105 +1311,77 @@
           262.0
         ],
         [
-          124.0,
-          235.17298580759922
+          127.0,
+          238.17298580759922
         ]
       ],
       "center_mm": [
-        3.3237742440385434,
-        244.56002039682923,
-        177.60370761861725
+        3.3237742440385376,
+        244.56002039682932,
+        180.60370761861748
       ],
       "solids": 11
     },
     {
-      "name": "56_LCD_bracket_3t",
+      "name": "56_LCD_holder_PRINTED",
       "group": "electronics",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "S355 3t laser-cut, 1 bend (105 deg), window-free plate 3 mm behind the LCD board"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "5 mm back plate + 6 mm foot + side clamps (2.5 mm lip over the glass border) + 2 ribs, one print",
+        "ground": "Plastic holder: the LCD frame is grounded by a cable to 58_ground_stud_M4"
       },
-      "volume_mm3": 69371.71863972502,
+      "volume_mm3": 147566.72109949923,
       "bounds_mm": [
         [
           -110.0,
           110.0
         ],
         [
-          217.7238945777827,
+          211.09062590538298,
           262.0
         ],
         [
           120.0,
-          219.20969226703573
+          222.20969226703573
         ]
       ],
       "center_mm": [
-        1.5142573964517482e-15,
-        235.65579106778642,
-        162.1565026174502
+        -7.888995632588456e-15,
+        235.68212776250527,
+        163.0861546915944
       ],
       "solids": 1
     },
     {
-      "name": "56_LCD_side_clamps_PRINTED",
-      "group": "electronics",
-      "status": "concept_support",
-      "metadata": {
-        "quantity": 2,
-        "material": "3D-printed clamp, 2x M3 into the bracket each (not drawn)"
-      },
-      "volume_mm3": 16824.0,
-      "bounds_mm": [
-        [
-          -95.9,
-          95.9
-        ],
-        [
-          221.9157672821625,
-          258.9454373546494
-        ],
-        [
-          137.10599703246493,
-          218.75410499782302
-        ]
-      ],
-      "center_mm": [
-        -7.438568174272167e-14,
-        240.69585299110307,
-        178.00112471868505
-      ],
-      "solids": 2
-    },
-    {
-      "name": "56_LCD_bracket_bolts_CB5-12",
+      "name": "56_LCD_holder_bolts_CB5-16",
       "group": "electronics",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "CB5-12 + M5 nut",
+        "sku": "CB5-16 + M5 fender washer OD15 + M5 nut",
         "quantity": 2
       },
-      "volume_mm3": 1325.014445151268,
+      "volume_mm3": 1849.1891794027242,
       "bounds_mm": [
         [
-          -106.61880215351701,
-          106.61880215351701
+          -109.5,
+          109.5
         ],
         [
-          248.75,
-          257.25
+          245.5,
+          260.5
         ],
         [
-          111.0,
-          128.0
+          111.2,
+          132.2
         ]
       ],
       "center_mm": [
-        -4.873465648784371e-14,
-        253.00000000000003,
-        120.20802217545865
+        -5.705278106793592e-14,
+        253.00000000000014,
+        123.24077856440614
       ],
-      "solids": 2
+      "solids": 4
     },
     {
       "name": "57_company_speaker_STEP",
@@ -1460,20 +1413,21 @@
         ]
       ],
       "center_mm": [
-        -75.25128011655309,
-        -236.00064630472963,
-        186.80313168215096
+        -75.25128011655306,
+        -236.00064630472954,
+        186.803131682151
       ],
       "solids": 21
     },
     {
-      "name": "57_speaker_bracket_3t",
+      "name": "57_speaker_holder_PRINTED",
       "group": "electronics",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "S355 3t laser-cut, 1 bend; plate on the frame rear bosses with a box window; grille faces rear (-Y)"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "5 mm plate on the frame rear bosses with a box window + 6 mm foot + 2 ribs; grille faces rear (-Y)"
       },
-      "volume_mm3": 36368.68359422072,
+      "volume_mm3": 71792.92513856293,
       "bounds_mm": [
         [
           -140.0,
@@ -1481,17 +1435,17 @@
         ],
         [
           -264.5,
-          -224.69999999999925
+          -197.69999990000005
         ],
         [
-          120.0,
-          238.29999999999998
+          119.9999999,
+          238.30000009999998
         ]
       ],
       "center_mm": [
-        -76.15668221670776,
-        -233.69562366237324,
-        155.04653491982768
+        -76.11006111943216,
+        -232.10329508078286,
+        151.66032948274326
       ],
       "solids": 1
     },
@@ -1500,10 +1454,10 @@
       "group": "electronics",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "M3x20 + nut (verify on the frame bosses)",
+        "sku": "M3x22 + washer + nut (verify on the frame bosses)",
         "quantity": 3
       },
-      "volume_mm3": 584.9252821902492,
+      "volume_mm3": 627.3367830137114,
       "bounds_mm": [
         [
           -119.75,
@@ -1511,7 +1465,7 @@
         ],
         [
           -242.20000000000005,
-          -221.70000000000005
+          -219.70000000000005
         ],
         [
           141.79,
@@ -1519,41 +1473,41 @@
         ]
       ],
       "center_mm": [
-        -74.99999999999999,
-        -229.70302114803636,
-        172.87333333333333
+        -75.0,
+        -228.61549295774645,
+        172.87333333333322
       ],
       "solids": 3
     },
     {
-      "name": "57_speaker_bracket_bolts_CB5-12",
+      "name": "57_speaker_holder_bolts_CB5-16",
       "group": "electronics",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "CB5-12 + M5 nut",
+        "sku": "CB5-16 + M5 fender washer OD15 + M5 nut",
         "quantity": 2
       },
-      "volume_mm3": 1325.0144451512683,
+      "volume_mm3": 1849.1891794027247,
       "bounds_mm": [
         [
-          -138.618802153517,
-          -11.381197846482994
+          -141.5,
+          -8.5
         ],
         [
-          -250.75,
-          -242.25
+          -254.0,
+          -239.0
         ],
         [
-          111.0,
-          128.0
+          111.2,
+          132.2
         ]
       ],
       "center_mm": [
-        -74.99999999999991,
-        -246.49999999999986,
-        120.20802217545858
+        -75.00000000000001,
+        -246.5000000000001,
+        123.24077856440614
       ],
-      "solids": 2
+      "solids": 4
     },
     {
       "name": "55_DCDC_DDR-240B-24_ENVELOPE",
@@ -1650,13 +1604,103 @@
       "solids": 2
     },
     {
+      "name": "50_battery_hold_down_straps",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2,
+        "sku": "25 mm polyester strap + cam buckle",
+        "fit": "Around the case through two base-plate slots each, closed under the plate; clear of the terminal block"
+      },
+      "volume_mm3": 37729.271060264364,
+      "bounds_mm": [
+        [
+          -106.5,
+          106.5
+        ],
+        [
+          -127.41423986690828,
+          29.414239866908275
+        ],
+        [
+          115.49999999999999,
+          213.19999400127904
+        ]
+      ],
+      "center_mm": [
+        1.2342175563475582e-13,
+        -49.0,
+        164.34999700063977
+      ],
+      "solids": 2
+    },
+    {
+      "name": "50_battery_strap_buckles",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2
+      },
+      "volume_mm3": 20880.0,
+      "bounds_mm": [
+        [
+          -108.5,
+          108.5
+        ],
+        [
+          -69.0,
+          -29.0
+        ],
+        [
+          213.19999400127907,
+          222.19999400127907
+        ]
+      ],
+      "center_mm": [
+        0.0,
+        -49.0,
+        217.69999400127904
+      ],
+      "solids": 2
+    },
+    {
+      "name": "58_ground_stud_M4",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M4x16 + ring terminal + M4 nut + star washer",
+        "role": "Chassis ground point; the 3D-printed LCD and speaker holders do not ground, so a cable runs from here to the LCD frame (and the battery negative)"
+      },
+      "volume_mm3": 382.72824907086505,
+      "bounds_mm": [
+        [
+          95.95854811567261,
+          104.04145188432739
+        ],
+        [
+          146.0,
+          154.0
+        ],
+        [
+          114.2,
+          129.0
+        ]
+      ],
+      "center_mm": [
+        100.0,
+        150.0,
+        120.57244544539395
+      ],
+      "solids": 3
+    },
+    {
       "name": "60_lidar_bracket_3t_FRONT_LEFT",
       "group": "lidars",
       "status": "concept_fabrication",
       "metadata": {
-        "material": "S355 3t laser-cut, 2 bends (bend limit 3t); wraps two faces of the main column"
+        "material": "S355 3t laser-cut; wraps two faces of the main column; Rev17: 55 mm up-flanges with 3 bolts each + 15 mm stiffening lips on the sensor plate (6 bends)"
       },
-      "volume_mm3": 28034.76409957188,
+      "volume_mm3": 43557.739116301986,
       "bounds_mm": [
         [
           -273.03300858899104,
@@ -1664,17 +1708,17 @@
         ],
         [
           196.96699141100893,
-          303.03300858899104
+          303.0330085889911
         ],
         [
-          128.0,
-          163.0
+          145.0,
+          218.0
         ]
       ],
       "center_mm": [
-        -196.90114145329125,
-        238.4066356215968,
-        159.28094233480743
+        -201.0317972072424,
+        240.35992650338332,
+        162.92671192104243
       ],
       "solids": 1
     },
@@ -1684,9 +1728,9 @@
       "status": "catalog_envelope",
       "metadata": {
         "sku": "M5x10 hex socket + M5 T-nut for 2020 slot 6",
-        "quantity": 4
+        "quantity": 6
       },
-      "volume_mm3": 2418.6534094420117,
+      "volume_mm3": 3627.980114163018,
       "bounds_mm": [
         [
           -164.0,
@@ -1697,23 +1741,54 @@
           226.0
         ],
         [
-          131.0,
-          157.0
+          166.0,
+          215.0
         ]
       ],
       "center_mm": [
-        -151.73425170556382,
-        213.73425170556388,
-        143.99999999999997
+        -151.73425170556396,
+        213.73425170556385,
+        190.99999999999997
       ],
-      "solids": 8
+      "solids": 12
+    },
+    {
+      "name": "66_lidar_scanner_screws_M3_FRONT_LEFT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M3x5 + spring washer, 0.8 N m max (SICK)",
+        "quantity": 2,
+        "note": "Hole spacing assumed; confirm on the SICK TiM5xx dimensional drawing"
+      },
+      "volume_mm3": 184.9612674800992,
+      "bounds_mm": [
+        [
+          -236.89213562373095,
+          -203.10786437626905
+        ],
+        [
+          233.10786437626905,
+          266.89213562373095
+        ],
+        [
+          157.0,
+          163.0
+        ]
+      ],
+      "center_mm": [
+        -220.00000000000003,
+        249.99999999999997,
+        159.1878980891719
+      ],
+      "solids": 2
     },
     {
       "name": "61_SICK_TiM571_envelope_base_FRONT_LEFT",
       "group": "lidars",
       "status": "drawing_envelope",
       "metadata": {},
-      "volume_mm3": 204200.55,
+      "volume_mm3": 204200.55000000005,
       "bounds_mm": [
         [
           -273.25928275897076,
@@ -1729,7 +1804,7 @@
         ]
       ],
       "center_mm": [
-        -220.0,
+        -220.00000000000003,
         250.0,
         181.0
       ],
@@ -1740,7 +1815,7 @@
       "group": "lidars",
       "status": "drawing_envelope",
       "metadata": {},
-      "volume_mm3": 227359.19999999998,
+      "volume_mm3": 227359.20000000007,
       "bounds_mm": [
         [
           -262.77996026178613,
@@ -1794,27 +1869,27 @@
       "group": "lidars",
       "status": "concept_fabrication",
       "metadata": {
-        "material": "S355 3t laser-cut, 2 bends (bend limit 3t); wraps two faces of the main column"
+        "material": "S355 3t laser-cut; wraps two faces of the main column; Rev17: 55 mm up-flanges with 3 bolts each + 15 mm stiffening lips on the sensor plate (6 bends)"
       },
-      "volume_mm3": 28034.764099571883,
+      "volume_mm3": 43557.73911630199,
       "bounds_mm": [
         [
           136.0,
-          273.03300858899104
+          273.0330085889911
         ],
         [
-          -303.03300858899104,
+          -303.0330085889911,
           -196.96699141100893
         ],
         [
-          128.0,
-          163.0
+          145.0,
+          218.0
         ]
       ],
       "center_mm": [
-        196.90114145329116,
-        -238.40663562159682,
-        159.2809423348074
+        201.03179720724253,
+        -240.3599265033833,
+        162.9267119210425
       ],
       "solids": 1
     },
@@ -1824,9 +1899,9 @@
       "status": "catalog_envelope",
       "metadata": {
         "sku": "M5x10 hex socket + M5 T-nut for 2020 slot 6",
-        "quantity": 4
+        "quantity": 6
       },
-      "volume_mm3": 2418.6534094420117,
+      "volume_mm3": 3627.980114163018,
       "bounds_mm": [
         [
           141.2,
@@ -1837,16 +1912,47 @@
           -203.20000000000002
         ],
         [
-          131.0,
-          157.0
+          166.0,
+          215.0
         ]
       ],
       "center_mm": [
-        151.73425170556382,
-        -213.73425170556382,
-        144.00000000000003
+        151.73425170556374,
+        -213.73425170556376,
+        190.9999999999999
       ],
-      "solids": 8
+      "solids": 12
+    },
+    {
+      "name": "66_lidar_scanner_screws_M3_REAR_RIGHT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M3x5 + spring washer, 0.8 N m max (SICK)",
+        "quantity": 2,
+        "note": "Hole spacing assumed; confirm on the SICK TiM5xx dimensional drawing"
+      },
+      "volume_mm3": 184.96126748009922,
+      "bounds_mm": [
+        [
+          203.10786437626905,
+          236.89213562373095
+        ],
+        [
+          -266.89213562373095,
+          -233.10786437626905
+        ],
+        [
+          157.0,
+          163.0
+        ]
+      ],
+      "center_mm": [
+        220.0,
+        -249.99999999999997,
+        159.18789808917197
+      ],
+      "solids": 2
     },
     {
       "name": "61_SICK_TiM571_envelope_base_REAR_RIGHT",
@@ -1937,7 +2043,7 @@
         "source": "AstraMiniPro_3D_V0.1_20221012.stp",
         "source_solids": 58,
         "placement_repair": {
-          "cache_key": "8d88e2fde69c8e1f83f3",
+          "cache_key": "79e7f5c97e0719fc5ea5",
           "repairs": [],
           "source_preserved": true,
           "pose": [
@@ -1948,22 +2054,22 @@
             10,
             15
           ],
-          "source_solid_volume_mm3": 13831.14760859772,
-          "placed_solid_volume_mm3": 13831.147608597723,
+          "source_solid_volume_mm3": 13831.147608597721,
+          "placed_solid_volume_mm3": 13831.147608597721,
           "minimum_topology_tolerance_mm": 1e-05,
           "open_reference_shells_excluded": 3
         },
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.147608597723,
+      "volume_mm3": 13831.147608664714,
       "bounds_mm": [
         [
           -130.00381821959914,
-          -46.11607497491715
+          -46.11607497491716
         ],
         [
-          254.9729471113061,
+          254.97294711130607,
           294.34032240046406
         ],
         [
@@ -1972,9 +2078,9 @@
         ]
       ],
       "center_mm": [
-        -89.87498357188935,
-        273.6033524383707,
-        267.41376053382584
+        -89.87498357218661,
+        273.6033524383797,
+        267.4137605338381
       ],
       "solids": 58
     },
@@ -2012,11 +2118,11 @@
       "metadata": {
         "material": "3D-printed wedge; camera M2 screws pitch 80 not drawn"
       },
-      "volume_mm3": 3307.743715380252,
+      "volume_mm3": 3307.743715380254,
       "bounds_mm": [
         [
           -130.0981300737904,
-          -47.71785023576781
+          -47.71785023576783
         ],
         [
           255.5492071086428,
@@ -2028,8 +2134,8 @@
         ]
       ],
       "center_mm": [
-        -88.56402957914264,
-        272.6408854311943,
+        -88.56402957914266,
+        272.64088543119436,
         256.3903977924244
       ],
       "solids": 1
@@ -2104,7 +2210,7 @@
         "source": "AstraMiniPro_3D_V0.1_20221012.stp",
         "source_solids": 58,
         "placement_repair": {
-          "cache_key": "8da4e9f684aa64ccec50",
+          "cache_key": "a62e80fe14137857b0a8",
           "repairs": [],
           "source_preserved": true,
           "pose": [
@@ -2115,18 +2221,18 @@
             10,
             15
           ],
-          "source_solid_volume_mm3": 13831.14760859772,
-          "placed_solid_volume_mm3": 13831.14760859772,
+          "source_solid_volume_mm3": 13831.147608597721,
+          "placed_solid_volume_mm3": 13831.147608597717,
           "minimum_topology_tolerance_mm": 1e-05,
           "open_reference_shells_excluded": 3
         },
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.14760859772,
+      "volume_mm3": 13831.147608664714,
       "bounds_mm": [
         [
-          46.11607497537959,
+          46.1160749753796,
           130.003818305512
         ],
         [
@@ -2139,9 +2245,9 @@
         ]
       ],
       "center_mm": [
-        87.9099436218197,
-        274.1298833060874,
-        267.4137605338268
+        87.90994362156698,
+        274.12988330624324,
+        267.4137605338365
       ],
       "solids": 58
     },
@@ -2183,10 +2289,10 @@
       "bounds_mm": [
         [
           47.717850235767806,
-          130.0981300737904
+          130.09813007379037
         ],
         [
-          255.54920710864278,
+          255.5492071086428,
           292.2999204418976
         ],
         [
@@ -2197,7 +2303,7 @@
       "center_mm": [
         88.56402957914267,
         272.64088543119436,
-        256.39039779242444
+        256.3903977924244
       ],
       "solids": 1
     },
@@ -2353,7 +2459,7 @@
       ],
       "center_mm": [
         106.35633270321362,
-        154.99999999999997,
+        155.0,
         92.00000000000003
       ],
       "solids": 4
@@ -2385,7 +2491,7 @@
       "center_mm": [
         112.99999999999997,
         154.99999999999997,
-        92.00000000000001
+        92.0
       ],
       "solids": 4
     },
@@ -2415,7 +2521,7 @@
       ],
       "center_mm": [
         167.0,
-        -4.2877698499766783e-17,
+        2.6936795752486687e-17,
         84.71019614370167
       ],
       "solids": 1
@@ -2446,7 +2552,7 @@
       ],
       "center_mm": [
         175.45000000000002,
-        2.9974587265733475e-16,
+        3.4232724512054055e-16,
         89.99999999999999
       ],
       "solids": 1
@@ -2476,7 +2582,7 @@
       ],
       "center_mm": [
         163.49999999999997,
-        8.452987299144201e-16,
+        8.998132869007721e-16,
         89.99999999999999
       ],
       "solids": 1
@@ -2507,7 +2613,7 @@
       ],
       "center_mm": [
         159.0,
-        7.330027475249419e-16,
+        3.888332601679172e-17,
         90.0
       ],
       "solids": 1
@@ -2633,9 +2739,9 @@
         ]
       ],
       "center_mm": [
-        142.0,
+        142.00000000000009,
         59.99999999999999,
-        67.64366729678642
+        67.6436672967864
       ],
       "solids": 4
     },
@@ -2753,7 +2859,7 @@
         "supply": "company stock",
         "fit": "M10 lock nut (spring-ring type), 31 N m catalogue torque; hold the bolt with a 6 mm hex key"
       },
-      "volume_mm3": 1425.4546604378504,
+      "volume_mm3": 1425.4546604378509,
       "bounds_mm": [
         [
           114.39999999999999,
@@ -2769,7 +2875,7 @@
         ]
       ],
       "center_mm": [
-        118.55,
+        118.54999999999998,
         60.0,
         87.0
       ],
@@ -2857,7 +2963,7 @@
         "source": "BGHK6001DD-30.stp.gz",
         "quantity": 2
       },
-      "volume_mm3": 448.2693378766572,
+      "volume_mm3": 448.26933787665723,
       "bounds_mm": [
         [
           136.1999999,
@@ -2873,9 +2979,9 @@
         ]
       ],
       "center_mm": [
-        141.84999999999997,
+        141.84999999999994,
         59.99999999999999,
-        85.07722386996805
+        85.07722386996808
       ],
       "solids": 2
     },
@@ -3018,7 +3124,7 @@
         "tip_z": 83.0,
         "fit": "M5x0.8 thread 7: 3t floor + M5 nut 4 underneath"
       },
-      "volume_mm3": 1408.891155264521,
+      "volume_mm3": 1408.8911552645213,
       "bounds_mm": [
         [
           129.9999999,
@@ -3227,25 +3333,25 @@
         "geometry": "Coil drawn at the posed length (SWU wire section, display turns); rate and allowable deflection from the catalogue",
         "fit": "Sits on the rear bogie floor around the C-USLH10; top end around the M6 striker jam nut under the base plate"
       },
-      "volume_mm3": 3162.503070876178,
+      "volume_mm3": 3162.503070876193,
       "bounds_mm": [
         [
-          139.49948955985772,
-          160.50052237101323
+          139.49948955985784,
+          160.50052237101303
         ],
         [
-          -35.50051043997603,
-          -14.499477629145128
+          -35.500510439976175,
+          -14.499477629144979
         ],
         [
-          66.00560843837611,
-          116.99439156218772
+          66.0056084383761,
+          116.99439156218745
         ]
       ],
       "center_mm": [
-        150.16897739372322,
-        -24.831022606278797,
-        91.49999999998447
+        150.16897739372334,
+        -24.831022606278786,
+        91.49999999998428
       ],
       "solids": 1
     },
@@ -3339,7 +3445,7 @@
       ],
       "center_mm": [
         -106.35633270321362,
-        154.99999999999997,
+        155.0,
         92.00000000000003
       ],
       "solids": 4
@@ -3353,7 +3459,7 @@
         "moving_wheel": "LEFT",
         "quantity": 4
       },
-      "volume_mm3": 572.6507481162862,
+      "volume_mm3": 572.6507481162863,
       "bounds_mm": [
         [
           -115.0,
@@ -3369,9 +3475,9 @@
         ]
       ],
       "center_mm": [
-        -112.99999999999999,
-        154.99999999999994,
-        92.00000000000001
+        -112.99999999999994,
+        154.99999999999986,
+        91.99999999999997
       ],
       "solids": 4
     },
@@ -3384,7 +3490,7 @@
         "moving_wheel": "LEFT",
         "material": "S355 6t flat laser-cut, AF10.2 slot; clamped by the axle nut against the outer wall"
       },
-      "volume_mm3": 8406.108784869595,
+      "volume_mm3": 8406.108784869597,
       "bounds_mm": [
         [
           -170.0,
@@ -3400,9 +3506,9 @@
         ]
       ],
       "center_mm": [
-        -167.0,
-        -3.9940790688674394e-17,
-        84.71019614370167
+        -166.99999999999997,
+        3.885225030034727e-17,
+        84.71019614370165
       ],
       "solids": 1
     },
@@ -3432,7 +3538,7 @@
       ],
       "center_mm": [
         -175.45000000000005,
-        2.633450555917254e-16,
+        3.059264280549313e-16,
         90.00000000000001
       ],
       "solids": 1
@@ -3462,7 +3568,7 @@
       ],
       "center_mm": [
         -163.49999999999994,
-        9.40699204640534e-16,
+        9.86128002129161e-16,
         89.99999999999997
       ],
       "solids": 1
@@ -3476,7 +3582,7 @@
         "moving_wheel": "LEFT",
         "fit": "OEM nut thickness and wrench envelope assumed"
       },
-      "volume_mm3": 2068.4017999881917,
+      "volume_mm3": 2068.4017999881926,
       "bounds_mm": [
         [
           -163.0,
@@ -3492,8 +3598,8 @@
         ]
       ],
       "center_mm": [
-        -159.00000000000006,
-        9.451847081203305e-16,
+        -158.99999999999994,
+        3.477553531819374e-16,
         90.0
       ],
       "solids": 1
@@ -3525,9 +3631,9 @@
         ]
       ],
       "center_mm": [
-        -138.00000000000003,
-        215.0,
-        81.76744186046511
+        -138.00000000000006,
+        215.00000000000006,
+        81.76744186046514
       ],
       "solids": 4
     },
@@ -3619,9 +3725,9 @@
         ]
       ],
       "center_mm": [
-        -142.00000000000003,
-        59.99999999999999,
-        67.64366729678639
+        -141.99999999999994,
+        59.99999999999998,
+        67.64366729678638
       ],
       "solids": 4
     },
@@ -3739,7 +3845,7 @@
         "supply": "company stock",
         "fit": "M10 lock nut (spring-ring type), 31 N m catalogue torque; hold the bolt with a 6 mm hex key"
       },
-      "volume_mm3": 1425.4546604378509,
+      "volume_mm3": 1425.454660437851,
       "bounds_mm": [
         [
           -122.7,
@@ -3755,7 +3861,7 @@
         ]
       ],
       "center_mm": [
-        -118.54999999999997,
+        -118.54999999999991,
         60.0,
         87.0
       ],
@@ -4213,25 +4319,25 @@
         "geometry": "Coil drawn at the posed length (SWU wire section, display turns); rate and allowable deflection from the catalogue",
         "fit": "Sits on the rear bogie floor around the C-USLH10; top end around the M6 striker jam nut under the base plate"
       },
-      "volume_mm3": 3162.5030708762083,
+      "volume_mm3": 3162.503070876198,
       "bounds_mm": [
         [
-          -160.50052237101332,
-          -139.49948955985766
+          -160.50052237101286,
+          -139.49948955985784
         ],
         [
-          -35.50051043997603,
-          -14.499477629145128
+          -35.500510439976175,
+          -14.499477629144979
         ],
         [
-          66.00560843837611,
-          116.99439156218772
+          66.0056084383761,
+          116.99439156218745
         ]
       ],
       "center_mm": [
-        -150.16897739372342,
-        -24.831022606278754,
-        91.49999999998444
+        -150.1689773937232,
+        -24.83102260627874,
+        91.49999999998441
       ],
       "solids": 1
     },
@@ -4425,7 +4531,7 @@
       "center_mm": [
         -137.9999999999999,
         -214.99999999999991,
-        88.49999999999996
+        88.49999999999997
       ],
       "solids": 4
     },
@@ -4487,8 +4593,8 @@
       ],
       "center_mm": [
         -48.0,
-        -214.99999999999994,
-        118.64366729678639
+        -215.0,
+        118.64366729678642
       ],
       "solids": 2
     },
@@ -4641,25 +4747,25 @@
         "lever_ratio": 0.7222,
         "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 1092.5502014663718,
+      "volume_mm3": 1092.550201466438,
       "bounds_mm": [
         [
-          -121.50066458805362,
-          -104.49933827194641
+          -121.50066458805355,
+          -104.49933827194639
         ],
         [
           -223.50066172564212,
-          -206.49933541435718
+          -206.49933541435732
         ],
         [
           89.00663037058595,
-          116.99336963418276
+          116.99336963418234
         ]
       ],
       "center_mm": [
-        -113.23457674140957,
-        -214.76542325859145,
-        102.99999999986329
+        -113.23457674140964,
+        -214.76542325859137,
+        102.99999999986326
       ],
       "solids": 1
     },
@@ -4983,7 +5089,7 @@
       ],
       "center_mm": [
         138.0,
-        -214.99999999999997,
+        -215.0,
         81.76744186046511
       ],
       "solids": 4
@@ -5076,9 +5182,9 @@
         ]
       ],
       "center_mm": [
-        48.0,
-        -214.99999999999994,
-        118.64366729678639
+        48.000000000000014,
+        -215.0,
+        118.64366729678642
       ],
       "solids": 2
     },
@@ -5231,25 +5337,25 @@
         "lever_ratio": 0.7222,
         "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 1092.5502014663718,
+      "volume_mm3": 1092.550201466438,
       "bounds_mm": [
         [
-          104.49933541194638,
-          121.50066172805359
+          104.49933541194645,
+          121.50066172805361
         ],
         [
           -223.50066172564212,
-          -206.49933541435718
+          -206.49933541435732
         ],
         [
           89.00663037058595,
-          116.99336963418276
+          116.99336963418234
         ]
       ],
       "center_mm": [
-        112.76542325859043,
-        -214.76542325859145,
-        102.99999999986329
+        112.76542325859036,
+        -214.76542325859137,
+        102.99999999986326
       ],
       "solids": 1
     },
