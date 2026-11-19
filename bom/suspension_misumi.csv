@@ -14,7 +14,6 @@ Bogie,MISUMI,CB5-22,8,"Holder bolts: backing 3 + base plate 3 + holder flange 10
 Bogie,Motor supplier,M14x1.5 axle nut,2,Supplied with the motor (assumed AF22 x 8),,Rev15,0,2,0,,,Estimate (not quoted)
 Bogie,Fabricate,Axle washer and 4.9mm trial spacer,2 sets,Confirm the motor shoulder before cutting,,Rev15 (from Rev14),10000,2,20000,,,Estimate (not quoted)
 Bogie,Standard,M6 hex bolt + M6 jam nut (striker),4,Bogie rotation strikers through the base plate,,Rev15,400,4,1600,,,Estimate (not quoted)
-Bogie,Standard,Rubber grommet for a 28 mm hole (3t plate),2,Motor cable pass-through in the base plate above each bogie,,Rev16,500,2,1000,,,Estimate (not quoted)
 Bogie and rear caster,MISUMI,CB5-12,20,"Bogie U bracket 4 each + inner-wall splice 4 each + rear hinge bracket 2 each: plates 3+3 + nut 4, 2 mm past the nut",https://kr.misumi-ec.com/vona2/detail/110100141750/,Rev16 count,262,20,5240,ref ship 2026-11-17,2026-11-14 kr.misumi-ec.com,MISUMI price
 Bogie and rear caster,MISUMI,CB6-12,16,GL-65 caster plate (2mm) to the 3t pad: 4 per caster (bogie front pads + rear arms),https://kr.misumi-ec.com/vona2/detail/110100141750/,Rev15 count,269,16,4304,stock; same-day ship shown,2026-11-14 kr.misumi-ec.com,MISUMI price
 Bogie and rear caster,Standard,M5 hex nut,34,"U bracket 8 + splice 8 + holder 8 + rear bracket 4 bolts, stopper threads under the floor 6",,Rev16,50,34,1700,,,Estimate (not quoted)
@@ -31,5 +30,5 @@ Rear caster,Fabricate,S355 3t swing arm (channel + pad),2,Rev14 caster arm,,Rev1
 Rear caster,Fabricate,3t U hinge bracket,2,Rev14 caster bracket; ear holes 10 H7 reamed together,,Rev14,12000,2,24000,,small-lot laser cut + 2 bends per part; get quotes,Estimate (not quoted)
 Rear caster,Fabricate,S355 8t pivot boss (flat),4,Bush seats for MPFZ10-10,,Rev14; no bending,4000,4,16000,,,Estimate (not quoted)
 Total,,MISUMI priced items,,"Pins, bushes, springs, CB screws (MISUMI prices seen 2026-11-14/18); VAT 10% excluded",,,,,76126,2026-11-19,,MISUMI price
-Total,,Estimated items,,"Collars, standard hardware and fabricated sheet metal; rough estimate, get quotes",,,,,250100,2026-11-19,,Estimate (not quoted)
-Total,,Suspension total (2 bogies + 2 rear hinge modules),,"MISUMI price + estimate; company stock (BGMW6001DD-30 x2, BN1359 12x30 x2, E-GLNUTS10 x2, C-USLH10 x6) at 0 KRW; VAT excluded; Rev17 adds 2 bogie springs, removes the 2 rear preload shims",,,,,326226,2026-11-19,,Mixed
+Total,,Estimated items,,"Collars, standard hardware and fabricated sheet metal; rough estimate, get quotes",,,,,249100,2026-11-19,2026-11-20,Estimate (not quoted)
+Total,,Suspension total (2 bogies + 2 rear hinge modules),,"MISUMI price + estimate; company stock (BGMW6001DD-30 x2, BN1359 12x30 x2, E-GLNUTS10 x2, C-USLH10 x6) at 0 KRW; VAT excluded; Rev17 adds 2 bogie springs, removes the 2 rear preload shims",,,,,325226,2026-11-19,2026-11-20,Mixed

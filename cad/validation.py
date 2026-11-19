@@ -341,8 +341,12 @@ def validate(records,d,full=False,collisions=False):
         scan_z=d.layout['lidars'][0]['scan_z']
         below=('30_','31_','32_','50_','51_','52_','53_','54_','55_','56_','57_','64_','80_','81_')
         above=('20_','70_','71_','72_')
-        if any(x.shape.bounding_box().max.Z>=scan_z for x in records if x.name.startswith(below)):
-            errors.append('Below-scan component crosses scan plane')
+        # Rev17e: the scan plane was lowered to the eco height (Z206.83), so the battery / LCD / driver tops now reach it.
+        # A part that crosses the plane is an error only if its section lies inside a LiDAR's 270 deg field of view.
+        crossing=[x for x in records if x.name.startswith(below) and x.shape.bounding_box().max.Z>=scan_z]
+        report['scan_plane_crossings']=scan_sectors(d,crossing,scan_z)
+        for row in report['scan_plane_crossings']:
+            if row['in_fov']:errors.append('Below-scan component inside the LiDAR FOV: '+row['part']+' / '+row['lidar'])
         if any(x.shape.bounding_box().min.Z<=scan_z for x in records if x.name.startswith(above)):
             errors.append('Above-scan component crosses scan plane')
         report['scan_plane_vertical_clearance_checked']=True
@@ -411,3 +415,24 @@ def compare_baseline(records,symmetric=True):
         if not ok:failed.append(item.name)
     return {'pass':not failed,'baseline_commit':'61483e873254c929061b77263d584c652aa565e6',
             'compared_parts':len(rows),'symmetric_difference_checked':symmetric,'failed':failed,'parts':rows}
+
+def scan_sectors(d,records,scan_z,radius=700):
+    """Angular span (deg from heading) of each record's section in the scan plane, per LiDAR; in_fov if it reaches inside +-132."""
+    import math
+    from .parts.common import span
+    out=[]
+    for pose in d.layout['lidars']:
+        x0,y0=pose['x'],pose['y'];slab=span(x0-radius,x0+radius,y0-radius,y0+radius,scan_z-.5,scan_z+.5)
+        for r in records:
+            b=r.shape.bounding_box()
+            if not(b.min.Z<scan_z+.5 and b.max.Z>scan_z-.5):continue
+            cut=r.shape&slab
+            if cut is None or not cut.solids():continue
+            ang=[((math.degrees(math.atan2(v.X-x0,v.Y-y0))-pose['heading_deg']+180)%360-180) for v in cut.vertices()]
+            if not ang:continue
+            lo,hi=min(ang),max(ang);wrap=hi-lo>180
+            edge=3.0   # rays within 3 deg of the FOV limit run along the robot side faces (same edge shadows the eco report lists)
+            inside=(not wrap) and not(hi<-135+edge or lo>135-edge)
+            out.append({'lidar':pose['name'],'part':r.name,'from_deg':round(lo,1),'to_deg':round(hi,1),'blind_sector_wrap':wrap,
+                        'nearest_mm':round(min(math.hypot(v.X-x0,v.Y-y0) for v in cut.vertices()),1),'in_fov':inside})
+    return out

@@ -12,6 +12,7 @@ from build123d import Axis, Compound, Location, Rotation, Solid, Plane
 from ..parameters import ROOT
 from ..parts.common import PartRecord, box, cylx, cyly, cylz, span, polygon_plate, rz
 from ..parts.suspension import coil, nut, screw
+from ..parts.sensors import camera_back_plate, lidar_base
 
 HERE = Path(__file__).resolve().parent
 AL, STEEL, DARK = (.74, .78, .82), (.48, .52, .58), (.20, .22, .25)
@@ -209,8 +210,9 @@ def plates(P):
     floor = polygon_plate(pts, pl['floor_t'], P.z_lo1)
     for x, y, dd in floor_holes(P):
         floor -= cylz(dd/2+.25, 10, x, y, P.z_lo1-3)
-    for x0, x1, y0, y1 in floor_slots(P):                                     # P30-5b battery strap slots
-        floor -= span(x0, x1, y0, y1, P.z_lo1-1, P.z_lo1+pl['floor_t']+1)
+    mc = L['drive']['motor_cable']
+    for sx in (-1, 1):                                                          # P30-6: hub-motor cable holes (grommet)
+        floor -= cylz(mc['hole_d']/2, 10, sx*mc['xy'][0], mc['xy'][1], P.z_lo1-3)
     r.append(rec('12_P30_floor_plate_'+tname(pl['floor_t']), 'plates', floor, PLATE, material=f"SS400 {pl['floor_t']:g}t laser cut, notched at the wheel bays"))
     # deck
     deck = span(-X, X, -Y, Y, P.z_top1, P.z_deck1)
@@ -431,18 +433,23 @@ def floor_holes(P):
     """(x, y, d) of every bolt that passes the floor plate."""
     L = P.L; f = L['frame']; Y = f['outer_y']; h = P.s/2; e = L['electronics']
     pts = [(x, y, 5) for y in (Y-h,) for x in (-140, 140)]+[(x, -(Y-h), 5) for x in (0, 120)]
-    pts += [(sx*f['inner_rail_x'], y, 5) for sx in (-1, 1) for y in (-160, -90, 90, 160)]
+    pts += [(sx*f['inner_rail_x'], y, 5) for sx in (-1, 1) for y in f['inner_rail_bolt_y']]
     pts += [(x, Y-h, 5) for x in (-104, 104)]                                  # LCD holder
     pts += [(e['speaker_x']+dx, -(Y-h), 5) for dx in (-40, 40)]                # speaker bracket
     for pose in lidar_poses(P):
         pts += [(px, py, 5) for px, py, _ in lidar_plate_bolts(P, pose)]
     pts += [(x, y, 5) for x, y in driver_floor_bolts(P)]                      # driver bracket
+    pts += [(x, y, 5) for x, y in battery_bridge_p30(P)[1]]                   # P30-6 battery bridges
     gx, gy = e['ground_stud_xy']; pts.append((gx, gy, 4))                       # ground stud
     return pts
 
 
-def floor_slots(P):
-    return battery_strap_p30(P)[1]
+def battery_bridge_p30(P):
+    """P30-6: two printed hold-down bridges across the battery (along X at y = battery_bridge y), feet bolted from above."""
+    from ..parts.electronics import battery_bridges
+    bq = P.L['electronics']['battery_bridge']
+    return battery_bridges(battery_case_p30(P), 'y', bq['y'], P.z_floor1, bq['width_mm'], bq['wall_mm'], bq['foot_mm'], bq['foot_t_mm'],
+                           bq['bolt_out_mm'])
 
 
 def battery_case_p30(P):
@@ -453,9 +460,6 @@ def battery_case_p30(P):
     return (-hx, hx, e['battery_center_y']-hy, e['battery_center_y']+hy, z0, z0+case.size.Z)
 
 
-def battery_strap_p30(P):
-    from ..parts.electronics import battery_strap
-    return battery_strap(battery_case_p30(P), 'y', P.L['electronics']['battery_strap_y'], P.z_lo1, P.L['plates']['floor_t'])
 
 
 def driver_floor_bolts(P):
@@ -464,9 +468,12 @@ def driver_floor_bolts(P):
 
 
 def lidar_plate_bolts(P, pose):
-    """P30-5b: 3x M5 countersunk T-nut bolts: 2 into the front/rear rail + 1 into the side rail (anti-rotation)."""
-    f = P.L['frame']; x, y = pose['x'], pose['y']; sy = 1 if y > 0 else -1
-    return [(x-12, y, 'x'), (x+12, y, 'x'), (x, y-sy*P.L['sensors']['lidar_side_bolt_dy'], 'y')]
+    """P30-6: 3x M5 from above on the inboard tongue of the printed base (outside the scanner footprint), nuts under the floor."""
+    out = []
+    for lx, ly in P.L['sensors']['lidar_base']['bolts_local']:
+        c = rz(box(1, 1, 1, lx, ly, 0), -pose['heading_deg']).translate((pose['x'], pose['y'], 0)).bounding_box().center()
+        out.append((c.X, c.Y, 'z'))
+    return out
 
 
 def deck_holes(P):
@@ -494,14 +501,27 @@ def electronics(P):
     batt = Compound([s.translate(mvb) for s in solids])
     r.append(rec('60_company_7S9P_battery_STEP', 'electronics', batt, (.86, .63, .36), 'company_supplied_step', source='BATTERY.STEP.gz',
                  placement={'yaw_deg': e['battery_yaw_deg'], 'translate_mm': [round(v, 3) for v in mvb]},
-                 limits='P30-5b: held by 2x 25 mm straps through floor slots (60_battery_hold_down_straps)'))
+                 limits='P30-6: held down by two 3D-printed bridges bolted from above (60_battery_hold_down_bridges_PRINTED)'))
     bb = batt.bounding_box(); cb = case
     pads = [cylz(7.5, e['battery_pad_mm'], x, y, top) for x in (cb.min.X+mvb[0]+15, cb.max.X+mvb[0]-15) for y in (cb.min.Y+mvb[1]+15, cb.max.Y+mvb[1]-15)]
     r.append(rec('60_battery_pads', 'electronics', Compound(pads), (.30, .30, .32), 'concept_support', quantity=4))
-    strap, _, buckle = battery_strap_p30(P)
-    r.append(rec('60_battery_hold_down_straps', 'electronics', strap, (.15, .15, .17), 'catalog_envelope', quantity=2,
-                 sku='25 mm polyester strap + cam buckle', fit='Around the case through two floor slots each, closed under the floor; clear of the terminal block'))
-    r.append(rec('60_battery_strap_buckles', 'electronics', buckle, (.30, .30, .33), 'catalog_envelope', quantity=2))
+    from ..parts.electronics import PRINT_NOTE
+    bridges, bpts, ftop = battery_bridge_p30(P)
+    r.append(rec('60_battery_hold_down_bridges_PRINTED', 'electronics', bridges, PRINT, 'concept_support', quantity=2, material=PRINT_NOTE,
+                 design='Inverted U over the case (6 mm bar on the lid, 6 mm legs, 8 mm feet); clamps the case onto the 3 mm rubber pads',
+                 fit='Set the battery in, drop the bridges over it, 2x M5 from above per bridge (nuts under the floor, outside the moved inner rails)'))
+    bb_ = [s_ for x_, y_ in bpts for s_ in (screw(x_, y_, ftop+1.2, 5, 16)+nut(x_, y_, P.z_lo1-4, 8, 4, 5)).solids()]
+    bb_ += [s_ for x_, y_ in bpts for s_ in (cylz(5, 1.2, x_, y_, ftop)-cylz(2.75, 3, x_, y_, ftop-1)).solids()]
+    r.append(rec('60_battery_bridge_bolts_M5', 'electronics', Compound(bb_), DARK, 'catalog_envelope', quantity=len(bpts),
+                 sku='M5x16 hex socket + washer + M5 nut under the floor'))
+    mc = L['drive']['motor_cable']; gr = []
+    for sx in (-1, 1):
+        cx_, cy_ = sx*mc['xy'][0], mc['xy'][1]; tf = L['plates']['floor_t']
+        gr += ((cylz(mc['hole_d']/2, tf, cx_, cy_, P.z_lo1)+cylz(mc['hole_d']/2+3, 1.5, cx_, cy_, top)
+                + cylz(mc['hole_d']/2+3, 1.5, cx_, cy_, P.z_lo1-1.5))-cylz(mc['bore_d']/2, 20, cx_, cy_, P.z_lo1-5)).solids()
+    r.append(rec('69_motor_cable_grommets', 'electronics', Compound(gr), (.12, .12, .13), 'catalog_envelope', quantity=2,
+                 sku=f"Rubber grommet for a D{mc['hole_d']:g} hole in 2t plate, D{mc['bore_d']:g} bore (split type: connectors pass first)",
+                 note=mc['note']))
     # ZLTECH ZLAC8015D on edge (narrow side down, manual-recommended for heat), heatsink face on a 3t SPCC L-bracket
     md = e['motor_driver']; L_, W_, H_ = md['envelope_mm']; y = md['y']
     xf = md['x']+H_/2; zc = top+W_/2                                           # heatsink mounting face (outboard), centre height
@@ -523,7 +543,6 @@ def electronics(P):
         brk -= cylz(2.75, 10, x_, y_, top-1)
     r.append(rec('61_motor_driver_bracket_3t', 'electronics', brk, PLATE, material='SPCC 3t laser cut, 1 bend (web + foot); 4x D3.5 for the driver ears, 2x D5.5 to the floor',
                  fit='Heatsink face against the web (thermal pad); foot clear of the drive axle plate (x142)'))
-    from ..parts.suspension import nut, screw
     m3 = []
     for yy, zz in ears:
         m3 += (cylx(2.75, 3, xf-ev.ZLAC_FLANGE_T-1.5, yy, zz)+cylx(1.5, ev.ZLAC_FLANGE_T+bt+2.4, xf+(bt+2.4-ev.ZLAC_FLANGE_T)/2, yy, zz)).solids()
@@ -625,7 +644,7 @@ def speaker(P):
 # ---------------------------------------------------------------- sensors
 def lidar_bottom_z(P):
     """Scanner housing bottom: on the lidar plate, which sits on the floor plate."""
-    return P.z_floor1+P.L['sensors']['lidar_plate'][2]
+    return P.z_floor1+P.L['sensors']['lidar_base']['thickness_mm']
 
 
 def lidar_poses(P):
@@ -640,31 +659,23 @@ def lidar_poses(P):
 
 def lidars(P):
     lid = P.parts['lidar']; sn = P.L['sensors']; r = []
-    pw, pd, pt = sn['lidar_plate']; z0 = lidar_bottom_z(P)
+    lb = sn['lidar_base']; z0 = lidar_bottom_z(P); pt = z0-P.z_floor1
+    from ..parts.electronics import PRINT_NOTE
     for pose in lidar_poses(P):
         n = pose['name']; x, y = pose['x'], pose['y']; yaw = -pose['heading_deg']
         place = lambda o: rz(o, yaw).translate((x, y, 0))
-        from ..parts.sensors import scanner_screws
-        plate = place(box(pw, pd, pt, 0, 0, z0-pt/2))
-        bolts = lidar_plate_bolts(P, pose)
-        for bx, by, _ in bolts:
-            plate -= cylz(2.75, 10, bx, by, z0-pt-1)   # countersunk M5 (flush, under the scanner)
-        pts, _ = scanner_screws(x, y, yaw, z0, pt, sn['scanner_holes_local'])
-        m3 = []
-        for px, py in pts:
-            cs = Solid.make_cone(3.1, 1.7, 1.7, Plane((px, py, z0-pt)))       # 90 deg countersink, flush with the plate bottom
-            plate -= cs+cylz(1.7, pt+2, px, py, z0-pt-1)
-            m3 += (Solid.make_cone(3.0, 1.5, 1.6, Plane((px, py, z0-pt+.05)))+cylz(1.5, pt-1.7, px, py, z0-pt+1.65)).solids()
-        m3 = Compound(m3)
-        from ..parts.electronics import PRINT_NOTE
-        r.append(rec('74_lidar_plate_PRINTED_'+n, 'lidars', plate, PRINT, 'concept_support',
-                     material=PRINT_NOTE+f'; {pt:g} mm solid plate, 100% infill around the bolt holes',
-                     fit='Sits flat on the 2t floor corner (fully supported, so a thick print is stiff); 3x M5 countersunk through plate + floor into T-nuts of two rails, so it cannot turn'))
-        tb = [tnut_bolt(bx, by, P.z_lo1, pt+P.L['plates']['floor_t'], 5, sd, flush=True) for bx, by, sd in bolts]
-        r.append(rec('74_lidar_plate_bolts_M5_Tnut_'+n, 'lidars', Compound([s for c in tb for s in c.solids()]), DARK, 'catalog_envelope',
-                     quantity=len(tb), sku=f'M5x{round(pt+2+6)} countersunk + 3030 slot-8 T-nut'))
-        r.append(rec('74_lidar_scanner_screws_M3_'+n, 'lidars', m3, DARK, 'catalog_envelope', quantity=len(pts),
-                     sku=f'M3x{round(pt+2)} countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker', note='TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing'))
+        plate, m3, bolts = lidar_base(x, y, yaw, P.z_floor1, z0, lb['outline_local'], lb['bolts_local'], sn['scanner_holes_local'],
+                                      P.z_lo1, 18, skirt=((-P.L['frame']['outer_x'], P.L['frame']['outer_x'], -P.L['frame']['outer_y'], P.L['frame']['outer_y']),
+                                                          P.z_floor1-lb['skirt_mm']))
+        r.append(rec('74_lidar_base_PRINTED_'+n, 'lidars', plate, PRINT, 'concept_support',
+                     material=PRINT_NOTE+f'; {pt:g} mm solid, 100% infill around the bolt holes',
+                     design=f"{pt:g} mm printed base under the scanner + inboard tongue to {-lb['outline_local'][2]:g} mm (blind 90 deg sector) for the bolts",
+                     fit='Lies flat on the 2t floor; where it overhangs the frame corner it is printed 20 mm deeper down the rail faces; 3x M5 from above on the tongue, outside the scanner, so the scanner can stay mounted; nuts under the floor clear of the rails'))
+        r.append(rec('74_lidar_base_bolts_M5_'+n, 'lidars', bolts, DARK, 'catalog_envelope', quantity=len(lb['bolts_local']),
+                     sku='M5x18 hex socket + washer + M5 nut under the floor'))
+        r.append(rec('74_lidar_scanner_screws_M3_'+n, 'lidars', m3, DARK, 'catalog_envelope', quantity=len(sn['scanner_holes_local']),
+                     sku=f'M3x{round(pt+2)} countersunk (flush under the base), 0.8 N m max (SICK) + threadlocker',
+                     note='TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the base first, then bolt the base down from above; hole spacing assumed, confirm on the SICK drawing'))
         r.append(rec('75_SICK_TiM571_envelope_base_'+n, 'lidars', place(box(lid['width'], lid['depth'], 36, 0, 0, z0+18)), (.85, .88, .90), 'drawing_envelope'))
         r.append(rec('76_SICK_TiM571_optical_envelope_'+n, 'lidars', place(box(61, 60, lid['height']-39, 0, 0, z0+36+(lid['height']-39)/2)), (.09, .16, .21),
                      'drawing_envelope', scan_z=pose['scan_z'], heading_deg=pose['heading_deg']))
@@ -701,7 +712,15 @@ def cameras(P):
         local = s.moved(frame_.inverse()).bounding_box()
         block = box(local.size.X-4, local.size.Y-4, 60, local.center().X, local.center().Y, local.min.Z-30).moved(frame_)
         wedge = block & span(x0, x1, leg_y+3, Y, z_sh+3, z_sh+60)
-        r.append(rec('79_camera_wedge_PRINTED_'+n, 'cameras', wedge, PRINT, 'concept_support', material='3D-printed wedge; M2 camera screws not drawn'))
+        back, holes, m2 = camera_back_plate(s, frame_, span(x0, x1, leg_y+3, Y, z_sh+3, z_sh+60))
+        wedge = wedge+back
+        for hh in holes:
+            wedge -= hh
+        r.append(rec('79_camera_wedge_PRINTED_'+n, 'cameras', wedge, PRINT, 'concept_support', material=PRINT_NOTE,
+                     design='Wedge (10 deg pitch, 5 deg yaw) + 5 mm back plate on the camera rear face; 2x M2 through the plate into the rear threads (pitch 80)'))
+        r.append(rec('79_camera_rear_screws_M2_'+n, 'cameras', m2, DARK, 'catalog_envelope', quantity=2,
+                     sku='M2x6 + washer into the camera rear threads (2x M2, pitch 80, official 2D V1.2); thread depth and height on the rear face assumed',
+                     note='The supplied 3D V0.1 has no holes: positions from the 2D drawing pitch, centred on the rear face'))
         tb = [tnut_bolt(xb, Y-h, P.z_top0, fl, 5, 'x', False, flush=True) for xb in xbs]   # countersunk: camera top is close under the flange
         r.append(rec('79_camera_bracket_bolts_M5_Tnut_'+n, 'cameras', Compound([s_ for c in tb for s_ in c.solids()]), DARK, 'catalog_envelope',
                      quantity=2, sku='M5 countersunk + T-nut'))

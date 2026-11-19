@@ -80,8 +80,8 @@
       "volume_mm3": 230084.92201923107,
       "bounds_mm": [
         [
-          -125.0,
-          -95.0
+          -95.0,
+          -65.0
         ],
         [
           -270.0,
@@ -93,8 +93,8 @@
         ]
       ],
       "center_mm": [
-        -110.0,
-        -1.1368683772161603e-13,
+        -80.0,
+        1.1368683772161603e-13,
         104.00000000000003
       ],
       "solids": 5
@@ -170,11 +170,11 @@
         "length_mm": 540,
         "section_status": "Generic 3030 slot-8 section for display (mouth 8, cavity 16x5.8, core D6.8 = M8 tap drill). Actual supplier section, alloy and end-tap need verification."
       },
-      "volume_mm3": 230084.92201923107,
+      "volume_mm3": 230084.9220192311,
       "bounds_mm": [
         [
-          95.0,
-          125.0
+          65.0,
+          95.0
         ],
         [
           -270.0,
@@ -186,7 +186,7 @@
         ]
       ],
       "center_mm": [
-        110.0,
+        80.0,
         -1.1368683772161603e-13,
         104.00000000000003
       ],
@@ -869,7 +869,7 @@
       "metadata": {
         "material": "SS400 2t laser cut, notched at the wheel bays"
       },
-      "volume_mm3": 388527.793241129,
+      "volume_mm3": 386914.23147709324,
       "bounds_mm": [
         [
           -220.0,
@@ -885,9 +885,9 @@
         ]
       ],
       "center_mm": [
-        -0.01159703485036045,
-        -0.012280444090810232,
-        120.00000000000024
+        -0.011645398364758884,
+        0.6518077804960385,
+        120.00000000000027
       ],
       "solids": 1
     },
@@ -1004,9 +1004,9 @@
         ]
       ],
       "center_mm": [
-        9.999999999999988,
-        -3.979707947967948e-14,
-        117.77696076765282
+        9.999999999999979,
+        -3.0000000000000453,
+        117.77696076765285
       ],
       "solids": 24
     },
@@ -2926,7 +2926,7 @@
             219.55
           ]
         },
-        "limits": "P30-5b: held by 2x 25 mm straps through floor slots (60_battery_hold_down_straps)"
+        "limits": "P30-6: held down by two 3D-printed bridges bolted from above (60_battery_hold_down_bridges_PRINTED)"
       },
       "volume_mm3": 421957.98988421535,
       "bounds_mm": [
@@ -2980,62 +2980,95 @@
       "solids": 4
     },
     {
-      "name": "60_battery_hold_down_straps",
+      "name": "60_battery_hold_down_bridges_PRINTED",
       "group": "electronics",
-      "status": "catalog_envelope",
+      "status": "concept_support",
       "metadata": {
         "quantity": 2,
-        "sku": "25 mm polyester strap + cam buckle",
-        "fit": "Around the case through two floor slots each, closed under the floor; clear of the terminal block"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "Inverted U over the case (6 mm bar on the lid, 6 mm legs, 8 mm feet); clamps the case onto the 3 mm rubber pads",
+        "fit": "Set the battery in, drop the bridges over it, 2x M5 from above per bridge (nuts under the floor, outside the moved inner rails)"
       },
-      "volume_mm3": 37579.27106026438,
+      "volume_mm3": 98414.56683456116,
       "bounds_mm": [
         [
-          -78.41423986690826,
-          78.41423986690826
+          -106.91423986690826,
+          106.91423986690826
         ],
         [
-          -106.5,
-          106.5
+          -110.0,
+          110.0
         ],
         [
-          117.49999999999999,
-          214.19999400127904
+          120.99999999999999,
+          218.69999400127907
         ]
       ],
       "center_mm": [
-        4.95657605024828e-14,
-        0.0,
-        165.84999700063972
+        -1.8482928514064936e-14,
+        -3.4008588465879482e-15,
+        180.3965091849279
       ],
       "solids": 2
     },
     {
-      "name": "60_battery_strap_buckles",
+      "name": "60_battery_bridge_bolts_M5",
       "group": "electronics",
       "status": "catalog_envelope",
       "metadata": {
-        "quantity": 2
+        "quantity": 4,
+        "sku": "M5x16 hex socket + washer + M5 nut under the floor"
       },
-      "volume_mm3": 20880.0,
+      "volume_mm3": 3227.139460766981,
       "bounds_mm": [
         [
-          -20.0,
-          20.0
+          -105.91423986690826,
+          105.91423986690826
         ],
         [
-          -108.5,
-          108.5
+          -105.0,
+          105.0
         ],
         [
-          214.19999400127907,
-          223.19999400127907
+          114.19999999999999,
+          135.2
         ]
       ],
       "center_mm": [
-        7.234315317931049e-16,
-        0.0,
-        218.69999400127904
+        -5.2137976022890185e-14,
+        -4.466956324123294e-14,
+        125.5728041610995
+      ],
+      "solids": 8
+    },
+    {
+      "name": "69_motor_cable_grommets",
+      "group": "electronics",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2,
+        "sku": "Rubber grommet for a D25 hole in 2t plate, D16 bore (split type: connectors pass first)",
+        "note": "P30-6: hub-motor lead (320 mm) leaves the inboard axle end at x131 z90, runs under the floor between the moved inner rail (x65..95) and the axle plate (x142) to a D25 floor hole at y-130 (clear of the battery bridge feet), then to the driver -Y end; the LEFT lead must cross to the right-side driver (likely needs an extension), split grommet D16 bore"
+      },
+      "volume_mm3": 4481.481920345839,
+      "bounds_mm": [
+        [
+          -137.5,
+          137.5
+        ],
+        [
+          -145.5,
+          -114.5
+        ],
+        [
+          117.5,
+          122.5
+        ]
+      ],
+      "center_mm": [
+        -1.948272757138853e-14,
+        -130.0,
+        120.00000000000001
       ],
       "solids": 2
     },
@@ -3515,9 +3548,9 @@
         ]
       ],
       "center_mm": [
-        -100.2512801165522,
-        -268.5006463047283,
-        183.8031316821477
+        -100.25128011655225,
+        -268.50064630472775,
+        183.80313168214755
       ],
       "solids": 21
     },
@@ -3612,62 +3645,63 @@
       "solids": 6
     },
     {
-      "name": "74_lidar_plate_PRINTED_FRONT_LEFT",
+      "name": "74_lidar_base_PRINTED_FRONT_LEFT",
       "group": "lidars",
       "status": "concept_support",
       "metadata": {
-        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep); 8 mm solid plate, 100% infill around the bolt holes",
-        "fit": "Sits flat on the 2t floor corner (fully supported, so a thick print is stiff); 3x M5 countersunk through plate + floor into T-nuts of two rails, so it cannot turn"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep); 8 mm solid, 100% infill around the bolt holes",
+        "design": "8 mm printed base under the scanner + inboard tongue to 62 mm (blind 90 deg sector) for the bolts",
+        "fit": "Lies flat on the 2t floor; where it overhangs the frame corner it is printed 20 mm deeper down the rail faces; 3x M5 from above on the tongue, outside the scanner, so the scanner can stay mounted; nuts under the floor clear of the rails"
       },
-      "volume_mm3": 44052.13339683744,
+      "volume_mm3": 120987.50415284239,
       "bounds_mm": [
         [
-          -258.03300858899104,
-          -151.96699141100893
+          -259.8007755419574,
+          -132.87510831897214
         ],
         [
-          231.96699141100893,
-          338.0330085889911
+          212.87510831897214,
+          339.8007755419574
         ],
         [
-          121.0,
+          101.0,
           129.0
         ]
       ],
       "center_mm": [
-        -204.99999999999997,
-        285.11217902205965,
-        125.00254765476684
+        -206.55329931501723,
+        286.55329931501757,
+        118.2828084003894
       ],
       "solids": 1
     },
     {
-      "name": "74_lidar_plate_bolts_M5_Tnut_FRONT_LEFT",
+      "name": "74_lidar_base_bolts_M5_FRONT_LEFT",
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 3,
-        "sku": "M5x16 countersunk + 3030 slot-8 T-nut"
+        "sku": "M5x18 hex socket + washer + M5 nut under the floor"
       },
-      "volume_mm3": 2381.5508872511105,
+      "volume_mm3": 2538.1643200848525,
       "bounds_mm": [
         [
-          -224.25,
-          -185.75
+          -181.7157287525381,
+          -151.91673887931478
         ],
         [
-          251.75,
-          289.75
+          231.91673887931478,
+          261.7157287525381
         ],
         [
-          112.5,
-          129.0
+          112.19999999999999,
+          135.2
         ]
       ],
       "center_mm": [
-        -205.00000000000009,
-        276.3333333333333,
-        117.14934112710422
+        -169.4089586802771,
+        249.40895868027712,
+        124.9985164216904
       ],
       "solids": 6
     },
@@ -3677,8 +3711,8 @@
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 2,
-        "sku": "M3x10 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker",
-        "note": "TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing"
+        "sku": "M3x10 countersunk (flush under the base), 0.8 N m max (SICK) + threadlocker",
+        "note": "TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the base first, then bolt the base down from above; hole spacing assumed, confirm on the SICK drawing"
       },
       "volume_mm3": 141.84290830957906,
       "bounds_mm": [
@@ -3787,62 +3821,63 @@
       "solids": 1
     },
     {
-      "name": "74_lidar_plate_PRINTED_REAR_RIGHT",
+      "name": "74_lidar_base_PRINTED_REAR_RIGHT",
       "group": "lidars",
       "status": "concept_support",
       "metadata": {
-        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep); 8 mm solid plate, 100% infill around the bolt holes",
-        "fit": "Sits flat on the 2t floor corner (fully supported, so a thick print is stiff); 3x M5 countersunk through plate + floor into T-nuts of two rails, so it cannot turn"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep); 8 mm solid, 100% infill around the bolt holes",
+        "design": "8 mm printed base under the scanner + inboard tongue to 62 mm (blind 90 deg sector) for the bolts",
+        "fit": "Lies flat on the 2t floor; where it overhangs the frame corner it is printed 20 mm deeper down the rail faces; 3x M5 from above on the tongue, outside the scanner, so the scanner can stay mounted; nuts under the floor clear of the rails"
       },
-      "volume_mm3": 44052.133396837424,
+      "volume_mm3": 120987.50415284089,
       "bounds_mm": [
         [
-          151.96699141100893,
-          258.03300858899104
+          132.87510831897214,
+          259.8007755419574
         ],
         [
-          -338.0330085889911,
-          -231.96699141100893
+          -339.8007755419574,
+          -212.87510831897214
         ],
         [
-          121.0,
+          101.0,
           129.0
         ]
       ],
       "center_mm": [
-        205.00000000000006,
-        -285.11217902205965,
-        125.00254765476683
+        206.55329931501717,
+        -286.55329931501774,
+        118.28280840038944
       ],
       "solids": 1
     },
     {
-      "name": "74_lidar_plate_bolts_M5_Tnut_REAR_RIGHT",
+      "name": "74_lidar_base_bolts_M5_REAR_RIGHT",
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 3,
-        "sku": "M5x16 countersunk + 3030 slot-8 T-nut"
+        "sku": "M5x18 hex socket + washer + M5 nut under the floor"
       },
-      "volume_mm3": 2381.5508872511105,
+      "volume_mm3": 2538.1643200848525,
       "bounds_mm": [
         [
-          185.75,
-          224.25
+          151.91673887931478,
+          181.7157287525381
         ],
         [
-          -289.75,
-          -251.75
+          -261.7157287525381,
+          -231.91673887931478
         ],
         [
-          112.5,
-          129.0
+          112.19999999999999,
+          135.2
         ]
       ],
       "center_mm": [
-        204.99999999999997,
-        -276.3333333333334,
-        117.1493411271042
+        169.40895868027704,
+        -249.4089586802771,
+        124.9985164216904
       ],
       "solids": 6
     },
@@ -3852,8 +3887,8 @@
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 2,
-        "sku": "M3x10 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker",
-        "note": "TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing"
+        "sku": "M3x10 countersunk (flush under the base), 0.8 N m max (SICK) + threadlocker",
+        "note": "TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the base first, then bolt the base down from above; hole spacing assumed, confirm on the SICK drawing"
       },
       "volume_mm3": 141.84290830957906,
       "bounds_mm": [
@@ -4042,29 +4077,61 @@
       "group": "cameras",
       "status": "concept_support",
       "metadata": {
-        "material": "3D-printed wedge; M2 camera screws not drawn"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "Wedge (10 deg pitch, 5 deg yaw) + 5 mm back plate on the camera rear face; 2x M2 through the plate into the rear threads (pitch 80)"
       },
-      "volume_mm3": 5510.004620053342,
+      "volume_mm3": 15769.511180601423,
       "bounds_mm": [
         [
-          -160.0,
-          -108.0
+          -183.3606203229229,
+          -94.09733335663493
         ],
         [
-          267.0906162649357,
+          259.5885288086306,
           288.7806081835982
         ],
         [
           223.0,
-          230.91132571617953
+          249.85340271107208
         ]
       ],
       "center_mm": [
-        -134.0,
-        277.493844858802,
-        226.31323104651173
+        -136.38573822819188,
+        270.68608009155554,
+        233.64738555004612
       ],
-      "solids": 1
+      "solids": 2
+    },
+    {
+      "name": "79_camera_rear_screws_M2_LEFT",
+      "group": "cameras",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2,
+        "sku": "M2x6 + washer into the camera rear threads (2x M2, pitch 80, official 2D V1.2); thread depth and height on the rear face assumed",
+        "note": "The supplied 3D V0.1 has no holes: positions from the 2D drawing pitch, centred on the rear face"
+      },
+      "volume_mm3": 76.78052445373447,
+      "bounds_mm": [
+        [
+          -180.27030841496241,
+          -96.61709257815603
+        ],
+        [
+          259.37609004747736,
+          273.7777093269785
+        ],
+        [
+          240.10380585774908,
+          244.19337167452932
+        ]
+      ],
+      "center_mm": [
+        -138.5666181639574,
+        265.6163706442044,
+        241.89991093396478
+      ],
+      "solids": 2
     },
     {
       "name": "79_camera_bracket_bolts_M5_Tnut_LEFT",
@@ -4177,29 +4244,61 @@
       "group": "cameras",
       "status": "concept_support",
       "metadata": {
-        "material": "3D-printed wedge; M2 camera screws not drawn"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "Wedge (10 deg pitch, 5 deg yaw) + 5 mm back plate on the camera rear face; 2x M2 through the plate into the rear threads (pitch 80)"
       },
-      "volume_mm3": 5510.004620053334,
+      "volume_mm3": 15769.51118060143,
       "bounds_mm": [
         [
-          108.0,
-          160.0
+          94.09733335663492,
+          183.3606203229229
         ],
         [
-          267.0906162649357,
+          259.5885288086306,
           288.78060818359813
         ],
         [
           223.0,
-          230.91132571617953
+          249.85340271107208
         ]
       ],
       "center_mm": [
-        134.0,
-        277.49384485880205,
-        226.3132310465118
+        136.38573822819183,
+        270.6860800915556,
+        233.64738555004615
       ],
-      "solids": 1
+      "solids": 2
+    },
+    {
+      "name": "79_camera_rear_screws_M2_RIGHT",
+      "group": "cameras",
+      "status": "catalog_envelope",
+      "metadata": {
+        "quantity": 2,
+        "sku": "M2x6 + washer into the camera rear threads (2x M2, pitch 80, official 2D V1.2); thread depth and height on the rear face assumed",
+        "note": "The supplied 3D V0.1 has no holes: positions from the 2D drawing pitch, centred on the rear face"
+      },
+      "volume_mm3": 76.78052445373447,
+      "bounds_mm": [
+        [
+          96.61709257815603,
+          180.27030841496241
+        ],
+        [
+          259.37609004747736,
+          273.7777093269785
+        ],
+        [
+          240.10380585774908,
+          244.19337167452932
+        ]
+      ],
+      "center_mm": [
+        138.56661816395737,
+        265.61637064420455,
+        241.8999109339648
+      ],
+      "solids": 2
     },
     {
       "name": "79_camera_bracket_bolts_M5_Tnut_RIGHT",

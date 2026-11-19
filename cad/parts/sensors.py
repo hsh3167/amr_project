@@ -50,67 +50,89 @@ def lidar_bracket(d,n,x,y,z0,pt,sensorplate):
                        {'sku':'M5x10 hex socket + M5 T-nut for 2020 slot 6','quantity':len(zs)*2})]
 
 
-def pedestal_base_bolts(d,x,y):
-    """(x, y) of the pedestal-to-base-plate bolts, from the main column next to the LiDAR."""
-    q=d.layout['lidar_mount'];sx=1 if x>0 else -1;sy=1 if y>0 else -1
-    cx,cy=next((a,b) for a,b in d.profile['main_columns_xy'] if a*sx>0 and b*sy>0)
-    return [(cx+sx*a,cy+sy*b) for a,b in q['pedestal_base_bolts_rel']]
+def pedestal_base_bolts(d,pose):
+    """Rev17e: (x, y) of the LiDAR-base bolts (local pattern, +Y = heading), all through the base plate."""
+    return [_local_xy(pose['x'],pose['y'],-pose['heading_deg'],lx,ly) for lx,ly in d.layout['lidar_mount']['base_bolts_local']]
 
 
 def mount_holes(d):
-    """(x, y, d) base-plate holes for the Rev17b LiDAR pedestals."""
+    """(x, y, d) base-plate holes for the LiDAR bases."""
     if d.variant=='baseline':return []
-    return [(px,py,5.5) for pose in d.layout['lidars'] for px,py in pedestal_base_bolts(d,pose['x'],pose['y'])]
+    return [(px,py,5.5) for pose in d.layout['lidars'] for px,py in pedestal_base_bolts(d,pose)]
 
 
-def lidar_pedestal(d,n,x,y,z0,yaw):
-    """Rev17b: one 3D-printed pedestal per LiDAR instead of the 3t sheet cantilever.
-
-    Solid from the base-plate top up to the scanner bottom (43 mm deep) under the scanner and around the main
-    column corner, two 6 mm walls 55 mm up the column faces (3 M5 T-nut bolts each) and 3 M5 bolts into the base
-    plate. A deep printed block is far stiffer than a 3 mm cantilever plate, so the scanner does not ring."""
-    from .suspension import screw,nut
+def lidar_base_records(d,pose):
+    """Rev17e (user): printed LiDAR base on the 3t base plate only (no column walls / column bolts), scan plane matched to eco."""
     from .electronics import PRINT_NOTE
-    q=d.layout['lidar_mount'];sx=1 if x>0 else -1;sy=1 if y>0 else -1
-    cx,cy=next((a,b) for a,b in d.profile['main_columns_xy'] if a*sx>0 and b*sy>0)
-    h=d.profile['nominal_section']/2;fx=cx+sx*h;fy=cy+sy*h
-    base_bottom=d.p['base_bottom_z'];base_top=base_bottom+d.p['base_thickness']
-    w=q['pedestal_wall_mm'];up=q['flange_up_mm'];reach=q['deck_reach_mm'];deck=q['pedestal_deck_mm']
-    def S(x0,x1,y0,y1,z0_,z1):return span(min(x0,x1),max(x0,x1),min(y0,y1),max(y0,y1),z0_,z1)
-    pad=rz(box(q['pedestal_pad'][0],q['pedestal_pad'][1],z0-base_top,0,0,(z0+base_top)/2),yaw).translate((x,y,0))
-    body=pad+S(fx,fx+sx*reach,cy-sy*h,cy+sy*reach,base_top,z0)+S(cx-sx*h,fx,fy,cy+sy*reach,base_top,z0)
-    body=body+S(fx,fx+sx*w,cy-sy*h,fy+sy*w,z0,z0+up)+S(cx-sx*h,fx,fy,fy+sy*w,z0,z0+up)
-    body=body-S(cx-h-.2,cx+h+.2,cy-h-.2,cy+h+.2,base_top-1,z0+up+1)
-    # column bolts: head outside the 6 mm wall, shank through the slot mouth, T-nut in the 2020 slot channel
-    zs=[z0+8,z0+up/2,z0+up-8];bolts=[]
-    for z in zs:
-        body=body-cylx(2.75,w+2,fx+sx*w/2,cy,z)-cyly(2.75,w+2,cx,fy+sy*w/2,z)
-        bolts+=[cylx(4.25,5,fx+sx*(w+2.5),cy,z)+cylx(2.5,w+4.4,fx+sx*(w-4.4)/2,cy,z),
-                cyly(4.25,5,cx,fy+sy*(w+2.5),z)+cyly(2.5,w+4.4,cx,fy+sy*(w-4.4)/2,z),
-                box(2.3,9.6,10,fx-sx*3.25,cy,z)-cylx(2.5,4,fx-sx*3.25,cy,z),box(9.6,2.3,10,cx,fy-sy*3.25,z)-cyly(2.5,4,cx,fy-sy*3.25,z)]
-    # base-plate bolts: head in a 10 mm counterbore from the top, nut under the base plate
-    base=[];pk=10
-    for px,py in pedestal_base_bolts(d,x,y):
-        body=body-cylz(2.75,z0-base_top+2,px,py,base_top-1)-cylz(5,pk+1,px,py,z0-pk)
-        L=round((z0-pk)-(base_bottom-4)+2)
-        base+=(screw(px,py,z0-pk,5,L)+nut(px,py,base_bottom-4,8,4,5)).solids()
-    # scanner: 2x M3 from below, heads in pockets open at the overhanging bottom of the pedestal
-    pts,_=scanner_screws(x,y,yaw,z0,deck,q.get('scanner_holes_local',[]))
-    m3=[]
-    for px,py in pts:
-        body=body-cylz(1.7,deck+2,px,py,z0-deck-1)-cylz(3.5,z0-deck-base_top+1,px,py,base_top-1)
-        m3+=screw(px,py,z0-deck,3,deck,True).solids()
-    return [PartRecord('60_lidar_pedestal_PRINTED_'+n,'lidars',body,(.80,.66,.40),'concept_support',
-                       {'material':PRINT_NOTE+'; print the walls with 6+ perimeters and 60% infill',
-                        'design':f'Solid pedestal {z0-base_top:g} mm deep under the scanner + {w:g} mm walls {up:g} mm up two column faces',
-                        'stiffness':'Hand estimate: 43 mm deep printed section (E~1.2 GPa effective) about 11 kN/mm at the scanner, first mode ~1 kHz; the 3t steel cantilever it replaces was about 0.9 kN/mm, ~300 Hz'}),
-            PartRecord('65_lidar_column_bolts_M5_Tnut_'+n,'lidars',Compound(bolts),(.20,.22,.25),'catalog_envelope',
-                       {'sku':'M5x10 hex socket + washer + M5 T-nut for 2020 slot 6','quantity':len(zs)*2}),
-            PartRecord('65_lidar_base_bolts_M5_'+n,'lidars',Compound(base),(.20,.22,.25),'catalog_envelope',
-                       {'sku':'M5x40 hex socket + washer + M5 nut under the base plate','quantity':len(pedestal_base_bolts(d,x,y))}),
-            PartRecord('66_lidar_scanner_screws_M3_'+n,'lidars',Compound(m3),(.20,.22,.25),'catalog_envelope',
-                       {'sku':'M3x8 + washer, 0.8 N m max (SICK)','quantity':len(pts),
+    q=d.layout['lidar_mount'];n=pose['name'];x,y,z0=pose['x'],pose['y'],pose['bbox_bottom_z'];yaw=-pose['heading_deg']
+    bb=d.p['base_bottom_z'];top=bb+d.p['base_thickness'];w=d.p['base_width']/2;l=d.p['base_length']/2
+    cut=None
+    for cx,cy in d.profile['main_columns_xy']:
+        c=span(cx-10.5,cx+10.5,cy-10.5,cy+10.5,bb-20,z0+1)
+        cut=c if cut is None else cut+c
+    body,m3,hw=lidar_base(x,y,yaw,top,z0,q['base_outline_local'],q['base_bolts_local'],q.get('scanner_holes_local',[]),bb,
+                          q['base_bolt_len_mm'],cut=cut,skirt=((-w,w,-l,l),bb-q['base_skirt_mm']))
+    return [PartRecord('60_lidar_base_PRINTED_'+n,'lidars',body,(.80,.66,.40),'concept_support',
+                       {'material':PRINT_NOTE+'; 100% infill around the bolt holes',
+                        'design':f"{z0-top:g} mm printed base on the base plate + {q['base_skirt_mm']:g} mm deeper skirt where it overhangs the plate edge + inboard tongue for the bolts",
+                        'fit':'Scanner screwed on first (M3 from below), then 3x M5 from above on the tongue (outside the scanner, blind sector), nuts under the base plate'}),
+            PartRecord('65_lidar_base_bolts_M5_'+n,'lidars',hw,(.20,.22,.25),'catalog_envelope',
+                       {'sku':f"M5x{q['base_bolt_len_mm']:g} hex socket + washer + M5 nut under the base plate",'quantity':len(q['base_bolts_local'])}),
+            PartRecord('66_lidar_scanner_screws_M3_'+n,'lidars',m3,(.20,.22,.25),'catalog_envelope',
+                       {'sku':f'M3x{round(z0-top+2)} countersunk (flush under the base), 0.8 N m max (SICK)','quantity':len(q.get('scanner_holes_local',[])),
                         'note':'Into the TiM571 bottom threads (M3 x 2.8 deep); hole spacing assumed, confirm on the SICK drawing'})]
+
+
+def _local_xy(x,y,yaw,lx,ly):
+    v=rz(box(1,1,1,lx,ly,0),yaw).translate((x,y,0)).bounding_box().center();return v.X,v.Y
+
+
+def lidar_base(x,y,yaw,plate_top,z0,outline,bolts_local,holes_local,plate_bottom,bolt_len,cut=None,skirt=None):
+    """Rev17e / P30-6 printed LiDAR base, fixed to the body plate only (both models).
+
+    Solid print from the plate top to the scanner bottom over the local rectangle `outline` (x0, x1, y0, y1; +Y = heading).
+    The scanner is screwed on first (M3 countersunk from below, flush). The base is then bolted down from ABOVE with M5
+    on its inboard tongue (outside the scanner footprint, in the blind sector), washer on the print, nut under the plate.
+    skirt = ((X0, X1, Y0, Y1) body-plate outline, z_bottom): where the base overhangs the plate it is printed deeper,
+    down to z_bottom, hugging the plate (and rail) edges, so the overhang is not a thin cantilever.
+    Returns (base, M3 screws, M5 hardware)."""
+    from build123d import Plane,Solid
+    from .suspension import screw,nut
+    x0,x1,y0,y1=outline;pt=z0-plate_top
+    body=rz(span(x0,x1,y0,y1,plate_top,z0),yaw).translate((x,y,0))
+    if skirt:
+        (X0,X1,Y0,Y1),zb=skirt
+        out=rz(span(x0,x1,y0,y1,zb,plate_top+.5),yaw).translate((x,y,0))-span(X0,X1,Y0,Y1,zb-1,plate_top+1)
+        if out is not None and out.solids():body=body+out
+    if cut is not None:body=body-cut
+    hw=[]
+    for lx,ly in bolts_local:
+        px,py=_local_xy(x,y,yaw,lx,ly)
+        body=body-cylz(2.75,pt+2,px,py,plate_top-1)
+        hw+=(screw(px,py,z0+1.2,5,bolt_len)+nut(px,py,plate_bottom-4,8,4,5)).solids()
+        hw+=(cylz(5,1.2,px,py,z0)-cylz(2.75,3,px,py,z0-1)).solids()
+    m3=[]
+    for lx,ly in holes_local:
+        px,py=_local_xy(x,y,yaw,lx,ly)
+        cs=Solid.make_cone(3.1,1.7,1.7,Plane((px,py,plate_top)))       # 90 deg countersink, flush with the base bottom
+        body=body-cs-cylz(1.7,pt+2,px,py,plate_top-1)
+        m3+=(Solid.make_cone(3.0,1.5,1.6,Plane((px,py,plate_top+.05)))+cylz(1.5,pt-1.7,px,py,plate_top+1.65)).solids()
+    return body,Compound(m3),Compound(hw)
+
+
+def camera_back_plate(camera,frame,clip,t=5,pitch=80,drop=40):
+    """Back plate on the Astra rear face with the two M2 threads (pitch 80, official 2D V1.2) -> (plate, holes, M2 screws).
+
+    The plate is camera-high over the full width (screws at local x +-40, mid height) and drops into the support only
+    inside `clip` (wedge/platform region). The supplied 3D V0.1 has no holes; positions follow the 2D pitch, centred."""
+    local=camera.moved(frame.inverse()).bounding_box()
+    ry=local.min.Y;cx=local.center().X;cz=local.center().Z;zb=local.min.Z;zt=local.max.Z-2;w=local.size.X+4
+    plate=box(w,t,zt-zb,cx,ry-t/2,(zt+zb)/2).moved(frame)
+    low=box(w,t,drop,cx,ry-t/2,zb-drop/2+1).moved(frame)&clip
+    if low is not None and low.solids():plate=plate+low
+    holes=[cyly(1.2,t+2,cx+s*pitch/2,ry-t/2,cz).moved(frame) for s in (-1,1)]
+    screws=[(cyly(1.9,2,cx+s*pitch/2,ry-t-1,cz)+cyly(1.0,t,cx+s*pitch/2,ry-t/2,cz)).moved(frame) for s in (-1,1)]
+    return plate,holes,Compound([q for c in screws for q in c.solids()])
 
 
 def scanner_screws(x,y,yaw,plate_top,pt,holes):
@@ -134,7 +156,7 @@ def lidars(d):
             r.append(PartRecord('60_diagonal_lidar_mount_CONCEPT_'+n,'lidars',sensorplate+bridge,(.28,.43,.54)))
             r.append(column(d,sx,sy,d.p['base_bottom_z']+d.p['base_thickness'],z0-pt,'64_2020_Al_lidar_column_'+n,'lidars'))
         else:
-            r.extend(lidar_pedestal(d,n,x,y,z0,yaw))
+            r.extend(lidar_base_records(d,pose))
         r.append(PartRecord('61_SICK_TiM571_envelope_base_'+n,'lidars',place(box(lidar['width'],lidar['depth'],36,0,0,z0+18)),(.85,.88,.90),'drawing_envelope'))
         # Rev12b: the optical envelope stops under the 3mm scanner-top disc instead of overlapping it.
         top=3 if d.variant!='baseline' else 0
@@ -163,14 +185,19 @@ def camera_hanger(d,side,n,x,y,z,camera):
     local=camera.moved(frame.inverse()).bounding_box()
     block=box(local.size.X-4,local.size.Y-4,60,local.center().X,local.center().Y,local.min.Z-30).moved(frame)
     body=body+(block&box(cm['plate_width'],cm['plate_depth'],60,x,cm['plate_y'],top+30))
-    body=body-camera   # ribs and wedge follow the yawed camera body exactly
+    back,holes,m2=camera_back_plate(camera,frame,box(cm['plate_width'],cm['plate_depth'],60,x,cm['plate_y'],top+30))
+    body=body+back-camera   # ribs and wedge follow the yawed camera body exactly
+    for hh in holes:body=body-hh
     bolts=[]
     for bx in (x-hq['bolt_dx_mm'],x+hq['bolt_dx_mm']):
         body=body-cylz(3.2,hq['insert_depth_mm'],bx,py,deck_bottom-hq['insert_depth_mm'])
         bolts+=screw(bx,py,deck_top,5,p['top_thickness']+hq['insert_depth_mm']-1).solids()
     return [PartRecord('71_camera_hanger_PRINTED_'+n,'cameras',body,(.80,.66,.40),'concept_support',
-                       {'material':PRINT_NOTE,'design':'Flange + 40x20 post + 6 mm platform + 2 ribs + wedge, one print; camera M2 screws pitch 80 not drawn',
-                        'fit':'2x M5 heat-set inserts in the flange (D6.4 pockets)'}),
+                       {'material':PRINT_NOTE,'design':'Flange + 40x20 post + 6 mm platform + 2 ribs + wedge + 5 mm back plate on the camera rear face, one print',
+                        'fit':'2x M5 heat-set inserts in the flange (D6.4 pockets); camera by 2x M2 through the back plate into its rear threads (pitch 80)'}),
+            PartRecord('73_camera_rear_screws_M2_'+n,'cameras',m2,(.20,.22,.25),'catalog_envelope',
+                       {'sku':'M2x6 + washer into the camera rear threads (2x M2, pitch 80, official 2D V1.2); thread depth and height on the rear face assumed','quantity':2,
+                        'note':'The supplied 3D V0.1 has no holes: positions from the 2D drawing pitch, centred on the rear face'}),
             PartRecord('73_camera_hanger_bolts_M5_'+n,'cameras',Compound(bolts),(.20,.22,.25),'catalog_envelope',
                        {'sku':'M5x12 + washer from the deck top into M5 heat-set inserts','quantity':2})]
 

@@ -1,6 +1,6 @@
 {
   "valid": true,
-  "components": 169,
+  "components": 167,
   "solids": 459,
   "errors": [],
   "suspension_catalog": {
@@ -186,8 +186,8 @@
   "lidar_sampling": {
     "method": "2D sample rays; nominal270deg FOV; main-column occlusion; conservative wheel/deck perimeter",
     "scan_z_mm": [
-      240.83,
-      240.83
+      206.83,
+      206.83
     ],
     "perimeters": [
       {
@@ -217,154 +217,121 @@
     ],
     "limitations": "No real optical housing origin, glass, range accuracy, cable/cover/arm occlusion, floor obstacles or safety validation."
   },
+  "scan_plane_crossings": [
+    {
+      "lidar": "FRONT_LEFT",
+      "part": "50_company_7S9P_battery_STEP",
+      "from_deg": -179.1,
+      "to_deg": 177.6,
+      "blind_sector_wrap": true,
+      "nearest_mm": 248.3,
+      "in_fov": false
+    },
+    {
+      "lidar": "FRONT_LEFT",
+      "part": "56_company_LCD_7in_STEP",
+      "from_deg": 136.7,
+      "to_deg": 141.4,
+      "blind_sector_wrap": false,
+      "nearest_mm": 130.4,
+      "in_fov": false
+    },
+    {
+      "lidar": "FRONT_LEFT",
+      "part": "56_LCD_holder_PRINTED",
+      "from_deg": 136.4,
+      "to_deg": 148.8,
+      "blind_sector_wrap": false,
+      "nearest_mm": 124.3,
+      "in_fov": false
+    },
+    {
+      "lidar": "FRONT_LEFT",
+      "part": "57_company_speaker_STEP",
+      "from_deg": -156.5,
+      "to_deg": -146.4,
+      "blind_sector_wrap": false,
+      "nearest_mm": 471.4,
+      "in_fov": false
+    },
+    {
+      "lidar": "FRONT_LEFT",
+      "part": "57_speaker_holder_PRINTED",
+      "from_deg": -158.1,
+      "to_deg": -145.4,
+      "blind_sector_wrap": false,
+      "nearest_mm": 480.8,
+      "in_fov": false
+    },
+    {
+      "lidar": "FRONT_LEFT",
+      "part": "50_battery_end_clamps_PRINTED",
+      "from_deg": -179.0,
+      "to_deg": 166.9,
+      "blind_sector_wrap": true,
+      "nearest_mm": 234.9,
+      "in_fov": false
+    },
+    {
+      "lidar": "REAR_RIGHT",
+      "part": "50_company_7S9P_battery_STEP",
+      "from_deg": -171.1,
+      "to_deg": 179.2,
+      "blind_sector_wrap": true,
+      "nearest_mm": 154.5,
+      "in_fov": false
+    },
+    {
+      "lidar": "REAR_RIGHT",
+      "part": "56_company_LCD_7in_STEP",
+      "from_deg": -167.3,
+      "to_deg": -149.8,
+      "blind_sector_wrap": false,
+      "nearest_mm": 501.5,
+      "in_fov": false
+    },
+    {
+      "lidar": "REAR_RIGHT",
+      "part": "56_LCD_holder_PRINTED",
+      "from_deg": -168.9,
+      "to_deg": -149.1,
+      "blind_sector_wrap": false,
+      "nearest_mm": 485.6,
+      "in_fov": false
+    },
+    {
+      "lidar": "REAR_RIGHT",
+      "part": "57_company_speaker_STEP",
+      "from_deg": 133.0,
+      "to_deg": 144.1,
+      "blind_sector_wrap": false,
+      "nearest_mm": 247.3,
+      "in_fov": false
+    },
+    {
+      "lidar": "REAR_RIGHT",
+      "part": "57_speaker_holder_PRINTED",
+      "from_deg": 138.6,
+      "to_deg": 141.5,
+      "blind_sector_wrap": false,
+      "nearest_mm": 239.0,
+      "in_fov": false
+    },
+    {
+      "lidar": "REAR_RIGHT",
+      "part": "50_battery_end_clamps_PRINTED",
+      "from_deg": -168.7,
+      "to_deg": 172.9,
+      "blind_sector_wrap": true,
+      "nearest_mm": 145.8,
+      "in_fov": false
+    }
+  ],
   "scan_plane_vertical_clearance_checked": true,
   "deck_sensor_clearance_mm": {
-    "deck_underside_above_scan": 42.17,
+    "deck_underside_above_scan": 76.17,
     "deck_underside_above_camera_top": 4.324,
-    "lowest_camera_mount_above_scan": 8.17
+    "lowest_camera_mount_above_scan": 42.17
   },
-  "selected_sensor_collisions": [],
-  "suspension_collision_sampling": {
-    "sampled_poses": 20,
-    "boolean_pairs": 412,
-    "hits": [],
-    "scope": "One motion key at a time (bogie or hinge module), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
-  },
-  "caster_swivel_sampling": {
-    "sampled_poses": 96,
-    "boolean_pairs": 192,
-    "hits": [],
-    "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump of its hinge arm; local hardware and chassis"
-  },
-  "static_interference": {
-    "boolean_pairs": 312,
-    "hits": [],
-    "known_manufacturer_overlaps": [
-      {
-        "a": "43_GL65_OEM_fork_LB",
-        "b": "44_GL65_OEM_wheel_LB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
-      },
-      {
-        "a": "43_GL65_OEM_fork_LF",
-        "b": "44_GL65_OEM_wheel_LF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
-      },
-      {
-        "a": "43_GL65_OEM_fork_RB",
-        "b": "44_GL65_OEM_wheel_RB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
-      },
-      {
-        "a": "43_GL65_OEM_fork_RF",
-        "b": "44_GL65_OEM_wheel_RF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
-      }
-    ],
-    "scope": "All parts, nominal pose, BRep common volume > 0.01 mm3; contact without overlap is allowed"
-  },
-  "suspension_pose_interference": {
-    "sampled_poses": 8,
-    "boolean_pairs": 554,
-    "hits": [],
-    "known_manufacturer_overlaps": [
-      {
-        "a": "43_GL65_OEM_fork_LF",
-        "b": "44_GL65_OEM_wheel_LF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "LEFT",
-        "displacement_mm": -10.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_LF",
-        "b": "44_GL65_OEM_wheel_LF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "LEFT",
-        "displacement_mm": 10.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_RF",
-        "b": "44_GL65_OEM_wheel_RF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "RIGHT",
-        "displacement_mm": -10.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_RF",
-        "b": "44_GL65_OEM_wheel_RF",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "RIGHT",
-        "displacement_mm": 10.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_LB",
-        "b": "44_GL65_OEM_wheel_LB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "LB",
-        "displacement_mm": -5.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_LB",
-        "b": "44_GL65_OEM_wheel_LB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "LB",
-        "displacement_mm": 5.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_RB",
-        "b": "44_GL65_OEM_wheel_RB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "RB",
-        "displacement_mm": -5.0
-      },
-      {
-        "a": "43_GL65_OEM_fork_RB",
-        "b": "44_GL65_OEM_wheel_RB",
-        "volume_mm3": 26.095,
-        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
-        "wheel": "RB",
-        "displacement_mm": 5.0
-      }
-    ],
-    "scope": "One wheel at a time at full droop and full bump; springs, stoppers and fasteners included; cameras excluded; not a swept-volume proof"
-  },
-  "support_connectivity": {
-    "root": "01_lower_steel_plate_3t",
-    "tolerance_mm": 0.2,
-    "contacts": 239,
-    "unsupported": [],
-    "isolated": [],
-    "scope": "Contact graph from the base plate at the nominal pose; geometric support only, not joint strength"
-  },
-  "step_roundtrip": [
-    {
-      "file": "amr_current.step",
-      "raw_import_valid": false,
-      "valid_after_explicit_normalization": true,
-      "normalized_components": [
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        },
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        }
-      ],
-      "solids": 459
-    }
-  ]
+  "step_roundtrip": []
 }

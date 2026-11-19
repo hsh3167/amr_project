@@ -32,22 +32,46 @@ def make(d):
         records.append(PartRecord(label,'electronics',Compound(legs),(.55,.58,.62),'concept_support',
                                   {'height_mm':round(h,2),'quantity':4,'supports':name}))
     records+=battery(d)+lcd(d)+speaker(d)+dcdc(d)
-    strap,_,buckle=_battery_strap(d)
-    records+=[PartRecord('50_battery_hold_down_straps','electronics',strap,(.15,.15,.17),'catalog_envelope',
-                         {'quantity':2,'sku':'25 mm polyester strap + cam buckle','fit':'Around the case through two base-plate slots each, closed under the plate; clear of the terminal block'}),
-              PartRecord('50_battery_strap_buckles','electronics',buckle,(.30,.30,.33),'catalog_envelope',{'quantity':2})]
+    from .suspension import screw
+    clamps,pts,ftop=_battery_clamps(d);bq=e['battery_clamp']
+    hw=[]
+    for x,y in pts:
+        hw+=(screw(x,y,ftop+1.2,5,bq['bolt_len_mm'])+cylz(7.5,1.2,x,y,ftop)-cylz(2.75,3,x,y,ftop-1)).solids()
+        hw+=(cylz(3.55,p['base_thickness'],x,y,p['base_bottom_z'])-cylz(2.5,p['base_thickness']+2,x,y,p['base_bottom_z']-1)).solids()
+    records+=[PartRecord('50_battery_end_clamps_PRINTED','electronics',clamps,(.80,.66,.40),'concept_support',
+                         {'quantity':2,'material':PRINT_NOTE,
+                          'design':f"One clamp per battery end: {bq['wall_mm']:g} mm wall on the end face, {bq['lip_mm']:g} mm lip over the lid edge, {bq['foot_t_mm']:g} mm foot; clamps the case onto the 3 mm rubber pads",
+                          'fit':'Set the battery in, put the two clamps on its ends, 3x M5 from above per clamp into self-clinching nuts pressed in the 3t base plate (nothing below the plate)'}),
+              PartRecord(f"50_battery_clamp_bolts_M5x{bq['bolt_len_mm']:g}",'electronics',Compound(hw),(.20,.22,.25),'catalog_envelope',
+                         {'sku':f"M5x{bq['bolt_len_mm']:g} hex socket + fender washer + M5 self-clinching nut (e.g. PEM CLS-M5-2, hole D7.1) in the base plate",'quantity':len(pts)})]
     gx,gy=_ground_xy(d)
     records.append(ground_stud(base_top,p['base_bottom_z'],gx,gy,'58_ground_stud_M4'))
     return records
 
 
-def _battery_strap(d):
+def _battery_clamps(d):
+    """Rev17e: printed end clamps (rear face boxed in by the power bay, front face by the driver: no bridge legs fit there)."""
     from .vendor import source
-    p=d.p;e=d.layout['electronics']
-    case=max(source('BATTERY.STEP').solids(),key=lambda s:s.volume).bounding_box()
+    p=d.p;e=d.layout['electronics'];bq=e['battery_clamp'];top=p['base_bottom_z']+p['base_thickness']
+    src=source('BATTERY.STEP');solids=src.solids();big=max(solids,key=lambda s:s.volume);case=big.bounding_box()
     hx,hy,h=case.size.X/2,case.size.Y/2,case.size.Z
-    box_=(-hx,hx,e['battery_y']-hy,e['battery_y']+hy,e['battery_bottom_z'],e['battery_bottom_z']+h)
-    return battery_strap(box_,'x',e['battery_strap_x'],p['base_bottom_z'],p['base_thickness'])
+    dx=-(case.min.X+case.max.X)/2;dy=e['battery_y']-(case.min.Y+case.max.Y)/2;dz=e['battery_bottom_z']-case.min.Z
+    x0,x1,y0,y1,z1=-hx,hx,e['battery_y']-hy,e['battery_y']+hy,e['battery_bottom_z']+h
+    w,lip,lt,ft,fl=bq['wall_mm'],bq['lip_mm'],bq['lip_t_mm'],bq['foot_t_mm'],bq['foot_mm']
+    keep=[s.bounding_box() for s in solids if s.volume<big.volume*.5]
+    q=d.layout['suspension']['bogie'];sx_,sy_=q['stopper_rear_xy_mm']
+    bodies=[];pts=[]
+    for sg,xe in ((-1,x0),(1,x1)):
+        S=lambda a,b,c0,c1:span(min(a,b),max(a,b),y0,y1,c0,c1)
+        body=S(xe,xe+sg*w,top,z1+lt)+S(xe-sg*lip,xe,z1,z1+lt)+S(xe+sg*w,xe+sg*(w+fl),top,top+ft)
+        for k in keep:   # terminal block and other lid parts: 1.5 mm clearance
+            body=body-span(k.min.X+dx-1.5,k.max.X+dx+1.5,k.min.Y+dy-1.5,k.max.Y+dy+1.5,k.min.Z+dz-1.5,k.max.Z+dz+1.5)
+        body=body-cylz(6.5,20,sg*sx_,sy_,top-1)      # rear rotation-stop striker head on the plate
+        xb=xe+sg*(w+fl/2)
+        for y in bq['bolt_y']:
+            body=body-cylz(2.75,ft+2,xb,y,top-1);pts.append((xb,y))
+        bodies.append(body)
+    return Compound(bodies),pts,top+ft
 
 
 def mount_holes(d):
@@ -56,13 +80,13 @@ def mount_holes(d):
     md=d.layout['electronics'].get('motor_driver')
     driver=[(md['x']+x,md['y']+y,3.4) for x,y in ZLAC_EAR_HOLES] if md else []
     gx,gy=_ground_xy(d)
-    return [(x,y,5.5) for x,y in _lcd_bolts(d)+_speaker_bolts(d)]+driver+[(gx,gy,4.5)]
+    clinch=[(x,y,7.1) for x,y in _battery_clamps(d)[1]]   # M5 self-clinching nut mounting holes
+    return [(x,y,5.5) for x,y in _lcd_bolts(d)+_speaker_bolts(d)]+driver+[(gx,gy,4.5)]+clinch
 
 
 def mount_slots(d):
-    """(x0, x1, y0, y1) base-plate slots for the battery straps."""
-    if d.variant=='baseline':return []
-    return _battery_strap(d)[1]
+    """(x0, x1, y0, y1) base-plate slots (Rev17e: none; the battery straps were replaced by bolted printed bridges)."""
+    return []
 
 
 def motor_driver(d):
@@ -113,9 +137,9 @@ def battery(d):
     body,pads,detail=_battery_shapes(e['battery_y'],e['battery_bottom_z'],e['battery_pad_mm'],p['base_bottom_z']+p['base_thickness'])
     return [PartRecord('50_company_7S9P_battery_STEP','electronics',body,(.86,.63,.36),COMPANY,
                        {'source':'BATTERY.STEP.gz','placement':detail,
-                        'limits':'Company-supplied STEP (case + terminal block); cell type, mass, BMS and charger not in the model. Hold-down strap TBD.'}),
+                        'limits':'Company-supplied STEP (case + terminal block); cell type, mass, BMS and charger not in the model. Held by 50_battery_end_clamps_PRINTED.'}),
             PartRecord('50_battery_support_pads','electronics',pads,(.55,.58,.62),'concept_support',
-                       {'quantity':4,'height_mm':e['battery_pad_mm'],'material':'rubber pad (anti-vibration), strap or clamp TBD'})]
+                       {'quantity':4,'height_mm':e['battery_pad_mm'],'material':'rubber pad (anti-vibration), preloaded by the printed end clamps'})]
 
 
 @lru_cache(maxsize=4)
@@ -299,6 +323,28 @@ def battery_strap(case, along, positions, under_z, plate_t, width=25, t=1.5):
             buckles.append(span((x0+x1)/2-20, (x0+x1)/2+20, p-width/2-2, p+width/2+2, z1+t, z1+t+9))
         straps.append(ring)
     return Compound(straps), slots, Compound(buckles)
+
+
+def battery_bridges(case, along, positions, plate_top, width=20, wall=6, foot=16, foot_t=8, bolt_out=14):
+    """Rev17e / P30-6: printed hold-down bridges (inverted U) over a box case (x0,x1,y0,y1,z0,z1), feet bolted from above.
+
+    along = 'x': bridges at x positions run across Y (legs on the y faces); 'y': at y positions across X.
+    bolt_out = bolt distance from the case face. Returns (bridges, bolt points, foot top z)."""
+    x0, x1, y0, y1, z0, z1 = case; bodies = []; pts = []
+    for p in positions:
+        a0, a1 = p-width/2, p+width/2
+        if along == 'x':
+            S = lambda u0, u1, v0, v1: span(a0, a1, u0, u1, v0, v1); lo, hi = y0, y1
+            bolts = [(p, y0-bolt_out), (p, y1+bolt_out)]
+        else:
+            S = lambda u0, u1, v0, v1: span(u0, u1, a0, a1, v0, v1); lo, hi = x0, x1
+            bolts = [(x0-bolt_out, p), (x1+bolt_out, p)]
+        b = (S(lo-wall, hi+wall, z1, z1+wall)+S(lo-wall, lo, plate_top, z1)+S(hi, hi+wall, plate_top, z1)
+             + S(lo-wall-foot, lo-wall, plate_top, plate_top+foot_t)+S(hi+wall, hi+wall+foot, plate_top, plate_top+foot_t))
+        for bx, by in bolts:
+            b -= cylz(2.75, foot_t+2, bx, by, plate_top-1)
+        bodies.append(b); pts += bolts
+    return Compound(bodies), pts, plate_top+foot_t
 
 
 # ---------------------------------------------------------------- DC/DC

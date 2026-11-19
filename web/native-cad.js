@@ -126,8 +126,8 @@ export async function loadNativeCAD({robot,groups,parts,wheels,casters,part,tag,
   if(missing.length)throw new Error('CAD nodes missing: '+missing.join(', '));
   if(lidarVisual)addLidarVisuals(lidarVisual,layout,groups,parts,tag);
     for(const n of ['LF','LB','RF','RB'])parts['caster'+n].description='공식 GL-65-ASF-EUS STEP 기준(장착높이 83mm, 판 48×65mm, 홀 24×54mm). '+(BOGIE&&n[1]==='F'?'보기 링크 앞쪽 패드에 CB6-12 4개로 고정되어 구동륜과 함께 피벗(Y=+60) 둘레를 돕니다(±10mm).':'90mm 경첩 암에 달려 ±5mm 움직이고, 바로 위 X-SWU17-35 스프링이 받칩니다.');
-  for(const id of ['cameraLeft','cameraRight'])parts[id].description='Orbbec 공식 Astra Mini Pro 3D V0.1의 58솔리드. 2D V1.2는 M2 피치80/깊이19.92, 3D 깊이24.264. 실물 버전·어댑터 확인 필요.';
-  parts.profiles.description='주기둥 4개와 카메라 행거 2개는 알루미늄 프로파일입니다. 각 기둥 양끝을 CB5-12 볼트로 판을 관통해 프로파일 중심 탭(M5)에 체결합니다. Rev17b: LiDAR는 3D 프린팅 받침대(하판~스캐너 바닥 43mm 통블록 + 기둥 두 면 6mm 벽 55mm, 기둥 M5 6개 + 하판 M5 3개)에 고정하고, 스캐너는 아래에서 M3 2개로 체결합니다. 카메라는 2020 기둥 대신 상판 밑의 3D 프린팅 행거(쐐기 일체, M5 인서트 2개)에 답니다. 공칭 20×20 단면과 슬롯은 제조사 미지정 범용 형상입니다.';
+  for(const id of ['cameraLeft','cameraRight'])parts[id].description='Orbbec 공식 Astra Mini Pro 3D V0.1의 58솔리드. 뒷면 M2 2개(2D V1.2 피치80)로 프린팅 행거 뒤판에 체결합니다. 3D 모델에는 구멍이 없어 위치는 2D 피치 기준(뒷면 중앙 높이) 가정입니다. 3D 깊이24.264, 실물 버전 확인 필요.';
+  parts.profiles.description='주기둥 4개와 카메라 행거 2개는 알루미늄 프로파일입니다. 각 기둥 양끝을 CB5-12 볼트로 판을 관통해 프로파일 중심 탭(M5)에 체결합니다. Rev17e: LiDAR는 eco와 같은 높이(스캔면 Z206.8)로 내리고, 하판 위 9mm 프린팅 받침에 고정합니다(스캐너는 아래에서 M3 2개, 받침은 안쪽 혀 부분에서 위→아래 M5 3개로 하판에만 체결, 판 밖으로 나간 부분은 12mm 더 두껍게). 카메라는 상판 밑 3D 프린팅 행거에 얹고 뒷면 M2 2개(피치 80)로 행거 뒤판에 체결합니다. 공칭 20×20 단면과 슬롯은 제조사 미지정 범용 형상입니다.';
   const poses=BOGIE?{LEFT:0,RIGHT:0,LB:0,RB:0}:{LEFT:0,RIGHT:0,LF:0,LB:0,RF:0,RB:0};
   function setPose(wheel,mm){
     if(!(wheel in poses)||!Number.isFinite(mm))throw new Error('Invalid wheel pose');

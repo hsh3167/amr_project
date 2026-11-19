@@ -61,8 +61,8 @@
       "x": -220,
       "y": 250,
       "heading_deg": -45,
-      "bbox_bottom_z": 163,
-      "scan_z": 240.83,
+      "bbox_bottom_z": 129,
+      "scan_z": 206.83,
       "support_x": -176,
       "support_y": 220
     },
@@ -72,8 +72,8 @@
       "x": 220,
       "y": -250,
       "heading_deg": 135,
-      "bbox_bottom_z": 163,
-      "scan_z": 240.83,
+      "bbox_bottom_z": 129,
+      "scan_z": 206.83,
       "support_x": 176,
       "support_y": -220
     }
@@ -86,24 +86,6 @@
     "flange_up_mm": 55,
     "pedestal_wall_mm": 6,
     "pedestal_deck_mm": 8,
-    "pedestal_pad": [
-      84,
-      80
-    ],
-    "pedestal_base_bolts_rel": [
-      [
-        39,
-        -3
-      ],
-      [
-        20,
-        32
-      ],
-      [
-        0,
-        32
-      ]
-    ],
     "rev17b_note": "Rev17b: 3D-printed pedestal replaces the 3t sheet bracket (vibration): solid from the base-plate top to the scanner bottom, two 6 mm walls 55 mm up the column faces (3 M5 T-nut bolts each), 3 M5 bolts into the base plate, scanner 2x M3 from below",
     "stiffening_lip_mm": 15,
     "scanner_holes_local": [
@@ -120,7 +102,30 @@
     "deck_reach_mm": 44,
     "scan_offset_above_envelope_min": 77.83,
     "optical_datum_status": "62.46 above body-bottom reference from SICK drawing; 15.37 connector allowance derived from101.12-85.75. Translating these to this simplified centered envelope is a layout assumption; verify actual optical origin and ROS TF.",
-    "fov_status": "270 degrees aimed outward; blind90 toward chassis. Geometric sampling only, no safety certification or guaranteed detection."
+    "fov_status": "270 degrees aimed outward; blind90 toward chassis. Geometric sampling only, no safety certification or guaranteed detection.",
+    "base_outline_local": [
+      -40,
+      40,
+      -70,
+      37.5
+    ],
+    "base_bolts_local": [
+      [
+        4,
+        -46
+      ],
+      [
+        22,
+        -46
+      ],
+      [
+        10,
+        -62
+      ]
+    ],
+    "base_bolt_len_mm": 18,
+    "base_skirt_mm": 12,
+    "rev17e_note": "Rev17e (user): scanner bottom Z163 -> 129 so the scan plane (Z206.83) equals eco; the printed base (9 mm on the 3t base plate, 12 mm deeper skirt where it overhangs the plate edge) is fixed to the base plate only by 3x M5 from above on its inboard tongue, outside the scanner, nuts under the plate; the column walls and column bolts are gone"
   },
   "camera_mount": {
     "profile_y": 235,
@@ -129,7 +134,7 @@
     "plate_center_z": 253.5,
     "plate_width": 90,
     "plate_depth": 74,
-    "wedge_status": "Rev13: printed wedge between the adapter plate and the camera underside (10 deg pitch, 15 deg yaw); M2 camera screws pitch 80 not drawn",
+    "wedge_status": "Rev17e: printed hanger with a 5 mm back plate; the camera is fixed by 2x M2 through it into the camera rear threads (pitch 80, official 2D V1.2)",
     "plate_thickness": 3,
     "hanger": {
       "post": [
@@ -192,10 +197,6 @@
       66,
       175
     ],
-    "battery_strap_x": [
-      -94,
-      94
-    ],
     "ground_stud_xy": [
       100,
       150
@@ -212,7 +213,21 @@
       125.2,
       128.5,
       63
-    ]
+    ],
+    "battery_clamp": {
+      "wall_mm": 6,
+      "lip_mm": 8,
+      "lip_t_mm": 6,
+      "foot_mm": 16,
+      "foot_t_mm": 8,
+      "bolt_y": [
+        -105,
+        -60,
+        10
+      ],
+      "bolt_len_mm": 12,
+      "note": "Rev17e (user): straps through base-plate slots could not be assembled; one printed clamp per battery end (x faces), 3x M5 from above per clamp into self-clinching nuts in the 3t base plate (flush, no hardware under the plate over the bogie). The rear face is boxed in by the power bay (4 mm gap) and the front face by the driver (5.6 mm), so bridges over the short side do not fit"
+    }
   },
   "suspension": {
     "status": "Rev15 (2026-11-15): front caster + drive wheel joined by a 3t bent bogie link on each side (pivot axis +X); rear casters keep the Rev14 hinge + spring modules. The 'drive' block below is the Rev14 hinge concept, kept for history and used only when concept='hinge'. Screening calculations only.",
@@ -477,15 +492,11 @@
       ],
       "outer_wall_access_hole_d_mm": 22,
       "inner_wall_access_hole_d_mm": 30,
-      "motor_cable_hole_xy_mm": [
-        154,
-        5
-      ],
-      "motor_cable_hole_d_mm": 28,
-      "motor_cable_note": "Hub-motor lead leaves the inboard axle end inside the bogie, rises through a 28 mm base-plate hole with a rubber grommet to the motor driver; leave slack for +-3.9 mm drive travel.",
+      "motor_cable_note": "Rev17e (user): the 28 mm base-plate hole + grommet was removed as unnecessary. The hub-motor lead leaves the inboard axle end inside the bogie and is routed up through the wheel-well opening of the base plate beside the tire to the driver; tie it to the bogie and leave slack for the bogie stroke (route to confirm on the prototype)",
       "holder_count": 1,
       "bearings_per_holder": 2,
       "holder_note": "Rev17d (2026-11-19, user decision): one company-stock MISUMI BGMW6001DD-30 per side (T-type short double, h30, two 6001DD back to back in a 23 mm housing; STEP downloaded 2026-11-19) instead of two BGHK6001DD-30. Bearing centre spacing 8 mm (was 19.3) -> much higher bearing load from the roll moment; see bogie_report pivot_bearings"
     }
-  }
+  },
+  "revision_note_rev17e": "Rev17e (2026-11-20, user): motor-cable grommet removed; LiDAR scan plane matched to eco (Z206.83) on a plate-fixed printed base; camera fixed by its 2 rear M2 threads; battery held by bolted printed bridges"
 }

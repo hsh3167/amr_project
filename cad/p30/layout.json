@@ -1,5 +1,5 @@
 {
-  "revision": "P30-5c",
+  "revision": "P30-6",
   "status": "P30 concept (2026-11-15): low-cost 30x30 aluminium profile chassis with SS400 laser-cut steel plates. Two drive wheels on vertical slide suspension (MISUMI D20 shafts + ball bushings + one spring each), four GL-65 casters bolted rigid. Separate variant; the Rev15 model in cad/layout.json is unchanged.",
   "coordinates": "mm; X right, Y forward, Z up, ground Z0. Heading clockwise from +Y (CAD Z rotation = -heading).",
   "frame": {
@@ -8,7 +8,7 @@
     "outer_x": 220,
     "outer_y": 300,
     "lower_bottom_z": 89,
-    "inner_rail_x": 110,
+    "inner_rail_x": 80,
     "stub_start_y": 100,
     "top_bottom_z": 255,
     "arm_member_y": 62,
@@ -20,6 +20,13 @@
     "lidar_corners": [
       "LF",
       "RB"
+    ],
+    "inner_rail_note": "P30-6 (2026-11-20, user): lower inner rails moved 30 mm inboard (x110 -> 80) so the hub-motor lead leaving the inboard axle end (x131, z90) does not hit the rail; the lead turns up through a grommet hole in the floor",
+    "inner_rail_bolt_y": [
+      -250,
+      -146,
+      146,
+      232
     ]
   },
   "plates": {
@@ -147,7 +154,16 @@
       -55,
       0,
       55
-    ]
+    ],
+    "motor_cable": {
+      "xy": [
+        122,
+        -130
+      ],
+      "hole_d": 25,
+      "bore_d": 16,
+      "note": "P30-6: hub-motor lead (320 mm) leaves the inboard axle end at x131 z90, runs under the floor between the moved inner rail (x65..95) and the axle plate (x142) to a D25 floor hole at y-130 (clear of the battery bridge feet), then to the driver -Y end; the LEFT lead must cross to the right-side driver (likely needs an extension), split grommet D16 bore"
+    }
   },
   "electronics": {
     "battery_center_y": 0,
@@ -215,22 +231,25 @@
       66,
       170
     ],
-    "battery_strap_y": [
-      -94,
-      94
-    ],
     "ground_stud_xy": [
       -130,
       150
     ],
-    "print_note": "P30-5b: LCD and speaker holders 3D-printed (PETG/ASA, 5 mm plate, 6 mm foot, ribs); grounding by cable to an M4 ground stud"
+    "print_note": "P30-5b: LCD and speaker holders 3D-printed (PETG/ASA, 5 mm plate, 6 mm foot, ribs); grounding by cable to an M4 ground stud",
+    "battery_bridge": {
+      "y": [
+        -100,
+        100
+      ],
+      "width_mm": 20,
+      "wall_mm": 6,
+      "foot_mm": 24,
+      "foot_t_mm": 8,
+      "bolt_out_mm": 24,
+      "note": "P30-6 (user): straps through floor slots could not be assembled; two printed bridges bolted from above. y +-100 clears the terminal block (y114.5) and the driver web (y87); bolts at x+-101 clear the moved inner rails (x65..95)"
+    }
   },
   "sensors": {
-    "lidar_plate": [
-      80,
-      70,
-      8
-    ],
     "scan_offset_above_envelope_min": 77.83,
     "camera_x": 140,
     "camera_y": 282,
@@ -259,14 +278,38 @@
         0
       ]
     ],
-    "lidar_side_bolt_dy": 26,
-    "lidar_mount_note": "P30-5c: TiM571 on an 8 mm 3D-printed plate with 2x M3 countersunk (bottom threads M3 x 2.8, 0.8 N m max; spacing assumed). The plate lies flat on the 2t floor corner (fully supported), 3x M5 countersunk through plate + floor into T-nuts of two rails",
+    "lidar_mount_note": "P30-6: TiM571 on an 8 mm printed base: 2x M3 countersunk from below into the scanner (spacing assumed), then 3x M5 from above on the inboard tongue through the 2t floor, nuts underneath. Scan plane Z206.83 (Rev17 matched to it)",
     "camera_bracket": {
       "flange_mm": 3.5,
       "leg_mm": 8,
       "shelf_mm": 8,
       "gusset_mm": 20,
       "note": "P30-5c: printed; the flange is limited to 3.5 mm by the camera top (Z250.7) under the rail (Z255)"
+    },
+    "lidar_base": {
+      "thickness_mm": 8,
+      "outline_local": [
+        -40,
+        40,
+        -62,
+        37.5
+      ],
+      "bolts_local": [
+        [
+          0,
+          -43
+        ],
+        [
+          -14,
+          -54
+        ],
+        [
+          14,
+          -54
+        ]
+      ],
+      "note": "P30-6 (user): LiDAR fixed to the body plate only. Local frame: +Y = heading. The tongue (local Y -38..-62) lies in the blind sector, inside the frame corner (no rail below), so the three M5 nuts sit under the floor and the bolts stay reachable from above with the scanner mounted",
+      "skirt_mm": 20
     }
   },
   "load_case": {

@@ -130,8 +130,6 @@ def chassis_mount_holes(d):
         q = d.layout['suspension']['bogie']
         for s in (-1, 1):
             holes.extend((s*x, y, q['holder_d1_mm']) for x, y in holder_bolt_xy(d))
-            cx, cy = q['motor_cable_hole_xy_mm']
-            holes.append((s*cx, cy, q['motor_cable_hole_d_mm']))
             holes.extend((s*q[k][0], q[k][1], 6.5) for k in ('stopper_front_xy_mm', 'stopper_rear_xy_mm'))
     return holes
 
@@ -302,11 +300,6 @@ def bogie_records(d, add, base_bottom, base_top):
         out.append((f'bogie_holder_bolts_CB5-{blen}', Compound([screw(a, b, base_top+bkt, 5, blen) for a, b in hb]), False,
                     {'sku': f'CB5-{blen}', 'quantity': 4}))
         out.append(('bogie_holder_nuts_M5', Compound([nut(a, b, base_bottom-S-4, 8, 4, 5) for a, b in hb]), False, {'quantity': 4}))
-        mcx, mcy = q['motor_cable_hole_xy_mm']; cd = q['motor_cable_hole_d_mm']
-        grommet = (cylz(cd/2, base_top-base_bottom, mcx, mcy, base_bottom)+cylz(cd/2+3, 1.5, mcx, mcy, base_top)
-                   + cylz(cd/2+3, 1.5, mcx, mcy, base_bottom-1.5))-cylz(10, 20, mcx, mcy, base_bottom-5)
-        out.append(('motor_cable_grommet_D28', grommet, False,
-                    {'status': 'catalog_envelope', 'note': q['motor_cable_note'], 'fit': 'Rubber grommet for a 28 mm hole in 3t plate, 20 mm bore'}))
         # ---- rotation limits: stopper on the floor, M6 striker from the base plate (contact exactly at the limit)
         for (x, y), limit, tag in ((stoppers[0], half, 'front'), (stoppers[1], -half, 'rear')):
             parts = [misumi_solid(q['bump_stopper_step'], c).rotate(Axis.Y, 90).translate((x, y, fz))

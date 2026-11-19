@@ -165,11 +165,8 @@ def test_rev16_bogie_bearing_pivot_and_rotation_limits():
             bo=parts['80_'+bolts+'_'+key].shape.bounding_box();nu=parts['80_'+nuts+'_'+key].shape.bounding_box()
             past=min(getattr(nu.min,axis)-getattr(bo.min,axis),getattr(bo.max,axis)-getattr(nu.max,axis))
             assert 0<past<=2.5,(bolts,key,past)
-        # Motor cable hole through the base plate, clear of the bogie and the battery footprint.
-        cx,cy=q['motor_cable_hole_xy_mm'];r=q['motor_cable_hole_d_mm']/2
-        from build123d import Solid
-        probe=Solid.make_cylinder(r-.5,10).translate((s*cx,cy,d.p['base_bottom_z']-3))
-        cut=probe&plate;assert cut is None or cut.volume<.01
+        # Rev17e (user): no motor-cable grommet / hole in the base plate any more.
+        assert not any('grommet' in name for name in parts)
     report=__import__('cad.validation',fromlist=['bogie_report']).bogie_report(d)['pivot_bearings']
     nominal=report['cases'][0]
     # Rev17d (user decision): one BGMW6001DD-30 per side -> two bearings 8 mm apart; static check passes at 1 g only
@@ -258,12 +255,13 @@ def test_rev14_bend_limit_fastener_length_and_lidar_bracket():
         assert arm.size.Y>=2*(27+3.3+5)
     assert not any(n.startswith('64_') for n in parts)
     for n in ('FRONT_LEFT','REAR_RIGHT'):
-        # Rev17b: printed pedestal (base plate to scanner, walls up the column, 6 column + 3 base bolts), below the scan plane.
-        assert parts['65_lidar_column_bolts_M5_Tnut_'+n].metadata['quantity']==6
+        # Rev17e: printed base fixed to the base plate only (3 M5 from above, no column bolts); scan plane = eco (Z206.83).
+        assert not any(k.startswith('65_lidar_column_bolts') for k in parts)
         assert parts['65_lidar_base_bolts_M5_'+n].metadata['quantity']==3
-        ped=parts['60_lidar_pedestal_PRINTED_'+n].shape
+        ped=parts['60_lidar_base_PRINTED_'+n].shape
         assert ped.is_valid and ped.bounding_box().max.Z<d.layout['lidars'][0]['scan_z']-10
-        assert ped.bounding_box().min.Z==pytest.approx(d.p['base_bottom_z']+d.p['base_thickness'])
+        assert d.layout['lidars'][0]['scan_z']==pytest.approx(206.83)
+        assert ped.bounding_box().max.Z==pytest.approx(d.layout['lidars'][0]['bbox_bottom_z'])
         assert parts['66_lidar_scanner_screws_M3_'+n].metadata['quantity']==2
 
 
@@ -274,7 +272,10 @@ def test_rev15_company_parts_placed_below_the_scan_plane():
     for name in ('50_company_7S9P_battery_STEP','56_company_LCD_7in_STEP','57_company_speaker_STEP'):
         part=parts[name]
         assert part.status=='company_supplied_step' and part.shape.is_valid
-        assert part.shape.bounding_box().max.Z<scan
+    # Rev17e: scan plane lowered to eco (Z206.83); the tall parts may reach it, but only inside the blind 90 deg sectors.
+    from cad.validation import scan_sectors
+    rows=scan_sectors(d,[parts[n] for n in ('50_company_7S9P_battery_STEP','56_company_LCD_7in_STEP','57_company_speaker_STEP')],scan)
+    assert not [r for r in rows if r['in_fov']],rows
     case=parts['50_company_7S9P_battery_STEP'].metadata['placement']['case_mm']
     assert case==pytest.approx([274.79,153.83,88.7],abs=.02)
     assert parts['57_company_speaker_STEP'].metadata['trimmed_solids']>=1
