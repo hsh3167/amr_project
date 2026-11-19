@@ -102,7 +102,7 @@ def bogie_report(d):
             'drive_each_without_arm_without_spring_N':case(s['design_mass_without_arm_kg'],0,0)['drive_each_N'],
             'bogie_angular_rate_Nm_per_deg':round(spring["rate_N_mm"]*spring["arm_behind_pivot_mm"]**2*math.pi/180/1000,3),
             'scope':'Spring force at the poses = rate x posed length (front caster +-%g mm); the pose loads are quasi-static (chassis level)'%half}
-    return {'concept':'Rev17 bogie (front caster + drive wheel, BGHK bearing pivot, coaxial bogie spring) + rear hinge casters'
+    return {'concept':'Rev17 bogie (front caster + drive wheel, MISUMI 6001DD bearing-housing pivot, coaxial bogie spring) + rear hinge casters'
             if spring else 'Rev16 bogie (front caster + drive wheel, BGHK bearing pivot) + rear hinge casters','design_mass_kg':s['design_mass_kg'],
             'bogie_spring':spring_report,
             'bogie':{'pivot_y_mm':yp,'pivot_z_mm':q['pivot_z_mm'],'front_arm_mm':yc-yp,'rear_arm_mm':yp,
