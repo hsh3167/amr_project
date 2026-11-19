@@ -656,14 +656,15 @@ def lidars(P):
             plate -= cs+cylz(1.7, pt+2, px, py, z0-pt-1)
             m3 += (Solid.make_cone(3.0, 1.5, 1.6, Plane((px, py, z0-pt+.05)))+cylz(1.5, pt-1.7, px, py, z0-pt+1.65)).solids()
         m3 = Compound(m3)
-        r.append(rec('74_lidar_plate_3t_'+n, 'lidars', plate, PLATE,
-                     material='SS400 3t laser cut, flat; 3x D5.5 countersunk (2 front/rear rail + 1 side rail), 2x D3.4 for the scanner',
-                     fit='Sits on the 2t floor corner; the three bolts go through plate + floor into T-nuts of two rails, so the plate cannot turn'))
+        from ..parts.electronics import PRINT_NOTE
+        r.append(rec('74_lidar_plate_PRINTED_'+n, 'lidars', plate, PRINT, 'concept_support',
+                     material=PRINT_NOTE+f'; {pt:g} mm solid plate, 100% infill around the bolt holes',
+                     fit='Sits flat on the 2t floor corner (fully supported, so a thick print is stiff); 3x M5 countersunk through plate + floor into T-nuts of two rails, so it cannot turn'))
         tb = [tnut_bolt(bx, by, P.z_lo1, pt+P.L['plates']['floor_t'], 5, sd, flush=True) for bx, by, sd in bolts]
         r.append(rec('74_lidar_plate_bolts_M5_Tnut_'+n, 'lidars', Compound([s for c in tb for s in c.solids()]), DARK, 'catalog_envelope',
-                     quantity=len(tb), sku='M5x12 countersunk + 3030 slot-8 T-nut'))
+                     quantity=len(tb), sku=f'M5x{round(pt+2+6)} countersunk + 3030 slot-8 T-nut'))
         r.append(rec('74_lidar_scanner_screws_M3_'+n, 'lidars', m3, DARK, 'catalog_envelope', quantity=len(pts),
-                     sku='M3x6 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker', note='TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing'))
+                     sku=f'M3x{round(pt+2)} countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker', note='TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing'))
         r.append(rec('75_SICK_TiM571_envelope_base_'+n, 'lidars', place(box(lid['width'], lid['depth'], 36, 0, 0, z0+18)), (.85, .88, .90), 'drawing_envelope'))
         r.append(rec('76_SICK_TiM571_optical_envelope_'+n, 'lidars', place(box(61, 60, lid['height']-39, 0, 0, z0+36+(lid['height']-39)/2)), (.09, .16, .21),
                      'drawing_envelope', scan_z=pose['scan_z'], heading_deg=pose['heading_deg']))
@@ -679,21 +680,31 @@ def cameras(P):
         s, detail = camera_shape(side, sn['camera_x'], sn['camera_y'], sn['camera_z'], sn['camera_pitch_down_deg'], sn['camera_yaw_deg'])
         r.append(rec('70_Orbbec_Astra_Mini_Pro_MX6000_'+n, 'cameras', s, (.65, .50, .82), 'manufacturer_step_family_revision_reference',
                      source='AstraMiniPro_3D_V0.1_20221012.stp', placement_repair=detail))
-        # 3t bracket, 2 bends: flange under the top front rail -> leg -> shelf; printed wedge on the shelf
+        # P30-5c: one printed bracket: flange under the top front rail -> thick leg -> thick shelf, 2 gussets, 2 M5 T-nuts
+        from ..parts.electronics import PRINT_NOTE
+        from ..parts.suspension import yz_prism
+        cq = sn['camera_bracket']
         x0, x1 = sorted((side*108, side*160)); z_sh = sn['camera_shelf_z']; leg_y = 250
-        flange = span(x0, x1, leg_y, Y, P.z_top0-3, P.z_top0)
-        leg = span(x0, x1, leg_y, leg_y+3, z_sh, P.z_top0-3)
-        shelf = span(x0, x1, leg_y+3, Y, z_sh, z_sh+3)
-        xb = side*134
-        bracket = flange+leg+shelf-cylz(2.75, 10, xb, Y-h, P.z_top0-5)
-        r.append(rec('78_camera_bracket_3t_'+n, 'cameras', bracket, PLATE, material='SPCC 3t, 2 bends, 1x M5 T-nut into the top front rail'))
+        fl, lg, sh = cq['flange_mm'], cq['leg_mm'], cq['shelf_mm']
+        flange = span(x0, x1, leg_y-lg+3, Y, P.z_top0-fl, P.z_top0)
+        leg = span(x0, x1, leg_y-lg+3, leg_y+3, z_sh+3-sh, P.z_top0-fl)
+        shelf = span(x0, x1, leg_y+3, Y, z_sh+3-sh, z_sh+3)
+        bracket = flange+leg+shelf
+        for g0 in (x0, x1-5):
+            bracket = bracket+yz_prism([(leg_y-lg+3, P.z_top0-fl), (leg_y-lg+3-cq['gusset_mm'], P.z_top0-fl), (leg_y-lg+3, P.z_top0-fl-cq['gusset_mm'])], g0, g0+5)
+        xbs = [side*134+dx for dx in (-12, 12)]
+        for xb in xbs:
+            bracket -= cylz(2.75, 10, xb, Y-h, P.z_top0-5)
+        r.append(rec('78_camera_bracket_PRINTED_'+n, 'cameras', bracket, PRINT, 'concept_support', material=PRINT_NOTE,
+                     design=f'{fl:g} mm flange (camera top clearance) + {lg:g} mm leg + {sh:g} mm shelf + 2 gussets under the rail, one print'))
         frame_ = Location((side*sn['camera_x'], sn['camera_y'], sn['camera_z']))*Rotation(0, 0, -side*sn['camera_yaw_deg'])*Rotation(-sn['camera_pitch_down_deg'], 0, 0)
         local = s.moved(frame_.inverse()).bounding_box()
         block = box(local.size.X-4, local.size.Y-4, 60, local.center().X, local.center().Y, local.min.Z-30).moved(frame_)
         wedge = block & span(x0, x1, leg_y+3, Y, z_sh+3, z_sh+60)
         r.append(rec('79_camera_wedge_PRINTED_'+n, 'cameras', wedge, PRINT, 'concept_support', material='3D-printed wedge; M2 camera screws not drawn'))
-        tb = tnut_bolt(xb, Y-h, P.z_top0, 3, 5, 'x', False, flush=True)   # countersunk: camera top is close under the flange
-        r.append(rec('79_camera_bracket_bolt_M5_Tnut_'+n, 'cameras', tb, DARK, 'catalog_envelope', quantity=1, sku='M5 countersunk + T-nut'))
+        tb = [tnut_bolt(xb, Y-h, P.z_top0, fl, 5, 'x', False, flush=True) for xb in xbs]   # countersunk: camera top is close under the flange
+        r.append(rec('79_camera_bracket_bolts_M5_Tnut_'+n, 'cameras', Compound([s_ for c in tb for s_ in c.solids()]), DARK, 'catalog_envelope',
+                     quantity=2, sku='M5 countersunk + T-nut'))
     return r
 
 

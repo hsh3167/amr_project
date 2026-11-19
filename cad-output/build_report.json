@@ -1,7 +1,7 @@
 {
   "valid": true,
-  "components": 171,
-  "solids": 471,
+  "components": 169,
+  "solids": 459,
   "errors": [],
   "suspension_catalog": {
     "concept": "Rev17 bogie (front caster + drive wheel, BGHK bearing pivot, coaxial bogie spring) + rear hinge casters",
@@ -51,44 +51,44 @@
       "travel_front_caster_mm": 20,
       "drive_travel_mm": 7.74,
       "step_rise_ratio": 0.279,
-      "pivot": "BGHK6001DD-30"
+      "pivot": "BGMW6001DD-30"
     },
     "pivot_bearings": {
-      "holder": "BGHK6001DD-30",
+      "holder": "BGMW6001DD-30",
       "bearing": "6001DD",
       "C0r_kN": 2.39,
       "bearing_x_mm": [
         151.5,
-        132.2
+        143.5
       ],
-      "bearing_spacing_mm": 19.3,
+      "bearing_spacing_mm": 8.0,
       "cases": [
         {
           "cg_y_mm": 0.0,
-          "outer_bearing_N": 723.5,
-          "inner_bearing_N": -551.6,
-          "roll_moment_about_centre_Nm": 12.76,
-          "s0_at_1g": 3.3,
-          "s0_at_2g": 1.65,
-          "s0_at_3g": 1.1
+          "outer_bearing_N": 1502.6,
+          "inner_bearing_N": -1330.7,
+          "roll_moment_about_centre_Nm": 11.47,
+          "s0_at_1g": 1.59,
+          "s0_at_2g": 0.8,
+          "s0_at_3g": 0.53
         },
         {
           "cg_y_mm": -30,
-          "outer_bearing_N": 634.4,
-          "inner_bearing_N": -491.9,
-          "roll_moment_about_centre_Nm": 11.33,
-          "s0_at_1g": 3.77,
-          "s0_at_2g": 1.88,
-          "s0_at_3g": 1.26
+          "outer_bearing_N": 1329.3,
+          "inner_bearing_N": -1186.8,
+          "roll_moment_about_centre_Nm": 10.21,
+          "s0_at_1g": 1.8,
+          "s0_at_2g": 0.9,
+          "s0_at_3g": 0.6
         },
         {
           "cg_y_mm": 30,
-          "outer_bearing_N": 812.5,
-          "inner_bearing_N": -611.2,
-          "roll_moment_about_centre_Nm": 14.2,
-          "s0_at_1g": 2.94,
-          "s0_at_2g": 1.47,
-          "s0_at_3g": 0.98
+          "outer_bearing_N": 1675.9,
+          "inner_bearing_N": -1474.6,
+          "roll_moment_about_centre_Nm": 12.74,
+          "s0_at_1g": 1.43,
+          "s0_at_2g": 0.71,
+          "s0_at_3g": 0.48
         }
       ],
       "scope": "Vertical wheel loads only (no side force); static load rating check, no fatigue or fretting"
@@ -221,7 +221,7 @@
   "deck_sensor_clearance_mm": {
     "deck_underside_above_scan": 42.17,
     "deck_underside_above_camera_top": 4.324,
-    "lowest_camera_mount_above_scan": 11.17
+    "lowest_camera_mount_above_scan": 8.17
   },
   "selected_sensor_collisions": [],
   "suspension_collision_sampling": {

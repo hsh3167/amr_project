@@ -2,36 +2,16 @@
   "engine": "build123d",
   "root": "amr_current",
   "files": [
-    "amr_current.step",
     "amr_current.glb"
   ],
-  "step_roundtrip": [
-    {
-      "file": "amr_current.step",
-      "raw_import_valid": false,
-      "valid_after_explicit_normalization": true,
-      "normalized_components": [
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        },
-        {
-          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
-          "minimum_topology_tolerance_mm": 1e-05,
-          "volume_change_mm3": 0.0
-        }
-      ],
-      "solids": 471
-    }
-  ],
+  "step_roundtrip": [],
   "components": [
     {
       "name": "01_lower_steel_plate_3t",
       "group": "chassis",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 588977.4466847194,
+      "volume_mm3": 588834.8969180628,
       "bounds_mm": [
         [
           -195.0,
@@ -47,9 +27,9 @@
         ]
       ],
       "center_mm": [
-        0.010051214507336646,
-        0.34889211400389486,
-        118.50000000000007
+        0.010053647784115787,
+        0.3780271170039406,
+        118.50000000000004
       ],
       "solids": 1
     },
@@ -58,7 +38,7 @@
       "group": "payload_interface",
       "status": "concept",
       "metadata": {},
-      "volume_mm3": 691907.338367118,
+      "volume_mm3": 691764.7886004613,
       "bounds_mm": [
         [
           -210.0,
@@ -74,9 +54,9 @@
         ]
       ],
       "center_mm": [
-        1.0808925585799522e-14,
-        -0.04841572463066489,
-        284.5
+        9.216366551883752e-16,
+        -0.09685140300964938,
+        284.5000000000001
       ],
       "solids": 1
     },
@@ -101,8 +81,8 @@
         ]
       ],
       "center_mm": [
-        -3.576336036472139e-15,
-        -2.4453579736561635e-16,
+        -3.59161952380749e-15,
+        -2.292523100302653e-16,
         280.5
       ],
       "solids": 1
@@ -409,7 +389,7 @@
       ],
       "center_mm": [
         -210.99999999999997,
-        5.874350963537429e-16,
+        5.695670363809649e-16,
         90.0
       ],
       "solids": 1
@@ -438,7 +418,7 @@
       ],
       "center_mm": [
         -210.00000000000003,
-        1.2606462339927814e-15,
+        1.5738831422361906e-15,
         90.00000000000001
       ],
       "solids": 1
@@ -467,7 +447,7 @@
       ],
       "center_mm": [
         -165.10000000000002,
-        6.552005468566091e-16,
+        7.391369745589288e-16,
         89.99999999999999
       ],
       "solids": 1
@@ -496,7 +476,7 @@
       ],
       "center_mm": [
         210.99999999999997,
-        5.874350963537429e-16,
+        5.695670363809649e-16,
         90.0
       ],
       "solids": 1
@@ -525,7 +505,7 @@
       ],
       "center_mm": [
         210.00000000000003,
-        1.2606462339927814e-15,
+        1.5738831422361906e-15,
         90.00000000000001
       ],
       "solids": 1
@@ -554,8 +534,8 @@
       ],
       "center_mm": [
         165.10000000000002,
-        5.586064566975899e-16,
-        90.0
+        7.8998601391854e-16,
+        89.99999999999999
       ],
       "solids": 1
     },
@@ -589,7 +569,7 @@
         ]
       ],
       "center_mm": [
-        -138.07354507666767,
+        -138.07354507666764,
         -224.1112064694331,
         57.94177205412502
       ],
@@ -698,7 +678,7 @@
       ],
       "center_mm": [
         -138.07354507666764,
-        205.8887935305669,
+        205.88879353056686,
         57.94177205412502
       ],
       "solids": 1
@@ -734,7 +714,7 @@
       ],
       "center_mm": [
         -137.99999103002804,
-        214.9984962673742,
+        214.99849626737418,
         78.72768320789984
       ],
       "solids": 1
@@ -805,8 +785,8 @@
         ]
       ],
       "center_mm": [
-        137.9264549233324,
-        -224.1112064694332,
+        137.92645492333236,
+        -224.11120646943317,
         57.941772054124996
       ],
       "solids": 1
@@ -836,7 +816,7 @@
           -182.4999999
         ],
         [
-          68.79761779634251,
+          68.79761769634251,
           83.00000019999919
         ]
       ],
@@ -915,7 +895,7 @@
       "center_mm": [
         137.9264549233324,
         205.8887935305669,
-        57.94177205412501
+        57.941772054125
       ],
       "solids": 1
     },
@@ -944,7 +924,7 @@
           247.5000001
         ],
         [
-          68.79761779634251,
+          68.79761769634251,
           83.00000019999919
         ]
       ],
@@ -1164,7 +1144,7 @@
         ]
       ],
       "center_mm": [
-        -2.494567775562778e-14,
+        -2.940964114347696e-14,
         180.0,
         131.25000000000003
       ],
@@ -1227,7 +1207,7 @@
       ],
       "center_mm": [
         -95.00000000000003,
-        -162.5,
+        -162.50000000000003,
         124.50000000000001
       ],
       "solids": 4
@@ -1300,9 +1280,9 @@
         ]
       ],
       "center_mm": [
-        1.544006160032541e-14,
-        -49.000000000000014,
-        121.50000000000004
+        1.2008936800253096e-14,
+        -48.99999999999999,
+        121.50000000000001
       ],
       "solids": 4
     },
@@ -1433,9 +1413,9 @@
         ]
       ],
       "center_mm": [
-        -75.25128011655308,
-        -236.00064630472943,
-        186.80313168215096
+        -75.25128011655309,
+        -236.00064630472963,
+        186.80313168215127
       ],
       "solids": 21
     },
@@ -1494,7 +1474,7 @@
       ],
       "center_mm": [
         -75.0,
-        -228.61549295774648,
+        -228.61549295774645,
         172.87333333333322
       ],
       "solids": 3
@@ -1714,51 +1694,53 @@
       "solids": 3
     },
     {
-      "name": "60_lidar_bracket_3t_FRONT_LEFT",
+      "name": "60_lidar_pedestal_PRINTED_FRONT_LEFT",
       "group": "lidars",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "S355 3t laser-cut; wraps two faces of the main column; Rev17: 55 mm up-flanges with 3 bolts each + 15 mm stiffening lips on the sensor plate (6 bends)"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep); print the walls with 6+ perimeters and 60% infill",
+        "design": "Solid pedestal 43 mm deep under the scanner + 6 mm walls 55 mm up two column faces",
+        "stiffness": "Hand estimate: 43 mm deep printed section (E~1.2 GPa effective) about 11 kN/mm at the scanner, first mode ~1 kHz; the 3t steel cantilever it replaces was about 0.9 kN/mm, ~300 Hz"
       },
-      "volume_mm3": 43557.739116301935,
+      "volume_mm3": 394418.6499269524,
       "bounds_mm": [
         [
-          -273.03300858899104,
+          -277.9827560572969,
           -136.0
         ],
         [
-          196.96699141100893,
-          303.0330085889911
+          192.0172439427031,
+          307.9827560572969
         ],
         [
-          145.0,
+          120.0,
           218.0
         ]
       ],
       "center_mm": [
-        -201.0317972072425,
-        240.35992650338343,
-        162.9267119210425
+        -204.65904963390278,
+        242.36553435942574,
+        143.18033684291171
       ],
       "solids": 1
     },
     {
-      "name": "65_lidar_bracket_bolts_M5_Tnut_FRONT_LEFT",
+      "name": "65_lidar_column_bolts_M5_Tnut_FRONT_LEFT",
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "M5x10 hex socket + M5 T-nut for 2020 slot 6",
+        "sku": "M5x10 hex socket + washer + M5 T-nut for 2020 slot 6",
         "quantity": 6
       },
-      "volume_mm3": 3627.980114163018,
+      "volume_mm3": 3981.4092876918694,
       "bounds_mm": [
         [
-          -164.0,
+          -167.0,
           -141.20000000000002
         ],
         [
           203.2,
-          226.0
+          229.0
         ],
         [
           166.0,
@@ -1766,22 +1748,52 @@
         ]
       ],
       "center_mm": [
-        -151.73425170556396,
-        213.73425170556385,
-        190.99999999999997
+        -152.510166770432,
+        214.51016677043202,
+        190.50000000000003
       ],
       "solids": 12
+    },
+    {
+      "name": "65_lidar_base_bolts_M5_FRONT_LEFT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M5x40 hex socket + washer + M5 nut under the base plate",
+        "quantity": 3
+      },
+      "volume_mm3": 3754.6675353711594,
+      "bounds_mm": [
+        [
+          -189.618802153517,
+          -141.381197846483
+        ],
+        [
+          200.75,
+          244.25
+        ],
+        [
+          111.0,
+          158.0
+        ]
+      ],
+      "center_mm": [
+        -165.66666666666663,
+        228.3333333333333,
+        135.38280858212877
+      ],
+      "solids": 3
     },
     {
       "name": "66_lidar_scanner_screws_M3_FRONT_LEFT",
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "M3x5 + spring washer, 0.8 N m max (SICK)",
+        "sku": "M3x8 + washer, 0.8 N m max (SICK)",
         "quantity": 2,
-        "note": "Hole spacing assumed; confirm on the SICK TiM5xx dimensional drawing"
+        "note": "Into the TiM571 bottom threads (M3 x 2.8 deep); hole spacing assumed, confirm on the SICK drawing"
       },
-      "volume_mm3": 184.9612674800992,
+      "volume_mm3": 255.64710218586947,
       "bounds_mm": [
         [
           -236.89213562373095,
@@ -1792,14 +1804,14 @@
           266.89213562373095
         ],
         [
-          157.0,
+          152.0,
           163.0
         ]
       ],
       "center_mm": [
         -220.00000000000003,
         249.99999999999997,
-        159.1878980891719
+        155.93317972350232
       ],
       "solids": 2
     },
@@ -1808,7 +1820,7 @@
       "group": "lidars",
       "status": "drawing_envelope",
       "metadata": {},
-      "volume_mm3": 204200.55,
+      "volume_mm3": 204200.55000000005,
       "bounds_mm": [
         [
           -273.25928275897076,
@@ -1824,7 +1836,7 @@
         ]
       ],
       "center_mm": [
-        -220.0,
+        -220.00000000000003,
         250.0,
         181.0
       ],
@@ -1835,7 +1847,7 @@
       "group": "lidars",
       "status": "drawing_envelope",
       "metadata": {},
-      "volume_mm3": 227359.19999999998,
+      "volume_mm3": 227359.20000000007,
       "bounds_mm": [
         [
           -262.77996026178613,
@@ -1885,50 +1897,52 @@
       "solids": 1
     },
     {
-      "name": "60_lidar_bracket_3t_REAR_RIGHT",
+      "name": "60_lidar_pedestal_PRINTED_REAR_RIGHT",
       "group": "lidars",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "S355 3t laser-cut; wraps two faces of the main column; Rev17: 55 mm up-flanges with 3 bolts each + 15 mm stiffening lips on the sensor plate (6 bends)"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep); print the walls with 6+ perimeters and 60% infill",
+        "design": "Solid pedestal 43 mm deep under the scanner + 6 mm walls 55 mm up two column faces",
+        "stiffness": "Hand estimate: 43 mm deep printed section (E~1.2 GPa effective) about 11 kN/mm at the scanner, first mode ~1 kHz; the 3t steel cantilever it replaces was about 0.9 kN/mm, ~300 Hz"
       },
-      "volume_mm3": 43557.73911630199,
+      "volume_mm3": 394418.6499269524,
       "bounds_mm": [
         [
           136.0,
-          273.0330085889911
+          277.9827560572969
         ],
         [
-          -303.0330085889911,
-          -196.96699141100893
+          -307.9827560572969,
+          -192.0172439427031
         ],
         [
-          145.0,
+          120.0,
           218.0
         ]
       ],
       "center_mm": [
-        201.03179720724253,
-        -240.3599265033833,
-        162.9267119210425
+        204.65904963390278,
+        -242.3655343594257,
+        143.18033684291163
       ],
       "solids": 1
     },
     {
-      "name": "65_lidar_bracket_bolts_M5_Tnut_REAR_RIGHT",
+      "name": "65_lidar_column_bolts_M5_Tnut_REAR_RIGHT",
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "M5x10 hex socket + M5 T-nut for 2020 slot 6",
+        "sku": "M5x10 hex socket + washer + M5 T-nut for 2020 slot 6",
         "quantity": 6
       },
-      "volume_mm3": 3627.980114163018,
+      "volume_mm3": 3981.4092876918694,
       "bounds_mm": [
         [
           141.2,
-          164.0
+          167.0
         ],
         [
-          -226.0,
+          -229.0,
           -203.20000000000002
         ],
         [
@@ -1937,22 +1951,52 @@
         ]
       ],
       "center_mm": [
-        151.73425170556374,
-        -213.73425170556376,
-        190.9999999999999
+        152.51016677043197,
+        -214.51016677043205,
+        190.50000000000006
       ],
       "solids": 12
+    },
+    {
+      "name": "65_lidar_base_bolts_M5_REAR_RIGHT",
+      "group": "lidars",
+      "status": "catalog_envelope",
+      "metadata": {
+        "sku": "M5x40 hex socket + washer + M5 nut under the base plate",
+        "quantity": 3
+      },
+      "volume_mm3": 3754.6675353711594,
+      "bounds_mm": [
+        [
+          141.381197846483,
+          189.618802153517
+        ],
+        [
+          -244.25,
+          -200.75
+        ],
+        [
+          111.0,
+          158.0
+        ]
+      ],
+      "center_mm": [
+        165.66666666666657,
+        -228.33333333333331,
+        135.3828085821288
+      ],
+      "solids": 3
     },
     {
       "name": "66_lidar_scanner_screws_M3_REAR_RIGHT",
       "group": "lidars",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "M3x5 + spring washer, 0.8 N m max (SICK)",
+        "sku": "M3x8 + washer, 0.8 N m max (SICK)",
         "quantity": 2,
-        "note": "Hole spacing assumed; confirm on the SICK TiM5xx dimensional drawing"
+        "note": "Into the TiM571 bottom threads (M3 x 2.8 deep); hole spacing assumed, confirm on the SICK drawing"
       },
-      "volume_mm3": 184.96126748009922,
+      "volume_mm3": 255.6471021858695,
       "bounds_mm": [
         [
           203.10786437626905,
@@ -1963,14 +2007,14 @@
           -233.10786437626905
         ],
         [
-          157.0,
+          152.0,
           163.0
         ]
       ],
       "center_mm": [
         220.0,
         -249.99999999999997,
-        159.18789808917197
+        155.9331797235023
       ],
       "solids": 2
     },
@@ -2063,7 +2107,7 @@
         "source": "AstraMiniPro_3D_V0.1_20221012.stp",
         "source_solids": 58,
         "placement_repair": {
-          "cache_key": "8d88e2fde69c8e1f83f3",
+          "cache_key": "79e7f5c97e0719fc5ea5",
           "repairs": [],
           "source_preserved": true,
           "pose": [
@@ -2074,22 +2118,22 @@
             10,
             15
           ],
-          "source_solid_volume_mm3": 13831.14760859772,
-          "placed_solid_volume_mm3": 13831.147608597723,
+          "source_solid_volume_mm3": 13831.147608597721,
+          "placed_solid_volume_mm3": 13831.147608597721,
           "minimum_topology_tolerance_mm": 1e-05,
           "open_reference_shells_excluded": 3
         },
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.147608597723,
+      "volume_mm3": 13831.147608664714,
       "bounds_mm": [
         [
           -130.00381821959914,
-          -46.11607497491715
+          -46.11607497491716
         ],
         [
-          254.9729471113061,
+          254.97294711130607,
           294.34032240046406
         ],
         [
@@ -2098,127 +2142,70 @@
         ]
       ],
       "center_mm": [
-        -89.87498357188935,
-        273.6033524383707,
-        267.41376053382584
+        -89.87498357218661,
+        273.6033524383797,
+        267.4137605338381
       ],
       "solids": 58
     },
     {
-      "name": "71_camera_adapter_CONCEPT_LEFT",
+      "name": "71_camera_hanger_PRINTED_LEFT",
       "group": "cameras",
-      "status": "concept",
-      "metadata": {},
-      "volume_mm3": 19908.72511667168,
+      "status": "concept_support",
+      "metadata": {
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "Flange + 40x20 post + 6 mm platform + 2 ribs + wedge, one print; camera M2 screws pitch 80 not drawn",
+        "fit": "2x M5 heat-set inserts in the flange (D6.4 pockets)"
+      },
+      "volume_mm3": 72782.88717600213,
       "bounds_mm": [
         [
           -135.0,
           -45.0
         ],
         [
-          222.0,
+          220.0,
           296.0
         ],
         [
-          252.0,
-          255.0
-        ]
-      ],
-      "center_mm": [
-        -89.99999999999997,
-        259.08592198595613,
-        253.49999999999997
-      ],
-      "solids": 1
-    },
-    {
-      "name": "71_camera_wedge_CONCEPT_LEFT",
-      "group": "cameras",
-      "status": "concept_support",
-      "metadata": {
-        "material": "3D-printed wedge; camera M2 screws pitch 80 not drawn"
-      },
-      "volume_mm3": 3307.743715380252,
-      "bounds_mm": [
-        [
-          -130.0981300737904,
-          -47.71785023576781
-        ],
-        [
-          255.5492071086428,
-          292.2999204418976
-        ],
-        [
-          255.0,
-          258.91132571617953
-        ]
-      ],
-      "center_mm": [
-        -88.56402957914264,
-        272.6408854311943,
-        256.3903977924244
-      ],
-      "solids": 1
-    },
-    {
-      "name": "72_2020_Al_camera_column_LEFT",
-      "group": "cameras",
-      "status": "generic_profile",
-      "metadata": {
-        "material": "Aluminum extrusion",
-        "length_mm": 28,
-        "section_mm": 20
-      },
-      "volume_mm3": 6668.076139134731,
-      "bounds_mm": [
-        [
-          -100.0,
-          -80.0
-        ],
-        [
-          225.0,
-          245.0
-        ],
-        [
-          255.0,
+          249.0,
           283.0
         ]
       ],
       "center_mm": [
-        -90.0,
-        235.0,
-        269.0
+        -89.92461172308958,
+        250.28415519987956,
+        259.7300461836226
       ],
       "solids": 1
     },
     {
-      "name": "73_camera_column_bolts_CB5-12_LEFT",
+      "name": "73_camera_hanger_bolts_M5_LEFT",
       "group": "cameras",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "CB5-12",
-        "quantity": 2,
-        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
+        "sku": "M5x12 + washer from the deck top into M5 heat-set inserts",
+        "quantity": 2
       },
-      "volume_mm3": 934.6395224062317,
+      "volume_mm3": 1038.6890710931252,
       "bounds_mm": [
         [
-          -94.25,
-          -85.75
+          -106.25,
+          -73.75
         ],
         [
           230.75,
           239.25
         ],
         [
-          247.0,
+          274.0,
           291.0
         ]
       ],
       "center_mm": [
         -89.99999999999999,
         234.99999999999997,
-        269.00000000000006
+        284.64366729678636
       ],
       "solids": 2
     },
@@ -2230,7 +2217,7 @@
         "source": "AstraMiniPro_3D_V0.1_20221012.stp",
         "source_solids": 58,
         "placement_repair": {
-          "cache_key": "8da4e9f684aa64ccec50",
+          "cache_key": "a62e80fe14137857b0a8",
           "repairs": [],
           "source_preserved": true,
           "pose": [
@@ -2241,18 +2228,18 @@
             10,
             15
           ],
-          "source_solid_volume_mm3": 13831.14760859772,
-          "placed_solid_volume_mm3": 13831.14760859772,
+          "source_solid_volume_mm3": 13831.147608597721,
+          "placed_solid_volume_mm3": 13831.147608597717,
           "minimum_topology_tolerance_mm": 1e-05,
           "open_reference_shells_excluded": 3
         },
         "datum": "original bounding-box center; source optics +Z mapped to local +Y",
         "limits": "3D V0.1 differs from 2D V1.2 depth; verify MX6000 A V1.2 actual hardware and adapter before fabrication"
       },
-      "volume_mm3": 13831.14760859772,
+      "volume_mm3": 13831.147608664714,
       "bounds_mm": [
         [
-          46.11607497537959,
+          46.1160749753796,
           130.003818305512
         ],
         [
@@ -2265,127 +2252,70 @@
         ]
       ],
       "center_mm": [
-        87.9099436218197,
-        274.1298833060874,
-        267.4137605338268
+        87.90994362156698,
+        274.12988330624324,
+        267.4137605338365
       ],
       "solids": 58
     },
     {
-      "name": "71_camera_adapter_CONCEPT_RIGHT",
+      "name": "71_camera_hanger_PRINTED_RIGHT",
       "group": "cameras",
-      "status": "concept",
-      "metadata": {},
-      "volume_mm3": 19908.72511667168,
+      "status": "concept_support",
+      "metadata": {
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "Flange + 40x20 post + 6 mm platform + 2 ribs + wedge, one print; camera M2 screws pitch 80 not drawn",
+        "fit": "2x M5 heat-set inserts in the flange (D6.4 pockets)"
+      },
+      "volume_mm3": 72782.88729654634,
       "bounds_mm": [
         [
           45.0,
           135.0
         ],
         [
-          222.0,
+          220.0,
           296.0
         ],
         [
-          252.0,
-          255.0
-        ]
-      ],
-      "center_mm": [
-        90.0,
-        259.08592198595613,
-        253.49999999999997
-      ],
-      "solids": 1
-    },
-    {
-      "name": "71_camera_wedge_CONCEPT_RIGHT",
-      "group": "cameras",
-      "status": "concept_support",
-      "metadata": {
-        "material": "3D-printed wedge; camera M2 screws pitch 80 not drawn"
-      },
-      "volume_mm3": 3307.743715380252,
-      "bounds_mm": [
-        [
-          47.717850235767806,
-          130.0981300737904
-        ],
-        [
-          255.54920710864278,
-          292.2999204418976
-        ],
-        [
-          255.0,
-          258.91132571617953
-        ]
-      ],
-      "center_mm": [
-        88.56402957914267,
-        272.64088543119436,
-        256.39039779242444
-      ],
-      "solids": 1
-    },
-    {
-      "name": "72_2020_Al_camera_column_RIGHT",
-      "group": "cameras",
-      "status": "generic_profile",
-      "metadata": {
-        "material": "Aluminum extrusion",
-        "length_mm": 28,
-        "section_mm": 20
-      },
-      "volume_mm3": 6668.076139134731,
-      "bounds_mm": [
-        [
-          80.0,
-          100.0
-        ],
-        [
-          225.0,
-          245.0
-        ],
-        [
-          255.0,
+          249.0,
           283.0
         ]
       ],
       "center_mm": [
-        90.0,
-        235.0,
-        269.0
+        89.92461174673538,
+        250.2841552126899,
+        259.7300461850884
       ],
       "solids": 1
     },
     {
-      "name": "73_camera_column_bolts_CB5-12_RIGHT",
+      "name": "73_camera_hanger_bolts_M5_RIGHT",
       "group": "cameras",
       "status": "catalog_envelope",
       "metadata": {
-        "sku": "CB5-12",
-        "quantity": 2,
-        "fit": "M5 into the tapped profile core (core 4.2 = M5 tap drill); thread drawn at the core diameter"
+        "sku": "M5x12 + washer from the deck top into M5 heat-set inserts",
+        "quantity": 2
       },
-      "volume_mm3": 934.6395224062317,
+      "volume_mm3": 1038.6890710931252,
       "bounds_mm": [
         [
-          85.75,
-          94.25
+          73.75,
+          106.25
         ],
         [
           230.75,
           239.25
         ],
         [
-          247.0,
+          274.0,
           291.0
         ]
       ],
       "center_mm": [
-        90.00000000000001,
+        90.0,
         234.99999999999997,
-        269.00000000000006
+        284.64366729678636
       ],
       "solids": 2
     },
@@ -2399,7 +2329,7 @@
         "material": "S355 3t laser-cut, 4 bends (outer wall + rear floor + rear inner wall, front caster pad + front inner wall); AF10.2 axle slot; D22/D30 pivot access holes",
         "length_mm": 292.5
       },
-      "volume_mm3": 106974.77909890124,
+      "volume_mm3": 106974.77909890126,
       "bounds_mm": [
         [
           108.0,
@@ -2415,9 +2345,9 @@
         ]
       ],
       "center_mm": [
-        141.03430907636505,
-        91.24648923710122,
-        79.33914503239457
+        141.02764630183722,
+        91.24648923710127,
+        79.33914503239468
       ],
       "solids": 1
     },
@@ -2479,7 +2409,7 @@
       ],
       "center_mm": [
         106.35633270321362,
-        154.99999999999997,
+        155.0,
         92.00000000000003
       ],
       "solids": 4
@@ -2511,7 +2441,7 @@
       "center_mm": [
         112.99999999999997,
         154.99999999999997,
-        92.00000000000001
+        92.0
       ],
       "solids": 4
     },
@@ -2541,7 +2471,7 @@
       ],
       "center_mm": [
         167.0,
-        -4.2877698499766783e-17,
+        2.6936795752486687e-17,
         84.71019614370167
       ],
       "solids": 1
@@ -2572,7 +2502,7 @@
       ],
       "center_mm": [
         175.45000000000002,
-        2.9974587265733475e-16,
+        3.4232724512054055e-16,
         89.99999999999999
       ],
       "solids": 1
@@ -2602,7 +2532,7 @@
       ],
       "center_mm": [
         163.49999999999997,
-        8.452987299144201e-16,
+        8.998132869007721e-16,
         89.99999999999999
       ],
       "solids": 1
@@ -2633,7 +2563,7 @@
       ],
       "center_mm": [
         159.0,
-        7.330027475249419e-16,
+        3.888332601679172e-17,
         90.0
       ],
       "solids": 1
@@ -2711,10 +2641,10 @@
         "moving_wheel": "RIGHT",
         "material": "S355 3t laser-cut, 2 bends; window under the bearing holders; D12.2 / D10.5 ear holes; 4x CB5-12 to the floor"
       },
-      "volume_mm3": 14883.609289320386,
+      "volume_mm3": 14523.609289320384,
       "bounds_mm": [
         [
-          122.69999999999999,
+          127.69999999999999,
           161.0
         ],
         [
@@ -2727,9 +2657,9 @@
         ]
       ],
       "center_mm": [
-        141.72693861393992,
-        59.99999999999994,
-        80.25581872318986
+        144.24133404606368,
+        59.999999999999986,
+        80.57200009717698
       ],
       "solids": 1
     },
@@ -2743,10 +2673,10 @@
         "sku": "CB5-12",
         "quantity": 4
       },
-      "volume_mm3": 2077.378142186251,
+      "volume_mm3": 2077.3781421862504,
       "bounds_mm": [
         [
-          126.75,
+          131.75,
           157.25
         ],
         [
@@ -2759,9 +2689,9 @@
         ]
       ],
       "center_mm": [
-        142.0,
-        59.99999999999999,
-        67.64366729678642
+        144.50000000000003,
+        60.00000000000001,
+        67.6436672967864
       ],
       "solids": 4
     },
@@ -2774,10 +2704,10 @@
         "moving_wheel": "RIGHT",
         "quantity": 4
       },
-      "volume_mm3": 572.6507481162854,
+      "volume_mm3": 572.6507481162855,
       "bounds_mm": [
         [
-          126.38119784648299,
+          131.381197846483,
           157.618802153517
         ],
         [
@@ -2790,29 +2720,29 @@
         ]
       ],
       "center_mm": [
-        142.00000000000006,
+        144.49999999999991,
         59.99999999999998,
         61.00000000000003
       ],
       "solids": 4
     },
     {
-      "name": "80_bogie_pivot_shoulder_bolt_12x35_RIGHT",
+      "name": "80_bogie_pivot_shoulder_bolt_12x30_RIGHT",
       "group": "suspension",
       "status": "catalog_envelope",
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": "RIGHT",
-        "sku": "Bossard BN1359 12x35 (ISO 7379)",
+        "sku": "Bossard BN1359 12x30 (ISO 7379)",
         "supply": "company stock",
-        "source": "ISO 7379 12x35: head D18 x 8, shoulder D12 f9 x 35, M10 x 16",
-        "note": "Company stock (user, 2026-11-18): 2x 12x35 and 2x 12x30. The pivot uses the two 12x35; the collar stack (35.3) does not fit a 30 mm shoulder. The supplied SHOULDER BOLT.STEP (30.0 mm shoulder) is the 12x30 variant, so the 12x35 is modelled from ISO 7379 catalogue dimensions.",
+        "source": "ISO 7379 12x30: head D18 x 8, shoulder D12 f9 x 30, M10 x 16",
+        "note": "Rev17d: company-stock 12x30 (2 pcs). Collars 2.5 + 8.8 + 2 bearings 16 + outboard ear 3 = 30.3, 0.3 longer than the shoulder, so the nut clamps the ears, collars and inner rings",
         "fit": "Pivot axle: inner rings and collars clamped between the outboard ear and the inboard ear"
       },
-      "volume_mm3": 7067.966147620605,
+      "volume_mm3": 6504.362854770269,
       "bounds_mm": [
         [
-          110.0,
+          115.0,
           169.0
         ],
         [
@@ -2825,9 +2755,9 @@
         ]
       ],
       "center_mm": [
-        144.6187643720885,
+        146.98145143723227,
         60.0,
-        87.0
+        86.99999999999999
       ],
       "solids": 1
     },
@@ -2838,18 +2768,17 @@
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": "RIGHT",
-        "quantity": 3,
+        "quantity": 2,
         "lengths_mm": [
           2.5,
-          11.3,
-          2.5
+          8.8
         ],
         "note": "Bearing collars d12.1 x D16, length-specified catalogue collars (SKU to pick); the stack is 0.3 mm longer than the shoulder so the nut clamps the inner rings."
       },
-      "volume_mm3": 1402.9700910456397,
+      "volume_mm3": 972.6111674120082,
       "bounds_mm": [
         [
-          125.69999999999999,
+          130.7,
           158.0
         ],
         [
@@ -2862,11 +2791,11 @@
         ]
       ],
       "center_mm": [
-        141.85,
-        59.99999999999999,
-        87.0
+        139.88982300884962,
+        60.00000000000001,
+        86.99999999999999
       ],
-      "solids": 3
+      "solids": 2
     },
     {
       "name": "80_bogie_pivot_nut_E-GLNUTS10_RIGHT",
@@ -2879,11 +2808,11 @@
         "supply": "company stock",
         "fit": "M10 lock nut (spring-ring type), 31 N m catalogue torque; hold the bolt with a 6 mm hex key"
       },
-      "volume_mm3": 1425.4546604378504,
+      "volume_mm3": 1425.4546604378509,
       "bounds_mm": [
         [
-          114.39999999999999,
-          122.69999999999999
+          119.39999999999999,
+          127.69999999999999
         ],
         [
           51.5,
@@ -2895,29 +2824,29 @@
         ]
       ],
       "center_mm": [
-        118.55,
+        123.54999999999998,
         60.0,
         87.0
       ],
       "solids": 1
     },
     {
-      "name": "80_bogie_pivot_holders_BGHK6001DD-30_RIGHT",
+      "name": "80_bogie_pivot_holders_BGMW6001DD-30_RIGHT",
       "group": "suspension",
       "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
-        "sku": "BGHK6001DD-30",
+        "sku": "BGMW6001DD-30",
         "supply": "company stock",
-        "source": "BGHK6001DD-30.stp.gz",
-        "quantity": 2,
-        "fit": "Hung flange-up under the base plate, 2x M5 each; 2 mm lips face outward"
+        "source": "BGMW6001DD-30.stp.gz",
+        "quantity": 1,
+        "fit": "Hung flange-up under the base plate, 2x M5 each; 2 mm lip faces outboard"
       },
-      "volume_mm3": 40100.14528081911,
+      "volume_mm3": 30868.055359580754,
       "bounds_mm": [
         [
-          126.1999999,
+          134.4999999,
           157.5000001
         ],
         [
@@ -2926,15 +2855,15 @@
         ],
         [
           69.0,
-          117.00000010000001
+          117.0000001
         ]
       ],
       "center_mm": [
-        141.85000000000005,
-        59.99999999999997,
-        98.6528681451121
+        146.13094323209285,
+        60.00000000000002,
+        98.8110729209073
       ],
-      "solids": 2
+      "solids": 1
     },
     {
       "name": "80_bogie_pivot_bearings_6001DD_RIGHT",
@@ -2943,16 +2872,16 @@
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
-        "sku": "BGHK6001DD-30",
+        "sku": "BGMW6001DD-30",
         "supply": "company stock",
-        "source": "BGHK6001DD-30.stp.gz",
+        "source": "BGMW6001DD-30.stp.gz",
         "quantity": 2,
-        "note": "Bearing solid of the BGHK STEP (inner-ring land D16.3)"
+        "note": "Bearing solids of the MISUMI STEP (6001DD, d12)"
       },
-      "volume_mm3": 7531.8607357631345,
+      "volume_mm3": 7531.860735763135,
       "bounds_mm": [
         [
-          128.1999999,
+          139.4999999,
           155.5000001
         ],
         [
@@ -2965,9 +2894,9 @@
         ]
       ],
       "center_mm": [
-        141.8499999999999,
-        59.999999999999986,
-        86.99999999999997
+        147.50000000000003,
+        60.00000000000001,
+        87.00000000000001
       ],
       "solids": 2
     },
@@ -2978,32 +2907,32 @@
       "metadata": {
         "wheel": "RIGHT",
         "moving_wheel": null,
-        "sku": "BGHK6001DD-30",
+        "sku": "BGMW6001DD-30",
         "supply": "company stock",
-        "source": "BGHK6001DD-30.stp.gz",
-        "quantity": 2
+        "source": "BGMW6001DD-30.stp.gz",
+        "quantity": 1
       },
-      "volume_mm3": 448.2693378766572,
+      "volume_mm3": 220.03206599950008,
       "bounds_mm": [
         [
-          136.1999999,
-          147.5000001
+          138.29999990000002,
+          139.5000001
         ],
         [
-          45.3,
-          74.7
+          45.300000000000004,
+          74.69999999999999
         ],
         [
-          72.3,
-          101.24170176232846
+          72.30000000000001,
+          101.3058916555602
         ]
       ],
       "center_mm": [
-        141.84999999999997,
-        59.99999999999999,
-        85.07722386996805
+        138.90000000000003,
+        60.04804913068858,
+        84.85111418808611
       ],
-      "solids": 2
+      "solids": 1
     },
     {
       "name": "80_bogie_pivot_backing_plate_3t_RIGHT",
@@ -3014,7 +2943,7 @@
         "moving_wheel": null,
         "material": "S355 3t flat laser-cut; spreads the bearing-pair couple into the 3t base plate"
       },
-      "volume_mm3": 10604.900466686726,
+      "volume_mm3": 10747.450233343363,
       "bounds_mm": [
         [
           112.0,
@@ -3030,8 +2959,8 @@
         ]
       ],
       "center_mm": [
-        142.0040325630713,
-        60.256720938452204,
+        141.94694564252484,
+        60.253315897342205,
         121.49999999999999
       ],
       "solids": 1
@@ -3046,11 +2975,11 @@
         "sku": "CB5-22",
         "quantity": 4
       },
-      "volume_mm3": 2862.776305583699,
+      "volume_mm3": 1431.3881527918495,
       "bounds_mm": [
         [
-          129.45,
-          154.25
+          141.75,
+          150.25
         ],
         [
           31.75,
@@ -3062,11 +2991,11 @@
         ]
       ],
       "center_mm": [
-        141.85,
-        60.00000000000002,
-        117.35185185185186
+        146.0,
+        59.99999999999999,
+        117.35185185185183
       ],
-      "solids": 4
+      "solids": 2
     },
     {
       "name": "80_bogie_holder_nuts_M5_RIGHT",
@@ -3077,11 +3006,11 @@
         "moving_wheel": null,
         "quantity": 4
       },
-      "volume_mm3": 572.6507481162854,
+      "volume_mm3": 286.32537405814276,
       "bounds_mm": [
         [
-          129.08119784648298,
-          154.618802153517
+          141.381197846483,
+          150.618802153517
         ],
         [
           32.0,
@@ -3093,11 +3022,11 @@
         ]
       ],
       "center_mm": [
-        141.84999999999997,
-        60.00000000000001,
-        105.00000000000001
+        146.00000000000003,
+        59.99999999999999,
+        104.99999999999997
       ],
-      "solids": 4
+      "solids": 2
     },
     {
       "name": "80_motor_cable_grommet_D28_RIGHT",
@@ -3144,7 +3073,7 @@
         "tip_z": 83.0,
         "fit": "M5x0.8 thread 7: 3t floor + M5 nut 4 underneath"
       },
-      "volume_mm3": 1408.891155264521,
+      "volume_mm3": 1408.8911552645213,
       "bounds_mm": [
         [
           129.9999999,
@@ -3353,25 +3282,25 @@
         "geometry": "Coil drawn at the posed length (SWU wire section, display turns); rate and allowable deflection from the catalogue",
         "fit": "Sits on the rear bogie floor around the C-USLH10; top end around the M6 striker jam nut under the base plate"
       },
-      "volume_mm3": 3162.503070876178,
+      "volume_mm3": 3162.503070876193,
       "bounds_mm": [
         [
-          139.49948955985772,
-          160.50052237101323
+          139.49948955985784,
+          160.50052237101303
         ],
         [
-          -35.50051043997603,
-          -14.499477629145128
+          -35.500510439976175,
+          -14.499477629144979
         ],
         [
-          66.00560843837611,
-          116.99439156218772
+          66.0056084383761,
+          116.99439156218745
         ]
       ],
       "center_mm": [
-        150.16897739372322,
-        -24.831022606278797,
-        91.49999999998447
+        150.16897739372334,
+        -24.831022606278786,
+        91.49999999998428
       ],
       "solids": 1
     },
@@ -3385,7 +3314,7 @@
         "material": "S355 3t laser-cut, 4 bends (outer wall + rear floor + rear inner wall, front caster pad + front inner wall); AF10.2 axle slot; D22/D30 pivot access holes",
         "length_mm": 292.5
       },
-      "volume_mm3": 106974.77909890124,
+      "volume_mm3": 106974.77909890126,
       "bounds_mm": [
         [
           -173.0,
@@ -3401,9 +3330,9 @@
         ]
       ],
       "center_mm": [
-        -141.03430907636505,
-        91.24648923710122,
-        79.33914503239457
+        -141.02764630183705,
+        91.24648923710126,
+        79.33914503239461
       ],
       "solids": 1
     },
@@ -3465,7 +3394,7 @@
       ],
       "center_mm": [
         -106.35633270321362,
-        154.99999999999997,
+        155.0,
         92.00000000000003
       ],
       "solids": 4
@@ -3479,7 +3408,7 @@
         "moving_wheel": "LEFT",
         "quantity": 4
       },
-      "volume_mm3": 572.6507481162862,
+      "volume_mm3": 572.6507481162863,
       "bounds_mm": [
         [
           -115.0,
@@ -3495,9 +3424,9 @@
         ]
       ],
       "center_mm": [
-        -112.99999999999999,
-        154.99999999999994,
-        92.00000000000001
+        -112.99999999999994,
+        154.99999999999986,
+        91.99999999999997
       ],
       "solids": 4
     },
@@ -3510,7 +3439,7 @@
         "moving_wheel": "LEFT",
         "material": "S355 6t flat laser-cut, AF10.2 slot; clamped by the axle nut against the outer wall"
       },
-      "volume_mm3": 8406.108784869595,
+      "volume_mm3": 8406.108784869597,
       "bounds_mm": [
         [
           -170.0,
@@ -3526,9 +3455,9 @@
         ]
       ],
       "center_mm": [
-        -167.0,
-        -3.9940790688674394e-17,
-        84.71019614370167
+        -166.99999999999997,
+        3.885225030034727e-17,
+        84.71019614370165
       ],
       "solids": 1
     },
@@ -3558,7 +3487,7 @@
       ],
       "center_mm": [
         -175.45000000000005,
-        2.633450555917254e-16,
+        3.059264280549313e-16,
         90.00000000000001
       ],
       "solids": 1
@@ -3588,7 +3517,7 @@
       ],
       "center_mm": [
         -163.49999999999994,
-        9.40699204640534e-16,
+        9.86128002129161e-16,
         89.99999999999997
       ],
       "solids": 1
@@ -3602,7 +3531,7 @@
         "moving_wheel": "LEFT",
         "fit": "OEM nut thickness and wrench envelope assumed"
       },
-      "volume_mm3": 2068.4017999881917,
+      "volume_mm3": 2068.4017999881926,
       "bounds_mm": [
         [
           -163.0,
@@ -3618,8 +3547,8 @@
         ]
       ],
       "center_mm": [
-        -159.00000000000006,
-        9.451847081203305e-16,
+        -158.99999999999994,
+        3.477553531819374e-16,
         90.0
       ],
       "solids": 1
@@ -3651,9 +3580,9 @@
         ]
       ],
       "center_mm": [
-        -138.00000000000003,
-        215.0,
-        81.76744186046511
+        -138.00000000000006,
+        215.00000000000006,
+        81.76744186046514
       ],
       "solids": 4
     },
@@ -3697,11 +3626,11 @@
         "moving_wheel": "LEFT",
         "material": "S355 3t laser-cut, 2 bends; window under the bearing holders; D12.2 / D10.5 ear holes; 4x CB5-12 to the floor"
       },
-      "volume_mm3": 14883.609289320386,
+      "volume_mm3": 14523.609289320384,
       "bounds_mm": [
         [
           -161.0,
-          -122.69999999999999
+          -127.69999999999999
         ],
         [
           26.0,
@@ -3713,9 +3642,9 @@
         ]
       ],
       "center_mm": [
-        -141.72693861393992,
-        59.99999999999994,
-        80.25581872318986
+        -144.24133404606368,
+        59.999999999999986,
+        80.57200009717698
       ],
       "solids": 1
     },
@@ -3733,7 +3662,7 @@
       "bounds_mm": [
         [
           -157.25,
-          -126.75
+          -131.75
         ],
         [
           27.75,
@@ -3745,9 +3674,9 @@
         ]
       ],
       "center_mm": [
-        -142.00000000000003,
-        59.99999999999999,
-        67.64366729678639
+        -144.49999999999997,
+        60.0,
+        67.64366729678642
       ],
       "solids": 4
     },
@@ -3760,11 +3689,11 @@
         "moving_wheel": "LEFT",
         "quantity": 4
       },
-      "volume_mm3": 572.650748116285,
+      "volume_mm3": 572.6507481162851,
       "bounds_mm": [
         [
           -157.618802153517,
-          -126.38119784648299
+          -131.381197846483
         ],
         [
           28.0,
@@ -3776,30 +3705,30 @@
         ]
       ],
       "center_mm": [
-        -141.99999999999997,
-        59.999999999999964,
-        61.00000000000003
+        -144.5,
+        59.99999999999998,
+        61.000000000000014
       ],
       "solids": 4
     },
     {
-      "name": "80_bogie_pivot_shoulder_bolt_12x35_LEFT",
+      "name": "80_bogie_pivot_shoulder_bolt_12x30_LEFT",
       "group": "suspension",
       "status": "catalog_envelope",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": "LEFT",
-        "sku": "Bossard BN1359 12x35 (ISO 7379)",
+        "sku": "Bossard BN1359 12x30 (ISO 7379)",
         "supply": "company stock",
-        "source": "ISO 7379 12x35: head D18 x 8, shoulder D12 f9 x 35, M10 x 16",
-        "note": "Company stock (user, 2026-11-18): 2x 12x35 and 2x 12x30. The pivot uses the two 12x35; the collar stack (35.3) does not fit a 30 mm shoulder. The supplied SHOULDER BOLT.STEP (30.0 mm shoulder) is the 12x30 variant, so the 12x35 is modelled from ISO 7379 catalogue dimensions.",
+        "source": "ISO 7379 12x30: head D18 x 8, shoulder D12 f9 x 30, M10 x 16",
+        "note": "Rev17d: company-stock 12x30 (2 pcs). Collars 2.5 + 8.8 + 2 bearings 16 + outboard ear 3 = 30.3, 0.3 longer than the shoulder, so the nut clamps the ears, collars and inner rings",
         "fit": "Pivot axle: inner rings and collars clamped between the outboard ear and the inboard ear"
       },
-      "volume_mm3": 7067.966147620604,
+      "volume_mm3": 6504.362854770268,
       "bounds_mm": [
         [
           -169.0,
-          -110.0
+          -115.0
         ],
         [
           51.0,
@@ -3811,9 +3740,9 @@
         ]
       ],
       "center_mm": [
-        -144.61876437208852,
-        59.999999999999986,
-        87.0
+        -146.98145143723227,
+        59.99999999999999,
+        86.99999999999999
       ],
       "solids": 1
     },
@@ -3824,19 +3753,18 @@
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": "LEFT",
-        "quantity": 3,
+        "quantity": 2,
         "lengths_mm": [
           2.5,
-          11.3,
-          2.5
+          8.8
         ],
         "note": "Bearing collars d12.1 x D16, length-specified catalogue collars (SKU to pick); the stack is 0.3 mm longer than the shoulder so the nut clamps the inner rings."
       },
-      "volume_mm3": 1402.9700910456402,
+      "volume_mm3": 972.6111674120086,
       "bounds_mm": [
         [
           -158.0,
-          -125.69999999999999
+          -130.7
         ],
         [
           52.0,
@@ -3848,11 +3776,11 @@
         ]
       ],
       "center_mm": [
-        -141.85000000000002,
-        60.00000000000001,
-        87.00000000000003
+        -139.88982300884953,
+        60.000000000000014,
+        87.00000000000004
       ],
-      "solids": 3
+      "solids": 2
     },
     {
       "name": "80_bogie_pivot_nut_E-GLNUTS10_LEFT",
@@ -3865,11 +3793,11 @@
         "supply": "company stock",
         "fit": "M10 lock nut (spring-ring type), 31 N m catalogue torque; hold the bolt with a 6 mm hex key"
       },
-      "volume_mm3": 1425.4546604378509,
+      "volume_mm3": 1425.454660437851,
       "bounds_mm": [
         [
-          -122.7,
-          -114.39999999999999
+          -127.7,
+          -119.39999999999999
         ],
         [
           51.5,
@@ -3881,33 +3809,33 @@
         ]
       ],
       "center_mm": [
-        -118.54999999999997,
+        -123.55,
         60.0,
         87.0
       ],
       "solids": 1
     },
     {
-      "name": "80_bogie_pivot_holders_BGHK6001DD-30_LEFT",
+      "name": "80_bogie_pivot_holders_BGMW6001DD-30_LEFT",
       "group": "suspension",
       "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
-        "sku": "BGHK6001DD-30",
+        "sku": "BGMW6001DD-30",
         "supply": "company stock",
-        "source": "BGHK6001DD-30.stp.gz",
-        "quantity": 2,
-        "fit": "Hung flange-up under the base plate, 2x M5 each; 2 mm lips face outward"
+        "source": "BGMW6001DD-30.stp.gz",
+        "quantity": 1,
+        "fit": "Hung flange-up under the base plate, 2x M5 each; 2 mm lip faces outboard"
       },
-      "volume_mm3": 40100.145280819095,
+      "volume_mm3": 30868.055359580754,
       "bounds_mm": [
         [
           -157.5000001,
-          -126.1999999
+          -134.4999999
         ],
         [
-          29.999999999999996,
+          30.000000000000004,
           90.0
         ],
         [
@@ -3916,11 +3844,11 @@
         ]
       ],
       "center_mm": [
-        -141.85000000000005,
-        60.00000000000001,
-        98.65286814511211
+        -146.13094323209285,
+        60.00000000000003,
+        98.81107292090734
       ],
-      "solids": 2
+      "solids": 1
     },
     {
       "name": "80_bogie_pivot_bearings_6001DD_LEFT",
@@ -3929,20 +3857,20 @@
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
-        "sku": "BGHK6001DD-30",
+        "sku": "BGMW6001DD-30",
         "supply": "company stock",
-        "source": "BGHK6001DD-30.stp.gz",
+        "source": "BGMW6001DD-30.stp.gz",
         "quantity": 2,
-        "note": "Bearing solid of the BGHK STEP (inner-ring land D16.3)"
+        "note": "Bearing solids of the MISUMI STEP (6001DD, d12)"
       },
-      "volume_mm3": 7531.860735763132,
+      "volume_mm3": 7531.860735763135,
       "bounds_mm": [
         [
           -155.5000001,
-          -128.1999999
+          -139.4999999
         ],
         [
-          45.9999999,
+          45.99999989999999,
           74.0000001
         ],
         [
@@ -3951,9 +3879,9 @@
         ]
       ],
       "center_mm": [
-        -141.84999999999997,
-        59.999999999999986,
-        86.99999999999997
+        -147.50000000000003,
+        60.00000000000001,
+        86.99999999999999
       ],
       "solids": 2
     },
@@ -3964,32 +3892,32 @@
       "metadata": {
         "wheel": "LEFT",
         "moving_wheel": null,
-        "sku": "BGHK6001DD-30",
+        "sku": "BGMW6001DD-30",
         "supply": "company stock",
-        "source": "BGHK6001DD-30.stp.gz",
-        "quantity": 2
+        "source": "BGMW6001DD-30.stp.gz",
+        "quantity": 1
       },
-      "volume_mm3": 448.2693378766573,
+      "volume_mm3": 220.03206599949993,
       "bounds_mm": [
         [
-          -147.5000001,
-          -136.1999999
+          -139.5000001,
+          -138.29999990000002
         ],
         [
-          45.3,
-          74.7
+          45.300000000000004,
+          74.69999999999999
         ],
         [
-          72.3,
-          101.24170176232847
+          72.30000000000001,
+          101.3058916555602
         ]
       ],
       "center_mm": [
-        -141.84999999999994,
-        59.99999999999999,
-        85.07722386996805
+        -138.9000000000001,
+        60.04804913068859,
+        84.85111418808611
       ],
-      "solids": 2
+      "solids": 1
     },
     {
       "name": "80_bogie_pivot_backing_plate_3t_LEFT",
@@ -4000,7 +3928,7 @@
         "moving_wheel": null,
         "material": "S355 3t flat laser-cut; spreads the bearing-pair couple into the 3t base plate"
       },
-      "volume_mm3": 10604.900466686726,
+      "volume_mm3": 10747.450233343363,
       "bounds_mm": [
         [
           -172.0,
@@ -4016,8 +3944,8 @@
         ]
       ],
       "center_mm": [
-        -142.0040325630713,
-        60.256720938452204,
+        -141.94694564252484,
+        60.25331589734219,
         121.49999999999999
       ],
       "solids": 1
@@ -4032,11 +3960,11 @@
         "sku": "CB5-22",
         "quantity": 4
       },
-      "volume_mm3": 2862.776305583702,
+      "volume_mm3": 1431.388152791851,
       "bounds_mm": [
         [
-          -154.25,
-          -129.45
+          -150.25,
+          -141.75
         ],
         [
           31.75,
@@ -4048,11 +3976,11 @@
         ]
       ],
       "center_mm": [
-        -141.84999999999997,
-        60.00000000000001,
-        117.35185185185186
+        -146.0,
+        59.999999999999986,
+        117.35185185185182
       ],
-      "solids": 4
+      "solids": 2
     },
     {
       "name": "80_bogie_holder_nuts_M5_LEFT",
@@ -4063,11 +3991,11 @@
         "moving_wheel": null,
         "quantity": 4
       },
-      "volume_mm3": 572.6507481162851,
+      "volume_mm3": 286.32537405814253,
       "bounds_mm": [
         [
-          -154.618802153517,
-          -129.08119784648298
+          -150.618802153517,
+          -141.381197846483
         ],
         [
           32.0,
@@ -4079,11 +4007,11 @@
         ]
       ],
       "center_mm": [
-        -141.85,
-        59.99999999999998,
-        105.00000000000003
+        -146.00000000000003,
+        59.99999999999999,
+        105.00000000000001
       ],
-      "solids": 4
+      "solids": 2
     },
     {
       "name": "80_motor_cable_grommet_D28_LEFT",
@@ -4339,25 +4267,25 @@
         "geometry": "Coil drawn at the posed length (SWU wire section, display turns); rate and allowable deflection from the catalogue",
         "fit": "Sits on the rear bogie floor around the C-USLH10; top end around the M6 striker jam nut under the base plate"
       },
-      "volume_mm3": 3162.5030708762083,
+      "volume_mm3": 3162.503070876198,
       "bounds_mm": [
         [
-          -160.50052237101332,
-          -139.49948955985766
+          -160.50052237101286,
+          -139.49948955985784
         ],
         [
-          -35.50051043997603,
-          -14.499477629145128
+          -35.500510439976175,
+          -14.499477629144979
         ],
         [
-          66.00560843837611,
-          116.99439156218772
+          66.0056084383761,
+          116.99439156218745
         ]
       ],
       "center_mm": [
-        -150.16897739372342,
-        -24.831022606278754,
-        91.49999999998444
+        -150.1689773937232,
+        -24.83102260627874,
+        91.49999999998441
       ],
       "solids": 1
     },
@@ -4551,7 +4479,7 @@
       "center_mm": [
         -137.9999999999999,
         -214.99999999999991,
-        88.49999999999996
+        88.49999999999997
       ],
       "solids": 4
     },
@@ -4613,8 +4541,8 @@
       ],
       "center_mm": [
         -48.0,
-        -214.99999999999994,
-        118.64366729678639
+        -215.0,
+        118.64366729678642
       ],
       "solids": 2
     },
@@ -4767,25 +4695,25 @@
         "lever_ratio": 0.7222,
         "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 1092.5502014663718,
+      "volume_mm3": 1092.550201466438,
       "bounds_mm": [
         [
-          -121.50066458805362,
-          -104.49933827194641
+          -121.50066458805355,
+          -104.49933827194639
         ],
         [
           -223.50066172564212,
-          -206.49933541435718
+          -206.49933541435732
         ],
         [
           89.00663037058595,
-          116.99336963418276
+          116.99336963418234
         ]
       ],
       "center_mm": [
-        -113.23457674140957,
-        -214.76542325859145,
-        102.99999999986329
+        -113.23457674140964,
+        -214.76542325859137,
+        102.99999999986326
       ],
       "solids": 1
     },
@@ -5109,7 +5037,7 @@
       ],
       "center_mm": [
         138.0,
-        -214.99999999999997,
+        -215.0,
         81.76744186046511
       ],
       "solids": 4
@@ -5202,9 +5130,9 @@
         ]
       ],
       "center_mm": [
-        48.0,
-        -214.99999999999994,
-        118.64366729678639
+        48.000000000000014,
+        -215.0,
+        118.64366729678642
       ],
       "solids": 2
     },
@@ -5357,25 +5285,25 @@
         "lever_ratio": 0.7222,
         "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 1092.5502014663718,
+      "volume_mm3": 1092.550201466438,
       "bounds_mm": [
         [
-          104.49933541194638,
-          121.50066172805359
+          104.49933541194645,
+          121.50066172805361
         ],
         [
           -223.50066172564212,
-          -206.49933541435718
+          -206.49933541435732
         ],
         [
           89.00663037058595,
-          116.99336963418276
+          116.99336963418234
         ]
       ],
       "center_mm": [
-        112.76542325859043,
-        -214.76542325859145,
-        102.99999999986329
+        112.76542325859036,
+        -214.76542325859137,
+        102.99999999986326
       ],
       "solids": 1
     },

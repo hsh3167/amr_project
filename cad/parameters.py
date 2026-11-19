@@ -95,7 +95,7 @@ def validate_bogie(d):
     if q['sheet_t_mm']>3 or q['bracket_t_mm']>3:raise ValueError('Bent sheet parts are limited to 3t')
     yp,zp=q['pivot_y_mm'],q['pivot_z_mm'];front=d.p['caster_y']-yp
     if not 0<yp<d.p['caster_y']:raise ValueError('Bogie pivot must sit between the drive axle and the front caster')
-    if abs(bb-q['holder_h_mm']-zp)>1e-6:raise ValueError('Hung BGHK holders put the bore at base_bottom - h: pivot_z must match')
+    if abs(bb-q['holder_h_mm']-zp)>1e-6:raise ValueError('Hung bearing holders put the bore at base_bottom - h: pivot_z must match')
     if not q['bolt_shoulder_d_mm']<=q['bearing_d_mm']<q['spacer_id_mm']<q['spacer_od_mm']<=q['bearing_inner_land_mm']<q['holder_dh_mm']:
         raise ValueError('Shoulder bolt, collars and bearing holder do not fit')
     st=bogie_stack(d);a=asin(q['travel_mm']/2/front)
@@ -103,8 +103,9 @@ def validate_bogie(d):
     if not q['bolt_shoulder_l_mm']<stack<=q['bolt_shoulder_l_mm']+.5:raise ValueError('Collar stack must be just longer than the shoulder')
     if st['thread_tip']>st['nut'][0]:raise ValueError('Shoulder-bolt thread does not reach through the lock nut')
     if st['ear_in'][0]-st['thread_tip']>q['bolt_thread_l_mm']:raise ValueError('Not enough thread past the inboard ear')
-    if st['holder_out'][1]>st['ear_out'][0]-.4 or st['holder_in'][0]<st['ear_in'][1]+.4:raise ValueError('Holders touch the U-bracket ears')
-    if st['holder_in'][1]>st['holder_out'][0]-.4:raise ValueError('The two bearing holders overlap')
+    inner=st.get('holder_in',st['holder_out'])   # Rev17d: one double holder carries both faces
+    if st['holder_out'][1]>st['ear_out'][0]-.4 or inner[0]<st['ear_in'][1]+.4:raise ValueError('Holders touch the U-bracket ears')
+    if 'holder_in' in st and st['holder_in'][1]>st['holder_out'][0]-.4:raise ValueError('The two bearing holders overlap')
     if st['nut'][0]<=q['inner_wall_x_mm']+q['sheet_t_mm']+1:raise ValueError('Lock nut reaches the inner wall')
     r=q['inner_wall_access_hole_d_mm']/2
     if r<=q['nut_af_mm']/(2*cos(math.pi/6))+1:raise ValueError('Inner-wall socket hole too small for the lock nut')

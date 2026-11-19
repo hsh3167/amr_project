@@ -285,7 +285,7 @@ def mass(records):
         mat = None
         if r.status in ('generic_profile',):
             mat = 'al'
-        elif r.name.startswith(('11_', '12_', '13_', '36_', '37_', '51_', '52_', '74_lidar_plate_3t', '78_', '61_motor_driver_bracket',
+        elif r.name.startswith(('11_', '12_', '13_', '36_', '37_', '51_', '52_', '61_motor_driver_bracket',
                                 '50_', '44_spring_stud', '33_', '34_')):
             mat = 'steel'          # P30-3: all plates and brackets SS400 / SPCC
         if mat:

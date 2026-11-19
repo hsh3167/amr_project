@@ -9,7 +9,8 @@ def make(d):
     if d.variant!='baseline':
         from .suspension import chassis_mount_holes
         from .electronics import mount_holes
-        for x,y,diameter in chassis_mount_holes(d)+mount_holes(d):
+        from .sensors import mount_holes as sensor_holes
+        for x,y,diameter in chassis_mount_holes(d)+mount_holes(d)+sensor_holes(d):
             base=drilled(base,[(x,y)],diameter,p['base_bottom_z'],p['base_thickness'])
         from .electronics import mount_slots
         for x0,x1,y0,y1 in mount_slots(d):   # Rev17 battery strap slots
@@ -24,7 +25,8 @@ def make(d):
     top=drilled(top,d.profile['main_columns_xy'],5.5,p['top_bottom_z'],p['top_thickness'])
     if d.variant!='baseline':
         cm=d.layout['camera_mount']
-        top=drilled(top,[(s*p['camera_x'],cm['profile_y']) for s in (-1,1)],5.5,p['top_bottom_z'],p['top_thickness'])
+        dx=cm['hanger']['bolt_dx_mm']
+        top=drilled(top,[(s*p['camera_x']+k*dx,cm['profile_y']) for s in (-1,1) for k in (-1,1)],5.5,p['top_bottom_z'],p['top_thickness'])
     pitch=p['arm_bolt_pitch']/2
     arm_mounts=[(x,y) for x in (-pitch,pitch) for y in (-pitch,pitch)]
     top=drilled(top,arm_mounts,8.4,p['top_bottom_z'],p['top_thickness'])

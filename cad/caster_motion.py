@@ -75,6 +75,19 @@ def bogie_stack(d):
     bt, B, inset, T = q['bracket_t_mm'], q['bearing_B_mm'], q['bearing_inset_mm'], q['holder_T_mm']
     s = {'head': (q['outer_wall_x_mm'] - q['head_gap_mm'] - q['bolt_head_t_mm'], q['outer_wall_x_mm'] - q['head_gap_mm'])}
     x = s['head'][0]
+    if q.get('holder_count', 2) == 1:
+        # Rev17d: one double-bearing holder (BGMW6001DD-30, two 6001 back to back, lip 2 mm outboard, mouth 5 mm inboard).
+        n = q['bearings_per_holder']
+        for name, length in (('ear_out', bt), ('spacer_out', q['spacer_outer_mm']), ('race_out', n*B),
+                             ('spacer_in', q['spacer_inner_mm']), ('ear_in', bt), ('nut', q['nut_h_mm'])):
+            s[name] = (x - length, x)
+            x -= length
+        s['holder_out'] = (s['race_out'][1] + inset - T, s['race_out'][1] + inset)
+        s['shoulder_end'] = s['head'][0] - q['bolt_shoulder_l_mm']
+        s['thread_tip'] = s['shoulder_end'] - q['bolt_thread_l_mm']
+        s['bearing_x'] = (s['race_out'][1] - B/2, s['race_out'][0] + B/2)
+        s['center_x'] = sum(s['bearing_x']) / 2
+        return s
     for name, length in (('ear_out', bt), ('spacer_out', q['spacer_outer_mm']), ('race_out', B),
                          ('spacer_mid', q['spacer_mid_mm']), ('race_in', B), ('spacer_in', q['spacer_inner_mm']),
                          ('ear_in', bt), ('nut', q['nut_h_mm'])):

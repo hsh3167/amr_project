@@ -1,5 +1,5 @@
 {
-  "revision": "P30-5b",
+  "revision": "P30-5c",
   "status": "P30 concept (2026-11-15): low-cost 30x30 aluminium profile chassis with SS400 laser-cut steel plates. Two drive wheels on vertical slide suspension (MISUMI D20 shafts + ball bushings + one spring each), four GL-65 casters bolted rigid. Separate variant; the Rev15 model in cad/layout.json is unchanged.",
   "coordinates": "mm; X right, Y forward, Z up, ground Z0. Heading clockwise from +Y (CAD Z rotation = -heading).",
   "frame": {
@@ -229,7 +229,7 @@
     "lidar_plate": [
       80,
       70,
-      3
+      8
     ],
     "scan_offset_above_envelope_min": 77.83,
     "camera_x": 140,
@@ -260,7 +260,14 @@
       ]
     ],
     "lidar_side_bolt_dy": 26,
-    "lidar_mount_note": "P30-5b: TiM571 on a 3t SS400 plate with 2x M3x5 (bottom threads M3 x 2.8, 0.8 N m max; spacing assumed). Plate on the 2t floor corner, 3x M5 countersunk through plate + floor into T-nuts: 2 in the front/rear rail, 1 in the side rail (no rotation)"
+    "lidar_mount_note": "P30-5c: TiM571 on an 8 mm 3D-printed plate with 2x M3 countersunk (bottom threads M3 x 2.8, 0.8 N m max; spacing assumed). The plate lies flat on the 2t floor corner (fully supported), 3x M5 countersunk through plate + floor into T-nuts of two rails",
+    "camera_bracket": {
+      "flange_mm": 3.5,
+      "leg_mm": 8,
+      "shelf_mm": 8,
+      "gusset_mm": 20,
+      "note": "P30-5c: printed; the flange is limited to 3.5 mm by the camera top (Z250.7) under the rail (Z255)"
+    }
   },
   "load_case": {
     "mass_kg": 55,

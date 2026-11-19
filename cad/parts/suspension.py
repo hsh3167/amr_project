@@ -139,7 +139,7 @@ def chassis_mount_holes(d):
 def holder_bolt_xy(d):
     """Right-side holder flange bolts (2 per BGHK, pitch L1 along Y)."""
     q = d.layout['suspension']['bogie']; st = bogie_stack(d)
-    return [(sum(st[k])/2, q['pivot_y_mm']+s*q['holder_L1_mm']/2) for k in ('holder_out', 'holder_in') for s in (-1, 1)]
+    return [(sum(st[k])/2, q['pivot_y_mm']+s*q['holder_L1_mm']/2) for k in ('holder_out', 'holder_in') if k in st for s in (-1, 1)]
 
 
 def yz_prism(points, x0, x1):
@@ -254,14 +254,15 @@ def bogie_records(d, add, base_bottom, base_top):
                 + cylx(q['bolt_shoulder_d_mm']/2, h0-send, (h0+send)/2, yp, zp)
                 + cylx(5, send-st['thread_tip'], (send+st['thread_tip'])/2, yp, zp))
         bolt -= cylx(3.0, 6, h1-3, yp, zp)  # hex socket 6 (as a round recess)
-        out.append(('bogie_pivot_shoulder_bolt_12x35', bolt, True,
+        out.append((f"bogie_pivot_shoulder_bolt_12x{q['bolt_shoulder_l_mm']:g}", bolt, True,
                     {'sku': q['bolt_sku'], 'supply': 'company stock', 'status': 'catalog_envelope',
-                     'source': 'ISO 7379 12x35: head D18 x 8, shoulder D12 f9 x 35, M10 x 16', 'note': q['bolt_note'],
+                     'source': f"ISO 7379 12x{q['bolt_shoulder_l_mm']:g}: head D18 x 8, shoulder D12 f9 x {q['bolt_shoulder_l_mm']:g}, M10 x 16", 'note': q['bolt_note'],
                      'fit': 'Pivot axle: inner rings and collars clamped between the outboard ear and the inboard ear'}))
         od, idd = q['spacer_od_mm'], q['spacer_id_mm']
-        collars = [ring_x(st[k][0], st[k][1]-st[k][0], yp, zp, od, idd) for k in ('spacer_out', 'spacer_mid', 'spacer_in')]
+        ck = [k for k in ('spacer_out', 'spacer_mid', 'spacer_in') if k in st]
+        collars = [ring_x(st[k][0], st[k][1]-st[k][0], yp, zp, od, idd) for k in ck]
         out.append(('bogie_pivot_collars', Compound(collars), True,
-                    {'quantity': 3, 'lengths_mm': [q['spacer_outer_mm'], q['spacer_mid_mm'], q['spacer_inner_mm']],
+                    {'quantity': len(ck), 'lengths_mm': [round(st[k][1]-st[k][0], 2) for k in ck],
                      'status': 'catalog_envelope', 'note': q['spacer_note']}))
         out.append(('bogie_pivot_nut_'+q['nut_sku'], nut_x(st['nut'][0], yp, zp, q['nut_af_mm'], q['nut_h_mm'], 10), True,
                     {'sku': q['nut_sku'], 'supply': 'company stock', 'status': 'catalog_table_model',
@@ -271,17 +272,27 @@ def bogie_records(d, add, base_bottom, base_top):
         # snap-ring mouth Z0. Lip faces point outward (outboard / inboard), so the bearings sit 2 mm from the outer faces.
         S = q['holder_S_mm']
         assert abs(base_bottom-q['holder_h_mm']-zp) < 1e-6, 'BGHK centre height must put the bore on the pivot axis'
-        parts = {k: [] for k in ('Housing', 'Bearing', 'CHTMW')}
-        for key, turn, x_mouth in (('holder_out', 90, st['holder_out'][0]), ('holder_in', -90, st['holder_in'][1])):
-            for k in parts:
-                solid = misumi_solid(q['holder_step'], f"{k}_{q['holder_sku']}")
-                parts[k].append(solid.rotate(Axis.X, -90).rotate(Axis.Z, turn).translate((x_mouth, yp, base_bottom)))
+        parts = {k: [] for k in ('Housing', 'Bearing', 'Ring')}
+        from .vendor import source as vendor_source
+        if q.get('holder_count', 2) == 1:
+            # Rev17d: one BGMW6001DD-30 (supplied MISUMI STEP, unscaled). STEP frame: X = width, Y = height from the
+            # flange underside (bore Y30), Z = thickness 0..23 with the 2 mm lip at Z0 -> lip outboard at holder_out[1].
+            places = [(90, st['holder_out'][1])]
+        else:
+            # BGHK6001DD-30: lip face Z-15, mouth Z0; lips face outward on both holders.
+            places = [(90, st['holder_out'][0]), (-90, st['holder_in'][1])]
+        for turn, x_ref in places:
+            for c in vendor_source(q['holder_step']).children:
+                k = 'Housing' if c.label.startswith('Housing') else 'Bearing' if c.label.startswith('Bearing') else 'Ring'
+                for solid in c.solids():
+                    parts[k].append(solid.rotate(Axis.X, -90).rotate(Axis.Z, turn).translate((x_ref, yp, base_bottom)))
+        nh = len(places); nb = len(parts['Bearing'])
         meta = {'sku': q['holder_sku'], 'supply': 'company stock', 'status': 'misumi_step_exact', 'source': q['holder_step']+'.gz'}
         out.append(('bogie_pivot_holders_'+q['holder_sku'], Compound(parts['Housing']), False,
-                    {**meta, 'quantity': 2, 'fit': 'Hung flange-up under the base plate, 2x M5 each; 2 mm lips face outward'}))
+                    {**meta, 'quantity': nh, 'fit': 'Hung flange-up under the base plate, 2x M5 each; 2 mm lip faces outboard'}))
         out.append(('bogie_pivot_bearings_6001DD', Compound(parts['Bearing']), False,
-                    {**meta, 'quantity': 2, 'note': 'Bearing solid of the BGHK STEP (inner-ring land D16.3)'}))
-        out.append(('bogie_pivot_snap_rings', Compound(parts['CHTMW']), False, {**meta, 'quantity': 2}))
+                    {**meta, 'quantity': nb, 'note': 'Bearing solids of the MISUMI STEP (6001DD, d12)'}))
+        out.append(('bogie_pivot_snap_rings', Compound(parts['Ring']), False, {**meta, 'quantity': nh}))
         bx0, bx1 = q['backing_x_mm']; by0, by1 = q['backing_y_mm']; bkt = q['backing_t_mm']
         hb = holder_bolt_xy(d)
         backing = drilled(span(bx0, bx1, by0, by1, base_top, base_top+bkt), hb, 5.5, base_top, bkt)

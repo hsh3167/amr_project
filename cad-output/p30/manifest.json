@@ -3515,9 +3515,9 @@
         ]
       ],
       "center_mm": [
-        -100.25128011655225,
-        -268.50064630472775,
-        183.80313168214755
+        -100.2512801165522,
+        -268.5006463047283,
+        183.8031316821477
       ],
       "solids": 21
     },
@@ -3612,14 +3612,14 @@
       "solids": 6
     },
     {
-      "name": "74_lidar_plate_3t_FRONT_LEFT",
+      "name": "74_lidar_plate_PRINTED_FRONT_LEFT",
       "group": "lidars",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "SS400 3t laser cut, flat; 3x D5.5 countersunk (2 front/rear rail + 1 side rail), 2x D3.4 for the scanner",
-        "fit": "Sits on the 2t floor corner; the three bolts go through plate + floor into T-nuts of two rails, so the plate cannot turn"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep); 8 mm solid plate, 100% infill around the bolt holes",
+        "fit": "Sits flat on the 2t floor corner (fully supported, so a thick print is stiff); 3x M5 countersunk through plate + floor into T-nuts of two rails, so it cannot turn"
       },
-      "volume_mm3": 16499.299841167776,
+      "volume_mm3": 44052.13339683744,
       "bounds_mm": [
         [
           -258.03300858899104,
@@ -3631,13 +3631,13 @@
         ],
         [
           121.0,
-          124.0
+          129.0
         ]
       ],
       "center_mm": [
-        -204.99999999999991,
-        285.112316703398,
-        122.50189274074377
+        -204.99999999999997,
+        285.11217902205965,
+        125.00254765476684
       ],
       "solids": 1
     },
@@ -3647,9 +3647,9 @@
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 3,
-        "sku": "M5x12 countersunk + 3030 slot-8 T-nut"
+        "sku": "M5x16 countersunk + 3030 slot-8 T-nut"
       },
-      "volume_mm3": 2089.378058078278,
+      "volume_mm3": 2381.5508872511105,
       "bounds_mm": [
         [
           -224.25,
@@ -3661,13 +3661,13 @@
         ],
         [
           112.5,
-          124.0
+          129.0
         ]
       ],
       "center_mm": [
-        -204.99999999999997,
-        276.33333333333337,
-        115.84177094038711
+        -205.00000000000009,
+        276.3333333333333,
+        117.14934112710422
       ],
       "solids": 6
     },
@@ -3677,10 +3677,10 @@
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 2,
-        "sku": "M3x6 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker",
+        "sku": "M3x10 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker",
         "note": "TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing"
       },
-      "volume_mm3": 71.15707360380875,
+      "volume_mm3": 141.84290830957906,
       "bounds_mm": [
         [
           -222.14213562373095,
@@ -3692,13 +3692,13 @@
         ],
         [
           121.05,
-          123.95
+          128.95000000000002
         ]
       ],
       "center_mm": [
-        -205.0,
+        -205.00000000000003,
         285.00000000000006,
-        122.09735099337746
+        124.26644518272427
       ],
       "solids": 2
     },
@@ -3718,14 +3718,14 @@
           338.25928275897076
         ],
         [
-          124.0,
-          160.0
+          129.0,
+          165.0
         ]
       ],
       "center_mm": [
         -205.00000000000003,
         285.0,
-        142.0
+        147.0
       ],
       "solids": 1
     },
@@ -3734,7 +3734,7 @@
       "group": "lidars",
       "status": "drawing_envelope",
       "metadata": {
-        "scan_z": 201.82999999999998,
+        "scan_z": 206.82999999999998,
         "heading_deg": -45.0
       },
       "volume_mm3": 227359.2,
@@ -3748,14 +3748,14 @@
           327.77996026178613
         ],
         [
-          160.0,
-          222.12
+          165.0,
+          227.12
         ]
       ],
       "center_mm": [
         -205.0,
         285.0,
-        191.06
+        196.06
       ],
       "solids": 1
     },
@@ -3775,26 +3775,26 @@
           307.0
         ],
         [
-          222.12,
-          225.12
+          227.12,
+          230.12
         ]
       ],
       "center_mm": [
         -205.0,
         285.0,
-        223.62
+        228.62
       ],
       "solids": 1
     },
     {
-      "name": "74_lidar_plate_3t_REAR_RIGHT",
+      "name": "74_lidar_plate_PRINTED_REAR_RIGHT",
       "group": "lidars",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "SS400 3t laser cut, flat; 3x D5.5 countersunk (2 front/rear rail + 1 side rail), 2x D3.4 for the scanner",
-        "fit": "Sits on the 2t floor corner; the three bolts go through plate + floor into T-nuts of two rails, so the plate cannot turn"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep); 8 mm solid plate, 100% infill around the bolt holes",
+        "fit": "Sits flat on the 2t floor corner (fully supported, so a thick print is stiff); 3x M5 countersunk through plate + floor into T-nuts of two rails, so it cannot turn"
       },
-      "volume_mm3": 16499.299841167776,
+      "volume_mm3": 44052.133396837424,
       "bounds_mm": [
         [
           151.96699141100893,
@@ -3806,13 +3806,13 @@
         ],
         [
           121.0,
-          124.0
+          129.0
         ]
       ],
       "center_mm": [
-        204.99999999999991,
-        -285.112316703398,
-        122.50189274074377
+        205.00000000000006,
+        -285.11217902205965,
+        125.00254765476683
       ],
       "solids": 1
     },
@@ -3822,9 +3822,9 @@
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 3,
-        "sku": "M5x12 countersunk + 3030 slot-8 T-nut"
+        "sku": "M5x16 countersunk + 3030 slot-8 T-nut"
       },
-      "volume_mm3": 2089.378058078278,
+      "volume_mm3": 2381.5508872511105,
       "bounds_mm": [
         [
           185.75,
@@ -3836,13 +3836,13 @@
         ],
         [
           112.5,
-          124.0
+          129.0
         ]
       ],
       "center_mm": [
-        204.99999999999991,
-        -276.3333333333333,
-        115.8417709403871
+        204.99999999999997,
+        -276.3333333333334,
+        117.1493411271042
       ],
       "solids": 6
     },
@@ -3852,10 +3852,10 @@
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 2,
-        "sku": "M3x6 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker",
+        "sku": "M3x10 countersunk (flush under the plate), 0.8 N m max (SICK) + threadlocker",
         "note": "TiM571 bottom threads M3 x 2.8 deep; screw the scanner to the plate first, then bolt the plate down; hole spacing assumed, confirm on the SICK drawing"
       },
-      "volume_mm3": 71.15707360380875,
+      "volume_mm3": 141.84290830957906,
       "bounds_mm": [
         [
           187.85786437626905,
@@ -3867,13 +3867,13 @@
         ],
         [
           121.05,
-          123.95
+          128.95000000000002
         ]
       ],
       "center_mm": [
-        205.0,
-        -285.0,
-        122.09735099337747
+        205.00000000000003,
+        -285.00000000000006,
+        124.26644518272427
       ],
       "solids": 2
     },
@@ -3893,14 +3893,14 @@
           -231.74071724102924
         ],
         [
-          124.0,
-          160.0
+          129.0,
+          165.0
         ]
       ],
       "center_mm": [
         205.0,
         -285.0,
-        142.0
+        147.0
       ],
       "solids": 1
     },
@@ -3909,7 +3909,7 @@
       "group": "lidars",
       "status": "drawing_envelope",
       "metadata": {
-        "scan_z": 201.82999999999998,
+        "scan_z": 206.82999999999998,
         "heading_deg": 135.0
       },
       "volume_mm3": 227359.19999999998,
@@ -3923,14 +3923,14 @@
           -242.22003973821387
         ],
         [
-          160.0,
-          222.12
+          165.0,
+          227.12
         ]
       ],
       "center_mm": [
         205.0,
         -285.0,
-        191.06
+        196.06
       ],
       "solids": 1
     },
@@ -3950,14 +3950,14 @@
           -263.0
         ],
         [
-          222.12,
-          225.12
+          227.12,
+          230.12
         ]
       ],
       "center_mm": [
         205.0,
         -285.0,
-        223.62
+        228.62
       ],
       "solids": 1
     },
@@ -4008,31 +4008,32 @@
       "solids": 58
     },
     {
-      "name": "78_camera_bracket_3t_LEFT",
+      "name": "78_camera_bracket_PRINTED_LEFT",
       "group": "cameras",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "SPCC 3t, 2 bends, 1x M5 T-nut into the top front rail"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "3.5 mm flange (camera top clearance) + 8 mm leg + 8 mm shelf + 2 gussets under the rail, one print"
       },
-      "volume_mm3": 20052.725116671685,
+      "volume_mm3": 46579.691938900585,
       "bounds_mm": [
         [
           -160.0,
           -108.0
         ],
         [
-          250.0,
+          225.0,
           300.0
         ],
         [
-          220.0,
+          215.0,
           255.0
         ]
       ],
       "center_mm": [
-        -134.00000000000003,
-        269.66273295970626,
-        237.44313001716134
+        -134.00000000000006,
+        265.00685932927814,
+        231.99246711137218
       ],
       "solids": 1
     },
@@ -4066,34 +4067,34 @@
       "solids": 1
     },
     {
-      "name": "79_camera_bracket_bolt_M5_Tnut_LEFT",
+      "name": "79_camera_bracket_bolts_M5_Tnut_LEFT",
       "group": "cameras",
       "status": "catalog_envelope",
       "metadata": {
-        "quantity": 1,
+        "quantity": 2,
         "sku": "M5 countersunk + T-nut"
       },
-      "volume_mm3": 657.5029754697152,
+      "volume_mm3": 1334.4841395509525,
       "bounds_mm": [
         [
-          -141.25,
-          -126.75
+          -153.25,
+          -114.75
         ],
         [
           280.25,
           289.75
         ],
         [
-          252.0,
+          251.5,
           261.5
         ]
       ],
       "center_mm": [
-        -134.0,
+        -133.99999999999997,
         285.0,
-        258.5823467927624
+        258.48262156145796
       ],
-      "solids": 2
+      "solids": 4
     },
     {
       "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
@@ -4142,31 +4143,32 @@
       "solids": 58
     },
     {
-      "name": "78_camera_bracket_3t_RIGHT",
+      "name": "78_camera_bracket_PRINTED_RIGHT",
       "group": "cameras",
-      "status": "concept_fabrication",
+      "status": "concept_support",
       "metadata": {
-        "material": "SPCC 3t, 2 bends, 1x M5 T-nut into the top front rail"
+        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
+        "design": "3.5 mm flange (camera top clearance) + 8 mm leg + 8 mm shelf + 2 gussets under the rail, one print"
       },
-      "volume_mm3": 20052.725116671685,
+      "volume_mm3": 46579.691938900585,
       "bounds_mm": [
         [
           108.0,
           160.0
         ],
         [
-          250.0,
+          225.0,
           300.0
         ],
         [
-          220.0,
+          215.0,
           255.0
         ]
       ],
       "center_mm": [
-        133.99999999999991,
-        269.66273295970626,
-        237.44313001716134
+        134.00000000000003,
+        265.00685932927814,
+        231.99246711137218
       ],
       "solids": 1
     },
@@ -4200,34 +4202,34 @@
       "solids": 1
     },
     {
-      "name": "79_camera_bracket_bolt_M5_Tnut_RIGHT",
+      "name": "79_camera_bracket_bolts_M5_Tnut_RIGHT",
       "group": "cameras",
       "status": "catalog_envelope",
       "metadata": {
-        "quantity": 1,
+        "quantity": 2,
         "sku": "M5 countersunk + T-nut"
       },
-      "volume_mm3": 657.5029754697152,
+      "volume_mm3": 1334.4841395509525,
       "bounds_mm": [
         [
-          126.75,
-          141.25
+          114.75,
+          153.25
         ],
         [
           280.25,
           289.75
         ],
         [
-          252.0,
+          251.5,
           261.5
         ]
       ],
       "center_mm": [
-        133.99999999999997,
+        134.0,
         285.0,
-        258.5823467927624
+        258.4826215614581
       ],
-      "solids": 2
+      "solids": 4
     }
   ]
 }

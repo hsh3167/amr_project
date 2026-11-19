@@ -134,10 +134,10 @@ def test_rev16_bogie_bearing_pivot_and_rotation_limits():
         b=link.shape.bounding_box()
         assert (b.min.Y,b.max.Y)==pytest.approx((q['rear_y_mm'],q['front_y_mm']))
         assert b.max.Z<d.p['base_bottom_z']-4
-        holders=parts['80_bogie_pivot_holders_BGHK6001DD-30_'+key]
+        holders=parts['80_bogie_pivot_holders_'+q['holder_sku']+'_'+key]
         assert holders.metadata['moving_wheel'] is None and holders.metadata['supply']=='company stock'
-        assert len(holders.shape.solids())==2 and holders.shape.bounding_box().max.Z==pytest.approx(d.p['base_bottom_z'])
-        bolt=parts['80_bogie_pivot_shoulder_bolt_12x35_'+key]
+        assert len(holders.shape.solids())==q['holder_count'] and holders.shape.bounding_box().max.Z==pytest.approx(d.p['base_bottom_z'])
+        bolt=parts[f"80_bogie_pivot_shoulder_bolt_12x{q['bolt_shoulder_l_mm']:g}_"+key]
         assert bolt.metadata['moving_wheel']==key and bolt.metadata['supply']=='company stock'
         c=bolt.shape.center(CenterOf.BOUNDING_BOX)
         assert (c.Y,c.Z)==pytest.approx((q['pivot_y_mm'],q['pivot_z_mm']),abs=1e-3)
@@ -172,7 +172,9 @@ def test_rev16_bogie_bearing_pivot_and_rotation_limits():
         cut=probe&plate;assert cut is None or cut.volume<.01
     report=__import__('cad.validation',fromlist=['bogie_report']).bogie_report(d)['pivot_bearings']
     nominal=report['cases'][0]
-    assert report['bearing_spacing_mm']==pytest.approx(19.3) and nominal['s0_at_1g']>3 and nominal['s0_at_2g']>1.5
+    # Rev17d (user decision): one BGMW6001DD-30 per side -> two bearings 8 mm apart; static check passes at 1 g only
+    # (s0 ~1.6), shock loads exceed C0r. Kept as a documented risk.
+    assert report['bearing_spacing_mm']==pytest.approx(8.0) and nominal['s0_at_1g']>1.4
 
 
 def test_rev12b_misumi_step_parts_and_static_clearance():
@@ -256,10 +258,12 @@ def test_rev14_bend_limit_fastener_length_and_lidar_bracket():
         assert arm.size.Y>=2*(27+3.3+5)
     assert not any(n.startswith('64_') for n in parts)
     for n in ('FRONT_LEFT','REAR_RIGHT'):
-        # Rev17: 55 mm up-flanges with 3 bolts each (was 32 mm down, 2 each); the flanges stay below the scan plane.
-        assert parts['65_lidar_bracket_bolts_M5_Tnut_'+n].metadata['quantity']==6
-        bracket=parts['60_lidar_bracket_3t_'+n].shape
-        assert bracket.is_valid and bracket.bounding_box().max.Z<d.layout['lidars'][0]['scan_z']-10
+        # Rev17b: printed pedestal (base plate to scanner, walls up the column, 6 column + 3 base bolts), below the scan plane.
+        assert parts['65_lidar_column_bolts_M5_Tnut_'+n].metadata['quantity']==6
+        assert parts['65_lidar_base_bolts_M5_'+n].metadata['quantity']==3
+        ped=parts['60_lidar_pedestal_PRINTED_'+n].shape
+        assert ped.is_valid and ped.bounding_box().max.Z<d.layout['lidars'][0]['scan_z']-10
+        assert ped.bounding_box().min.Z==pytest.approx(d.p['base_bottom_z']+d.p['base_thickness'])
         assert parts['66_lidar_scanner_screws_M3_'+n].metadata['quantity']==2
 
 

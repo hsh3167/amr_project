@@ -188,6 +188,20 @@
         "site": "kr.misumi-ec.com"
       },
       "note": "MISUMI Korea CAD download (user-approved). Axis +Z, z 0..70, OD21; used for wire section 3.75x1.875 only (the coil is redrawn per pose)"
+    },
+    {
+      "file": "BGMW6001DD-30.stp.gz",
+      "sha256_original": "b8aac711b50a8eb4f2d69e37a378eeff20d3bf79e5ea139261591af1faf26b49",
+      "original_bytes": 102846,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110300105550/?HissuCode=BGMW6001DD-30",
+      "retrieved": "2026-11-19",
+      "cad_format": "STEP AP214 (3D, mm; housing, 2 bearings, snap ring)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0)",
+      "price": {
+        "currency": "KRW",
+        "note": "company stock (2), not priced"
+      },
+      "note": "MISUMI Korea CAD download (user-approved). Frame: X width 60, Y height from the flange underside (bore Y30), Z thickness 0..23, lip Z0, bearings Z2..10 and Z10..18, snap ring Z18..19.2"
     }
   ]
 }
