@@ -226,7 +226,7 @@
   "selected_sensor_collisions": [],
   "suspension_collision_sampling": {
     "sampled_poses": 20,
-    "boolean_pairs": 406,
+    "boolean_pairs": 412,
     "hits": [],
     "scope": "One motion key at a time (bogie or hinge module), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
   },
@@ -237,7 +237,7 @@
     "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump of its hinge arm; local hardware and chassis"
   },
   "static_interference": {
-    "boolean_pairs": 308,
+    "boolean_pairs": 312,
     "hits": [],
     "known_manufacturer_overlaps": [
       {
@@ -269,7 +269,7 @@
   },
   "suspension_pose_interference": {
     "sampled_poses": 8,
-    "boolean_pairs": 559,
+    "boolean_pairs": 554,
     "hits": [],
     "known_manufacturer_overlaps": [
       {
@@ -342,7 +342,7 @@
   "support_connectivity": {
     "root": "01_lower_steel_plate_3t",
     "tolerance_mm": 0.2,
-    "contacts": 241,
+    "contacts": 239,
     "unsupported": [],
     "isolated": [],
     "scope": "Contact graph from the base plate at the nominal pose; geometric support only, not joint strength"
@@ -364,7 +364,7 @@
           "volume_change_mm3": 0.0
         }
       ],
-      "solids": 471
+      "solids": 459
     }
   ]
 }
