@@ -12,7 +12,7 @@ from build123d import Axis, Compound, Location, Rotation, Solid, Plane
 from ..parameters import ROOT
 from ..parts.common import PartRecord, box, cylx, cyly, cylz, span, polygon_plate, rz
 from ..parts.suspension import coil, nut, screw
-from ..parts.sensors import camera_back_plate, lidar_base
+from ..parts.sensors import camera_plate_mount, lidar_base
 
 HERE = Path(__file__).resolve().parent
 AL, STEEL, DARK = (.74, .78, .82), (.48, .52, .58), (.20, .22, .25)
@@ -445,11 +445,16 @@ def floor_holes(P):
 
 
 def battery_bridge_p30(P):
-    """P30-6: two printed hold-down bridges across the battery (along X at y = battery_bridge y), feet bolted from above."""
-    from ..parts.electronics import battery_bridges
-    bq = P.L['electronics']['battery_bridge']
-    return battery_bridges(battery_case_p30(P), 'y', bq['y'], P.z_floor1, bq['width_mm'], bq['wall_mm'], bq['foot_mm'], bq['foot_t_mm'],
-                           bq['bolt_out_mm'])
+    """P30-7: printed end clamps on the two Y ends of the battery (wall + lip + corner cleats), feet bolted from above."""
+    from ..parts.electronics import battery_end_clamps
+    from ..parts.vendor import source
+    e = P.L['electronics']; bq = e['battery_clamp']
+    src = source('BATTERY.STEP'); solids = [s.rotate(Axis.Z, e['battery_yaw_deg']) for s in src.solids()]
+    big = max(solids, key=lambda s: s.volume); cb = big.bounding_box()
+    mvb = (-(cb.min.X+cb.max.X)/2, e['battery_center_y']-(cb.min.Y+cb.max.Y)/2, P.z_floor1+e['battery_pad_mm']-cb.min.Z)
+    keep = [(k.min.X+mvb[0]-1.5, k.max.X+mvb[0]+1.5, k.min.Y+mvb[1]-1.5, k.max.Y+mvb[1]+1.5, k.min.Z+mvb[2]-1.5, k.max.Z+mvb[2]+1.5)
+            for k in (s.bounding_box() for s in solids if s.volume < big.volume*.5)]
+    return battery_end_clamps(battery_case_p30(P), 'y', P.z_floor1, bq, keep)
 
 
 def battery_case_p30(P):
@@ -501,15 +506,15 @@ def electronics(P):
     batt = Compound([s.translate(mvb) for s in solids])
     r.append(rec('60_company_7S9P_battery_STEP', 'electronics', batt, (.86, .63, .36), 'company_supplied_step', source='BATTERY.STEP.gz',
                  placement={'yaw_deg': e['battery_yaw_deg'], 'translate_mm': [round(v, 3) for v in mvb]},
-                 limits='P30-6: held down by two 3D-printed bridges bolted from above (60_battery_hold_down_bridges_PRINTED)'))
+                 limits='P30-7: held by two 3D-printed end clamps bolted from above (60_battery_end_clamps_PRINTED)'))
     bb = batt.bounding_box(); cb = case
     pads = [cylz(7.5, e['battery_pad_mm'], x, y, top) for x in (cb.min.X+mvb[0]+15, cb.max.X+mvb[0]-15) for y in (cb.min.Y+mvb[1]+15, cb.max.Y+mvb[1]-15)]
     r.append(rec('60_battery_pads', 'electronics', Compound(pads), (.30, .30, .32), 'concept_support', quantity=4))
     from ..parts.electronics import PRINT_NOTE
     bridges, bpts, ftop = battery_bridge_p30(P)
-    r.append(rec('60_battery_hold_down_bridges_PRINTED', 'electronics', bridges, PRINT, 'concept_support', quantity=2, material=PRINT_NOTE,
-                 design='Inverted U over the case (6 mm bar on the lid, 6 mm legs, 8 mm feet); clamps the case onto the 3 mm rubber pads',
-                 fit='Set the battery in, drop the bridges over it, 2x M5 from above per bridge (nuts under the floor, outside the moved inner rails)'))
+    r.append(rec('60_battery_end_clamps_PRINTED', 'electronics', bridges, PRINT, 'concept_support', quantity=2, material=PRINT_NOTE,
+                 design='One clamp per battery end (Y faces): 6 mm wall, 8 mm lip over the lid edge, corner cleats on the side faces, 8 mm foot',
+                 fit='Holds the case in X (cleats), Y (walls) and Z (lips) on the 3 mm rubber pads; 2x M5 from above per clamp, nuts under the floor'))
     bb_ = [s_ for x_, y_ in bpts for s_ in (screw(x_, y_, ftop+1.2, 5, 16)+nut(x_, y_, P.z_lo1-4, 8, 4, 5)).solids()]
     bb_ += [s_ for x_, y_ in bpts for s_ in (cylz(5, 1.2, x_, y_, ftop)-cylz(2.75, 3, x_, y_, ftop-1)).solids()]
     r.append(rec('60_battery_bridge_bolts_M5', 'electronics', Compound(bb_), DARK, 'catalog_envelope', quantity=len(bpts),
@@ -691,39 +696,29 @@ def cameras(P):
         s, detail = camera_shape(side, sn['camera_x'], sn['camera_y'], sn['camera_z'], sn['camera_pitch_down_deg'], sn['camera_yaw_deg'])
         r.append(rec('70_Orbbec_Astra_Mini_Pro_MX6000_'+n, 'cameras', s, (.65, .50, .82), 'manufacturer_step_family_revision_reference',
                      source='AstraMiniPro_3D_V0.1_20221012.stp', placement_repair=detail))
-        # P30-5c: one printed bracket: flange under the top front rail -> thick leg -> thick shelf, 2 gussets, 2 M5 T-nuts
+        # P30-7: ONE printed plate per camera hanging on the rear face of the top front rail (was bracket + loose wedge).
         from ..parts.electronics import PRINT_NOTE
-        from ..parts.suspension import yz_prism
-        cq = sn['camera_bracket']
-        x0, x1 = sorted((side*108, side*160)); z_sh = sn['camera_shelf_z']; leg_y = 250
-        fl, lg, sh = cq['flange_mm'], cq['leg_mm'], cq['shelf_mm']
-        flange = span(x0, x1, leg_y-lg+3, Y, P.z_top0-fl, P.z_top0)
-        leg = span(x0, x1, leg_y-lg+3, leg_y+3, z_sh+3-sh, P.z_top0-fl)
-        shelf = span(x0, x1, leg_y+3, Y, z_sh+3-sh, z_sh+3)
-        bracket = flange+leg+shelf
-        for g0 in (x0, x1-5):
-            bracket = bracket+yz_prism([(leg_y-lg+3, P.z_top0-fl), (leg_y-lg+3-cq['gusset_mm'], P.z_top0-fl), (leg_y-lg+3, P.z_top0-fl-cq['gusset_mm'])], g0, g0+5)
-        xbs = [side*134+dx for dx in (-12, 12)]
+        cx, cy, cz = side*sn['camera_x'], sn['camera_y'], sn['camera_z']
+        frame_ = Location((cx, cy, cz))*Rotation(0, 0, -side*sn['camera_yaw_deg'])*Rotation(-sn['camera_pitch_down_deg'], 0, 0)
+        cq = sn['camera_mount']; ry0 = Y-P.s                                     # rail rear face (y 270)
+        body, holes, m2, w = camera_plate_mount(s, frame_, cx, cy, cz, side, sn['camera_yaw_deg'], P.z_top1-2, (ry0-cq['plate_mm'], ry0))
+        zb = (P.z_top0+P.z_top1)/2; xbs = [cx+dx for dx in (-cq['bolt_dx_mm'], cq['bolt_dx_mm'])]
+        hw = []
         for xb in xbs:
-            bracket -= cylz(2.75, 10, xb, Y-h, P.z_top0-5)
-        r.append(rec('78_camera_bracket_PRINTED_'+n, 'cameras', bracket, PRINT, 'concept_support', material=PRINT_NOTE,
-                     design=f'{fl:g} mm flange (camera top clearance) + {lg:g} mm leg + {sh:g} mm shelf + 2 gussets under the rail, one print'))
-        frame_ = Location((side*sn['camera_x'], sn['camera_y'], sn['camera_z']))*Rotation(0, 0, -side*sn['camera_yaw_deg'])*Rotation(-sn['camera_pitch_down_deg'], 0, 0)
-        local = s.moved(frame_.inverse()).bounding_box()
-        block = box(local.size.X-4, local.size.Y-4, 60, local.center().X, local.center().Y, local.min.Z-30).moved(frame_)
-        wedge = block & span(x0, x1, leg_y+3, Y, z_sh+3, z_sh+60)
-        back, holes, m2 = camera_back_plate(s, frame_, span(x0, x1, leg_y+3, Y, z_sh+3, z_sh+60))
-        wedge = wedge+back
+            body -= cyly(2.75, cq['plate_mm']+2, xb, ry0-cq['plate_mm']/2, zb)
+            hw += (cyly(4.25, 5, xb, ry0-cq['plate_mm']-2.5, zb)+cyly(2.5, cq['plate_mm']+6.5, xb, ry0-(cq['plate_mm']-6.5)/2, zb)).solids()
+            hw += (span(xb-7.25, xb+7.25, ry0+2.3, ry0+6.3, zb-4.75, zb+4.75)-cyly(2.5, 8, xb, ry0+4.3, zb)).solids()
+        body = body-s
         for hh in holes:
-            wedge -= hh
-        r.append(rec('79_camera_wedge_PRINTED_'+n, 'cameras', wedge, PRINT, 'concept_support', material=PRINT_NOTE,
-                     design='Wedge (10 deg pitch, 5 deg yaw) + 5 mm back plate on the camera rear face; 2x M2 through the plate into the rear threads (pitch 80)'))
+            body -= hh
+        r.append(rec('78_camera_mount_PRINTED_'+n, 'cameras', body, PRINT, 'concept_support', material=PRINT_NOTE,
+                     design=f"P30-7: one print: {cq['plate_mm']:g} mm upright plate on the rail rear face + yawed web + back plate on the camera rear face + rear ledge",
+                     fit='2x M5 horizontal into T-nuts in the rear slot of the top front rail (reachable from inside); camera by 2x M2 into its rear threads'))
         r.append(rec('79_camera_rear_screws_M2_'+n, 'cameras', m2, DARK, 'catalog_envelope', quantity=2,
                      sku='M2x6 + washer into the camera rear threads (2x M2, pitch 80, official 2D V1.2); thread depth and height on the rear face assumed',
                      note='The supplied 3D V0.1 has no holes: positions from the 2D drawing pitch, centred on the rear face'))
-        tb = [tnut_bolt(xb, Y-h, P.z_top0, fl, 5, 'x', False, flush=True) for xb in xbs]   # countersunk: camera top is close under the flange
-        r.append(rec('79_camera_bracket_bolts_M5_Tnut_'+n, 'cameras', Compound([s_ for c in tb for s_ in c.solids()]), DARK, 'catalog_envelope',
-                     quantity=2, sku='M5 countersunk + T-nut'))
+        r.append(rec('79_camera_mount_bolts_M5_Tnut_'+n, 'cameras', Compound(hw), DARK, 'catalog_envelope', quantity=2,
+                     sku='M5x14 hex socket + washer + 3030 slot-8 T-nut (rail rear slot)'))
     return r
 
 

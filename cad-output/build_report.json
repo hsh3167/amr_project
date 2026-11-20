@@ -221,117 +221,117 @@
     {
       "lidar": "FRONT_LEFT",
       "part": "50_company_7S9P_battery_STEP",
-      "from_deg": -179.1,
-      "to_deg": 177.6,
+      "from_deg": -179.9,
+      "to_deg": 179.8,
       "blind_sector_wrap": true,
-      "nearest_mm": 248.3,
+      "nearest_mm": 274.6,
       "in_fov": false
     },
     {
       "lidar": "FRONT_LEFT",
       "part": "56_company_LCD_7in_STEP",
-      "from_deg": 136.7,
-      "to_deg": 141.4,
+      "from_deg": 143.5,
+      "to_deg": 156.6,
       "blind_sector_wrap": false,
-      "nearest_mm": 130.4,
+      "nearest_mm": 123.3,
       "in_fov": false
     },
     {
       "lidar": "FRONT_LEFT",
       "part": "56_LCD_holder_PRINTED",
-      "from_deg": 136.4,
-      "to_deg": 148.8,
+      "from_deg": 143.1,
+      "to_deg": 166.0,
       "blind_sector_wrap": false,
-      "nearest_mm": 124.3,
+      "nearest_mm": 117.1,
       "in_fov": false
     },
     {
       "lidar": "FRONT_LEFT",
       "part": "57_company_speaker_STEP",
-      "from_deg": -156.5,
-      "to_deg": -146.4,
+      "from_deg": -153.7,
+      "to_deg": -144.1,
       "blind_sector_wrap": false,
-      "nearest_mm": 471.4,
+      "nearest_mm": 502.4,
       "in_fov": false
     },
     {
       "lidar": "FRONT_LEFT",
       "part": "57_speaker_holder_PRINTED",
-      "from_deg": -158.1,
-      "to_deg": -145.4,
+      "from_deg": -155.2,
+      "to_deg": -143.1,
       "blind_sector_wrap": false,
-      "nearest_mm": 480.8,
+      "nearest_mm": 512.9,
       "in_fov": false
     },
     {
       "lidar": "FRONT_LEFT",
       "part": "50_battery_end_clamps_PRINTED",
-      "from_deg": -179.0,
-      "to_deg": 166.9,
+      "from_deg": -175.1,
+      "to_deg": 171.5,
       "blind_sector_wrap": true,
-      "nearest_mm": 234.9,
+      "nearest_mm": 261.0,
       "in_fov": false
     },
     {
       "lidar": "REAR_RIGHT",
       "part": "50_company_7S9P_battery_STEP",
-      "from_deg": -171.1,
-      "to_deg": 179.2,
+      "from_deg": -177.1,
+      "to_deg": 179.7,
       "blind_sector_wrap": true,
-      "nearest_mm": 154.5,
+      "nearest_mm": 177.0,
       "in_fov": false
     },
     {
       "lidar": "REAR_RIGHT",
       "part": "56_company_LCD_7in_STEP",
-      "from_deg": -167.3,
-      "to_deg": -149.8,
+      "from_deg": -164.4,
+      "to_deg": -147.3,
       "blind_sector_wrap": false,
-      "nearest_mm": 501.5,
+      "nearest_mm": 531.7,
       "in_fov": false
     },
     {
       "lidar": "REAR_RIGHT",
       "part": "56_LCD_holder_PRINTED",
-      "from_deg": -168.9,
-      "to_deg": -149.1,
+      "from_deg": -165.8,
+      "to_deg": -146.7,
       "blind_sector_wrap": false,
-      "nearest_mm": 485.6,
+      "nearest_mm": 516.1,
       "in_fov": false
     },
     {
       "lidar": "REAR_RIGHT",
       "part": "57_company_speaker_STEP",
-      "from_deg": 133.0,
-      "to_deg": 144.1,
+      "from_deg": 139.7,
+      "to_deg": 152.4,
       "blind_sector_wrap": false,
-      "nearest_mm": 247.3,
+      "nearest_mm": 235.9,
       "in_fov": false
     },
     {
       "lidar": "REAR_RIGHT",
       "part": "57_speaker_holder_PRINTED",
-      "from_deg": 138.6,
-      "to_deg": 141.5,
+      "from_deg": 144.6,
+      "to_deg": 150.6,
       "blind_sector_wrap": false,
-      "nearest_mm": 239.0,
+      "nearest_mm": 230.2,
       "in_fov": false
     },
     {
       "lidar": "REAR_RIGHT",
       "part": "50_battery_end_clamps_PRINTED",
-      "from_deg": -168.7,
-      "to_deg": 172.9,
+      "from_deg": -158.5,
+      "to_deg": 177.7,
       "blind_sector_wrap": true,
-      "nearest_mm": 145.8,
+      "nearest_mm": 167.3,
       "in_fov": false
     }
   ],
   "scan_plane_vertical_clearance_checked": true,
   "deck_sensor_clearance_mm": {
     "deck_underside_above_scan": 76.17,
-    "deck_underside_above_camera_top": 4.324,
-    "lowest_camera_mount_above_scan": 42.17
+    "deck_underside_above_camera_top": 32.324,
+    "lowest_camera_mount_above_scan": 20.085
   },
   "step_roundtrip": []
 }

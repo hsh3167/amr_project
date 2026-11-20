@@ -128,11 +128,30 @@ def camera_back_plate(camera,frame,clip,t=5,pitch=80,drop=40):
     local=camera.moved(frame.inverse()).bounding_box()
     ry=local.min.Y;cx=local.center().X;cz=local.center().Z;zb=local.min.Z;zt=local.max.Z-2;w=local.size.X+4
     plate=box(w,t,zt-zb,cx,ry-t/2,(zt+zb)/2).moved(frame)
-    low=box(w,t,drop,cx,ry-t/2,zb-drop/2+1).moved(frame)&clip
-    if low is not None and low.solids():plate=plate+low
+    if clip is not None:
+        low=box(w,t,drop,cx,ry-t/2,zb-drop/2+1).moved(frame)&clip
+        if low is not None and low.solids():plate=plate+low
     holes=[cyly(1.2,t+2,cx+s*pitch/2,ry-t/2,cz).moved(frame) for s in (-1,1)]
     screws=[(cyly(1.9,2,cx+s*pitch/2,ry-t-1,cz)+cyly(1.0,t,cx+s*pitch/2,ry-t/2,cz)).moved(frame) for s in (-1,1)]
     return plate,holes,Compound([q for c in screws for q in c.solids()])
+
+
+def camera_plate_mount(camera,frame,cx,cy,cz,side,yaw_deg,upper_top,upper_y=(263,270)):
+    """Rev17f / P30-7 (both models): one printed plate behind each camera.
+
+    Tilted back plate on the camera rear face (2x M2, pitch 80) + 3 mm ledge under the rear bottom edge + a web that
+    follows the camera yaw + an upright plate (straight in world, y upper_y) from just above the camera to upper_top,
+    which carries the fixings (eco: 2x M5 into the front rail rear slot; Rev17: flange under the deck).
+    Returns (body before the camera is subtracted, M2 holes, M2 screws, width)."""
+    from build123d import Location,Rotation
+    local=camera.moved(frame.inverse()).bounding_box()
+    w=local.size.X+2;ry=local.min.Y;zb=local.min.Z;lx=local.center().X
+    back,holes,m2=camera_back_plate(camera,frame,None)
+    back=back+box(w-30,5,3,lx,ry-2.5,zb-1.5).moved(frame)+box(w-30,13,3,lx,ry+1.5,zb-1.5).moved(frame)   # central ledge under the rear edge (clear of the LiDAR top)
+    yf=Location((cx,cy,cz))*Rotation(0,0,-side*yaw_deg)
+    web=box(w,6,8,0,-15.5,11).moved(yf)                                       # follows the yaw, z cz+7..cz+15
+    upper=span(cx-w/2,cx+w/2,upper_y[0],upper_y[1],cz+13,upper_top)
+    return back+web+upper,holes,m2,w
 
 
 def scanner_screws(x,y,yaw,plate_top,pt,holes):
@@ -173,27 +192,22 @@ def camera_hanger(d,side,n,x,y,z,camera):
     from .suspension import screw,yz_prism
     from .electronics import PRINT_NOTE
     p=d.p;cm=d.layout['camera_mount'];hq=cm['hanger']
-    deck_bottom=p['top_bottom_z'];deck_top=deck_bottom+p['top_thickness']
-    top=cm['plate_center_z']+cm['plate_thickness']/2;py=cm['profile_y'];pw,pd=hq['post']
-    plate=box(cm['plate_width'],cm['plate_depth'],hq['platform_mm'],x,cm['plate_y'],top-hq['platform_mm']/2)
-    post=span(x-pw/2,x+pw/2,py-pd/2,py+pd/2,top,deck_bottom)
-    flange=span(x-hq['flange'][0]/2,x+hq['flange'][0]/2,py-hq['flange'][1]/2,py+hq['flange'][1]/2,deck_bottom-hq['flange_mm'],deck_bottom)
-    body=plate+post+flange
-    for x0 in (x-pw/2,x+pw/2-5):
-        body=body+yz_prism([(py+pd/2,top),(py+pd/2+hq['rib_depth_mm'],top),(py+pd/2,top+hq['rib_height_mm'])],x0,x0+5)
+    deck_bottom=p['top_bottom_z'];deck_top=deck_bottom+p['top_thickness'];py=cm['profile_y']
     frame=Location((x,y,z))*Rotation(0,0,-side*p['camera_yaw_deg'])*Rotation(-p['camera_pitch_down_deg'],0,0)
-    local=camera.moved(frame.inverse()).bounding_box()
-    block=box(local.size.X-4,local.size.Y-4,60,local.center().X,local.center().Y,local.min.Z-30).moved(frame)
-    body=body+(block&box(cm['plate_width'],cm['plate_depth'],60,x,cm['plate_y'],top+30))
-    back,holes,m2=camera_back_plate(camera,frame,box(cm['plate_width'],cm['plate_depth'],60,x,cm['plate_y'],top+30))
-    body=body+back-camera   # ribs and wedge follow the yawed camera body exactly
+    uy=hq['upper_y']
+    body,holes,m2,w=camera_plate_mount(camera,frame,x,y,z,side,p['camera_yaw_deg'],deck_bottom,uy)
+    ft=hq['flange_mm'];fy0=hq['flange_y0']
+    body=body+span(x-w/2,x+w/2,fy0,uy[1],deck_bottom-ft,deck_bottom)          # flange under the deck
+    for x0 in (x-w/2,x+w/2-5):                                                 # 2 ribs behind the upright plate
+        body=body+yz_prism([(uy[0]+.5,deck_bottom-ft),(fy0+2,deck_bottom-ft),(uy[0]+.5,deck_bottom-ft-hq['rib_mm'])],x0,x0+5)
+    body=body-camera
     for hh in holes:body=body-hh
     bolts=[]
     for bx in (x-hq['bolt_dx_mm'],x+hq['bolt_dx_mm']):
         body=body-cylz(3.2,hq['insert_depth_mm'],bx,py,deck_bottom-hq['insert_depth_mm'])
         bolts+=screw(bx,py,deck_top,5,p['top_thickness']+hq['insert_depth_mm']-1).solids()
     return [PartRecord('71_camera_hanger_PRINTED_'+n,'cameras',body,(.80,.66,.40),'concept_support',
-                       {'material':PRINT_NOTE,'design':'Flange + 40x20 post + 6 mm platform + 2 ribs + wedge + 5 mm back plate on the camera rear face, one print',
+                       {'material':PRINT_NOTE,'design':'Rev17f: flange under the deck + upright plate + 2 ribs + yawed web + back plate on the camera rear face + rear ledge, one print (no post/platform/wedge)',
                         'fit':'2x M5 heat-set inserts in the flange (D6.4 pockets); camera by 2x M2 through the back plate into its rear threads (pitch 80)'}),
             PartRecord('73_camera_rear_screws_M2_'+n,'cameras',m2,(.20,.22,.25),'catalog_envelope',
                        {'sku':'M2x6 + washer into the camera rear threads (2x M2, pitch 80, official 2D V1.2); thread depth and height on the rear face assumed','quantity':2,

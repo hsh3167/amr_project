@@ -56,22 +56,14 @@ def _battery_clamps(d):
     src=source('BATTERY.STEP');solids=src.solids();big=max(solids,key=lambda s:s.volume);case=big.bounding_box()
     hx,hy,h=case.size.X/2,case.size.Y/2,case.size.Z
     dx=-(case.min.X+case.max.X)/2;dy=e['battery_y']-(case.min.Y+case.max.Y)/2;dz=e['battery_bottom_z']-case.min.Z
-    x0,x1,y0,y1,z1=-hx,hx,e['battery_y']-hy,e['battery_y']+hy,e['battery_bottom_z']+h
-    w,lip,lt,ft,fl=bq['wall_mm'],bq['lip_mm'],bq['lip_t_mm'],bq['foot_t_mm'],bq['foot_mm']
-    keep=[s.bounding_box() for s in solids if s.volume<big.volume*.5]
-    q=d.layout['suspension']['bogie'];sx_,sy_=q['stopper_rear_xy_mm']
-    bodies=[];pts=[]
-    for sg,xe in ((-1,x0),(1,x1)):
-        S=lambda a,b,c0,c1:span(min(a,b),max(a,b),y0,y1,c0,c1)
-        body=S(xe,xe+sg*w,top,z1+lt)+S(xe-sg*lip,xe,z1,z1+lt)+S(xe+sg*w,xe+sg*(w+fl),top,top+ft)
-        for k in keep:   # terminal block and other lid parts: 1.5 mm clearance
-            body=body-span(k.min.X+dx-1.5,k.max.X+dx+1.5,k.min.Y+dy-1.5,k.max.Y+dy+1.5,k.min.Z+dz-1.5,k.max.Z+dz+1.5)
-        body=body-cylz(6.5,20,sg*sx_,sy_,top-1)      # rear rotation-stop striker head on the plate
-        xb=xe+sg*(w+fl/2)
-        for y in bq['bolt_y']:
-            body=body-cylz(2.75,ft+2,xb,y,top-1);pts.append((xb,y))
-        bodies.append(body)
-    return Compound(bodies),pts,top+ft
+    case_=(-hx,hx,e['battery_y']-hy,e['battery_y']+hy,e['battery_bottom_z'],e['battery_bottom_z']+h)
+    keep=[(k.min.X+dx-1.5,k.max.X+dx+1.5,k.min.Y+dy-1.5,k.max.Y+dy+1.5,k.min.Z+dz-1.5,k.max.Z+dz+1.5)
+          for k in (s.bounding_box() for s in solids if s.volume<big.volume*.5)]   # terminal block, 1.5 mm clearance
+    q=d.layout['suspension']['bogie'];sx_,sy_=q['stopper_rear_xy_mm'];bx0,bx1=q['backing_x_mm'];by0,by1=q['backing_y_mm']
+    for sg in (-1,1):   # bogie backing plates (3t on the base plate) under the front corner cleats
+        keep.append(tuple(sorted((sg*(bx0-.5),sg*(bx1+.5))))+(by0-.5,by1+.5,top-1,top+q['backing_t_mm']+.5))
+    cut=cylz(6.5,20,sx_,sy_,top-1)+cylz(6.5,20,-sx_,sy_,top-1)   # rear rotation-stop striker heads on the plate
+    return battery_end_clamps(case_,'x',top,bq,keep,cut)
 
 
 def mount_holes(d):
@@ -345,6 +337,39 @@ def battery_bridges(case, along, positions, plate_top, width=20, wall=6, foot=16
             b -= cylz(2.75, foot_t+2, bx, by, plate_top-1)
         bodies.append(b); pts += bolts
     return Compound(bodies), pts, plate_top+foot_t
+
+
+def battery_end_clamps(case, axis, plate_top, q, ends_keep=(), cut=None):
+    """Rev17f / P30-7 (both models): one printed clamp on each END of the battery (the faces normal to `axis`).
+
+    Each clamp = wall on the end face + lip over the lid edge (Z) + two low corner cleats wrapping the side faces (side
+    direction) + foot bolted from above. Wall = end direction, cleats = side direction, lip = vertical: the case is held in
+    all three directions. ends_keep: boxes (x0,x1,y0,y1,z0,z1) to clear (terminal block, plates); cut: extra solid to remove.
+    Returns (clamps, bolt points, foot top z)."""
+    x0, x1, y0, y1, z0, z1 = case
+    w, lip, lt, ft, fl, ct, cl, ch = (q[k] for k in ('wall_mm', 'lip_mm', 'lip_t_mm', 'foot_t_mm', 'foot_mm', 'cleat_t_mm', 'cleat_len_mm', 'cleat_h_mm'))
+    if axis == 'x':
+        S = lambda a0, a1, b0, b1, c0, c1: span(min(a0, a1), max(a0, a1), min(b0, b1), max(b0, b1), c0, c1)
+        e0, e1, s0, s1 = x0, x1, y0, y1
+    else:
+        S = lambda a0, a1, b0, b1, c0, c1: span(min(b0, b1), max(b0, b1), min(a0, a1), max(a0, a1), c0, c1)
+        e0, e1, s0, s1 = y0, y1, x0, x1
+    f0, f1 = q.get('foot_span', (s0, s1))
+    bodies = []; pts = []
+    for sg, e in ((-1, e0), (1, e1)):
+        b = (S(e, e+sg*w, s0-ct, s1+ct, plate_top, z1+lt) + S(e-sg*lip, e, s0, s1, z1, z1+lt)
+             + S(e+sg*w, e+sg*(w+fl), f0, f1, plate_top, plate_top+ft)
+             + S(e-sg*cl, e, s0-ct, s0, plate_top, plate_top+ch) + S(e-sg*cl, e, s1, s1+ct, plate_top, plate_top+ch))
+        for k in ends_keep:
+            b = b-span(*k)
+        if cut is not None:
+            b = b-cut
+        a = e+sg*(w+fl/2)
+        for v in q['bolts_along']:
+            p_ = (a, v) if axis == 'x' else (v, a)
+            b = b-cylz(2.75, ft+2, p_[0], p_[1], plate_top-1); pts.append(p_)
+        bodies.append(b)
+    return Compound(bodies), pts, plate_top+ft
 
 
 # ---------------------------------------------------------------- DC/DC

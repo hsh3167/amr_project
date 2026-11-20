@@ -158,7 +158,7 @@ function part(id,name,description,explode=[0,0,0]){const g=new THREE.Group();g.u
 const tag=(obj,id)=>obj.traverse(o=>{if(o.isMesh)o.userData.partId=id});
 part('frame','3030 알루미늄 프로파일 프레임','회사 재고 3030(슬롯 8) 프로파일 약 6.1 m. 하부·상부 사각 프레임과 코너/베이 기둥 6개를 각진 브래킷으로 체결합니다. 표시 단면은 범용 가정이며 실제 공급 단면·합금·단면 탭은 확인이 필요합니다.');
 part('plates','SS400 레이저 강판 (덱 2.3t · 바닥 2t · 코너판 6t)','판재를 전부 SS400 레이저 평판으로 얇게 만들어 원가를 낮췄습니다. P30-6: 아래 안쪽 레일을 30mm 안쪽(x±80)으로 옮기고, 바닥판에 휠모터 케이블 구멍 D25(그로밋)를 뚫었습니다. 용접 없이 M5/M6 T너트로 프로파일에 체결합니다. 코너판 6t에 캐스터를 M6 탭으로 직접 고정하며, 6t 탭은 업체 확인이 필요합니다.',[0,110,0]);
-part('battery','회사 7S9P 배터리 (STEP)','회사에서 제공한 7S9P 배터리 STEP을 그대로 배치했습니다. 세로 중앙, 하판 위 고무 패드에 올리고 3D 프린팅 브리지 2개로 위에서 눌러 M5 4개(위→아래, 너트는 바닥판 밑)로 고정합니다. 셀 종류·BMS·충전기는 모델에 없습니다.',[0,70,0]);
+part('battery','회사 7S9P 배터리 (STEP)','회사에서 제공한 7S9P 배터리 STEP을 그대로 배치했습니다. 세로 중앙, 하판 위 고무 패드에 올리고 양 끝(Y면)을 3D 프린팅 클램프 2개로 잡습니다. 벽(Y)·윗면 립(Z)·모서리 턱(X)으로 세 방향 모두 고정하고 클램프마다 M5 2개를 위에서 체결합니다(너트는 바닥판 밑). 셀 종류·BMS·충전기는 모델에 없습니다.',[0,70,0]);
 part('electronics','전장부 · LCD · 스피커','LCD는 앞쪽에 15° 위로 기울여 고정하고 스피커·DC/DC는 뒤쪽에 둡니다. 모터 드라이버·컨트롤러·컴퓨터·전원 분배는 크기 예약(envelope)이며 실제 치수와 방열은 미확정입니다.',[150,70,40]);
 part('driveL','왼쪽 구동륜 + 수직 슬라이드','Ø180 NBR 휠 + MISUMI SFJW16 축 2개, LHSS16 하우징형 볼 리니어 부시 2개, SWU21-70 스프링 1개, 녹색 C-USLH10 스토퍼(위 방향 2개: 스프링 시트 위 + M6 스트라이커, 아래 방향 2개: 아래 홀더 위에서 하우징 바닥을 받음). 구동륜은 위아래 ±10 mm 이동하며 10t 액슬판이 휠 축과 부시 하우징을 잡고 스프링 시트(6t)가 스프링을 받칩니다.',[-130,0,0]);
 part('driveR','오른쪽 구동륜 + 수직 슬라이드','왼쪽과 좌우 대칭입니다. 슬라이더로 위치를 바꾸면 스프링이 압축·신장합니다.',[130,0,0]);
@@ -167,7 +167,7 @@ for(const s of 'LR')for(const f of 'FB'){const x=s==='L'?-1:1,z=f==='F'?1:-1;
 const POSES=[{id:'lidarFL',name:'FRONT_LEFT',x:-FR.corner_post_xy[0],y:FR.corner_post_xy[1],heading_deg:-45},{id:'lidarRR',name:'REAR_RIGHT',x:FR.corner_post_xy[0],y:-FR.corner_post_xy[1],heading_deg:135}];
 const scanZ=REPORT?.lidar_shadows?.[0]?.scan_z??206.83;
 for(const p of POSES){p.scan_z=scanZ;p.bbox_bottom_z=scanZ-SENS.scan_offset_above_envelope_min;part(p.id,p.name==='FRONT_LEFT'?'앞 왼쪽 SICK TiM571':'뒤 오른쪽 SICK TiM571','모서리 기둥 자리에 대각 배치: 270°는 바깥쪽, 사각 90°는 차체 안쪽입니다. 스캔면 약 Z'+scanZ+' mm(Rev17도 같은 높이). 8mm 프린팅 받침에 아래에서 M3 2개로 스캐너를 고정하고, 받침의 안쪽 혀 부분을 위→아래 M5 3개로 바닥판에만 체결합니다(너트는 바닥판 밑). 프레임 밖으로 나간 부분은 레일 옆면을 따라 20mm 더 두껍게 출력합니다. 광학 원점과 케이블·커버에 의한 가림은 실물 확인이 필요합니다.',[Math.sign(p.x)*110,70,Math.sign(p.y)*100])}
-for(const s of [-1,1])part(s<0?'cameraLeft':'cameraRight',(s<0?'왼쪽':'오른쪽')+' Orbbec Astra Mini Pro','상부 앞 레일 밑 선반에 바깥 '+SENS.camera_yaw_deg+'°·하향 '+SENS.camera_pitch_down_deg+'°로 장착합니다. 프로파일과 앞 LiDAR가 시야에 들어오지 않도록 각도를 정했습니다. 카메라는 뒷면 M2 2개(피치 80)로 프린팅 쐐기의 뒤판에 체결합니다(구멍 위치는 2D 피치 기준 가정).',[s*80,70,120]);
+for(const s of [-1,1])part(s<0?'cameraLeft':'cameraRight',(s<0?'왼쪽':'오른쪽')+' Orbbec Astra Mini Pro','상부 앞 레일 밑 선반에 바깥 '+SENS.camera_yaw_deg+'°·하향 '+SENS.camera_pitch_down_deg+'°로 장착합니다. 프로파일과 앞 LiDAR가 시야에 들어오지 않도록 각도를 정했습니다. P30-7: 카메라는 3D 프린팅 판 1개(위 앞 레일 뒷면에 M5 T너트 2개로 수평 체결)에 뒷면 M2 2개(피치 80)로 매답니다. 전에는 쐐기가 고정되지 않은 채 선반 위에 놓여 있었습니다(구멍 위치는 2D 피치 기준 가정).',[s*80,70,120]);
 const arm=part('arm','향후 로봇암 설치 영역','로봇암은 현재 포함하지 않습니다. 덱 중앙의 가상 영역이며 하중·작업반경·전도 검토가 선행되어야 합니다.',[0,150,0]);
 const deckTop=287.3;
 {const mat=new THREE.MeshStandardMaterial({color:0xffd276,metalness:.2,roughness:.45,transparent:true,opacity:.19,depthWrite:false,side:THREE.DoubleSide});

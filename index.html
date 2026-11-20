@@ -57,7 +57,7 @@
 <button class="control" id="resetSuspension">공칭 위치로 복귀</button></div>
 <div class="section">
         <h2>센서 배치</h2>
-        <p class="hint">LiDAR: 전방 좌측·후방 우측 대각 배치. 스캔면 약207mm(eco와 동일), 각270°의 사각90°는 차체 안쪽을 향합니다. 카메라: 상판 아래 전방 좌우 ±15°/하향10°(가정).</p>
+        <p class="hint">LiDAR: eco와 같은 위치(앞 왼쪽 (−205, 285)·뒤 오른쪽 (205, −285)), 스캔면 Z206.8, 각270°의 사각90°는 차체 안쪽을 향합니다. 카메라: eco와 같은 위치(X±140, Y282, Z239), 바깥 5°·하향 10°. 하판·상판을 eco와 같은 440×600으로 키웠습니다.</p>
       </div>
       <div class="section">
         <div class="range-row"><span>분해 뷰 (Explode)</span><strong id="explodeVal">0%</strong></div>
@@ -189,7 +189,7 @@ for(const pose of LAYOUT.lidars){
 }
 function makeCamera(id,sign){
  part(id,sign<0?'좌측 Orbbec Astra Mini Pro':'우측 Orbbec Astra Mini Pro',
-  '상판 아래 전방 카메라:좌우 ±15°, 하향10° 가정. 알루미늄 프로파일 행거는 스캔면 약241mm 위에만 배치했습니다. USB/구조광 상호간섭과 실제 마운트 확인 필요.',[sign*80,70,120]);
+  '상판 아래 전방 카메라: eco와 같은 위치(X±140, Y282, Z239), 바깥 5°, 하향 10°. 3D 프린팅 판 1개에 카메라 뒷면 M2 2개로 체결하고, 판은 상판 밑에 M5 인서트 2개로 답니다. 구조광 상호간섭과 실제 시야 가림은 실물 확인이 필요합니다.',[sign*80,70,120]);
  // Astra Mini Pro datasheet depth channel. The model center is the display origin.
  cameraFov.add(cameraFrustum(LP,sign,SPEC.camera.horizontal_depth_fov_deg,45.5,280));
 }

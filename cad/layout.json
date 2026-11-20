@@ -2,12 +2,12 @@
   "revision": "1.7",
   "coordinates": "mm; X right, Y forward, Z up; heading clockwise from +Y (CAD Z rotation = -heading)",
   "parameters": {
-    "base_width": 390,
-    "base_length": 530,
+    "base_width": 440,
+    "base_length": 600,
     "base_bottom_z": 117,
     "base_thickness": 3,
-    "top_width": 420,
-    "top_length": 550,
+    "top_width": 440,
+    "top_length": 600,
     "top_bottom_z": 283,
     "top_thickness": 3,
     "extrusion": 20,
@@ -20,10 +20,10 @@
     "battery_y": -52,
     "battery_center_z": 173.5,
     "arm_bolt_pitch": 124,
-    "camera_x": 90,
-    "camera_y": 278,
-    "camera_z": 267,
-    "camera_yaw_deg": 15,
+    "camera_x": 140,
+    "camera_y": 282,
+    "camera_z": 239,
+    "camera_yaw_deg": 5,
     "camera_pitch_down_deg": 10,
     "base_well_inner_x": 175
   },
@@ -58,8 +58,8 @@
     {
       "id": "lidarFrontLeft",
       "name": "FRONT_LEFT",
-      "x": -220,
-      "y": 250,
+      "x": -205,
+      "y": 285,
       "heading_deg": -45,
       "bbox_bottom_z": 129,
       "scan_z": 206.83,
@@ -69,8 +69,8 @@
     {
       "id": "lidarRearRight",
       "name": "REAR_RIGHT",
-      "x": 220,
-      "y": -250,
+      "x": 205,
+      "y": -285,
       "heading_deg": 135,
       "bbox_bottom_z": 129,
       "scan_z": 206.83,
@@ -106,21 +106,21 @@
     "base_outline_local": [
       -40,
       40,
-      -70,
+      -62,
       37.5
     ],
     "base_bolts_local": [
       [
-        4,
-        -46
+        -6,
+        -44
       ],
       [
-        22,
-        -46
+        -20,
+        -52
       ],
       [
-        10,
-        -62
+        12,
+        -56
       ]
     ],
     "base_bolt_len_mm": 18,
@@ -128,30 +128,25 @@
     "rev17e_note": "Rev17e (user): scanner bottom Z163 -> 129 so the scan plane (Z206.83) equals eco; the printed base (9 mm on the 3t base plate, 12 mm deeper skirt where it overhangs the plate edge) is fixed to the base plate only by 3x M5 from above on its inboard tongue, outside the scanner, nuts under the plate; the column walls and column bolts are gone"
   },
   "camera_mount": {
-    "profile_y": 235,
+    "profile_y": 256,
     "profile_bottom_z": 255,
     "plate_y": 259,
     "plate_center_z": 253.5,
     "plate_width": 90,
     "plate_depth": 74,
-    "wedge_status": "Rev17e: printed hanger with a 5 mm back plate; the camera is fixed by 2x M2 through it into the camera rear threads (pitch 80, official 2D V1.2)",
+    "wedge_status": "Rev17f: no wedge/post/platform; the camera hangs on its 2 rear M2 threads from the printed plate (pitch/yaw set by the back plate)",
     "plate_thickness": 3,
     "hanger": {
-      "post": [
-        40,
-        20
+      "upper_y": [
+        263,
+        270
       ],
-      "platform_mm": 6,
-      "flange": [
-        60,
-        30
-      ],
+      "flange_y0": 246,
       "flange_mm": 6,
-      "rib_depth_mm": 20,
-      "rib_height_mm": 18,
-      "bolt_dx_mm": 12,
+      "rib_mm": 14,
+      "bolt_dx_mm": 20,
       "insert_depth_mm": 10,
-      "note": "Rev17b: one printed hanger per camera replaces the 2020 hanger column, the 3t adapter plate and the loose wedge"
+      "note": "Rev17f: one print per camera: flange under the deck (2x M5 heat-set inserts at y256) + upright plate + 2 ribs + yawed web + back plate (2x M2 into the camera rear) + rear ledge"
     }
   },
   "electronics": {
@@ -220,13 +215,16 @@
       "lip_t_mm": 6,
       "foot_mm": 16,
       "foot_t_mm": 8,
-      "bolt_y": [
+      "bolt_len_mm": 12,
+      "note": "Rev17f (user: one direction was free): end clamps on the X faces (wall = X, lip = Z) now wrap the corners with 10 mm high cleats on the Y faces (front cleat steps over the bogie backing plate), so the case is held in X, Y and Z; 3x M5 from above per clamp into self-clinching nuts",
+      "cleat_t_mm": 3.5,
+      "cleat_len_mm": 15,
+      "cleat_h_mm": 10,
+      "bolts_along": [
         -105,
         -60,
         10
-      ],
-      "bolt_len_mm": 12,
-      "note": "Rev17e (user): straps through base-plate slots could not be assembled; one printed clamp per battery end (x faces), 3x M5 from above per clamp into self-clinching nuts in the 3t base plate (flush, no hardware under the plate over the bogie). The rear face is boxed in by the power bay (4 mm gap) and the front face by the driver (5.6 mm), so bridges over the short side do not fit"
+      ]
     }
   },
   "suspension": {
@@ -498,5 +496,6 @@
       "holder_note": "Rev17d (2026-11-19, user decision): one company-stock MISUMI BGMW6001DD-30 per side (T-type short double, h30, two 6001DD back to back in a 23 mm housing; STEP downloaded 2026-11-19) instead of two BGHK6001DD-30. Bearing centre spacing 8 mm (was 19.3) -> much higher bearing load from the roll moment; see bogie_report pivot_bearings"
     }
   },
-  "revision_note_rev17e": "Rev17e (2026-11-20, user): motor-cable grommet removed; LiDAR scan plane matched to eco (Z206.83) on a plate-fixed printed base; camera fixed by its 2 rear M2 threads; battery held by bolted printed bridges"
+  "revision_note_rev17e": "Rev17e (2026-11-20, user): motor-cable grommet removed; LiDAR scan plane matched to eco (Z206.83) on a plate-fixed printed base; camera fixed by its 2 rear M2 threads; battery held by bolted printed bridges",
+  "revision_note_rev17f": "Rev17f (2026-11-20, user): LiDAR and camera poses equal to eco (LiDAR (+-205, +-285), camera (+-140, 282, 239), yaw 5, pitch 10); base and top plates grown to the eco footprint 440 x 600 so the corner LiDAR sits on the plate like eco; one-plate camera hanger; battery end clamps with corner cleats"
 }

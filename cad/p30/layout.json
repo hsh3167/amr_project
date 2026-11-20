@@ -1,5 +1,5 @@
 {
-  "revision": "P30-6",
+  "revision": "P30-7",
   "status": "P30 concept (2026-11-15): low-cost 30x30 aluminium profile chassis with SS400 laser-cut steel plates. Two drive wheels on vertical slide suspension (MISUMI D20 shafts + ball bushings + one spring each), four GL-65 casters bolted rigid. Separate variant; the Rev15 model in cad/layout.json is unchanged.",
   "coordinates": "mm; X right, Y forward, Z up, ground Z0. Heading clockwise from +Y (CAD Z rotation = -heading).",
   "frame": {
@@ -24,8 +24,8 @@
     "inner_rail_note": "P30-6 (2026-11-20, user): lower inner rails moved 30 mm inboard (x110 -> 80) so the hub-motor lead leaving the inboard axle end (x131, z90) does not hit the rail; the lead turns up through a grommet hole in the floor",
     "inner_rail_bolt_y": [
       -250,
-      -146,
-      146,
+      -170,
+      162,
       232
     ]
   },
@@ -177,7 +177,7 @@
     ],
     "pcb_xy": [
       -5,
-      200
+      216
     ],
     "computer_above_pcb": 10,
     "lcd_tilt_deg": 15,
@@ -236,18 +236,26 @@
       150
     ],
     "print_note": "P30-5b: LCD and speaker holders 3D-printed (PETG/ASA, 5 mm plate, 6 mm foot, ribs); grounding by cable to an M4 ground stud",
-    "battery_bridge": {
-      "y": [
-        -100,
-        100
-      ],
-      "width_mm": 20,
+    "battery_clamp": {
       "wall_mm": 6,
-      "foot_mm": 24,
+      "lip_mm": 8,
+      "lip_t_mm": 6,
       "foot_t_mm": 8,
-      "bolt_out_mm": 24,
-      "note": "P30-6 (user): straps through floor slots could not be assembled; two printed bridges bolted from above. y +-100 clears the terminal block (y114.5) and the driver web (y87); bolts at x+-101 clear the moved inner rails (x65..95)"
-    }
+      "foot_mm": 16,
+      "foot_span": [
+        -60,
+        60
+      ],
+      "bolts_along": [
+        -35,
+        35
+      ],
+      "cleat_t_mm": 3.5,
+      "cleat_len_mm": 15,
+      "cleat_h_mm": 10,
+      "note": "P30-7 (user: one direction was free with the bridges): one printed clamp per battery END (Y faces: wall = Y, lip = Z, corner cleats on the X faces = X); 2x M5 from above per clamp, nuts under the floor; foot limited to x+-60 (PCB standoffs at x69.5/-79.5)"
+    },
+    "pcb_note": "P30-7: controller PCB + computer moved 16 mm forward (y200 -> 216) so the front battery clamp bolts are not under the PCB"
   },
   "sensors": {
     "scan_offset_above_envelope_min": 77.83,
@@ -256,7 +264,6 @@
     "camera_z": 239,
     "camera_yaw_deg": 5,
     "camera_pitch_down_deg": 10,
-    "camera_shelf_z": 220,
     "camera_fov_deg": [
       58.4,
       45.5
@@ -279,13 +286,6 @@
       ]
     ],
     "lidar_mount_note": "P30-6: TiM571 on an 8 mm printed base: 2x M3 countersunk from below into the scanner (spacing assumed), then 3x M5 from above on the inboard tongue through the 2t floor, nuts underneath. Scan plane Z206.83 (Rev17 matched to it)",
-    "camera_bracket": {
-      "flange_mm": 3.5,
-      "leg_mm": 8,
-      "shelf_mm": 8,
-      "gusset_mm": 20,
-      "note": "P30-5c: printed; the flange is limited to 3.5 mm by the camera top (Z250.7) under the rail (Z255)"
-    },
     "lidar_base": {
       "thickness_mm": 8,
       "outline_local": [
@@ -310,6 +310,11 @@
       ],
       "note": "P30-6 (user): LiDAR fixed to the body plate only. Local frame: +Y = heading. The tongue (local Y -38..-62) lies in the blind sector, inside the frame corner (no rail below), so the three M5 nuts sit under the floor and the bolts stay reachable from above with the scanner mounted",
       "skirt_mm": 20
+    },
+    "camera_mount": {
+      "plate_mm": 7,
+      "bolt_dx_mm": 25,
+      "note": "P30-7 (user: re-check the camera fixing): the 3.5 mm flange under the rail + leg + shelf + a LOOSE wedge (it had no fixing) were replaced by one print: 7 mm upright plate on the rear face of the top front rail (2x M5 horizontal into rear-slot T-nuts at z270) + yawed web + back plate with the 2 camera M2 + rear ledge"
     }
   },
   "load_case": {

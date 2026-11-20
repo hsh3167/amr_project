@@ -885,8 +885,8 @@
         ]
       ],
       "center_mm": [
-        -0.011645398364758884,
-        0.6518077804960385,
+        -0.011645398364764949,
+        0.6537727261101043,
         120.00000000000027
       ],
       "solids": 1
@@ -1004,9 +1004,9 @@
         ]
       ],
       "center_mm": [
-        9.999999999999979,
-        -3.0000000000000453,
-        117.77696076765285
+        9.999999999999996,
+        -4.33333333333345,
+        117.7769607676529
       ],
       "solids": 24
     },
@@ -2926,7 +2926,7 @@
             219.55
           ]
         },
-        "limits": "P30-6: held down by two 3D-printed bridges bolted from above (60_battery_hold_down_bridges_PRINTED)"
+        "limits": "P30-7: held by two 3D-printed end clamps bolted from above (60_battery_end_clamps_PRINTED)"
       },
       "volume_mm3": 421957.98988421535,
       "bounds_mm": [
@@ -2980,24 +2980,24 @@
       "solids": 4
     },
     {
-      "name": "60_battery_hold_down_bridges_PRINTED",
+      "name": "60_battery_end_clamps_PRINTED",
       "group": "electronics",
       "status": "concept_support",
       "metadata": {
         "quantity": 2,
         "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
-        "design": "Inverted U over the case (6 mm bar on the lid, 6 mm legs, 8 mm feet); clamps the case onto the 3 mm rubber pads",
-        "fit": "Set the battery in, drop the bridges over it, 2x M5 from above per bridge (nuts under the floor, outside the moved inner rails)"
+        "design": "One clamp per battery end (Y faces): 6 mm wall, 8 mm lip over the lid edge, corner cleats on the side faces, 8 mm foot",
+        "fit": "Holds the case in X (cleats), Y (walls) and Z (lips) on the 3 mm rubber pads; 2x M5 from above per clamp, nuts under the floor"
       },
-      "volume_mm3": 98414.56683456116,
+      "volume_mm3": 235320.50443567638,
       "bounds_mm": [
         [
-          -106.91423986690826,
-          106.91423986690826
+          -80.41423986690826,
+          80.41423986690826
         ],
         [
-          -110.0,
-          110.0
+          -159.39304979770694,
+          159.39304979770694
         ],
         [
           120.99999999999999,
@@ -3005,9 +3005,9 @@
         ]
       ],
       "center_mm": [
-        -1.8482928514064936e-14,
-        -3.4008588465879482e-15,
-        180.3965091849279
+        0.011445659854431004,
+        -0.0342158907324235,
+        166.6138439769797
       ],
       "solids": 2
     },
@@ -3019,15 +3019,15 @@
         "quantity": 4,
         "sku": "M5x16 hex socket + washer + M5 nut under the floor"
       },
-      "volume_mm3": 3227.139460766981,
+      "volume_mm3": 3227.1394607669827,
       "bounds_mm": [
         [
-          -105.91423986690826,
-          105.91423986690826
+          -40.0,
+          40.0
         ],
         [
-          -105.0,
-          105.0
+          -156.39304979770694,
+          156.39304979770694
         ],
         [
           114.19999999999999,
@@ -3035,9 +3035,9 @@
         ]
       ],
       "center_mm": [
-        -5.2137976022890185e-14,
-        -4.466956324123294e-14,
-        125.5728041610995
+        2.5012137146116244e-15,
+        -6.594749399652058e-14,
+        125.57280416109957
       ],
       "solids": 8
     },
@@ -3240,8 +3240,8 @@
           77.5
         ],
         [
-          148.0,
-          252.0
+          164.0,
+          268.0
         ],
         [
           131.0,
@@ -3250,7 +3250,7 @@
       ],
       "center_mm": [
         -5.0,
-        200.0,
+        216.0,
         134.5
       ],
       "solids": 1
@@ -3267,8 +3267,8 @@
           68.0
         ],
         [
-          159.0,
-          241.0
+          175.0,
+          257.0
         ],
         [
           148.0,
@@ -3277,7 +3277,7 @@
       ],
       "center_mm": [
         -5.0,
-        200.0,
+        216.0,
         159.5
       ],
       "solids": 1
@@ -3289,15 +3289,15 @@
       "metadata": {
         "quantity": 8
       },
-      "volume_mm3": 3078.7608005179977,
+      "volume_mm3": 3078.760800517998,
       "bounds_mm": [
         [
           -83.0,
           73.0
         ],
         [
-          152.5,
-          247.5
+          168.5,
+          263.5
         ],
         [
           121.0,
@@ -3305,9 +3305,9 @@
         ]
       ],
       "center_mm": [
-        -5.000000000000049,
-        200.0,
-        134.50000000000003
+        -5.000000000000038,
+        215.9999999999999,
+        134.49999999999991
       ],
       "solids": 8
     },
@@ -3548,9 +3548,9 @@
         ]
       ],
       "center_mm": [
-        -100.25128011655225,
-        -268.50064630472775,
-        183.80313168214755
+        -100.2512801165522,
+        -268.5006463047283,
+        183.8031316821477
       ],
       "solids": 21
     },
@@ -4043,64 +4043,35 @@
       "solids": 58
     },
     {
-      "name": "78_camera_bracket_PRINTED_LEFT",
+      "name": "78_camera_mount_PRINTED_LEFT",
       "group": "cameras",
       "status": "concept_support",
       "metadata": {
         "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
-        "design": "3.5 mm flange (camera top clearance) + 8 mm leg + 8 mm shelf + 2 gussets under the rail, one print"
+        "design": "P30-7: one print: 7 mm upright plate on the rail rear face + yawed web + back plate on the camera rear face + rear ledge",
+        "fit": "2x M5 horizontal into T-nuts in the rear slot of the top front rail (reachable from inside); camera by 2x M2 into its rear threads"
       },
-      "volume_mm3": 46579.691938900585,
+      "volume_mm3": 31038.0414888655,
       "bounds_mm": [
         [
-          -160.0,
-          -108.0
-        ],
-        [
-          225.0,
-          300.0
-        ],
-        [
-          215.0,
-          255.0
-        ]
-      ],
-      "center_mm": [
-        -134.00000000000006,
-        265.00685932927814,
-        231.99246711137218
-      ],
-      "solids": 1
-    },
-    {
-      "name": "79_camera_wedge_PRINTED_LEFT",
-      "group": "cameras",
-      "status": "concept_support",
-      "metadata": {
-        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
-        "design": "Wedge (10 deg pitch, 5 deg yaw) + 5 mm back plate on the camera rear face; 2x M2 through the plate into the rear threads (pitch 80)"
-      },
-      "volume_mm3": 15769.511180601423,
-      "bounds_mm": [
-        [
-          -183.3606203229229,
+          -183.45000010078,
           -94.09733335663493
         ],
         [
           259.5885288086306,
-          288.7806081835982
+          278.69596588097727
         ],
         [
-          223.0,
-          249.85340271107208
+          226.91501339114134,
+          283.0
         ]
       ],
       "center_mm": [
-        -136.38573822819188,
-        270.68608009155554,
-        233.64738555004612
+        -139.4739774180016,
+        266.93185005171085,
+        256.531316405253
       ],
-      "solids": 2
+      "solids": 1
     },
     {
       "name": "79_camera_rear_screws_M2_LEFT",
@@ -4134,32 +4105,32 @@
       "solids": 2
     },
     {
-      "name": "79_camera_bracket_bolts_M5_Tnut_LEFT",
+      "name": "79_camera_mount_bolts_M5_Tnut_LEFT",
       "group": "cameras",
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 2,
-        "sku": "M5 countersunk + T-nut"
+        "sku": "M5x14 hex socket + washer + 3030 slot-8 T-nut (rail rear slot)"
       },
-      "volume_mm3": 1334.4841395509525,
+      "volume_mm3": 2042.5143006684452,
       "bounds_mm": [
         [
-          -153.25,
-          -114.75
+          -172.25,
+          -107.75
         ],
         [
-          280.25,
-          289.75
+          258.0,
+          276.5
         ],
         [
-          251.5,
-          261.5
+          265.25,
+          274.75
         ]
       ],
       "center_mm": [
-        -133.99999999999997,
-        285.0,
-        258.48262156145796
+        -140.00000000000003,
+        269.28511883410727,
+        269.99999999999994
       ],
       "solids": 4
     },
@@ -4210,64 +4181,35 @@
       "solids": 58
     },
     {
-      "name": "78_camera_bracket_PRINTED_RIGHT",
+      "name": "78_camera_mount_PRINTED_RIGHT",
       "group": "cameras",
       "status": "concept_support",
       "metadata": {
         "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
-        "design": "3.5 mm flange (camera top clearance) + 8 mm leg + 8 mm shelf + 2 gussets under the rail, one print"
+        "design": "P30-7: one print: 7 mm upright plate on the rail rear face + yawed web + back plate on the camera rear face + rear ledge",
+        "fit": "2x M5 horizontal into T-nuts in the rear slot of the top front rail (reachable from inside); camera by 2x M2 into its rear threads"
       },
-      "volume_mm3": 46579.691938900585,
-      "bounds_mm": [
-        [
-          108.0,
-          160.0
-        ],
-        [
-          225.0,
-          300.0
-        ],
-        [
-          215.0,
-          255.0
-        ]
-      ],
-      "center_mm": [
-        134.00000000000003,
-        265.00685932927814,
-        231.99246711137218
-      ],
-      "solids": 1
-    },
-    {
-      "name": "79_camera_wedge_PRINTED_RIGHT",
-      "group": "cameras",
-      "status": "concept_support",
-      "metadata": {
-        "material": "FDM 3D print, PETG or ASA, 4 perimeters, >=40% infill; washers under every bolt head (plastic creep)",
-        "design": "Wedge (10 deg pitch, 5 deg yaw) + 5 mm back plate on the camera rear face; 2x M2 through the plate into the rear threads (pitch 80)"
-      },
-      "volume_mm3": 15769.51118060143,
+      "volume_mm3": 31038.041488865525,
       "bounds_mm": [
         [
           94.09733335663492,
-          183.3606203229229
+          183.45000010078002
         ],
         [
           259.5885288086306,
-          288.78060818359813
+          278.69596588097727
         ],
         [
-          223.0,
-          249.85340271107208
+          226.91501339114134,
+          283.0
         ]
       ],
       "center_mm": [
-        136.38573822819183,
-        270.6860800915556,
-        233.64738555004615
+        139.47397741800154,
+        266.93185005171085,
+        256.531316405253
       ],
-      "solids": 2
+      "solids": 1
     },
     {
       "name": "79_camera_rear_screws_M2_RIGHT",
@@ -4301,32 +4243,32 @@
       "solids": 2
     },
     {
-      "name": "79_camera_bracket_bolts_M5_Tnut_RIGHT",
+      "name": "79_camera_mount_bolts_M5_Tnut_RIGHT",
       "group": "cameras",
       "status": "catalog_envelope",
       "metadata": {
         "quantity": 2,
-        "sku": "M5 countersunk + T-nut"
+        "sku": "M5x14 hex socket + washer + 3030 slot-8 T-nut (rail rear slot)"
       },
-      "volume_mm3": 1334.4841395509525,
+      "volume_mm3": 2042.5143006684452,
       "bounds_mm": [
         [
-          114.75,
-          153.25
+          107.75,
+          172.25
         ],
         [
-          280.25,
-          289.75
+          258.0,
+          276.5
         ],
         [
-          251.5,
-          261.5
+          265.25,
+          274.75
         ]
       ],
       "center_mm": [
-        134.0,
-        285.0,
-        258.4826215614581
+        140.0,
+        269.28511883410727,
+        270.0
       ],
       "solids": 4
     }

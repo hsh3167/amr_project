@@ -1,8 +1,8 @@
 {
   "variant": "P30",
-  "revision": "P30-6",
-  "components": 139,
-  "solids": 601,
+  "revision": "P30-7",
+  "components": 137,
+  "solids": 597,
   "ground": {
     "drive_tire_min_z": [
       0.0,
