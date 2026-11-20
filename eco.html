@@ -4,24 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a111d">
-<title>AMR PROJECT · Eco 저가형 Layout Lab</title>
-<link rel="stylesheet" href="web/lab.css?v=4">
+<title>AMR PROJECT · Eco 모델</title>
+<link rel="stylesheet" href="web/lab.css?v=5">
 <script type="module" src="web/ui.js"></script>
 <script>if(new URLSearchParams(location.search).has('embed'))document.documentElement.classList.add('embed')</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"}}</script>
 </head>
 <body>
 <div class="app">
-  <div class="eco-head"><div><strong>AMR PROJECT</strong><small>ECO 저가형 · 30×30 프로파일 샤시</small></div><a href="index.html">← 6륜 메인 모델 Layout Lab</a></div>
+  <div class="eco-head"><div><strong>AMR PROJECT</strong><small>ECO 모델 · 30×30 프로파일 샤시</small></div><a href="index.html">← Pro 모델 Layout Lab</a></div>
   <main class="workspace">
     <aside class="left">
-      <div class="eyebrow">LOW-COST VARIANT</div>
-      <h1>Eco 저가형 AMR</h1>
+      <div class="eyebrow">ECO MODEL · LOW-COST</div>
+      <h1>Eco 모델</h1>
       <p class="intro">회사 재고 3030 알루미늄 프로파일 프레임과 SS400 레이저 강판으로 원가를 낮춘 버전입니다. 캐스터 4개는 고정하고, 구동륜 2개는 MISUMI 축 + 볼 리니어 부시 + 스프링으로 수직 슬라이드합니다.</p>
       <div class="section">
         <h2>카메라 시점</h2>
         <div class="tabs"><button class="control active" data-view="iso">3D</button><button class="control" data-view="top">상부</button><button class="control" data-view="front">전면</button><button class="control" data-view="bottom">하부</button></div>
         <p class="hint" style="margin-top:10px">마우스 드래그: 회전 · 휠: 확대 · 우클릭: 이동</p>
+      </div>
+      <div class="section" id="simSection">
+        <h2>주행 동역학 시뮬레이션</h2>
+        <div class="tabs" id="simTabs"><button class="control active" data-sim="slope">경사</button><button class="control" data-sim="step">단차</button><button class="control" data-sim="bump">방지턱</button><button class="control" data-sim="estop">E-stop</button></div>
+        <div class="sim-variants" id="simVariants"></div>
+        <p class="hint" id="simNote" style="margin-top:8px"></p>
+        <div class="range-row"><span id="simParamLabel">경사각</span><strong id="simParamVal">—</strong></div>
+        <input id="simParam" type="range" aria-label="시험 값">
+        <div class="range-row"><span>주행 속도</span><strong id="simSpeedVal">0.5 m/s</strong></div>
+        <input id="simSpeed" type="range" min="0.2" max="2" step="0.1" value="0.5" aria-label="주행 속도">
+        <div class="btn-row"><button class="control" id="simRun">▶ 실행</button><button class="control" id="simAtLimit">한계값 실행</button><button class="control" id="simAtFail">실패값 실행</button></div>
+        <div class="btn-row"><button class="control" id="simRecord">● 영상 저장</button></div>
+        <p class="hint" id="simStatus" style="margin-top:8px"></p>
+        <div id="simLimits" class="hint">한계값 보고서 불러오는 중…</div>
       </div>
       <div class="section">
         <h2>센서 시야 (FOV)</h2>
@@ -81,7 +95,19 @@
       <canvas id="viewport"></canvas>
       <div id="loading">3D 모델 불러오는 중… (GLB 약 18 MB)<br>인터넷 연결이 필요합니다 (Three.js CDN).</div>
       <div id="labels"></div>
-      <div class="scene-top"><h2>ECO LOW-COST AMR / GENERAL ARRANGEMENT</h2><p>build123d 조립 모델 · 제작 검증 전 [mm]</p></div>
+      <div id="simHud" class="sim-hud" hidden>
+        <div class="sim-hud-head"><b id="hudTitle">—</b><span id="hudResult"></span></div>
+        <div class="sim-hud-grid">
+          <span>시간</span><b id="hudT">—</b><span>속도</span><b id="hudV">—</b>
+          <span>피치</span><b id="hudPitch">—</b><span>스트로크</span><b id="hudSlide">—</b>
+          <span>구동륜</span><b id="hudNd">—</b><span>토크</span><b id="hudTq">—</b>
+          <span>앞 캐스터</span><b id="hudNf">—</b><span>뒤 캐스터</span><b id="hudNr">—</b>
+        </div>
+        <canvas id="hudChart" width="600" height="192"></canvas>
+        <div class="sim-legend"><span><i style="background:#6aa8ff"></i>구동륜 하중</span><span><i style="background:#4fe0c9"></i>앞 캐스터</span><span><i style="background:#ffcc73"></i>뒤 캐스터</span><span><i style="background:#e9eefb"></i>속도</span></div>
+        <div class="sim-ctl"><button data-rate="0.25">0.25×</button><button data-rate="0.5">0.5×</button><button data-rate="1" class="active">1×</button><button id="simReplay" title="다시 재생">↺</button><button id="simClose" title="시뮬레이션 종료">✕</button></div>
+      </div>
+      <div class="scene-top"><h2>ECO MODEL / GENERAL ARRANGEMENT</h2><p>build123d 조립 모델 · 제작 검증 전 [mm]</p></div>
       <div class="top-actions"><button class="icon-btn" id="resetCamera">⟳ 시점 초기화</button><button class="icon-btn" id="saveImage">↓ PNG</button><button class="icon-btn" id="openBom">☰ BOM·예상 가격</button></div>
       <div class="status">
         <div class="stats">
@@ -96,7 +122,7 @@
     <aside class="right">
       <div class="eyebrow">COMPONENT INSPECTOR</div>
       <div class="legend">부품을 클릭하면 설명 표시</div>
-      <h2 id="partName" class="detail-title">Eco 조립 모델</h2>
+      <h2 id="partName" class="detail-title">Eco 모델 조립</h2>
       <p id="partDescription" class="detail-text">프레임·판재·구동 슬라이드·캐스터·전장·센서를 그룹별로 켜고 끌 수 있습니다. 구동륜 슬라이더와 센서 각도, 부품 위치를 조정해 보세요.</p>
       <div class="section" style="margin-top:18px">
         <h2>기본 사양</h2>
@@ -119,7 +145,7 @@
   </main>
 </div>
 <dialog id="bomDialog" aria-labelledby="bomTitle">
-  <div class="bom-head"><h2 id="bomTitle">Eco BOM · 예상 가격 (VAT 별도)</h2><div class="tabs"><button class="control" id="closeBom" aria-label="닫기">✕ 닫기</button></div></div>
+  <div class="bom-head"><h2 id="bomTitle">Eco 모델 BOM · 예상 가격 (VAT 별도)</h2><div class="tabs"><button class="control" id="closeBom" aria-label="닫기">✕ 닫기</button></div></div>
   <div class="bom-body" id="bomContent">BOM 불러오는 중…</div>
 </dialog>
 <script type="module">
@@ -128,12 +154,14 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {STLLoader} from 'three/addons/loaders/STLLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
+import {ecoParams,simulate,TESTS} from './web/drive-sim.js';
 
 const $=id=>document.getElementById(id);
 const getJSON=(u,fallback)=>fetch(u,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(u);return r.json()}).catch(e=>{if(fallback!==undefined)return fallback;throw e});
 const [LAYOUT,MANIFEST,REPORT,SPEC]=await Promise.all([
   getJSON('./cad/p30/layout.json'),getJSON('./cad-output/p30/manifest.json'),
   getJSON('./cad-output/p30/build_report.json',null),getJSON('./cad/parts.json',{})]);
+const [SIMREP,PROFILE]=await Promise.all([getJSON('./cad-output/p30/drive_sim.json',null),getJSON('./cad-output/p30/side_profile.json',null)]);
 const SENS=LAYOUT.sensors,FR=LAYOUT.frame,DR=LAYOUT.drive,CA=LAYOUT.caster;
 const CAM_FOV=SENS.camera_fov_deg,SCAN_DEG=SPEC.lidar?.scan_deg||270;
 
@@ -166,7 +194,7 @@ for(const s of 'LR')for(const f of 'FB'){const x=s==='L'?-1:1,z=f==='F'?1:-1;
   part('caster'+s+f,'GL-65-ASF 캐스터','Ø64 휠, 장착높이 83 mm. 코너 6t 강판에 M6 4개로 직접 고정하며 선회 간섭은 CAD 검증에서 88표본 확인했습니다.',[x*90,0,z*90])}
 const POSES=[{id:'lidarFL',name:'FRONT_LEFT',x:-FR.corner_post_xy[0],y:FR.corner_post_xy[1],heading_deg:-45},{id:'lidarRR',name:'REAR_RIGHT',x:FR.corner_post_xy[0],y:-FR.corner_post_xy[1],heading_deg:135}];
 const scanZ=REPORT?.lidar_shadows?.[0]?.scan_z??206.83;
-for(const p of POSES){p.scan_z=scanZ;p.bbox_bottom_z=scanZ-SENS.scan_offset_above_envelope_min;part(p.id,p.name==='FRONT_LEFT'?'앞 왼쪽 SICK TiM571':'뒤 오른쪽 SICK TiM571','모서리 기둥 자리에 대각 배치: 270°는 바깥쪽, 사각 90°는 차체 안쪽입니다. 스캔면 약 Z'+scanZ+' mm(Rev17도 같은 높이). 8mm 프린팅 받침에 아래에서 M3 2개로 스캐너를 고정하고, 받침의 안쪽 혀 부분을 위→아래 M5 3개로 바닥판에만 체결합니다(너트는 바닥판 밑). 프레임 밖으로 나간 부분은 레일 옆면을 따라 20mm 더 두껍게 출력합니다. 광학 원점과 케이블·커버에 의한 가림은 실물 확인이 필요합니다.',[Math.sign(p.x)*110,70,Math.sign(p.y)*100])}
+for(const p of POSES){p.scan_z=scanZ;p.bbox_bottom_z=scanZ-SENS.scan_offset_above_envelope_min;part(p.id,p.name==='FRONT_LEFT'?'앞 왼쪽 SICK TiM571':'뒤 오른쪽 SICK TiM571','모서리 기둥 자리에 대각 배치: 270°는 바깥쪽, 사각 90°는 차체 안쪽입니다. 스캔면 약 Z'+scanZ+' mm(Pro 모델도 같은 높이). 8mm 프린팅 받침에 아래에서 M3 2개로 스캐너를 고정하고, 받침의 안쪽 혀 부분을 위→아래 M5 3개로 바닥판에만 체결합니다(너트는 바닥판 밑). 프레임 밖으로 나간 부분은 레일 옆면을 따라 20mm 더 두껍게 출력합니다. 광학 원점과 케이블·커버에 의한 가림은 실물 확인이 필요합니다.',[Math.sign(p.x)*110,70,Math.sign(p.y)*100])}
 for(const s of [-1,1])part(s<0?'cameraLeft':'cameraRight',(s<0?'왼쪽':'오른쪽')+' Orbbec Astra Mini Pro','상부 앞 레일 밑 선반에 바깥 '+SENS.camera_yaw_deg+'°·하향 '+SENS.camera_pitch_down_deg+'°로 장착합니다. 프로파일과 앞 LiDAR가 시야에 들어오지 않도록 각도를 정했습니다. P30-7: 카메라는 3D 프린팅 판 1개(위 앞 레일 뒷면에 M5 T너트 2개로 수평 체결)에 뒷면 M2 2개(피치 80)로 매답니다. 전에는 쐐기가 고정되지 않은 채 선반 위에 놓여 있었습니다(구멍 위치는 2D 피치 기준 가정).',[s*80,70,120]);
 const arm=part('arm','향후 로봇암 설치 영역','로봇암은 현재 포함하지 않습니다. 덱 중앙의 가상 영역이며 하중·작업반경·전도 검토가 선행되어야 합니다.',[0,150,0]);
 const deckTop=287.3;
@@ -349,9 +377,9 @@ function setView(view){
   document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));requestRender();
 }
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
-function setMotion(v){motion=v;document.querySelectorAll('[data-motion]').forEach(b=>b.classList.toggle('active',b.dataset.motion===v));requestRender()}
+function setMotion(v){if(v!=='stop'&&sim.res)simClose();motion=v;document.querySelectorAll('[data-motion]').forEach(b=>b.classList.toggle('active',b.dataset.motion===v));requestRender()}
 document.querySelectorAll('[data-motion]').forEach(b=>b.addEventListener('click',()=>setMotion(b.dataset.motion)));
-$('resetCamera').addEventListener('click',()=>{setMotion('stop');robot.rotation.y=0;robot.position.set(0,0,0);setView('iso')});
+$('resetCamera').addEventListener('click',()=>{simClose();setMotion('stop');robot.rotation.set(0,0,0);robot.position.set(0,0,0);setView('iso')});
 $('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-eco-layout.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
 const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();
 canvas.addEventListener('click',e=>{
@@ -362,7 +390,7 @@ canvas.addEventListener('click',e=>{
 
 // rendering
 function updateLabels(){
-  const show=$('showLabels').checked;
+  const show=$('showLabels').checked&&!sim.res;
   for(const a of annotations){const g=groups[a.id];a.node.style.display='none';if(!show||!g.visible)continue;
     const v=new THREE.Vector3(...a.pos).add(g.position).applyMatrix4(robot.matrixWorld).project(camera);
     const x=(v.x*.5+.5)*wrap.clientWidth,y=(-v.y*.5+.5)*wrap.clientHeight;
@@ -382,8 +410,9 @@ function render(now){
   }else if(motion==='stop'){
     for(const c of casters){if(Math.abs(c.rotation.y)>.002){c.rotation.y*=1-Math.min(1,dt*8);settling=true}else c.rotation.y=0}
   }
-  robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera);
-  if(driving||settling)requestRender();
+  const simulating=simTick(dt);
+  robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera);simCapture();
+  if(driving||settling||simulating)requestRender();
 }
 orbit.addEventListener('change',requestRender);
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;lastFrame=0}else requestRender()});
@@ -427,8 +456,200 @@ async function loadBom(){
 $('openBom').addEventListener('click',()=>{loadBom();$('bomDialog').showModal()});
 $('closeBom').addEventListener('click',()=>$('bomDialog').close());
 
+// ---- drive dynamics simulation (web/drive-sim.js; limits from tools/drive_sim.mjs) ---------------------
+const SIM_P=PROFILE&&SPEC.drive_motor?ecoParams(LAYOUT,SPEC,PROFILE):null;
+const SIMCFG={
+  slope:{label:'경사각',min:0,max:25,step:1,def:6,unit:'°',variants:[['kink','평지→경사 진입'],['ramp','경사 위 출발']]},
+  step:{label:'단차 높이',min:0,max:50,step:1,def:15,unit:' mm'},
+  bump:{label:'방지턱 높이',min:0,max:70,step:2,def:30,unit:' mm'},
+  estop:{label:'감속 명령',min:0.5,max:15,step:0.5,def:3,unit:' m/s²',variants:[['drive','구동륜 제동 (실제)'],['ideal','이상 제동 (전도 한계)']]}
+};
+const sim={kind:'slope',variant:'kink',res:null,t:0,rate:1,playing:false,hold:0,terrain:null,rec:null,recCanvas:null};
+const simKindNow=()=>sim.kind==='slope'&&sim.variant==='ramp'?'ramp':sim.kind;
+const nearest=(list,v)=>list.reduce((a,b)=>Math.abs(b-v)<Math.abs(a-v)?b:a,list[0]);
+function limitFor(kind,variant,speed){
+  const T=SIMREP?.tests;if(!T)return null;
+  if(kind==='slope'&&variant==='ramp')return T.ramp?.peak_torque;
+  if(kind==='estop')return variant==='ideal'?T.estop?.ideal?.['v'+nearest([0.5,1,1.5,2],speed)]?.no_lift:null;
+  const key={slope:'slope_deg',step:'step_mm',bump:'bump_mm'}[kind];return T['v'+nearest([0.3,0.5,1],speed)]?.[key];
+}
+function simUI(){
+  const c=SIMCFG[sim.kind],inp=$('simParam');
+  document.querySelectorAll('[data-sim]').forEach(b=>b.classList.toggle('active',b.dataset.sim===sim.kind));
+  $('simVariants').innerHTML=(c.variants||[]).map(([k,l])=>`<button class="control${k===sim.variant?' active':''}" data-variant="${k}">${l}</button>`).join('');
+  $('simVariants').style.display=c.variants?'grid':'none';
+  $('simVariants').querySelectorAll('[data-variant]').forEach(b=>b.addEventListener('click',()=>{sim.variant=b.dataset.variant;simUI()}));
+  $('simParamLabel').textContent=c.label;
+  if(inp.dataset.kind!==sim.kind){inp.min=c.min;inp.max=c.max;inp.step=c.step;inp.value=c.def;inp.dataset.kind=sim.kind}
+  $('simParamVal').textContent=inp.value+c.unit;$('simSpeedVal').textContent=(+$('simSpeed').value).toFixed(1)+' m/s';
+  const tk=simKindNow(),note=(TESTS[tk]||TESTS[sim.kind]).note;
+  $('simNote').textContent=note+(sim.kind==='estop'?(sim.variant==='ideal'?' · 6바퀴 모두 마찰계수 a/g로 미끄러지며 제동(전도 한계 확인용 가정)':' · 구동륜 속도 제어로 감속, 바닥 μ '+(SIM_P?.mu??0.6)+', 캐스터는 자유 회전'):'');
+  const L=limitFor(sim.kind,sim.variant,+$('simSpeed').value);
+  $('simAtLimit').disabled=!L||L.limit==null;$('simAtFail').disabled=!L?.firstFail;
+}
+document.querySelectorAll('[data-sim]').forEach(b=>b.addEventListener('click',()=>{sim.kind=b.dataset.sim;sim.variant=(SIMCFG[sim.kind].variants||[[null]])[0][0];simUI()}));
+$('simParam').addEventListener('input',simUI);$('simSpeed').addEventListener('input',simUI);
+function runAt(which){const L=limitFor(sim.kind,sim.variant,+$('simSpeed').value);if(!L)return;const v=which==='fail'?L.firstFail?.value:L.limit;if(v==null)return;$('simParam').value=v;simUI();runSim()}
+$('simAtLimit').addEventListener('click',()=>runAt('limit'));$('simAtFail').addEventListener('click',()=>runAt('fail'));
+$('simRun').addEventListener('click',()=>runSim());
+$('simRecord').addEventListener('click',()=>{if(sim.rec){stopRecording();return}runSim(true)});
+
+// terrain: extruded polyline across the width (only where it differs from the plain floor)
+function buildTerrain(terr){
+  if(sim.terrain){scene.remove(sim.terrain);sim.terrain.traverse(o=>{o.geometry?.dispose();o.material?.dispose()});sim.terrain=null}
+  const pts=terr.pts.map(([x,z])=>[x*1000,z*1000]),minZ=Math.min(...pts.map(p=>p[1]));
+  const below=minZ<-1,raised=pts.some(p=>p[1]>0.5);
+  floor.visible=grid.visible=!below;
+  if(!below&&!raised)return;
+  // keep only the raised part (a bump ends where it returns to the floor), the far end clipped 2.5 m after the feature
+  let a=0,b=pts.length-1;
+  if(!below){while(a<pts.length-2&&pts[a+1][1]<=0.5)a++;let k=a+1;while(k<pts.length&&pts[k][1]>0.5)k++;if(k<pts.length)b=k}
+  let poly;
+  if(below){const t=(pts[1][1]-pts[0][1])/(pts[1][0]-pts[0][0]);poly=[[-1500,-1500*t],[4000,4000*t]]}
+  else{const feat=Math.max(...terr.xs.map(v=>v*1000),pts[a][0]+500);poly=pts.slice(a,b+1).filter(([x])=>x<=feat+2500);if(poly.at(-1)[0]<feat+2500&&b===pts.length-1)poly.push([feat+2500,pts[b][1]])}
+  const base=below?poly[0][1]-40:-2;
+  const shape=new THREE.Shape();shape.moveTo(poly[0][0],base);for(const [x,z] of poly)shape.lineTo(x,z+(below?0:0.6));shape.lineTo(poly.at(-1)[0],base);shape.closePath();
+  const W=1000,geo=new THREE.ExtrudeGeometry(shape,{depth:W,bevelEnabled:false});
+  const g=new THREE.Group();
+  const mesh=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0x3a5876,roughness:.85,metalness:.05}));
+  mesh.rotation.y=-Math.PI/2;mesh.position.x=W/2;g.add(mesh);
+  const edges=new THREE.LineSegments(new THREE.EdgesGeometry(geo,20),new THREE.LineBasicMaterial({color:0x8fb3d9,transparent:true,opacity:.55}));
+  edges.rotation.copy(mesh.rotation);edges.position.copy(mesh.position);g.add(edges);
+  scene.add(g);sim.terrain=g;
+}
+function applyFrame(f){
+  const X=f[1],Z=f[2],th=f[3],slide=f[6],phi=f[7],P=SIM_P;
+  robot.position.set(0,0,0);robot.rotation.set(0,0,0);robot.updateMatrixWorld(true);
+  const mm=Math.max(-12,Math.min(12,slide*1000));pose('LEFT',mm);pose('RIGHT',mm);
+  for(const w of wheels)w.group.rotation.x=phi;
+  const rx=X+P.hs*Math.sin(th),rz=Z-P.hs*Math.cos(th);
+  robot.position.set(0,rz*1000,rx*1000);robot.rotation.set(-th,0,0);
+  const d=new THREE.Vector3(0,rz*1000+170,rx*1000+200).sub(orbit.target);orbit.target.add(d);camera.position.add(d);
+  hud(f);
+}
+const fmtN=v=>Math.round(v)+' N';
+function hud(f){
+  const t=f[0],th=f[3],slide=f[6],v=f[8],Nd=f[9],Nf=f[10],Nr=f[11],T=f[12],r=sim.res;
+  $('hudT').textContent=t.toFixed(2)+' s';$('hudV').textContent=v.toFixed(2)+' m/s';
+  $('hudPitch').textContent=(th*180/Math.PI).toFixed(1)+'°';$('hudSlide').textContent=(slide>0?'+':'')+(slide*1000).toFixed(1)+' mm';
+  $('hudNd').textContent=fmtN(Nd);$('hudNf').textContent=fmtN(Nf);$('hudNr').textContent=fmtN(Nr);$('hudTq').textContent=(T/2).toFixed(1)+' Nm/륜';
+  const done=t>=r.frames.at(-1)[0]-1e-6,res=$('hudResult');
+  if(done){res.textContent=r.result.text;res.className=r.result.pass?'sim-ok':'sim-bad'}else{res.textContent='주행 중';res.className='sim-run'}
+  drawChart(t);
+}
+function drawChart(tNow){
+  const c=$('hudChart'),x=c.getContext('2d'),W=c.width,H=c.height,F=sim.res.frames,t1=F.at(-1)[0]||1;
+  x.clearRect(0,0,W,H);
+  let nMax=400;for(const f of F)nMax=Math.max(nMax,f[9],f[10],f[11]);nMax=Math.min(nMax,900);
+  let vMax=0.5;for(const f of F)vMax=Math.max(vMax,Math.abs(f[8]));vMax*=1.15;
+  x.strokeStyle='rgba(150,175,215,.18)';x.lineWidth=1;for(let i=1;i<4;i++){const y=H*i/4;x.beginPath();x.moveTo(0,y);x.lineTo(W,y);x.stroke()}
+  const line=(idx,col,scale,dash)=>{x.strokeStyle=col;x.lineWidth=2.2;x.setLineDash(dash||[]);x.beginPath();F.forEach((f,i)=>{const px=f[0]/t1*W,py=H-4-Math.max(0,Math.min(1,f[idx]/scale))*(H-10);i?x.lineTo(px,py):x.moveTo(px,py)});x.stroke();x.setLineDash([])};
+  line(9,'#6aa8ff',nMax);line(10,'#4fe0c9',nMax);line(11,'#ffcc73',nMax);line(8,'rgba(233,238,251,.85)',vMax,[6,5]);
+  x.fillStyle='#8394ad';x.font='20px system-ui,sans-serif';x.textAlign='left';x.fillText(Math.round(nMax)+' N',6,22);x.textAlign='right';x.fillText(vMax.toFixed(1)+' m/s',W-6,22);x.textAlign='left';
+  const cx=tNow/t1*W;x.strokeStyle='rgba(255,255,255,.7)';x.lineWidth=1.5;x.beginPath();x.moveTo(cx,0);x.lineTo(cx,H);x.stroke();
+}
+function runSim(record=false){
+  if(!SIM_P){$('simStatus').textContent='시뮬레이션 데이터(side_profile.json)가 없습니다.';return}
+  if(sim.rec)stopRecording(true);
+  motion='stop';document.querySelectorAll('[data-motion]').forEach(b=>b.classList.toggle('active',b.dataset.motion==='stop'));
+  if(explode){explode=0;$('explode').value=0;$('explodeVal').textContent='0%';placeGroups();applyVisibility()}
+  const kind=simKindNow(),opt={value:+$('simParam').value,speed:+$('simSpeed').value,torque:'peak',mode:sim.variant};
+  $('simStatus').textContent='계산 중…';
+  setTimeout(()=>{
+    const t0=performance.now(),r=simulate(SIM_P,kind,opt),ms=performance.now()-t0;
+    sim.res=r;sim.t=0;sim.hold=0;sim.playing=true;
+    const c=SIMCFG[sim.kind];
+    $('hudTitle').textContent=(TESTS[kind]?.label||'')+' '+opt.value+c.unit+' · '+opt.speed.toFixed(1)+' m/s'+(sim.kind==='estop'?' · '+(opt.mode==='ideal'?'이상 제동':'구동 제동'):'');
+    const m=r.metrics,extra=kind==='estop'?` · 정지거리 ${m.stop_distance_mm??'—'} mm · 평균 감속 ${m.mean_decel_m_s2??'—'} m/s² · 뒤 캐스터 들림 ${m.rear_lift_mm} mm`:(kind==='slope'||kind==='ramp')?(m.hold_rollback_mm!=null?` · 정지 중 밀림 ${m.hold_rollback_mm} mm`:''):` · 최대 피치 ${m.max_pitch_rel_deg}°`;
+    $('simStatus').innerHTML=`결과: <b class="${r.result.pass?'sim-ok':'sim-bad'}">${esc(r.result.text)}</b>${extra} · 계산 ${Math.round(ms)} ms`;
+    buildTerrain(r.terrain);$('simHud').hidden=false;
+    const rx=r.frames[0][1];
+    camera.position.set(-1750,520,rx*1000+380);orbit.target.set(0,170,rx*1000+200);orbit.update();
+    applyFrame(r.frames[0]);
+    if(record)startRecording();
+    requestRender();
+  },30);
+}
+function simTick(dt){
+  if(!sim.res||!sim.playing)return false;
+  const F=sim.res.frames,tEnd=F.at(-1)[0];
+  sim.t=Math.min(tEnd,sim.t+dt*sim.rate);
+  let i=Math.min(F.length-1,Math.floor(sim.t*60));while(i>0&&F[i][0]>sim.t)i--;
+  applyFrame(F[i]);
+  if(sim.t>=tEnd){applyFrame(F.at(-1));sim.hold+=dt;if(sim.hold>1.2){sim.playing=false;if(sim.rec)stopRecording()}}
+  return true;
+}
+document.querySelectorAll('[data-rate]').forEach(b=>b.addEventListener('click',()=>{sim.rate=+b.dataset.rate;document.querySelectorAll('[data-rate]').forEach(x=>x.classList.toggle('active',x===b))}));
+$('simReplay').addEventListener('click',()=>{if(!sim.res)return;sim.t=0;sim.hold=0;sim.playing=true;requestRender()});
+$('simClose').addEventListener('click',()=>simClose());
+function simClose(){
+  if(sim.rec)stopRecording(true);
+  sim.res=null;sim.playing=false;$('simHud').hidden=true;
+  if(sim.terrain){scene.remove(sim.terrain);sim.terrain=null}
+  floor.visible=grid.visible=true;robot.position.set(0,0,0);robot.rotation.set(0,0,0);robot.updateMatrixWorld(true);
+  pose('LEFT',+$('poseLEFT').value);pose('RIGHT',+$('poseRIGHT').value);for(const w of wheels)w.group.rotation.x=0;
+  requestRender();
+}
+// video: composite the WebGL frame and the HUD into a 2-D canvas and record it (MP4 where supported, else WebM)
+function startRecording(){
+  const types=['video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm'];
+  const type=window.MediaRecorder&&types.find(t=>MediaRecorder.isTypeSupported(t));
+  if(!type){$('simStatus').textContent+=' · 이 브라우저는 영상 녹화를 지원하지 않습니다.';return}
+  const rc=document.createElement('canvas');rc.width=canvas.width;rc.height=canvas.height;sim.recCanvas=rc;
+  const chunks=[],rec=new MediaRecorder(rc.captureStream(60),{mimeType:type,videoBitsPerSecond:8e6});
+  rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+  rec.onstop=()=>{if(rec.discard)return;const blob=new Blob(chunks,{type}),a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download=`eco_${simKindNow()}_${$('simParam').value}_${(+$('simSpeed').value).toFixed(1)}mps.${type.includes('mp4')?'mp4':'webm'}`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)};
+  rec.start(200);sim.rec=rec;sim.recType=type;$('simRecord').textContent='■ 녹화 중지';$('simRecord').classList.add('recording');
+}
+function stopRecording(discard=false){
+  const rec=sim.rec;if(!rec)return;sim.rec=null;rec.discard=discard;rec.stop();sim.recCanvas=null;
+  $('simRecord').textContent='● 영상 저장';$('simRecord').classList.remove('recording');
+}
+function simCapture(){
+  const rc=sim.recCanvas;if(!rc||!sim.rec)return;
+  if(rc.width!==canvas.width||rc.height!==canvas.height){rc.width=canvas.width;rc.height=canvas.height}
+  const x=rc.getContext('2d');
+  x.fillStyle='#0b1726';x.fillRect(0,0,rc.width,rc.height);x.drawImage(canvas,0,0);
+  const s=rc.width/canvas.clientWidth,pad=14*s,w=330*s,left=16*s,top=16*s,chartH=(w-2*pad)*192/600,h=pad*2+118*s+chartH;
+  x.fillStyle='rgba(14,21,34,.82)';x.fillRect(left,top,w,h);
+  x.textAlign='left';x.fillStyle='#e9eefb';x.font=`600 ${13*s}px system-ui,sans-serif`;x.fillText($('hudTitle').textContent,left+pad,top+pad+10*s);
+  x.fillStyle=getComputedStyle($('hudResult')).color;x.fillText($('hudResult').textContent,left+pad,top+pad+30*s);
+  x.fillStyle='#b4c2d9';x.font=`${12*s}px system-ui,sans-serif`;
+  const rows=[['시간',$('hudT').textContent,'속도',$('hudV').textContent],['피치',$('hudPitch').textContent,'스트로크',$('hudSlide').textContent],['구동륜',$('hudNd').textContent,'토크',$('hudTq').textContent],['앞 캐스터',$('hudNf').textContent,'뒤 캐스터',$('hudNr').textContent]];
+  rows.forEach((r,i)=>{const y=top+pad+52*s+i*17*s;x.fillText(r[0]+'  '+r[1],left+pad,y);x.fillText(r[2]+'  '+r[3],left+pad+160*s,y)});
+  x.drawImage($('hudChart'),left+pad,top+pad+118*s,w-2*pad,chartH);
+  x.fillStyle='#8394ad';x.font=`${10*s}px system-ui,sans-serif`;x.fillText('Eco 모델 '+LAYOUT.revision+' · 2D 동역학 시뮬레이션(가정 포함) · 파랑 구동륜 / 청록 앞 캐스터 / 노랑 뒤 캐스터 하중, 점선 속도',left,rc.height-10*s);
+}
+// limits table from cad-output/p30/drive_sim.json
+(function(){
+  const T=SIMREP?.tests;if(!T){$('simLimits').textContent='한계값 보고서 없음 (node tools/drive_sim.mjs)';return}
+  const cell=(kind,variant,v,L,unit)=>L?.limit==null?'—':`<button data-run="${kind}|${variant}|${v}|${L.limit}" title="${L.firstFail?'다음 값 '+L.firstFail.value+unit+': '+esc(L.firstFail.text):''}">${L.limit}${unit}</button>`;
+  const sp=[0.3,0.5,1];
+  let h='<table class="sim-table"><thead><tr><th>시험 (통과 한계)</th>'+sp.map(v=>`<th>${v} m/s</th>`).join('')+'</tr></thead><tbody>';
+  h+='<tr><td>경사 (평지→경사)</td>'+sp.map(v=>`<td>${cell('slope','kink',v,T['v'+v]?.slope_deg,'°')}</td>`).join('')+'</tr>';
+  h+='<tr><td>단차</td>'+sp.map(v=>`<td>${cell('step','',v,T['v'+v]?.step_mm,' mm')}</td>`).join('')+'</tr>';
+  h+='<tr><td>방지턱</td>'+sp.map(v=>`<td>${cell('bump','',v,T['v'+v]?.bump_mm,' mm')}</td>`).join('')+'</tr></tbody></table>';
+  const E=T.estop,ramp=T.ramp,drv=E?.drive_brake||[];
+  const dmax=Math.max(...drv.map(d=>d.mean_decel_m_s2||0)),idl=E?.ideal?.v1,tips=Object.values(E?.ideal||{}).map(o=>o.no_tip);
+  const tipTxt=tips.length&&tips.every(t=>!t.firstFail)?'≥ '+Math.min(...tips.map(t=>t.limit))+' m/s² 까지 없음':tips.length?Math.min(...tips.map(t=>t.limit))+' m/s²':'—';
+  h+='<table class="sim-table"><tbody>';
+  h+=`<tr><td>경사 위 출발 · 최대 토크</td><td>${cell('slope','ramp',0.5,ramp?.peak_torque,'°')}</td></tr>`;
+  h+=`<tr><td>경사 위 출발 · 정격 4 Nm 연속</td><td>${ramp?.rated_torque?.limit??'—'}°</td></tr>`;
+  h+=`<tr><td>E-stop 구동 제동 최대 감속 (1 m/s)</td><td><button data-run="estop|drive|1|20">${dmax.toFixed(1)} m/s²</button></td></tr>`;
+  h+=`<tr><td>뒤 캐스터 들림 없는 최대 감속</td><td>${cell('estop','ideal',1,idl?.no_lift,' m/s²')}</td></tr>`;
+  h+=`<tr><td>전도 (0.5~2 m/s, 이상 제동)</td><td>${tipTxt}</td></tr>`;
+  h+='</tbody></table>';
+  const fails=[];for(const v of sp)for(const [k,l,u] of [['slope_deg','경사','°'],['step_mm','단차',' mm'],['bump_mm','방지턱',' mm']]){const f=T['v'+v]?.[k]?.firstFail;if(f)fails.push(`${l} ${v} m/s · ${f.value}${u}: ${f.text}`)}
+  if(ramp?.peak_torque?.firstFail)fails.push(`경사 위 출발 · ${ramp.peak_torque.firstFail.value}°: ${ramp.peak_torque.firstFail.text}`);
+  h+=`<details style="margin-top:8px"><summary>실패 원인 (한계 바로 다음 값)</summary><p>${fails.map(esc).join('<br>')}</p></details>`;
+  h+=`<p style="margin-top:6px">표의 값을 누르면 그 조건으로 재생합니다. 측면 2D 모델(좌우 동일), 질량 ${SIM_P?.source.mass_kg??55} kg·무게중심 높이 ${SIM_P?.source.cg_height_mm??250} mm·바닥 μ ${SIM_P?.mu??0.6}·관성·타이어 강성은 가정이며 캐스터 선회 오프셋은 무시합니다. 시제품 시험으로 확인해야 합니다.</p>`;
+  $('simLimits').innerHTML=h;
+  $('simLimits').querySelectorAll('[data-run]').forEach(b=>b.addEventListener('click',()=>{const [k,vr,sp_,val]=b.dataset.run.split('|');sim.kind=k;sim.variant=vr||null;$('simSpeed').value=sp_;simUI();$('simParam').value=val;simUI();runSim()}));
+})();
+simUI();
 rebuildFov();ready=true;placeGroups();applyVisibility();syncMoveUI();$('loading').remove();requestRender();
-window.ecoReview={groups,parts,movers,springs,camPivots,pose,applyCamera,state:()=>({explode,motion,selected,camYaw,camPitch,lidarFov:lidarFovRoot.visible,cameraFov:cameraFovRoot.visible})};
+window.ecoReview={groups,parts,movers,springs,camPivots,pose,applyCamera,sim,runSim,simulate,SIM_P,simFrame:dt=>{const go=simTick(dt);robot.updateMatrixWorld(true);renderer.render(scene,camera);simCapture();return go},simSeek:t=>{const F=sim.res.frames;let i=Math.min(F.length-1,Math.round(t*60));sim.t=F[i][0];sim.playing=false;applyFrame(F[i]);robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera);return F[i]},state:()=>({explode,motion,selected,camYaw,camPitch,lidarFov:lidarFovRoot.visible,cameraFov:cameraFovRoot.visible})};
 </script>
 </body>
 </html>

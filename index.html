@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0a111d">
   <meta name="description" content="University AMR Project: interactive 3D CAD concept, 2WD + 4 casters, 24V Ø180mm ZLLG65ASM250-N V2.02 rubber hub motors, four GL-65-ASF casters, dual SICK TiM571 and dual Orbbec Astra Mini Pro.">
-  <title>AMR PROJECT · Layout Lab</title>
-  <link rel="stylesheet" href="web/lab.css?v=4">
+  <title>AMR PROJECT · Pro 모델</title>
+  <link rel="stylesheet" href="web/lab.css?v=5">
   <script type="module" src="web/ui.js"></script>
   <script>addEventListener("error",e=>{const el=document.getElementById("loading");if(el)el.textContent="3D 로딩 실패: 새로고침하거나 네트워크 연결을 확인하세요.";});addEventListener("unhandledrejection",()=>{const el=document.getElementById("loading");if(el)el.textContent="3D 부품 데이터 로딩 실패: 새로고침해 주세요.";});</script>
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"}}</script>
@@ -15,12 +15,12 @@
 <div class="app">
   <header>
     <div class="brand"><div class="mark">A</div><div><strong>AMR PROJECT</strong><small>UNIVERSITY ROBOTICS · LAYOUT LAB</small></div></div>
-    <div class="header-right"><span class="chip"><b>●</b> REV <span id="layoutRevision">0.9</span> · BUILD123D</span><div class="model-switch" role="tablist" aria-label="모델 선택"><button type="button" role="tab" data-model="rev15" aria-selected="true" id="mainModelTab">Rev17 6륜</button><button type="button" role="tab" data-model="eco" aria-selected="false">Eco 저가형</button></div><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    <div class="header-right"><span class="chip"><b>●</b> REV <span id="layoutRevision">0.9</span> · BUILD123D</span><div class="model-switch" role="tablist" aria-label="모델 선택"><button type="button" role="tab" data-model="rev15" aria-selected="true" id="mainModelTab">Pro 모델</button><button type="button" role="tab" data-model="eco" aria-selected="false">Eco 모델</button></div><a class="header-link" href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </header>
   <main class="workspace">
     <aside class="left">
-      <div class="eyebrow">MECHANICAL CONCEPT</div>
-      <h1>6-Wheel Differential AMR</h1>
+      <div class="eyebrow">PRO MODEL · MECHANICAL CONCEPT</div>
+      <h1>Pro 모델 · 6륜 차동 AMR</h1>
       <p class="intro">선정 부품 기반 6륜 AMR. ZLLG65ASM250-N V2.02 Ø180 고무타이어 2개, GL-65-ASF 캐스터 4개(앞 2개는 구동륜과 보기 링크), SICK TiM571 2개, Orbbec Astra Mini Pro 2개, 회사 7S9P 배터리·7인치 LCD·스피커, 판재+프로파일 구조.</p>
       <div class="section">
         <h2>카메라 시점</h2>
@@ -57,7 +57,7 @@
 <button class="control" id="resetSuspension">공칭 위치로 복귀</button></div>
 <div class="section">
         <h2>센서 배치</h2>
-        <p class="hint">LiDAR: eco와 같은 위치(앞 왼쪽 (−205, 285)·뒤 오른쪽 (205, −285)), 스캔면 Z206.8, 각270°의 사각90°는 차체 안쪽을 향합니다. 카메라: eco와 같은 위치(X±140, Y282, Z239), 바깥 5°·하향 10°. 하판·상판을 eco와 같은 440×600으로 키웠습니다.</p>
+        <p class="hint">LiDAR: Eco 모델과 같은 위치(앞 왼쪽 (−205, 285)·뒤 오른쪽 (205, −285)), 스캔면 Z206.8, 각270°의 사각90°는 차체 안쪽을 향합니다. 카메라: Eco 모델과 같은 위치(X±140, Y282, Z239), 바깥 5°·하향 10°. 하판·상판을 Eco 모델과 같은 440×600으로 키웠습니다.</p>
       </div>
       <div class="section">
         <div class="range-row"><span>분해 뷰 (Explode)</span><strong id="explodeVal">0%</strong></div>
@@ -73,7 +73,7 @@
       <canvas id="viewport"></canvas>
       <div id="loading">3D 모델 불러오는 중…<br>인터넷 연결이 필요합니다 (Three.js CDN).</div>
       <div id="labels"></div>
-      <div class="scene-top"><h2>LOW-COST AMR / GENERAL ARRANGEMENT</h2><p>선정 부품 기반 배치 · 제작 검증 전 [mm]</p></div>
+      <div class="scene-top"><h2>PRO MODEL / GENERAL ARRANGEMENT</h2><p>선정 부품 기반 배치 · 제작 검증 전 [mm]</p></div>
       <div class="top-actions"><button class="icon-btn" id="resetCamera">⟳ 시점 초기화</button><button class="icon-btn" id="saveImage">↓ PNG</button><button class="icon-btn" id="openBom">☰ BOM·예상 가격</button></div>
       <div class="footer">개념 모델 · 강도·하중 검증 전</div>
       <div class="status">
@@ -123,10 +123,10 @@
       <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_current.step.gz">STEP 다운로드 (gzip) ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
     </aside>
   </main>
-  <iframe class="eco-view" id="ecoView" title="Eco 프로파일 샤시 3D 뷰어"></iframe>
+  <iframe class="eco-view" id="ecoView" title="Eco 모델 3D 뷰어"></iframe>
 <script>
 (()=>{const app=document.querySelector('.app'),frame=document.getElementById('ecoView'),btns=[...document.querySelectorAll('.model-switch button')];
-function show(m){const p=m==='eco';if(p&&!frame.getAttribute('src'))frame.src='eco.html?embed=1';app.classList.toggle('show-eco',p);for(const b of btns)b.setAttribute('aria-selected',String(b.dataset.model===m));document.title=p?'AMR PROJECT · Eco Profile Chassis':'AMR PROJECT · Layout Lab';if(!p)dispatchEvent(new Event('resize'))}
+function show(m){const p=m==='eco';if(p&&!frame.getAttribute('src'))frame.src='eco.html?embed=1';app.classList.toggle('show-eco',p);for(const b of btns)b.setAttribute('aria-selected',String(b.dataset.model===m));document.title=p?'AMR PROJECT · Eco 모델':'AMR PROJECT · Pro 모델';if(!p)dispatchEvent(new Event('resize'))}
 for(const b of btns)b.onclick=()=>{history.replaceState(null,'',b.dataset.model==='eco'?'#eco':location.pathname+location.search);show(b.dataset.model)};
 show(location.hash==='#eco'?'eco':'rev15');})();
 </script>
@@ -189,7 +189,7 @@ for(const pose of LAYOUT.lidars){
 }
 function makeCamera(id,sign){
  part(id,sign<0?'좌측 Orbbec Astra Mini Pro':'우측 Orbbec Astra Mini Pro',
-  '상판 아래 전방 카메라: eco와 같은 위치(X±140, Y282, Z239), 바깥 5°, 하향 10°. 3D 프린팅 판 1개에 카메라 뒷면 M2 2개로 체결하고, 판은 상판 밑에 M5 인서트 2개로 답니다. 구조광 상호간섭과 실제 시야 가림은 실물 확인이 필요합니다.',[sign*80,70,120]);
+  '상판 아래 전방 카메라: Eco 모델과 같은 위치(X±140, Y282, Z239), 바깥 5°, 하향 10°. 3D 프린팅 판 1개에 카메라 뒷면 M2 2개로 체결하고, 판은 상판 밑에 M5 인서트 2개로 답니다. 구조광 상호간섭과 실제 시야 가림은 실물 확인이 필요합니다.',[sign*80,70,120]);
  // Astra Mini Pro datasheet depth channel. The model center is the display origin.
  cameraFov.add(cameraFrustum(LP,sign,SPEC.camera.horizontal_depth_fov_deg,45.5,280));
 }
@@ -311,7 +311,7 @@ try{
  document.querySelectorAll('[data-wheel]').forEach(input=>input.addEventListener('input',()=>{setMotion('stop');native.setPose(input.dataset.wheel,Number(input.value));$('value'+input.dataset.wheel).textContent=Number(input.value).toFixed(1).replace(/\.0$/,'')+' mm'}));
  $('resetSuspension').addEventListener('click',()=>{for(const input of document.querySelectorAll('[data-wheel]')){input.value=0;native.setPose(input.dataset.wheel,0);$('value'+input.dataset.wheel).textContent='0 mm'}requestRender()});
  $('partName').textContent=`build123d 조립 모델 · Rev ${LAYOUT.revision}`;
- $('layoutRevision').textContent=LAYOUT.revision;{const rev='Rev'+String(LAYOUT.revision).replace('.','');$('mainModelTab').textContent=rev+' 6륜';$('bogieRevision').textContent=rev}
+ $('layoutRevision').textContent=LAYOUT.revision;{const rev='Rev'+String(LAYOUT.revision).replace('.','');$('mainModelTab').textContent='Pro 모델';$('mainModelTab').title='Pro 모델 · '+rev;$('bogieRevision').textContent=rev}
  $('deckHeight').textContent=`${deckTop} mm`;
  const {width,length,height}=native.bounds_mm;
  $('envelopeDimensions').textContent=`W${width.toFixed(1)} × L${length.toFixed(1)} × H${height.toFixed(1)}`;
