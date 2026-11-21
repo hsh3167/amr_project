@@ -137,14 +137,14 @@ show(location.hash==='#eco'?'eco':'rev15');})();
     <div class="tabs"><button class="control active" data-bom="suspension">서스펜션 6모듈</button><button class="control" data-bom="concept">전체 개념 BOM</button><button class="control" id="closeBom" aria-label="닫기">✕ 닫기</button></div></div>
   <div class="bom-body" id="bomContent"></div>
 </dialog>
-<script type="module">import {setupBOM} from './web/bom.js?rev=1';setupBOM();</script>
+<script type="module">import {setupBOM} from './web/bom.js?rev=2';setupBOM();</script>
 <script type="module">
 import * as THREE from 'three';
-import {loadNativeCAD} from './web/native-cad.js?rev=16';
+import {loadNativeCAD} from './web/native-cad.js?rev=17';
 import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {proParams} from './web/drive-sim.js?v=2';
-import {setupDriveSim} from './web/sim-ui.js?v=1';
+import {proParams} from './web/drive-sim.js?v=3';
+import {setupDriveSim} from './web/sim-ui.js?v=2';
 
 const [SPEC,LAYOUT]=await Promise.all(['./cad/parts.json','./cad/layout.json'].map(url=>fetch(url,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Layout data unavailable');return r.json()})));
 const LP=LAYOUT.parameters;

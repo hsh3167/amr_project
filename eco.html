@@ -129,8 +129,8 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {STLLoader} from 'three/addons/loaders/STLLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
-import {ecoParams,simulate} from './web/drive-sim.js?v=2';
-import {setupDriveSim} from './web/sim-ui.js?v=1';
+import {ecoParams,simulate} from './web/drive-sim.js?v=3';
+import {setupDriveSim} from './web/sim-ui.js?v=2';
 
 const $=id=>document.getElementById(id);
 const getJSON=(u,fallback)=>fetch(u,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(u);return r.json()}).catch(e=>{if(fallback!==undefined)return fallback;throw e});

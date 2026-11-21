@@ -2,7 +2,7 @@
 // controls, 3-D playback on the CAD model, HUD + load chart, video recording, limits table and the
 // "계산 내용" dialog that explains the model, equations, parameters and criteria.
 import * as THREE from 'three';
-import {simulate, TESTS, DT, G} from './drive-sim.js?v=2';
+import {simulate, TESTS, DT, G} from './drive-sim.js?v=3';
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const SIMCFG = {
@@ -311,7 +311,7 @@ function calcHTML(P, report, res, hand) {
   for (const s of P.subs) {
     if (s.kind === 'slide') {
       const who = s.name === 'drive' ? '구동부 수직 슬라이드' : '뒤 캐스터 경첩 암 (90 mm 암, ±' + s.smax*1000 + ' mm → 수직 슬라이드로 근사)';
-      h += `<p><b>${who}</b></p><div class="eq">F<sub>스프링</sub> = −(F₀ + k·s) − c·ṡ   (s: 위로 +, F₀ = ${f1(s.F0)} N, k = ${f1(s.ks/1000)} N/mm, c = ${s.cs} N·s/m, 좌우 합)<br>|s| > ${s.smax*1000} mm → 스토퍼 k<sub>st</sub> = ${f0(s.kst/1000)} N/mm 추가,  슬라이드 직각 방향은 k<sub>j</sub> = ${f0(P.kj/1000)} N/mm로 구속</div>`;
+      h += `<p><b>${who}</b></p><div class="eq">F<sub>스프링</sub> = −max(0, F₀ + k·s) − c·ṡ   (스프링은 밀기만 함, s: 위로 +, F₀ = ${f1(s.F0)} N, k = ${f1(s.ks/1000)} N/mm, c = ${s.cs} N·s/m, 좌우 합)<br>|s| > ${s.smax*1000} mm → 스토퍼 k<sub>st</sub> = ${f0(s.kst/1000)} N/mm 추가,  슬라이드 직각 방향은 k<sub>j</sub> = ${f0(P.kj/1000)} N/mm로 구속</div>`;
     } else {
       h += `<p><b>보기 링크 (핀 조인트)</b> — 피벗을 k<sub>j</sub> = ${f0(P.kj/1000)} N/mm 페널티로 차체에 묶고, 링크는 피벗 둘레로 회전합니다(φ: 앞 캐스터가 올라가는 방향 +).</p>
         <div class="eq">τ = a·max(0, F₀ − k·a·φ) − c<sub>r</sub>·φ̇   (a = 피벗 뒤 ${f0(s.arm*1000)} mm, F₀ = ${f1(s.F0)} N, k = ${f1(s.k/1000)} N/mm, 좌우 합)<br>|φ| > ${(s.amax*180/Math.PI).toFixed(2)}° (앞 캐스터 ±${f0(s.frontArm*1000*Math.sin(s.amax))} mm) → 우레탄 스토퍼 (앞 캐스터 올라감 ${f0(s.ksrUp)} / 내려감 ${f0(s.ksrDown)} N·m/rad, C-USLH10 1개 3×10⁵ N/m 가정) 추가</div>

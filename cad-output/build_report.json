@@ -1,7 +1,7 @@
 {
   "valid": true,
-  "components": 167,
-  "solids": 459,
+  "components": 169,
+  "solids": 461,
   "errors": [],
   "suspension_catalog": {
     "concept": "Rev17 bogie (front caster + drive wheel, MISUMI 6001DD bearing-housing pivot, coaxial bogie spring) + rear hinge casters",
@@ -148,31 +148,31 @@
       }
     },
     "rear_caster_spring": {
-      "sku": "X-SWU17-35",
+      "sku": "SWL18-30",
       "travel_mm": 10,
       "lever_ratio": 0.7222,
       "spring_travel_mm": 7.222,
       "spring_lengths_mm": [
-        31.611,
-        28,
-        24.389
+        32.311,
+        28.7,
+        25.089
       ],
       "forces_N": [
-        23.587,
-        48.72,
-        73.853
+        0.0,
+        45.63,
+        172.376
       ],
-      "min_solid_margin_mm": 13.889,
-      "max_working_deflection_margin_mm": 8.639,
-      "installed_length_mm": 28,
-      "shim_removed_force_N": 48.72,
+      "min_solid_margin_mm": 7.089,
+      "max_working_deflection_margin_mm": 4.689,
+      "installed_length_mm": 28.7,
+      "shim_removed_force_N": 35.1,
       "needed_spring_force_N": 45.78,
-      "needed_length_mm": 28.422,
-      "level_shim_mm": -0.422,
-      "configured_shim_mm": 0,
-      "rear_sink_with_arm_mm": -0.584,
-      "rear_sink_without_arm_mm": -6.479,
-      "wheel_rate_N_mm": 3.63
+      "needed_length_mm": 28.696,
+      "level_shim_mm": 0.304,
+      "configured_shim_mm": 0.3,
+      "rear_sink_with_arm_mm": 0.006,
+      "rear_sink_without_arm_mm": -1.163,
+      "wheel_rate_N_mm": 18.307
     },
     "forward_pitch_onset_g": 0.3,
     "scope": "Centred CG unless stated, flat floor, rigid bogie, catalog rear spring rate (+-10%). Pitch: the chassis can rotate forward about the pivot line once deceleration x CG height > g x pivot_y (CG height 200 mm assumed); the front stopper then hands the load to the front caster. Measure on prototype."
@@ -333,5 +333,148 @@
     "deck_underside_above_camera_top": 32.324,
     "lowest_camera_mount_above_scan": 20.085
   },
-  "step_roundtrip": []
+  "selected_sensor_collisions": [],
+  "suspension_collision_sampling": {
+    "sampled_poses": 20,
+    "boolean_pairs": 379,
+    "hits": [],
+    "scope": "One motion key at a time (bogie or hinge module), five sampled positions; springs excluded; no continuous swept-volume or dynamic clearance proof"
+  },
+  "caster_swivel_sampling": {
+    "sampled_poses": 96,
+    "boolean_pairs": 192,
+    "hits": [],
+    "scope": "OEM fork and wheel, 45-degree swivel increments at droop, nominal and bump of its hinge arm; local hardware and chassis"
+  },
+  "static_interference": {
+    "boolean_pairs": 310,
+    "hits": [],
+    "known_manufacturer_overlaps": [
+      {
+        "a": "43_GL65_OEM_fork_LB",
+        "b": "44_GL65_OEM_wheel_LB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      },
+      {
+        "a": "43_GL65_OEM_fork_LF",
+        "b": "44_GL65_OEM_wheel_LF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      },
+      {
+        "a": "43_GL65_OEM_fork_RB",
+        "b": "44_GL65_OEM_wheel_RB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      },
+      {
+        "a": "43_GL65_OEM_fork_RF",
+        "b": "44_GL65_OEM_wheel_RF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle"
+      }
+    ],
+    "scope": "All parts, nominal pose, BRep common volume > 0.01 mm3; contact without overlap is allowed"
+  },
+  "suspension_pose_interference": {
+    "sampled_poses": 8,
+    "boolean_pairs": 568,
+    "hits": [],
+    "known_manufacturer_overlaps": [
+      {
+        "a": "43_GL65_OEM_fork_LF",
+        "b": "44_GL65_OEM_wheel_LF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "LEFT",
+        "displacement_mm": -10.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_LF",
+        "b": "44_GL65_OEM_wheel_LF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "LEFT",
+        "displacement_mm": 10.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_RF",
+        "b": "44_GL65_OEM_wheel_RF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "RIGHT",
+        "displacement_mm": -10.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_RF",
+        "b": "44_GL65_OEM_wheel_RF",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "RIGHT",
+        "displacement_mm": 10.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_LB",
+        "b": "44_GL65_OEM_wheel_LB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "LB",
+        "displacement_mm": -5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_LB",
+        "b": "44_GL65_OEM_wheel_LB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "LB",
+        "displacement_mm": 5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_RB",
+        "b": "44_GL65_OEM_wheel_RB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "RB",
+        "displacement_mm": -5.0
+      },
+      {
+        "a": "43_GL65_OEM_fork_RB",
+        "b": "44_GL65_OEM_wheel_RB",
+        "volume_mm3": 26.095,
+        "reason": "GL-65-ASF-EUS manufacturer STEP: wheel hub faces enter the fork legs by 0.2 mm at the axle",
+        "wheel": "RB",
+        "displacement_mm": 5.0
+      }
+    ],
+    "scope": "One wheel at a time at full droop and full bump; springs, stoppers and fasteners included; cameras excluded; not a swept-volume proof"
+  },
+  "support_connectivity": {
+    "root": "01_lower_steel_plate_3t",
+    "tolerance_mm": 0.2,
+    "contacts": 238,
+    "unsupported": [],
+    "isolated": [],
+    "scope": "Contact graph from the base plate at the nominal pose; geometric support only, not joint strength"
+  },
+  "step_roundtrip": [
+    {
+      "file": "amr_current.step",
+      "raw_import_valid": false,
+      "valid_after_explicit_normalization": true,
+      "normalized_components": [
+        {
+          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_LEFT",
+          "minimum_topology_tolerance_mm": 1e-05,
+          "volume_change_mm3": 0.0
+        },
+        {
+          "name": "70_Orbbec_Astra_Mini_Pro_MX6000_RIGHT",
+          "minimum_topology_tolerance_mm": 1e-05,
+          "volume_change_mm3": 0.0
+        }
+      ],
+      "solids": 461
+    }
+  ]
 }

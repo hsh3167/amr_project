@@ -330,7 +330,7 @@ export function simulate(P, kind0, opt) {
         const vAx = ch.vx-ch.om*(az-ch.z), vAz = ch.vz+ch.om*(ax-ch.x);
         const rvx = b.vx-vAx, rvz = b.vz-vAz, vu = rvx*c+rvz*s, vw = -rvx*s+rvz*c;
         const Fp = -(P.kj*su+P.cj*vu);
-        let Fs = -(b.F0+b.ks*sw)-b.cs*vw;
+        let Fs = -Math.max(0, b.F0+b.ks*sw)-b.cs*vw;   // a seated spring pushes only (goes slack in droop)
         if (sw > b.smax) Fs += -b.kst*(sw-b.smax)-b.cst*vw;
         else if (sw < -b.smax) Fs += b.kst*(-b.smax-sw)-b.cst*vw;
         const jx = Fp*c-Fs*s, jz = Fp*s+Fs*c;

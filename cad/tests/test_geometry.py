@@ -73,7 +73,9 @@ def test_bogie_statics_and_rear_spring_within_catalog():
     total=2*(nominal['drive_each_N']+nominal['front_caster_each_N']+nominal['rear_caster_each_N'])
     assert total==pytest.approx(55*9.80665,abs=.05)
     rear=report['rear_caster_spring']
-    assert rear['sku']=='X-SWU17-35' and rear['forces_N'][0]>0 and rear['min_solid_margin_mm']>0 and rear['max_working_deflection_margin_mm']>0
+    # Rev17g: SWL18-30 (35.1 N/mm) goes slack at full droop (0 N) by design; loaded at the nominal pose
+    assert rear['sku']=='SWL18-30' and rear['forces_N'][0]>=0 and rear['forces_N'][1]>40 and rear['min_solid_margin_mm']>0 and rear['max_working_deflection_margin_mm']>0
+    assert rear['wheel_rate_N_mm']>15
     # Rev17: the bogie springs unload the rear casters; a negative level shim cannot be fitted, so the shim is 0
     # and the rear may sit a little high (< 1 mm with the arm).
     if rear['level_shim_mm']<0:
@@ -175,16 +177,20 @@ def test_rev16_bogie_bearing_pivot_and_rotation_limits():
 
 
 def test_rev12b_misumi_step_parts_and_static_clearance():
-    """MISUMI STEP pins, bushes and C-USLH10 stoppers on the rear hinge modules; nothing near the suspension overlaps."""
+    """C-USLH10 stoppers from the MISUMI STEP; Rev17g stock E-SHCCG6-75 pin + MPFZ6-10 bushes drawn from the catalog
+    table (no STEP) on the rear hinge modules; nothing near the suspension overlaps."""
     from cad.validation import static_interference
 
     d=load_design()
     records=build_records(d,['chassis','structure','lidars','suspension','electronics'])
     parts={r.name:r for r in records}
     for wheel in ('LB','RB'):
-        for name in ('hinge_pin','hinge_bushes','bump_stopper_C-USLH10'):
+        for name,status in (('hinge_pin','misumi_catalog_envelope'),('hinge_bushes','misumi_catalog_envelope'),
+                            ('pin_retaining_ring','misumi_catalog_envelope'),('bump_stopper_C-USLH10','misumi_step_exact')):
             part=parts['80_caster_'+name+'_'+wheel]
-            assert part.status=='misumi_step_exact' and part.shape.is_valid
+            assert part.status==status and part.shape.is_valid
+        pin=parts['80_caster_hinge_pin_'+wheel]
+        assert pin.metadata['sku']=='E-SHCCG6-75' and pin.metadata['length_mm']==75
         stopper=parts['80_caster_bump_stopper_C-USLH10_'+wheel].shape.bounding_box()
         assert stopper.size.Z==pytest.approx(24) and stopper.size.X==pytest.approx(10)
         assert parts['80_caster_spring_coil_'+wheel].shape.is_valid

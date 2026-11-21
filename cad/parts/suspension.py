@@ -115,6 +115,14 @@ def bump_stop_xy(d, key):
     return x-(off if x > 0 else -off), y
 
 
+STUD_NUT = {6: (10, 5), 8: (13, 6.5)}   # nut across flats, height
+
+
+def stud_size(q):
+    """Spring guide stud diameter from layout 'stud' (default M8)."""
+    return int(str(q.get('stud', 'M8')).lstrip('M'))
+
+
 def stud_hole(d, key):
     return 13 if key in ('LEFT', 'RIGHT') else 12
 
@@ -417,32 +425,60 @@ def make(d):
         add(kind+'_bracket_nuts', Compound([nut(a, b, base_bottom-bt-4, 8, 4, 5) for a, b in holes]), key,
             quantity=len(holes))
         length = round(hi-lo+1, 1)
-        # Rev12b: the supplied MISUMI STEP (axis +X, head underside at X0) placed on +Y.
-        pin = misumi_solid(q['pin_step'])
-        if abs(pin.bounding_box().max.X-length) > 1e-6:
-            raise ValueError('Pin STEP length differs from the bracket span: '+key)
-        pin = pin.rotate(Axis.Z, 90).translate((px, lo, pz))
-        add(kind+'_hinge_pin', pin, key, sku=q['pin_sku'], length_mm=length, status='misumi_step_exact',
-            source=q['pin_step']+'.gz', fit='Fixed in ear holes (H7), arm turns on it; grease. M6 tapped end, depth ~18.6')
-        end = lo+length
-        tap = q['pin_tap_minor_d_mm']
-        keeper = cyly(8, 1, px, end+.5, pz)-cyly(3.2, 3, px, end+.5, pz)
-        # Thread engagement inside the pin is drawn at the tap minor diameter.
-        keeper += cyly(tap/2, 7, px, end-3.5, pz)+cyly(3, 1, px, end+.5, pz)+cyly(5, 6, px, end+4, pz)
-        add(kind+'_pin_retainer', keeper, key, sku='CB6-8', washer='M6 OD16 t1',
-            thread='engaged length 7 shown at the tap minor diameter')
+        if q.get('pin_model') == 'catalog':
+            # Rev17g: company-stock E-SHCCG (flanged, retaining-ring type) drawn from the MISUMI catalog table:
+            # local axis +X, flange underside at X0, ring groove at X=L (= the catalog L), N beyond the groove.
+            L = float(q['pin_sku'].split('-')[-1])
+            if abs(L-length) > 1e-6:
+                raise ValueError('Pin L (flange to ring groove) differs from the bracket span + 1 mm: '+key)
+            r, T, N, w = q['pin_d_mm']/2, q['pin_head_thickness_mm'], q['pin_end_mm'], q['pin_groove_width_mm']
+            pin = cyly(q['pin_head_d_mm']/2, T, px, lo-T/2, pz)+cyly(r, L+N, px, lo+(L+N)/2, pz)
+            pin -= cyly(r+1, w, px, lo+L+w/2, pz)-cyly(q['pin_groove_d_mm']/2, w+1, px, lo+L+w/2, pz)
+            add(kind+'_hinge_pin', pin, key, sku=q['pin_sku'], length_mm=L, status='misumi_catalog_envelope',
+                source=q.get('pin_source', ''), fit='g7 pin in the ear holes (H7 clearance); the arm turns on its bushes; '
+                'the ring sits 1 mm outside the +Y ear (axial play 1 mm); grease')
+            # E-ring No.5 in the groove (JIS E5: OD 11, t 0.6; drawn as a plain ring)
+            ring_t = .6
+            keeper = cyly(5.5, ring_t, px, lo+L+ring_t/2+.05, pz)-cyly(q['pin_groove_d_mm']/2, ring_t+1, px, lo+L+ring_t/2+.05, pz)
+            add(kind+'_pin_retaining_ring', keeper, key, sku=q.get('pin_ring', 'E-ring'), quantity=1,
+                status='misumi_catalog_envelope', note='Supplied with the pin; drawn as a plain ring (no opening)')
+        else:
+            # Rev12b: the supplied MISUMI STEP (axis +X, head underside at X0) placed on +Y.
+            pin = misumi_solid(q['pin_step'])
+            if abs(pin.bounding_box().max.X-length) > 1e-6:
+                raise ValueError('Pin STEP length differs from the bracket span: '+key)
+            pin = pin.rotate(Axis.Z, 90).translate((px, lo, pz))
+            add(kind+'_hinge_pin', pin, key, sku=q['pin_sku'], length_mm=length, status='misumi_step_exact',
+                source=q['pin_step']+'.gz', fit='Fixed in ear holes (H7), arm turns on it; grease. M6 tapped end, depth ~18.6')
+            end = lo+length
+            tap = q['pin_tap_minor_d_mm']
+            keeper = cyly(8, 1, px, end+.5, pz)-cyly(3.2, 3, px, end+.5, pz)
+            # Thread engagement inside the pin is drawn at the tap minor diameter.
+            keeper += cyly(tap/2, 7, px, end-3.5, pz)+cyly(3, 1, px, end+.5, pz)+cyly(5, 6, px, end+4, pz)
+            add(kind+'_pin_retainer', keeper, key, sku='CB6-8', washer='M6 OD16 t1',
+                thread='engaged length 7 shown at the tap minor diameter')
 
     def bushes(kind, key, outer_lo, outer_hi, q):
         """Two flanged oil-free bushes pressed into the arm from outside; flanges face the bracket ears."""
         (px, py, pz), _ = pivot_of(d, key)
-        source = misumi_solid(q['bush_step'])  # axis +X, flange X-2..0, sleeve X0..8
+        catalog = q.get('bush_model') == 'catalog'
+        if catalog:
+            # Rev17g: drawn from the MISUMI table (axis +X, flange X-t..0, sleeve X0..L-t), same frame as the STEP.
+            t, L = q['bush_flange_t_mm'], q['bush_length_mm']
+            source = (Solid.make_cylinder(q['bush_flange_d_mm']/2, t, Plane.YZ.offset(-t))
+                      + Solid.make_cylinder(q['bush_od_mm']/2, L-t, Plane.YZ)
+                      - Solid.make_cylinder(q['bush_bore_mm']/2, L+2, Plane.YZ.offset(-t-1)))
+        else:
+            source = misumi_solid(q['bush_step'])  # axis +X, flange X-2..0, sleeve X0..8
         parts = []
         for sy, outer in ((-1, outer_lo), (1, outer_hi)):
             face = py+sy*outer
             parts.append(source.rotate(Axis.Z, 90 if sy < 0 else -90).translate((px, face, pz)))
-        add(kind+'_hinge_bushes', Compound(parts), key, True, sku=q['bush_sku'], quantity=2, status='misumi_step_exact',
-            source=q['bush_step']+'.gz',
-            fit='Press into 14 H7 arm bore (m6 OD); runs on the g6 pin (F7 bore, STEP nominal 10.0); flange = thrust washer')
+        od, bore = q['bush_od_mm'], q['bush_bore_mm']
+        add(kind+'_hinge_bushes', Compound(parts), key, True, sku=q['bush_sku'], quantity=2,
+            status='misumi_catalog_envelope' if catalog else 'misumi_step_exact',
+            source=q.get('bush_source', '') if catalog else q['bush_step']+'.gz',
+            fit=f'Press into {od:g} H7 arm bore (r6/m6 OD); runs on the g pin ({bore:g} bore); flange = thrust washer')
 
     def spring_stack(kind, key, washer_od):
         q = d.layout['suspension'][kind]
@@ -455,28 +491,34 @@ def make(d):
         bottom = seat+q['shim_mm']
         spacer = q.get('seat_spacer_mm', 0)
         floor = seat-spacer-q['arm_thickness_mm']
+        sd, (af, nh) = stud_size(q), STUD_NUT[stud_size(q)]   # Rev17g rear: M6 (spring ID 9 clears the tilting stud)
         if spacer:
-            add(kind+'_seat_spacer', ring(x, y, seat-spacer, spacer, q['spring_od_mm']+1, 8.4), key, True,
+            add(kind+'_seat_spacer', ring(x, y, seat-spacer, spacer, q['spring_od_mm']+1, sd+.4), key, True,
                 material=f'{spacer}t flat washer/plate (fixed)')
         if q['shim_mm'] > 0:   # Rev17: the rear caster shim is 0 (bogie springs unload the rear casters)
-            add(kind+'_preload_shim', ring(x, y, seat, q['shim_mm'], q['spring_od_mm']+1, 8.4), key, True,
+            add(kind+'_preload_shim', ring(x, y, seat, q['shim_mm'], q['spring_od_mm']+1, sd+.4), key, True,
                 remove_without_arm=True)
         length = state['installed_length_mm']
         r = q['spring_od_mm']/2
         dz = max(seat_travel(d, key, value, x+dx, bottom) for dx in (-r, r))  # tilted seat: lift to its high edge
-        add(kind+'_spring_coil', coil(x, y, bottom+dz, length-dz, q), key, sku=q['spring_sku'],
+        # Rev17g: a stiff spring goes slack in droop; it then rests on the arm seat at its free length.
+        height = min(length-dz, q['free_length_mm'])
+        add(kind+'_spring_coil', coil(x, y, bottom+dz, height, q), key, sku=q['spring_sku'],
             spring_top_z=bottom+length, spring_length_mm=length, spring_xy=[x, y], rate_N_mm=q['rate_N_mm'],
             free_length_mm=q['free_length_mm'], nominal_spring_force_N=state['forces_N'][1],
-            lever_ratio=state['lever_ratio'], geometry='MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog')
+            lever_ratio=state['lever_ratio'],
+            geometry=('catalog rate and allowable deflection; wire section and turns approximate (no STEP); ground ends omitted'
+                      if 'spring_note' in q else 'MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog'))
         # Washer and nut on the stud land on the base plate top at full droop.
         w = washer_od/2
         drop = min(seat_travel(d, key, -half, x+dx, base_top) for dx in (-w, w))
         washer_bottom = base_top-drop+.05
-        nut_top = washer_bottom+1.6+6.5
-        stud = cylz(4, nut_top+1.5-floor, x, y, floor)
-        add(kind+'_stud_M8', stud, key, True, sku='M8 stud', length_mm=round(nut_top+1.5-floor, 1),
-            fit='Tapped M8 in the 3t floor + threadlocker; droop load below 100 N')
-        stop = ring(x, y, washer_bottom, 1.6, washer_od, 8.4)+nut(x, y, washer_bottom+1.6, 13, 6.5, 8)
+        nut_top = washer_bottom+1.6+nh
+        stud = cylz(sd/2, nut_top+1.5-floor, x, y, floor)
+        m = f'M{sd:g}'
+        add(kind+'_stud_'+m, stud, key, True, sku=m+' stud', length_mm=round(nut_top+1.5-floor, 1),
+            fit=f'Tapped {m} in the 3t floor + threadlocker; droop load below 100 N')
+        stop = ring(x, y, washer_bottom, 1.6, washer_od, sd+.4)+nut(x, y, washer_bottom+1.6, af, nh, sd)
         add(kind+'_droop_stop_washer_nut', stop, key, True, adjust='Turn the nut to set the droop limit; lock with a second nut')
         return state
 
@@ -592,13 +634,13 @@ def make(d):
         bolts = [(x+dx, y+dy) for dx in (-12, 12) for dy in (-27, 27)]
         arm = drilled(arm, bolts, 6.6, plate_top, t)
         sx, sy_, _ = spring_point(d, wheel)
-        arm -= cylz(4, t+2, sx, sy_, plate_top-1)
+        arm -= cylz(stud_size(q)/2, t+2, sx, sy_, plate_top-1)
         arm -= cylz(q['bump_stopper_thread_d_mm']/2, t+2, *bump_stop_xy(d, wheel), plate_top-1)  # M5 for the stopper
         bushes('caster', wheel, hw, hw, q)
         add('caster_swing_arm_3t', arm, wheel, True,
-            material='S355 3t laser-cut, narrow floor + 2 side walls (2 bends) + flat caster pad; M8 tapped seat',
+            material=f"S355 3t laser-cut, narrow floor + 2 side walls (2 bends) + flat caster pad; {q.get('stud', 'M8')} tapped seat",
             arm_length_mm=q['arm_length_mm'])
-        add('caster_pivot_bosses_8t', bosses, wheel, True, material='S355 8t flat laser-cut, bush bore 14 H7, 2x M4 tapped each',
+        add('caster_pivot_bosses_8t', bosses, wheel, True, material=f"S355 8t flat laser-cut, bush bore {q['bush_od_mm']:g} H7, 2x M4 tapped each",
             quantity=2)
         add('caster_boss_screws_CB4-10', Compound([screw_y(*s, q) for s in screws]), wheel, True, sku='CB4-10', quantity=4)
         # Heads bear on the 2 mm OEM plate; plate 2 + floor 3 + nut 5 -> CB6-12 ends 2 mm past the nut.

@@ -2,7 +2,7 @@
 
 **모델 이름:** 보기 링크 6륜 메인 모델 = **Pro 모델**(`cad/layout.json`, Rev17f), 3030 프로파일 저가형 = **Eco 모델**(`cad/p30/`, P30-7). [웹 뷰어](https://hsh3167.github.io/amr_project/) 상단에서 두 모델을 전환합니다.
 
-**주행 동역학 시뮬레이션 (Pro·Eco):** 경사·단차·방지턱·E-stop을 두 모델 페이지에서 3D로 재생하고 MP4/WebM으로 저장합니다. **ⓘ 계산 내용** 버튼으로 수식·파라미터·출처를 볼 수 있습니다. 한계(0.5 m/s, Pro / Eco): 경사 진입 11° / 7°, 경사 위 출발 17° / 19°, 단차 30 / 18 mm, 방지턱 42 / 32 mm. E-stop은 두 모델 모두 전도가 없지만, Pro는 약 1.4 m/s²부터 뒤 캐스터가 뜹니다. [상세](docs/drive-dynamics.md)
+**주행 동역학 시뮬레이션 (Pro·Eco):** 경사·단차·방지턱·E-stop을 두 모델 페이지에서 3D로 재생하고 MP4/WebM으로 저장합니다. **ⓘ 계산 내용** 버튼으로 수식·파라미터·출처를 볼 수 있습니다. 한계(0.5 m/s, Pro / Eco): 경사 진입 11° / 7°, 경사 위 출발 17° / 19°, 단차 31 / 18 mm, 방지턱 42 / 32 mm. E-stop은 두 모델 모두 전도가 없지만, Pro는 약 1.5~1.75 m/s²부터 뒤 캐스터가 뜹니다(Rev17g 뒤 스프링 SWL18-30, 이전 1.0). [상세](docs/drive-dynamics.md)
 
 ```powershell
 .venv\Scripts\python.exe -m cad.side_profile

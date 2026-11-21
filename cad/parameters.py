@@ -46,15 +46,18 @@ def validate_parameters(d):
                     raise ValueError('Invalid suspension parameter: '+kind+'.'+key)
             if q['travel_mm']>maximum:raise ValueError('Frame redesign required for greater '+kind+' travel')
             if q['shim_mm']<0 or q['spring_od_mm']<=q['spring_id_mm']:raise ValueError('Spring fit is invalid: '+kind)
-            if q['spring_id_mm']<=8.4:raise ValueError('Spring must pass the M8 stud: '+kind)
+            sd=int(str(q.get('stud','M8')).lstrip('M'))
+            if q['spring_id_mm']<=sd+.4:raise ValueError(f'Spring must pass the M{sd} stud: '+kind)
             if q['ear_gap_mm']<q['bush_flange_t_mm']+.3:raise ValueError('No room for the bush flange: '+kind)
             # Rev12b: bush bore is the STEP nominal 10.0 (F7 after press-fit), equal to the g6 pin nominal.
             if not q['pin_d_mm']<=q['bush_bore_mm']<q['bush_od_mm']<q['bush_flange_d_mm']:raise ValueError('Hinge bush fit is invalid: '+kind)
             walls=((q['arm_wall_y_mm']+q['arm_thickness_mm'],q['arm_wall_y_pos_mm']+q['arm_thickness_mm']) if kind=='drive'
                    else (q['arm_half_width_mm'],)*2)
             pin=round(sum(walls)+2*(q['ear_gap_mm']+q['bracket_thickness_mm'])+1,1)
-            if not 25<=pin<=100:raise ValueError('Hinge pin outside catalog CLBKHM10 L25-100: '+kind)
-            if abs(float(q['pin_sku'].split('-')[-1])-pin)>1e-6:raise ValueError(f'Hinge pin SKU must be CLBKHM10-{pin:g}: '+kind)
+            # CLBKHM10: L25-100 (0.1 steps); Rev17g stock E-SHCCG6: L5-120, L = flange underside to the ring groove
+            lo_,hi_=(5,120) if q.get('pin_model')=='catalog' else (25,100)
+            if not lo_<=pin<=hi_:raise ValueError(f'Hinge pin outside catalog L{lo_}-{hi_}: '+kind)
+            if abs(float(q['pin_sku'].split('-')[-1])-pin)>1e-6:raise ValueError(f'Hinge pin L must be {pin:g} ({q["pin_sku"]}): '+kind)
             if kind=='drive':
                 length=d.p['drive_track']/2-q['pivot_x_mm'];ratio=(q['spring_x_mm']-q['pivot_x_mm'])/length
                 seat=q['arm_bottom_z_mm']+q['arm_thickness_mm']
@@ -81,7 +84,10 @@ def validate_parameters(d):
                 raise ValueError('Bump stopper leaves no room for the striker bolt: '+kind)
             installed=q['loaded_length_mm']-q['shim_mm']
             half=q['travel_mm']/2*ratio
-            if (installed+half>q['free_length_mm'] or installed-half<=q['solid_length_mm']
+            # Rev17g: a stiff rear spring may go slack in droop (guided on the stud) when the layout says so;
+            # it must still be compressed at the nominal pose.
+            slack=q.get('spring_may_go_slack',False)
+            if ((installed+half>q['free_length_mm'] and not slack) or installed>=q['free_length_mm'] or installed-half<=q['solid_length_mm']
                     or q['free_length_mm']-(installed-half)>q['max_deflection_mm']):
                 raise ValueError('Catalog spring travel is exceeded: '+kind)
 
