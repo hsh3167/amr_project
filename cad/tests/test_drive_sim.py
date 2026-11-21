@@ -1,4 +1,4 @@
-"""Eco (P30) drive-test dynamics (web/drive-sim.js) sanity checks, run through Node when it is installed."""
+"""Eco (P30) and Pro (bogie) drive-test dynamics (web/drive-sim.js) sanity checks, run through Node when it is installed."""
 import json
 import shutil
 import subprocess
@@ -59,3 +59,49 @@ def test_estop(sim):
     assert 2.5 < d['peak_decel_m_s2'] < 4.5 and d['rear_lift_mm'] < 2
     i = sim['ideal']
     assert i['pass'] and i['reason'] == 'lift' and i['m']['rear_lift_mm'] > 2   # rear casters lift, no tip-over
+
+
+PRO_SCRIPT = r"""
+import {readFileSync} from 'node:fs';
+import {proParams, simulate} from './web/drive-sim.js';
+const read = p => JSON.parse(readFileSync(p, 'utf8'));
+const P = proParams(read('cad/layout.json'), read('cad/parts.json'), read('cad-output/side_profile.json'), read('cad-output/build_report.json').suspension_catalog);
+const run = (k, o) => { const r = simulate(P, k, o); return {pass: r.result.pass, reason: r.result.reason, m: r.metrics, f0: r.frames.find(f => f[0] >= 0.39), fl: r.frames.at(-1)}; };
+console.log(JSON.stringify({
+  m: P.m, subs: P.subs.map(s => s.kind),
+  flat: run('step', {value: 0, speed: 0.5}),
+  ramp10: run('ramp', {value: 10, speed: 0.5}),
+  ramp25: run('ramp', {value: 25, speed: 0.5}),
+  step15: run('step', {value: 15, speed: 0.5}),
+  step45: run('step', {value: 45, speed: 0.5}),
+  drive: run('estop', {value: 20, speed: 1.0, mode: 'drive'}),
+}));
+"""
+
+
+@pytest.fixture(scope='module')
+def pro():
+    need = ['cad-output/side_profile.json', 'cad-output/build_report.json']
+    if not NODE or not all((ROOT/p).exists() for p in need):
+        pytest.skip('node or cad-output/side_profile.json / build_report.json missing')
+    out = subprocess.run([NODE, '--input-type=module', '-e', PRO_SCRIPT], cwd=ROOT, capture_output=True, text=True, timeout=120)
+    assert out.returncode == 0, out.stderr
+    return json.loads(out.stdout)
+
+
+def test_pro_static_loads_match_bogie_report(pro):
+    # bogie_report (rigid statics, Rev17 bogie spring): drive 2 x 186.9 N, front and rear casters 2 x 41.4 N
+    f = pro['flat']['f0']
+    assert pro['subs'] == ['pivot', 'slide'] and pro['flat']['pass']
+    assert abs(f[9]-373.8) < 15 and abs(f[10]-82.8) < 10 and abs(f[11]-82.8) < 10
+    assert abs(f[9]+f[10]+f[11]-55*9.81) < 15
+
+
+def test_pro_gradeability_and_step(pro):
+    assert pro['ramp10']['pass'] and not pro['ramp25']['pass']
+    assert pro['step15']['pass'] and not pro['step45']['pass']
+
+
+def test_pro_estop_no_tip(pro):
+    d = pro['drive']
+    assert d['pass'] and 2.0 < d['m']['peak_decel_m_s2'] < 4.5

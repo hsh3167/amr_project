@@ -39,7 +39,12 @@
 - build123d0.12.0/OCP7.9.3.1.1, Python3.10 가상환경 `.venv`. 기존 글로벌 CadQuery2.5.2 환경은 분리 보존.
 - `cad/parameters.py`가 공통 JSON을 읽고 `parts/`의 독립 생성 함수, `assembly.py`, `export.py`, CLI `python -m cad`로 조립/출력. `cad/amr_layout.py`는 새 기본 엔진의 호환 진입점.
 - `--part`로 필요한 그룹만 생성, `--format none/step/stl/glb` 선택, `--individual` 개별 출력. `param` 명령/JSON 편집은 AI 없이 사용. Rev15 `--pose LEFT=10`(왼쪽 보기, 앞 캐스터 장착 중심 ±10)·`RB=-5`(뒤 캐스터 ±5). `suspension.concept`를 `"hinge"`로 바꾸면 Rev14 6륜 경첩(`LEFT/RIGHT/LF/LB/RF/RB`)으로 돌아간다.
-- **Eco 주행 동역학 시뮬레이션(2026-11-21, 사용자 요청):** `web/drive-sim.js`(측면 2D 다물체) + `tools/drive_sim.mjs`(한계 탐색) + `cad/p30/side_profile.py`(CAD 하부 실루엣). eco.html에서 3D 재생·하중 그래프·MP4/WebM 녹화. 상세 `docs/p30-profile-chassis.md`.
+- **Pro 주행 동역학 시뮬레이션 + 계산 내용 보기(2026-11-21, 사용자 요청):** 엔진을 슬라이드/핀 조인트 일반형으로 바꿔 Pro(보기 링크 + 뒤 캐스터 경첩)에도 적용했다(Eco 결과는 이전과 같음). 공용 UI `web/sim-ui.js`에 **ⓘ 계산 내용** 창(구성도·수식·파라미터 출처·판정 기준·민감도·정지 하중 검산)을 추가했다. Pro 실루엣은 `python -m cad.side_profile`, 한계는 `node tools/drive_sim.mjs all` → `cad-output/drive_sim.json`. 상세 `docs/drive-dynamics.md`.
+  - **Pro 한계(0.3/0.5/1.0 m/s):** 경사 진입 9/11/17°, 경사 위 출발 17°(정격 8°), 단차 19/30/33 mm, 방지턱 34/42/≥70 mm(1 m/s는 바퀴가 뜨며 피치 24°).
+  - **Pro E-stop:** 구동 제동 최대 평균 2.85 m/s², 전도 없음. 하지만 **뒤 캐스터가 약 1.4 m/s²(0.14 g)부터 뜬다**(최대 23 mm). Rev17 보기 스프링이 뒤 캐스터 하중을 쌍당 81 N으로 줄였고, 차체가 보기 피벗(Y+60)을 중심으로 앞으로 기울기 때문이다. 손계산 `forward_pitch_onset_g 0.3`(무게중심 200 mm)보다 낮다. check.py 수정은 미적용.
+  - **Pro 등판:** 오르막에서 앞 캐스터가 뜨고 뒤 캐스터가 무게의 약 40%를 받아, 구동륜 하중이 375 N에서 약 290 N으로 준다. 그래서 순수 등판은 Eco(19°)보다 낮다.
+  - **민감도:** Pro 장애물 한계는 보기 우레탄 스토퍼 강성(가정 3e5 N/m/개)에 민감하다. 1/3~3배에서 경사 0.3 m/s 8~15°, 방지턱 0.5 m/s 34~60 mm. 실물 강성을 측정한 뒤 다시 계산해야 한다.
+- **Eco 주행 동역학 시뮬레이션(2026-11-21, 사용자 요청):** `web/drive-sim.js`(측면 2D 다물체) + `tools/drive_sim.mjs`(한계 탐색) + `cad/p30/side_profile.py`(CAD 하부 실루엣). eco.html에서 3D 재생·하중 그래프·MP4/WebM 녹화. 상세 `docs/p30-profile-chassis.md`, 두 모델 비교 `docs/drive-dynamics.md`.
   - **한계(0.3/0.5/1.0 m/s):** 경사 진입 5/7/13°, 경사 위 출발 19°(정격 토크 연속 8°), 단차 18/18/18 mm, 방지턱 22/32/42 mm.
   - **E-stop:** 구동 제동 최대 3.64 m/s², 전도 없음. 뒤 캐스터 들림은 4.5 m/s² 초과부터, 완전 전도는 15 m/s²까지 없음.
   - **설계상 약점:** 4캐스터 강체 + 가운데 구동륜 ±10 mm 구조라 꺾임·방지턱에서 구동륜 하중이 빠지거나(신장) 캐스터가 뜹니다(압축). 단차는 Ø64 앞 캐스터가 결정합니다.

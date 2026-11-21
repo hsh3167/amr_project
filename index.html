@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0a111d">
   <meta name="description" content="University AMR Project: interactive 3D CAD concept, 2WD + 4 casters, 24V Ø180mm ZLLG65ASM250-N V2.02 rubber hub motors, four GL-65-ASF casters, dual SICK TiM571 and dual Orbbec Astra Mini Pro.">
   <title>AMR PROJECT · Pro 모델</title>
-  <link rel="stylesheet" href="web/lab.css?v=5">
+  <link rel="stylesheet" href="web/lab.css?v=6">
   <script type="module" src="web/ui.js"></script>
   <script>addEventListener("error",e=>{const el=document.getElementById("loading");if(el)el.textContent="3D 로딩 실패: 새로고침하거나 네트워크 연결을 확인하세요.";});addEventListener("unhandledrejection",()=>{const el=document.getElementById("loading");if(el)el.textContent="3D 부품 데이터 로딩 실패: 새로고침해 주세요.";});</script>
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"}}</script>
@@ -27,6 +27,7 @@
         <div class="tabs"><button class="control active" data-view="iso">3D</button><button class="control" data-view="top">상부</button><button class="control" data-view="front">전면</button><button class="control" data-view="bottom">하부</button></div>
         <p class="hint" style="margin-top:10px">마우스 드래그: 회전 · 휠: 확대 · 우클릭: 이동</p>
       </div>
+      <div class="section" id="simSection"><h2>주행 동역학 시뮬레이션</h2><p class="hint">CAD 모델을 불러오는 중…</p></div>
       <div class="section">
         <h2>센서 시야 (FOV)</h2>
         <label class="toggle"><span><i class="swatch" style="background:#43e1d3"></i>LiDAR 수평 270°</span><input type="checkbox" id="showFov"></label>
@@ -118,7 +119,7 @@
       <div class="section">
         <h2>1차 설계 검증 항목</h2>
         <ul class="list"><li>Ø14 / AF10 / M14×1.5 <strong>축 고정 및 토크반력 브라켓</strong></li><li>구동륜·캐스터 <strong>접지하중 / 높이</strong> 확인</li><li>배터리·드라이버 간 <strong>케이블/방열 공간</strong></li><li>급정지 시 <strong>전도 / 제동 / 전원 차단</strong></li><li>차후 로봇암의 <strong>하중 및 작동반력</strong></li></ul>
-        <div class="callout" style="margin-top:13px">이 화면의 주행 애니메이션은 <b>개념적 운동 표현</b>입니다. 실제 동역학/전도/마찰/주행제어/SLAM 시뮬레이션은 아닙니다.</div>
+        <div class="callout" style="margin-top:13px">아래 ↑ 직진 / ↻ 제자리 회전 버튼은 <b>개념적 운동 표현</b>입니다. 경사·단차·방지턱·E-stop 거동은 왼쪽 <b>주행 동역학 시뮬레이션</b>(측면 2D 계산, 가정 포함)에서 확인합니다.</div>
       </div>
       <div class="section"><p class="hint">도면 p.7: 외형 89.8±1mm, 타이어 폭42.5±1mm, 축 Ø14(-0.1/-0.4), AF10±0.1, 나사 길이23.5±0.3mm. 케이스 지름은 가정입니다.</p><p style="margin-top:10px"><a href="cad-output/amr_current.step.gz">STEP 다운로드 (gzip) ↓</a> · <a href="https://github.com/hsh3167/amr_project/blob/main/docs/motor-datasheet-review.md">도면 판독 근거 ↗</a></p><p class="hint" style="margin-top:10px">24V / 4Nm / 500rpm / 10A · 스톨 11.7Nm / 30A (본문 p.4) · 1024라인</p><a href="https://github.com/hsh3167/amr_project" target="_blank" rel="noopener noreferrer">GitHub에서 설계자료 확인 ↗</a></div>
     </aside>
@@ -142,9 +143,14 @@ import * as THREE from 'three';
 import {loadNativeCAD} from './web/native-cad.js?rev=16';
 import {cameraFrustum,lidarSector} from './web/sensor-fov.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {proParams} from './web/drive-sim.js?v=2';
+import {setupDriveSim} from './web/sim-ui.js?v=1';
 
 const [SPEC,LAYOUT]=await Promise.all(['./cad/parts.json','./cad/layout.json'].map(url=>fetch(url,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Layout data unavailable');return r.json()})));
 const LP=LAYOUT.parameters;
+const opt=u=>fetch(u,{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
+const [SIMREP,PROFILE,BUILD]=await Promise.all(['./cad-output/drive_sim.json','./cad-output/side_profile.json','./cad-output/build_report.json'].map(opt));
+let SIM=null;
 const MOTOR=SPEC.drive_motor;
 const $=id=>document.getElementById(id);
 const canvas=$('viewport'), wrap=document.querySelector('.scene-wrap');
@@ -246,18 +252,19 @@ function setView(view){
 }
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 function setMotion(value){
+ if(value!=='stop'&&SIM?.active())SIM.close();
  motion=value;
  document.querySelectorAll('[data-motion]').forEach(button=>button.classList.toggle('active',button.dataset.motion===value));
  requestRender();
 }
-$('resetCamera').addEventListener('click',()=>{setMotion('stop');robot.rotation.y=0;robot.position.set(0,0,0);setView('iso')});
+$('resetCamera').addEventListener('click',()=>{SIM?.close();setMotion('stop');robot.rotation.y=0;robot.position.set(0,0,0);setView('iso')});
 document.querySelectorAll('[data-motion]').forEach(button=>button.addEventListener('click',()=>setMotion(button.dataset.motion)));
 $('saveImage').addEventListener('click',()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='amr-layout-rev07.png';a.href=renderer.domElement.toDataURL('image/png');a.click()});
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
 canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width*2-1;pointer.y=-(e.clientY-r.top)/r.height*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(Object.values(groups).filter(g=>g.visible),true).filter(h=>h.object.userData.partId);if(hits.length){const {partId:id,sku}=hits[0].object.userData;selected=id;$('partName').textContent=sku?parts[id].name+' · '+sku:parts[id].name;$('partDescription').textContent=parts[id].description}});
 function resize(){const w=wrap.clientWidth,h=wrap.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();requestRender()}
 
-function updateLabels(){const visible=$('showLabels').checked;for(const p of annotations){const g=groups[p.id];p.node.style.display=visible&&g.visible?'block':'none';if(!visible||!g.visible)continue;const v=new THREE.Vector3(...p.pos).add(g.position).applyMatrix4(robot.matrixWorld).project(camera);const screenX=(v.x*.5+.5)*wrap.clientWidth,screenY=(-v.y*.5+.5)*wrap.clientHeight;const inview=v.z<1&&v.z>-1&&screenX>5&&screenX<wrap.clientWidth-5&&screenY>5&&screenY<wrap.clientHeight-5;p.node.style.display=inview?'block':'none';p.node.style.left=screenX+'px';p.node.style.top=screenY+'px'}}
+function updateLabels(){const visible=$('showLabels').checked&&!SIM?.active();for(const p of annotations){const g=groups[p.id];p.node.style.display=visible&&g.visible?'block':'none';if(!visible||!g.visible)continue;const v=new THREE.Vector3(...p.pos).add(g.position).applyMatrix4(robot.matrixWorld).project(camera);const screenX=(v.x*.5+.5)*wrap.clientWidth,screenY=(-v.y*.5+.5)*wrap.clientHeight;const inview=v.z<1&&v.z>-1&&screenX>5&&screenX<wrap.clientWidth-5&&screenY>5&&screenY<wrap.clientHeight-5;p.node.style.display=inview?'block':'none';p.node.style.left=screenX+'px';p.node.style.top=screenY+'px'}}
 let frame=0,lastFrame=0,distance=0,renderedFrames=0,ready=false;
 const bootTime=performance.now();
 function requestRender(){
@@ -288,8 +295,9 @@ function render(now){
    else caster.rotation.y=0;
   }
  }
- robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera);renderedFrames++;
- if(driving||settling)requestRender();
+ const simulating=SIM?SIM.tick(dt):false;
+ robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera);SIM?.capture();renderedFrames++;
+ if(driving||settling||simulating)requestRender();
 }
 orbit.addEventListener('change',requestRender);
 document.addEventListener('visibilitychange',()=>{
@@ -316,6 +324,21 @@ try{
  const {width,length,height}=native.bounds_mm;
  $('envelopeDimensions').textContent=`W${width.toFixed(1)} × L${length.toFixed(1)} × H${height.toFixed(1)}`;
  $('partDescription').textContent=(native.lidarVisual==='drawing_envelope'?'build123d 조립 형상을 표시합니다.':'build123d 조립 형상과 SICK TiM5xx 공용 LiDAR 외형을 표시합니다.')+' 구동륜 2개와 캐스터 4개가 각각 독립 경첩 암으로 움직입니다.';
+ // drive dynamics simulation (web/drive-sim.js + web/sim-ui.js; limits from node tools/drive_sim.mjs)
+ const SC=BUILD?.suspension_catalog,SIM_P=PROFILE?proParams(LAYOUT,SPEC,PROFILE,SC):null,W=SC?.static_cases?.with_arm;
+ const clamp=(v,a)=>Math.max(-a,Math.min(a,v)),BL=LP.caster_y-LAYOUT.suspension.bogie.pivot_y_mm,RH=LAYOUT.suspension.caster.travel_mm/2;
+ const posePro=(b,r,phi)=>{for(const k of ['LEFT','RIGHT'])native.setPose(k,clamp(b,LAYOUT.suspension.bogie.travel_mm/2));for(const k of ['LB','RB'])native.setPose(k,clamp(r,RH));for(const w of wheels)w.group.rotation.x=phi};
+ SIM=setupDriveSim({P:SIM_P,report:SIMREP,section:$('simSection'),wrap,scene,camera,orbit,robot,floor,grid,canvas,
+  label:'Pro 모델 Rev'+String(LAYOUT.revision).replace('.',''),filePrefix:'pro',requestRender:()=>requestRender(),
+  pose:f=>posePro(BL*Math.sin(f[16]),f[17]*1000,f[7]),
+  resetPose:()=>{for(const input of document.querySelectorAll('[data-wheel]'))native.setPose(input.dataset.wheel,Number(input.value));for(const w of wheels)w.group.rotation.x=0},
+  onStart:()=>{motion='stop';document.querySelectorAll('[data-motion]').forEach(b=>b.classList.toggle('active',b.dataset.motion==='stop'));
+   if(explode){explode=0;$('explode').value=0;$('explodeVal').textContent='0%';Object.values(groups).forEach(g=>g.position.set(0,0,0));applyVisibility()}},
+  extraRows:[['보기(앞 캐스터)',f=>{const v=BL*Math.sin(f[16]);return (v>0?'+':'')+v.toFixed(1)+' mm'}],['뒤 캐스터 암',f=>(f[17]>0?'+':'')+(f[17]*1000).toFixed(1)+' mm']],
+  handLoads:W?{drive:+(2*W.drive_each_N).toFixed(1),front:+(2*W.front_caster_each_N).toFixed(1),rear:+(2*W.rear_caster_each_N).toFixed(1),note:'손계산 = CAD 검증 bogie_report 정적 계산(강체, 타이어 변형 무시, 무게중심 중앙).'}:null});
+ window.amrReview.SIM=SIM;window.amrReview.SIM_P=SIM_P;window.amrReview.view={scene,camera,orbit,robot};
+ window.amrReview.simFrame=dt=>{const go=SIM.tick(dt);robot.updateMatrixWorld(true);renderer.render(scene,camera);SIM.capture();return go};
+ window.amrReview.simSeek=t=>{const f=SIM.seek(t);robot.updateMatrixWorld(true);updateLabels();renderer.render(scene,camera);return f};
  ready=true;applyVisibility();updateBattery();robot.visible=true;$('loading').remove();
  window.amrReview.readyMs=Math.round(performance.now()-bootTime);requestRender();
 }catch(error){$('loading').textContent='CAD 불러오기 실패: '+error.message;console.error(error)}

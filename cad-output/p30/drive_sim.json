@@ -1,6 +1,6 @@
 {
- "model": "Eco P30-7",
- "generated": "2026-11-20",
+ "model": "Eco 모델 P30-7",
+ "generated": "2026-11-21",
  "assumptions": {
   "mass_kg": 55,
   "cg_height_mm": 250,
@@ -5770,9 +5770,53 @@
      }
     }
    },
-   "static_lift_m_s2_note": "rear caster unloads when m a h = rear caster static load x caster base (drive load is fixed by the spring)",
+   "static_lift_m_s2_note": "rear caster unloads when m a h = rear caster static load x caster base",
    "static_tip_m_s2": 9.61
   }
  },
- "runtime_s": 12.533
+ "sensitivity": {
+  "parameter": "구동 슬라이드 고무 스토퍼 강성",
+  "factors": {
+   "x0.33": {
+    "v0.3": {
+     "slope_deg": 6,
+     "step_mm": 18,
+     "bump_mm": 24
+    },
+    "v0.5": {
+     "slope_deg": 7,
+     "step_mm": 19,
+     "bump_mm": 34
+    },
+    "v1": {
+     "slope_deg": 13,
+     "step_mm": 18,
+     "bump_mm": 56
+    }
+   },
+   "x3": {
+    "v0.3": {
+     "slope_deg": 5,
+     "step_mm": 18,
+     "bump_mm": 22
+    },
+    "v0.5": {
+     "slope_deg": 6,
+     "step_mm": 18,
+     "bump_mm": 32
+    },
+    "v1": {
+     "slope_deg": 12,
+     "step_mm": 19,
+     "bump_mm": 42
+    }
+   }
+  }
+ },
+ "static_loads_N": {
+  "drive_pair": 325.9,
+  "front_caster_pair": 106.8,
+  "rear_caster_pair": 106.8
+ },
+ "runtime_s": 34.554
 }

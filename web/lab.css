@@ -178,3 +178,17 @@ input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.15)}
 .sim-table th{color:var(--muted);font-weight:550}.sim-table button{border:0;background:none;color:var(--blue);padding:0;font:inherit;cursor:pointer;text-decoration:underline dotted}
 .sim-table button:hover{color:var(--teal)}
 #simRecord.recording{border-color:#ff6b6b;color:#ff8f8f}
+
+/* drive simulation: calculation dialog */
+#simCalcDialog{width:min(980px,calc(100vw - 32px));max-height:calc(100vh - 48px);padding:0;border:1px solid var(--line-2);border-radius:var(--r-lg);background:#0c1424;color:var(--text);box-shadow:0 30px 90px rgba(0,0,0,.65)}
+#simCalcDialog::backdrop{background:rgba(3,7,14,.7);backdrop-filter:blur(6px)}
+.calc{font-size:13px;line-height:1.6;color:var(--text-2)}.calc b{color:var(--text)}
+.calc h3{margin:20px 0 8px;font-size:14px;color:var(--text)}.calc p{margin:6px 0}.calc code{font-size:12px;color:#9fd0ff}
+.calc-lead{font-size:13.5px}.calc-svg{display:block;width:100%;max-width:760px;margin:10px auto 4px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:var(--r-md)}
+.calc .eq{margin:8px 0;padding:10px 12px;border-left:3px solid var(--blue);background:rgba(106,168,255,.07);border-radius:6px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.5px;line-height:1.8;color:var(--text);overflow-x:auto}
+.calc-t{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0;font-variant-numeric:tabular-nums}
+.calc-t th,.calc-t td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.calc-t th{color:var(--muted);font-weight:550}
+.calc-ul{margin:6px 0 0 18px;padding:0}.calc-ul li{margin:3px 0}
+.badge{display:inline-block;padding:1px 7px;border-radius:999px;font-size:10.5px;font-weight:650;white-space:nowrap}
+.b-design{background:rgba(106,168,255,.16);color:#9fd0ff}.b-cat{background:rgba(79,224,201,.15);color:var(--teal)}.b-der{background:rgba(233,238,251,.1);color:var(--text-2)}.b-asm{background:rgba(255,204,115,.16);color:var(--warn)}
+@media (max-width:640px){.calc{font-size:12.5px}.calc-t th,.calc-t td{padding:5px 4px}.calc .eq{font-size:11.5px}}
