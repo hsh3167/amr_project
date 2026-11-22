@@ -32,4 +32,4 @@ LiDAR 외형은 SICK `sick_scan_xd`가 TiM57x에 사용하는 [공용 STL 원본
 BGHK6001DD-30(Rev16 피벗 베어링 홀더)은 사용자가 준 MISUMI STEP(`BGHK6001DD-30.stp.gz`, 하우징·베어링·스냅링 3솔리드)을 크기 변경 없이 회전·이동만 해서 놓았다(`misumi_step_exact`). Rev15의 EA-MFCNW20 부시는 STEP 없이 카탈로그 표 치수로 만들었었다.
 
 
-Rev17g(2026-11-21) 뒤 캐스터 힌지 핀 E-SHCCG6-75(회사 재고), 부시 MPFZ6-10, 스프링 SWL18-30은 STEP 없이 MISUMI 카탈로그 표 치수로 그렸다(`misumi_catalog_envelope`). 스프링 선재 단면과 감김 수는 근사다. 이전 CLBKHM10-75·MPFZ10-10 STEP은 `suspension.concept: "hinge"`(6륜 경첩) 구동 쪽과 기록용으로 남겨 둔다.
+Rev17g(2026-11-21) 뒤 캐스터 힌지 핀 E-SHCCG6-75(회사 재고), 부시 MPFZ6-10, 스프링 SWL18-30의 STEP은 2026-11-22 MISUMI에서 받았다(`provenance.json`). 핀(BODY·RING1 두 솔리드)과 부시는 그대로 배치하고(`misumi_step_exact`), 스프링은 STEP 선재 단면 4.5×2.25와 자유 길이 피치 7.5를 자세 길이에 맞춰 쓴다. 이전 CLBKHM10-75·MPFZ10-10 STEP은 `suspension.concept: "hinge"`(6륜 경첩) 구동 쪽과 기록용으로 남겨 둔다.

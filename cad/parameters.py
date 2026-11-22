@@ -55,7 +55,7 @@ def validate_parameters(d):
                    else (q['arm_half_width_mm'],)*2)
             pin=round(sum(walls)+2*(q['ear_gap_mm']+q['bracket_thickness_mm'])+1,1)
             # CLBKHM10: L25-100 (0.1 steps); Rev17g stock E-SHCCG6: L5-120, L = flange underside to the ring groove
-            lo_,hi_=(5,120) if q.get('pin_model')=='catalog' else (25,100)
+            lo_,hi_=(5,120) if q['pin_sku'].startswith('E-SHCCG') else (25,100)
             if not lo_<=pin<=hi_:raise ValueError(f'Hinge pin outside catalog L{lo_}-{hi_}: '+kind)
             if abs(float(q['pin_sku'].split('-')[-1])-pin)>1e-6:raise ValueError(f'Hinge pin L must be {pin:g} ({q["pin_sku"]}): '+kind)
             if kind=='drive':

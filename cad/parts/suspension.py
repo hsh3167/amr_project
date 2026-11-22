@@ -425,23 +425,26 @@ def make(d):
         add(kind+'_bracket_nuts', Compound([nut(a, b, base_bottom-bt-4, 8, 4, 5) for a, b in holes]), key,
             quantity=len(holes))
         length = round(hi-lo+1, 1)
-        if q.get('pin_model') == 'catalog':
-            # Rev17g: company-stock E-SHCCG (flanged, retaining-ring type) drawn from the MISUMI catalog table:
-            # local axis +X, flange underside at X0, ring groove at X=L (= the catalog L), N beyond the groove.
+        if 'pin_step_children' in q:
+            # Rev17g: company-stock E-SHCCG (flanged, retaining-ring type), MISUMI STEP as supplied:
+            # axis +X, flange X0..T, flange underside at X=T, ring groove at X=T+L, N beyond; E-ring = 2nd solid.
+            body, ring_name = q['pin_step_children']
             L = float(q['pin_sku'].split('-')[-1])
+            T, N = q['pin_head_thickness_mm'], q['pin_end_mm']
             if abs(L-length) > 1e-6:
                 raise ValueError('Pin L (flange to ring groove) differs from the bracket span + 1 mm: '+key)
-            r, T, N, w = q['pin_d_mm']/2, q['pin_head_thickness_mm'], q['pin_end_mm'], q['pin_groove_width_mm']
-            pin = cyly(q['pin_head_d_mm']/2, T, px, lo-T/2, pz)+cyly(r, L+N, px, lo+(L+N)/2, pz)
-            pin -= cyly(r+1, w, px, lo+L+w/2, pz)-cyly(q['pin_groove_d_mm']/2, w+1, px, lo+L+w/2, pz)
-            add(kind+'_hinge_pin', pin, key, sku=q['pin_sku'], length_mm=L, status='misumi_catalog_envelope',
-                source=q.get('pin_source', ''), fit='g7 pin in the ear holes (H7 clearance); the arm turns on its bushes; '
+            pin = misumi_solid(q['pin_step'], body)
+            if abs(pin.bounding_box().max.X-(T+L+N)) > 1e-6:
+                raise ValueError('Pin STEP length differs from T+L+N: '+key)
+
+            def place(s):
+                return s.translate((-T, 0, 0)).rotate(Axis.Z, 90).translate((px, lo, pz))
+            add(kind+'_hinge_pin', place(pin), key, sku=q['pin_sku'], length_mm=L, status='misumi_step_exact',
+                source=q['pin_step']+'.gz', fit='g7 pin in the ear holes (H7 clearance); the arm turns on its bushes; '
                 'the ring sits 1 mm outside the +Y ear (axial play 1 mm); grease')
-            # E-ring No.5 in the groove (JIS E5: OD 11, t 0.6; drawn as a plain ring)
-            ring_t = .6
-            keeper = cyly(5.5, ring_t, px, lo+L+ring_t/2+.05, pz)-cyly(q['pin_groove_d_mm']/2, ring_t+1, px, lo+L+ring_t/2+.05, pz)
-            add(kind+'_pin_retaining_ring', keeper, key, sku=q.get('pin_ring', 'E-ring'), quantity=1,
-                status='misumi_catalog_envelope', note='Supplied with the pin; drawn as a plain ring (no opening)')
+            add(kind+'_pin_retaining_ring', place(misumi_solid(q['pin_step'], ring_name)), key,
+                sku=q.get('pin_ring', 'E-ring'), quantity=1, status='misumi_step_exact', source=q['pin_step']+'.gz',
+                note='Supplied with the pin (separate solid in the MISUMI STEP)')
         else:
             # Rev12b: the supplied MISUMI STEP (axis +X, head underside at X0) placed on +Y.
             pin = misumi_solid(q['pin_step'])
@@ -461,23 +464,14 @@ def make(d):
     def bushes(kind, key, outer_lo, outer_hi, q):
         """Two flanged oil-free bushes pressed into the arm from outside; flanges face the bracket ears."""
         (px, py, pz), _ = pivot_of(d, key)
-        catalog = q.get('bush_model') == 'catalog'
-        if catalog:
-            # Rev17g: drawn from the MISUMI table (axis +X, flange X-t..0, sleeve X0..L-t), same frame as the STEP.
-            t, L = q['bush_flange_t_mm'], q['bush_length_mm']
-            source = (Solid.make_cylinder(q['bush_flange_d_mm']/2, t, Plane.YZ.offset(-t))
-                      + Solid.make_cylinder(q['bush_od_mm']/2, L-t, Plane.YZ)
-                      - Solid.make_cylinder(q['bush_bore_mm']/2, L+2, Plane.YZ.offset(-t-1)))
-        else:
-            source = misumi_solid(q['bush_step'])  # axis +X, flange X-2..0, sleeve X0..8
+        source = misumi_solid(q['bush_step'])  # axis +X, flange X-2..0, sleeve X0..8 (MPFZ10-10, MPFZ6-10)
         parts = []
         for sy, outer in ((-1, outer_lo), (1, outer_hi)):
             face = py+sy*outer
             parts.append(source.rotate(Axis.Z, 90 if sy < 0 else -90).translate((px, face, pz)))
         od, bore = q['bush_od_mm'], q['bush_bore_mm']
         add(kind+'_hinge_bushes', Compound(parts), key, True, sku=q['bush_sku'], quantity=2,
-            status='misumi_catalog_envelope' if catalog else 'misumi_step_exact',
-            source=q.get('bush_source', '') if catalog else q['bush_step']+'.gz',
+            status='misumi_step_exact', source=q['bush_step']+'.gz',
             fit=f'Press into {od:g} H7 arm bore (r6/m6 OD); runs on the g pin ({bore:g} bore); flange = thrust washer')
 
     def spring_stack(kind, key, washer_od):
@@ -507,8 +501,7 @@ def make(d):
             spring_top_z=bottom+length, spring_length_mm=length, spring_xy=[x, y], rate_N_mm=q['rate_N_mm'],
             free_length_mm=q['free_length_mm'], nominal_spring_force_N=state['forces_N'][1],
             lever_ratio=state['lever_ratio'],
-            geometry=('catalog rate and allowable deflection; wire section and turns approximate (no STEP); ground ends omitted'
-                      if 'spring_note' in q else 'MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog'))
+            geometry='MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog')
         # Washer and nut on the stud land on the base plate top at full droop.
         w = washer_od/2
         drop = min(seat_travel(d, key, -half, x+dx, base_top) for dx in (-w, w))

@@ -157,6 +157,57 @@
       "source": "User-supplied file (C:/AI_Work/part cad/BGHK6001DD-30.stp), MISUMI BGHK6001DD-30 STEP AP203",
       "retrieved": "2026-11-15",
       "note": "MISUMI T-type bearing holder set, company stock x4. Three labelled solids: Housing_, Bearing_, CHTMW_ (snap ring). Frame: X = width L (+-30), Y = height from the flange underside (bore centre Y30, flange top Y10, body top Y48), Z = thickness (-15..0). Measured: flange S10, holes D5.5 at X+-24, lip D24 Z-15..-13, bearing D28 Z-13..-5, snap-ring groove D29.4 Z-5..-3.65, mouth D28 to Z0; bearing inner-ring land D16.3. Placed in Rev16 as the bogie pivot."
+    },
+    {
+      "file": "E-SHCCG6-75.stp.gz",
+      "sha256_original": "33de41b715afcc9bebc7ed595f3f744095354e678167789d621cbb9e09be9756",
+      "original_bytes": 60430,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110310887669/?HissuCode=E-SHCCG6-75",
+      "retrieved": "2026-11-22",
+      "cad_format": "STEP AP214 (3D, mm, 2 solids: BODY_E-SHCCG6-75, RING1_E-SHCCG6-75)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0)",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 4517,
+        "min_order_qty": 1,
+        "seen": "2026-11-22",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download 2026-11-22 (logged in, ego lite). Company stock (x6), price for reference only. Measured: axis +X, flange D9 X0..1.5 (C0.5), neck relief D5.8 X1.5..3, shaft D6 X3..76.5, groove D5 X76.5..77.2, end D6 to 78.5 (C0.5); E-ring OD11 t0.6 at X76.5..77.1. L75 = flange underside to groove (matches the catalog table). Rev17g rear caster hinge pin x2, placed as supplied"
+    },
+    {
+      "file": "MPFZ6-10.stp.gz",
+      "sha256_original": "1c9157c6f9c650c6de99c1af956178d95d2026e96e2ce8e9d767ec9d9da1842b",
+      "original_bytes": 20072,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110302579350/?HissuCode=MPFZ6-10",
+      "retrieved": "2026-11-22",
+      "cad_format": "STEP AP214 (3D, mm, single solid)",
+      "cad_version": "SolidWorks 2016 (SwSTEP 2.0); STEP file stamped 2025-11-26",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 6248,
+        "min_order_qty": 1,
+        "seen": "2026-11-22",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download 2026-11-22 (logged in, ego lite). Measured: axis +X, flange D16 X-2..0, sleeve D10 X0..8 (R0.3 root, C1 end), bore D6. Same frame as MPFZ10-10. Rev17g rear caster hinge bush x4, placed as supplied"
+    },
+    {
+      "file": "SWL18-30.step.gz",
+      "sha256_original": "321a83f043029f5e60cdd5a86b5b7e947e5f41ec0f1bcaffa2667904100df1c7",
+      "original_bytes": 122254,
+      "source": "https://kr.misumi-ec.com/vona2/detail/110100185670/?HissuCode=SWL18-30",
+      "retrieved": "2026-11-22",
+      "cad_format": "STEP (3D, mm, single solid; header AP214)",
+      "cad_version": "Spatial InterOp 3D (MISUMI export, generated 2026-11-22)",
+      "price": {
+        "currency": "KRW",
+        "unit_price_ex_vat": 3958,
+        "min_order_qty": 1,
+        "seen": "2026-11-22",
+        "site": "kr.misumi-ec.com"
+      },
+      "note": "MISUMI Korea CAD download 2026-11-22 (logged in, ego lite), ZIP SWL18-30_STEP_20261122.zip. Measured: axis +Z, free length 30, OD18 ID9, rectangular wire 4.5 radial x 2.25 axial, pitch 7.5 at free length, both ends ground flat. Not placed as-is (free-length shape): the model spring uses this wire section and pitch at the posed length (as X-SWU from Rev12b). Rev17g rear caster spring x2"
     }
   ]
 }

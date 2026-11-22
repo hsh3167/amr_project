@@ -4252,34 +4252,34 @@
     {
       "name": "80_caster_hinge_bushes_LB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": "LB",
         "sku": "MPFZ6-10",
         "quantity": 2,
-        "source": "MISUMI flanged oil-free bush, high-strength brass: d6 E7, D10 r6, L10 (sleeve 8), flange 16 x 2, housing 10 H7; 6,248 KRW (2026-11-21). Drawn from the catalog table (no STEP)",
+        "source": "MPFZ6-10.stp.gz",
         "fit": "Press into 10 H7 arm bore (r6/m6 OD); runs on the g pin (6 bore); flange = thrust washer"
       },
-      "volume_mm3": 1495.3981031087415,
+      "volume_mm3": 1455.7394644212527,
       "bounds_mm": [
         [
-          -56.0,
-          -40.0
+          -56.0000001,
+          -39.9999999
         ],
         [
-          -248.5,
-          -181.5
+          -248.5000001,
+          -181.4999999
         ],
         [
-          91.5,
-          107.5
+          91.4999999,
+          107.5000001
         ]
       ],
       "center_mm": [
-        -48.00000000000002,
-        -215.00000000000017,
-        99.50000000000001
+        -47.999999999999986,
+        -215.00000000000003,
+        99.49999999999997
       ],
       "solids": 2
     },
@@ -4540,57 +4540,58 @@
     {
       "name": "80_caster_hinge_pin_LB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": null,
         "sku": "E-SHCCG6-75",
         "length_mm": 75.0,
-        "source": "Company stock (part cad/\ud68c\uc0ac\uc7ac\uace0 \ud30c\ud2b8 \ub9ac\uc2a4\ud2b8.xlsx: E-SHCCG6-75 x6). MISUMI economy hinge pin, flanged, retaining-ring type, SUS304, D6 g7; catalog table: flange H9 x T1.5, L = flange underside to the ring groove, groove M0.7 wide at d5, N2 beyond the groove (overall L+N+T = 78.5), E-ring No.5 included. Drawn from the catalog table (no STEP)",
+        "source": "E-SHCCG6-75.stp.gz",
         "fit": "g7 pin in the ear holes (H7 clearance); the arm turns on its bushes; the ring sits 1 mm outside the +Y ear (axial play 1 mm); grease"
       },
-      "volume_mm3": 2266.5020199323553,
+      "volume_mm3": 2258.0930235962473,
       "bounds_mm": [
         [
-          -52.5,
-          -43.5
+          -52.5000001,
+          -43.4999999
         ],
         [
-          -253.5,
-          -175.0
+          -253.5000001,
+          -174.9999999
         ],
         [
-          95.0,
-          104.0
+          94.9999999,
+          104.0000001
         ]
       ],
       "center_mm": [
-        -48.00000000000001,
-        -215.25085591517083,
-        99.49999999999999
+        -47.99999999999999,
+        -215.18863561530756,
+        99.5
       ],
       "solids": 1
     },
     {
       "name": "80_caster_pin_retaining_ring_LB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "LB",
         "moving_wheel": null,
         "sku": "E-ring No.5 (JIS E5: OD 11, t 0.6)",
         "quantity": 1,
-        "note": "Supplied with the pin; drawn as a plain ring (no opening)"
+        "source": "E-SHCCG6-75.stp.gz",
+        "note": "Supplied with the pin (separate solid in the MISUMI STEP)"
       },
-      "volume_mm3": 45.23893421169296,
+      "volume_mm3": 22.084525277806947,
       "bounds_mm": [
         [
-          -53.5,
-          -42.5
+          -53.49999999999999,
+          -44.570714360103544
         ],
         [
-          -176.95,
-          -176.35
+          -176.99999999999997,
+          -176.39999999999998
         ],
         [
           94.0,
@@ -4598,9 +4599,9 @@
         ]
       ],
       "center_mm": [
-        -48.0,
-        -176.64999999999998,
-        99.49999999999996
+        -49.33540165005472,
+        -176.69999999999996,
+        99.5
       ],
       "solids": 1
     },
@@ -4684,27 +4685,27 @@
         "free_length_mm": 30,
         "nominal_spring_force_N": 45.63,
         "lever_ratio": 0.7222,
-        "geometry": "catalog rate and allowable deflection; wire section and turns approximate (no STEP); ground ends omitted"
+        "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 2691.778062900548,
+      "volume_mm3": 1611.2528523663354,
       "bounds_mm": [
         [
-          -122.00160285149649,
-          -103.99839714850202
+          -122.00197470439888,
+          -103.99802816662137
         ],
         [
-          -224.00160285150085,
-          -205.9983971485019
+          -224.00196241630061,
+          -205.99802563278774
         ],
         [
-          88.31032666484715,
-          116.98967334631868
+          88.31564821518886,
+          116.98435178606707
         ]
       ],
       "center_mm": [
-        -113.00000318468695,
-        -215.00000000000065,
-        102.6499999996187
+        -113.2860837225896,
+        -214.60623953648744,
+        102.64999999995072
       ],
       "solids": 1
     },
@@ -4873,34 +4874,34 @@
     {
       "name": "80_caster_hinge_bushes_RB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RB",
         "moving_wheel": "RB",
         "sku": "MPFZ6-10",
         "quantity": 2,
-        "source": "MISUMI flanged oil-free bush, high-strength brass: d6 E7, D10 r6, L10 (sleeve 8), flange 16 x 2, housing 10 H7; 6,248 KRW (2026-11-21). Drawn from the catalog table (no STEP)",
+        "source": "MPFZ6-10.stp.gz",
         "fit": "Press into 10 H7 arm bore (r6/m6 OD); runs on the g pin (6 bore); flange = thrust washer"
       },
-      "volume_mm3": 1495.3981031087415,
+      "volume_mm3": 1455.7394644212527,
       "bounds_mm": [
         [
-          40.0,
-          56.0
+          39.9999999,
+          56.0000001
         ],
         [
-          -248.5,
-          -181.5
+          -248.5000001,
+          -181.4999999
         ],
         [
-          91.5,
-          107.5
+          91.4999999,
+          107.5000001
         ]
       ],
       "center_mm": [
-        48.00000000000002,
-        -215.00000000000017,
-        99.50000000000001
+        47.999999999999986,
+        -215.00000000000003,
+        99.49999999999997
       ],
       "solids": 2
     },
@@ -5161,57 +5162,58 @@
     {
       "name": "80_caster_hinge_pin_RB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RB",
         "moving_wheel": null,
         "sku": "E-SHCCG6-75",
         "length_mm": 75.0,
-        "source": "Company stock (part cad/\ud68c\uc0ac\uc7ac\uace0 \ud30c\ud2b8 \ub9ac\uc2a4\ud2b8.xlsx: E-SHCCG6-75 x6). MISUMI economy hinge pin, flanged, retaining-ring type, SUS304, D6 g7; catalog table: flange H9 x T1.5, L = flange underside to the ring groove, groove M0.7 wide at d5, N2 beyond the groove (overall L+N+T = 78.5), E-ring No.5 included. Drawn from the catalog table (no STEP)",
+        "source": "E-SHCCG6-75.stp.gz",
         "fit": "g7 pin in the ear holes (H7 clearance); the arm turns on its bushes; the ring sits 1 mm outside the +Y ear (axial play 1 mm); grease"
       },
-      "volume_mm3": 2266.5020199323553,
+      "volume_mm3": 2258.0930235962473,
       "bounds_mm": [
         [
-          43.5,
-          52.5
+          43.4999999,
+          52.5000001
         ],
         [
-          -253.5,
-          -175.0
+          -253.5000001,
+          -174.9999999
         ],
         [
-          95.0,
-          104.0
+          94.9999999,
+          104.0000001
         ]
       ],
       "center_mm": [
         48.00000000000001,
-        -215.25085591517083,
-        99.49999999999999
+        -215.18863561530756,
+        99.5
       ],
       "solids": 1
     },
     {
       "name": "80_caster_pin_retaining_ring_RB",
       "group": "suspension",
-      "status": "misumi_catalog_envelope",
+      "status": "misumi_step_exact",
       "metadata": {
         "wheel": "RB",
         "moving_wheel": null,
         "sku": "E-ring No.5 (JIS E5: OD 11, t 0.6)",
         "quantity": 1,
-        "note": "Supplied with the pin; drawn as a plain ring (no opening)"
+        "source": "E-SHCCG6-75.stp.gz",
+        "note": "Supplied with the pin (separate solid in the MISUMI STEP)"
       },
-      "volume_mm3": 45.23893421169296,
+      "volume_mm3": 22.084525277806947,
       "bounds_mm": [
         [
-          42.5,
-          53.5
+          42.50000000000001,
+          51.429285639896456
         ],
         [
-          -176.95,
-          -176.35
+          -176.99999999999997,
+          -176.39999999999998
         ],
         [
           94.0,
@@ -5219,9 +5221,9 @@
         ]
       ],
       "center_mm": [
-        48.0,
-        -176.64999999999998,
-        99.49999999999996
+        46.66459834994528,
+        -176.69999999999996,
+        99.5
       ],
       "solids": 1
     },
@@ -5305,27 +5307,27 @@
         "free_length_mm": 30,
         "nominal_spring_force_N": 45.63,
         "lever_ratio": 0.7222,
-        "geometry": "catalog rate and allowable deflection; wire section and turns approximate (no STEP); ground ends omitted"
+        "geometry": "MISUMI STEP wire section and pitch; ground ends omitted; rate and solid length from catalog"
       },
-      "volume_mm3": 2691.778062900548,
+      "volume_mm3": 1611.2528523663354,
       "bounds_mm": [
         [
-          103.99839714850351,
-          122.00160285149798
+          103.99802529560112,
+          122.00197183337863
         ],
         [
-          -224.00160285150085,
-          -205.9983971485019
+          -224.00196241630061,
+          -205.99802563278774
         ],
         [
-          88.31032666484715,
-          116.98967334631868
+          88.31564821518886,
+          116.98435178606707
         ]
       ],
       "center_mm": [
-        112.99999681531305,
-        -215.00000000000065,
-        102.6499999996187
+        112.7139162774104,
+        -214.60623953648744,
+        102.64999999995072
       ],
       "solids": 1
     },

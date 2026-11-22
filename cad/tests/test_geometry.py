@@ -177,16 +177,16 @@ def test_rev16_bogie_bearing_pivot_and_rotation_limits():
 
 
 def test_rev12b_misumi_step_parts_and_static_clearance():
-    """C-USLH10 stoppers from the MISUMI STEP; Rev17g stock E-SHCCG6-75 pin + MPFZ6-10 bushes drawn from the catalog
-    table (no STEP) on the rear hinge modules; nothing near the suspension overlaps."""
+    """C-USLH10 stoppers from the MISUMI STEP; Rev17g stock E-SHCCG6-75 pin (+ E-ring) and MPFZ6-10 bushes from
+    their MISUMI STEP on the rear hinge modules; nothing near the suspension overlaps."""
     from cad.validation import static_interference
 
     d=load_design()
     records=build_records(d,['chassis','structure','lidars','suspension','electronics'])
     parts={r.name:r for r in records}
     for wheel in ('LB','RB'):
-        for name,status in (('hinge_pin','misumi_catalog_envelope'),('hinge_bushes','misumi_catalog_envelope'),
-                            ('pin_retaining_ring','misumi_catalog_envelope'),('bump_stopper_C-USLH10','misumi_step_exact')):
+        for name,status in (('hinge_pin','misumi_step_exact'),('hinge_bushes','misumi_step_exact'),
+                            ('pin_retaining_ring','misumi_step_exact'),('bump_stopper_C-USLH10','misumi_step_exact')):
             part=parts['80_caster_'+name+'_'+wheel]
             assert part.status==status and part.shape.is_valid
         pin=parts['80_caster_hinge_pin_'+wheel]
